@@ -9,7 +9,12 @@
     "rootDir": "./src",
     "stripInternal": true
   },
-  "include": ["src"]
+  "include": [
+    "src/index.ts",
+    "src/components",
+    "src/types",
+    "src/lib"
+  ]
 }
 
 

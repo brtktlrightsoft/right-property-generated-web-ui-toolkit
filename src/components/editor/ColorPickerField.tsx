@@ -46,10 +46,12 @@ export function ColorPickerField({ name, label, value = '#000000', onChange }: C
 
 export const colorPickerField: Field = {
   type: 'custom',
-  render: ({ name, label, value, onChange }) => (
+  // Puck passes { field, name, id, value, onChange, readOnly }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  render: ({ name, value, onChange, field }: any) => (
     <ColorPickerField
       name={name}
-      label={label}
+      label={field?.label ?? ''}
       value={value as string}
       onChange={(val) => onChange(val)}
     />

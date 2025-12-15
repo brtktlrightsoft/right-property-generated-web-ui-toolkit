@@ -15,8 +15,8 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
       name: 'RightPropertyGeneratedWebUiToolkit',
-      formats: ['es', 'cjs'],
-      fileName: (format) => (format === 'es' ? 'index.mjs' : 'index.cjs'),
+      formats: ['es'],
+      fileName: () => 'index.mjs',
     },
     rollupOptions: {
       external: ['react', 'react-dom'],

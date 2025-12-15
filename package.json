@@ -19,7 +19,8 @@
     "dev": "vite",
     "build": "tsc -p tsconfig.lib.json && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prepare": "npm run build"
   },
   "dependencies": {
     "@measured/puck": "^0.20.2",

@@ -13,7 +13,7 @@ export function SkyscrapperHomeFirstSection({
   backgroundData,
 }: SkyscrapperHomeFirstSectionProps) {
   return (
-    <div className="panel absolute left-0 top-0 will-change-transform w-full h-full z-30">
+    <div className="panel absolute font-instrument-serif left-0 top-0 will-change-transform w-full h-full z-30">
       <motion.div
         className="pt-17.5 flex flex-col justify-end lg:justify-center px-5 bg-gray-300 relative h-[100vh] w-[100vw] bg-no-repeat bg-cover"
       >

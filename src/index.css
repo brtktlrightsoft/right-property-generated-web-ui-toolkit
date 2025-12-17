@@ -134,3 +134,32 @@ body {
   min-height: 100vh;
   /* removed display:flex + place-items:center */
 }
+
+
+.gradient-border-button {
+  position: relative;
+  display: inline-block;
+  border-radius: 12.38px;
+  overflow: hidden;
+  background: transparent;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(320deg, #0f3f48 0%, #2498ae 47.17%, #eca650 100%);
+    padding: 1.24px;
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  > * {
+    position: relative;
+    background: transparent;
+  }
+}

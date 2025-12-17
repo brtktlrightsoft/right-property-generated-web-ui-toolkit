@@ -11,8 +11,6 @@ export function SkyscrapperHomeFirstSection({
   buttonLabel,
   buttonHref,
   backgroundData,
-  scrollIndicatorText = 'Scroll down',
-  scrollIndicatorOpacity = 1,
 }: SkyscrapperHomeFirstSectionProps) {
   return (
     <div className="panel absolute left-0 top-0 will-change-transform w-full h-full z-30">
@@ -44,17 +42,6 @@ export function SkyscrapperHomeFirstSection({
             </p>
             <GradientBorderButton href={buttonHref}>{buttonLabel}</GradientBorderButton>
           </div>
-          <motion.div
-            className="flex space-x-2.5 rtl:space-x-reverse items-center py-5 lg:mt-auto"
-            style={{
-              opacity: scrollIndicatorOpacity,
-            }}
-          >
-            <MouseIcon />
-            <span className="text-base font-light justify-self-end text-projectNameDesc">
-              {scrollIndicatorText}
-            </span>
-          </motion.div>
         </div>
       </motion.div>
     </div>
@@ -73,22 +60,6 @@ function GradientBorderButton({ children, href }: { children: React.ReactNode; h
   );
 }
 
-function MouseIcon() {
-  return (
-    <svg
-      width="16"
-      height="24"
-      viewBox="0 0 16 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      <rect x="0.5" y="0.5" width="15" height="23" rx="7.5" stroke="white" />
-      <circle cx="8" cy="6" r="1" fill="white" />
-      <line x1="8" y1="7.5" x2="8" y2="11.5" stroke="white" />
-    </svg>
-  );
-}
 
 
 

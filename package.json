@@ -2,20 +2,21 @@
   "name": "right-property-generated-web-ui-toolkit",
   "version": "0.1.0",
   "type": "module",
+  "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./src/index.ts"
+      "import": "./dist/index.mjs",
+      "default": "./dist/index.mjs"
     }
   },
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "scripts": {
     "dev": "vite",
-    "build": "tsc -p tsconfig.lib.json",
+    "build": "vite build && tsc -p tsconfig.lib.json",
     "lint": "eslint .",
     "preview": "vite preview",
     "prepare": "npm run build"

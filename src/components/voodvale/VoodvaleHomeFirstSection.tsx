@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import type { VoodvaleHomeFirstSectionProps } from '@/types/voodvale.types';
+import BackgroundMedia from '../common/background-media';
 
 export function VoodvaleHomeFirstSection({
   projectName,
@@ -43,66 +44,13 @@ export function VoodvaleHomeFirstSection({
               {buttonLabel}
             </a>
           </div>
-          <motion.div
-            className="flex space-x-2.5 rtl:space-x-reverse items-center py-5 lg:mt-auto"
-            style={{ opacity: scrollIndicatorOpacity }}
-          >
-            <MouseIcon />
-            <span className="text-base font-light justify-self-end text-projectNameDesc">{scrollIndicatorText}</span>
-          </motion.div>
         </div>
       </motion.div>
     </div>
   );
 }
 
-function MouseIcon() {
-  return (
-    <svg
-      width="16"
-      height="24"
-      viewBox="0 0 16 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      <rect x="0.5" y="0.5" width="15" height="23" rx="7.5" stroke="white" />
-      <circle cx="8" cy="6" r="1" fill="white" />
-      <line x1="8" y1="7.5" x2="8" y2="11.5" stroke="white" />
-    </svg>
-  );
-}
 
-function BackgroundMedia({
-  backgroundData,
-  projectName,
-}: {
-  backgroundData: VoodvaleHomeFirstSectionProps['backgroundData'];
-  projectName: string;
-}) {
-  if (backgroundData.isVideo) {
-    return (
-      <video
-        src={backgroundData.backgroundUrl}
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="auto"
-        className="absolute z-10 top-0 left-0 w-full h-full object-cover"
-      />
-    );
-  }
 
-  return (
-    <img
-      loading="eager"
-      alt={projectName}
-      src={backgroundData.backgroundUrl}
-      style={{ objectFit: 'cover' }}
-      className="absolute z-10 top-0 left-0 w-full h-full object-cover"
-    />
-  );
-}
 
 

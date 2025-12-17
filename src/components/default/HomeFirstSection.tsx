@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import type { HomeFirstSectionProps } from '@/types/default.types';
+import BackgroundMedia from '../common/background-media';
 
 export function HomeFirstSection({
   projectName,
@@ -26,8 +27,8 @@ export function HomeFirstSection({
         />
         <div className="page-container z-30 justify-end lg:justify-center px-5 py-5 lg:px-7.5 lg:py-7.5 mobile:p-0">
           <div className="mb-12.5 flex flex-col justify-end lg:justify-center lg:grow">
-            <h1 className="font-bold text-5xl mb-2.5 text-projectNameDesc">{projectName}</h1>
-            <h3 className="text-[1rem] mobile:text-[0.8rem] mobile:leading-[1.2rem] leading-[1.45rem] w-[37.5rem] mobile:w-[100%] text-projectNameDesc font-light whitespace-pre-wrap">
+            <h1 className="font-bold text-5xl mb-2.5 text-[#FAF9FD]">{projectName}</h1>
+            <h3 className="text-[1rem] mobile:text-[0.8rem] mobile:leading-[1.2rem] leading-[1.45rem] w-[37.5rem] mobile:w-[100%] text-[#FAF9FD] font-light whitespace-pre-wrap">
               {projectDescription}
             </h3>
           </div>
@@ -36,7 +37,7 @@ export function HomeFirstSection({
             style={{ opacity: scrollIndicatorOpacity }}
           >
             <MouseIcon />
-            <span className="text-base font-light justify-self-end text-projectNameDesc">
+            <span className="text-base font-light justify-self-end text-[#FAF9FD]">
               {scrollIndicatorText}
             </span>
           </motion.div>
@@ -63,36 +64,6 @@ function MouseIcon() {
   );
 }
 
-function BackgroundMedia({
-  backgroundData,
-  projectName,
-}: {
-  backgroundData: HomeFirstSectionProps['backgroundData'];
-  projectName: string;
-}) {
-  if (backgroundData.isVideo) {
-    return (
-      <video
-        src={backgroundData.backgroundUrl}
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="auto"
-        className="absolute z-10 top-0 left-0 w-full h-full object-cover"
-      />
-    );
-  }
 
-  return (
-    <img
-      loading="eager"
-      alt={projectName}
-      src={backgroundData.backgroundUrl}
-      style={{ objectFit: 'cover' }}
-      className="absolute z-10 top-0 left-0 w-full h-full object-cover"
-    />
-  );
-}
 
 

@@ -11,6 +11,9 @@ export * from './types/puck.types';
 // ui
 export * from './components/ui/select';
 
+// editor helpers
+export * from './components/editor/ColorPickerField';
+
 // default theme components
 export * from './components/default/HomeFirstSection';
 export * from './components/default/HomeFirstSectionWrapper';

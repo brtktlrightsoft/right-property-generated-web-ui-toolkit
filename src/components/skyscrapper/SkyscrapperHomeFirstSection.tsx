@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import type { SkyscrapperHomeFirstSectionProps } from '@/types/skyscrapper.types';
+import BackgroundMedia from '../common/background-media';
 
 export function SkyscrapperHomeFirstSection({
   projectName,
@@ -89,38 +90,5 @@ function MouseIcon() {
   );
 }
 
-function BackgroundMedia({
-  backgroundData,
-  projectName,
-}: {
-  backgroundData: SkyscrapperHomeFirstSectionProps['backgroundData'];
-  projectName: string;
-}) {
-  if (backgroundData.isVideo) {
-    return (
-      <video
-        src={backgroundData.backgroundUrl}
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="auto"
-        className="absolute z-10 top-0 left-0 w-full h-full object-cover"
-      />
-    );
-  }
-
-  return (
-    <img
-      loading="eager"
-      alt={projectName}
-      src={backgroundData.backgroundUrl}
-      style={{
-        objectFit: 'cover',
-      }}
-      className="absolute z-10 top-0 left-0 w-full h-full object-cover"
-    />
-  );
-}
 
 

@@ -13,7 +13,7 @@ export function SkyscrapperHomesSecondSection({
   return (
     <div
       id="second-section"
-      className="second-section left-0 top-0 w-full min-h-[100vh] flex flex-col z-10 pt-[12rem] mobile:pt-[8.5rem]"
+      className="bg-black text-[#CED7D8] font-instrument-serif second-section left-0 top-0 w-full min-h-[100vh] flex flex-col z-10 pt-[12rem] mobile:pt-[8.5rem]"
     >
       <div>
         <div className="w-full mx-auto flex flex-col px-[5rem] mobile:px-5 max-w-[1440px]">

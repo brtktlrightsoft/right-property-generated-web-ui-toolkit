@@ -9,8 +9,6 @@ export function VoodvaleHomeFirstSection({
   buttonLabel,
   buttonHref,
   backgroundData,
-  scrollIndicatorText = 'Scroll down',
-  scrollIndicatorOpacity = 1,
 }: VoodvaleHomeFirstSectionProps) {
   return (
     <div className="panel absolute left-0 top-0 will-change-transform w-full h-full z-30">

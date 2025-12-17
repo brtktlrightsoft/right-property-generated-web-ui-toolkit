@@ -19,7 +19,17 @@ export default defineConfig({
       fileName: () => 'index.mjs',
     },
     rollupOptions: {
-      external: ['react', 'react-dom'],
+      // IMPORTANT: externalize React AND the JSX runtimes.
+      // If we don't externalize jsx-runtime, Rollup may inline a CJS wrapper
+      // that ends up calling __require("react") at runtime in the browser.
+      external: [
+        'react',
+        'react-dom',
+        'react/jsx-runtime',
+        'react/jsx-dev-runtime',
+        'react-dom/client',
+        'react-dom/server',
+      ],
       output: {
         globals: {
           react: 'React',

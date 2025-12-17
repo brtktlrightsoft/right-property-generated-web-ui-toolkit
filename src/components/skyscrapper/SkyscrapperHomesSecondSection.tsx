@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils';
 import type { SkyscrapperHomesSecondSectionProps } from '@/types/skyscrapper.types';
-
+import { Image } from '../common/image';
 export function SkyscrapperHomesSecondSection({
   introText,
   image1,
@@ -21,17 +21,23 @@ export function SkyscrapperHomesSecondSection({
             {introText}
           </p>
           <div className="mb-[5rem] mobile:mb-[0rem] relative h-[46.875rem] mobile:h-[55vh]">
-            <img
+            <Image
+              width={233}
+              height={288}
               src={image1}
               alt="content-1"
               className="absolute right-1/2 -translate-x-[10%] top-1/2 -translate-y-[80%] w-[14.55rem] mobile:w-[10rem] h-[17.98rem] mobile:h-[12.3025rem] object-cover skyscrapper-image-mask"
             />
-            <img
+            <Image
+              width={233}
+              height={288}
               src={image2}
               alt="content-2"
               className="absolute right-1/2 translate-x-[105%] top-1/2 -translate-y-[115%] w-[14.55rem] mobile:w-[10rem] h-[17.98rem] mobile:h-[12.3025rem] object-cover skyscrapper-image-mask"
             />
-            <img
+            <Image
+              width={233}
+              height={288}
               src={image3}
               alt="content-3"
               className="absolute right-1/2 translate-x-[75%] top-1/2 -translate-y-[2%] w-[19.57rem] h-[24.20rem] mobile:w-[13.375rem] mobile:h-[16.625rem] object-cover skyscrapper-image-mask lg"

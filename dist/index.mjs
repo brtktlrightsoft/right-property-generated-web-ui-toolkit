@@ -18296,7 +18296,7 @@ function SkyscrapperHomeFirstSection({ projectName: m, heading: x, subheadingLin
 	return /* @__PURE__ */ jsx("div", {
 		className: "panel absolute font-instrument-serif left-0 top-0 will-change-transform w-full h-full z-30",
 		children: /* @__PURE__ */ jsxs(motion.div, {
-			className: "pt-17.5 flex flex-col justify-end lg:justify-center px-5 bg-gray-300 relative h-[100vh] w-[100vw] bg-no-repeat bg-cover",
+			className: "pt-17.5 pb-[2rem] flex flex-col justify-end lg:justify-center px-5 bg-gray-300 relative h-[100vh] w-[100vw] bg-no-repeat bg-cover",
 			children: [
 				/* @__PURE__ */ jsx(BackgroundMedia, {
 					backgroundData: k,
@@ -18433,7 +18433,7 @@ var GridCell$1 = ({ description: m, increase: x, className: S }) => /* @__PURE__
 	className: cn("", S),
 	children: [
 		/* @__PURE__ */ jsx("div", {
-			className: "skyscrapper-text-gradient tracking-[-0.1rem] text-[5rem] mb-[1.25rem]",
+			className: "skyscrapper-text-gradient leading-[100%] tracking-[-0.1rem] text-[5rem] mb-[1.25rem]",
 			children: x
 		}),
 		/* @__PURE__ */ jsx("div", {
@@ -18633,7 +18633,7 @@ function VoodvaleHomeFirstSection({ projectName: m, heading: x, subheading: S, b
 	return /* @__PURE__ */ jsx("div", {
 		className: "panel absolute left-0 top-0 will-change-transform w-full h-full z-30",
 		children: /* @__PURE__ */ jsxs(motion.div, {
-			className: "pt-17.5 flex flex-col justify-end lg:justify-center px-5 bg-gray-300 relative h-[100vh] w-[100vw] bg-no-repeat bg-cover",
+			className: "pt-17.5 pb-[2rem] flex flex-col justify-end lg:justify-center px-5 bg-gray-300 relative h-[100vh] w-[100vw] bg-no-repeat bg-cover",
 			children: [
 				/* @__PURE__ */ jsx(BackgroundMedia, {
 					backgroundData: D,

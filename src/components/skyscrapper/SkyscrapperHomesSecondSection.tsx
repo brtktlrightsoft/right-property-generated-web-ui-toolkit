@@ -74,7 +74,7 @@ const GridCell = ({
   const classes = cn('', className);
   return (
     <div className={classes}>
-      <div className="skyscrapper-text-gradient tracking-[-0.1rem] text-[5rem] mb-[1.25rem]">{increase}</div>
+      <div className="skyscrapper-text-gradient leading-[100%] tracking-[-0.1rem] text-[5rem] mb-[1.25rem]">{increase}</div>
       <div className="font-general-sans text-[1rem] leading-[162%] h-[7.75rem]">{description}</div>
       <div className="h-[1px] bg-[#FABA6C4D] w-full"></div>
     </div>

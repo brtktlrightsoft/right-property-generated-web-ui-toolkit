@@ -13,7 +13,7 @@ export function HomePageContent({
   const titleStyle = { color: titleColor };
 
   return (
-    <div>
+    <div className='font-fira'>
       {/* Desktop Version */}
       <div className="hidden md:block pb-15 px-24 pt-20">
         <div className="grid grid-cols-2 gap-10">

@@ -158,7 +158,12 @@ body {
   /* removed display:flex + place-items:center */
 }
 
-
+.skyscrapper-text-gradient {
+  background: linear-gradient(305deg, #032228 1.01%, #5c8c95 51.34%, #faba6c 91.9%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 .gradient-border-button {
   position: relative;
   display: inline-block;

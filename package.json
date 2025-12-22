@@ -10,14 +10,18 @@
       "import": "./dist/index.mjs",
       "default": "./dist/index.mjs"
     },
-    "./styles": "./dist/right-property-generated-web-ui-toolkit.css"
+    "./styles": {
+      "types": "./dist/styles.d.ts",
+      "import": "./dist/right-property-generated-web-ui-toolkit.css",
+      "default": "./dist/right-property-generated-web-ui-toolkit.css"
+    }
   },
   "files": [
     "dist"
   ],
   "scripts": {
     "dev": "vite",
-    "build": "vite build && tsc -p tsconfig.lib.json",
+    "build": "vite build && tsc -p tsconfig.lib.json && cp src/styles.d.ts dist/styles.d.ts",
     "lint": "eslint .",
     "preview": "vite preview",
     "prepare": "npm run build"

@@ -39,5 +39,9 @@ export * from './components/voodvale/VoodvaleHomeSecondSection';
 export * from './components/voodvale/VoodvaleHomeSecondSectionWrapper';
 export * from './components/VoodvaleSection';
 
+// plan-view components
+export * from './components/common/plan-view';
+export * from './components/common/PlanViewWrapper';
+
 
 

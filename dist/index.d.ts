@@ -24,4 +24,6 @@ export * from './components/voodvale/VoodvaleHomeFirstSectionWrapper';
 export * from './components/voodvale/VoodvaleHomeSecondSection';
 export * from './components/voodvale/VoodvaleHomeSecondSectionWrapper';
 export * from './components/VoodvaleSection';
+export * from './components/common/plan-view';
+export * from './components/common/PlanViewWrapper';
 //# sourceMappingURL=index.d.ts.map

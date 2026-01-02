@@ -28,7 +28,7 @@ export function SkyscrapperHomeFirstSection({
           }}
         />
         <div className="page-container z-30 text-white">
-          <h1 className="skyscrapper-text-gradient w-[58.3125rem] mobile:w-[19.875rem] text-[10.44rem] mobile:text-[5rem] ml-[11.86rem] mobile:ml-[0] mt-[8.5rem] text-white leading-[78.125%] tracking-[-0.20881rem]">
+          <h1 className="skyscrapper-text-gradient w-[58.3125rem] mobile:w-[19.875rem] text-[10.44rem] mobile:text-[5rem] ml-[11.86rem] mobile:ml-[0] mt-[8.5rem] text-white leading-[1.1em] tracking-[-0.20881rem]">
             {heading}
           </h1>
           <div className="mt-[1.56rem] mobile:mt-[5.19rem] ml-[58.56rem] mobile:ml-0">

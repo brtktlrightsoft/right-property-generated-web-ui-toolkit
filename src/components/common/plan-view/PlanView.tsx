@@ -82,19 +82,22 @@ export default function PlanView({
       $canvas.current!.setWidth(canvasContainer.clientWidth).setHeight(canvasContainer.clientHeight);
     }
   };
-  
+
   useEffect(() => {
     const handler = (e: Event) => e.preventDefault();
     const doc = $canvasContainer.current ?? document;
+    const canvasContainer = $canvasContainer.current;
     doc.addEventListener('gesturestart', handler);
     doc.addEventListener('gesturechange', handler);
     doc.addEventListener('gestureend', handler);
     doc.addEventListener('resize', resizeCanvasByElement);
+    canvasContainer?.ownerDocument.addEventListener('resize', resizeCanvasByElement);
     return () => {
       doc.removeEventListener('gesturestart', handler);
       doc.removeEventListener('gesturechange', handler);
       doc.removeEventListener('gestureend', handler);
       doc.removeEventListener('resize', resizeCanvasByElement);
+      canvasContainer?.ownerDocument.removeEventListener('resize', resizeCanvasByElement);
     };
   }, [$canvasContainer]);
 

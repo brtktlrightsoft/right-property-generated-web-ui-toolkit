@@ -9,7 +9,7 @@ export function HomeFirstSection({
   scrollIndicatorText = 'Scroll down',
   scrollIndicatorOpacity = 1,
 }: HomeFirstSectionProps) {
-  const bgData = backgroundData ?? { isVideo: false, backgroundUrl: defaultBg };
+  const bgData = backgroundData?.backgroundUrl ? { isVideo: backgroundData.isVideo, backgroundUrl: backgroundData.backgroundUrl } : { isVideo: false, backgroundUrl: defaultBg };
   return (
     <div className="">
       <div className="pt-17.5 flex flex-col justify-end lg:justify-center px-5 bg-gray-300 relative h-[100vh] w-[100vw] bg-no-repeat bg-cover">

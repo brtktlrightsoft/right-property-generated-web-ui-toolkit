@@ -1,5 +1,5 @@
-import * as React$1 from "react";
-import React, { Component, Fragment, createContext, createElement, forwardRef, isValidElement, memo, startTransition, useCallback, useContext, useEffect, useId, useImperativeHandle, useInsertionEffect, useLayoutEffect, useMemo, useRef, useState, useTransition } from "react";
+import * as React from "react";
+import React2, { Component, Fragment, createContext, createElement, forwardRef, isValidElement, memo, startTransition, useCallback, useContext, useEffect, useId, useImperativeHandle, useInsertionEffect, useLayoutEffect, useMemo, useRef, useState, useTransition } from "react";
 import * as ReactDOM$1 from "react-dom";
 import ReactDOM, { createPortal, flushSync } from "react-dom";
 import { Fragment as Fragment$1, jsx, jsxs } from "react/jsx-runtime";
@@ -35,10 +35,10 @@ function composeEventHandlers(m, x, { checkForDefaultPrevented: S = !0 } = {}) {
 function createContextScope(x, S = []) {
 	let C = [];
 	function T(S, T) {
-		let D = React$1.createContext(T), O = C.length;
+		let D = React.createContext(T), O = C.length;
 		C = [...C, T];
 		let k = (S) => {
-			let { scope: C, children: T, ...k } = S, A = C?.[x]?.[O] || D, j = React$1.useMemo(() => k, Object.values(k));
+			let { scope: C, children: T, ...k } = S, A = C?.[x]?.[O] || D, j = React.useMemo(() => k, Object.values(k));
 			return /* @__PURE__ */ jsx(A.Provider, {
 				value: j,
 				children: T
@@ -46,7 +46,7 @@ function createContextScope(x, S = []) {
 		};
 		k.displayName = S + "Provider";
 		function A(C, k) {
-			let A = k?.[x]?.[O] || D, j = React$1.useContext(A);
+			let A = k?.[x]?.[O] || D, j = React.useContext(A);
 			if (j) return j;
 			if (T !== void 0) return T;
 			throw Error(`\`${C}\` must be used within \`${S}\``);
@@ -54,10 +54,10 @@ function createContextScope(x, S = []) {
 		return [k, A];
 	}
 	let D = () => {
-		let S = C.map((x) => React$1.createContext(x));
+		let S = C.map((x) => React.createContext(x));
 		return function(C) {
 			let T = C?.[x] || S;
-			return React$1.useMemo(() => ({ [`__scope${x}`]: {
+			return React.useMemo(() => ({ [`__scope${x}`]: {
 				...C,
 				[x]: T
 			} }), [C, T]);
@@ -81,7 +81,7 @@ function composeContextScopes(...x) {
 					...T
 				};
 			}, {});
-			return React$1.useMemo(() => ({ [`__scope${S.scopeName}`]: T }), [T]);
+			return React.useMemo(() => ({ [`__scope${S.scopeName}`]: T }), [T]);
 		};
 	};
 	return C.scopeName = S.scopeName, C;
@@ -105,18 +105,18 @@ function composeRefs(...m) {
 	};
 }
 function useComposedRefs(...x) {
-	return React$1.useCallback(composeRefs(...x), x);
+	return React.useCallback(composeRefs(...x), x);
 }
 /* @__NO_SIDE_EFFECTS__ */
 function createSlot(x) {
-	let S = /* @__PURE__ */ createSlotClone(x), C = React$1.forwardRef((x, C) => {
-		let { children: T, ...D } = x, O = React$1.Children.toArray(T), k = O.find(isSlottable);
+	let S = /* @__PURE__ */ createSlotClone(x), C = React.forwardRef((x, C) => {
+		let { children: T, ...D } = x, O = React.Children.toArray(T), k = O.find(isSlottable);
 		if (k) {
-			let x = k.props.children, T = O.map((S) => S === k ? React$1.Children.count(x) > 1 ? React$1.Children.only(null) : React$1.isValidElement(x) ? x.props.children : null : S);
+			let x = k.props.children, T = O.map((S) => S === k ? React.Children.count(x) > 1 ? React.Children.only(null) : React.isValidElement(x) ? x.props.children : null : S);
 			return /* @__PURE__ */ jsx(S, {
 				...D,
 				ref: C,
-				children: React$1.isValidElement(x) ? React$1.cloneElement(x, void 0, T) : null
+				children: React.isValidElement(x) ? React.cloneElement(x, void 0, T) : null
 			});
 		}
 		return /* @__PURE__ */ jsx(S, {
@@ -129,19 +129,19 @@ function createSlot(x) {
 }
 /* @__NO_SIDE_EFFECTS__ */
 function createSlotClone(x) {
-	let S = React$1.forwardRef((x, S) => {
+	let S = React.forwardRef((x, S) => {
 		let { children: C, ...T } = x;
-		if (React$1.isValidElement(C)) {
+		if (React.isValidElement(C)) {
 			let x = getElementRef(C), D = mergeProps(T, C.props);
-			return C.type !== React$1.Fragment && (D.ref = S ? composeRefs(S, x) : x), React$1.cloneElement(C, D);
+			return C.type !== React.Fragment && (D.ref = S ? composeRefs(S, x) : x), React.cloneElement(C, D);
 		}
-		return React$1.Children.count(C) > 1 ? React$1.Children.only(null) : null;
+		return React.Children.count(C) > 1 ? React.Children.only(null) : null;
 	});
 	return S.displayName = `${x}.SlotClone`, S;
 }
 var SLOTTABLE_IDENTIFIER = Symbol("radix.slottable");
 function isSlottable(x) {
-	return React$1.isValidElement(x) && typeof x.type == "function" && "__radixId" in x.type && x.type.__radixId === SLOTTABLE_IDENTIFIER;
+	return React.isValidElement(x) && typeof x.type == "function" && "__radixId" in x.type && x.type.__radixId === SLOTTABLE_IDENTIFIER;
 }
 function mergeProps(m, x) {
 	let S = { ...x };
@@ -169,7 +169,7 @@ function createCollection(m) {
 		collectionRef: { current: null },
 		itemMap: /* @__PURE__ */ new Map()
 	}), k = (m) => {
-		let { scope: S, children: C } = m, T = React.useRef(null), O = React.useRef(/* @__PURE__ */ new Map()).current;
+		let { scope: S, children: C } = m, T = React2.useRef(null), O = React2.useRef(/* @__PURE__ */ new Map()).current;
 		return /* @__PURE__ */ jsx(D, {
 			scope: S,
 			itemMap: O,
@@ -178,7 +178,7 @@ function createCollection(m) {
 		});
 	};
 	k.displayName = S;
-	let A = m + "CollectionSlot", j = /* @__PURE__ */ createSlot(A), M = React.forwardRef((m, x) => {
+	let A = m + "CollectionSlot", j = /* @__PURE__ */ createSlot(A), M = React2.forwardRef((m, x) => {
 		let { scope: S, children: C } = m;
 		return /* @__PURE__ */ jsx(j, {
 			ref: useComposedRefs(x, O(A, S).collectionRef),
@@ -186,9 +186,9 @@ function createCollection(m) {
 		});
 	});
 	M.displayName = A;
-	let N = m + "CollectionItemSlot", P = "data-radix-collection-item", F = /* @__PURE__ */ createSlot(N), I = React.forwardRef((m, S) => {
-		let { scope: C, children: T, ...D } = m, k = React.useRef(null), A = useComposedRefs(S, k), j = O(N, C);
-		return React.useEffect(() => (j.itemMap.set(k, {
+	let N = m + "CollectionItemSlot", P = "data-radix-collection-item", F = /* @__PURE__ */ createSlot(N), I = React2.forwardRef((m, S) => {
+		let { scope: C, children: T, ...D } = m, k = React2.useRef(null), A = useComposedRefs(S, k), j = O(N, C);
+		return React2.useEffect(() => (j.itemMap.set(k, {
 			ref: k,
 			...D
 		}), () => void j.itemMap.delete(k))), /* @__PURE__ */ jsx(F, {
@@ -200,7 +200,7 @@ function createCollection(m) {
 	I.displayName = N;
 	function L(S) {
 		let C = O(m + "CollectionConsumer", S);
-		return React.useCallback(() => {
+		return React2.useCallback(() => {
 			let m = C.collectionRef.current;
 			if (!m) return [];
 			let x = Array.from(m.querySelectorAll(`[${P}]`));
@@ -217,9 +217,9 @@ function createCollection(m) {
 		T
 	];
 }
-var DirectionContext = React$1.createContext(void 0);
+var DirectionContext = React.createContext(void 0);
 function useDirection(x) {
-	let S = React$1.useContext(DirectionContext);
+	let S = React.useContext(DirectionContext);
 	return x || S || "ltr";
 }
 var Primitive = [
@@ -241,7 +241,7 @@ var Primitive = [
 	"svg",
 	"ul"
 ].reduce((x, S) => {
-	let C = /* @__PURE__ */ createSlot(`Primitive.${S}`), T = React$1.forwardRef((m, x) => {
+	let C = /* @__PURE__ */ createSlot(`Primitive.${S}`), T = React.forwardRef((m, x) => {
 		let { asChild: T, ...D } = m, O = T ? C : S;
 		return typeof window < "u" && (window[Symbol.for("radix-ui")] = !0), /* @__PURE__ */ jsx(O, {
 			...D,
@@ -257,26 +257,26 @@ function dispatchDiscreteCustomEvent(m, x) {
 	m && ReactDOM$1.flushSync(() => m.dispatchEvent(x));
 }
 function useCallbackRef(x) {
-	let S = React$1.useRef(x);
-	return React$1.useEffect(() => {
+	let S = React.useRef(x);
+	return React.useEffect(() => {
 		S.current = x;
-	}), React$1.useMemo(() => (...m) => S.current?.(...m), []);
+	}), React.useMemo(() => (...m) => S.current?.(...m), []);
 }
 function useEscapeKeydown(x, S = globalThis?.document) {
 	let C = useCallbackRef(x);
-	React$1.useEffect(() => {
+	React.useEffect(() => {
 		let m = (m) => {
 			m.key === "Escape" && C(m);
 		};
 		return S.addEventListener("keydown", m, { capture: !0 }), () => S.removeEventListener("keydown", m, { capture: !0 });
 	}, [C, S]);
 }
-var DISMISSABLE_LAYER_NAME = "DismissableLayer", CONTEXT_UPDATE = "dismissableLayer.update", POINTER_DOWN_OUTSIDE = "dismissableLayer.pointerDownOutside", FOCUS_OUTSIDE = "dismissableLayer.focusOutside", originalBodyPointerEvents, DismissableLayerContext = React$1.createContext({
+var DISMISSABLE_LAYER_NAME = "DismissableLayer", CONTEXT_UPDATE = "dismissableLayer.update", POINTER_DOWN_OUTSIDE = "dismissableLayer.pointerDownOutside", FOCUS_OUTSIDE = "dismissableLayer.focusOutside", originalBodyPointerEvents, DismissableLayerContext = React.createContext({
 	layers: /* @__PURE__ */ new Set(),
 	layersWithOutsidePointerEventsDisabled: /* @__PURE__ */ new Set(),
 	branches: /* @__PURE__ */ new Set()
-}), DismissableLayer = React$1.forwardRef((x, S) => {
-	let { disableOutsidePointerEvents: C = !1, onEscapeKeyDown: T, onPointerDownOutside: D, onFocusOutside: O, onInteractOutside: k, onDismiss: A, ...j } = x, M = React$1.useContext(DismissableLayerContext), [N, P] = React$1.useState(null), F = N?.ownerDocument ?? globalThis?.document, [, I] = React$1.useState({}), L = useComposedRefs(S, (m) => P(m)), R = Array.from(M.layers), [z] = [...M.layersWithOutsidePointerEventsDisabled].slice(-1), B = R.indexOf(z), H = N ? R.indexOf(N) : -1, U = M.layersWithOutsidePointerEventsDisabled.size > 0, W = H >= B, G = usePointerDownOutside((m) => {
+}), DismissableLayer = React.forwardRef((x, S) => {
+	let { disableOutsidePointerEvents: C = !1, onEscapeKeyDown: T, onPointerDownOutside: D, onFocusOutside: O, onInteractOutside: k, onDismiss: A, ...j } = x, M = React.useContext(DismissableLayerContext), [N, P] = React.useState(null), F = N?.ownerDocument ?? globalThis?.document, [, I] = React.useState({}), L = useComposedRefs(S, (m) => P(m)), R = Array.from(M.layers), [z] = [...M.layersWithOutsidePointerEventsDisabled].slice(-1), B = R.indexOf(z), H = N ? R.indexOf(N) : -1, U = M.layersWithOutsidePointerEventsDisabled.size > 0, W = H >= B, G = usePointerDownOutside((m) => {
 		let x = m.target, S = [...M.branches].some((m) => m.contains(x));
 		!W || S || (D?.(m), k?.(m), m.defaultPrevented || A?.());
 	}, F), K = useFocusOutside((m) => {
@@ -285,7 +285,7 @@ var DISMISSABLE_LAYER_NAME = "DismissableLayer", CONTEXT_UPDATE = "dismissableLa
 	}, F);
 	return useEscapeKeydown((m) => {
 		H === M.layers.size - 1 && (T?.(m), !m.defaultPrevented && A && (m.preventDefault(), A()));
-	}, F), React$1.useEffect(() => {
+	}, F), React.useEffect(() => {
 		if (N) return C && (M.layersWithOutsidePointerEventsDisabled.size === 0 && (originalBodyPointerEvents = F.body.style.pointerEvents, F.body.style.pointerEvents = "none"), M.layersWithOutsidePointerEventsDisabled.add(N)), M.layers.add(N), dispatchUpdate(), () => {
 			C && M.layersWithOutsidePointerEventsDisabled.size === 1 && (F.body.style.pointerEvents = originalBodyPointerEvents);
 		};
@@ -294,9 +294,9 @@ var DISMISSABLE_LAYER_NAME = "DismissableLayer", CONTEXT_UPDATE = "dismissableLa
 		F,
 		C,
 		M
-	]), React$1.useEffect(() => () => {
+	]), React.useEffect(() => () => {
 		N && (M.layers.delete(N), M.layersWithOutsidePointerEventsDisabled.delete(N), dispatchUpdate());
-	}, [N, M]), React$1.useEffect(() => {
+	}, [N, M]), React.useEffect(() => {
 		let m = () => I({});
 		return document.addEventListener(CONTEXT_UPDATE, m), () => document.removeEventListener(CONTEXT_UPDATE, m);
 	}, []), /* @__PURE__ */ jsx(Primitive.div, {
@@ -312,9 +312,9 @@ var DISMISSABLE_LAYER_NAME = "DismissableLayer", CONTEXT_UPDATE = "dismissableLa
 	});
 });
 DismissableLayer.displayName = DISMISSABLE_LAYER_NAME;
-var BRANCH_NAME = "DismissableLayerBranch", DismissableLayerBranch = React$1.forwardRef((x, S) => {
-	let C = React$1.useContext(DismissableLayerContext), T = React$1.useRef(null), D = useComposedRefs(S, T);
-	return React$1.useEffect(() => {
+var BRANCH_NAME = "DismissableLayerBranch", DismissableLayerBranch = React.forwardRef((x, S) => {
+	let C = React.useContext(DismissableLayerContext), T = React.useRef(null), D = useComposedRefs(S, T);
+	return React.useEffect(() => {
 		let m = T.current;
 		if (m) return C.branches.add(m), () => {
 			C.branches.delete(m);
@@ -326,8 +326,8 @@ var BRANCH_NAME = "DismissableLayerBranch", DismissableLayerBranch = React$1.for
 });
 DismissableLayerBranch.displayName = BRANCH_NAME;
 function usePointerDownOutside(x, S = globalThis?.document) {
-	let C = useCallbackRef(x), T = React$1.useRef(!1), D = React$1.useRef(() => {});
-	return React$1.useEffect(() => {
+	let C = useCallbackRef(x), T = React.useRef(!1), D = React.useRef(() => {});
+	return React.useEffect(() => {
 		let m = (m) => {
 			if (m.target && !T.current) {
 				let x = function() {
@@ -345,8 +345,8 @@ function usePointerDownOutside(x, S = globalThis?.document) {
 	}, [S, C]), { onPointerDownCapture: () => T.current = !0 };
 }
 function useFocusOutside(x, S = globalThis?.document) {
-	let C = useCallbackRef(x), T = React$1.useRef(!1);
-	return React$1.useEffect(() => {
+	let C = useCallbackRef(x), T = React.useRef(!1);
+	return React.useEffect(() => {
 		let m = (m) => {
 			m.target && !T.current && handleAndDispatchCustomEvent(FOCUS_OUTSIDE, C, { originalEvent: m }, { discrete: !1 });
 		};
@@ -370,7 +370,7 @@ function handleAndDispatchCustomEvent(m, x, S, { discrete: C }) {
 }
 var count$1 = 0;
 function useFocusGuards() {
-	React$1.useEffect(() => {
+	React.useEffect(() => {
 		let m = document.querySelectorAll("[data-radix-focus-guard]");
 		return document.body.insertAdjacentElement("afterbegin", m[0] ?? createFocusGuard()), document.body.insertAdjacentElement("beforeend", m[1] ?? createFocusGuard()), count$1++, () => {
 			count$1 === 1 && document.querySelectorAll("[data-radix-focus-guard]").forEach((m) => m.remove()), count$1--;
@@ -384,8 +384,8 @@ function createFocusGuard() {
 var AUTOFOCUS_ON_MOUNT = "focusScope.autoFocusOnMount", AUTOFOCUS_ON_UNMOUNT = "focusScope.autoFocusOnUnmount", EVENT_OPTIONS = {
 	bubbles: !1,
 	cancelable: !0
-}, FOCUS_SCOPE_NAME = "FocusScope", FocusScope = React$1.forwardRef((x, S) => {
-	let { loop: C = !1, trapped: T = !1, onMountAutoFocus: D, onUnmountAutoFocus: O, ...k } = x, [A, j] = React$1.useState(null), M = useCallbackRef(D), N = useCallbackRef(O), P = React$1.useRef(null), F = useComposedRefs(S, (m) => j(m)), I = React$1.useRef({
+}, FOCUS_SCOPE_NAME = "FocusScope", FocusScope = React.forwardRef((x, S) => {
+	let { loop: C = !1, trapped: T = !1, onMountAutoFocus: D, onUnmountAutoFocus: O, ...k } = x, [A, j] = React.useState(null), M = useCallbackRef(D), N = useCallbackRef(O), P = React.useRef(null), F = useComposedRefs(S, (m) => j(m)), I = React.useRef({
 		paused: !1,
 		pause() {
 			this.paused = !0;
@@ -394,7 +394,7 @@ var AUTOFOCUS_ON_MOUNT = "focusScope.autoFocusOnMount", AUTOFOCUS_ON_UNMOUNT = "
 			this.paused = !1;
 		}
 	}).current;
-	React$1.useEffect(() => {
+	React.useEffect(() => {
 		if (T) {
 			let m = function(m) {
 				if (I.paused || !A) return;
@@ -420,7 +420,7 @@ var AUTOFOCUS_ON_MOUNT = "focusScope.autoFocusOnMount", AUTOFOCUS_ON_UNMOUNT = "
 		T,
 		A,
 		I.paused
-	]), React$1.useEffect(() => {
+	]), React.useEffect(() => {
 		if (A) {
 			focusScopesStack.add(I);
 			let m = document.activeElement;
@@ -441,7 +441,7 @@ var AUTOFOCUS_ON_MOUNT = "focusScope.autoFocusOnMount", AUTOFOCUS_ON_UNMOUNT = "
 		N,
 		I
 	]);
-	let L = React$1.useCallback((m) => {
+	let L = React.useCallback((m) => {
 		if (!C && !T || I.paused) return;
 		let x = m.key === "Tab" && !m.altKey && !m.ctrlKey && !m.metaKey, S = document.activeElement;
 		if (x && S) {
@@ -518,9 +518,9 @@ function arrayRemove(m, x) {
 function removeLinks(m) {
 	return m.filter((m) => m.tagName !== "A");
 }
-var useLayoutEffect2 = globalThis?.document ? React$1.useLayoutEffect : () => {}, useReactId = React$1.useId || (() => void 0), count = 0;
+var useLayoutEffect2 = globalThis?.document ? React.useLayoutEffect : () => {}, useReactId = React.useId || (() => void 0), count = 0;
 function useId$1(x) {
-	let [S, C] = React$1.useState(useReactId());
+	let [S, C] = React.useState(useReactId());
 	return useLayoutEffect2(() => {
 		x || C((m) => m ?? String(count++));
 	}, [x]), x || (S ? `radix-${S}` : "");
@@ -1459,27 +1459,27 @@ function roundByDPR(m, x) {
 	return Math.round(x * S) / S;
 }
 function useLatestRef(x) {
-	let S = React$1.useRef(x);
+	let S = React.useRef(x);
 	return index(() => {
 		S.current = x;
 	}), S;
 }
 function useFloating(x) {
 	x === void 0 && (x = {});
-	let { placement: S = "bottom", strategy: C = "absolute", middleware: T = [], platform: D, elements: { reference: O, floating: k } = {}, transform: A = !0, whileElementsMounted: j, open: M } = x, [N, P] = React$1.useState({
+	let { placement: S = "bottom", strategy: C = "absolute", middleware: T = [], platform: D, elements: { reference: O, floating: k } = {}, transform: A = !0, whileElementsMounted: j, open: M } = x, [N, P] = React.useState({
 		x: 0,
 		y: 0,
 		strategy: C,
 		placement: S,
 		middlewareData: {},
 		isPositioned: !1
-	}), [F, I] = React$1.useState(T);
+	}), [F, I] = React.useState(T);
 	deepEqual$1(F, T) || I(T);
-	let [L, R] = React$1.useState(null), [z, B] = React$1.useState(null), H = React$1.useCallback((m) => {
+	let [L, R] = React.useState(null), [z, B] = React.useState(null), H = React.useCallback((m) => {
 		m !== q.current && (q.current = m, R(m));
-	}, []), U = React$1.useCallback((m) => {
+	}, []), U = React.useCallback((m) => {
 		m !== J.current && (J.current = m, B(m));
-	}, []), G = O || L, K = k || z, q = React$1.useRef(null), J = React$1.useRef(null), NR = React$1.useRef(N), PR = j != null, Y = useLatestRef(j), X = useLatestRef(D), Z = useLatestRef(M), Q = React$1.useCallback(() => {
+	}, []), G = O || L, K = k || z, q = React.useRef(null), J = React.useRef(null), NR = React.useRef(N), PR = j != null, Y = useLatestRef(j), X = useLatestRef(D), Z = useLatestRef(M), Q = React.useCallback(() => {
 		if (!q.current || !J.current) return;
 		let m = {
 			placement: S,
@@ -1508,7 +1508,7 @@ function useFloating(x) {
 			isPositioned: !1
 		})));
 	}, [M]);
-	let FR = React$1.useRef(!1);
+	let FR = React.useRef(!1);
 	index(() => (FR.current = !0, () => {
 		FR.current = !1;
 	}), []), index(() => {
@@ -1523,15 +1523,15 @@ function useFloating(x) {
 		Y,
 		PR
 	]);
-	let IR = React$1.useMemo(() => ({
+	let IR = React.useMemo(() => ({
 		reference: q,
 		floating: J,
 		setReference: H,
 		setFloating: U
-	}), [H, U]), LR = React$1.useMemo(() => ({
+	}), [H, U]), LR = React.useMemo(() => ({
 		reference: G,
 		floating: K
-	}), [G, K]), RR = React$1.useMemo(() => {
+	}), [G, K]), RR = React.useMemo(() => {
 		let m = {
 			position: C,
 			left: 0,
@@ -1555,7 +1555,7 @@ function useFloating(x) {
 		N.x,
 		N.y
 	]);
-	return React$1.useMemo(() => ({
+	return React.useMemo(() => ({
 		...N,
 		update: Q,
 		refs: IR,
@@ -1608,7 +1608,7 @@ var arrow$1$1 = (m) => {
 }), arrow = (m, x) => ({
 	...arrow$1$1(m),
 	options: [m, x]
-}), NAME$1 = "Arrow", Arrow$1 = React$1.forwardRef((m, x) => {
+}), NAME$1 = "Arrow", Arrow$1 = React.forwardRef((m, x) => {
 	let { children: S, width: C = 10, height: T = 5, ...D } = m;
 	return /* @__PURE__ */ jsx(Primitive.svg, {
 		...D,
@@ -1623,7 +1623,7 @@ var arrow$1$1 = (m) => {
 Arrow$1.displayName = NAME$1;
 var Root = Arrow$1;
 function useSize(x) {
-	let [S, C] = React$1.useState(void 0);
+	let [S, C] = React.useState(void 0);
 	return useLayoutEffect2(() => {
 		if (x) {
 			C({
@@ -1647,7 +1647,7 @@ function useSize(x) {
 	}, [x]), S;
 }
 var POPPER_NAME = "Popper", [createPopperContext, createPopperScope] = createContextScope(POPPER_NAME), [PopperProvider, usePopperContext] = createPopperContext(POPPER_NAME), Popper = (x) => {
-	let { __scopePopper: S, children: C } = x, [T, D] = React$1.useState(null);
+	let { __scopePopper: S, children: C } = x, [T, D] = React.useState(null);
 	return /* @__PURE__ */ jsx(PopperProvider, {
 		scope: S,
 		anchor: T,
@@ -1656,9 +1656,9 @@ var POPPER_NAME = "Popper", [createPopperContext, createPopperScope] = createCon
 	});
 };
 Popper.displayName = POPPER_NAME;
-var ANCHOR_NAME = "PopperAnchor", PopperAnchor = React$1.forwardRef((x, S) => {
-	let { __scopePopper: C, virtualRef: T, ...D } = x, O = usePopperContext(ANCHOR_NAME, C), k = React$1.useRef(null), A = useComposedRefs(S, k), j = React$1.useRef(null);
-	return React$1.useEffect(() => {
+var ANCHOR_NAME = "PopperAnchor", PopperAnchor = React.forwardRef((x, S) => {
+	let { __scopePopper: C, virtualRef: T, ...D } = x, O = usePopperContext(ANCHOR_NAME, C), k = React.useRef(null), A = useComposedRefs(S, k), j = React.useRef(null);
+	return React.useEffect(() => {
 		let m = j.current;
 		j.current = T?.current || k.current, m !== j.current && O.onAnchorChange(j.current);
 	}), T ? null : /* @__PURE__ */ jsx(Primitive.div, {
@@ -1667,8 +1667,8 @@ var ANCHOR_NAME = "PopperAnchor", PopperAnchor = React$1.forwardRef((x, S) => {
 	});
 });
 PopperAnchor.displayName = ANCHOR_NAME;
-var CONTENT_NAME$1 = "PopperContent", [PopperContentProvider, useContentContext] = createPopperContext(CONTENT_NAME$1), PopperContent = React$1.forwardRef((x, S) => {
-	let { __scopePopper: C, side: T = "bottom", sideOffset: D = 0, align: O = "center", alignOffset: k = 0, arrowPadding: A = 0, avoidCollisions: j = !0, collisionBoundary: M = [], collisionPadding: N = 0, sticky: P = "partial", hideWhenDetached: F = !1, updatePositionStrategy: I = "optimized", onPlaced: L, ...R } = x, z = usePopperContext(CONTENT_NAME$1, C), [B, H] = React$1.useState(null), U = useComposedRefs(S, (m) => H(m)), [W, G] = React$1.useState(null), K = useSize(W), q = K?.width ?? 0, J = K?.height ?? 0, PR = T + (O === "center" ? "" : "-" + O), Y = typeof N == "number" ? N : {
+var CONTENT_NAME$1 = "PopperContent", [PopperContentProvider, useContentContext] = createPopperContext(CONTENT_NAME$1), PopperContent = React.forwardRef((x, S) => {
+	let { __scopePopper: C, side: T = "bottom", sideOffset: D = 0, align: O = "center", alignOffset: k = 0, arrowPadding: A = 0, avoidCollisions: j = !0, collisionBoundary: M = [], collisionPadding: N = 0, sticky: P = "partial", hideWhenDetached: F = !1, updatePositionStrategy: I = "optimized", onPlaced: L, ...R } = x, z = usePopperContext(CONTENT_NAME$1, C), [B, H] = React.useState(null), U = useComposedRefs(S, (m) => H(m)), [W, G] = React.useState(null), K = useSize(W), q = K?.width ?? 0, J = K?.height ?? 0, PR = T + (O === "center" ? "" : "-" + O), Y = typeof N == "number" ? N : {
 		top: 0,
 		right: 0,
 		bottom: 0,
@@ -1719,7 +1719,7 @@ var CONTENT_NAME$1 = "PopperContent", [PopperContentProvider, useContentContext]
 	useLayoutEffect2(() => {
 		RR && HR?.();
 	}, [RR, HR]);
-	let $ = zR.arrow?.x, UR = zR.arrow?.y, WR = zR.arrow?.centerOffset !== 0, [GR, KR] = React$1.useState();
+	let $ = zR.arrow?.x, UR = zR.arrow?.y, WR = zR.arrow?.centerOffset !== 0, [GR, KR] = React.useState();
 	return useLayoutEffect2(() => {
 		B && KR(window.getComputedStyle(B).zIndex);
 	}, [B]), /* @__PURE__ */ jsx("div", {
@@ -1763,7 +1763,7 @@ var ARROW_NAME$1 = "PopperArrow", OPPOSITE_SIDE = {
 	right: "left",
 	bottom: "top",
 	left: "right"
-}, PopperArrow = React$1.forwardRef(function(m, x) {
+}, PopperArrow = React.forwardRef(function(m, x) {
 	let { __scopePopper: S, ...C } = m, T = useContentContext(ARROW_NAME$1, S), D = OPPOSITE_SIDE[T.placedSide];
 	return /* @__PURE__ */ jsx("span", {
 		ref: T.onArrowChange,
@@ -1819,8 +1819,8 @@ function getSideAndAlignFromPlacement(m) {
 	let [x, S = "center"] = m.split("-");
 	return [x, S];
 }
-var Root2$1 = Popper, Anchor = PopperAnchor, Content = PopperContent, Arrow = PopperArrow, PORTAL_NAME$1 = "Portal", Portal = React$1.forwardRef((x, S) => {
-	let { container: C, ...T } = x, [D, O] = React$1.useState(!1);
+var Root2$1 = Popper, Anchor = PopperAnchor, Content = PopperContent, Arrow = PopperArrow, PORTAL_NAME$1 = "Portal", Portal = React.forwardRef((x, S) => {
+	let { container: C, ...T } = x, [D, O] = React.useState(!1);
 	useLayoutEffect2(() => O(!0), []);
 	let k = C || D && globalThis?.document?.body;
 	return k ? ReactDOM.createPortal(/* @__PURE__ */ jsx(Primitive.div, {
@@ -1829,15 +1829,15 @@ var Root2$1 = Popper, Anchor = PopperAnchor, Content = PopperContent, Arrow = Po
 	}), k) : null;
 });
 Portal.displayName = PORTAL_NAME$1;
-var useInsertionEffect$1 = React$1.useInsertionEffect || useLayoutEffect2;
+var useInsertionEffect$1 = React.useInsertionEffect || useLayoutEffect2;
 function useControllableState({ prop: x, defaultProp: S, onChange: C = () => {}, caller: T }) {
 	let [D, O, k] = useUncontrolledState({
 		defaultProp: S,
 		onChange: C
 	}), A = x !== void 0, j = A ? x : D;
 	{
-		let S = React$1.useRef(x !== void 0);
-		React$1.useEffect(() => {
+		let S = React.useRef(x !== void 0);
+		React.useEffect(() => {
 			let m = S.current;
 			if (m !== A) {
 				let x = m ? "controlled" : "uncontrolled", S = A ? "controlled" : "uncontrolled";
@@ -1846,7 +1846,7 @@ function useControllableState({ prop: x, defaultProp: S, onChange: C = () => {},
 			S.current = A;
 		}, [A, T]);
 	}
-	return [j, React$1.useCallback((m) => {
+	return [j, React.useCallback((m) => {
 		if (A) {
 			let S = isFunction(m) ? m(x) : m;
 			S !== x && k.current?.(S);
@@ -1859,10 +1859,10 @@ function useControllableState({ prop: x, defaultProp: S, onChange: C = () => {},
 	])];
 }
 function useUncontrolledState({ defaultProp: x, onChange: S }) {
-	let [C, T] = React$1.useState(x), D = React$1.useRef(C), O = React$1.useRef(S);
+	let [C, T] = React.useState(x), D = React.useRef(C), O = React.useRef(S);
 	return useInsertionEffect$1(() => {
 		O.current = S;
-	}, [S]), React$1.useEffect(() => {
+	}, [S]), React.useEffect(() => {
 		D.current !== C && (O.current?.(C), D.current = C);
 	}, [C, D]), [
 		C,
@@ -1874,11 +1874,11 @@ function isFunction(m) {
 	return typeof m == "function";
 }
 function usePrevious(x) {
-	let S = React$1.useRef({
+	let S = React.useRef({
 		value: x,
 		previous: x
 	});
-	return React$1.useMemo(() => (S.current.value !== x && (S.current.previous = S.current.value, S.current.value = x), S.current.previous), [x]);
+	return React.useMemo(() => (S.current.value !== x && (S.current.previous = S.current.value, S.current.value = x), S.current.previous), [x]);
 }
 var VISUALLY_HIDDEN_STYLES = Object.freeze({
 	position: "absolute",
@@ -1891,7 +1891,7 @@ var VISUALLY_HIDDEN_STYLES = Object.freeze({
 	clip: "rect(0, 0, 0, 0)",
 	whiteSpace: "nowrap",
 	wordWrap: "normal"
-}), NAME = "VisuallyHidden", VisuallyHidden = React$1.forwardRef((m, x) => /* @__PURE__ */ jsx(Primitive.span, {
+}), NAME = "VisuallyHidden", VisuallyHidden = React.forwardRef((m, x) => /* @__PURE__ */ jsx(Primitive.span, {
 	...m,
 	ref: x,
 	style: {
@@ -1980,7 +1980,7 @@ function useCallbackRef$1(m, x) {
 	})[0];
 	return S.callback = x, S.facade;
 }
-var useIsomorphicLayoutEffect$2 = typeof window < "u" ? React$1.useLayoutEffect : React$1.useEffect, currentValues = /* @__PURE__ */ new WeakMap();
+var useIsomorphicLayoutEffect$2 = typeof window < "u" ? React.useLayoutEffect : React.useEffect, currentValues = /* @__PURE__ */ new WeakMap();
 function useMergeRefs(m, x) {
 	var S = useCallbackRef$1(x || null, function(x) {
 		return m.forEach(function(m) {
@@ -2070,14 +2070,14 @@ var SideCar = function(x) {
 	if (!S) throw Error("Sidecar: please provide `sideCar` property to import the right car");
 	var T = S.read();
 	if (!T) throw Error("Sidecar medium not found");
-	return React$1.createElement(T, __assign({}, C));
+	return React.createElement(T, __assign({}, C));
 };
 SideCar.isSideCarExport = !0;
 function exportSidecar(m, x) {
 	return m.useMedium(x), SideCar;
 }
-var effectCar = createSidecarMedium(), nothing = function() {}, RemoveScroll = React$1.forwardRef(function(x, S) {
-	var C = React$1.useRef(null), T = React$1.useState({
+var effectCar = createSidecarMedium(), nothing = function() {}, RemoveScroll = React.forwardRef(function(x, S) {
+	var C = React.useRef(null), T = React.useState({
 		onScrollCapture: nothing,
 		onWheelCapture: nothing,
 		onTouchMoveCapture: nothing
@@ -2096,7 +2096,7 @@ var effectCar = createSidecarMedium(), nothing = function() {}, RemoveScroll = R
 		"as",
 		"gapMode"
 	]), G = F, K = useMergeRefs([C, S]), q = __assign(__assign({}, W), D);
-	return React$1.createElement(React$1.Fragment, null, N && React$1.createElement(G, {
+	return React.createElement(React.Fragment, null, N && React.createElement(G, {
 		sideCar: effectCar,
 		removeScrollBar: M,
 		shards: P,
@@ -2107,7 +2107,7 @@ var effectCar = createSidecarMedium(), nothing = function() {}, RemoveScroll = R
 		allowPinchZoom: !!z,
 		lockRef: C,
 		gapMode: U
-	}), k ? React$1.cloneElement(React$1.Children.only(A), __assign(__assign({}, q), { ref: K })) : React$1.createElement(H, __assign({}, q, {
+	}), k ? React.cloneElement(React.Children.only(A), __assign(__assign({}, q), { ref: K })) : React.createElement(H, __assign({}, q, {
 		className: j,
 		ref: K
 	}), A));
@@ -2150,7 +2150,7 @@ var stylesheetSingleton = function() {
 }, styleHookSingleton = function() {
 	var x = stylesheetSingleton();
 	return function(S, C) {
-		React$1.useEffect(function() {
+		React.useEffect(function() {
 			return x.add(S), function() {
 				x.remove();
 			};
@@ -2233,7 +2233,7 @@ var stylesheetSingleton = function() {
 	var m = parseInt(document.body.getAttribute("data-scroll-locked") || "0", 10);
 	return isFinite(m) ? m : 0;
 }, useLockAttribute = function() {
-	React$1.useEffect(function() {
+	React.useEffect(function() {
 		return document.body.setAttribute(lockAttribute, (getCurrentUseCounter() + 1).toString()), function() {
 			var m = getCurrentUseCounter() - 1;
 			m <= 0 ? document.body.removeAttribute(lockAttribute) : document.body.setAttribute(lockAttribute, m.toString());
@@ -2242,10 +2242,10 @@ var stylesheetSingleton = function() {
 }, RemoveScrollBar = function(x) {
 	var S = x.noRelative, C = x.noImportant, T = x.gapMode, D = T === void 0 ? "margin" : T;
 	useLockAttribute();
-	var O = React$1.useMemo(function() {
+	var O = React.useMemo(function() {
 		return getGapWidth(D);
 	}, [D]);
-	return React$1.createElement(Style, { styles: getStyles$1(O, !S, D, C ? "" : "!important") });
+	return React.createElement(Style, { styles: getStyles$1(O, !S, D, C ? "" : "!important") });
 }, passiveSupported = !1;
 if (typeof window < "u") try {
 	var options$1 = Object.defineProperty({}, "passive", { get: function() {
@@ -2318,10 +2318,10 @@ var nonPassive = passiveSupported ? { passive: !1 } : !1, alwaysContainsScroll =
 `;
 }, idCounter = 0, lockStack = [];
 function RemoveScrollSideCar(x) {
-	var S = React$1.useRef([]), C = React$1.useRef([0, 0]), T = React$1.useRef(), D = React$1.useState(idCounter++)[0], O = React$1.useState(styleSingleton)[0], k = React$1.useRef(x);
-	React$1.useEffect(function() {
+	var S = React.useRef([]), C = React.useRef([0, 0]), T = React.useRef(), D = React.useState(idCounter++)[0], O = React.useState(styleSingleton)[0], k = React.useRef(x);
+	React.useEffect(function() {
 		k.current = x;
-	}, [x]), React$1.useEffect(function() {
+	}, [x]), React.useEffect(function() {
 		if (x.inert) {
 			document.body.classList.add(`block-interactivity-${D}`);
 			var m = __spreadArray([x.lockRef.current], (x.shards || []).map(extractRef), !0).filter(Boolean);
@@ -2338,7 +2338,7 @@ function RemoveScrollSideCar(x) {
 		x.lockRef.current,
 		x.shards
 	]);
-	var A = React$1.useCallback(function(m, x) {
+	var A = React.useCallback(function(m, x) {
 		if ("touches" in m && m.touches.length === 2 || m.type === "wheel" && m.ctrlKey) return !k.current.allowPinchZoom;
 		var S = getTouchXY(m), D = C.current, O = "deltaX" in m ? m.deltaX : D[0] - S[0], A = "deltaY" in m ? m.deltaY : D[1] - S[1], j, M = m.target, N = Math.abs(O) > Math.abs(A) ? "h" : "v";
 		if ("touches" in m && N === "h" && M.type === "range") return !1;
@@ -2350,7 +2350,7 @@ function RemoveScrollSideCar(x) {
 		if (!T.current && "changedTouches" in m && (O || A) && (T.current = j), !j) return !0;
 		var L = T.current || j;
 		return handleScroll(L, x, m, L === "h" ? O : A, !0);
-	}, []), j = React$1.useCallback(function(m) {
+	}, []), j = React.useCallback(function(m) {
 		var x = m;
 		if (!(!lockStack.length || lockStack[lockStack.length - 1] !== O)) {
 			var C = "deltaY" in x ? getDeltaXY(x) : getTouchXY(x), T = S.current.filter(function(m) {
@@ -2367,7 +2367,7 @@ function RemoveScrollSideCar(x) {
 				(D.length > 0 ? A(x, D[0]) : !k.current.noIsolation) && x.cancelable && x.preventDefault();
 			}
 		}
-	}, []), M = React$1.useCallback(function(m, x, C, T) {
+	}, []), M = React.useCallback(function(m, x, C, T) {
 		var D = {
 			name: m,
 			delta: x,
@@ -2380,14 +2380,14 @@ function RemoveScrollSideCar(x) {
 				return m !== D;
 			});
 		}, 1);
-	}, []), N = React$1.useCallback(function(m) {
+	}, []), N = React.useCallback(function(m) {
 		C.current = getTouchXY(m), T.current = void 0;
-	}, []), P = React$1.useCallback(function(m) {
+	}, []), P = React.useCallback(function(m) {
 		M(m.type, getDeltaXY(m), m.target, A(m, x.lockRef.current));
-	}, []), F = React$1.useCallback(function(m) {
+	}, []), F = React.useCallback(function(m) {
 		M(m.type, getTouchXY(m), m.target, A(m, x.lockRef.current));
 	}, []);
-	React$1.useEffect(function() {
+	React.useEffect(function() {
 		return lockStack.push(O), x.setCallbacks({
 			onScrollCapture: P,
 			onWheelCapture: P,
@@ -2399,7 +2399,7 @@ function RemoveScrollSideCar(x) {
 		};
 	}, []);
 	var I = x.removeScrollBar, L = x.inert;
-	return React$1.createElement(React$1.Fragment, null, L ? React$1.createElement(O, { styles: generateStyle(D) }) : null, I ? React$1.createElement(RemoveScrollBar, {
+	return React.createElement(React.Fragment, null, L ? React.createElement(O, { styles: generateStyle(D) }) : null, I ? React.createElement(RemoveScrollBar, {
 		noRelative: x.noRelative,
 		gapMode: x.gapMode
 	}) : null);
@@ -2408,8 +2408,8 @@ function getOutermostShadowParent(m) {
 	for (var x = null; m !== null;) m instanceof ShadowRoot && (x = m.host, m = m.host), m = m.parentNode;
 	return x;
 }
-var sidecar_default = exportSidecar(effectCar, RemoveScrollSideCar), ReactRemoveScroll = React$1.forwardRef(function(x, S) {
-	return React$1.createElement(RemoveScroll, __assign({}, x, {
+var sidecar_default = exportSidecar(effectCar, RemoveScrollSideCar), ReactRemoveScroll = React.forwardRef(function(x, S) {
+	return React.createElement(RemoveScroll, __assign({}, x, {
 		ref: S,
 		sideCar: sidecar_default
 	}));
@@ -2421,7 +2421,7 @@ var Combination_default = ReactRemoveScroll, OPEN_KEYS = [
 	"ArrowUp",
 	"ArrowDown"
 ], SELECTION_KEYS = [" ", "Enter"], SELECT_NAME = "Select", [Collection, useCollection, createCollectionScope] = createCollection(SELECT_NAME), [createSelectContext, createSelectScope] = createContextScope(SELECT_NAME, [createCollectionScope, createPopperScope]), usePopperScope = createPopperScope(), [SelectProvider, useSelectContext] = createSelectContext(SELECT_NAME), [SelectNativeOptionsProvider, useSelectNativeOptionsContext] = createSelectContext(SELECT_NAME), Select$1 = (x) => {
-	let { __scopeSelect: S, children: C, open: T, defaultOpen: D, onOpenChange: O, value: k, defaultValue: A, onValueChange: j, dir: M, name: N, autoComplete: P, disabled: F, required: I, form: L } = x, R = usePopperScope(S), [z, B] = React$1.useState(null), [H, U] = React$1.useState(null), [W, G] = React$1.useState(!1), K = useDirection(M), [q, J] = useControllableState({
+	let { __scopeSelect: S, children: C, open: T, defaultOpen: D, onOpenChange: O, value: k, defaultValue: A, onValueChange: j, dir: M, name: N, autoComplete: P, disabled: F, required: I, form: L } = x, R = usePopperScope(S), [z, B] = React.useState(null), [H, U] = React.useState(null), [W, G] = React.useState(!1), K = useDirection(M), [q, J] = useControllableState({
 		prop: T,
 		defaultProp: D ?? !1,
 		onChange: O,
@@ -2431,7 +2431,7 @@ var Combination_default = ReactRemoveScroll, OPEN_KEYS = [
 		defaultProp: A,
 		onChange: j,
 		caller: SELECT_NAME
-	}), Z = React$1.useRef(null), Q = z ? L || !!z.closest("form") : !0, [FR, IR] = React$1.useState(/* @__PURE__ */ new Set()), LR = Array.from(FR).map((m) => m.props.value).join(";");
+	}), Z = React.useRef(null), Q = z ? L || !!z.closest("form") : !0, [FR, IR] = React.useState(/* @__PURE__ */ new Set()), LR = Array.from(FR).map((m) => m.props.value).join(";");
 	return /* @__PURE__ */ jsx(Root2$1, {
 		...R,
 		children: /* @__PURE__ */ jsxs(SelectProvider, {
@@ -2455,10 +2455,10 @@ var Combination_default = ReactRemoveScroll, OPEN_KEYS = [
 				scope: S,
 				children: /* @__PURE__ */ jsx(SelectNativeOptionsProvider, {
 					scope: x.__scopeSelect,
-					onNativeOptionAdd: React$1.useCallback((m) => {
+					onNativeOptionAdd: React.useCallback((m) => {
 						IR((x) => new Set(x).add(m));
 					}, []),
-					onNativeOptionRemove: React$1.useCallback((m) => {
+					onNativeOptionRemove: React.useCallback((m) => {
 						IR((x) => {
 							let S = new Set(x);
 							return S.delete(m), S;
@@ -2482,8 +2482,8 @@ var Combination_default = ReactRemoveScroll, OPEN_KEYS = [
 	});
 };
 Select$1.displayName = SELECT_NAME;
-var TRIGGER_NAME = "SelectTrigger", SelectTrigger$1 = React$1.forwardRef((x, S) => {
-	let { __scopeSelect: C, disabled: T = !1, ...D } = x, O = usePopperScope(C), k = useSelectContext(TRIGGER_NAME, C), A = k.disabled || T, j = useComposedRefs(S, k.onTriggerChange), M = useCollection(C), N = React$1.useRef("touch"), [P, F, I] = useTypeaheadSearch((m) => {
+var TRIGGER_NAME = "SelectTrigger", SelectTrigger$1 = React.forwardRef((x, S) => {
+	let { __scopeSelect: C, disabled: T = !1, ...D } = x, O = usePopperScope(C), k = useSelectContext(TRIGGER_NAME, C), A = k.disabled || T, j = useComposedRefs(S, k.onTriggerChange), M = useCollection(C), N = React.useRef("touch"), [P, F, I] = useTypeaheadSearch((m) => {
 		let x = M().filter((m) => !m.disabled), S = findNextItem(x, m, x.find((m) => m.value === k.value));
 		S !== void 0 && k.onValueChange(S.value);
 	}), L = (m) => {
@@ -2525,7 +2525,7 @@ var TRIGGER_NAME = "SelectTrigger", SelectTrigger$1 = React$1.forwardRef((x, S) 
 	});
 });
 SelectTrigger$1.displayName = TRIGGER_NAME;
-var VALUE_NAME = "SelectValue", SelectValue$1 = React$1.forwardRef((m, x) => {
+var VALUE_NAME = "SelectValue", SelectValue$1 = React.forwardRef((m, x) => {
 	let { __scopeSelect: S, className: C, style: T, children: D, placeholder: O = "", ...k } = m, A = useSelectContext(VALUE_NAME, S), { onValueNodeHasChildrenChange: j } = A, M = D !== void 0, N = useComposedRefs(x, A.onValueNodeChange);
 	return useLayoutEffect2(() => {
 		j(M);
@@ -2537,7 +2537,7 @@ var VALUE_NAME = "SelectValue", SelectValue$1 = React$1.forwardRef((m, x) => {
 	});
 });
 SelectValue$1.displayName = VALUE_NAME;
-var ICON_NAME = "SelectIcon", SelectIcon = React$1.forwardRef((m, x) => {
+var ICON_NAME = "SelectIcon", SelectIcon = React.forwardRef((m, x) => {
 	let { __scopeSelect: S, children: C, ...T } = m;
 	return /* @__PURE__ */ jsx(Primitive.span, {
 		"aria-hidden": !0,
@@ -2552,8 +2552,8 @@ var PORTAL_NAME = "SelectPortal", SelectPortal = (m) => /* @__PURE__ */ jsx(Port
 	...m
 });
 SelectPortal.displayName = PORTAL_NAME;
-var CONTENT_NAME = "SelectContent", SelectContent$1 = React$1.forwardRef((x, S) => {
-	let C = useSelectContext(CONTENT_NAME, x.__scopeSelect), [T, D] = React$1.useState();
+var CONTENT_NAME = "SelectContent", SelectContent$1 = React.forwardRef((x, S) => {
+	let C = useSelectContext(CONTENT_NAME, x.__scopeSelect), [T, D] = React.useState();
 	if (useLayoutEffect2(() => {
 		D(new DocumentFragment());
 	}, []), !C.open) {
@@ -2572,24 +2572,24 @@ var CONTENT_NAME = "SelectContent", SelectContent$1 = React$1.forwardRef((x, S) 
 	});
 });
 SelectContent$1.displayName = CONTENT_NAME;
-var CONTENT_MARGIN = 10, [SelectContentProvider, useSelectContentContext] = createSelectContext(CONTENT_NAME), CONTENT_IMPL_NAME = "SelectContentImpl", Slot = /* @__PURE__ */ createSlot("SelectContent.RemoveScroll"), SelectContentImpl = React$1.forwardRef((x, S) => {
-	let { __scopeSelect: C, position: T = "item-aligned", onCloseAutoFocus: D, onEscapeKeyDown: O, onPointerDownOutside: k, side: A, sideOffset: j, align: M, alignOffset: N, arrowPadding: P, collisionBoundary: F, collisionPadding: I, sticky: L, hideWhenDetached: R, avoidCollisions: z, ...B } = x, H = useSelectContext(CONTENT_NAME, C), [U, W] = React$1.useState(null), [G, K] = React$1.useState(null), q = useComposedRefs(S, (m) => W(m)), [J, PR] = React$1.useState(null), [Y, X] = React$1.useState(null), Z = useCollection(C), [Q, FR] = React$1.useState(!1), IR = React$1.useRef(!1);
-	React$1.useEffect(() => {
+var CONTENT_MARGIN = 10, [SelectContentProvider, useSelectContentContext] = createSelectContext(CONTENT_NAME), CONTENT_IMPL_NAME = "SelectContentImpl", Slot = /* @__PURE__ */ createSlot("SelectContent.RemoveScroll"), SelectContentImpl = React.forwardRef((x, S) => {
+	let { __scopeSelect: C, position: T = "item-aligned", onCloseAutoFocus: D, onEscapeKeyDown: O, onPointerDownOutside: k, side: A, sideOffset: j, align: M, alignOffset: N, arrowPadding: P, collisionBoundary: F, collisionPadding: I, sticky: L, hideWhenDetached: R, avoidCollisions: z, ...B } = x, H = useSelectContext(CONTENT_NAME, C), [U, W] = React.useState(null), [G, K] = React.useState(null), q = useComposedRefs(S, (m) => W(m)), [J, PR] = React.useState(null), [Y, X] = React.useState(null), Z = useCollection(C), [Q, FR] = React.useState(!1), IR = React.useRef(!1);
+	React.useEffect(() => {
 		if (U) return hideOthers(U);
 	}, [U]), useFocusGuards();
-	let LR = React$1.useCallback((m) => {
+	let LR = React.useCallback((m) => {
 		let [x, ...S] = Z().map((m) => m.ref.current), [C] = S.slice(-1), T = document.activeElement;
 		for (let S of m) if (S === T || (S?.scrollIntoView({ block: "nearest" }), S === x && G && (G.scrollTop = 0), S === C && G && (G.scrollTop = G.scrollHeight), S?.focus(), document.activeElement !== T)) return;
-	}, [Z, G]), RR = React$1.useCallback(() => LR([J, U]), [
+	}, [Z, G]), RR = React.useCallback(() => LR([J, U]), [
 		LR,
 		J,
 		U
 	]);
-	React$1.useEffect(() => {
+	React.useEffect(() => {
 		Q && RR();
 	}, [Q, RR]);
 	let { onOpenChange: zR, triggerPointerDownPosRef: BR } = H;
-	React$1.useEffect(() => {
+	React.useEffect(() => {
 		if (U) {
 			let m = {
 				x: 0,
@@ -2613,7 +2613,7 @@ var CONTENT_MARGIN = 10, [SelectContentProvider, useSelectContentContext] = crea
 		U,
 		zR,
 		BR
-	]), React$1.useEffect(() => {
+	]), React.useEffect(() => {
 		let m = () => zR(!1);
 		return window.addEventListener("blur", m), window.addEventListener("resize", m), () => {
 			window.removeEventListener("blur", m), window.removeEventListener("resize", m);
@@ -2622,10 +2622,10 @@ var CONTENT_MARGIN = 10, [SelectContentProvider, useSelectContentContext] = crea
 	let [VR, HR] = useTypeaheadSearch((m) => {
 		let x = Z().filter((m) => !m.disabled), S = findNextItem(x, m, x.find((m) => m.ref.current === document.activeElement));
 		S && setTimeout(() => S.ref.current.focus());
-	}), $ = React$1.useCallback((m, x, S) => {
+	}), $ = React.useCallback((m, x, S) => {
 		let C = !IR.current && !S;
 		(H.value !== void 0 && H.value === x || C) && (PR(m), C && (IR.current = !0));
-	}, [H.value]), UR = React$1.useCallback(() => U?.focus(), [U]), GR = React$1.useCallback((m, x, S) => {
+	}, [H.value]), UR = React.useCallback(() => U?.focus(), [U]), GR = React.useCallback((m, x, S) => {
 		let C = !IR.current && !S;
 		(H.value !== void 0 && H.value === x || C) && X(m);
 	}, [H.value]), KR = T === "popper" ? SelectPopperPosition : SelectItemAlignedPosition, qR = KR === SelectPopperPosition ? {
@@ -2712,8 +2712,8 @@ var CONTENT_MARGIN = 10, [SelectContentProvider, useSelectContentContext] = crea
 	});
 });
 SelectContentImpl.displayName = CONTENT_IMPL_NAME;
-var ITEM_ALIGNED_POSITION_NAME = "SelectItemAlignedPosition", SelectItemAlignedPosition = React$1.forwardRef((x, S) => {
-	let { __scopeSelect: C, onPlaced: T, ...D } = x, O = useSelectContext(CONTENT_NAME, C), k = useSelectContentContext(CONTENT_NAME, C), [A, j] = React$1.useState(null), [M, N] = React$1.useState(null), P = useComposedRefs(S, (m) => N(m)), F = useCollection(C), I = React$1.useRef(!1), L = React$1.useRef(!0), { viewport: R, selectedItem: z, selectedItemText: B, focusSelectedItem: H } = k, U = React$1.useCallback(() => {
+var ITEM_ALIGNED_POSITION_NAME = "SelectItemAlignedPosition", SelectItemAlignedPosition = React.forwardRef((x, S) => {
+	let { __scopeSelect: C, onPlaced: T, ...D } = x, O = useSelectContext(CONTENT_NAME, C), k = useSelectContentContext(CONTENT_NAME, C), [A, j] = React.useState(null), [M, N] = React.useState(null), P = useComposedRefs(S, (m) => N(m)), F = useCollection(C), I = React.useRef(!1), L = React.useRef(!0), { viewport: R, selectedItem: z, selectedItemText: B, focusSelectedItem: H } = k, U = React.useCallback(() => {
 		if (O.trigger && O.valueNode && A && M && R && z && B) {
 			let m = O.trigger.getBoundingClientRect(), x = M.getBoundingClientRect(), S = O.valueNode.getBoundingClientRect(), C = B.getBoundingClientRect();
 			if (O.dir !== "rtl") {
@@ -2750,14 +2750,14 @@ var ITEM_ALIGNED_POSITION_NAME = "SelectItemAlignedPosition", SelectItemAlignedP
 		T
 	]);
 	useLayoutEffect2(() => U(), [U]);
-	let [W, G] = React$1.useState();
+	let [W, G] = React.useState();
 	return useLayoutEffect2(() => {
 		M && G(window.getComputedStyle(M).zIndex);
 	}, [M]), /* @__PURE__ */ jsx(SelectViewportProvider, {
 		scope: C,
 		contentWrapper: A,
 		shouldExpandOnScrollRef: I,
-		onScrollButtonChange: React$1.useCallback((m) => {
+		onScrollButtonChange: React.useCallback((m) => {
 			m && L.current === !0 && (U(), H?.(), L.current = !1);
 		}, [U, H]),
 		children: /* @__PURE__ */ jsx("div", {
@@ -2781,7 +2781,7 @@ var ITEM_ALIGNED_POSITION_NAME = "SelectItemAlignedPosition", SelectItemAlignedP
 	});
 });
 SelectItemAlignedPosition.displayName = ITEM_ALIGNED_POSITION_NAME;
-var POPPER_POSITION_NAME = "SelectPopperPosition", SelectPopperPosition = React$1.forwardRef((m, x) => {
+var POPPER_POSITION_NAME = "SelectPopperPosition", SelectPopperPosition = React.forwardRef((m, x) => {
 	let { __scopeSelect: S, align: C = "start", collisionPadding: T = CONTENT_MARGIN, ...D } = m;
 	return /* @__PURE__ */ jsx(Content, {
 		...usePopperScope(S),
@@ -2801,8 +2801,8 @@ var POPPER_POSITION_NAME = "SelectPopperPosition", SelectPopperPosition = React$
 	});
 });
 SelectPopperPosition.displayName = POPPER_POSITION_NAME;
-var [SelectViewportProvider, useSelectViewportContext] = createSelectContext(CONTENT_NAME, {}), VIEWPORT_NAME = "SelectViewport", SelectViewport = React$1.forwardRef((x, S) => {
-	let { __scopeSelect: C, nonce: T, ...D } = x, O = useSelectContentContext(VIEWPORT_NAME, C), k = useSelectViewportContext(VIEWPORT_NAME, C), A = useComposedRefs(S, O.onViewportChange), j = React$1.useRef(0);
+var [SelectViewportProvider, useSelectViewportContext] = createSelectContext(CONTENT_NAME, {}), VIEWPORT_NAME = "SelectViewport", SelectViewport = React.forwardRef((x, S) => {
+	let { __scopeSelect: C, nonce: T, ...D } = x, O = useSelectContentContext(VIEWPORT_NAME, C), k = useSelectViewportContext(VIEWPORT_NAME, C), A = useComposedRefs(S, O.onViewportChange), j = React.useRef(0);
 	return /* @__PURE__ */ jsxs(Fragment$1, { children: [/* @__PURE__ */ jsx("style", {
 		dangerouslySetInnerHTML: { __html: "[data-radix-select-viewport]{scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch;}[data-radix-select-viewport]::-webkit-scrollbar{display:none}" },
 		nonce: T
@@ -2837,7 +2837,7 @@ var [SelectViewportProvider, useSelectViewportContext] = createSelectContext(CON
 	})] });
 });
 SelectViewport.displayName = VIEWPORT_NAME;
-var GROUP_NAME = "SelectGroup", [SelectGroupContextProvider, useSelectGroupContext] = createSelectContext(GROUP_NAME), SelectGroup$1 = React$1.forwardRef((m, x) => {
+var GROUP_NAME = "SelectGroup", [SelectGroupContextProvider, useSelectGroupContext] = createSelectContext(GROUP_NAME), SelectGroup$1 = React.forwardRef((m, x) => {
 	let { __scopeSelect: S, ...C } = m, T = useId$1();
 	return /* @__PURE__ */ jsx(SelectGroupContextProvider, {
 		scope: S,
@@ -2851,7 +2851,7 @@ var GROUP_NAME = "SelectGroup", [SelectGroupContextProvider, useSelectGroupConte
 	});
 });
 SelectGroup$1.displayName = GROUP_NAME;
-var LABEL_NAME = "SelectLabel", SelectLabel$1 = React$1.forwardRef((m, x) => {
+var LABEL_NAME = "SelectLabel", SelectLabel$1 = React.forwardRef((m, x) => {
 	let { __scopeSelect: S, ...C } = m, T = useSelectGroupContext(LABEL_NAME, S);
 	return /* @__PURE__ */ jsx(Primitive.div, {
 		id: T.id,
@@ -2860,8 +2860,8 @@ var LABEL_NAME = "SelectLabel", SelectLabel$1 = React$1.forwardRef((m, x) => {
 	});
 });
 SelectLabel$1.displayName = LABEL_NAME;
-var ITEM_NAME = "SelectItem", [SelectItemContextProvider, useSelectItemContext] = createSelectContext(ITEM_NAME), SelectItem$1 = React$1.forwardRef((x, S) => {
-	let { __scopeSelect: C, value: T, disabled: D = !1, textValue: O, ...k } = x, A = useSelectContext(ITEM_NAME, C), j = useSelectContentContext(ITEM_NAME, C), M = A.value === T, [N, P] = React$1.useState(O ?? ""), [F, I] = React$1.useState(!1), L = useComposedRefs(S, (m) => j.itemRefCallback?.(m, T, D)), R = useId$1(), z = React$1.useRef("touch"), B = () => {
+var ITEM_NAME = "SelectItem", [SelectItemContextProvider, useSelectItemContext] = createSelectContext(ITEM_NAME), SelectItem$1 = React.forwardRef((x, S) => {
+	let { __scopeSelect: C, value: T, disabled: D = !1, textValue: O, ...k } = x, A = useSelectContext(ITEM_NAME, C), j = useSelectContentContext(ITEM_NAME, C), M = A.value === T, [N, P] = React.useState(O ?? ""), [F, I] = React.useState(!1), L = useComposedRefs(S, (m) => j.itemRefCallback?.(m, T, D)), R = useId$1(), z = React.useRef("touch"), B = () => {
 		D || (A.onValueChange(T), A.onOpenChange(!1));
 	};
 	if (T === "") throw Error("A <Select.Item /> must have a value prop that is not an empty string. This is because the Select value can be set to an empty string to clear the selection and show the placeholder.");
@@ -2871,7 +2871,7 @@ var ITEM_NAME = "SelectItem", [SelectItemContextProvider, useSelectItemContext] 
 		disabled: D,
 		textId: R,
 		isSelected: M,
-		onItemTextChange: React$1.useCallback((m) => {
+		onItemTextChange: React.useCallback((m) => {
 			P((x) => x || (m?.textContent ?? "").trim());
 		}, []),
 		children: /* @__PURE__ */ jsx(Collection.ItemSlot, {
@@ -2915,8 +2915,8 @@ var ITEM_NAME = "SelectItem", [SelectItemContextProvider, useSelectItemContext] 
 	});
 });
 SelectItem$1.displayName = ITEM_NAME;
-var ITEM_TEXT_NAME = "SelectItemText", SelectItemText = React$1.forwardRef((x, S) => {
-	let { __scopeSelect: C, className: T, style: D, ...O } = x, k = useSelectContext(ITEM_TEXT_NAME, C), A = useSelectContentContext(ITEM_TEXT_NAME, C), j = useSelectItemContext(ITEM_TEXT_NAME, C), M = useSelectNativeOptionsContext(ITEM_TEXT_NAME, C), [N, P] = React$1.useState(null), F = useComposedRefs(S, (m) => P(m), j.onItemTextChange, (m) => A.itemTextRefCallback?.(m, j.value, j.disabled)), I = N?.textContent, L = React$1.useMemo(() => /* @__PURE__ */ jsx("option", {
+var ITEM_TEXT_NAME = "SelectItemText", SelectItemText = React.forwardRef((x, S) => {
+	let { __scopeSelect: C, className: T, style: D, ...O } = x, k = useSelectContext(ITEM_TEXT_NAME, C), A = useSelectContentContext(ITEM_TEXT_NAME, C), j = useSelectItemContext(ITEM_TEXT_NAME, C), M = useSelectNativeOptionsContext(ITEM_TEXT_NAME, C), [N, P] = React.useState(null), F = useComposedRefs(S, (m) => P(m), j.onItemTextChange, (m) => A.itemTextRefCallback?.(m, j.value, j.disabled)), I = N?.textContent, L = React.useMemo(() => /* @__PURE__ */ jsx("option", {
 		value: j.value,
 		disabled: j.disabled,
 		children: I
@@ -2936,7 +2936,7 @@ var ITEM_TEXT_NAME = "SelectItemText", SelectItemText = React$1.forwardRef((x, S
 	}), j.isSelected && k.valueNode && !k.valueNodeHasChildren ? ReactDOM$1.createPortal(O.children, k.valueNode) : null] });
 });
 SelectItemText.displayName = ITEM_TEXT_NAME;
-var ITEM_INDICATOR_NAME = "SelectItemIndicator", SelectItemIndicator = React$1.forwardRef((m, x) => {
+var ITEM_INDICATOR_NAME = "SelectItemIndicator", SelectItemIndicator = React.forwardRef((m, x) => {
 	let { __scopeSelect: S, ...C } = m;
 	return useSelectItemContext(ITEM_INDICATOR_NAME, S).isSelected ? /* @__PURE__ */ jsx(Primitive.span, {
 		"aria-hidden": !0,
@@ -2945,8 +2945,8 @@ var ITEM_INDICATOR_NAME = "SelectItemIndicator", SelectItemIndicator = React$1.f
 	}) : null;
 });
 SelectItemIndicator.displayName = ITEM_INDICATOR_NAME;
-var SCROLL_UP_BUTTON_NAME = "SelectScrollUpButton", SelectScrollUpButton$1 = React$1.forwardRef((x, S) => {
-	let C = useSelectContentContext(SCROLL_UP_BUTTON_NAME, x.__scopeSelect), T = useSelectViewportContext(SCROLL_UP_BUTTON_NAME, x.__scopeSelect), [D, O] = React$1.useState(!1), k = useComposedRefs(S, T.onScrollButtonChange);
+var SCROLL_UP_BUTTON_NAME = "SelectScrollUpButton", SelectScrollUpButton$1 = React.forwardRef((x, S) => {
+	let C = useSelectContentContext(SCROLL_UP_BUTTON_NAME, x.__scopeSelect), T = useSelectViewportContext(SCROLL_UP_BUTTON_NAME, x.__scopeSelect), [D, O] = React.useState(!1), k = useComposedRefs(S, T.onScrollButtonChange);
 	return useLayoutEffect2(() => {
 		if (C.viewport && C.isPositioned) {
 			let m = function() {
@@ -2964,8 +2964,8 @@ var SCROLL_UP_BUTTON_NAME = "SelectScrollUpButton", SelectScrollUpButton$1 = Rea
 	}) : null;
 });
 SelectScrollUpButton$1.displayName = SCROLL_UP_BUTTON_NAME;
-var SCROLL_DOWN_BUTTON_NAME = "SelectScrollDownButton", SelectScrollDownButton$1 = React$1.forwardRef((x, S) => {
-	let C = useSelectContentContext(SCROLL_DOWN_BUTTON_NAME, x.__scopeSelect), T = useSelectViewportContext(SCROLL_DOWN_BUTTON_NAME, x.__scopeSelect), [D, O] = React$1.useState(!1), k = useComposedRefs(S, T.onScrollButtonChange);
+var SCROLL_DOWN_BUTTON_NAME = "SelectScrollDownButton", SelectScrollDownButton$1 = React.forwardRef((x, S) => {
+	let C = useSelectContentContext(SCROLL_DOWN_BUTTON_NAME, x.__scopeSelect), T = useSelectViewportContext(SCROLL_DOWN_BUTTON_NAME, x.__scopeSelect), [D, O] = React.useState(!1), k = useComposedRefs(S, T.onScrollButtonChange);
 	return useLayoutEffect2(() => {
 		if (C.viewport && C.isPositioned) {
 			let m = function() {
@@ -2984,11 +2984,11 @@ var SCROLL_DOWN_BUTTON_NAME = "SelectScrollDownButton", SelectScrollDownButton$1
 	}) : null;
 });
 SelectScrollDownButton$1.displayName = SCROLL_DOWN_BUTTON_NAME;
-var SelectScrollButtonImpl = React$1.forwardRef((x, S) => {
-	let { __scopeSelect: C, onAutoScroll: T, ...D } = x, O = useSelectContentContext("SelectScrollButton", C), k = React$1.useRef(null), A = useCollection(C), j = React$1.useCallback(() => {
+var SelectScrollButtonImpl = React.forwardRef((x, S) => {
+	let { __scopeSelect: C, onAutoScroll: T, ...D } = x, O = useSelectContentContext("SelectScrollButton", C), k = React.useRef(null), A = useCollection(C), j = React.useCallback(() => {
 		k.current !== null && (window.clearInterval(k.current), k.current = null);
 	}, []);
-	return React$1.useEffect(() => () => j(), [j]), useLayoutEffect2(() => {
+	return React.useEffect(() => () => j(), [j]), useLayoutEffect2(() => {
 		A().find((m) => m.ref.current === document.activeElement)?.ref.current?.scrollIntoView({ block: "nearest" });
 	}, [A]), /* @__PURE__ */ jsx(Primitive.div, {
 		"aria-hidden": !0,
@@ -3008,7 +3008,7 @@ var SelectScrollButtonImpl = React$1.forwardRef((x, S) => {
 			j();
 		})
 	});
-}), SEPARATOR_NAME = "SelectSeparator", SelectSeparator$1 = React$1.forwardRef((m, x) => {
+}), SEPARATOR_NAME = "SelectSeparator", SelectSeparator$1 = React.forwardRef((m, x) => {
 	let { __scopeSelect: S, ...C } = m;
 	return /* @__PURE__ */ jsx(Primitive.div, {
 		"aria-hidden": !0,
@@ -3017,7 +3017,7 @@ var SelectScrollButtonImpl = React$1.forwardRef((x, S) => {
 	});
 });
 SelectSeparator$1.displayName = SEPARATOR_NAME;
-var ARROW_NAME = "SelectArrow", SelectArrow = React$1.forwardRef((m, x) => {
+var ARROW_NAME = "SelectArrow", SelectArrow = React.forwardRef((m, x) => {
 	let { __scopeSelect: S, ...C } = m, T = usePopperScope(S), D = useSelectContext(ARROW_NAME, S), O = useSelectContentContext(ARROW_NAME, S);
 	return D.open && O.position === "popper" ? /* @__PURE__ */ jsx(Arrow, {
 		...T,
@@ -3026,9 +3026,9 @@ var ARROW_NAME = "SelectArrow", SelectArrow = React$1.forwardRef((m, x) => {
 	}) : null;
 });
 SelectArrow.displayName = ARROW_NAME;
-var BUBBLE_INPUT_NAME = "SelectBubbleInput", SelectBubbleInput = React$1.forwardRef(({ __scopeSelect: x, value: S, ...C }, T) => {
-	let D = React$1.useRef(null), O = useComposedRefs(T, D), k = usePrevious(S);
-	return React$1.useEffect(() => {
+var BUBBLE_INPUT_NAME = "SelectBubbleInput", SelectBubbleInput = React.forwardRef(({ __scopeSelect: x, value: S, ...C }, T) => {
+	let D = React.useRef(null), O = useComposedRefs(T, D), k = usePrevious(S);
+	return React.useEffect(() => {
 		let m = D.current;
 		if (!m) return;
 		let x = window.HTMLSelectElement.prototype, C = Object.getOwnPropertyDescriptor(x, "value").set;
@@ -3051,15 +3051,15 @@ function shouldShowPlaceholder(m) {
 	return m === "" || m === void 0;
 }
 function useTypeaheadSearch(x) {
-	let S = useCallbackRef(x), C = React$1.useRef(""), T = React$1.useRef(0), D = React$1.useCallback((m) => {
+	let S = useCallbackRef(x), C = React.useRef(""), T = React.useRef(0), D = React.useCallback((m) => {
 		let x = C.current + m;
 		S(x), (function m(x) {
 			C.current = x, window.clearTimeout(T.current), x !== "" && (T.current = window.setTimeout(() => m(""), 1e3));
 		})(x);
-	}, [S]), O = React$1.useCallback(() => {
+	}, [S]), O = React.useCallback(() => {
 		C.current = "", window.clearTimeout(T.current);
 	}, []);
-	return React$1.useEffect(() => () => window.clearTimeout(T.current), []), [
+	return React.useEffect(() => () => window.clearTimeout(T.current), []), [
 		C,
 		D,
 		O
@@ -3687,8 +3687,8 @@ var v4_default = v4, createStoreImpl = (m) => {
 	return D;
 }, createStore = ((m) => m ? createStoreImpl(m) : createStoreImpl), identity$1 = (m) => m;
 function useStore(m, S = identity$1) {
-	let C = React.useSyncExternalStore(m.subscribe, React.useCallback(() => S(m.getState()), [m, S]), React.useCallback(() => S(m.getInitialState()), [m, S]));
-	return React.useDebugValue(C), C;
+	let C = React2.useSyncExternalStore(m.subscribe, React2.useCallback(() => S(m.getState()), [m, S]), React2.useCallback(() => S(m.getInitialState()), [m, S]));
+	return React2.useDebugValue(C), C;
 }
 var createImpl = (m) => {
 	let x = createStore(m), S = (m) => useStore(x, m);
@@ -7595,7 +7595,7 @@ function shallow(m, x) {
 	return Object.is(m, x) ? !0 : typeof m != "object" || !m || typeof x != "object" || !x || Object.getPrototypeOf(m) !== Object.getPrototypeOf(x) ? !1 : isIterable(m) && isIterable(x) ? hasIterableEntries(m) && hasIterableEntries(x) ? compareEntries(m, x) : compareIterables(m, x) : compareEntries({ entries: () => Object.entries(m) }, { entries: () => Object.entries(x) });
 }
 function useShallow(m) {
-	let S = React.useRef(void 0);
+	let S = React2.useRef(void 0);
 	return (x) => {
 		let C = m(x);
 		return shallow(S.current, C) ? S.current : S.current = C;
@@ -10929,7 +10929,7 @@ var getClassName14 = get_class_name_factory_default("ObjectField", {
 };
 init_react_import();
 var useSafeId = () => {
-	if (React.useId !== void 0) return React.useId();
+	if (React2.useId !== void 0) return React2.useId();
 	let [m] = useState(generateId());
 	return m;
 }, getClassName15 = get_class_name_factory_default("Input", styles_module_default3), getClassNameWrapper = get_class_name_factory_default("InputWrapper", styles_module_default3), FieldLabel = ({ children: m, icon: x, label: S, el: C = "label", readOnly: T, className: D }) => /* @__PURE__ */ jsxs(C, {
@@ -12330,7 +12330,7 @@ var getSelectorForId = (m, x) => {
 	}));
 }), DropZonePure = (m) => /* @__PURE__ */ jsx(DropZone, __spreadValues({}, m)), DropZone = forwardRef(function(m, x) {
 	return useContext(dropZoneContext)?.mode === "edit" ? /* @__PURE__ */ jsx(Fragment$1, { children: /* @__PURE__ */ jsx(DropZoneEdit, __spreadProps(__spreadValues({}, m), { ref: x })) }) : /* @__PURE__ */ jsx(Fragment$1, { children: /* @__PURE__ */ jsx(DropZoneRender, __spreadProps(__spreadValues({}, m), { ref: x })) });
-}), renderContext = React.createContext({
+}), renderContext = React2.createContext({
 	config: { components: {} },
 	data: {
 		root: {},
@@ -29165,8 +29165,8 @@ var bindToProps = (m, x, S) => (C, T, D, O = {}, k = !1) => {
 	S && j && (M += "Passive"), m[M] = m[M] || [], m[M].push(D);
 };
 function useRecognizers(m, S = {}, C, T) {
-	let D = React.useMemo(() => new Controller(m), []);
-	if (D.applyHandlers(m, T), D.applyConfig(S, C), React.useEffect(D.effect.bind(D)), React.useEffect(() => D.clean.bind(D), []), S.target === void 0) return D.bind.bind(D);
+	let D = React2.useMemo(() => new Controller(m), []);
+	if (D.applyHandlers(m, T), D.applyConfig(S, C), React2.useEffect(D.effect.bind(D)), React2.useEffect(() => D.clean.bind(D), []), S.target === void 0) return D.bind.bind(D);
 }
 function usePinch(m, x) {
 	return registerAction(pinchAction), useRecognizers({ pinch: m }, x || {}, "pinch");
@@ -29409,7 +29409,7 @@ function ContainerPlanPopup({ canvas: m, obj: x, item: S, onClickOutside: C, onN
 		]
 	});
 }
-var FloorViewPopup = React.forwardRef(({ canvas: m, obj: x, item: S, onClickOutside: C, onNavigate: T, measurementSystem: D = "metric" }, O) => {
+var FloorViewPopup = React2.forwardRef(({ canvas: m, obj: x, item: S, onClickOutside: C, onNavigate: T, measurementSystem: D = "metric" }, O) => {
 	let k = useRef(null), [A, j] = useState([1, 1]), M = useRef(!1), N = (m) => {
 		k.current && !k.current.contains(m.target) && (m.type === "mousedown" ? (m.preventDefault(), C()) : m.type === "touchmove" ? (m.preventDefault(), M.current = !0) : m.type === "touchend" && (m.preventDefault(), M.current ? M.current = !1 : C()));
 	};
@@ -29468,181 +29468,181 @@ var FloorViewPopup = React.forwardRef(({ canvas: m, obj: x, item: S, onClickOuts
 });
 FloorViewPopup.displayName = "FloorViewPopup";
 var floor_view_popup_default = FloorViewPopup, import_fabric = require_fabric();
-function PlanView({ planId: m, objects: x, items: S, background: C, color: T, canvasSubject: D, elementId: O = "canvas_container", useHalfWidth: k, onNavigate: A, formatCurrency: j, formatArea: N, t: F, showPrice: I, measurementSystem: L }) {
-	let R = useRef(null), z = useRef(null), U = useRef(null), W = useRef(null), G = useRef(null), q = useRef(null), J = useRef(null), Y = useRef(0), X = useRef(0), Z = useRef(!1), Q = useRef(!1), FR = useRef(0), IR = useRef(1), LR = useRef(new PlanItemController(S)), RR = useRef(new PlanObjectController(x)), zR = useRef(x), BR = useRef(""), VR = useRef(null), HR = useRef(0), $ = useRef(0), UR = useRef(0), WR = useRef(null), [GR, KR] = useState([]), qR = useRef(null);
+function PlanView({ planId: m, objects: x, items: S, background: C, color: T, canvasSubject: D, useHalfWidth: O, onNavigate: k, formatCurrency: A, formatArea: j, t: N, showPrice: F, measurementSystem: I }) {
+	let L = useRef(null), R = useRef(null), z = useRef(null), U = useRef(null), W = useRef(null), G = useRef(null), q = useRef(null), J = useRef(0), Y = useRef(0), X = useRef(!1), Z = useRef(!1), Q = useRef(0), FR = useRef(1), IR = useRef(new PlanItemController(S)), LR = useRef(new PlanObjectController(x)), RR = useRef(x), zR = useRef(""), BR = useRef(null), VR = useRef(0), HR = useRef(0), $ = useRef(0), UR = useRef(null), [WR, GR] = useState([]), KR = useRef(null);
 	useEffect(() => {
-		let m = (m) => m.preventDefault(), x = qR.current ?? document;
+		let m = (m) => m.preventDefault(), x = KR.current ?? document;
 		return x.addEventListener("gesturestart", m), x.addEventListener("gesturechange", m), x.addEventListener("gestureend", m), () => {
 			x.removeEventListener("gesturestart", m), x.removeEventListener("gesturechange", m), x.removeEventListener("gestureend", m);
 		};
-	}, [qR]), usePinch((m) => {
+	}, [KR]), usePinch((m) => {
 		let { da: x } = m;
-		m.event.preventDefault(), FR.current == 0 && (FR.current = x[0]);
-		let S = x[0] / FR.current * J.current.getZoom();
-		S > 20 && (S = 20), S < IR.current && (S = IR.current), J.current.setZoom(S), oz(), FR.current = x[0], J.current.renderAll();
-	}, { target: WR }), useEffect(() => {
-		J.current && D && D.attach(() => {
-			XR();
+		m.event.preventDefault(), Q.current == 0 && (Q.current = x[0]);
+		let S = x[0] / Q.current * q.current.getZoom();
+		S > 20 && (S = 20), S < FR.current && (S = FR.current), q.current.setZoom(S), az(), Q.current = x[0], q.current.renderAll();
+	}, { target: UR }), useEffect(() => {
+		q.current && D && D.attach(() => {
+			YR();
 		}, "onFit");
-	}, [D, J.current]), useEffect(() => {
+	}, [D, q.current]), useEffect(() => {
 		if (!C?.objectUrl) return;
 		let m = typeof window < "u" ? window.document : document;
-		return m.addEventListener("gesturestart", (m) => m.preventDefault()), m.addEventListener("gesturechange", (m) => m.preventDefault()), JR(), () => {
+		return m.addEventListener("gesturestart", (m) => m.preventDefault()), m.addEventListener("gesturechange", (m) => m.preventDefault()), qR(), () => {
 			try {
-				J.current && (J.current?.dispose(), z.current?.dispose());
+				q.current && (q.current?.dispose(), R.current?.dispose());
 			} catch (m) {
 				console.error(m);
 			}
 		};
 	}, [C]), useEffect(() => {
-		let C = m == BR.current;
-		if (J.current && C) J.current.remove(...J.current.getObjects()), RR.current.deleteObjects(), LR.current = new PlanItemController(S), RR.current = new PlanObjectController(x), RR.current.initContainerObjects(U.current), RR.current.containerObjects.forEach((m) => {
-			let x = LR.current.getItem(m.itemId);
-			x && (m.assign(x), J.current.add(m, m.label));
-		}), J.current?.requestRenderAll();
-		else if (J.current && !C) try {
-			J.current && (J.current.remove(...J.current.getObjects()), z.current?.dispose(), RR.current.deleteObjects(), LR.current = new PlanItemController(S), RR.current = new PlanObjectController(x), JR());
+		let C = m == zR.current;
+		if (q.current && C) q.current.remove(...q.current.getObjects()), LR.current.deleteObjects(), IR.current = new PlanItemController(S), LR.current = new PlanObjectController(x), LR.current.initContainerObjects(z.current), LR.current.containerObjects.forEach((m) => {
+			let x = IR.current.getItem(m.itemId);
+			x && (m.assign(x), q.current.add(m, m.label));
+		}), q.current?.requestRenderAll();
+		else if (q.current && !C) try {
+			q.current && (q.current.remove(...q.current.getObjects()), R.current?.dispose(), LR.current.deleteObjects(), IR.current = new PlanItemController(S), LR.current = new PlanObjectController(x), qR());
 		} catch (m) {
 			console.error(m);
 		}
-		zR.current = x, BR.current = m;
+		RR.current = x, zR.current = m;
 	}, [x]);
-	let JR = () => {
+	let qR = () => {
 		import_fabric.fabric.Image.fromURL(C.objectUrl ?? "", (m) => {
 			m.setOptions({
 				stroke: "#333333",
 				strokeWidth: 0,
 				opacity: 1,
 				hasBorders: !1
-			}), z.current = m, U.current = new import_fabric.fabric.Point(z.current.width ?? 0, z.current.height ?? 0), $R(), az(z.current?.width ?? 0, z.current?.height ?? 0), XR();
+			}), R.current = m, z.current = new import_fabric.fabric.Point(R.current.width ?? 0, R.current.height ?? 0), QR(), iz(R.current?.width ?? 0, R.current?.height ?? 0), YR();
 		});
+	}, JR = () => {
+		let m = KR.current;
+		m && q.current.setWidth(m.clientWidth).setHeight(m.clientHeight);
 	}, YR = () => {
-		let m = qR.current;
-		m && J.current.setWidth(m.clientWidth).setHeight(m.clientHeight);
-	}, XR = () => {
-		YR();
+		JR();
 		let m = 1;
-		if (z.current?.width !== 0 || z.current?.height !== 0) {
-			let x = J.current.getWidth() / (k ? 2 : 1), S = z.current.width, C = z.current.height, T = J.current.getHeight(), D = x / S, O = T / C;
-			m = Math.min(D, O), J.current.setZoom(m), J.current.absolutePan(new import_fabric.fabric.Point((S * m - x) / 2, (C * m - T) / 2)), IR.current = m;
+		if (R.current?.width !== 0 || R.current?.height !== 0) {
+			let x = q.current.getWidth() / (O ? 2 : 1), S = R.current.width, C = R.current.height, T = q.current.getHeight(), D = x / S, k = T / C;
+			m = Math.min(D, k), q.current.setZoom(m), q.current.absolutePan(new import_fabric.fabric.Point((S * m - x) / 2, (C * m - T) / 2)), FR.current = m;
 		}
-		J.current.renderAll(), VR.current = J.current?.viewportTransform;
-	}, ZR = (m) => {
+		q.current.renderAll(), BR.current = q.current?.viewportTransform;
+	}, XR = (m) => {
 		if (m.target instanceof PlanRectangleObject || m.target instanceof PlanCircleObject || m.target instanceof PlanPolygonObject) {
-			let x = m.target, S = getPlanItemTypeEnum(LR.current.getItem(x.itemId)?.type ?? "");
-			S == PlanItemTypeEnum.Room && (q.current = S, tz(x));
+			let x = m.target, S = getPlanItemTypeEnum(IR.current.getItem(x.itemId)?.type ?? "");
+			S == PlanItemTypeEnum.Room && (G.current = S, ez(x));
 		}
-	}, QR = (m) => {
-		if ((m.target instanceof PlanRectangleObject || m.target instanceof PlanCircleObject || m.target instanceof PlanPolygonObject) && q.current == PlanItemTypeEnum.Room) {
-			let x = W.current?.getBoundingClientRect(), { clientX: S, clientY: C } = m.e;
+	}, ZR = (m) => {
+		if ((m.target instanceof PlanRectangleObject || m.target instanceof PlanCircleObject || m.target instanceof PlanPolygonObject) && G.current == PlanItemTypeEnum.Room) {
+			let x = U.current?.getBoundingClientRect(), { clientX: S, clientY: C } = m.e;
 			if (S >= Math.round((x?.left ?? 0) - 10) && S <= Math.round((x?.right ?? 0) + 10) && C >= Math.round((x?.top ?? 0) - 10) && C <= Math.round((x?.bottom ?? 0) + 10)) return;
-			nz();
+			tz();
 		}
-	}, $R = () => {
-		z.current && (J.current, J.current = new import_fabric.fabric.Canvas(R.current, {
+	}, QR = () => {
+		R.current && (q.current, q.current = new import_fabric.fabric.Canvas(L.current, {
 			hoverCursor: "move",
 			selection: !0,
 			selectionBorderColor: "blue",
 			backgroundColor: "#cccccc",
 			renderOnAddRemove: !1,
 			objectCaching: !1,
-			backgroundImage: z.current
-		}), J.current.backgroundColor = T ?? "#ff00", J.current.selection = !1, J.current.defaultCursor = "grab", J.current.on("mouse:wheel", function(m) {
-			let x = m.e.deltaY, S = J.current.getZoom(), C = new import_fabric.fabric.Point(J.current.getWidth() / 2, J.current.getHeight() / 2);
-			S *= .999 ** x, S > 20 && (S = 20), S < IR.current && (S = IR.current);
-			let T = J.current.getPointer(m.e), D = new import_fabric.fabric.Point(T.x, T.y), O = import_fabric.fabric.util.transformPoint(D, J.current.viewportTransform);
-			J.current.zoomToPoint(C, S);
-			let k = import_fabric.fabric.util.transformPoint(D, J.current.viewportTransform), A = new import_fabric.fabric.Point(O.x - k.x, O.y - k.y);
-			J.current.relativePan(A), oz(), J.current.renderAll(), m.e.preventDefault(), m.e.stopPropagation();
-		}), J.current.on("mouse:move", function(m) {
-			Z.current && (m.e.type == "mousemove" ? cz(m.e.clientX, m.e.clientY) : m.e.touches && m.e.touches.length > 1 || cz(m.e.touches[0].clientX, m.e.touches[0].clientY));
-		}), J.current.on("mouse:up", iz), J.current.on("mouse:down", rz), J.current.on("mouse:over", ZR), J.current.on("mouse:out", QR), RR.current.initContainerObjects(U.current), RR.current.containerObjects.forEach((m) => {
-			let x = LR.current.getItem(m.itemId);
+			backgroundImage: R.current
+		}), q.current.backgroundColor = T ?? "#ff00", q.current.selection = !1, q.current.defaultCursor = "grab", q.current.on("mouse:wheel", function(m) {
+			let x = m.e.deltaY, S = q.current.getZoom(), C = new import_fabric.fabric.Point(q.current.getWidth() / 2, q.current.getHeight() / 2);
+			S *= .999 ** x, S > 20 && (S = 20), S < FR.current && (S = FR.current);
+			let T = q.current.getPointer(m.e), D = new import_fabric.fabric.Point(T.x, T.y), O = import_fabric.fabric.util.transformPoint(D, q.current.viewportTransform);
+			q.current.zoomToPoint(C, S);
+			let k = import_fabric.fabric.util.transformPoint(D, q.current.viewportTransform), A = new import_fabric.fabric.Point(O.x - k.x, O.y - k.y);
+			q.current.relativePan(A), az(), q.current.renderAll(), m.e.preventDefault(), m.e.stopPropagation();
+		}), q.current.on("mouse:move", function(m) {
+			X.current && (m.e.type == "mousemove" ? sz(m.e.clientX, m.e.clientY) : m.e.touches && m.e.touches.length > 1 || sz(m.e.touches[0].clientX, m.e.touches[0].clientY));
+		}), q.current.on("mouse:up", rz), q.current.on("mouse:down", nz), q.current.on("mouse:over", XR), q.current.on("mouse:out", ZR), LR.current.initContainerObjects(z.current), LR.current.containerObjects.forEach((m) => {
+			let x = IR.current.getItem(m.itemId);
 			if (x) if (m.itemType == "Room") {
 				x && m.assign(x);
 				let S = m.fill;
-				m.fill = "#ff00", m.label = new PlanLabelObject(x.name, S ?? "0x000000", m.left ?? 0, m.top ?? 0, m.width ?? 0, m.height ?? 0, 1, 56), m.label.hideBackground(), m.label.addStroke(), J.current.add(m, m.label);
-			} else x && m.assign(x), J.current.add(m, m.label);
-		}), J.current.on("mouse:mouseup", (m) => {
-			(m.target instanceof PlanRectangleObject || m.target instanceof PlanCircleObject || m.target instanceof PlanPolygonObject) && (tz(m.target), J.current?.requestRenderAll());
-		}), J.current.requestRenderAll(), Q.current = !0);
-	}, ez = async (m) => {
+				m.fill = "#ff00", m.label = new PlanLabelObject(x.name, S ?? "0x000000", m.left ?? 0, m.top ?? 0, m.width ?? 0, m.height ?? 0, 1, 56), m.label.hideBackground(), m.label.addStroke(), q.current.add(m, m.label);
+			} else x && m.assign(x), q.current.add(m, m.label);
+		}), q.current.on("mouse:mouseup", (m) => {
+			(m.target instanceof PlanRectangleObject || m.target instanceof PlanCircleObject || m.target instanceof PlanPolygonObject) && (ez(m.target), q.current?.requestRenderAll());
+		}), q.current.requestRenderAll(), Z.current = !0);
+	}, $R = async (m) => {
 		let x = getPlanItemTypeEnum(m?.itemType ?? ""), S = "/availability/site-plan";
-		x === PlanItemTypeEnum.PlotContainer ? (S = `/availability/site-plan/plot-container/${m?.itemId}`, A && A(S)) : x === PlanItemTypeEnum.Plot && (S = `/plot/${m?.itemId}`, A && A(S));
-	}, tz = (m) => {
-		let x = LR.current.getItem(m.itemId), S = getPlanItemTypeEnum(x?.type ?? "");
-		switch (q.current = S, S) {
+		x === PlanItemTypeEnum.PlotContainer ? (S = `/availability/site-plan/plot-container/${m?.itemId}`, k && k(S)) : x === PlanItemTypeEnum.Plot && (S = `/plot/${m?.itemId}`, k && k(S));
+	}, ez = (m) => {
+		let x = IR.current.getItem(m.itemId), S = getPlanItemTypeEnum(x?.type ?? "");
+		switch (G.current = S, S) {
 			case PlanItemTypeEnum.Plot:
-				KR([/* @__PURE__ */ jsx(PlanViewPopup, {
-					canvas: J.current,
+				GR([/* @__PURE__ */ jsx(PlanViewPopup, {
+					canvas: q.current,
 					obj: m,
 					item: x,
 					onClickOutside: () => {
-						nz();
+						tz();
 					},
-					onNavigate: A,
-					formatCurrency: j,
-					formatArea: N,
-					t: F,
-					showPrice: I
+					onNavigate: k,
+					formatCurrency: A,
+					formatArea: j,
+					t: N,
+					showPrice: F
 				}, "container_element")]);
 				break;
 			case PlanItemTypeEnum.PlotContainer:
-				KR([/* @__PURE__ */ jsx(ContainerPlanPopup, {
-					canvas: J.current,
+				GR([/* @__PURE__ */ jsx(ContainerPlanPopup, {
+					canvas: q.current,
 					obj: m,
 					item: x,
 					onClickOutside: () => {
-						nz();
+						tz();
 					},
-					onNavigate: A,
-					formatCurrency: j,
-					t: F,
-					showPrice: I
+					onNavigate: k,
+					formatCurrency: A,
+					t: N,
+					showPrice: F
 				}, "container_element")]);
 				break;
 			case PlanItemTypeEnum.Room:
-				KR([/* @__PURE__ */ jsx(floor_view_popup_default, {
-					ref: W,
-					canvas: J.current,
+				GR([/* @__PURE__ */ jsx(floor_view_popup_default, {
+					ref: U,
+					canvas: q.current,
 					obj: m,
 					item: x,
 					onClickOutside: () => {
-						nz();
+						tz();
 					},
-					onNavigate: A,
-					measurementSystem: L
+					onNavigate: k,
+					measurementSystem: I
 				}, "container_element")]);
 				break;
 		}
-	}, nz = useCallback(() => {
-		q.current = null, KR([]), G.current = null;
-	}, [GR]), rz = (m) => {
-		Z.current = !0, m.e.type.includes("mouse") && (Y.current = m.e.clientX, X.current = m.e.clientY), m.e.type.includes("touch") && (Y.current = m.e.touches[0].clientX, X.current = m.e.touches[0].clientY), (m.target instanceof PlanRectangleObject || m.target instanceof PlanCircleObject || m.target instanceof PlanPolygonObject) && G.current && G.current.itemId == m.target.itemId ? ez(G.current) : (m.target instanceof PlanRectangleObject || m.target instanceof PlanCircleObject || m.target instanceof PlanPolygonObject) && setTimeout(() => {
-			tz(m.target), J.current?.requestRenderAll();
+	}, tz = useCallback(() => {
+		G.current = null, GR([]), W.current = null;
+	}, [WR]), nz = (m) => {
+		X.current = !0, m.e.type.includes("mouse") && (J.current = m.e.clientX, Y.current = m.e.clientY), m.e.type.includes("touch") && (J.current = m.e.touches[0].clientX, Y.current = m.e.touches[0].clientY), (m.target instanceof PlanRectangleObject || m.target instanceof PlanCircleObject || m.target instanceof PlanPolygonObject) && W.current && W.current.itemId == m.target.itemId ? $R(W.current) : (m.target instanceof PlanRectangleObject || m.target instanceof PlanCircleObject || m.target instanceof PlanPolygonObject) && setTimeout(() => {
+			ez(m.target), q.current?.requestRenderAll();
 		}, 150);
-	}, iz = (m) => {
-		Z.current = !1, J.current?.fire("canvas:dragEnd"), FR.current = 0;
-	}, az = (m, x) => {
-		HR.current = m, $.current = x;
+	}, rz = (m) => {
+		X.current = !1, q.current?.fire("canvas:dragEnd"), Q.current = 0;
+	}, iz = (m, x) => {
+		VR.current = m, HR.current = x;
+	}, az = () => {
+		Date.now() - $.current < 8 || ($.current = Date.now(), oz(), q.current?.requestRenderAll());
 	}, oz = () => {
-		Date.now() - UR.current < 8 || (UR.current = Date.now(), sz(), J.current?.requestRenderAll());
-	}, sz = () => {
-		if (HR.current === 0 || $.current === 0 || !J.current?.viewportTransform) return;
-		let m = J.current?.viewportTransform, x = J.current?.getZoom(), S = J.current?.getWidth(), C = HR.current, T = $.current, D = J.current?.getHeight(), O = VR.current[4], k = VR.current[5];
-		m[4] >= VR.current[4] ? J.current.viewportTransform[4] = VR.current[4] : m[4] < S - C * x - O && (J.current.viewportTransform[4] = S - C * x - O), m[5] >= VR.current[5] ? J.current.viewportTransform[5] = VR.current[5] : m[5] < D - T * x - k && (J.current.viewportTransform[5] = D - T * x - k);
-	}, cz = (m, x) => {
-		if (J.current?.getZoom() == IR.current) return;
-		let S = new import_fabric.fabric.Point(m - Y.current, x - X.current);
-		J.current.relativePan(S), oz(), J.current?.requestRenderAll(), Y.current = m, X.current = x;
+		if (VR.current === 0 || HR.current === 0 || !q.current?.viewportTransform) return;
+		let m = q.current?.viewportTransform, x = q.current?.getZoom(), S = q.current?.getWidth(), C = VR.current, T = HR.current, D = q.current?.getHeight(), O = BR.current[4], k = BR.current[5];
+		m[4] >= BR.current[4] ? q.current.viewportTransform[4] = BR.current[4] : m[4] < S - C * x - O && (q.current.viewportTransform[4] = S - C * x - O), m[5] >= BR.current[5] ? q.current.viewportTransform[5] = BR.current[5] : m[5] < D - T * x - k && (q.current.viewportTransform[5] = D - T * x - k);
+	}, sz = (m, x) => {
+		if (q.current?.getZoom() == FR.current) return;
+		let S = new import_fabric.fabric.Point(m - J.current, x - Y.current);
+		q.current.relativePan(S), az(), q.current?.requestRenderAll(), J.current = m, Y.current = x;
 	};
 	return /* @__PURE__ */ jsx("div", {
 		className: "w-full h-[600px]",
-		ref: qR,
+		ref: KR,
 		children: /* @__PURE__ */ jsxs("div", {
-			ref: WR,
+			ref: UR,
 			className: "relative",
-			children: [GR.map((m) => createPortal(m, WR.current)), /* @__PURE__ */ jsx("canvas", { ref: R })]
+			children: [WR.map((m) => createPortal(m, UR.current)), /* @__PURE__ */ jsx("canvas", { ref: L })]
 		})
 	});
 }

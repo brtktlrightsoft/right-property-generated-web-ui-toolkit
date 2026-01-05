@@ -18,5 +18,5 @@ export interface PlanViewProps {
     showPrice?: boolean;
     measurementSystem?: 'metric' | 'imperial';
 }
-export default function PlanView({ planId, objects, items, background, color, canvasSubject, elementId, useHalfWidth, onNavigate, formatCurrency, formatArea, t, showPrice, measurementSystem, }: PlanViewProps): import("react/jsx-runtime").JSX.Element;
+export default function PlanView({ planId, objects, items, background, color, canvasSubject, useHalfWidth, onNavigate, formatCurrency, formatArea, t, showPrice, measurementSystem, }: PlanViewProps): import("react/jsx-runtime").JSX.Element;
 //# sourceMappingURL=PlanView.d.ts.map

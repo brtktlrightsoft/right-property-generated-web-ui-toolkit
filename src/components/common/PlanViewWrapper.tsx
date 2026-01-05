@@ -40,13 +40,15 @@ export function PlanViewWrapper(props: PlanViewWrapperProps & Record<string, unk
     return <div className="p-4 text-red-600">Error: Invalid JSON data for PlanView component</div>;
   }
 
-  if (!parsedBackground) {
-    return <div className="p-4 text-yellow-600">Warning: Background asset is required for PlanView</div>;
+  if (!parsedBackground || !planId) {
+    return (
+      <div className="w-full h-[600px] flex items-center justify-center p-4">
+        <div className="w-8 h-8 border-4 border-gray-200 border-t-[#5ec6d3] rounded-full animate-spin"></div>
+      </div>
+    );
   }
 
-  if (!planId) {
-    return <div className="p-4 text-yellow-600">Warning: Plan ID is required</div>;
-  }
+ 
 
   return (
       <PlanView

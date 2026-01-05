@@ -75,16 +75,26 @@ export default function PlanView({
   const ref = useRef<HTMLDivElement>(null);
   const [popupContainer, setPopupContainer] = useState<ReactElement[]>([]);
   const $canvasContainer = useRef<HTMLDivElement>(null);
+
+  const resizeCanvasByElement = () => {
+    const canvasContainer = $canvasContainer.current;
+    if (canvasContainer) {
+      $canvas.current!.setWidth(canvasContainer.clientWidth).setHeight(canvasContainer.clientHeight);
+    }
+  };
+  
   useEffect(() => {
     const handler = (e: Event) => e.preventDefault();
     const doc = $canvasContainer.current ?? document;
     doc.addEventListener('gesturestart', handler);
     doc.addEventListener('gesturechange', handler);
     doc.addEventListener('gestureend', handler);
+    doc.addEventListener('resize', resizeCanvasByElement);
     return () => {
       doc.removeEventListener('gesturestart', handler);
       doc.removeEventListener('gesturechange', handler);
       doc.removeEventListener('gestureend', handler);
+      doc.removeEventListener('resize', resizeCanvasByElement);
     };
   }, [$canvasContainer]);
 
@@ -182,12 +192,7 @@ export default function PlanView({
     });
   };
 
-  const resizeCanvasByElement = () => {
-    const canvasContainer = $canvasContainer.current;
-    if (canvasContainer) {
-      $canvas.current!.setWidth(canvasContainer.clientWidth).setHeight(canvasContainer.clientHeight);
-    }
-  };
+
 
   const fitToScreen = () => {
     resizeCanvasByElement();

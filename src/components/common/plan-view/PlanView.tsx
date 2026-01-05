@@ -531,7 +531,7 @@ export default function PlanView({
   };
 
   return (
-    <div className='w-full h-[600px]'>
+    <div className='w-full h-[600px]' id='canvas_container'>
       <div ref={ref} className="relative">
         {popupContainer.map((c) => createPortal(c, ref.current!))}
         <canvas ref={canvasRef}></canvas>

@@ -78,13 +78,14 @@ export default function PlanView({
 
   useEffect(() => {
     const handler = (e: Event) => e.preventDefault();
-    document.addEventListener('gesturestart', handler);
-    document.addEventListener('gesturechange', handler);
-    document.addEventListener('gestureend', handler);
+    const doc = typeof window !== 'undefined' ? window.document : document;
+    doc.addEventListener('gesturestart', handler);
+    doc.addEventListener('gesturechange', handler);
+    doc.addEventListener('gestureend', handler);
     return () => {
-      document.removeEventListener('gesturestart', handler);
-      document.removeEventListener('gesturechange', handler);
-      document.removeEventListener('gestureend', handler);
+      doc.removeEventListener('gesturestart', handler);
+      doc.removeEventListener('gesturechange', handler);
+      doc.removeEventListener('gestureend', handler);
     };
   }, []);
 
@@ -115,8 +116,9 @@ export default function PlanView({
 
   useEffect(() => {
     if (!background?.objectUrl) return;
-    document.addEventListener('gesturestart', (e) => e.preventDefault());
-    document.addEventListener('gesturechange', (e) => e.preventDefault());
+    const doc = typeof window !== 'undefined' ? window.document : document;
+    doc.addEventListener('gesturestart', (e) => e.preventDefault());
+    doc.addEventListener('gesturechange', (e) => e.preventDefault());
     initContainer();
 
     return () => {
@@ -182,8 +184,11 @@ export default function PlanView({
   };
 
   const resizeCanvasByElement = (id: string) => {
-    const canvasContainer = document.getElementById(id);
-    $canvas.current!.setWidth(canvasContainer!.clientWidth).setHeight(canvasContainer!.clientHeight);
+    // Use window.document to ensure we're using the iframe's document, not the parent document
+    const canvasContainer = typeof window !== 'undefined' ? window.document.getElementById(id) : null;
+    if (canvasContainer) {
+      $canvas.current!.setWidth(canvasContainer.clientWidth).setHeight(canvasContainer.clientHeight);
+    }
   };
 
   const fitToScreen = () => {

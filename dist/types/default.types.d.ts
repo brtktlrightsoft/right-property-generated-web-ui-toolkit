@@ -13,7 +13,7 @@ export type HomePageContentProps = {
 export type HomeFirstSectionProps = {
     projectName: string;
     projectDescription: string;
-    backgroundData: {
+    backgroundData?: {
         isVideo: boolean;
         backgroundUrl: string;
     };

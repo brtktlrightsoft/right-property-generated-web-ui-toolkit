@@ -1,5 +1,6 @@
-export declare function Image({ src, alt, width, height, className }: {
+export declare function Image({ src, fallbackSrc, alt, width, height, className }: {
     src: string;
+    fallbackSrc?: string;
     alt: string;
     width: string | number;
     height: string | number;

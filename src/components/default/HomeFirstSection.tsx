@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import type { HomeFirstSectionProps } from '@/types/default.types';
 import BackgroundMedia from '../common/background-media';
-import defaultBg from '@/assets/background.webp';
+import defaultBg from '@/assets/wimbledon/background.webp';
 export function HomeFirstSection({
   projectName,
   projectDescription,

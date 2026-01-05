@@ -49,17 +49,19 @@ export function PlanViewWrapper(props: PlanViewWrapperProps & Record<string, unk
   }
 
   return (
-    <PlanView
-      planId={planId}
-      objects={parsedObjects}
-      items={parsedItems}
-      background={parsedBackground}
-      color={color}
-      elementId={elementId}
-      useHalfWidth={useHalfWidth}
-      showPrice={showPrice}
-      measurementSystem={measurementSystem}
-    />
+    <div className='w-full h-[600px]' id='canvas_container'>
+      <PlanView
+        planId={planId}
+        objects={parsedObjects}
+        items={parsedItems}
+        background={parsedBackground}
+        color={color}
+        elementId={elementId}
+        useHalfWidth={useHalfWidth}
+        showPrice={showPrice}
+        measurementSystem={measurementSystem}
+      />
+    </div>
   );
 }
 

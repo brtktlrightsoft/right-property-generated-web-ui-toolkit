@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import type { VoodvaleHomeFirstSectionProps } from '@/types/voodvale.types';
 import BackgroundMedia from '../common/background-media';
-
+import defaultBg from '@/assets/woodvale/wodvale_bg.avif';
 export function VoodvaleHomeFirstSection({
   projectName,
   heading,
@@ -10,10 +10,11 @@ export function VoodvaleHomeFirstSection({
   buttonHref,
   backgroundData,
 }: VoodvaleHomeFirstSectionProps) {
+  const bgData = backgroundData?.backgroundUrl ? { isVideo: backgroundData.isVideo, backgroundUrl: backgroundData.backgroundUrl } : { isVideo: false, backgroundUrl: defaultBg };
   return (
     <div className="panel absolute left-0 top-0 will-change-transform w-full h-full z-30">
       <motion.div className="pt-17.5 pb-[2rem] flex flex-col justify-end lg:justify-center px-5 bg-gray-300 relative h-[100vh] w-[100vw] bg-no-repeat bg-cover">
-        <BackgroundMedia backgroundData={backgroundData} projectName={projectName} />
+        <BackgroundMedia backgroundData={bgData} projectName={projectName} />
         <motion.div
           className="absolute z-20 top-0 left-0"
           style={{

@@ -1,6 +1,8 @@
 import type { HomePageContentProps } from '@/types/default.types';
 import { Image } from '../common/image';
-
+import wimbledonMainImage from '@/assets/wimbledon/wimbledon_content_main.avif';
+import wimbledonImage2 from '@/assets/wimbledon/wimbledon_content_left.avif';
+import wimbledonImage3 from '@/assets/wimbledon/wimbledon_content_right.avif';
 export function HomePageContent({
   title,
   titleColor = '#1a1a1a',
@@ -35,6 +37,7 @@ export function HomePageContent({
                   width={600}
                   height={400}
                   src={image1}
+                  fallbackSrc={wimbledonMainImage}
                   className="h-60 lg:h-100 w-full"
                   alt=""
                 />
@@ -45,6 +48,7 @@ export function HomePageContent({
                     width={290}
                     height={180}
                     src={image2}
+                    fallbackSrc={wimbledonImage2}
                     className="h-auto w-full"
                     alt=""
                   />
@@ -54,6 +58,7 @@ export function HomePageContent({
                     width={290}
                     height={180}
                     src={image3}
+                    fallbackSrc={wimbledonImage3}
                     className="h-auto w-full"
                     alt=""
                   />
@@ -76,26 +81,32 @@ export function HomePageContent({
           <div className="flex-auto w-full md:w-1/2 p-5">
             <div className="flex flex-wrap space-y-5">
               <div className="w-full">
-                <img
+                <Image
+                  width={400}
+                  height={280}
                   src={image1}
-                  id="9b0dbca81a314389a1c60abea63ded99"
+                  fallbackSrc={wimbledonMainImage}
                   className="h-60 lg:h-100 w-full"
                   alt=""
                 />
               </div>
               <div className="flex space-x-5">
                 <div className="flex-auto w-1/2">
-                  <img
+                  <Image
+                    width={290}
+                    height={120}
                     src={image2}
-                    id="620c82e2eb894d48b0149c150a1dd4d2"
+                    fallbackSrc={wimbledonImage2}
                     className="h-30 w-full"
                     alt=""
                   />
                 </div>
                 <div className="flex-auto w-1/2">
-                  <img
+                  <Image
+                    width={290}
+                    height={120}
                     src={image3}
-                    id="8bf28ac444a24d39bd8200d914770e9b"
+                    fallbackSrc={wimbledonImage3}
                     className="h-30 w-full"
                     alt=""
                   />

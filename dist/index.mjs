@@ -18160,12 +18160,12 @@ function HomeFirstSectionWrapper(m) {
 	});
 }
 function Image({ src: m, fallbackSrc: x, alt: S, width: C, height: T, className: D }) {
-	return m ? x ? /* @__PURE__ */ jsx("img", {
-		src: x,
+	return m ? /* @__PURE__ */ jsx("img", {
+		src: m,
 		alt: S,
 		className: D
-	}) : /* @__PURE__ */ jsx("img", {
-		src: m,
+	}) : x ? /* @__PURE__ */ jsx("img", {
+		src: x,
 		alt: S,
 		className: D
 	}) : /* @__PURE__ */ jsx("div", {
@@ -18334,7 +18334,7 @@ function SkyscrapperHomeFirstSection({ projectName: m, heading: x, subheadingLin
 				/* @__PURE__ */ jsx(motion.div, {
 					className: "absolute z-20 top-0 left-0",
 					style: {
-						opacity: .5,
+						opacity: .1,
 						backgroundColor: "black",
 						height: "100vh",
 						width: "100vw"

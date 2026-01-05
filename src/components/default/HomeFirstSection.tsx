@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import type { HomeFirstSectionProps } from '@/types/default.types';
 import BackgroundMedia from '../common/background-media';
-
+import defaultBg from '@/assets/background.webp';
 export function HomeFirstSection({
   projectName,
   projectDescription,
@@ -9,10 +9,11 @@ export function HomeFirstSection({
   scrollIndicatorText = 'Scroll down',
   scrollIndicatorOpacity = 1,
 }: HomeFirstSectionProps) {
+  const bgData = backgroundData ?? { isVideo: false, backgroundUrl: defaultBg };
   return (
     <div className="">
       <div className="pt-17.5 flex flex-col justify-end lg:justify-center px-5 bg-gray-300 relative h-[100vh] w-[100vw] bg-no-repeat bg-cover">
-        <BackgroundMedia backgroundData={backgroundData} projectName={projectName} />
+        <BackgroundMedia backgroundData={bgData} projectName={projectName} />
         <div
           className="absolute z-20 top-0 left-0 h-[100vh] w-[100vw]"
           style={{ opacity: 0.5, backgroundColor: 'black' }}

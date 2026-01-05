@@ -43,7 +43,6 @@ export default function PlanView({
   background,
   color,
   canvasSubject,
-  elementId = 'canvas_container',
   useHalfWidth,
   onNavigate,
   formatCurrency,

@@ -10,8 +10,13 @@ import { HomeFirstSectionWrapper } from '@/components/default/HomeFirstSectionWr
 import { SkyscrapperHomeFirstSectionWrapper } from '@/components/skyscrapper/SkyscrapperHomeFirstSectionWrapper';
 import { SkyscrapperHomesSecondSectionWrapper } from '@/components/skyscrapper/SkyscrapperHomesSecondSectionWrapper';
 import { ColorPickerField } from '@/components/editor/ColorPickerField';
-
-export const puckConfig: Config = {
+import { PlanViewWrapper } from '@/components/common/PlanViewWrapper';
+import type { Components } from '@/types/puck.types';
+type Category =
+  | 'voodvale'
+  | 'default'
+  | 'skyscrapper';
+export const puckConfig: Config<Components, object, Category>  = {
   categories: {
     voodvale: {
       title: 'Voodvale',
@@ -25,7 +30,7 @@ export const puckConfig: Config = {
     },
     default: {
       title: 'Default',
-      components: ['HomePageContent', 'HomeFirstSection'],
+      components: ['HomePageContent', 'HomeFirstSection','SitePlan'],
     },
     skyscrapper: {
       title: 'Skyscrapper',
@@ -369,6 +374,29 @@ export const puckConfig: Config = {
         ],
       },
       render: SkyscrapperHomesSecondSectionWrapper,
+    },
+    SitePlan: {
+      resolveData: async ({ props }) => {
+        const response = await fetch(`https://api-test.rightproperty.app/api/v1/web/availability/siteplan`, {
+          headers: {
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbi10eXBlIjoiV2ViU2l0ZSIsIm5hbWUiOiJlNWYxNDIyYi1jMTAzLTRjZGItYjJkMy00ZWY4NTVmNGZmNmMiLCJ0b2tlbi10eXBlIjoiT3RoZXIiLCJqdGkiOiJhY2FkNTQzYS04YmI1LTRkMmMtYjA3MC00YjI1Yjg4Y2YyZmMiLCJuYmYiOjE3Njc2MTg3NzQsImV4cCI6MTc3MDIxMDc3NCwiaWF0IjoxNzY3NjE4Nzc0LCJpc3MiOiJSaWdodFNvZnRJc3N1ZXIiLCJhdWQiOiJSaWdodFNvZnRBdWRpZW5jZSJ9.e3lVxA5DgJTQaj3Z-k-hoSw2RroI6_ecC50d0AaNaDI',
+          },
+        });
+        const sitePlan = await response.json();
+        return {
+          props: {
+            ...props,
+            planId: sitePlan.plan.id,
+            objects: sitePlan.plan.objects,
+            items: sitePlan.plan.items,
+            background: sitePlan.plan.backgroundAsset,
+            color: sitePlan.plan.backgroundColor,
+          },
+        };
+      },
+      render: props => {
+        return React.createElement(PlanViewWrapper, props);
+      },
     },
   },
 };

@@ -79,25 +79,55 @@ export default function PlanView({
   const resizeCanvasByElement = () => {
     const canvasContainer = $canvasContainer.current;
     if (canvasContainer) {
-      $canvas.current!.setWidth(canvasContainer.clientWidth).setHeight(canvasContainer.clientHeight);
+      $canvas.current!.setDimensions({ width: canvasContainer.clientWidth, height: canvasContainer.clientHeight });
     }
+  };
+  const fitToScreen = () => {
+    resizeCanvasByElement();
+
+    let minZoom = 1.0;
+    if ($backgroundImage.current?.width !== 0 || $backgroundImage.current?.height !== 0) {
+      const canvasWidth = $canvas.current!.getWidth() / (useHalfWidth ? 2 : 1);
+      const backgroundWidth = $backgroundImage.current!.width;
+      const backgroundHeight = $backgroundImage.current!.height;
+      const canvasHeight = $canvas.current!.getHeight();
+      const horizontalZoom = canvasWidth / backgroundWidth!;
+      const verticalZoom = canvasHeight / backgroundHeight!;
+      minZoom = Math.min(horizontalZoom, verticalZoom);
+      $canvas.current!.setZoom(minZoom);
+      $canvas.current!.absolutePan(
+        new fabric.Point((backgroundWidth! * minZoom - canvasWidth) / 2, (backgroundHeight! * minZoom - canvasHeight) / 2)
+      );
+      $minZoom.current = minZoom;
+    }
+    $canvas.current!.renderAll();
+    $initialViewportTransform.current = $canvas.current?.viewportTransform;
   };
 
   useEffect(() => {
     const handler = (e: Event) => e.preventDefault();
     const doc = $canvasContainer.current ?? document;
-    const canvasContainer = $canvasContainer.current;
+    const puckRoot = document?.getElementById('puck-canvas-root');
     doc.addEventListener('gesturestart', handler);
     doc.addEventListener('gesturechange', handler);
     doc.addEventListener('gestureend', handler);
-    doc.addEventListener('resize', resizeCanvasByElement);
-    canvasContainer?.ownerDocument.addEventListener('resize', resizeCanvasByElement);
+
+    let resizeObserver: ResizeObserver | null = null;
+    if (puckRoot) {
+      resizeObserver = new ResizeObserver(() => {
+        fitToScreen();
+      });
+      resizeObserver.observe(puckRoot);
+    }
+
     return () => {
       doc.removeEventListener('gesturestart', handler);
       doc.removeEventListener('gesturechange', handler);
       doc.removeEventListener('gestureend', handler);
-      doc.removeEventListener('resize', resizeCanvasByElement);
-      canvasContainer?.ownerDocument.removeEventListener('resize', resizeCanvasByElement);
+      if (resizeObserver && puckRoot) {
+        resizeObserver.unobserve(puckRoot);
+        resizeObserver.disconnect();
+      }
     };
   }, [$canvasContainer]);
 
@@ -197,27 +227,7 @@ export default function PlanView({
 
 
 
-  const fitToScreen = () => {
-    resizeCanvasByElement();
 
-    let minZoom = 1.0;
-    if ($backgroundImage.current?.width !== 0 || $backgroundImage.current?.height !== 0) {
-      const canvasWidth = $canvas.current!.getWidth() / (useHalfWidth ? 2 : 1);
-      const backgroundWidth = $backgroundImage.current!.width;
-      const backgroundHeight = $backgroundImage.current!.height;
-      const canvasHeight = $canvas.current!.getHeight();
-      const horizontalZoom = canvasWidth / backgroundWidth!;
-      const verticalZoom = canvasHeight / backgroundHeight!;
-      minZoom = Math.min(horizontalZoom, verticalZoom);
-      $canvas.current!.setZoom(minZoom);
-      $canvas.current!.absolutePan(
-        new fabric.Point((backgroundWidth! * minZoom - canvasWidth) / 2, (backgroundHeight! * minZoom - canvasHeight) / 2)
-      );
-      $minZoom.current = minZoom;
-    }
-    $canvas.current!.renderAll();
-    $initialViewportTransform.current = $canvas.current?.viewportTransform;
-  };
 
   const onMouseOver = (e: { target: PlanRectangleObject | PlanCircleObject | PlanPolygonObject }) => {
     if (
@@ -542,7 +552,7 @@ export default function PlanView({
   };
 
   return (
-    <div className='w-full h-[600px]' ref={$canvasContainer}>
+    <div className='w-full xl:h-[600px] h-[300px] overflow-hidden' ref={$canvasContainer}>
 
       <div ref={ref} className="relative">
         {popupContainer.map((c) => createPortal(c, ref.current!))}

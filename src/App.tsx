@@ -3,7 +3,6 @@ import '@measured/puck/puck.css';
 
 import './App.css';
 import { puckConfig } from '@/config/puck.config';
-import { initialData } from '@/data/initialData';
 
 function App() {
   return (

@@ -10,6 +10,7 @@ import type {
   SkyscrapperHomeFirstSectionEditableProps,
   SkyscrapperHomesSecondSectionProps,
 } from './skyscrapper.types';
+import type { PlanViewWrapperProps } from '@/components/common/PlanViewWrapper';
 
 export type ComponentGroup = 'all' | 'voodvale' | 'default' | 'skyscrapper';
 
@@ -23,6 +24,7 @@ export type Components = {
   HomeFirstSection: HomeFirstSectionEditableProps;
   SkyscrapperHomeFirstSection: SkyscrapperHomeFirstSectionEditableProps;
   SkyscrapperHomesSecondSection: SkyscrapperHomesSecondSectionProps;
+  SitePlan: PlanViewWrapperProps;
 };
 
 

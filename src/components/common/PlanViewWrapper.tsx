@@ -49,7 +49,6 @@ export function PlanViewWrapper(props: PlanViewWrapperProps & Record<string, unk
   }
 
   return (
-    <div className='w-full h-[600px]' id='canvas_container'>
       <PlanView
         planId={planId}
         objects={parsedObjects}
@@ -61,7 +60,6 @@ export function PlanViewWrapper(props: PlanViewWrapperProps & Record<string, unk
         showPrice={showPrice}
         measurementSystem={measurementSystem}
       />
-    </div>
   );
 }
 

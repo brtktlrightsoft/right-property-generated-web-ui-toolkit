@@ -75,10 +75,10 @@ export default function PlanView({
   const $lastBoundaryCheckTime = useRef<number>(0);
   const ref = useRef<HTMLDivElement>(null);
   const [popupContainer, setPopupContainer] = useState<ReactElement[]>([]);
-
+  const $canvasContainer = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const handler = (e: Event) => e.preventDefault();
-    const doc = typeof window !== 'undefined' ? window.document : document;
+    const doc = $canvasContainer.current ?? document;
     doc.addEventListener('gesturestart', handler);
     doc.addEventListener('gesturechange', handler);
     doc.addEventListener('gestureend', handler);
@@ -87,7 +87,7 @@ export default function PlanView({
       doc.removeEventListener('gesturechange', handler);
       doc.removeEventListener('gestureend', handler);
     };
-  }, []);
+  }, [$canvasContainer]);
 
   usePinch(
     (state) => {
@@ -183,16 +183,15 @@ export default function PlanView({
     });
   };
 
-  const resizeCanvasByElement = (id: string) => {
-    // Use window.document to ensure we're using the iframe's document, not the parent document
-    const canvasContainer = typeof window !== 'undefined' ? window.document.getElementById(id) : null;
+  const resizeCanvasByElement = () => {
+    const canvasContainer = $canvasContainer.current;
     if (canvasContainer) {
       $canvas.current!.setWidth(canvasContainer.clientWidth).setHeight(canvasContainer.clientHeight);
     }
   };
 
   const fitToScreen = () => {
-    resizeCanvasByElement(elementId);
+    resizeCanvasByElement();
 
     let minZoom = 1.0;
     if ($backgroundImage.current?.width !== 0 || $backgroundImage.current?.height !== 0) {
@@ -536,9 +535,12 @@ export default function PlanView({
   };
 
   return (
-    <div ref={ref} className="relative">
-      {popupContainer.map((c) => createPortal(c, ref.current!))}
-      <canvas ref={canvasRef}></canvas>
+    <div className='w-full h-[600px]' ref={$canvasContainer}>
+
+      <div ref={ref} className="relative">
+        {popupContainer.map((c) => createPortal(c, ref.current!))}
+        <canvas ref={canvasRef}></canvas>
+      </div>
     </div>
   );
 }

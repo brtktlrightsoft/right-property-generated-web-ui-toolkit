@@ -23,7 +23,7 @@ export function SkyscrapperHomeFirstSection({
         <motion.div
           className="absolute z-20 top-0 left-0"
           style={{
-            opacity: 0.5,
+            opacity: 0.1,
             backgroundColor: 'black',
             height: '100vh',
             width: '100vw',

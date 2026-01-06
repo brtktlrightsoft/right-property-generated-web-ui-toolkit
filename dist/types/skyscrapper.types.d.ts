@@ -31,4 +31,12 @@ export type SkyscrapperHomesSecondSectionProps = {
     gridLead: string;
     gridItems: SkyscrapperGridItem[];
 };
+import type { PlotThumbResult } from './plot.types';
+export type SkyscrapperPlotsShowcaseEditableProps = {
+    plots: PlotThumbResult[];
+    title?: string;
+    subtitle?: string;
+    locale?: string;
+    language?: string;
+};
 //# sourceMappingURL=skyscrapper.types.d.ts.map

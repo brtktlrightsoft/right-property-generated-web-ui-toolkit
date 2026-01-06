@@ -1,5 +1,5 @@
-import * as React from "react";
-import React2, { Component, Fragment, createContext, createElement, forwardRef, isValidElement, memo, startTransition, useCallback, useContext, useEffect, useId, useImperativeHandle, useInsertionEffect, useLayoutEffect, useMemo, useRef, useState, useTransition } from "react";
+import * as React$1 from "react";
+import React, { Component, Fragment, createContext, createElement, forwardRef, isValidElement, memo, startTransition, useCallback, useContext, useEffect, useId, useImperativeHandle, useInsertionEffect, useLayoutEffect, useMemo, useRef, useState, useTransition } from "react";
 import * as ReactDOM$1 from "react-dom";
 import ReactDOM, { createPortal, flushSync } from "react-dom";
 import { Fragment as Fragment$1, jsx, jsxs } from "react/jsx-runtime";
@@ -35,10 +35,10 @@ function composeEventHandlers(m, x, { checkForDefaultPrevented: S = !0 } = {}) {
 function createContextScope(x, S = []) {
 	let C = [];
 	function T(S, T) {
-		let D = React.createContext(T), O = C.length;
+		let D = React$1.createContext(T), O = C.length;
 		C = [...C, T];
 		let k = (S) => {
-			let { scope: C, children: T, ...k } = S, A = C?.[x]?.[O] || D, j = React.useMemo(() => k, Object.values(k));
+			let { scope: C, children: T, ...k } = S, A = C?.[x]?.[O] || D, j = React$1.useMemo(() => k, Object.values(k));
 			return /* @__PURE__ */ jsx(A.Provider, {
 				value: j,
 				children: T
@@ -46,7 +46,7 @@ function createContextScope(x, S = []) {
 		};
 		k.displayName = S + "Provider";
 		function A(C, k) {
-			let A = k?.[x]?.[O] || D, j = React.useContext(A);
+			let A = k?.[x]?.[O] || D, j = React$1.useContext(A);
 			if (j) return j;
 			if (T !== void 0) return T;
 			throw Error(`\`${C}\` must be used within \`${S}\``);
@@ -54,10 +54,10 @@ function createContextScope(x, S = []) {
 		return [k, A];
 	}
 	let D = () => {
-		let S = C.map((x) => React.createContext(x));
+		let S = C.map((x) => React$1.createContext(x));
 		return function(C) {
 			let T = C?.[x] || S;
-			return React.useMemo(() => ({ [`__scope${x}`]: {
+			return React$1.useMemo(() => ({ [`__scope${x}`]: {
 				...C,
 				[x]: T
 			} }), [C, T]);
@@ -81,7 +81,7 @@ function composeContextScopes(...x) {
 					...T
 				};
 			}, {});
-			return React.useMemo(() => ({ [`__scope${S.scopeName}`]: T }), [T]);
+			return React$1.useMemo(() => ({ [`__scope${S.scopeName}`]: T }), [T]);
 		};
 	};
 	return C.scopeName = S.scopeName, C;
@@ -105,18 +105,18 @@ function composeRefs(...m) {
 	};
 }
 function useComposedRefs(...x) {
-	return React.useCallback(composeRefs(...x), x);
+	return React$1.useCallback(composeRefs(...x), x);
 }
 /* @__NO_SIDE_EFFECTS__ */
 function createSlot(x) {
-	let S = /* @__PURE__ */ createSlotClone(x), C = React.forwardRef((x, C) => {
-		let { children: T, ...D } = x, O = React.Children.toArray(T), k = O.find(isSlottable);
+	let S = /* @__PURE__ */ createSlotClone(x), C = React$1.forwardRef((x, C) => {
+		let { children: T, ...D } = x, O = React$1.Children.toArray(T), k = O.find(isSlottable);
 		if (k) {
-			let x = k.props.children, T = O.map((S) => S === k ? React.Children.count(x) > 1 ? React.Children.only(null) : React.isValidElement(x) ? x.props.children : null : S);
+			let x = k.props.children, T = O.map((S) => S === k ? React$1.Children.count(x) > 1 ? React$1.Children.only(null) : React$1.isValidElement(x) ? x.props.children : null : S);
 			return /* @__PURE__ */ jsx(S, {
 				...D,
 				ref: C,
-				children: React.isValidElement(x) ? React.cloneElement(x, void 0, T) : null
+				children: React$1.isValidElement(x) ? React$1.cloneElement(x, void 0, T) : null
 			});
 		}
 		return /* @__PURE__ */ jsx(S, {
@@ -129,19 +129,19 @@ function createSlot(x) {
 }
 /* @__NO_SIDE_EFFECTS__ */
 function createSlotClone(x) {
-	let S = React.forwardRef((x, S) => {
+	let S = React$1.forwardRef((x, S) => {
 		let { children: C, ...T } = x;
-		if (React.isValidElement(C)) {
+		if (React$1.isValidElement(C)) {
 			let x = getElementRef(C), D = mergeProps(T, C.props);
-			return C.type !== React.Fragment && (D.ref = S ? composeRefs(S, x) : x), React.cloneElement(C, D);
+			return C.type !== React$1.Fragment && (D.ref = S ? composeRefs(S, x) : x), React$1.cloneElement(C, D);
 		}
-		return React.Children.count(C) > 1 ? React.Children.only(null) : null;
+		return React$1.Children.count(C) > 1 ? React$1.Children.only(null) : null;
 	});
 	return S.displayName = `${x}.SlotClone`, S;
 }
 var SLOTTABLE_IDENTIFIER = Symbol("radix.slottable");
 function isSlottable(x) {
-	return React.isValidElement(x) && typeof x.type == "function" && "__radixId" in x.type && x.type.__radixId === SLOTTABLE_IDENTIFIER;
+	return React$1.isValidElement(x) && typeof x.type == "function" && "__radixId" in x.type && x.type.__radixId === SLOTTABLE_IDENTIFIER;
 }
 function mergeProps(m, x) {
 	let S = { ...x };
@@ -169,7 +169,7 @@ function createCollection(m) {
 		collectionRef: { current: null },
 		itemMap: /* @__PURE__ */ new Map()
 	}), k = (m) => {
-		let { scope: S, children: C } = m, T = React2.useRef(null), O = React2.useRef(/* @__PURE__ */ new Map()).current;
+		let { scope: S, children: C } = m, T = React.useRef(null), O = React.useRef(/* @__PURE__ */ new Map()).current;
 		return /* @__PURE__ */ jsx(D, {
 			scope: S,
 			itemMap: O,
@@ -178,7 +178,7 @@ function createCollection(m) {
 		});
 	};
 	k.displayName = S;
-	let A = m + "CollectionSlot", j = /* @__PURE__ */ createSlot(A), M = React2.forwardRef((m, x) => {
+	let A = m + "CollectionSlot", j = /* @__PURE__ */ createSlot(A), M = React.forwardRef((m, x) => {
 		let { scope: S, children: C } = m;
 		return /* @__PURE__ */ jsx(j, {
 			ref: useComposedRefs(x, O(A, S).collectionRef),
@@ -186,9 +186,9 @@ function createCollection(m) {
 		});
 	});
 	M.displayName = A;
-	let N = m + "CollectionItemSlot", P = "data-radix-collection-item", F = /* @__PURE__ */ createSlot(N), I = React2.forwardRef((m, S) => {
-		let { scope: C, children: T, ...D } = m, k = React2.useRef(null), A = useComposedRefs(S, k), j = O(N, C);
-		return React2.useEffect(() => (j.itemMap.set(k, {
+	let N = m + "CollectionItemSlot", P = "data-radix-collection-item", F = /* @__PURE__ */ createSlot(N), I = React.forwardRef((m, S) => {
+		let { scope: C, children: T, ...D } = m, k = React.useRef(null), A = useComposedRefs(S, k), j = O(N, C);
+		return React.useEffect(() => (j.itemMap.set(k, {
 			ref: k,
 			...D
 		}), () => void j.itemMap.delete(k))), /* @__PURE__ */ jsx(F, {
@@ -200,7 +200,7 @@ function createCollection(m) {
 	I.displayName = N;
 	function L(S) {
 		let C = O(m + "CollectionConsumer", S);
-		return React2.useCallback(() => {
+		return React.useCallback(() => {
 			let m = C.collectionRef.current;
 			if (!m) return [];
 			let x = Array.from(m.querySelectorAll(`[${P}]`));
@@ -217,9 +217,9 @@ function createCollection(m) {
 		T
 	];
 }
-var DirectionContext = React.createContext(void 0);
+var DirectionContext = React$1.createContext(void 0);
 function useDirection(x) {
-	let S = React.useContext(DirectionContext);
+	let S = React$1.useContext(DirectionContext);
 	return x || S || "ltr";
 }
 var Primitive = [
@@ -241,7 +241,7 @@ var Primitive = [
 	"svg",
 	"ul"
 ].reduce((x, S) => {
-	let C = /* @__PURE__ */ createSlot(`Primitive.${S}`), T = React.forwardRef((m, x) => {
+	let C = /* @__PURE__ */ createSlot(`Primitive.${S}`), T = React$1.forwardRef((m, x) => {
 		let { asChild: T, ...D } = m, O = T ? C : S;
 		return typeof window < "u" && (window[Symbol.for("radix-ui")] = !0), /* @__PURE__ */ jsx(O, {
 			...D,
@@ -257,26 +257,26 @@ function dispatchDiscreteCustomEvent(m, x) {
 	m && ReactDOM$1.flushSync(() => m.dispatchEvent(x));
 }
 function useCallbackRef(x) {
-	let S = React.useRef(x);
-	return React.useEffect(() => {
+	let S = React$1.useRef(x);
+	return React$1.useEffect(() => {
 		S.current = x;
-	}), React.useMemo(() => (...m) => S.current?.(...m), []);
+	}), React$1.useMemo(() => (...m) => S.current?.(...m), []);
 }
 function useEscapeKeydown(x, S = globalThis?.document) {
 	let C = useCallbackRef(x);
-	React.useEffect(() => {
+	React$1.useEffect(() => {
 		let m = (m) => {
 			m.key === "Escape" && C(m);
 		};
 		return S.addEventListener("keydown", m, { capture: !0 }), () => S.removeEventListener("keydown", m, { capture: !0 });
 	}, [C, S]);
 }
-var DISMISSABLE_LAYER_NAME = "DismissableLayer", CONTEXT_UPDATE = "dismissableLayer.update", POINTER_DOWN_OUTSIDE = "dismissableLayer.pointerDownOutside", FOCUS_OUTSIDE = "dismissableLayer.focusOutside", originalBodyPointerEvents, DismissableLayerContext = React.createContext({
+var DISMISSABLE_LAYER_NAME = "DismissableLayer", CONTEXT_UPDATE = "dismissableLayer.update", POINTER_DOWN_OUTSIDE = "dismissableLayer.pointerDownOutside", FOCUS_OUTSIDE = "dismissableLayer.focusOutside", originalBodyPointerEvents, DismissableLayerContext = React$1.createContext({
 	layers: /* @__PURE__ */ new Set(),
 	layersWithOutsidePointerEventsDisabled: /* @__PURE__ */ new Set(),
 	branches: /* @__PURE__ */ new Set()
-}), DismissableLayer = React.forwardRef((x, S) => {
-	let { disableOutsidePointerEvents: C = !1, onEscapeKeyDown: T, onPointerDownOutside: D, onFocusOutside: O, onInteractOutside: k, onDismiss: A, ...j } = x, M = React.useContext(DismissableLayerContext), [N, P] = React.useState(null), F = N?.ownerDocument ?? globalThis?.document, [, I] = React.useState({}), L = useComposedRefs(S, (m) => P(m)), R = Array.from(M.layers), [z] = [...M.layersWithOutsidePointerEventsDisabled].slice(-1), B = R.indexOf(z), H = N ? R.indexOf(N) : -1, U = M.layersWithOutsidePointerEventsDisabled.size > 0, W = H >= B, G = usePointerDownOutside((m) => {
+}), DismissableLayer = React$1.forwardRef((x, S) => {
+	let { disableOutsidePointerEvents: C = !1, onEscapeKeyDown: T, onPointerDownOutside: D, onFocusOutside: O, onInteractOutside: k, onDismiss: A, ...j } = x, M = React$1.useContext(DismissableLayerContext), [N, P] = React$1.useState(null), F = N?.ownerDocument ?? globalThis?.document, [, I] = React$1.useState({}), L = useComposedRefs(S, (m) => P(m)), R = Array.from(M.layers), [z] = [...M.layersWithOutsidePointerEventsDisabled].slice(-1), B = R.indexOf(z), H = N ? R.indexOf(N) : -1, U = M.layersWithOutsidePointerEventsDisabled.size > 0, W = H >= B, G = usePointerDownOutside((m) => {
 		let x = m.target, S = [...M.branches].some((m) => m.contains(x));
 		!W || S || (D?.(m), k?.(m), m.defaultPrevented || A?.());
 	}, F), K = useFocusOutside((m) => {
@@ -285,7 +285,7 @@ var DISMISSABLE_LAYER_NAME = "DismissableLayer", CONTEXT_UPDATE = "dismissableLa
 	}, F);
 	return useEscapeKeydown((m) => {
 		H === M.layers.size - 1 && (T?.(m), !m.defaultPrevented && A && (m.preventDefault(), A()));
-	}, F), React.useEffect(() => {
+	}, F), React$1.useEffect(() => {
 		if (N) return C && (M.layersWithOutsidePointerEventsDisabled.size === 0 && (originalBodyPointerEvents = F.body.style.pointerEvents, F.body.style.pointerEvents = "none"), M.layersWithOutsidePointerEventsDisabled.add(N)), M.layers.add(N), dispatchUpdate(), () => {
 			C && M.layersWithOutsidePointerEventsDisabled.size === 1 && (F.body.style.pointerEvents = originalBodyPointerEvents);
 		};
@@ -294,9 +294,9 @@ var DISMISSABLE_LAYER_NAME = "DismissableLayer", CONTEXT_UPDATE = "dismissableLa
 		F,
 		C,
 		M
-	]), React.useEffect(() => () => {
+	]), React$1.useEffect(() => () => {
 		N && (M.layers.delete(N), M.layersWithOutsidePointerEventsDisabled.delete(N), dispatchUpdate());
-	}, [N, M]), React.useEffect(() => {
+	}, [N, M]), React$1.useEffect(() => {
 		let m = () => I({});
 		return document.addEventListener(CONTEXT_UPDATE, m), () => document.removeEventListener(CONTEXT_UPDATE, m);
 	}, []), /* @__PURE__ */ jsx(Primitive.div, {
@@ -312,9 +312,9 @@ var DISMISSABLE_LAYER_NAME = "DismissableLayer", CONTEXT_UPDATE = "dismissableLa
 	});
 });
 DismissableLayer.displayName = DISMISSABLE_LAYER_NAME;
-var BRANCH_NAME = "DismissableLayerBranch", DismissableLayerBranch = React.forwardRef((x, S) => {
-	let C = React.useContext(DismissableLayerContext), T = React.useRef(null), D = useComposedRefs(S, T);
-	return React.useEffect(() => {
+var BRANCH_NAME = "DismissableLayerBranch", DismissableLayerBranch = React$1.forwardRef((x, S) => {
+	let C = React$1.useContext(DismissableLayerContext), T = React$1.useRef(null), D = useComposedRefs(S, T);
+	return React$1.useEffect(() => {
 		let m = T.current;
 		if (m) return C.branches.add(m), () => {
 			C.branches.delete(m);
@@ -326,8 +326,8 @@ var BRANCH_NAME = "DismissableLayerBranch", DismissableLayerBranch = React.forwa
 });
 DismissableLayerBranch.displayName = BRANCH_NAME;
 function usePointerDownOutside(x, S = globalThis?.document) {
-	let C = useCallbackRef(x), T = React.useRef(!1), D = React.useRef(() => {});
-	return React.useEffect(() => {
+	let C = useCallbackRef(x), T = React$1.useRef(!1), D = React$1.useRef(() => {});
+	return React$1.useEffect(() => {
 		let m = (m) => {
 			if (m.target && !T.current) {
 				let x = function() {
@@ -345,8 +345,8 @@ function usePointerDownOutside(x, S = globalThis?.document) {
 	}, [S, C]), { onPointerDownCapture: () => T.current = !0 };
 }
 function useFocusOutside(x, S = globalThis?.document) {
-	let C = useCallbackRef(x), T = React.useRef(!1);
-	return React.useEffect(() => {
+	let C = useCallbackRef(x), T = React$1.useRef(!1);
+	return React$1.useEffect(() => {
 		let m = (m) => {
 			m.target && !T.current && handleAndDispatchCustomEvent(FOCUS_OUTSIDE, C, { originalEvent: m }, { discrete: !1 });
 		};
@@ -370,7 +370,7 @@ function handleAndDispatchCustomEvent(m, x, S, { discrete: C }) {
 }
 var count$1 = 0;
 function useFocusGuards() {
-	React.useEffect(() => {
+	React$1.useEffect(() => {
 		let m = document.querySelectorAll("[data-radix-focus-guard]");
 		return document.body.insertAdjacentElement("afterbegin", m[0] ?? createFocusGuard()), document.body.insertAdjacentElement("beforeend", m[1] ?? createFocusGuard()), count$1++, () => {
 			count$1 === 1 && document.querySelectorAll("[data-radix-focus-guard]").forEach((m) => m.remove()), count$1--;
@@ -384,8 +384,8 @@ function createFocusGuard() {
 var AUTOFOCUS_ON_MOUNT = "focusScope.autoFocusOnMount", AUTOFOCUS_ON_UNMOUNT = "focusScope.autoFocusOnUnmount", EVENT_OPTIONS = {
 	bubbles: !1,
 	cancelable: !0
-}, FOCUS_SCOPE_NAME = "FocusScope", FocusScope = React.forwardRef((x, S) => {
-	let { loop: C = !1, trapped: T = !1, onMountAutoFocus: D, onUnmountAutoFocus: O, ...k } = x, [A, j] = React.useState(null), M = useCallbackRef(D), N = useCallbackRef(O), P = React.useRef(null), F = useComposedRefs(S, (m) => j(m)), I = React.useRef({
+}, FOCUS_SCOPE_NAME = "FocusScope", FocusScope = React$1.forwardRef((x, S) => {
+	let { loop: C = !1, trapped: T = !1, onMountAutoFocus: D, onUnmountAutoFocus: O, ...k } = x, [A, j] = React$1.useState(null), M = useCallbackRef(D), N = useCallbackRef(O), P = React$1.useRef(null), F = useComposedRefs(S, (m) => j(m)), I = React$1.useRef({
 		paused: !1,
 		pause() {
 			this.paused = !0;
@@ -394,7 +394,7 @@ var AUTOFOCUS_ON_MOUNT = "focusScope.autoFocusOnMount", AUTOFOCUS_ON_UNMOUNT = "
 			this.paused = !1;
 		}
 	}).current;
-	React.useEffect(() => {
+	React$1.useEffect(() => {
 		if (T) {
 			let m = function(m) {
 				if (I.paused || !A) return;
@@ -420,7 +420,7 @@ var AUTOFOCUS_ON_MOUNT = "focusScope.autoFocusOnMount", AUTOFOCUS_ON_UNMOUNT = "
 		T,
 		A,
 		I.paused
-	]), React.useEffect(() => {
+	]), React$1.useEffect(() => {
 		if (A) {
 			focusScopesStack.add(I);
 			let m = document.activeElement;
@@ -441,7 +441,7 @@ var AUTOFOCUS_ON_MOUNT = "focusScope.autoFocusOnMount", AUTOFOCUS_ON_UNMOUNT = "
 		N,
 		I
 	]);
-	let L = React.useCallback((m) => {
+	let L = React$1.useCallback((m) => {
 		if (!C && !T || I.paused) return;
 		let x = m.key === "Tab" && !m.altKey && !m.ctrlKey && !m.metaKey, S = document.activeElement;
 		if (x && S) {
@@ -518,9 +518,9 @@ function arrayRemove(m, x) {
 function removeLinks(m) {
 	return m.filter((m) => m.tagName !== "A");
 }
-var useLayoutEffect2 = globalThis?.document ? React.useLayoutEffect : () => {}, useReactId = React.useId || (() => void 0), count = 0;
+var useLayoutEffect2 = globalThis?.document ? React$1.useLayoutEffect : () => {}, useReactId = React$1.useId || (() => void 0), count = 0;
 function useId$1(x) {
-	let [S, C] = React.useState(useReactId());
+	let [S, C] = React$1.useState(useReactId());
 	return useLayoutEffect2(() => {
 		x || C((m) => m ?? String(count++));
 	}, [x]), x || (S ? `radix-${S}` : "");
@@ -752,15 +752,15 @@ var arrow$2 = (m) => ({
 			y: C
 		}, F = getAlignmentAxis(T), I = getAxisLength(F), L = await O.getDimensions(j), R = F === "y", z = R ? "top" : "left", B = R ? "bottom" : "right", H = R ? "clientHeight" : "clientWidth", U = D.reference[I] + D.reference[F] - P[F] - D.floating[I], W = P[F] - D.reference[F], G = await (O.getOffsetParent == null ? void 0 : O.getOffsetParent(j)), K = G ? G[H] : 0;
 		(!K || !await (O.isElement == null ? void 0 : O.isElement(G))) && (K = k.floating[H] || D.floating[I]);
-		let q = U / 2 - W / 2, J = K / 2 - L[I] / 2 - 1, NR = min(N[z], J), PR = min(N[B], J), Y = NR, X = K - L[I] - PR, Z = K / 2 - L[I] / 2 + q, Q = clamp$3(Y, Z, X), FR = !A.arrow && getAlignment(T) != null && Z !== Q && D.reference[I] / 2 - (Z < Y ? NR : PR) - L[I] / 2 < 0, IR = FR ? Z < Y ? Z - Y : Z - X : 0;
+		let q = U / 2 - W / 2, J = K / 2 - L[I] / 2 - 1, RV = min(N[z], J), zV = min(N[B], J), Y = RV, X = K - L[I] - zV, Z = K / 2 - L[I] / 2 + q, Q = clamp$3(Y, Z, X), BV = !A.arrow && getAlignment(T) != null && Z !== Q && D.reference[I] / 2 - (Z < Y ? RV : zV) - L[I] / 2 < 0, VV = BV ? Z < Y ? Z - Y : Z - X : 0;
 		return {
-			[F]: P[F] + IR,
+			[F]: P[F] + VV,
 			data: {
 				[F]: Q,
-				centerOffset: Z - Q - IR,
-				...FR && { alignmentOffset: IR }
+				centerOffset: Z - Q - VV,
+				...BV && { alignmentOffset: VV }
 			},
-			reset: FR
+			reset: BV
 		};
 	}
 }), flip$2 = function(m) {
@@ -988,30 +988,30 @@ function hasWindow() {
 	return typeof window < "u";
 }
 function getNodeName(m) {
-	return isNode$1(m) ? (m.nodeName || "").toLowerCase() : "#document";
+	return isNode$2(m) ? (m.nodeName || "").toLowerCase() : "#document";
 }
-function getWindow$1(m) {
+function getWindow$2(m) {
 	var x;
 	return (m == null || (x = m.ownerDocument) == null ? void 0 : x.defaultView) || window;
 }
 function getDocumentElement(m) {
-	return ((isNode$1(m) ? m.ownerDocument : m.document) || window.document)?.documentElement;
+	return ((isNode$2(m) ? m.ownerDocument : m.document) || window.document)?.documentElement;
 }
-function isNode$1(m) {
-	return hasWindow() ? m instanceof Node || m instanceof getWindow$1(m).Node : !1;
+function isNode$2(m) {
+	return hasWindow() ? m instanceof Node || m instanceof getWindow$2(m).Node : !1;
 }
 function isElement$1(m) {
-	return hasWindow() ? m instanceof Element || m instanceof getWindow$1(m).Element : !1;
+	return hasWindow() ? m instanceof Element || m instanceof getWindow$2(m).Element : !1;
 }
 function isHTMLElement$2(m) {
-	return hasWindow() ? m instanceof HTMLElement || m instanceof getWindow$1(m).HTMLElement : !1;
+	return hasWindow() ? m instanceof HTMLElement || m instanceof getWindow$2(m).HTMLElement : !1;
 }
 function isShadowRoot(m) {
-	return !hasWindow() || typeof ShadowRoot > "u" ? !1 : m instanceof ShadowRoot || m instanceof getWindow$1(m).ShadowRoot;
+	return !hasWindow() || typeof ShadowRoot > "u" ? !1 : m instanceof ShadowRoot || m instanceof getWindow$2(m).ShadowRoot;
 }
 var invalidOverflowDisplayValues = /* @__PURE__ */ new Set(["inline", "contents"]);
 function isOverflowElement(m) {
-	let { overflow: x, overflowX: S, overflowY: C, display: T } = getComputedStyle$2(m);
+	let { overflow: x, overflowX: S, overflowY: C, display: T } = getComputedStyle$3(m);
 	return /auto|scroll|overlay|hidden|clip/.test(x + C + S) && !invalidOverflowDisplayValues.has(T);
 }
 var tableElements = /* @__PURE__ */ new Set([
@@ -1052,7 +1052,7 @@ var transformProperties = [
 	"content"
 ];
 function isContainingBlock(m) {
-	let x = isWebKit(), S = isElement$1(m) ? getComputedStyle$2(m) : m;
+	let x = isWebKit(), S = isElement$1(m) ? getComputedStyle$3(m) : m;
 	return transformProperties.some((m) => S[m] ? S[m] !== "none" : !1) || (S.containerType ? S.containerType !== "normal" : !1) || !x && (S.backdropFilter ? S.backdropFilter !== "none" : !1) || !x && (S.filter ? S.filter !== "none" : !1) || willChangeValues.some((m) => (S.willChange || "").includes(m)) || containValues.some((m) => (S.contain || "").includes(m));
 }
 function getContainingBlock(m) {
@@ -1075,8 +1075,8 @@ var lastTraversableNodeNames = /* @__PURE__ */ new Set([
 function isLastTraversableNode(m) {
 	return lastTraversableNodeNames.has(getNodeName(m));
 }
-function getComputedStyle$2(m) {
-	return getWindow$1(m).getComputedStyle(m);
+function getComputedStyle$3(m) {
+	return getWindow$2(m).getComputedStyle(m);
 }
 function getNodeScroll(m) {
 	return isElement$1(m) ? {
@@ -1098,7 +1098,7 @@ function getNearestOverflowAncestor(m) {
 }
 function getOverflowAncestors(m, x, S) {
 	x === void 0 && (x = []), S === void 0 && (S = !0);
-	let C = getNearestOverflowAncestor(m), T = C === m.ownerDocument?.body, D = getWindow$1(C);
+	let C = getNearestOverflowAncestor(m), T = C === m.ownerDocument?.body, D = getWindow$2(C);
 	if (T) {
 		let m = getFrameElement$1(D);
 		return x.concat(D, D.visualViewport || [], isOverflowElement(C) ? C : [], m && S ? getOverflowAncestors(m) : []);
@@ -1109,7 +1109,7 @@ function getFrameElement$1(m) {
 	return m.parent && Object.getPrototypeOf(m.parent) ? m.frameElement : null;
 }
 function getCssDimensions(m) {
-	let x = getComputedStyle$2(m), S = parseFloat(x.width) || 0, C = parseFloat(x.height) || 0, T = isHTMLElement$2(m), D = T ? m.offsetWidth : S, O = T ? m.offsetHeight : C, k = round(S) !== D || round(C) !== O;
+	let x = getComputedStyle$3(m), S = parseFloat(x.width) || 0, C = parseFloat(x.height) || 0, T = isHTMLElement$2(m), D = T ? m.offsetWidth : S, O = T ? m.offsetHeight : C, k = round(S) !== D || round(C) !== O;
 	return k && (S = D, C = O), {
 		width: S,
 		height: C,
@@ -1130,14 +1130,14 @@ function getScale$1(m) {
 }
 var noOffsets = /* @__PURE__ */ createCoords(0);
 function getVisualOffsets(m) {
-	let x = getWindow$1(m);
+	let x = getWindow$2(m);
 	return !isWebKit() || !x.visualViewport ? noOffsets : {
 		x: x.visualViewport.offsetLeft,
 		y: x.visualViewport.offsetTop
 	};
 }
 function shouldAddVisualOffsets(m, x, S) {
-	return x === void 0 && (x = !1), !S || x && S !== getWindow$1(m) ? !1 : x;
+	return x === void 0 && (x = !1), !S || x && S !== getWindow$2(m) ? !1 : x;
 }
 function getBoundingClientRect(m, x, S, C) {
 	x === void 0 && (x = !1), S === void 0 && (S = !1);
@@ -1145,10 +1145,10 @@ function getBoundingClientRect(m, x, S, C) {
 	x && (C ? isElement$1(C) && (O = getScale$1(C)) : O = getScale$1(m));
 	let k = shouldAddVisualOffsets(D, S, C) ? getVisualOffsets(D) : createCoords(0), A = (T.left + k.x) / O.x, j = (T.top + k.y) / O.y, M = T.width / O.x, N = T.height / O.y;
 	if (D) {
-		let m = getWindow$1(D), x = C && isElement$1(C) ? getWindow$1(C) : C, S = m, T = getFrameElement$1(S);
+		let m = getWindow$2(D), x = C && isElement$1(C) ? getWindow$2(C) : C, S = m, T = getFrameElement$1(S);
 		for (; T && C && x !== S;) {
-			let m = getScale$1(T), x = T.getBoundingClientRect(), C = getComputedStyle$2(T), D = x.left + (T.clientLeft + parseFloat(C.paddingLeft)) * m.x, O = x.top + (T.clientTop + parseFloat(C.paddingTop)) * m.y;
-			A *= m.x, j *= m.y, M *= m.x, N *= m.y, A += D, j += O, S = getWindow$1(T), T = getFrameElement$1(S);
+			let m = getScale$1(T), x = T.getBoundingClientRect(), C = getComputedStyle$3(T), D = x.left + (T.clientLeft + parseFloat(C.paddingLeft)) * m.x, O = x.top + (T.clientTop + parseFloat(C.paddingTop)) * m.y;
+			A *= m.x, j *= m.y, M *= m.x, N *= m.y, A += D, j += O, S = getWindow$2(T), T = getFrameElement$1(S);
 		}
 	}
 	return rectToClientRect({
@@ -1193,7 +1193,7 @@ function getClientRects(m) {
 }
 function getDocumentRect(m) {
 	let x = getDocumentElement(m), S = getNodeScroll(m), C = m.ownerDocument.body, T = max(x.scrollWidth, x.clientWidth, C.scrollWidth, C.clientWidth), D = max(x.scrollHeight, x.clientHeight, C.scrollHeight, C.clientHeight), O = -S.scrollLeft + getWindowScrollBarX(m), k = -S.scrollTop;
-	return getComputedStyle$2(C).direction === "rtl" && (O += max(x.clientWidth, C.clientWidth) - T), {
+	return getComputedStyle$3(C).direction === "rtl" && (O += max(x.clientWidth, C.clientWidth) - T), {
 		width: T,
 		height: D,
 		x: O,
@@ -1202,7 +1202,7 @@ function getDocumentRect(m) {
 }
 var SCROLLBAR_MAX = 25;
 function getViewportRect(m, x) {
-	let S = getWindow$1(m), C = getDocumentElement(m), T = S.visualViewport, D = C.clientWidth, O = C.clientHeight, k = 0, A = 0;
+	let S = getWindow$2(m), C = getDocumentElement(m), T = S.visualViewport, D = C.clientWidth, O = C.clientHeight, k = 0, A = 0;
 	if (T) {
 		D = T.width, O = T.height;
 		let m = isWebKit();
@@ -1248,14 +1248,14 @@ function getClientRectFromClippingAncestor(m, x, S) {
 }
 function hasFixedPositionAncestor(m, x) {
 	let S = getParentNode(m);
-	return S === x || !isElement$1(S) || isLastTraversableNode(S) ? !1 : getComputedStyle$2(S).position === "fixed" || hasFixedPositionAncestor(S, x);
+	return S === x || !isElement$1(S) || isLastTraversableNode(S) ? !1 : getComputedStyle$3(S).position === "fixed" || hasFixedPositionAncestor(S, x);
 }
 function getClippingElementAncestors(m, x) {
 	let S = x.get(m);
 	if (S) return S;
-	let C = getOverflowAncestors(m, [], !1).filter((m) => isElement$1(m) && getNodeName(m) !== "body"), T = null, D = getComputedStyle$2(m).position === "fixed", O = D ? getParentNode(m) : m;
+	let C = getOverflowAncestors(m, [], !1).filter((m) => isElement$1(m) && getNodeName(m) !== "body"), T = null, D = getComputedStyle$3(m).position === "fixed", O = D ? getParentNode(m) : m;
 	for (; isElement$1(O) && !isLastTraversableNode(O);) {
-		let x = getComputedStyle$2(O), S = isContainingBlock(O);
+		let x = getComputedStyle$3(O), S = isContainingBlock(O);
 		!S && x.position === "fixed" && (T = null), (D ? !S && !T : !S && x.position === "static" && T && absoluteOrFixed.has(T.position) || isOverflowElement(O) && !S && hasFixedPositionAncestor(m, O)) ? C = C.filter((m) => m !== O) : T = x, O = getParentNode(O);
 	}
 	return x.set(m, C), C;
@@ -1301,16 +1301,16 @@ function getRectRelativeToOffsetParent(m, x, S) {
 	};
 }
 function isStaticPositioned(m) {
-	return getComputedStyle$2(m).position === "static";
+	return getComputedStyle$3(m).position === "static";
 }
 function getTrueOffsetParent(m, x) {
-	if (!isHTMLElement$2(m) || getComputedStyle$2(m).position === "fixed") return null;
+	if (!isHTMLElement$2(m) || getComputedStyle$3(m).position === "fixed") return null;
 	if (x) return x(m);
 	let S = m.offsetParent;
 	return getDocumentElement(m) === S && (S = S.ownerDocument.body), S;
 }
 function getOffsetParent(m, x) {
-	let S = getWindow$1(m);
+	let S = getWindow$2(m);
 	if (isTopLayer(m)) return S;
 	if (!isHTMLElement$2(m)) {
 		let x = getParentNode(m);
@@ -1337,7 +1337,7 @@ var getElementRects = async function(m) {
 	};
 };
 function isRTL(m) {
-	return getComputedStyle$2(m).direction === "rtl";
+	return getComputedStyle$3(m).direction === "rtl";
 }
 var platform = {
 	convertOffsetParentRelativeRectToViewportRelativeRect,
@@ -1459,27 +1459,27 @@ function roundByDPR(m, x) {
 	return Math.round(x * S) / S;
 }
 function useLatestRef(x) {
-	let S = React.useRef(x);
+	let S = React$1.useRef(x);
 	return index(() => {
 		S.current = x;
 	}), S;
 }
 function useFloating(x) {
 	x === void 0 && (x = {});
-	let { placement: S = "bottom", strategy: C = "absolute", middleware: T = [], platform: D, elements: { reference: O, floating: k } = {}, transform: A = !0, whileElementsMounted: j, open: M } = x, [N, P] = React.useState({
+	let { placement: S = "bottom", strategy: C = "absolute", middleware: T = [], platform: D, elements: { reference: O, floating: k } = {}, transform: A = !0, whileElementsMounted: j, open: M } = x, [N, P] = React$1.useState({
 		x: 0,
 		y: 0,
 		strategy: C,
 		placement: S,
 		middlewareData: {},
 		isPositioned: !1
-	}), [F, I] = React.useState(T);
+	}), [F, I] = React$1.useState(T);
 	deepEqual$1(F, T) || I(T);
-	let [L, R] = React.useState(null), [z, B] = React.useState(null), H = React.useCallback((m) => {
+	let [L, R] = React$1.useState(null), [z, B] = React$1.useState(null), H = React$1.useCallback((m) => {
 		m !== q.current && (q.current = m, R(m));
-	}, []), U = React.useCallback((m) => {
+	}, []), U = React$1.useCallback((m) => {
 		m !== J.current && (J.current = m, B(m));
-	}, []), G = O || L, K = k || z, q = React.useRef(null), J = React.useRef(null), NR = React.useRef(N), PR = j != null, Y = useLatestRef(j), X = useLatestRef(D), Z = useLatestRef(M), Q = React.useCallback(() => {
+	}, []), G = O || L, K = k || z, q = React$1.useRef(null), J = React$1.useRef(null), RV = React$1.useRef(N), zV = j != null, Y = useLatestRef(j), X = useLatestRef(D), Z = useLatestRef(M), Q = React$1.useCallback(() => {
 		if (!q.current || !J.current) return;
 		let m = {
 			placement: S,
@@ -1491,7 +1491,7 @@ function useFloating(x) {
 				...m,
 				isPositioned: Z.current !== !1
 			};
-			FR.current && !deepEqual$1(NR.current, x) && (NR.current = x, ReactDOM$1.flushSync(() => {
+			BV.current && !deepEqual$1(RV.current, x) && (RV.current = x, ReactDOM$1.flushSync(() => {
 				P(x);
 			}));
 		});
@@ -1503,14 +1503,14 @@ function useFloating(x) {
 		Z
 	]);
 	index(() => {
-		M === !1 && NR.current.isPositioned && (NR.current.isPositioned = !1, P((m) => ({
+		M === !1 && RV.current.isPositioned && (RV.current.isPositioned = !1, P((m) => ({
 			...m,
 			isPositioned: !1
 		})));
 	}, [M]);
-	let FR = React.useRef(!1);
-	index(() => (FR.current = !0, () => {
-		FR.current = !1;
+	let BV = React$1.useRef(!1);
+	index(() => (BV.current = !0, () => {
+		BV.current = !1;
 	}), []), index(() => {
 		if (G && (q.current = G), K && (J.current = K), G && K) {
 			if (Y.current) return Y.current(G, K, Q);
@@ -1521,28 +1521,28 @@ function useFloating(x) {
 		K,
 		Q,
 		Y,
-		PR
+		zV
 	]);
-	let IR = React.useMemo(() => ({
+	let VV = React$1.useMemo(() => ({
 		reference: q,
 		floating: J,
 		setReference: H,
 		setFloating: U
-	}), [H, U]), LR = React.useMemo(() => ({
+	}), [H, U]), HV = React$1.useMemo(() => ({
 		reference: G,
 		floating: K
-	}), [G, K]), RR = React.useMemo(() => {
+	}), [G, K]), UV = React$1.useMemo(() => {
 		let m = {
 			position: C,
 			left: 0,
 			top: 0
 		};
-		if (!LR.floating) return m;
-		let x = roundByDPR(LR.floating, N.x), S = roundByDPR(LR.floating, N.y);
+		if (!HV.floating) return m;
+		let x = roundByDPR(HV.floating, N.x), S = roundByDPR(HV.floating, N.y);
 		return A ? {
 			...m,
 			transform: "translate(" + x + "px, " + S + "px)",
-			...getDPR(LR.floating) >= 1.5 && { willChange: "transform" }
+			...getDPR(HV.floating) >= 1.5 && { willChange: "transform" }
 		} : {
 			position: C,
 			left: x,
@@ -1551,22 +1551,22 @@ function useFloating(x) {
 	}, [
 		C,
 		A,
-		LR.floating,
+		HV.floating,
 		N.x,
 		N.y
 	]);
-	return React.useMemo(() => ({
+	return React$1.useMemo(() => ({
 		...N,
 		update: Q,
-		refs: IR,
-		elements: LR,
-		floatingStyles: RR
+		refs: VV,
+		elements: HV,
+		floatingStyles: UV
 	}), [
 		N,
 		Q,
-		IR,
-		LR,
-		RR
+		VV,
+		HV,
+		UV
 	]);
 }
 var arrow$1$1 = (m) => {
@@ -1608,7 +1608,7 @@ var arrow$1$1 = (m) => {
 }), arrow = (m, x) => ({
 	...arrow$1$1(m),
 	options: [m, x]
-}), NAME$1 = "Arrow", Arrow$1 = React.forwardRef((m, x) => {
+}), NAME$1 = "Arrow", Arrow$3 = React$1.forwardRef((m, x) => {
 	let { children: S, width: C = 10, height: T = 5, ...D } = m;
 	return /* @__PURE__ */ jsx(Primitive.svg, {
 		...D,
@@ -1620,10 +1620,10 @@ var arrow$1$1 = (m) => {
 		children: m.asChild ? S : /* @__PURE__ */ jsx("polygon", { points: "0,0 30,0 15,10" })
 	});
 });
-Arrow$1.displayName = NAME$1;
-var Root = Arrow$1;
+Arrow$3.displayName = NAME$1;
+var Root = Arrow$3;
 function useSize(x) {
-	let [S, C] = React.useState(void 0);
+	let [S, C] = React$1.useState(void 0);
 	return useLayoutEffect2(() => {
 		if (x) {
 			C({
@@ -1647,7 +1647,7 @@ function useSize(x) {
 	}, [x]), S;
 }
 var POPPER_NAME = "Popper", [createPopperContext, createPopperScope] = createContextScope(POPPER_NAME), [PopperProvider, usePopperContext] = createPopperContext(POPPER_NAME), Popper = (x) => {
-	let { __scopePopper: S, children: C } = x, [T, D] = React.useState(null);
+	let { __scopePopper: S, children: C } = x, [T, D] = React$1.useState(null);
 	return /* @__PURE__ */ jsx(PopperProvider, {
 		scope: S,
 		anchor: T,
@@ -1656,9 +1656,9 @@ var POPPER_NAME = "Popper", [createPopperContext, createPopperScope] = createCon
 	});
 };
 Popper.displayName = POPPER_NAME;
-var ANCHOR_NAME = "PopperAnchor", PopperAnchor = React.forwardRef((x, S) => {
-	let { __scopePopper: C, virtualRef: T, ...D } = x, O = usePopperContext(ANCHOR_NAME, C), k = React.useRef(null), A = useComposedRefs(S, k), j = React.useRef(null);
-	return React.useEffect(() => {
+var ANCHOR_NAME = "PopperAnchor", PopperAnchor = React$1.forwardRef((x, S) => {
+	let { __scopePopper: C, virtualRef: T, ...D } = x, O = usePopperContext(ANCHOR_NAME, C), k = React$1.useRef(null), A = useComposedRefs(S, k), j = React$1.useRef(null);
+	return React$1.useEffect(() => {
 		let m = j.current;
 		j.current = T?.current || k.current, m !== j.current && O.onAnchorChange(j.current);
 	}), T ? null : /* @__PURE__ */ jsx(Primitive.div, {
@@ -1667,8 +1667,8 @@ var ANCHOR_NAME = "PopperAnchor", PopperAnchor = React.forwardRef((x, S) => {
 	});
 });
 PopperAnchor.displayName = ANCHOR_NAME;
-var CONTENT_NAME$1 = "PopperContent", [PopperContentProvider, useContentContext] = createPopperContext(CONTENT_NAME$1), PopperContent = React.forwardRef((x, S) => {
-	let { __scopePopper: C, side: T = "bottom", sideOffset: D = 0, align: O = "center", alignOffset: k = 0, arrowPadding: A = 0, avoidCollisions: j = !0, collisionBoundary: M = [], collisionPadding: N = 0, sticky: P = "partial", hideWhenDetached: F = !1, updatePositionStrategy: I = "optimized", onPlaced: L, ...R } = x, z = usePopperContext(CONTENT_NAME$1, C), [B, H] = React.useState(null), U = useComposedRefs(S, (m) => H(m)), [W, G] = React.useState(null), K = useSize(W), q = K?.width ?? 0, J = K?.height ?? 0, PR = T + (O === "center" ? "" : "-" + O), Y = typeof N == "number" ? N : {
+var CONTENT_NAME$1 = "PopperContent", [PopperContentProvider, useContentContext] = createPopperContext(CONTENT_NAME$1), PopperContent = React$1.forwardRef((x, S) => {
+	let { __scopePopper: C, side: T = "bottom", sideOffset: D = 0, align: O = "center", alignOffset: k = 0, arrowPadding: A = 0, avoidCollisions: j = !0, collisionBoundary: M = [], collisionPadding: N = 0, sticky: P = "partial", hideWhenDetached: F = !1, updatePositionStrategy: I = "optimized", onPlaced: L, ...R } = x, z = usePopperContext(CONTENT_NAME$1, C), [B, H] = React$1.useState(null), U = useComposedRefs(S, (m) => H(m)), [W, G] = React$1.useState(null), K = useSize(W), q = K?.width ?? 0, J = K?.height ?? 0, zV = T + (O === "center" ? "" : "-" + O), Y = typeof N == "number" ? N : {
 		top: 0,
 		right: 0,
 		bottom: 0,
@@ -1678,9 +1678,9 @@ var CONTENT_NAME$1 = "PopperContent", [PopperContentProvider, useContentContext]
 		padding: Y,
 		boundary: X.filter(isNotNull$2),
 		altBoundary: Z
-	}, { refs: FR, floatingStyles: IR, placement: LR, isPositioned: RR, middlewareData: zR } = useFloating({
+	}, { refs: BV, floatingStyles: VV, placement: HV, isPositioned: UV, middlewareData: WV } = useFloating({
 		strategy: "fixed",
-		placement: PR,
+		placement: zV,
 		whileElementsMounted: (...m) => autoUpdate(...m, { animationFrame: I === "always" }),
 		elements: { reference: z.anchor },
 		middleware: [
@@ -1715,23 +1715,23 @@ var CONTENT_NAME$1 = "PopperContent", [PopperContentProvider, useContentContext]
 				...Q
 			})
 		]
-	}), [BR, VR] = getSideAndAlignFromPlacement(LR), HR = useCallbackRef(L);
+	}), [GV, KV] = getSideAndAlignFromPlacement(HV), qV = useCallbackRef(L);
 	useLayoutEffect2(() => {
-		RR && HR?.();
-	}, [RR, HR]);
-	let $ = zR.arrow?.x, UR = zR.arrow?.y, WR = zR.arrow?.centerOffset !== 0, [GR, KR] = React.useState();
+		UV && qV?.();
+	}, [UV, qV]);
+	let $ = WV.arrow?.x, JV = WV.arrow?.y, YV = WV.arrow?.centerOffset !== 0, [XV, ZV] = React$1.useState();
 	return useLayoutEffect2(() => {
-		B && KR(window.getComputedStyle(B).zIndex);
+		B && ZV(window.getComputedStyle(B).zIndex);
 	}, [B]), /* @__PURE__ */ jsx("div", {
-		ref: FR.setFloating,
+		ref: BV.setFloating,
 		"data-radix-popper-content-wrapper": "",
 		style: {
-			...IR,
-			transform: RR ? IR.transform : "translate(0, -200%)",
+			...VV,
+			transform: UV ? VV.transform : "translate(0, -200%)",
 			minWidth: "max-content",
-			zIndex: GR,
-			"--radix-popper-transform-origin": [zR.transformOrigin?.x, zR.transformOrigin?.y].join(" "),
-			...zR.hide?.referenceHidden && {
+			zIndex: XV,
+			"--radix-popper-transform-origin": [WV.transformOrigin?.x, WV.transformOrigin?.y].join(" "),
+			...WV.hide?.referenceHidden && {
 				visibility: "hidden",
 				pointerEvents: "none"
 			}
@@ -1739,19 +1739,19 @@ var CONTENT_NAME$1 = "PopperContent", [PopperContentProvider, useContentContext]
 		dir: x.dir,
 		children: /* @__PURE__ */ jsx(PopperContentProvider, {
 			scope: C,
-			placedSide: BR,
+			placedSide: GV,
 			onArrowChange: G,
 			arrowX: $,
-			arrowY: UR,
-			shouldHideArrow: WR,
+			arrowY: JV,
+			shouldHideArrow: YV,
 			children: /* @__PURE__ */ jsx(Primitive.div, {
-				"data-side": BR,
-				"data-align": VR,
+				"data-side": GV,
+				"data-align": KV,
 				...R,
 				ref: U,
 				style: {
 					...R.style,
-					animation: RR ? void 0 : "none"
+					animation: UV ? void 0 : "none"
 				}
 			})
 		})
@@ -1763,7 +1763,7 @@ var ARROW_NAME$1 = "PopperArrow", OPPOSITE_SIDE = {
 	right: "left",
 	bottom: "top",
 	left: "right"
-}, PopperArrow = React.forwardRef(function(m, x) {
+}, PopperArrow = React$1.forwardRef(function(m, x) {
 	let { __scopePopper: S, ...C } = m, T = useContentContext(ARROW_NAME$1, S), D = OPPOSITE_SIDE[T.placedSide];
 	return /* @__PURE__ */ jsx("span", {
 		ref: T.onArrowChange,
@@ -1819,8 +1819,8 @@ function getSideAndAlignFromPlacement(m) {
 	let [x, S = "center"] = m.split("-");
 	return [x, S];
 }
-var Root2$1 = Popper, Anchor = PopperAnchor, Content = PopperContent, Arrow = PopperArrow, PORTAL_NAME$1 = "Portal", Portal = React.forwardRef((x, S) => {
-	let { container: C, ...T } = x, [D, O] = React.useState(!1);
+var Root2$1 = Popper, Anchor = PopperAnchor, Content = PopperContent, Arrow$2 = PopperArrow, PORTAL_NAME$1 = "Portal", Portal = React$1.forwardRef((x, S) => {
+	let { container: C, ...T } = x, [D, O] = React$1.useState(!1);
 	useLayoutEffect2(() => O(!0), []);
 	let k = C || D && globalThis?.document?.body;
 	return k ? ReactDOM.createPortal(/* @__PURE__ */ jsx(Primitive.div, {
@@ -1829,15 +1829,15 @@ var Root2$1 = Popper, Anchor = PopperAnchor, Content = PopperContent, Arrow = Po
 	}), k) : null;
 });
 Portal.displayName = PORTAL_NAME$1;
-var useInsertionEffect$1 = React.useInsertionEffect || useLayoutEffect2;
+var useInsertionEffect$1 = React$1.useInsertionEffect || useLayoutEffect2;
 function useControllableState({ prop: x, defaultProp: S, onChange: C = () => {}, caller: T }) {
 	let [D, O, k] = useUncontrolledState({
 		defaultProp: S,
 		onChange: C
 	}), A = x !== void 0, j = A ? x : D;
 	{
-		let S = React.useRef(x !== void 0);
-		React.useEffect(() => {
+		let S = React$1.useRef(x !== void 0);
+		React$1.useEffect(() => {
 			let m = S.current;
 			if (m !== A) {
 				let x = m ? "controlled" : "uncontrolled", S = A ? "controlled" : "uncontrolled";
@@ -1846,7 +1846,7 @@ function useControllableState({ prop: x, defaultProp: S, onChange: C = () => {},
 			S.current = A;
 		}, [A, T]);
 	}
-	return [j, React.useCallback((m) => {
+	return [j, React$1.useCallback((m) => {
 		if (A) {
 			let S = isFunction(m) ? m(x) : m;
 			S !== x && k.current?.(S);
@@ -1859,10 +1859,10 @@ function useControllableState({ prop: x, defaultProp: S, onChange: C = () => {},
 	])];
 }
 function useUncontrolledState({ defaultProp: x, onChange: S }) {
-	let [C, T] = React.useState(x), D = React.useRef(C), O = React.useRef(S);
+	let [C, T] = React$1.useState(x), D = React$1.useRef(C), O = React$1.useRef(S);
 	return useInsertionEffect$1(() => {
 		O.current = S;
-	}, [S]), React.useEffect(() => {
+	}, [S]), React$1.useEffect(() => {
 		D.current !== C && (O.current?.(C), D.current = C);
 	}, [C, D]), [
 		C,
@@ -1874,11 +1874,11 @@ function isFunction(m) {
 	return typeof m == "function";
 }
 function usePrevious(x) {
-	let S = React.useRef({
+	let S = React$1.useRef({
 		value: x,
 		previous: x
 	});
-	return React.useMemo(() => (S.current.value !== x && (S.current.previous = S.current.value, S.current.value = x), S.current.previous), [x]);
+	return React$1.useMemo(() => (S.current.value !== x && (S.current.previous = S.current.value, S.current.value = x), S.current.previous), [x]);
 }
 var VISUALLY_HIDDEN_STYLES = Object.freeze({
 	position: "absolute",
@@ -1891,7 +1891,7 @@ var VISUALLY_HIDDEN_STYLES = Object.freeze({
 	clip: "rect(0, 0, 0, 0)",
 	whiteSpace: "nowrap",
 	wordWrap: "normal"
-}), NAME = "VisuallyHidden", VisuallyHidden = React.forwardRef((m, x) => /* @__PURE__ */ jsx(Primitive.span, {
+}), NAME = "VisuallyHidden", VisuallyHidden = React$1.forwardRef((m, x) => /* @__PURE__ */ jsx(Primitive.span, {
 	...m,
 	ref: x,
 	style: {
@@ -1980,14 +1980,14 @@ function useCallbackRef$1(m, x) {
 	})[0];
 	return S.callback = x, S.facade;
 }
-var useIsomorphicLayoutEffect$2 = typeof window < "u" ? React.useLayoutEffect : React.useEffect, currentValues = /* @__PURE__ */ new WeakMap();
+var useIsomorphicLayoutEffect$3 = typeof window < "u" ? React$1.useLayoutEffect : React$1.useEffect, currentValues = /* @__PURE__ */ new WeakMap();
 function useMergeRefs(m, x) {
 	var S = useCallbackRef$1(x || null, function(x) {
 		return m.forEach(function(m) {
 			return assignRef$1(m, x);
 		});
 	});
-	return useIsomorphicLayoutEffect$2(function() {
+	return useIsomorphicLayoutEffect$3(function() {
 		var x = currentValues.get(S);
 		if (x) {
 			var C = new Set(x), T = new Set(m), D = S.current;
@@ -2070,14 +2070,14 @@ var SideCar = function(x) {
 	if (!S) throw Error("Sidecar: please provide `sideCar` property to import the right car");
 	var T = S.read();
 	if (!T) throw Error("Sidecar medium not found");
-	return React.createElement(T, __assign({}, C));
+	return React$1.createElement(T, __assign({}, C));
 };
 SideCar.isSideCarExport = !0;
 function exportSidecar(m, x) {
 	return m.useMedium(x), SideCar;
 }
-var effectCar = createSidecarMedium(), nothing = function() {}, RemoveScroll = React.forwardRef(function(x, S) {
-	var C = React.useRef(null), T = React.useState({
+var effectCar = createSidecarMedium(), nothing = function() {}, RemoveScroll = React$1.forwardRef(function(x, S) {
+	var C = React$1.useRef(null), T = React$1.useState({
 		onScrollCapture: nothing,
 		onWheelCapture: nothing,
 		onTouchMoveCapture: nothing
@@ -2096,7 +2096,7 @@ var effectCar = createSidecarMedium(), nothing = function() {}, RemoveScroll = R
 		"as",
 		"gapMode"
 	]), G = F, K = useMergeRefs([C, S]), q = __assign(__assign({}, W), D);
-	return React.createElement(React.Fragment, null, N && React.createElement(G, {
+	return React$1.createElement(React$1.Fragment, null, N && React$1.createElement(G, {
 		sideCar: effectCar,
 		removeScrollBar: M,
 		shards: P,
@@ -2107,7 +2107,7 @@ var effectCar = createSidecarMedium(), nothing = function() {}, RemoveScroll = R
 		allowPinchZoom: !!z,
 		lockRef: C,
 		gapMode: U
-	}), k ? React.cloneElement(React.Children.only(A), __assign(__assign({}, q), { ref: K })) : React.createElement(H, __assign({}, q, {
+	}), k ? React$1.cloneElement(React$1.Children.only(A), __assign(__assign({}, q), { ref: K })) : React$1.createElement(H, __assign({}, q, {
 		className: j,
 		ref: K
 	}), A));
@@ -2150,7 +2150,7 @@ var stylesheetSingleton = function() {
 }, styleHookSingleton = function() {
 	var x = stylesheetSingleton();
 	return function(S, C) {
-		React.useEffect(function() {
+		React$1.useEffect(function() {
 			return x.add(S), function() {
 				x.remove();
 			};
@@ -2233,7 +2233,7 @@ var stylesheetSingleton = function() {
 	var m = parseInt(document.body.getAttribute("data-scroll-locked") || "0", 10);
 	return isFinite(m) ? m : 0;
 }, useLockAttribute = function() {
-	React.useEffect(function() {
+	React$1.useEffect(function() {
 		return document.body.setAttribute(lockAttribute, (getCurrentUseCounter() + 1).toString()), function() {
 			var m = getCurrentUseCounter() - 1;
 			m <= 0 ? document.body.removeAttribute(lockAttribute) : document.body.setAttribute(lockAttribute, m.toString());
@@ -2242,10 +2242,10 @@ var stylesheetSingleton = function() {
 }, RemoveScrollBar = function(x) {
 	var S = x.noRelative, C = x.noImportant, T = x.gapMode, D = T === void 0 ? "margin" : T;
 	useLockAttribute();
-	var O = React.useMemo(function() {
+	var O = React$1.useMemo(function() {
 		return getGapWidth(D);
 	}, [D]);
-	return React.createElement(Style, { styles: getStyles$1(O, !S, D, C ? "" : "!important") });
+	return React$1.createElement(Style, { styles: getStyles$1(O, !S, D, C ? "" : "!important") });
 }, passiveSupported = !1;
 if (typeof window < "u") try {
 	var options$1 = Object.defineProperty({}, "passive", { get: function() {
@@ -2318,10 +2318,10 @@ var nonPassive = passiveSupported ? { passive: !1 } : !1, alwaysContainsScroll =
 `;
 }, idCounter = 0, lockStack = [];
 function RemoveScrollSideCar(x) {
-	var S = React.useRef([]), C = React.useRef([0, 0]), T = React.useRef(), D = React.useState(idCounter++)[0], O = React.useState(styleSingleton)[0], k = React.useRef(x);
-	React.useEffect(function() {
+	var S = React$1.useRef([]), C = React$1.useRef([0, 0]), T = React$1.useRef(), D = React$1.useState(idCounter++)[0], O = React$1.useState(styleSingleton)[0], k = React$1.useRef(x);
+	React$1.useEffect(function() {
 		k.current = x;
-	}, [x]), React.useEffect(function() {
+	}, [x]), React$1.useEffect(function() {
 		if (x.inert) {
 			document.body.classList.add(`block-interactivity-${D}`);
 			var m = __spreadArray([x.lockRef.current], (x.shards || []).map(extractRef), !0).filter(Boolean);
@@ -2338,7 +2338,7 @@ function RemoveScrollSideCar(x) {
 		x.lockRef.current,
 		x.shards
 	]);
-	var A = React.useCallback(function(m, x) {
+	var A = React$1.useCallback(function(m, x) {
 		if ("touches" in m && m.touches.length === 2 || m.type === "wheel" && m.ctrlKey) return !k.current.allowPinchZoom;
 		var S = getTouchXY(m), D = C.current, O = "deltaX" in m ? m.deltaX : D[0] - S[0], A = "deltaY" in m ? m.deltaY : D[1] - S[1], j, M = m.target, N = Math.abs(O) > Math.abs(A) ? "h" : "v";
 		if ("touches" in m && N === "h" && M.type === "range") return !1;
@@ -2350,7 +2350,7 @@ function RemoveScrollSideCar(x) {
 		if (!T.current && "changedTouches" in m && (O || A) && (T.current = j), !j) return !0;
 		var L = T.current || j;
 		return handleScroll(L, x, m, L === "h" ? O : A, !0);
-	}, []), j = React.useCallback(function(m) {
+	}, []), j = React$1.useCallback(function(m) {
 		var x = m;
 		if (!(!lockStack.length || lockStack[lockStack.length - 1] !== O)) {
 			var C = "deltaY" in x ? getDeltaXY(x) : getTouchXY(x), T = S.current.filter(function(m) {
@@ -2367,7 +2367,7 @@ function RemoveScrollSideCar(x) {
 				(D.length > 0 ? A(x, D[0]) : !k.current.noIsolation) && x.cancelable && x.preventDefault();
 			}
 		}
-	}, []), M = React.useCallback(function(m, x, C, T) {
+	}, []), M = React$1.useCallback(function(m, x, C, T) {
 		var D = {
 			name: m,
 			delta: x,
@@ -2380,14 +2380,14 @@ function RemoveScrollSideCar(x) {
 				return m !== D;
 			});
 		}, 1);
-	}, []), N = React.useCallback(function(m) {
+	}, []), N = React$1.useCallback(function(m) {
 		C.current = getTouchXY(m), T.current = void 0;
-	}, []), P = React.useCallback(function(m) {
+	}, []), P = React$1.useCallback(function(m) {
 		M(m.type, getDeltaXY(m), m.target, A(m, x.lockRef.current));
-	}, []), F = React.useCallback(function(m) {
+	}, []), F = React$1.useCallback(function(m) {
 		M(m.type, getTouchXY(m), m.target, A(m, x.lockRef.current));
 	}, []);
-	React.useEffect(function() {
+	React$1.useEffect(function() {
 		return lockStack.push(O), x.setCallbacks({
 			onScrollCapture: P,
 			onWheelCapture: P,
@@ -2399,7 +2399,7 @@ function RemoveScrollSideCar(x) {
 		};
 	}, []);
 	var I = x.removeScrollBar, L = x.inert;
-	return React.createElement(React.Fragment, null, L ? React.createElement(O, { styles: generateStyle(D) }) : null, I ? React.createElement(RemoveScrollBar, {
+	return React$1.createElement(React$1.Fragment, null, L ? React$1.createElement(O, { styles: generateStyle(D) }) : null, I ? React$1.createElement(RemoveScrollBar, {
 		noRelative: x.noRelative,
 		gapMode: x.gapMode
 	}) : null);
@@ -2408,8 +2408,8 @@ function getOutermostShadowParent(m) {
 	for (var x = null; m !== null;) m instanceof ShadowRoot && (x = m.host, m = m.host), m = m.parentNode;
 	return x;
 }
-var sidecar_default = exportSidecar(effectCar, RemoveScrollSideCar), ReactRemoveScroll = React.forwardRef(function(x, S) {
-	return React.createElement(RemoveScroll, __assign({}, x, {
+var sidecar_default = exportSidecar(effectCar, RemoveScrollSideCar), ReactRemoveScroll = React$1.forwardRef(function(x, S) {
+	return React$1.createElement(RemoveScroll, __assign({}, x, {
 		ref: S,
 		sideCar: sidecar_default
 	}));
@@ -2421,7 +2421,7 @@ var Combination_default = ReactRemoveScroll, OPEN_KEYS = [
 	"ArrowUp",
 	"ArrowDown"
 ], SELECTION_KEYS = [" ", "Enter"], SELECT_NAME = "Select", [Collection, useCollection, createCollectionScope] = createCollection(SELECT_NAME), [createSelectContext, createSelectScope] = createContextScope(SELECT_NAME, [createCollectionScope, createPopperScope]), usePopperScope = createPopperScope(), [SelectProvider, useSelectContext] = createSelectContext(SELECT_NAME), [SelectNativeOptionsProvider, useSelectNativeOptionsContext] = createSelectContext(SELECT_NAME), Select$1 = (x) => {
-	let { __scopeSelect: S, children: C, open: T, defaultOpen: D, onOpenChange: O, value: k, defaultValue: A, onValueChange: j, dir: M, name: N, autoComplete: P, disabled: F, required: I, form: L } = x, R = usePopperScope(S), [z, B] = React.useState(null), [H, U] = React.useState(null), [W, G] = React.useState(!1), K = useDirection(M), [q, J] = useControllableState({
+	let { __scopeSelect: S, children: C, open: T, defaultOpen: D, onOpenChange: O, value: k, defaultValue: A, onValueChange: j, dir: M, name: N, autoComplete: P, disabled: F, required: I, form: L } = x, R = usePopperScope(S), [z, B] = React$1.useState(null), [H, U] = React$1.useState(null), [W, G] = React$1.useState(!1), K = useDirection(M), [q, J] = useControllableState({
 		prop: T,
 		defaultProp: D ?? !1,
 		onChange: O,
@@ -2431,7 +2431,7 @@ var Combination_default = ReactRemoveScroll, OPEN_KEYS = [
 		defaultProp: A,
 		onChange: j,
 		caller: SELECT_NAME
-	}), Z = React.useRef(null), Q = z ? L || !!z.closest("form") : !0, [FR, IR] = React.useState(/* @__PURE__ */ new Set()), LR = Array.from(FR).map((m) => m.props.value).join(";");
+	}), Z = React$1.useRef(null), Q = z ? L || !!z.closest("form") : !0, [BV, VV] = React$1.useState(/* @__PURE__ */ new Set()), HV = Array.from(BV).map((m) => m.props.value).join(";");
 	return /* @__PURE__ */ jsx(Root2$1, {
 		...R,
 		children: /* @__PURE__ */ jsxs(SelectProvider, {
@@ -2455,11 +2455,11 @@ var Combination_default = ReactRemoveScroll, OPEN_KEYS = [
 				scope: S,
 				children: /* @__PURE__ */ jsx(SelectNativeOptionsProvider, {
 					scope: x.__scopeSelect,
-					onNativeOptionAdd: React.useCallback((m) => {
-						IR((x) => new Set(x).add(m));
+					onNativeOptionAdd: React$1.useCallback((m) => {
+						VV((x) => new Set(x).add(m));
 					}, []),
-					onNativeOptionRemove: React.useCallback((m) => {
-						IR((x) => {
+					onNativeOptionRemove: React$1.useCallback((m) => {
+						VV((x) => {
 							let S = new Set(x);
 							return S.delete(m), S;
 						});
@@ -2476,14 +2476,14 @@ var Combination_default = ReactRemoveScroll, OPEN_KEYS = [
 				onChange: (m) => X(m.target.value),
 				disabled: F,
 				form: L,
-				children: [Y === void 0 ? /* @__PURE__ */ jsx("option", { value: "" }) : null, Array.from(FR)]
-			}, LR) : null]
+				children: [Y === void 0 ? /* @__PURE__ */ jsx("option", { value: "" }) : null, Array.from(BV)]
+			}, HV) : null]
 		})
 	});
 };
 Select$1.displayName = SELECT_NAME;
-var TRIGGER_NAME = "SelectTrigger", SelectTrigger$1 = React.forwardRef((x, S) => {
-	let { __scopeSelect: C, disabled: T = !1, ...D } = x, O = usePopperScope(C), k = useSelectContext(TRIGGER_NAME, C), A = k.disabled || T, j = useComposedRefs(S, k.onTriggerChange), M = useCollection(C), N = React.useRef("touch"), [P, F, I] = useTypeaheadSearch((m) => {
+var TRIGGER_NAME = "SelectTrigger", SelectTrigger$1 = React$1.forwardRef((x, S) => {
+	let { __scopeSelect: C, disabled: T = !1, ...D } = x, O = usePopperScope(C), k = useSelectContext(TRIGGER_NAME, C), A = k.disabled || T, j = useComposedRefs(S, k.onTriggerChange), M = useCollection(C), N = React$1.useRef("touch"), [P, F, I] = useTypeaheadSearch((m) => {
 		let x = M().filter((m) => !m.disabled), S = findNextItem(x, m, x.find((m) => m.value === k.value));
 		S !== void 0 && k.onValueChange(S.value);
 	}), L = (m) => {
@@ -2525,7 +2525,7 @@ var TRIGGER_NAME = "SelectTrigger", SelectTrigger$1 = React.forwardRef((x, S) =>
 	});
 });
 SelectTrigger$1.displayName = TRIGGER_NAME;
-var VALUE_NAME = "SelectValue", SelectValue$1 = React.forwardRef((m, x) => {
+var VALUE_NAME = "SelectValue", SelectValue$1 = React$1.forwardRef((m, x) => {
 	let { __scopeSelect: S, className: C, style: T, children: D, placeholder: O = "", ...k } = m, A = useSelectContext(VALUE_NAME, S), { onValueNodeHasChildrenChange: j } = A, M = D !== void 0, N = useComposedRefs(x, A.onValueNodeChange);
 	return useLayoutEffect2(() => {
 		j(M);
@@ -2537,7 +2537,7 @@ var VALUE_NAME = "SelectValue", SelectValue$1 = React.forwardRef((m, x) => {
 	});
 });
 SelectValue$1.displayName = VALUE_NAME;
-var ICON_NAME = "SelectIcon", SelectIcon = React.forwardRef((m, x) => {
+var ICON_NAME = "SelectIcon", SelectIcon = React$1.forwardRef((m, x) => {
 	let { __scopeSelect: S, children: C, ...T } = m;
 	return /* @__PURE__ */ jsx(Primitive.span, {
 		"aria-hidden": !0,
@@ -2552,8 +2552,8 @@ var PORTAL_NAME = "SelectPortal", SelectPortal = (m) => /* @__PURE__ */ jsx(Port
 	...m
 });
 SelectPortal.displayName = PORTAL_NAME;
-var CONTENT_NAME = "SelectContent", SelectContent$1 = React.forwardRef((x, S) => {
-	let C = useSelectContext(CONTENT_NAME, x.__scopeSelect), [T, D] = React.useState();
+var CONTENT_NAME = "SelectContent", SelectContent$1 = React$1.forwardRef((x, S) => {
+	let C = useSelectContext(CONTENT_NAME, x.__scopeSelect), [T, D] = React$1.useState();
 	if (useLayoutEffect2(() => {
 		D(new DocumentFragment());
 	}, []), !C.open) {
@@ -2572,37 +2572,37 @@ var CONTENT_NAME = "SelectContent", SelectContent$1 = React.forwardRef((x, S) =>
 	});
 });
 SelectContent$1.displayName = CONTENT_NAME;
-var CONTENT_MARGIN = 10, [SelectContentProvider, useSelectContentContext] = createSelectContext(CONTENT_NAME), CONTENT_IMPL_NAME = "SelectContentImpl", Slot = /* @__PURE__ */ createSlot("SelectContent.RemoveScroll"), SelectContentImpl = React.forwardRef((x, S) => {
-	let { __scopeSelect: C, position: T = "item-aligned", onCloseAutoFocus: D, onEscapeKeyDown: O, onPointerDownOutside: k, side: A, sideOffset: j, align: M, alignOffset: N, arrowPadding: P, collisionBoundary: F, collisionPadding: I, sticky: L, hideWhenDetached: R, avoidCollisions: z, ...B } = x, H = useSelectContext(CONTENT_NAME, C), [U, W] = React.useState(null), [G, K] = React.useState(null), q = useComposedRefs(S, (m) => W(m)), [J, PR] = React.useState(null), [Y, X] = React.useState(null), Z = useCollection(C), [Q, FR] = React.useState(!1), IR = React.useRef(!1);
-	React.useEffect(() => {
+var CONTENT_MARGIN = 10, [SelectContentProvider, useSelectContentContext] = createSelectContext(CONTENT_NAME), CONTENT_IMPL_NAME = "SelectContentImpl", Slot = /* @__PURE__ */ createSlot("SelectContent.RemoveScroll"), SelectContentImpl = React$1.forwardRef((x, S) => {
+	let { __scopeSelect: C, position: T = "item-aligned", onCloseAutoFocus: D, onEscapeKeyDown: O, onPointerDownOutside: k, side: A, sideOffset: j, align: M, alignOffset: N, arrowPadding: P, collisionBoundary: F, collisionPadding: I, sticky: L, hideWhenDetached: R, avoidCollisions: z, ...B } = x, H = useSelectContext(CONTENT_NAME, C), [U, W] = React$1.useState(null), [G, K] = React$1.useState(null), q = useComposedRefs(S, (m) => W(m)), [J, zV] = React$1.useState(null), [Y, X] = React$1.useState(null), Z = useCollection(C), [Q, BV] = React$1.useState(!1), VV = React$1.useRef(!1);
+	React$1.useEffect(() => {
 		if (U) return hideOthers(U);
 	}, [U]), useFocusGuards();
-	let LR = React.useCallback((m) => {
+	let HV = React$1.useCallback((m) => {
 		let [x, ...S] = Z().map((m) => m.ref.current), [C] = S.slice(-1), T = document.activeElement;
 		for (let S of m) if (S === T || (S?.scrollIntoView({ block: "nearest" }), S === x && G && (G.scrollTop = 0), S === C && G && (G.scrollTop = G.scrollHeight), S?.focus(), document.activeElement !== T)) return;
-	}, [Z, G]), RR = React.useCallback(() => LR([J, U]), [
-		LR,
+	}, [Z, G]), UV = React$1.useCallback(() => HV([J, U]), [
+		HV,
 		J,
 		U
 	]);
-	React.useEffect(() => {
-		Q && RR();
-	}, [Q, RR]);
-	let { onOpenChange: zR, triggerPointerDownPosRef: BR } = H;
-	React.useEffect(() => {
+	React$1.useEffect(() => {
+		Q && UV();
+	}, [Q, UV]);
+	let { onOpenChange: WV, triggerPointerDownPosRef: GV } = H;
+	React$1.useEffect(() => {
 		if (U) {
 			let m = {
 				x: 0,
 				y: 0
 			}, x = (x) => {
 				m = {
-					x: Math.abs(Math.round(x.pageX) - (BR.current?.x ?? 0)),
-					y: Math.abs(Math.round(x.pageY) - (BR.current?.y ?? 0))
+					x: Math.abs(Math.round(x.pageX) - (GV.current?.x ?? 0)),
+					y: Math.abs(Math.round(x.pageY) - (GV.current?.y ?? 0))
 				};
 			}, S = (S) => {
-				m.x <= 10 && m.y <= 10 ? S.preventDefault() : U.contains(S.target) || zR(!1), document.removeEventListener("pointermove", x), BR.current = null;
+				m.x <= 10 && m.y <= 10 ? S.preventDefault() : U.contains(S.target) || WV(!1), document.removeEventListener("pointermove", x), GV.current = null;
 			};
-			return BR.current !== null && (document.addEventListener("pointermove", x), document.addEventListener("pointerup", S, {
+			return GV.current !== null && (document.addEventListener("pointermove", x), document.addEventListener("pointerup", S, {
 				capture: !0,
 				once: !0
 			})), () => {
@@ -2611,24 +2611,24 @@ var CONTENT_MARGIN = 10, [SelectContentProvider, useSelectContentContext] = crea
 		}
 	}, [
 		U,
-		zR,
-		BR
-	]), React.useEffect(() => {
-		let m = () => zR(!1);
+		WV,
+		GV
+	]), React$1.useEffect(() => {
+		let m = () => WV(!1);
 		return window.addEventListener("blur", m), window.addEventListener("resize", m), () => {
 			window.removeEventListener("blur", m), window.removeEventListener("resize", m);
 		};
-	}, [zR]);
-	let [VR, HR] = useTypeaheadSearch((m) => {
+	}, [WV]);
+	let [KV, qV] = useTypeaheadSearch((m) => {
 		let x = Z().filter((m) => !m.disabled), S = findNextItem(x, m, x.find((m) => m.ref.current === document.activeElement));
 		S && setTimeout(() => S.ref.current.focus());
-	}), $ = React.useCallback((m, x, S) => {
-		let C = !IR.current && !S;
-		(H.value !== void 0 && H.value === x || C) && (PR(m), C && (IR.current = !0));
-	}, [H.value]), UR = React.useCallback(() => U?.focus(), [U]), GR = React.useCallback((m, x, S) => {
-		let C = !IR.current && !S;
+	}), $ = React$1.useCallback((m, x, S) => {
+		let C = !VV.current && !S;
+		(H.value !== void 0 && H.value === x || C) && (zV(m), C && (VV.current = !0));
+	}, [H.value]), JV = React$1.useCallback(() => U?.focus(), [U]), XV = React$1.useCallback((m, x, S) => {
+		let C = !VV.current && !S;
 		(H.value !== void 0 && H.value === x || C) && X(m);
-	}, [H.value]), KR = T === "popper" ? SelectPopperPosition : SelectItemAlignedPosition, qR = KR === SelectPopperPosition ? {
+	}, [H.value]), ZV = T === "popper" ? SelectPopperPosition : SelectItemAlignedPosition, QV = ZV === SelectPopperPosition ? {
 		side: A,
 		sideOffset: j,
 		align: M,
@@ -2647,13 +2647,13 @@ var CONTENT_MARGIN = 10, [SelectContentProvider, useSelectContentContext] = crea
 		onViewportChange: K,
 		itemRefCallback: $,
 		selectedItem: J,
-		onItemLeave: UR,
-		itemTextRefCallback: GR,
-		focusSelectedItem: RR,
+		onItemLeave: JV,
+		itemTextRefCallback: XV,
+		focusSelectedItem: UV,
 		selectedItemText: Y,
 		position: T,
 		isPositioned: Q,
-		searchRef: VR,
+		searchRef: KV,
 		children: /* @__PURE__ */ jsx(Combination_default, {
 			as: Slot,
 			allowPinchZoom: !0,
@@ -2673,15 +2673,15 @@ var CONTENT_MARGIN = 10, [SelectContentProvider, useSelectContentContext] = crea
 					onPointerDownOutside: k,
 					onFocusOutside: (m) => m.preventDefault(),
 					onDismiss: () => H.onOpenChange(!1),
-					children: /* @__PURE__ */ jsx(KR, {
+					children: /* @__PURE__ */ jsx(ZV, {
 						role: "listbox",
 						id: H.contentId,
 						"data-state": H.open ? "open" : "closed",
 						dir: H.dir,
 						onContextMenu: (m) => m.preventDefault(),
 						...B,
-						...qR,
-						onPlaced: () => FR(!0),
+						...QV,
+						onPlaced: () => BV(!0),
 						ref: q,
 						style: {
 							display: "flex",
@@ -2691,7 +2691,7 @@ var CONTENT_MARGIN = 10, [SelectContentProvider, useSelectContentContext] = crea
 						},
 						onKeyDown: composeEventHandlers(B.onKeyDown, (m) => {
 							let x = m.ctrlKey || m.altKey || m.metaKey;
-							if (m.key === "Tab" && m.preventDefault(), !x && m.key.length === 1 && HR(m.key), [
+							if (m.key === "Tab" && m.preventDefault(), !x && m.key.length === 1 && qV(m.key), [
 								"ArrowUp",
 								"ArrowDown",
 								"Home",
@@ -2702,7 +2702,7 @@ var CONTENT_MARGIN = 10, [SelectContentProvider, useSelectContentContext] = crea
 									let S = m.target, C = x.indexOf(S);
 									x = x.slice(C + 1);
 								}
-								setTimeout(() => LR(x)), m.preventDefault();
+								setTimeout(() => HV(x)), m.preventDefault();
 							}
 						})
 					})
@@ -2712,8 +2712,8 @@ var CONTENT_MARGIN = 10, [SelectContentProvider, useSelectContentContext] = crea
 	});
 });
 SelectContentImpl.displayName = CONTENT_IMPL_NAME;
-var ITEM_ALIGNED_POSITION_NAME = "SelectItemAlignedPosition", SelectItemAlignedPosition = React.forwardRef((x, S) => {
-	let { __scopeSelect: C, onPlaced: T, ...D } = x, O = useSelectContext(CONTENT_NAME, C), k = useSelectContentContext(CONTENT_NAME, C), [A, j] = React.useState(null), [M, N] = React.useState(null), P = useComposedRefs(S, (m) => N(m)), F = useCollection(C), I = React.useRef(!1), L = React.useRef(!0), { viewport: R, selectedItem: z, selectedItemText: B, focusSelectedItem: H } = k, U = React.useCallback(() => {
+var ITEM_ALIGNED_POSITION_NAME = "SelectItemAlignedPosition", SelectItemAlignedPosition = React$1.forwardRef((x, S) => {
+	let { __scopeSelect: C, onPlaced: T, ...D } = x, O = useSelectContext(CONTENT_NAME, C), k = useSelectContentContext(CONTENT_NAME, C), [A, j] = React$1.useState(null), [M, N] = React$1.useState(null), P = useComposedRefs(S, (m) => N(m)), F = useCollection(C), I = React$1.useRef(!1), L = React$1.useRef(!0), { viewport: R, selectedItem: z, selectedItemText: B, focusSelectedItem: H } = k, U = React$1.useCallback(() => {
 		if (O.trigger && O.valueNode && A && M && R && z && B) {
 			let m = O.trigger.getBoundingClientRect(), x = M.getBoundingClientRect(), S = O.valueNode.getBoundingClientRect(), C = B.getBoundingClientRect();
 			if (O.dir !== "rtl") {
@@ -2723,17 +2723,17 @@ var ITEM_ALIGNED_POSITION_NAME = "SelectItemAlignedPosition", SelectItemAlignedP
 				let T = x.right - C.right, D = window.innerWidth - S.right - T, O = window.innerWidth - m.right - D, k = m.width + O, j = Math.max(k, x.width), M = window.innerWidth - CONTENT_MARGIN, N = clamp$2(D, [CONTENT_MARGIN, Math.max(CONTENT_MARGIN, M - j)]);
 				A.style.minWidth = k + "px", A.style.right = N + "px";
 			}
-			let D = F(), k = window.innerHeight - CONTENT_MARGIN * 2, j = R.scrollHeight, N = window.getComputedStyle(M), P = parseInt(N.borderTopWidth, 10), L = parseInt(N.paddingTop, 10), H = parseInt(N.borderBottomWidth, 10), U = parseInt(N.paddingBottom, 10), W = P + L + j + U + H, G = Math.min(z.offsetHeight * 5, W), K = window.getComputedStyle(R), q = parseInt(K.paddingTop, 10), J = parseInt(K.paddingBottom, 10), NR = m.top + m.height / 2 - CONTENT_MARGIN, PR = k - NR, Y = z.offsetHeight / 2, X = z.offsetTop + Y, Z = P + L + X, Q = W - Z;
-			if (Z <= NR) {
+			let D = F(), k = window.innerHeight - CONTENT_MARGIN * 2, j = R.scrollHeight, N = window.getComputedStyle(M), P = parseInt(N.borderTopWidth, 10), L = parseInt(N.paddingTop, 10), H = parseInt(N.borderBottomWidth, 10), U = parseInt(N.paddingBottom, 10), W = P + L + j + U + H, G = Math.min(z.offsetHeight * 5, W), K = window.getComputedStyle(R), q = parseInt(K.paddingTop, 10), J = parseInt(K.paddingBottom, 10), RV = m.top + m.height / 2 - CONTENT_MARGIN, zV = k - RV, Y = z.offsetHeight / 2, X = z.offsetTop + Y, Z = P + L + X, Q = W - Z;
+			if (Z <= RV) {
 				let m = D.length > 0 && z === D[D.length - 1].ref.current;
 				A.style.bottom = "0px";
-				let x = M.clientHeight - R.offsetTop - R.offsetHeight, S = Z + Math.max(PR, Y + (m ? J : 0) + x + H);
+				let x = M.clientHeight - R.offsetTop - R.offsetHeight, S = Z + Math.max(zV, Y + (m ? J : 0) + x + H);
 				A.style.height = S + "px";
 			} else {
 				let m = D.length > 0 && z === D[0].ref.current;
 				A.style.top = "0px";
-				let x = Math.max(NR, P + R.offsetTop + (m ? q : 0) + Y) + Q;
-				A.style.height = x + "px", R.scrollTop = Z - NR + R.offsetTop;
+				let x = Math.max(RV, P + R.offsetTop + (m ? q : 0) + Y) + Q;
+				A.style.height = x + "px", R.scrollTop = Z - RV + R.offsetTop;
 			}
 			A.style.margin = `${CONTENT_MARGIN}px 0`, A.style.minHeight = G + "px", A.style.maxHeight = k + "px", T?.(), requestAnimationFrame(() => I.current = !0);
 		}
@@ -2750,14 +2750,14 @@ var ITEM_ALIGNED_POSITION_NAME = "SelectItemAlignedPosition", SelectItemAlignedP
 		T
 	]);
 	useLayoutEffect2(() => U(), [U]);
-	let [W, G] = React.useState();
+	let [W, G] = React$1.useState();
 	return useLayoutEffect2(() => {
 		M && G(window.getComputedStyle(M).zIndex);
 	}, [M]), /* @__PURE__ */ jsx(SelectViewportProvider, {
 		scope: C,
 		contentWrapper: A,
 		shouldExpandOnScrollRef: I,
-		onScrollButtonChange: React.useCallback((m) => {
+		onScrollButtonChange: React$1.useCallback((m) => {
 			m && L.current === !0 && (U(), H?.(), L.current = !1);
 		}, [U, H]),
 		children: /* @__PURE__ */ jsx("div", {
@@ -2781,7 +2781,7 @@ var ITEM_ALIGNED_POSITION_NAME = "SelectItemAlignedPosition", SelectItemAlignedP
 	});
 });
 SelectItemAlignedPosition.displayName = ITEM_ALIGNED_POSITION_NAME;
-var POPPER_POSITION_NAME = "SelectPopperPosition", SelectPopperPosition = React.forwardRef((m, x) => {
+var POPPER_POSITION_NAME = "SelectPopperPosition", SelectPopperPosition = React$1.forwardRef((m, x) => {
 	let { __scopeSelect: S, align: C = "start", collisionPadding: T = CONTENT_MARGIN, ...D } = m;
 	return /* @__PURE__ */ jsx(Content, {
 		...usePopperScope(S),
@@ -2801,8 +2801,8 @@ var POPPER_POSITION_NAME = "SelectPopperPosition", SelectPopperPosition = React.
 	});
 });
 SelectPopperPosition.displayName = POPPER_POSITION_NAME;
-var [SelectViewportProvider, useSelectViewportContext] = createSelectContext(CONTENT_NAME, {}), VIEWPORT_NAME = "SelectViewport", SelectViewport = React.forwardRef((x, S) => {
-	let { __scopeSelect: C, nonce: T, ...D } = x, O = useSelectContentContext(VIEWPORT_NAME, C), k = useSelectViewportContext(VIEWPORT_NAME, C), A = useComposedRefs(S, O.onViewportChange), j = React.useRef(0);
+var [SelectViewportProvider, useSelectViewportContext] = createSelectContext(CONTENT_NAME, {}), VIEWPORT_NAME = "SelectViewport", SelectViewport = React$1.forwardRef((x, S) => {
+	let { __scopeSelect: C, nonce: T, ...D } = x, O = useSelectContentContext(VIEWPORT_NAME, C), k = useSelectViewportContext(VIEWPORT_NAME, C), A = useComposedRefs(S, O.onViewportChange), j = React$1.useRef(0);
 	return /* @__PURE__ */ jsxs(Fragment$1, { children: [/* @__PURE__ */ jsx("style", {
 		dangerouslySetInnerHTML: { __html: "[data-radix-select-viewport]{scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch;}[data-radix-select-viewport]::-webkit-scrollbar{display:none}" },
 		nonce: T
@@ -2837,7 +2837,7 @@ var [SelectViewportProvider, useSelectViewportContext] = createSelectContext(CON
 	})] });
 });
 SelectViewport.displayName = VIEWPORT_NAME;
-var GROUP_NAME = "SelectGroup", [SelectGroupContextProvider, useSelectGroupContext] = createSelectContext(GROUP_NAME), SelectGroup$1 = React.forwardRef((m, x) => {
+var GROUP_NAME = "SelectGroup", [SelectGroupContextProvider, useSelectGroupContext] = createSelectContext(GROUP_NAME), SelectGroup$1 = React$1.forwardRef((m, x) => {
 	let { __scopeSelect: S, ...C } = m, T = useId$1();
 	return /* @__PURE__ */ jsx(SelectGroupContextProvider, {
 		scope: S,
@@ -2851,7 +2851,7 @@ var GROUP_NAME = "SelectGroup", [SelectGroupContextProvider, useSelectGroupConte
 	});
 });
 SelectGroup$1.displayName = GROUP_NAME;
-var LABEL_NAME = "SelectLabel", SelectLabel$1 = React.forwardRef((m, x) => {
+var LABEL_NAME = "SelectLabel", SelectLabel$1 = React$1.forwardRef((m, x) => {
 	let { __scopeSelect: S, ...C } = m, T = useSelectGroupContext(LABEL_NAME, S);
 	return /* @__PURE__ */ jsx(Primitive.div, {
 		id: T.id,
@@ -2860,8 +2860,8 @@ var LABEL_NAME = "SelectLabel", SelectLabel$1 = React.forwardRef((m, x) => {
 	});
 });
 SelectLabel$1.displayName = LABEL_NAME;
-var ITEM_NAME = "SelectItem", [SelectItemContextProvider, useSelectItemContext] = createSelectContext(ITEM_NAME), SelectItem$1 = React.forwardRef((x, S) => {
-	let { __scopeSelect: C, value: T, disabled: D = !1, textValue: O, ...k } = x, A = useSelectContext(ITEM_NAME, C), j = useSelectContentContext(ITEM_NAME, C), M = A.value === T, [N, P] = React.useState(O ?? ""), [F, I] = React.useState(!1), L = useComposedRefs(S, (m) => j.itemRefCallback?.(m, T, D)), R = useId$1(), z = React.useRef("touch"), B = () => {
+var ITEM_NAME = "SelectItem", [SelectItemContextProvider, useSelectItemContext] = createSelectContext(ITEM_NAME), SelectItem$1 = React$1.forwardRef((x, S) => {
+	let { __scopeSelect: C, value: T, disabled: D = !1, textValue: O, ...k } = x, A = useSelectContext(ITEM_NAME, C), j = useSelectContentContext(ITEM_NAME, C), M = A.value === T, [N, P] = React$1.useState(O ?? ""), [F, I] = React$1.useState(!1), L = useComposedRefs(S, (m) => j.itemRefCallback?.(m, T, D)), R = useId$1(), z = React$1.useRef("touch"), B = () => {
 		D || (A.onValueChange(T), A.onOpenChange(!1));
 	};
 	if (T === "") throw Error("A <Select.Item /> must have a value prop that is not an empty string. This is because the Select value can be set to an empty string to clear the selection and show the placeholder.");
@@ -2871,7 +2871,7 @@ var ITEM_NAME = "SelectItem", [SelectItemContextProvider, useSelectItemContext] 
 		disabled: D,
 		textId: R,
 		isSelected: M,
-		onItemTextChange: React.useCallback((m) => {
+		onItemTextChange: React$1.useCallback((m) => {
 			P((x) => x || (m?.textContent ?? "").trim());
 		}, []),
 		children: /* @__PURE__ */ jsx(Collection.ItemSlot, {
@@ -2915,8 +2915,8 @@ var ITEM_NAME = "SelectItem", [SelectItemContextProvider, useSelectItemContext] 
 	});
 });
 SelectItem$1.displayName = ITEM_NAME;
-var ITEM_TEXT_NAME = "SelectItemText", SelectItemText = React.forwardRef((x, S) => {
-	let { __scopeSelect: C, className: T, style: D, ...O } = x, k = useSelectContext(ITEM_TEXT_NAME, C), A = useSelectContentContext(ITEM_TEXT_NAME, C), j = useSelectItemContext(ITEM_TEXT_NAME, C), M = useSelectNativeOptionsContext(ITEM_TEXT_NAME, C), [N, P] = React.useState(null), F = useComposedRefs(S, (m) => P(m), j.onItemTextChange, (m) => A.itemTextRefCallback?.(m, j.value, j.disabled)), I = N?.textContent, L = React.useMemo(() => /* @__PURE__ */ jsx("option", {
+var ITEM_TEXT_NAME = "SelectItemText", SelectItemText = React$1.forwardRef((x, S) => {
+	let { __scopeSelect: C, className: T, style: D, ...O } = x, k = useSelectContext(ITEM_TEXT_NAME, C), A = useSelectContentContext(ITEM_TEXT_NAME, C), j = useSelectItemContext(ITEM_TEXT_NAME, C), M = useSelectNativeOptionsContext(ITEM_TEXT_NAME, C), [N, P] = React$1.useState(null), F = useComposedRefs(S, (m) => P(m), j.onItemTextChange, (m) => A.itemTextRefCallback?.(m, j.value, j.disabled)), I = N?.textContent, L = React$1.useMemo(() => /* @__PURE__ */ jsx("option", {
 		value: j.value,
 		disabled: j.disabled,
 		children: I
@@ -2936,7 +2936,7 @@ var ITEM_TEXT_NAME = "SelectItemText", SelectItemText = React.forwardRef((x, S) 
 	}), j.isSelected && k.valueNode && !k.valueNodeHasChildren ? ReactDOM$1.createPortal(O.children, k.valueNode) : null] });
 });
 SelectItemText.displayName = ITEM_TEXT_NAME;
-var ITEM_INDICATOR_NAME = "SelectItemIndicator", SelectItemIndicator = React.forwardRef((m, x) => {
+var ITEM_INDICATOR_NAME = "SelectItemIndicator", SelectItemIndicator = React$1.forwardRef((m, x) => {
 	let { __scopeSelect: S, ...C } = m;
 	return useSelectItemContext(ITEM_INDICATOR_NAME, S).isSelected ? /* @__PURE__ */ jsx(Primitive.span, {
 		"aria-hidden": !0,
@@ -2945,8 +2945,8 @@ var ITEM_INDICATOR_NAME = "SelectItemIndicator", SelectItemIndicator = React.for
 	}) : null;
 });
 SelectItemIndicator.displayName = ITEM_INDICATOR_NAME;
-var SCROLL_UP_BUTTON_NAME = "SelectScrollUpButton", SelectScrollUpButton$1 = React.forwardRef((x, S) => {
-	let C = useSelectContentContext(SCROLL_UP_BUTTON_NAME, x.__scopeSelect), T = useSelectViewportContext(SCROLL_UP_BUTTON_NAME, x.__scopeSelect), [D, O] = React.useState(!1), k = useComposedRefs(S, T.onScrollButtonChange);
+var SCROLL_UP_BUTTON_NAME = "SelectScrollUpButton", SelectScrollUpButton$1 = React$1.forwardRef((x, S) => {
+	let C = useSelectContentContext(SCROLL_UP_BUTTON_NAME, x.__scopeSelect), T = useSelectViewportContext(SCROLL_UP_BUTTON_NAME, x.__scopeSelect), [D, O] = React$1.useState(!1), k = useComposedRefs(S, T.onScrollButtonChange);
 	return useLayoutEffect2(() => {
 		if (C.viewport && C.isPositioned) {
 			let m = function() {
@@ -2964,8 +2964,8 @@ var SCROLL_UP_BUTTON_NAME = "SelectScrollUpButton", SelectScrollUpButton$1 = Rea
 	}) : null;
 });
 SelectScrollUpButton$1.displayName = SCROLL_UP_BUTTON_NAME;
-var SCROLL_DOWN_BUTTON_NAME = "SelectScrollDownButton", SelectScrollDownButton$1 = React.forwardRef((x, S) => {
-	let C = useSelectContentContext(SCROLL_DOWN_BUTTON_NAME, x.__scopeSelect), T = useSelectViewportContext(SCROLL_DOWN_BUTTON_NAME, x.__scopeSelect), [D, O] = React.useState(!1), k = useComposedRefs(S, T.onScrollButtonChange);
+var SCROLL_DOWN_BUTTON_NAME = "SelectScrollDownButton", SelectScrollDownButton$1 = React$1.forwardRef((x, S) => {
+	let C = useSelectContentContext(SCROLL_DOWN_BUTTON_NAME, x.__scopeSelect), T = useSelectViewportContext(SCROLL_DOWN_BUTTON_NAME, x.__scopeSelect), [D, O] = React$1.useState(!1), k = useComposedRefs(S, T.onScrollButtonChange);
 	return useLayoutEffect2(() => {
 		if (C.viewport && C.isPositioned) {
 			let m = function() {
@@ -2984,11 +2984,11 @@ var SCROLL_DOWN_BUTTON_NAME = "SelectScrollDownButton", SelectScrollDownButton$1
 	}) : null;
 });
 SelectScrollDownButton$1.displayName = SCROLL_DOWN_BUTTON_NAME;
-var SelectScrollButtonImpl = React.forwardRef((x, S) => {
-	let { __scopeSelect: C, onAutoScroll: T, ...D } = x, O = useSelectContentContext("SelectScrollButton", C), k = React.useRef(null), A = useCollection(C), j = React.useCallback(() => {
+var SelectScrollButtonImpl = React$1.forwardRef((x, S) => {
+	let { __scopeSelect: C, onAutoScroll: T, ...D } = x, O = useSelectContentContext("SelectScrollButton", C), k = React$1.useRef(null), A = useCollection(C), j = React$1.useCallback(() => {
 		k.current !== null && (window.clearInterval(k.current), k.current = null);
 	}, []);
-	return React.useEffect(() => () => j(), [j]), useLayoutEffect2(() => {
+	return React$1.useEffect(() => () => j(), [j]), useLayoutEffect2(() => {
 		A().find((m) => m.ref.current === document.activeElement)?.ref.current?.scrollIntoView({ block: "nearest" });
 	}, [A]), /* @__PURE__ */ jsx(Primitive.div, {
 		"aria-hidden": !0,
@@ -3008,7 +3008,7 @@ var SelectScrollButtonImpl = React.forwardRef((x, S) => {
 			j();
 		})
 	});
-}), SEPARATOR_NAME = "SelectSeparator", SelectSeparator$1 = React.forwardRef((m, x) => {
+}), SEPARATOR_NAME = "SelectSeparator", SelectSeparator$1 = React$1.forwardRef((m, x) => {
 	let { __scopeSelect: S, ...C } = m;
 	return /* @__PURE__ */ jsx(Primitive.div, {
 		"aria-hidden": !0,
@@ -3017,18 +3017,18 @@ var SelectScrollButtonImpl = React.forwardRef((x, S) => {
 	});
 });
 SelectSeparator$1.displayName = SEPARATOR_NAME;
-var ARROW_NAME = "SelectArrow", SelectArrow = React.forwardRef((m, x) => {
+var ARROW_NAME = "SelectArrow", SelectArrow = React$1.forwardRef((m, x) => {
 	let { __scopeSelect: S, ...C } = m, T = usePopperScope(S), D = useSelectContext(ARROW_NAME, S), O = useSelectContentContext(ARROW_NAME, S);
-	return D.open && O.position === "popper" ? /* @__PURE__ */ jsx(Arrow, {
+	return D.open && O.position === "popper" ? /* @__PURE__ */ jsx(Arrow$2, {
 		...T,
 		...C,
 		ref: x
 	}) : null;
 });
 SelectArrow.displayName = ARROW_NAME;
-var BUBBLE_INPUT_NAME = "SelectBubbleInput", SelectBubbleInput = React.forwardRef(({ __scopeSelect: x, value: S, ...C }, T) => {
-	let D = React.useRef(null), O = useComposedRefs(T, D), k = usePrevious(S);
-	return React.useEffect(() => {
+var BUBBLE_INPUT_NAME = "SelectBubbleInput", SelectBubbleInput = React$1.forwardRef(({ __scopeSelect: x, value: S, ...C }, T) => {
+	let D = React$1.useRef(null), O = useComposedRefs(T, D), k = usePrevious(S);
+	return React$1.useEffect(() => {
 		let m = D.current;
 		if (!m) return;
 		let x = window.HTMLSelectElement.prototype, C = Object.getOwnPropertyDescriptor(x, "value").set;
@@ -3051,15 +3051,15 @@ function shouldShowPlaceholder(m) {
 	return m === "" || m === void 0;
 }
 function useTypeaheadSearch(x) {
-	let S = useCallbackRef(x), C = React.useRef(""), T = React.useRef(0), D = React.useCallback((m) => {
+	let S = useCallbackRef(x), C = React$1.useRef(""), T = React$1.useRef(0), D = React$1.useCallback((m) => {
 		let x = C.current + m;
 		S(x), (function m(x) {
 			C.current = x, window.clearTimeout(T.current), x !== "" && (T.current = window.setTimeout(() => m(""), 1e3));
 		})(x);
-	}, [S]), O = React.useCallback(() => {
+	}, [S]), O = React$1.useCallback(() => {
 		C.current = "", window.clearTimeout(T.current);
 	}, []);
-	return React.useEffect(() => () => window.clearTimeout(T.current), []), [
+	return React$1.useEffect(() => () => window.clearTimeout(T.current), []), [
 		C,
 		D,
 		O
@@ -3687,8 +3687,8 @@ var v4_default = v4, createStoreImpl = (m) => {
 	return D;
 }, createStore = ((m) => m ? createStoreImpl(m) : createStoreImpl), identity$1 = (m) => m;
 function useStore(m, S = identity$1) {
-	let C = React2.useSyncExternalStore(m.subscribe, React2.useCallback(() => S(m.getState()), [m, S]), React2.useCallback(() => S(m.getInitialState()), [m, S]));
-	return React2.useDebugValue(C), C;
+	let C = React.useSyncExternalStore(m.subscribe, React.useCallback(() => S(m.getState()), [m, S]), React.useCallback(() => S(m.getInitialState()), [m, S]));
+	return React.useDebugValue(C), C;
 }
 var createImpl = (m) => {
 	let x = createStore(m), S = (m) => useStore(x, m);
@@ -4961,27 +4961,27 @@ function isWindow(m) {
 	let x = Object.prototype.toString.call(m);
 	return x === "[object Window]" || x === "[object global]";
 }
-function isNode(m) {
+function isNode$1(m) {
 	return "nodeType" in m;
 }
-function getWindow(m) {
-	return m ? isWindow(m) ? m : isNode(m) ? "defaultView" in m ? m.defaultView ?? window : m.ownerDocument?.defaultView ?? window : window : window;
+function getWindow$1(m) {
+	return m ? isWindow(m) ? m : isNode$1(m) ? "defaultView" in m ? m.defaultView ?? window : m.ownerDocument?.defaultView ?? window : window : window;
 }
 function isDocument(m) {
-	let { Document: x } = getWindow(m);
+	let { Document: x } = getWindow$1(m);
 	return m instanceof x || "nodeType" in m && m.nodeType === Node.DOCUMENT_NODE;
 }
 function isHTMLElement$1(m) {
-	return !m || isWindow(m) ? !1 : m instanceof getWindow(m).HTMLElement || "namespaceURI" in m && typeof m.namespaceURI == "string" && m.namespaceURI.endsWith("html");
+	return !m || isWindow(m) ? !1 : m instanceof getWindow$1(m).HTMLElement || "namespaceURI" in m && typeof m.namespaceURI == "string" && m.namespaceURI.endsWith("html");
 }
 function isSVGElement$1(m) {
-	return m instanceof getWindow(m).SVGElement || "namespaceURI" in m && typeof m.namespaceURI == "string" && m.namespaceURI.endsWith("svg");
+	return m instanceof getWindow$1(m).SVGElement || "namespaceURI" in m && typeof m.namespaceURI == "string" && m.namespaceURI.endsWith("svg");
 }
-function getDocument(m) {
-	return m ? isWindow(m) ? m.document : isNode(m) ? isDocument(m) ? m : isHTMLElement$1(m) || isSVGElement$1(m) ? m.ownerDocument : document : document : document;
+function getDocument$1(m) {
+	return m ? isWindow(m) ? m.document : isNode$1(m) ? isDocument(m) ? m : isHTMLElement$1(m) || isSVGElement$1(m) ? m.ownerDocument : document : document : document;
 }
 function getViewportBoundingRectangle(m) {
-	let { documentElement: x } = getDocument(m), S = x.clientWidth, C = x.clientHeight;
+	let { documentElement: x } = getDocument$1(m), S = x.clientWidth, C = x.clientHeight;
 	return {
 		top: 0,
 		left: 0,
@@ -5108,11 +5108,11 @@ function isVisible(m, x = m.getBoundingClientRect()) {
 	let { width: S, height: C } = getVisibleBoundingRectangle(m, x);
 	return S > 0 && C > 0;
 }
-var Observer = canUseDOM ? ResizeObserver : class {
+var Observer$1 = canUseDOM ? ResizeObserver : class {
 	observe() {}
 	unobserve() {}
 	disconnect() {}
-}, _initialized, ResizeNotifier = class extends Observer {
+}, _initialized, ResizeNotifier = class extends Observer$1 {
 	constructor(m) {
 		super((x) => {
 			if (!__privateGet$3(this, _initialized)) {
@@ -5234,10 +5234,10 @@ function showPopover(m) {
 	} catch {}
 }
 function isDocumentScrollingElement(m) {
-	return !canUseDOM || !m ? !1 : m === getDocument(m).scrollingElement;
+	return !canUseDOM || !m ? !1 : m === getDocument$1(m).scrollingElement;
 }
 function getScrollPosition(m) {
-	let x = getWindow(m), S = isDocumentScrollingElement(m) ? getViewportBoundingRectangle(m) : getBoundingRectangle(m), C = isDocumentScrollingElement(m) ? {
+	let x = getWindow$1(m), S = isDocumentScrollingElement(m) ? getViewportBoundingRectangle(m) : getBoundingRectangle(m), C = isDocumentScrollingElement(m) ? {
 		height: x.innerHeight,
 		width: x.innerWidth
 	} : {
@@ -5297,7 +5297,7 @@ function getComputedStyles(m, x = !1) {
 	return S || (S = computeStyles(m), cachedStyles.set(m, S), scheduler2.schedule(clear), S);
 }
 function computeStyles(m) {
-	return getWindow(m).getComputedStyle(m);
+	return getWindow$1(m).getComputedStyle(m);
 }
 function isFixed(m, x = getComputedStyles(m, !0)) {
 	return x.position === "fixed" || x.position === "sticky";
@@ -5615,16 +5615,16 @@ var Styles = class {
 	}
 };
 function isElement(m) {
-	return m ? m instanceof getWindow(m).Element || isNode(m) && m.nodeType === Node.ELEMENT_NODE : !1;
+	return m ? m instanceof getWindow$1(m).Element || isNode$1(m) && m.nodeType === Node.ELEMENT_NODE : !1;
 }
 function isKeyboardEvent(m) {
 	if (!m) return !1;
-	let { KeyboardEvent: x } = getWindow(m.target);
+	let { KeyboardEvent: x } = getWindow$1(m.target);
 	return m instanceof x;
 }
 function isPointerEvent(m) {
 	if (!m) return !1;
-	let { PointerEvent: x } = getWindow(m.target);
+	let { PointerEvent: x } = getWindow$1(m.target);
 	return m instanceof x;
 }
 function isTextInput(m) {
@@ -5809,7 +5809,7 @@ function debounce$1(m, x) {
 var Cursor = class extends Plugin {
 	constructor(m, x) {
 		super(m, x), this.manager = m;
-		let S = computed(() => getDocument(this.manager.dragOperation.source?.element));
+		let S = computed(() => getDocument$1(this.manager.dragOperation.source?.element));
 		this.destroy = E(() => {
 			let { dragOperation: m } = this.manager, { cursor: x = "grabbing", nonce: C } = this.options ?? {};
 			if (m.status.initialized) {
@@ -5954,7 +5954,7 @@ _init$2 = __decoratorStart$2(_a$1), _overlay = /* @__PURE__ */ new WeakMap(), _F
 		y: P.scaleY / N.scaleY
 	}, { width: R, height: z, top: B, left: H } = I;
 	F && (R /= L.x, z /= L.y);
-	let U, W, G = new Styles(M), { transition: K, translate: q, boxSizing: J, paddingBlockStart: NR, paddingBlockEnd: PR, paddingInlineStart: Y, paddingInlineEnd: X, borderInlineStartWidth: Z, borderInlineEndWidth: Q, borderBlockStartWidth: FR, borderBlockEndWidth: IR } = getComputedStyles(k), LR = A === "clone", RR = J === "content-box", zR = RR ? parseInt(Y) + parseInt(X) + parseInt(Z) + parseInt(Q) : 0, BR = RR ? parseInt(NR) + parseInt(PR) + parseInt(FR) + parseInt(IR) : 0, VR = A !== "move" && !this.overlay ? createPlaceholder(D, LR ? "clone" : "hidden") : null, HR = n(() => isKeyboardEvent(x.dragOperation.activatorEvent));
+	let U, W, G = new Styles(M), { transition: K, translate: q, boxSizing: J, paddingBlockStart: RV, paddingBlockEnd: zV, paddingInlineStart: Y, paddingInlineEnd: X, borderInlineStartWidth: Z, borderInlineEndWidth: Q, borderBlockStartWidth: BV, borderBlockEndWidth: VV } = getComputedStyles(k), HV = A === "clone", UV = J === "content-box", WV = UV ? parseInt(Y) + parseInt(X) + parseInt(Z) + parseInt(Q) : 0, GV = UV ? parseInt(RV) + parseInt(zV) + parseInt(BV) + parseInt(VV) : 0, KV = A !== "move" && !this.overlay ? createPlaceholder(D, HV ? "clone" : "hidden") : null, qV = n(() => isKeyboardEvent(x.dragOperation.activatorEvent));
 	if (q !== "none") {
 		let m = parseTranslate(q);
 		m && !j.translate && (j.translate = m);
@@ -5966,10 +5966,10 @@ _init$2 = __decoratorStart$2(_a$1), _overlay = /* @__PURE__ */ new WeakMap(), _F
 			y: (m.y - B * N.scaleY - N.y) / (z * N.scaleY)
 		};
 	}
-	let { transformOrigin: $ } = j, UR = B * N.scaleY + N.y, WR = H * N.scaleX + N.x;
+	let { transformOrigin: $ } = j, JV = B * N.scaleY + N.y, YV = H * N.scaleX + N.x;
 	if (!j.coordinates && (j.coordinates = {
-		x: WR,
-		y: UR
+		x: YV,
+		y: JV
 	}, L.x !== 1 || L.y !== 1)) {
 		let { scaleX: m, scaleY: x } = P, { x: S, y: C } = $;
 		j.coordinates.x += (R * m - R) * S, j.coordinates.y += (z * x - z) * C;
@@ -5978,62 +5978,62 @@ _init$2 = __decoratorStart$2(_a$1), _overlay = /* @__PURE__ */ new WeakMap(), _F
 		width: R,
 		height: z
 	}, j.frameTransform ||= N;
-	let GR = {
-		x: j.coordinates.x - WR,
-		y: j.coordinates.y - UR
-	}, KR = {
+	let XV = {
+		x: j.coordinates.x - YV,
+		y: j.coordinates.y - JV
+	}, ZV = {
 		width: (j.dimensions.width * j.frameTransform.scaleX - R * N.scaleX) * $.x,
 		height: (j.dimensions.height * j.frameTransform.scaleY - z * N.scaleY) * $.y
-	}, qR = {
-		x: GR.x / N.scaleX + KR.width,
-		y: GR.y / N.scaleY + KR.height
-	}, JR = {
-		left: H + qR.x,
-		top: B + qR.y
+	}, QV = {
+		x: XV.x / N.scaleX + ZV.width,
+		y: XV.y / N.scaleY + ZV.height
+	}, $V = {
+		left: H + QV.x,
+		top: B + QV.y
 	};
 	M.setAttribute(ATTRIBUTE, "true");
-	let YR = n(() => C.transform), XR = j.translate ?? {
+	let eH = n(() => C.transform), tH = j.translate ?? {
 		x: 0,
 		y: 0
-	}, ZR = `${YR.x * N.scaleX + XR.x}px ${YR.y * N.scaleY + XR.y}px 0`, QR = K ? `${K}, translate 0ms linear` : "";
+	}, nH = `${eH.x * N.scaleX + tH.x}px ${eH.y * N.scaleY + tH.y}px 0`, rH = K ? `${K}, translate 0ms linear` : "";
 	G.set({
-		width: R - zR,
-		height: z - BR,
-		top: JR.top,
-		left: JR.left,
-		translate: ZR,
-		transition: QR,
+		width: R - WV,
+		height: z - GV,
+		top: $V.top,
+		left: $V.left,
+		translate: nH,
+		transition: rH,
 		scale: F ? `${L.x} ${L.y}` : "",
 		"transform-origin": `${$.x * 100}% ${$.y * 100}%`
-	}, CSS_PREFIX), VR && (k.insertAdjacentElement("afterend", VR), S?.rootElement && (typeof S.rootElement == "function" ? S.rootElement(D) : S.rootElement).appendChild(k)), supportsPopover(M) && (M.hasAttribute("popover") || M.setAttribute("popover", "manual"), showPopover(M), M.addEventListener("beforetoggle", preventPopoverClose));
-	let $R = new ResizeObserver(() => {
-		if (!VR) return;
-		let m = new DOMRectangle(VR, {
+	}, CSS_PREFIX), KV && (k.insertAdjacentElement("afterend", KV), S?.rootElement && (typeof S.rootElement == "function" ? S.rootElement(D) : S.rootElement).appendChild(k)), supportsPopover(M) && (M.hasAttribute("popover") || M.setAttribute("popover", "manual"), showPopover(M), M.addEventListener("beforetoggle", preventPopoverClose));
+	let iH = new ResizeObserver(() => {
+		if (!KV) return;
+		let m = new DOMRectangle(KV, {
 			frameTransform: N,
 			ignoreTransforms: !0
 		}), x = $ ?? {
 			x: 1,
 			y: 1
-		}, S = (R - m.width) * x.x + qR.x, T = (z - m.height) * x.y + qR.y;
+		}, S = (R - m.width) * x.x + QV.x, T = (z - m.height) * x.y + QV.y;
 		if (G.set({
-			width: m.width - zR,
-			height: m.height - BR,
+			width: m.width - WV,
+			height: m.height - GV,
 			top: B + T,
 			left: H + S
-		}, CSS_PREFIX), U?.takeRecords(), isTableRow(k) && isTableRow(VR)) {
-			let m = Array.from(k.cells), x = Array.from(VR.cells);
+		}, CSS_PREFIX), U?.takeRecords(), isTableRow(k) && isTableRow(KV)) {
+			let m = Array.from(k.cells), x = Array.from(KV.cells);
 			for (let [S, C] of m.entries()) {
 				let m = x[S];
 				C.style.width = `${m.offsetWidth}px`;
 			}
 		}
 		C.shape = new DOMRectangle(M);
-	}), ez = new DOMRectangle(M);
-	n(() => C.shape = ez);
-	let tz = getWindow(M), nz = (m) => {
+	}), aH = new DOMRectangle(M);
+	n(() => C.shape = aH);
+	let oH = getWindow$1(M), sH = (m) => {
 		this.manager.actions.stop({ event: m });
 	};
-	HR && tz.addEventListener("resize", nz), n(() => D.status) === "idle" && requestAnimationFrame(() => D.status = "dragging"), VR && ($R.observe(VR), U = new MutationObserver((m) => {
+	qV && oH.addEventListener("resize", sH), n(() => D.status) === "idle" && requestAnimationFrame(() => D.status = "dragging"), KV && (iH.observe(KV), U = new MutationObserver((m) => {
 		let x = !1;
 		for (let S of m) {
 			if (S.target !== k) {
@@ -6045,30 +6045,30 @@ _init$2 = __decoratorStart$2(_a$1), _overlay = /* @__PURE__ */ new WeakMap(), _F
 			if (m.startsWith("aria-") || IGNORED_ATTRIBUTES.includes(m)) continue;
 			let C = k.getAttribute(m);
 			if (m === "style") {
-				if (supportsStyle(k) && supportsStyle(VR)) {
+				if (supportsStyle(k) && supportsStyle(KV)) {
 					let m = k.style;
-					for (let x of Array.from(VR.style)) m.getPropertyValue(x) === "" && VR.style.removeProperty(x);
+					for (let x of Array.from(KV.style)) m.getPropertyValue(x) === "" && KV.style.removeProperty(x);
 					for (let x of Array.from(m)) {
 						if (IGNORED_STYLES.includes(x) || x.startsWith(CSS_PREFIX)) continue;
 						let S = m.getPropertyValue(x);
-						VR.style.setProperty(x, S);
+						KV.style.setProperty(x, S);
 					}
 				}
-			} else C === null ? VR.removeAttribute(m) : VR.setAttribute(m, C);
+			} else C === null ? KV.removeAttribute(m) : KV.setAttribute(m, C);
 		}
-		x && LR && (VR.innerHTML = k.innerHTML);
+		x && HV && (KV.innerHTML = k.innerHTML);
 	}), U.observe(k, {
 		attributes: !0,
 		subtree: !0,
 		childList: !0
 	}), W = new MutationObserver((m) => {
 		for (let x of m) if (x.addedNodes.length !== 0) for (let m of Array.from(x.addedNodes)) {
-			if (m.contains(k) && k.nextElementSibling !== VR) {
-				k.insertAdjacentElement("afterend", VR), showPopover(M);
+			if (m.contains(k) && k.nextElementSibling !== KV) {
+				k.insertAdjacentElement("afterend", KV), showPopover(M);
 				return;
 			}
-			if (m.contains(VR) && VR.previousElementSibling !== k) {
-				VR.insertAdjacentElement("beforebegin", k), showPopover(M);
+			if (m.contains(KV) && KV.previousElementSibling !== k) {
+				KV.insertAdjacentElement("beforebegin", k), showPopover(M);
 				return;
 			}
 		}
@@ -6076,15 +6076,15 @@ _init$2 = __decoratorStart$2(_a$1), _overlay = /* @__PURE__ */ new WeakMap(), _F
 		childList: !0,
 		subtree: !0
 	}));
-	let rz = x.dragOperation.source?.id, iz = () => {
-		if (!HR || rz == null) return;
-		let m = x.registry.draggables.get(rz), S = m?.handle ?? m?.element;
+	let cH = x.dragOperation.source?.id, lH = () => {
+		if (!qV || cH == null) return;
+		let m = x.registry.draggables.get(cH), S = m?.handle ?? m?.element;
 		isHTMLElement$1(S) && S.focus();
-	}, az = () => {
-		U?.disconnect(), W?.disconnect(), $R.disconnect(), tz.removeEventListener("resize", nz), supportsPopover(M) && (M.removeEventListener("beforetoggle", preventPopoverClose), M.removeAttribute("popover")), M.removeAttribute(ATTRIBUTE), G.reset(), D.status = "idle";
+	}, uH = () => {
+		U?.disconnect(), W?.disconnect(), iH.disconnect(), oH.removeEventListener("resize", sH), supportsPopover(M) && (M.removeEventListener("beforetoggle", preventPopoverClose), M.removeAttribute("popover")), M.removeAttribute(ATTRIBUTE), G.reset(), D.status = "idle";
 		let x = m.current.translate != null;
-		VR && (x || VR.parentElement !== M.parentElement) && M.isConnected && VR.replaceWith(M), VR?.remove();
-	}, oz = effects(() => {
+		KV && (x || KV.parentElement !== M.parentElement) && M.isConnected && KV.replaceWith(M), KV?.remove();
+	}, dH = effects(() => {
 		let { transform: x, status: S } = C;
 		if (!(!x.x && !x.y && !m.current.translate) && S.dragging) {
 			let S = j.translate ?? {
@@ -6093,11 +6093,11 @@ _init$2 = __decoratorStart$2(_a$1), _overlay = /* @__PURE__ */ new WeakMap(), _F
 			}, T = {
 				x: x.x / N.scaleX + S.x,
 				y: x.y / N.scaleY + S.y
-			}, D = m.current.translate, O = n(() => C.modifiers), k = n(() => C.shape?.current), A = HR ? "250ms cubic-bezier(0.25, 1, 0.5, 1)" : "0ms linear";
+			}, D = m.current.translate, O = n(() => C.modifiers), k = n(() => C.shape?.current), A = qV ? "250ms cubic-bezier(0.25, 1, 0.5, 1)" : "0ms linear";
 			if (G.set({
 				transition: `${K}, translate ${A}`,
 				translate: `${T.x}px ${T.y}px 0`
-			}, CSS_PREFIX), U?.takeRecords(), k && k !== ez && D && !O.length) {
+			}, CSS_PREFIX), U?.takeRecords(), k && k !== aH && D && !O.length) {
 				let m = Point.delta(T, D);
 				C.shape = Rectangle.from(k.boundingRectangle).translate(m.x * N.scaleX, m.y * N.scaleY);
 			} else C.shape = new DOMRectangle(M);
@@ -6111,7 +6111,7 @@ _init$2 = __decoratorStart$2(_a$1), _overlay = /* @__PURE__ */ new WeakMap(), _F
 				x: 0,
 				y: 0
 			}), !S) {
-				az();
+				uH();
 				return;
 			}
 			x.renderer.rendering.then(() => {
@@ -6119,7 +6119,7 @@ _init$2 = __decoratorStart$2(_a$1), _overlay = /* @__PURE__ */ new WeakMap(), _F
 					showPopover(M);
 					let [, m] = getFinalKeyframe$2(M, (m) => "translate" in m) ?? [];
 					m?.pause();
-					let x = VR ?? k, T = { frameTransform: isSameFrame(M, x) ? null : void 0 }, O = new DOMRectangle(M, T), A = parseTranslate(getComputedStyles(M).translate) ?? S, j = new DOMRectangle(x, T), N = Rectangle.delta(O, j, D.alignment), P = {
+					let x = KV ?? k, T = { frameTransform: isSameFrame(M, x) ? null : void 0 }, O = new DOMRectangle(M, T), A = parseTranslate(getComputedStyles(M).translate) ?? S, j = new DOMRectangle(x, T), N = Rectangle.delta(O, j, D.alignment), P = {
 						x: A.x - N.x,
 						y: A.y - N.y
 					}, F = Math.round(O.intrinsicHeight) === Math.round(j.intrinsicHeight) ? {} : {
@@ -6137,19 +6137,19 @@ _init$2 = __decoratorStart$2(_a$1), _overlay = /* @__PURE__ */ new WeakMap(), _F
 							easing: "ease"
 						}
 					}).then(() => {
-						M.removeAttribute(DROPPING_ATTRIBUTE), m?.finish(), az(), requestAnimationFrame(iz);
+						M.removeAttribute(DROPPING_ATTRIBUTE), m?.finish(), uH(), requestAnimationFrame(lH);
 					});
 				}
 			});
 		}
 	});
 	return () => {
-		az(), oz();
+		uH(), dH();
 	};
 }, injectStyles_fn = function() {
 	let { status: m, source: x, target: S } = this.manager.dragOperation, { nonce: C } = this.options ?? {};
 	if (m.initializing) {
-		let m = getDocument(x?.element ?? null), T = getDocument(S?.element ?? null), D = /* @__PURE__ */ new Set([m, T]);
+		let m = getDocument$1(x?.element ?? null), T = getDocument$1(S?.element ?? null), D = /* @__PURE__ */ new Set([m, T]);
 		for (let m of D) {
 			let x = styleSheetRegistry.get(m);
 			if (!x) {
@@ -6268,10 +6268,10 @@ var _autoScrolling_dec, _a3, _init3, _autoScrolling, _meta, _scroll, Scroller = 
 		let x = null, S = null, C = computed(() => {
 			let { position: S, source: C } = m.dragOperation;
 			if (!S) return null;
-			let T = getElementFromPoint(getDocument(C?.element), S.current);
+			let T = getElementFromPoint(getDocument$1(C?.element), S.current);
 			return T && (x = T), T ?? x;
 		}), T = computed(() => {
-			let x = C.value, { documentElement: T } = getDocument(x);
+			let x = C.value, { documentElement: T } = getDocument$1(x);
 			if (!x || x === T) {
 				let { target: x } = m.dragOperation, C = x?.element;
 				if (C) {
@@ -6364,7 +6364,7 @@ function removeSelection() {
 	var m;
 	(m = document.getSelection()) == null || m.removeAllRanges();
 }
-var defaults = Object.freeze({
+var defaults$1 = Object.freeze({
 	offset: 10,
 	keyboardCodes: {
 		start: ["Space", "Enter"],
@@ -6387,7 +6387,7 @@ var defaults = Object.freeze({
 	constructor(m, x) {
 		super(m), this.manager = m, this.options = x, __privateAdd$2(this, _cleanupFunctions, []), this.listeners = new Listeners(), this.handleSourceKeyDown = (m, x, S) => {
 			if (this.disabled || m.defaultPrevented || !isElement(m.target) || x.disabled) return;
-			let { keyboardCodes: C = defaults.keyboardCodes, shouldActivate: T = defaults.shouldActivate } = S ?? {};
+			let { keyboardCodes: C = defaults$1.keyboardCodes, shouldActivate: T = defaults$1.shouldActivate } = S ?? {};
 			C.start.includes(m.code) && this.manager.dragOperation.status.idle && T({
 				event: m,
 				source: x,
@@ -6419,7 +6419,7 @@ var defaults = Object.freeze({
 			source: x
 		}).signal.aborted) return this.cleanup();
 		this.sideEffects();
-		let D = getDocument(C), O = [this.listeners.bind(D, [{
+		let D = getDocument$1(C), O = [this.listeners.bind(D, [{
 			type: "keydown",
 			listener: (m) => this.handleKeyDown(m, x, S),
 			options: { capture: !0 }
@@ -6427,7 +6427,7 @@ var defaults = Object.freeze({
 		__privateGet$2(this, _cleanupFunctions).push(...O);
 	}
 	handleKeyDown(m, x, S) {
-		let { keyboardCodes: C = defaults.keyboardCodes } = S ?? {};
+		let { keyboardCodes: C = defaults$1.keyboardCodes } = S ?? {};
 		if (isKeycode(m, [...C.end, ...C.cancel])) {
 			m.preventDefault();
 			let x = isKeycode(m, C.cancel);
@@ -6446,7 +6446,7 @@ var defaults = Object.freeze({
 		let { shape: S } = this.manager.dragOperation, C = x.shiftKey ? 5 : 1, T = {
 			x: 0,
 			y: 0
-		}, D = this.options?.offset ?? defaults.offset;
+		}, D = this.options?.offset ?? defaults$1.offset;
 		if (typeof D == "number" && (D = {
 			x: D,
 			y: D
@@ -6496,7 +6496,7 @@ var defaults = Object.freeze({
 		this.cleanup(), this.listeners.clear();
 	}
 };
-_cleanupFunctions = /* @__PURE__ */ new WeakMap(), _KeyboardSensor.configure = configurator(_KeyboardSensor), _KeyboardSensor.defaults = defaults;
+_cleanupFunctions = /* @__PURE__ */ new WeakMap(), _KeyboardSensor.configure = configurator(_KeyboardSensor), _KeyboardSensor.defaults = defaults$1;
 var KeyboardSensor = _KeyboardSensor;
 function isKeycode(m, x) {
 	return x.includes(m.code);
@@ -6561,7 +6561,7 @@ var defaults2 = Object.freeze({ activationConstraints(m, x) {
 				});
 			}
 		}
-		let k = getDocument(m.target), A = this.listeners.bind(k, [
+		let k = getDocument$1(m.target), A = this.listeners.bind(k, [
 			{
 				type: "pointermove",
 				listener: (m) => this.handlePointerMove(m, x)
@@ -6627,7 +6627,7 @@ var defaults2 = Object.freeze({ activationConstraints(m, x) {
 			source: m
 		}).signal.aborted) return this.cleanup();
 		x.preventDefault();
-		let D = getDocument(x.target), O = D.body;
+		let D = getDocument$1(x.target), O = D.body;
 		O.setPointerCapture(x.pointerId);
 		let k = this.listeners.bind(D, [
 			{
@@ -6788,7 +6788,7 @@ function isRef(m) {
 function currentValue(m) {
 	if (m != null) return isRef(m) ? m.current ?? void 0 : m;
 }
-var useIsomorphicLayoutEffect$1 = typeof window < "u" && window.document !== void 0 && window.document.createElement !== void 0 ? useLayoutEffect : useEffect;
+var useIsomorphicLayoutEffect$2 = typeof window < "u" && window.document !== void 0 && window.document.createElement !== void 0 ? useLayoutEffect : useEffect;
 function useForceUpdate() {
 	let m = useState(0)[1];
 	return useCallback(() => {
@@ -6797,7 +6797,7 @@ function useForceUpdate() {
 }
 function useDeepSignal(m, x) {
 	let S = useRef(/* @__PURE__ */ new Map()), C = useForceUpdate();
-	return useIsomorphicLayoutEffect$1(() => {
+	return useIsomorphicLayoutEffect$2(() => {
 		if (!m) {
 			S.current.clear();
 			return;
@@ -6820,7 +6820,7 @@ function useImmediateEffect(m, x) {
 }
 function useLatest(m) {
 	let x = useRef(m);
-	return useIsomorphicLayoutEffect$1(() => {
+	return useIsomorphicLayoutEffect$2(() => {
 		x.current = m;
 	}, [m]), x;
 }
@@ -6833,7 +6833,7 @@ function useOnValueChange(m, x, S = useEffect, C = Object.is) {
 }
 function useOnElementChange(m, x) {
 	let S = useRef(currentValue(m));
-	useIsomorphicLayoutEffect$1(() => {
+	useIsomorphicLayoutEffect$2(() => {
 		let C = currentValue(m);
 		C !== S.current && (S.current = C, x(C));
 	});
@@ -6865,7 +6865,7 @@ var __defProp$2 = Object.defineProperty, __defProps$2 = Object.defineProperties,
 			});
 		}
 	}), []);
-	return useIsomorphicLayoutEffect$1(() => {
+	return useIsomorphicLayoutEffect$2(() => {
 		var m;
 		(m = D.current) == null || m.call(D), T.current = null;
 	}, [m, S]), useImperativeHandle(x, () => O), null;
@@ -6910,7 +6910,7 @@ function useDragDropManager() {
 }
 function useInstance(m) {
 	let x = useDragDropManager() ?? void 0, [S] = useState(() => m(x));
-	return S.manager !== x && (S.manager = x), useIsomorphicLayoutEffect$1(S.register, [x, S]), S;
+	return S.manager !== x && (S.manager = x), useIsomorphicLayoutEffect$2(S.register, [x, S]), S;
 }
 function useDraggable(m) {
 	let { disabled: x, data: S, element: C, handle: T, id: D, modifiers: O, sensors: k } = m, A = useInstance((x) => new Draggable(__spreadProps$3(__spreadValues$3({}, m), {
@@ -7537,7 +7537,7 @@ function useSortable(m) {
 		target: currentValue(L),
 		feedback: P
 	}), x)), H = useDeepSignal(B, shouldUpdateSynchronously);
-	return useOnValueChange(T, () => B.id = T), useIsomorphicLayoutEffect$1(() => {
+	return useOnValueChange(T, () => B.id = T), useIsomorphicLayoutEffect$2(() => {
 		r(() => {
 			B.group = j, B.index = A;
 		});
@@ -7595,7 +7595,7 @@ function shallow(m, x) {
 	return Object.is(m, x) ? !0 : typeof m != "object" || !m || typeof x != "object" || !x || Object.getPrototypeOf(m) !== Object.getPrototypeOf(x) ? !1 : isIterable(m) && isIterable(x) ? hasIterableEntries(m) && hasIterableEntries(x) ? compareEntries(m, x) : compareIterables(m, x) : compareEntries({ entries: () => Object.entries(m) }, { entries: () => Object.entries(x) });
 }
 function useShallow(m) {
-	let S = React2.useRef(void 0);
+	let S = React.useRef(void 0);
 	return (x) => {
 		let C = m(x);
 		return shallow(S.current, C) ? S.current : S.current = C;
@@ -7984,13 +7984,13 @@ var import_object_hash = /* @__PURE__ */ __toESM$1((/* @__PURE__ */ __commonJSMi
 						return D;
 					}
 					function F(m, x, S, C) {
-						return T._charsWritten = RR(function(m) {
+						return T._charsWritten = UV(function(m) {
 							for (var x = [], S = 0; S < m.length; S++) x.push(255 & m.charCodeAt(S));
 							return x;
 						}(x), m, S, C);
 					}
 					function I(m, x, S, C) {
-						return T._charsWritten = RR(function(m) {
+						return T._charsWritten = UV(function(m) {
 							for (var x, S, C = [], T = 0; T < m.length; T++) S = m.charCodeAt(T), x = S >> 8, S %= 256, C.push(S), C.push(x);
 							return C;
 						}(x), m, S, C);
@@ -8024,22 +8024,22 @@ var import_object_hash = /* @__PURE__ */ __toESM$1((/* @__PURE__ */ __commonJSMi
 						return C || ($(typeof S == "boolean", "missing or invalid endian"), $(x + 7 < m.length, "Trying to read beyond buffer length")), P.read(m, x, S, 52, 8);
 					}
 					function G(m, x, S, C, T) {
-						if (T || ($(x != null, "missing value"), $(typeof C == "boolean", "missing or invalid endian"), $(S != null, "missing offset"), $(S + 1 < m.length, "trying to write beyond buffer length"), BR(x, 65535)), T = m.length, !(T <= S)) for (var D = 0, O = Math.min(T - S, 2); D < O; D++) m[S + D] = (x & 255 << 8 * (C ? D : 1 - D)) >>> 8 * (C ? D : 1 - D);
+						if (T || ($(x != null, "missing value"), $(typeof C == "boolean", "missing or invalid endian"), $(S != null, "missing offset"), $(S + 1 < m.length, "trying to write beyond buffer length"), GV(x, 65535)), T = m.length, !(T <= S)) for (var D = 0, O = Math.min(T - S, 2); D < O; D++) m[S + D] = (x & 255 << 8 * (C ? D : 1 - D)) >>> 8 * (C ? D : 1 - D);
 					}
 					function K(m, x, S, C, T) {
-						if (T || ($(x != null, "missing value"), $(typeof C == "boolean", "missing or invalid endian"), $(S != null, "missing offset"), $(S + 3 < m.length, "trying to write beyond buffer length"), BR(x, 4294967295)), T = m.length, !(T <= S)) for (var D = 0, O = Math.min(T - S, 4); D < O; D++) m[S + D] = x >>> 8 * (C ? D : 3 - D) & 255;
+						if (T || ($(x != null, "missing value"), $(typeof C == "boolean", "missing or invalid endian"), $(S != null, "missing offset"), $(S + 3 < m.length, "trying to write beyond buffer length"), GV(x, 4294967295)), T = m.length, !(T <= S)) for (var D = 0, O = Math.min(T - S, 4); D < O; D++) m[S + D] = x >>> 8 * (C ? D : 3 - D) & 255;
 					}
 					function q(m, x, S, C, T) {
-						T || ($(x != null, "missing value"), $(typeof C == "boolean", "missing or invalid endian"), $(S != null, "missing offset"), $(S + 1 < m.length, "Trying to write beyond buffer length"), VR(x, 32767, -32768)), m.length <= S || G(m, 0 <= x ? x : 65535 + x + 1, S, C, T);
+						T || ($(x != null, "missing value"), $(typeof C == "boolean", "missing or invalid endian"), $(S != null, "missing offset"), $(S + 1 < m.length, "Trying to write beyond buffer length"), KV(x, 32767, -32768)), m.length <= S || G(m, 0 <= x ? x : 65535 + x + 1, S, C, T);
 					}
 					function J(m, x, S, C, T) {
-						T || ($(x != null, "missing value"), $(typeof C == "boolean", "missing or invalid endian"), $(S != null, "missing offset"), $(S + 3 < m.length, "Trying to write beyond buffer length"), VR(x, 2147483647, -2147483648)), m.length <= S || K(m, 0 <= x ? x : 4294967295 + x + 1, S, C, T);
+						T || ($(x != null, "missing value"), $(typeof C == "boolean", "missing or invalid endian"), $(S != null, "missing offset"), $(S + 3 < m.length, "Trying to write beyond buffer length"), KV(x, 2147483647, -2147483648)), m.length <= S || K(m, 0 <= x ? x : 4294967295 + x + 1, S, C, T);
 					}
-					function NR(m, x, S, C, T) {
-						T || ($(x != null, "missing value"), $(typeof C == "boolean", "missing or invalid endian"), $(S != null, "missing offset"), $(S + 3 < m.length, "Trying to write beyond buffer length"), HR(x, 34028234663852886e22, -34028234663852886e22)), m.length <= S || P.write(m, x, S, C, 23, 4);
+					function RV(m, x, S, C, T) {
+						T || ($(x != null, "missing value"), $(typeof C == "boolean", "missing or invalid endian"), $(S != null, "missing offset"), $(S + 3 < m.length, "Trying to write beyond buffer length"), qV(x, 34028234663852886e22, -34028234663852886e22)), m.length <= S || P.write(m, x, S, C, 23, 4);
 					}
-					function PR(m, x, S, C, T) {
-						T || ($(x != null, "missing value"), $(typeof C == "boolean", "missing or invalid endian"), $(S != null, "missing offset"), $(S + 7 < m.length, "Trying to write beyond buffer length"), HR(x, 17976931348623157e292, -17976931348623157e292)), m.length <= S || P.write(m, x, S, C, 52, 8);
+					function zV(m, x, S, C, T) {
+						T || ($(x != null, "missing value"), $(typeof C == "boolean", "missing or invalid endian"), $(S != null, "missing offset"), $(S + 7 < m.length, "Trying to write beyond buffer length"), qV(x, 17976931348623157e292, -17976931348623157e292)), m.length <= S || P.write(m, x, S, C, 52, 8);
 					}
 					S.Buffer = T, S.SlowBuffer = T, S.INSPECT_MAX_BYTES = 50, T.poolSize = 8192, T._useTypedArrays = function() {
 						try {
@@ -8075,7 +8075,7 @@ var import_object_hash = /* @__PURE__ */ __toESM$1((/* @__PURE__ */ __commonJSMi
 								break;
 							case "utf8":
 							case "utf-8":
-								S = IR(m).length;
+								S = VV(m).length;
 								break;
 							case "ascii":
 							case "binary":
@@ -8083,7 +8083,7 @@ var import_object_hash = /* @__PURE__ */ __toESM$1((/* @__PURE__ */ __commonJSMi
 								S = m.length;
 								break;
 							case "base64":
-								S = LR(m).length;
+								S = HV(m).length;
 								break;
 							case "ucs2":
 							case "ucs-2":
@@ -8121,14 +8121,14 @@ var import_object_hash = /* @__PURE__ */ __toESM$1((/* @__PURE__ */ __commonJSMi
 								break;
 							case "utf8":
 							case "utf-8":
-								O = this, k = x, A = S, D = T._charsWritten = RR(IR(m), O, k, A);
+								O = this, k = x, A = S, D = T._charsWritten = UV(VV(m), O, k, A);
 								break;
 							case "ascii":
 							case "binary":
 								D = F(this, m, x, S);
 								break;
 							case "base64":
-								O = this, k = x, A = S, D = T._charsWritten = RR(LR(m), O, k, A);
+								O = this, k = x, A = S, D = T._charsWritten = UV(HV(m), O, k, A);
 								break;
 							case "ucs2":
 							case "ucs-2":
@@ -8147,7 +8147,7 @@ var import_object_hash = /* @__PURE__ */ __toESM$1((/* @__PURE__ */ __commonJSMi
 								C = function(m, x, S) {
 									var C = m.length;
 									(!x || x < 0) && (x = 0), (!S || S < 0 || C < S) && (S = C);
-									for (var T = "", D = x; D < S; D++) T += FR(m[D]);
+									for (var T = "", D = x; D < S; D++) T += BV(m[D]);
 									return T;
 								}(k, x, S);
 								break;
@@ -8156,8 +8156,8 @@ var import_object_hash = /* @__PURE__ */ __toESM$1((/* @__PURE__ */ __commonJSMi
 								C = function(m, x, S) {
 									var C = "", T = "";
 									S = Math.min(m.length, S);
-									for (var D = x; D < S; D++) m[D] <= 127 ? (C += zR(T) + String.fromCharCode(m[D]), T = "") : T += "%" + m[D].toString(16);
-									return C + zR(T);
+									for (var D = x; D < S; D++) m[D] <= 127 ? (C += WV(T) + String.fromCharCode(m[D]), T = "") : T += "%" + m[D].toString(16);
+									return C + WV(T);
 								}(k, x, S);
 								break;
 							case "ascii":
@@ -8229,7 +8229,7 @@ var import_object_hash = /* @__PURE__ */ __toESM$1((/* @__PURE__ */ __commonJSMi
 					}, T.prototype.readDoubleBE = function(m, x) {
 						return W(this, m, !1, x);
 					}, T.prototype.writeUInt8 = function(m, x, S) {
-						S || ($(m != null, "missing value"), $(x != null, "missing offset"), $(x < this.length, "trying to write beyond buffer length"), BR(m, 255)), x >= this.length || (this[x] = m);
+						S || ($(m != null, "missing value"), $(x != null, "missing offset"), $(x < this.length, "trying to write beyond buffer length"), GV(m, 255)), x >= this.length || (this[x] = m);
 					}, T.prototype.writeUInt16LE = function(m, x, S) {
 						G(this, m, x, !0, S);
 					}, T.prototype.writeUInt16BE = function(m, x, S) {
@@ -8239,7 +8239,7 @@ var import_object_hash = /* @__PURE__ */ __toESM$1((/* @__PURE__ */ __commonJSMi
 					}, T.prototype.writeUInt32BE = function(m, x, S) {
 						K(this, m, x, !1, S);
 					}, T.prototype.writeInt8 = function(m, x, S) {
-						S || ($(m != null, "missing value"), $(x != null, "missing offset"), $(x < this.length, "Trying to write beyond buffer length"), VR(m, 127, -128)), x >= this.length || (0 <= m ? this.writeUInt8(m, x, S) : this.writeUInt8(255 + m + 1, x, S));
+						S || ($(m != null, "missing value"), $(x != null, "missing offset"), $(x < this.length, "Trying to write beyond buffer length"), KV(m, 127, -128)), x >= this.length || (0 <= m ? this.writeUInt8(m, x, S) : this.writeUInt8(255 + m + 1, x, S));
 					}, T.prototype.writeInt16LE = function(m, x, S) {
 						q(this, m, x, !0, S);
 					}, T.prototype.writeInt16BE = function(m, x, S) {
@@ -8249,20 +8249,20 @@ var import_object_hash = /* @__PURE__ */ __toESM$1((/* @__PURE__ */ __commonJSMi
 					}, T.prototype.writeInt32BE = function(m, x, S) {
 						J(this, m, x, !1, S);
 					}, T.prototype.writeFloatLE = function(m, x, S) {
-						NR(this, m, x, !0, S);
+						RV(this, m, x, !0, S);
 					}, T.prototype.writeFloatBE = function(m, x, S) {
-						NR(this, m, x, !1, S);
+						RV(this, m, x, !1, S);
 					}, T.prototype.writeDoubleLE = function(m, x, S) {
-						PR(this, m, x, !0, S);
+						zV(this, m, x, !0, S);
 					}, T.prototype.writeDoubleBE = function(m, x, S) {
-						PR(this, m, x, !1, S);
+						zV(this, m, x, !1, S);
 					}, T.prototype.fill = function(m, x, S) {
 						if (x ||= 0, S ||= this.length, $(typeof (m = typeof (m ||= 0) == "string" ? m.charCodeAt(0) : m) == "number" && !isNaN(m), "value is not a number"), $(x <= S, "end < start"), S !== x && this.length !== 0) {
 							$(0 <= x && x < this.length, "start out of bounds"), $(0 <= S && S <= this.length, "end out of bounds");
 							for (var C = x; C < S; C++) this[C] = m;
 						}
 					}, T.prototype.inspect = function() {
-						for (var m = [], x = this.length, C = 0; C < x; C++) if (m[C] = FR(this[C]), C === S.INSPECT_MAX_BYTES) {
+						for (var m = [], x = this.length, C = 0; C < x; C++) if (m[C] = BV(this[C]), C === S.INSPECT_MAX_BYTES) {
 							m[C + 1] = "...";
 							break;
 						}
@@ -8285,10 +8285,10 @@ var import_object_hash = /* @__PURE__ */ __toESM$1((/* @__PURE__ */ __commonJSMi
 							return Object.prototype.toString.call(m) === "[object Array]";
 						})(m);
 					}
-					function FR(m) {
+					function BV(m) {
 						return m < 16 ? "0" + m.toString(16) : m.toString(16);
 					}
-					function IR(m) {
+					function VV(m) {
 						for (var x = [], S = 0; S < m.length; S++) {
 							var C = m.charCodeAt(S);
 							if (C <= 127) x.push(m.charCodeAt(S));
@@ -8296,27 +8296,27 @@ var import_object_hash = /* @__PURE__ */ __toESM$1((/* @__PURE__ */ __commonJSMi
 						}
 						return x;
 					}
-					function LR(m) {
+					function HV(m) {
 						return N.toByteArray(m);
 					}
-					function RR(m, x, S, C) {
+					function UV(m, x, S, C) {
 						for (var T = 0; T < C && !(T + S >= x.length || T >= m.length); T++) x[T + S] = m[T];
 						return T;
 					}
-					function zR(m) {
+					function WV(m) {
 						try {
 							return decodeURIComponent(m);
 						} catch {
 							return "�";
 						}
 					}
-					function BR(m, x) {
+					function GV(m, x) {
 						$(typeof m == "number", "cannot write a non-number as a number"), $(0 <= m, "specified a negative value for writing an unsigned value"), $(m <= x, "value is larger than maximum value for type"), $(Math.floor(m) === m, "value has a fractional component");
 					}
-					function VR(m, x, S) {
+					function KV(m, x, S) {
 						$(typeof m == "number", "cannot write a non-number as a number"), $(m <= x, "value larger than maximum allowed value"), $(S <= m, "value smaller than minimum allowed value"), $(Math.floor(m) === m, "value has a fractional component");
 					}
-					function HR(m, x, S) {
+					function qV(m, x, S) {
 						$(typeof m == "number", "cannot write a non-number as a number"), $(m <= x, "value larger than maximum allowed value"), $(S <= m, "value smaller than minimum allowed value");
 					}
 					function $(m, x) {
@@ -10388,7 +10388,7 @@ var NestedFieldContext = createContext({}), useNestedFieldContext = () => {
 	useEffect(() => {
 		R.items.length > 0 && N(G(R));
 	}, []);
-	let [J, Y] = useState(""), X = !!J, Z = !useAppStore((m) => m.permissions.getPermissions({ item: m.selectedItem }).edit), Q = useRef(L), FR = useCallback((x) => {
+	let [J, Y] = useState(""), X = !!J, Z = !useAppStore((m) => m.permissions.getPermissions({ item: m.selectedItem }).edit), Q = useRef(L), BV = useCallback((x) => {
 		if (m.type !== "array" || !m.arrayFields) return;
 		let S = W.getState().config;
 		return walkField({
@@ -10399,7 +10399,7 @@ var NestedFieldContext = createContext({}), useNestedFieldContext = () => {
 		});
 	}, [W, m]);
 	if (m.type !== "array" || !m.arrayFields) return null;
-	let IR = m.max !== void 0 && z.arrayState.items.length >= m.max || O;
+	let VV = m.max !== void 0 && z.arrayState.items.length >= m.max || O;
 	return /* @__PURE__ */ jsx(A, {
 		label: T || C,
 		icon: D || /* @__PURE__ */ jsx(List, { size: 16 }),
@@ -10421,7 +10421,7 @@ var NestedFieldContext = createContext({}), useNestedFieldContext = () => {
 			children: /* @__PURE__ */ jsxs("div", {
 				className: getClassName6({
 					hasItems: Array.isArray(L) && L.length > 0,
-					addDisabled: IR
+					addDisabled: VV
 				}),
 				children: [z.arrayState.items.length > 0 && /* @__PURE__ */ jsx("div", {
 					className: getClassName6("inner"),
@@ -10453,10 +10453,10 @@ var NestedFieldContext = createContext({}), useNestedFieldContext = () => {
 												className: getClassNameItem("action"),
 												children: /* @__PURE__ */ jsx(IconButton, {
 													type: "button",
-													disabled: !!IR,
+													disabled: !!VV,
 													onClick: (m) => {
 														m.stopPropagation();
-														let S = [...L || []], C = FR(S[T]);
+														let S = [...L || []], C = BV(S[T]);
 														S.splice(T, 0, C), N(G(q(S)), !1), x(S);
 													},
 													title: "Duplicate",
@@ -10507,12 +10507,12 @@ var NestedFieldContext = createContext({}), useNestedFieldContext = () => {
 							})
 						}, D);
 					})
-				}), !IR && /* @__PURE__ */ jsx("button", {
+				}), !VV && /* @__PURE__ */ jsx("button", {
 					type: "button",
 					className: getClassName6("addButton"),
 					onClick: () => {
 						if (X) return;
-						let S = L || [], C = defaultSlots(FR(m.defaultItemProps ?? {}), m.arrayFields), T = [...S, C];
+						let S = L || [], C = defaultSlots(BV(m.defaultItemProps ?? {}), m.arrayFields), T = [...S, C];
 						N(G(q(T)), !1), x(T);
 					},
 					children: /* @__PURE__ */ jsx(Plus, { size: 21 })
@@ -10626,14 +10626,14 @@ var getClassName10 = get_class_name_factory_default("ExternalInput", styles_modu
 		let m = /* @__PURE__ */ new Set();
 		for (let x of Y) for (let S of Object.keys(x)) (typeof x[S] == "string" || typeof x[S] == "number" || isValidElement(x[S])) && m.add(S);
 		return Array.from(m);
-	}, [Y]), [Z, Q] = useState(m.initialQuery || ""), FR = useCallback((x, S) => __async(void 0, null, function* () {
+	}, [Y]), [Z, Q] = useState(m.initialQuery || ""), BV = useCallback((x, S) => __async(void 0, null, function* () {
 		B(!0);
 		let C = `${T}-${x}-${JSON.stringify(S)}`, D = dataCache[C] || (yield m.fetchList({
 			query: x,
 			filters: S
 		}));
 		D && (F(D), B(!1), dataCache[C] = D);
-	}), [T, m]), IR = useCallback((x) => m.renderFooter ? m.renderFooter(x) : /* @__PURE__ */ jsxs("span", {
+	}), [T, m]), VV = useCallback((x) => m.renderFooter ? m.renderFooter(x) : /* @__PURE__ */ jsxs("span", {
 		className: getClassNameModal("footer"),
 		children: [
 			x.items.length,
@@ -10642,7 +10642,7 @@ var getClassName10 = get_class_name_factory_default("ExternalInput", styles_modu
 		]
 	}), [m.renderFooter]);
 	return useEffect(() => {
-		FR(Z, W);
+		BV(Z, W);
 	}, []), /* @__PURE__ */ jsxs("div", {
 		className: getClassName10({
 			dataSelected: !!S,
@@ -10678,7 +10678,7 @@ var getClassName10 = get_class_name_factory_default("ExternalInput", styles_modu
 					filtersToggled: K
 				}),
 				onSubmit: (m) => {
-					m.preventDefault(), FR(Z, W);
+					m.preventDefault(), BV(Z, W);
 				},
 				children: [
 					/* @__PURE__ */ jsx("div", {
@@ -10749,7 +10749,7 @@ var getClassName10 = get_class_name_factory_default("ExternalInput", styles_modu
 										value: W[m],
 										onChange: (x) => {
 											let S = __spreadProps(__spreadValues({}, W), { [m]: x });
-											G(S), FR(Z, S);
+											G(S), BV(Z, S);
 										}
 									})
 								}, m);
@@ -10790,7 +10790,7 @@ var getClassName10 = get_class_name_factory_default("ExternalInput", styles_modu
 					}),
 					/* @__PURE__ */ jsx("div", {
 						className: getClassNameModal("footerContainer"),
-						children: /* @__PURE__ */ jsx(IR, { items: Y })
+						children: /* @__PURE__ */ jsx(VV, { items: Y })
 					})
 				]
 			})
@@ -10929,7 +10929,7 @@ var getClassName14 = get_class_name_factory_default("ObjectField", {
 };
 init_react_import();
 var useSafeId = () => {
-	if (React2.useId !== void 0) return React2.useId();
+	if (React.useId !== void 0) return React.useId();
 	let [m] = useState(generateId());
 	return m;
 }, getClassName15 = get_class_name_factory_default("Input", styles_module_default3), getClassNameWrapper = get_class_name_factory_default("InputWrapper", styles_module_default3), FieldLabel = ({ children: m, icon: x, label: S, el: C = "label", readOnly: T, className: D }) => /* @__PURE__ */ jsxs(C, {
@@ -11132,13 +11132,13 @@ var useOnDragFinished = (m, x = []) => {
 			let S = __spreadValues({}, x);
 			return delete S[m], S;
 		});
-	}, [X]), FR = Object.values(Y).filter(Boolean).length > 0, IR = useAppStore(useShallow((m) => m.state.indexes.nodes[C]?.path)), LR = useAppStore(useShallow((m) => {
+	}, [X]), BV = Object.values(Y).filter(Boolean).length > 0, VV = useAppStore(useShallow((m) => m.state.indexes.nodes[C]?.path)), HV = useAppStore(useShallow((m) => {
 		let x = getItem({
 			index: T,
 			zone: D
 		}, m.state);
 		return m.permissions.getPermissions({ item: x });
-	})), RR = useContext(ZoneStoreContext), [zR, BR] = useState(I || F), VR = useMemo(() => createDynamicCollisionDetector(zR), [zR]), { ref: HR, isDragging: $, sortable: UR } = useSortable({
+	})), UV = useContext(ZoneStoreContext), [WV, GV] = useState(I || F), KV = useMemo(() => createDynamicCollisionDetector(WV), [WV]), { ref: qV, isDragging: $, sortable: JV } = useSortable({
 		id: C,
 		index: T,
 		group: D,
@@ -11148,13 +11148,13 @@ var useOnDragFinished = (m, x = []) => {
 			zone: D,
 			index: T,
 			componentType: S,
-			containsActiveZone: FR,
+			containsActiveZone: BV,
 			depth: x,
-			path: IR || [],
+			path: VV || [],
 			inDroppableZone: L
 		},
 		collisionPriority: x,
-		collisionDetector: VR,
+		collisionDetector: KV,
 		transition: {
 			duration: 200,
 			easing: "cubic-bezier(0.2, 0, 0, 1)"
@@ -11162,65 +11162,65 @@ var useOnDragFinished = (m, x = []) => {
 		feedback: "clone"
 	});
 	useEffect(() => {
-		let m = RR.getState().enabledIndex[D];
-		UR.droppable.disabled = !m, UR.draggable.disabled = !LR.drag;
-		let x = RR.subscribe((m) => {
-			UR.droppable.disabled = !m.enabledIndex[D];
+		let m = UV.getState().enabledIndex[D];
+		JV.droppable.disabled = !m, JV.draggable.disabled = !HV.drag;
+		let x = UV.subscribe((m) => {
+			JV.droppable.disabled = !m.enabledIndex[D];
 		});
-		return WR.current && !LR.drag ? (WR.current.setAttribute("data-puck-disabled", ""), () => {
+		return YV.current && !HV.drag ? (YV.current.setAttribute("data-puck-disabled", ""), () => {
 			var m;
-			(m = WR.current) == null || m.removeAttribute("data-puck-disabled"), x();
+			(m = YV.current) == null || m.removeAttribute("data-puck-disabled"), x();
 		}) : x;
-	}, [LR.drag, D]);
-	let WR = useRef(null), GR = useCallback((m) => {
-		HR(m), m && (WR.current = m);
-	}, [HR]), [KR, qR] = useState();
+	}, [HV.drag, D]);
+	let YV = useRef(null), XV = useCallback((m) => {
+		qV(m), m && (YV.current = m);
+	}, [qV]), [ZV, QV] = useState();
 	useEffect(() => {
-		qR(q.enabled ? WR.current?.ownerDocument.body : WR.current?.closest("[data-puck-preview]") ?? document.body);
-	}, [q.enabled, WR.current]);
-	let JR = useCallback(() => {
-		if (!WR.current) return;
-		let m = WR.current.getBoundingClientRect(), x = getDeepScrollPosition(WR.current), S = q.enabled ? null : WR.current?.closest("[data-puck-preview]"), C = S?.getBoundingClientRect(), T = S ? getDeepScrollPosition(S) : {
+		QV(q.enabled ? YV.current?.ownerDocument.body : YV.current?.closest("[data-puck-preview]") ?? document.body);
+	}, [q.enabled, YV.current]);
+	let $V = useCallback(() => {
+		if (!YV.current) return;
+		let m = YV.current.getBoundingClientRect(), x = getDeepScrollPosition(YV.current), S = q.enabled ? null : YV.current?.closest("[data-puck-preview]"), C = S?.getBoundingClientRect(), T = S ? getDeepScrollPosition(S) : {
 			x: 0,
 			y: 0
 		}, D = {
 			x: x.x - T.x - (C?.left ?? 0),
 			y: x.y - T.y - (C?.top ?? 0)
 		}, O = {
-			height: WR.current.offsetHeight,
-			width: WR.current.offsetWidth
-		}, k = accumulateTransform(WR.current);
+			height: YV.current.offsetHeight,
+			width: YV.current.offsetWidth
+		}, k = accumulateTransform(YV.current);
 		return {
 			left: `${(m.left + D.x) / k.scaleX}px`,
 			top: `${(m.top + D.y) / k.scaleY}px`,
 			height: `${O.height}px`,
 			width: `${O.width}px`
 		};
-	}, [WR.current]), [YR, XR] = useState(), ZR = useCallback(() => {
-		XR(JR());
-	}, [WR.current, q]);
+	}, [YV.current]), [eH, tH] = useState(), nH = useCallback(() => {
+		tH($V());
+	}, [YV.current, q]);
 	useEffect(() => {
-		if (WR.current) {
-			let m = new ResizeObserver(ZR);
-			return m.observe(WR.current), () => {
+		if (YV.current) {
+			let m = new ResizeObserver(nH);
+			return m.observe(YV.current), () => {
 				m.disconnect();
 			};
 		}
-	}, [WR.current]);
-	let QR = useAppStore((m) => m.nodes.registerNode), $R = useCallback(() => {
-		fz(!1);
-	}, []), ez = useCallback(() => {
-		fz(!0);
+	}, [YV.current]);
+	let rH = useAppStore((m) => m.nodes.registerNode), iH = useCallback(() => {
+		_H(!1);
+	}, []), aH = useCallback(() => {
+		_H(!0);
 	}, []);
-	useEffect(() => (QR(C, {
+	useEffect(() => (rH(C, {
 		methods: {
-			sync: ZR,
-			showOverlay: ez,
-			hideOverlay: $R
+			sync: nH,
+			showOverlay: aH,
+			hideOverlay: iH
 		},
-		element: WR.current ?? null
+		element: YV.current ?? null
 	}), () => {
-		QR(C, {
+		rH(C, {
 			methods: {
 				sync: () => null,
 				hideOverlay: () => null,
@@ -11233,9 +11233,9 @@ var useOnDragFinished = (m, x = []) => {
 		D,
 		T,
 		S,
-		ZR
+		nH
 	]);
-	let tz = useMemo(() => W.actionBar || DefaultActionBar, [W.actionBar]), nz = useMemo(() => W.componentOverlay || DefaultOverlay, [W.componentOverlay]), rz = useCallback((m) => {
+	let oH = useMemo(() => W.actionBar || DefaultActionBar, [W.actionBar]), sH = useMemo(() => W.componentOverlay || DefaultOverlay, [W.componentOverlay]), cH = useCallback((m) => {
 		m.target.closest("[data-puck-overlay-portal]") || m.stopPropagation(), G({
 			type: "setUi",
 			ui: { itemSelector: {
@@ -11247,8 +11247,8 @@ var useOnDragFinished = (m, x = []) => {
 		T,
 		D,
 		C
-	]), iz = useAppStoreApi(), az = useCallback(() => {
-		let { nodes: m, zones: x } = iz.getState().state.indexes, S = m[C], T = S?.parentId ? m[S?.parentId] : null;
+	]), lH = useAppStoreApi(), uH = useCallback(() => {
+		let { nodes: m, zones: x } = lH.getState().state.indexes, S = m[C], T = S?.parentId ? m[S?.parentId] : null;
 		if (!T || !S.parentId) return;
 		let D = `${T.parentId}:${T.zone}`;
 		G({
@@ -11258,60 +11258,60 @@ var useOnDragFinished = (m, x = []) => {
 				index: x[D].contentIds.indexOf(S.parentId)
 			} }
 		});
-	}, [J, IR]), oz = useCallback(() => {
+	}, [J, VV]), dH = useCallback(() => {
 		G({
 			type: "duplicate",
 			sourceIndex: T,
 			sourceZone: D
 		});
-	}, [T, D]), sz = useCallback(() => {
+	}, [T, D]), fH = useCallback(() => {
 		G({
 			type: "remove",
 			index: T,
 			zone: D
 		});
-	}, [T, D]), [cz, lz] = useState(!1), uz = useContextStore(ZoneStoreContext, (m) => m.hoveringComponent === C);
+	}, [T, D]), [pH, mH] = useState(!1), hH = useContextStore(ZoneStoreContext, (m) => m.hoveringComponent === C);
 	useEffect(() => {
-		if (!WR.current) return;
-		let m = WR.current, x = (m) => {
-			RR.getState().draggedItem ? lz(!!$) : lz(!0), m.stopPropagation();
+		if (!YV.current) return;
+		let m = YV.current, x = (m) => {
+			UV.getState().draggedItem ? mH(!!$) : mH(!0), m.stopPropagation();
 		}, S = (m) => {
-			m.stopPropagation(), lz(!1);
+			m.stopPropagation(), mH(!1);
 		};
-		return m.setAttribute("data-puck-component", C), m.setAttribute("data-puck-dnd", C), m.style.position = "relative", m.addEventListener("click", rz), m.addEventListener("mouseover", x), m.addEventListener("mouseout", S), () => {
-			m.removeAttribute("data-puck-component"), m.removeAttribute("data-puck-dnd"), m.removeEventListener("click", rz), m.removeEventListener("mouseover", x), m.removeEventListener("mouseout", S);
+		return m.setAttribute("data-puck-component", C), m.setAttribute("data-puck-dnd", C), m.style.position = "relative", m.addEventListener("click", cH), m.addEventListener("mouseover", x), m.addEventListener("mouseout", S), () => {
+			m.removeAttribute("data-puck-component"), m.removeAttribute("data-puck-dnd"), m.removeEventListener("click", cH), m.removeEventListener("mouseover", x), m.removeEventListener("mouseout", S);
 		};
 	}, [
-		WR.current,
-		rz,
-		FR,
+		YV.current,
+		cH,
+		BV,
 		D,
 		C,
 		$,
 		L
 	]);
-	let [dz, fz] = useState(!1), [pz, mz] = useState(!0), [hz, gz] = useTransition();
+	let [gH, _H] = useState(!1), [vH, yH] = useState(!0), [bH, xH] = useTransition();
 	useEffect(() => {
-		gz(() => {
-			cz || uz || k ? (ZR(), fz(!0), vz(!1)) : fz(!1);
+		xH(() => {
+			pH || hH || k ? (nH(), _H(!0), CH(!1)) : _H(!1);
 		});
 	}, [
-		cz,
-		uz,
+		pH,
+		hH,
 		k,
 		q
 	]);
-	let [_z, vz] = useState(!1), yz = useOnDragFinished((m) => {
-		m ? gz(() => {
-			ZR(), mz(!0);
-		}) : mz(!1);
+	let [SH, CH] = useState(!1), wH = useOnDragFinished((m) => {
+		m ? xH(() => {
+			nH(), yH(!0);
+		}) : yH(!1);
 	});
 	useEffect(() => {
-		$ && vz(!0);
+		$ && CH(!0);
 	}, [$]), useEffect(() => {
-		if (_z) return yz();
-	}, [_z, yz]);
-	let bz = useCallback((m) => {
+		if (SH) return wH();
+	}, [SH, wH]);
+	let TH = useCallback((m) => {
 		if (m && m.ownerDocument.defaultView) {
 			let x = m.getBoundingClientRect(), S = x.x < 0, C = x.y < 0;
 			S && (m.style.transformOrigin = "left top", m.style.left = "0px"), C && (m.style.top = "12px", S || (m.style.transformOrigin = "right top"));
@@ -11319,24 +11319,24 @@ var useOnDragFinished = (m, x = []) => {
 	}, [R]);
 	useEffect(() => {
 		if (I) {
-			BR(I);
+			GV(I);
 			return;
 		}
-		if (WR.current) {
-			let m = window.getComputedStyle(WR.current);
+		if (YV.current) {
+			let m = window.getComputedStyle(YV.current);
 			if (m.display === "inline" || m.display === "inline-block") {
-				BR("x");
+				GV("x");
 				return;
 			}
 		}
-		BR(F);
+		GV(F);
 	}, [
-		WR,
+		YV,
 		I,
 		F
 	]);
-	let xz = useMemo(() => J?.areaId && J?.areaId !== "root" && /* @__PURE__ */ jsx(ActionBar.Action, {
-		onClick: az,
+	let EH = useMemo(() => J?.areaId && J?.areaId !== "root" && /* @__PURE__ */ jsx(ActionBar.Action, {
+		onClick: uH,
 		label: "Select parent",
 		children: /* @__PURE__ */ jsx(CornerLeftUp, { size: 16 })
 	}), [J?.areaId]);
@@ -11357,13 +11357,13 @@ var useOnDragFinished = (m, x = []) => {
 			Z,
 			Q
 		]),
-		children: [pz && dz && createPortal(/* @__PURE__ */ jsxs("div", {
+		children: [vH && gH && createPortal(/* @__PURE__ */ jsxs("div", {
 			className: getClassName16({
 				isSelected: k,
 				isDragging: $,
-				hover: cz || uz
+				hover: pH || hH
 			}),
-			style: __spreadValues({}, YR),
+			style: __spreadValues({}, eH),
 			"data-puck-overlay": !0,
 			children: [
 				A,
@@ -11383,16 +11383,16 @@ var useOnDragFinished = (m, x = []) => {
 							paddingLeft: actionsSide,
 							paddingRight: actionsSide
 						},
-						ref: bz,
-						children: /* @__PURE__ */ jsxs(tz, {
-							parentAction: xz,
+						ref: TH,
+						children: /* @__PURE__ */ jsxs(oH, {
+							parentAction: EH,
 							label: DEBUG2 ? C : j,
-							children: [LR.duplicate && /* @__PURE__ */ jsx(ActionBar.Action, {
-								onClick: oz,
+							children: [HV.duplicate && /* @__PURE__ */ jsx(ActionBar.Action, {
+								onClick: dH,
 								label: "Duplicate",
 								children: /* @__PURE__ */ jsx(Copy, { size: 16 })
-							}), LR.delete && /* @__PURE__ */ jsx(ActionBar.Action, {
-								onClick: sz,
+							}), HV.delete && /* @__PURE__ */ jsx(ActionBar.Action, {
+								onClick: fH,
 								label: "Delete",
 								children: /* @__PURE__ */ jsx(Trash, { size: 16 })
 							})]
@@ -11401,16 +11401,16 @@ var useOnDragFinished = (m, x = []) => {
 				}),
 				/* @__PURE__ */ jsx("div", {
 					className: getClassName16("overlayWrapper"),
-					children: /* @__PURE__ */ jsx(nz, {
+					children: /* @__PURE__ */ jsx(sH, {
 						componentId: C,
 						componentType: S,
-						hover: cz,
+						hover: pH,
 						isSelected: k,
 						children: /* @__PURE__ */ jsx("div", { className: getClassName16("overlay") })
 					})
 				})
 			]
-		}), KR || document.body), m(GR)]
+		}), ZV || document.body), m(XV)]
 	});
 };
 init_react_import();
@@ -12197,10 +12197,10 @@ var getSelectorForId = (m, x) => {
 			textAlign: "center"
 		},
 		children: ["No configuration for ", F.type]
-	}), FR = F.type, IR = "previewType" in F ? F.previewType === "insert" : !1;
-	return IR && (Q = W), /* @__PURE__ */ jsx(DraggableComponent, {
+	}), BV = F.type, VV = "previewType" in F ? F.previewType === "insert" : !1;
+	return VV && (Q = W), /* @__PURE__ */ jsx(DraggableComponent, {
 		id: x,
-		componentType: FR,
+		componentType: BV,
 		zoneCompound: m,
 		depth: k + 1,
 		index: S,
@@ -12210,7 +12210,7 @@ var getSelectorForId = (m, x) => {
 		autoDragAxis: C,
 		userDragAxis: T,
 		inDroppableZone: D,
-		children: (m) => I?.inline && !IR ? /* @__PURE__ */ jsx(Fragment$1, { children: /* @__PURE__ */ jsx(Q, __spreadProps(__spreadValues({}, Z), { puck: __spreadProps(__spreadValues({}, Z.puck), { dragRef: m }) })) }) : /* @__PURE__ */ jsx("div", {
+		children: (m) => I?.inline && !VV ? /* @__PURE__ */ jsx(Fragment$1, { children: /* @__PURE__ */ jsx(Q, __spreadProps(__spreadValues({}, Z), { puck: __spreadProps(__spreadValues({}, Z.puck), { dragRef: m }) })) }) : /* @__PURE__ */ jsx("div", {
 			ref: m,
 			children: /* @__PURE__ */ jsx(Q, __spreadValues({}, Z))
 		})
@@ -12224,7 +12224,7 @@ var getSelectorForId = (m, x) => {
 	}, [q, j]), useEffect(() => {
 		q === "dropzone" && U !== rootDroppableId && console.warn("DropZones have been deprecated in favor of slot fields and will be removed in a future version of Puck. Please see the migration guide: https://www.puckeditor.com/docs/guides/migrations/dropzones-to-slots");
 	}, [q]);
-	let J = useMemo(() => K || [], [K]), PR = useRef(null), Y = useCallback((m) => {
+	let J = useMemo(() => K || [], [K]), zV = useRef(null), Y = useCallback((m) => {
 		if (!m) return !0;
 		if (S) {
 			let C = x || [];
@@ -12242,19 +12242,19 @@ var getSelectorForId = (m, x) => {
 		Q,
 		U
 	]);
-	let [FR, IR] = useContentIdsWithPreview(J, U), LR = Q && (IR ? FR.length === 1 : FR.length === 0), RR = useContext(ZoneStoreContext);
+	let [BV, VV] = useContentIdsWithPreview(J, U), HV = Q && (VV ? BV.length === 1 : BV.length === 0), UV = useContext(ZoneStoreContext);
 	useEffect(() => {
-		let { enabledIndex: m } = RR.getState();
-		RR.setState({ enabledIndex: __spreadProps(__spreadValues({}, m), { [U]: Q }) });
+		let { enabledIndex: m } = UV.getState();
+		UV.setState({ enabledIndex: __spreadProps(__spreadValues({}, m), { [U]: Q }) });
 	}, [
 		Q,
-		RR,
+		UV,
 		U
 	]);
-	let { ref: zR } = useDroppable({
+	let { ref: WV } = useDroppable({
 		id: U,
 		collisionPriority: Q ? I : 0,
-		disabled: !LR,
+		disabled: !HV,
 		collisionDetector: pointerIntersection,
 		type: "dropzone",
 		data: {
@@ -12263,37 +12263,37 @@ var getSelectorForId = (m, x) => {
 			isDroppableTarget: X,
 			path: H || []
 		}
-	}), BR = useAppStore((m) => m?.selectedItem && F === m?.selectedItem.props.id), [VR] = useDragAxis(PR, O), [HR, $] = useMinEmptyHeight({
+	}), GV = useAppStore((m) => m?.selectedItem && F === m?.selectedItem.props.id), [KV] = useDragAxis(zV, O), [qV, $] = useMinEmptyHeight({
 		zoneCompound: U,
 		userMinEmptyHeight: D,
-		ref: PR
+		ref: zV
 	});
 	return /* @__PURE__ */ jsx("div", {
 		className: `${getClassName19({
 			isRootZone: W,
 			hoveringOverArea: Z,
 			isEnabled: Q,
-			isAreaSelected: BR,
+			isAreaSelected: GV,
 			hasChildren: J.length > 0,
 			isAnimating: $
 		})}${T ? ` ${T}` : ""}`,
 		ref: (m) => {
 			assignRefs([
-				PR,
-				zR,
+				zV,
+				WV,
 				k
 			], m);
 		},
 		"data-testid": `dropzone:${U}`,
 		"data-puck-dropzone": U,
 		style: __spreadProps(__spreadValues({}, C), {
-			"--min-empty-height": `${HR}px`,
+			"--min-empty-height": `${qV}px`,
 			backgroundColor: RENDER_DEBUG ? getRandomColor() : C?.backgroundColor
 		}),
-		children: FR.map((m, x) => /* @__PURE__ */ jsx(DropZoneChildMemo, {
+		children: BV.map((m, x) => /* @__PURE__ */ jsx(DropZoneChildMemo, {
 			zoneCompound: U,
 			componentId: m,
-			dragAxis: VR,
+			dragAxis: KV,
 			index: x,
 			collisionAxis: O,
 			inDroppableZone: X
@@ -12330,7 +12330,7 @@ var getSelectorForId = (m, x) => {
 	}));
 }), DropZonePure = (m) => /* @__PURE__ */ jsx(DropZone, __spreadValues({}, m)), DropZone = forwardRef(function(m, x) {
 	return useContext(dropZoneContext)?.mode === "edit" ? /* @__PURE__ */ jsx(Fragment$1, { children: /* @__PURE__ */ jsx(DropZoneEdit, __spreadProps(__spreadValues({}, m), { ref: x })) }) : /* @__PURE__ */ jsx(Fragment$1, { children: /* @__PURE__ */ jsx(DropZoneRender, __spreadProps(__spreadValues({}, m), { ref: x })) });
-}), renderContext = React2.createContext({
+}), renderContext = React.createContext({
 	config: { components: {} },
 	data: {
 		root: {},
@@ -13650,7 +13650,7 @@ function PuckProvider({ children: m }) {
 	})), K = N?.index || G.length - 1, q = G[K].state, J = useLoadedOverrides({
 		overrides: k,
 		plugins: O
-	}), PR = useMemo(() => __spreadValues(__spreadValues({}, (O || []).reduce((m, x) => __spreadValues(__spreadValues({}, m), x.fieldTransforms), {})), L), [L, O]), Y = useCallback((m) => ({
+	}), zV = useMemo(() => __spreadValues(__spreadValues({}, (O || []).reduce((m, x) => __spreadValues(__spreadValues({}, m), x.fieldTransforms), {})), L), [L, O]), Y = useCallback((m) => ({
 		state: m,
 		config: x,
 		plugins: O || [],
@@ -13659,7 +13659,7 @@ function PuckProvider({ children: m }) {
 		iframe: R,
 		onAction: I,
 		metadata: F,
-		fieldTransforms: PR
+		fieldTransforms: zV
 	}), [
 		q,
 		x,
@@ -13669,7 +13669,7 @@ function PuckProvider({ children: m }) {
 		R,
 		I,
 		F,
-		PR
+		zV
 	]), [X] = useState(() => createAppStore(Y(q)));
 	useEffect(() => {
 		process.env.NODE_ENV !== "production" && (window.__PUCK_INTERNAL_DO_NOT_USE = { appStore: X });
@@ -13848,7 +13848,7 @@ function useConstant(m) {
 	let x = useRef(null);
 	return x.current === null && (x.current = m()), x.current;
 }
-var isBrowser$1 = typeof window < "u", useIsomorphicLayoutEffect = isBrowser$1 ? useLayoutEffect : useEffect, PresenceContext = /* @__PURE__ */ createContext(null);
+var isBrowser$1 = typeof window < "u", useIsomorphicLayoutEffect$1 = isBrowser$1 ? useLayoutEffect : useEffect, PresenceContext = /* @__PURE__ */ createContext(null);
 function addUniqueItem(m, x) {
 	m.indexOf(x) === -1 && m.push(x);
 }
@@ -13867,7 +13867,7 @@ process.env.NODE_ENV !== "production" && (warning = (m, x, S) => {
 	if (!m) throw Error(formatErrorMessage(x, S));
 });
 var MotionGlobalConfig = {}, isNumericalString = (m) => /^-?(?:\d+(?:\.\d+)?|\.\d+)$/u.test(m);
-function isObject(m) {
+function isObject$3(m) {
 	return typeof m == "object" && !!m;
 }
 var isZeroValueString = (m) => /^0[^.\s]+$/u.test(m);
@@ -14004,14 +14004,14 @@ function createRenderBatcher(m, x) {
 		steps: O
 	};
 }
-var { schedule: frame, cancel: cancelFrame, state: frameData, steps: frameSteps } = /* @__PURE__ */ createRenderBatcher(typeof requestAnimationFrame < "u" ? requestAnimationFrame : noop$1, !0), now;
+var { schedule: frame, cancel: cancelFrame, state: frameData, steps: frameSteps } = /* @__PURE__ */ createRenderBatcher(typeof requestAnimationFrame < "u" ? requestAnimationFrame : noop$1, !0), now$1;
 function clearTime() {
-	now = void 0;
+	now$1 = void 0;
 }
 var time = {
-	now: () => (now === void 0 && time.set(frameData.isProcessing || MotionGlobalConfig.useManualTiming ? frameData.timestamp : performance.now()), now),
+	now: () => (now$1 === void 0 && time.set(frameData.isProcessing || MotionGlobalConfig.useManualTiming ? frameData.timestamp : performance.now()), now$1),
 	set: (m) => {
-		now = m, queueMicrotask(clearTime);
+		now$1 = m, queueMicrotask(clearTime);
 	}
 }, activeAnimations = {
 	layout: 0,
@@ -15261,7 +15261,7 @@ function resolveElements(m, x, S) {
 }
 var getValueAsType = (m, x) => x && typeof m == "number" ? x.transform(m) : m;
 function isHTMLElement(m) {
-	return isObject(m) && "offsetHeight" in m;
+	return isObject$3(m) && "offsetHeight" in m;
 }
 var MAX_VELOCITY_DELTA = 30, isFloat = (m) => !isNaN(parseFloat(m)), collectMotionValues = { current: void 0 }, MotionValue = class {
 	constructor(m, x = {}) {
@@ -15447,7 +15447,7 @@ function press(m, x, S = {}) {
 	}), D;
 }
 function isSVGElement(m) {
-	return isObject(m) && "ownerSVGElement" in m;
+	return isObject$3(m) && "ownerSVGElement" in m;
 }
 function isSVGSVGElement(m) {
 	return isSVGElement(m) && m.tagName === "svg";
@@ -15844,7 +15844,7 @@ function useVisualElement(m, x, S, C, T) {
 		M && I.current && M.update(S, k);
 	});
 	let R = S[optimizedAppearDataAttribute], z = useRef(!!R && !window.MotionHandoffIsComplete?.(R) && window.MotionHasOptimisedAnimation?.(R));
-	return useIsomorphicLayoutEffect(() => {
+	return useIsomorphicLayoutEffect$1(() => {
 		M && (I.current = !0, window.MotionIsMounted = !0, M.updateFeatures(), M.scheduleRenderMicrotask(), z.current && M.animationState && M.animationState.animateChanges());
 	}), useEffect(() => {
 		M && (!z.current && M.animationState && M.animationState.animateChanges(), z.current &&= (queueMicrotask(() => {
@@ -16236,7 +16236,7 @@ function renderHTML(m, { style: x, vars: S }, C, T) {
 	for (O in x) D[O] = x[O];
 	for (O in T?.applyProjectionStyles(D, C), S) D.setProperty(O, S[O]);
 }
-function getComputedStyle$1(m) {
+function getComputedStyle$2(m) {
 	return window.getComputedStyle(m);
 }
 var HTMLVisualElement = class extends DOMVisualElement {
@@ -16246,7 +16246,7 @@ var HTMLVisualElement = class extends DOMVisualElement {
 	readValueFromInstance(m, x) {
 		if (transformProps.has(x)) return this.projection?.isProjecting ? defaultTransformValue(x) : readTransformValue(m, x);
 		{
-			let S = getComputedStyle$1(m), C = (isCSSVariableName(x) ? S.getPropertyValue(x) : S[x]) || 0;
+			let S = getComputedStyle$2(m), C = (isCSSVariableName(x) ? S.getPropertyValue(x) : S[x]) || 0;
 			return typeof C == "string" ? C.trim() : C;
 		}
 	}
@@ -16550,10 +16550,10 @@ function createAnimationState(m) {
 				...M,
 				...G
 			}), C && m.blockInitialAnimation && (H = !1);
-			let NR = z && B;
-			H && (!NR || U) && A.push(...W.map((x) => {
+			let RV = z && B;
+			H && (!RV || U) && A.push(...W.map((x) => {
 				let S = { type: P };
-				if (typeof x == "string" && C && !NR && m.manuallyAnimateOnMount && m.parent) {
+				if (typeof x == "string" && C && !RV && m.manuallyAnimateOnMount && m.parent) {
 					let { parent: C } = m, T = resolveVariant(C, x);
 					if (C.enteringChildren && T) {
 						let { delayChildren: x } = T.transition || {};
@@ -18313,6 +18313,2359 @@ function HomePageContentWrapper(m) {
 		image3: k
 	});
 }
+function isObject$2(m) {
+	return typeof m == "object" && !!m && "constructor" in m && m.constructor === Object;
+}
+function extend$2(m = {}, x = {}) {
+	let S = [
+		"__proto__",
+		"constructor",
+		"prototype"
+	];
+	Object.keys(x).filter((m) => S.indexOf(m) < 0).forEach((S) => {
+		m[S] === void 0 ? m[S] = x[S] : isObject$2(x[S]) && isObject$2(m[S]) && Object.keys(x[S]).length > 0 && extend$2(m[S], x[S]);
+	});
+}
+var ssrDocument = {
+	body: {},
+	addEventListener() {},
+	removeEventListener() {},
+	activeElement: {
+		blur() {},
+		nodeName: ""
+	},
+	querySelector() {
+		return null;
+	},
+	querySelectorAll() {
+		return [];
+	},
+	getElementById() {
+		return null;
+	},
+	createEvent() {
+		return { initEvent() {} };
+	},
+	createElement() {
+		return {
+			children: [],
+			childNodes: [],
+			style: {},
+			setAttribute() {},
+			getElementsByTagName() {
+				return [];
+			}
+		};
+	},
+	createElementNS() {
+		return {};
+	},
+	importNode() {
+		return null;
+	},
+	location: {
+		hash: "",
+		host: "",
+		hostname: "",
+		href: "",
+		origin: "",
+		pathname: "",
+		protocol: "",
+		search: ""
+	}
+};
+function getDocument() {
+	let m = typeof document < "u" ? document : {};
+	return extend$2(m, ssrDocument), m;
+}
+var ssrWindow = {
+	document: ssrDocument,
+	navigator: { userAgent: "" },
+	location: {
+		hash: "",
+		host: "",
+		hostname: "",
+		href: "",
+		origin: "",
+		pathname: "",
+		protocol: "",
+		search: ""
+	},
+	history: {
+		replaceState() {},
+		pushState() {},
+		go() {},
+		back() {}
+	},
+	CustomEvent: function() {
+		return this;
+	},
+	addEventListener() {},
+	removeEventListener() {},
+	getComputedStyle() {
+		return { getPropertyValue() {
+			return "";
+		} };
+	},
+	Image() {},
+	Date() {},
+	screen: {},
+	setTimeout() {},
+	clearTimeout() {},
+	matchMedia() {
+		return {};
+	},
+	requestAnimationFrame(m) {
+		return typeof setTimeout > "u" ? (m(), null) : setTimeout(m, 0);
+	},
+	cancelAnimationFrame(m) {
+		typeof setTimeout > "u" || clearTimeout(m);
+	}
+};
+function getWindow() {
+	let m = typeof window < "u" ? window : {};
+	return extend$2(m, ssrWindow), m;
+}
+function classesToTokens(m = "") {
+	return m.trim().split(" ").filter((m) => !!m.trim());
+}
+function deleteProps(m) {
+	let x = m;
+	Object.keys(x).forEach((m) => {
+		try {
+			x[m] = null;
+		} catch {}
+		try {
+			delete x[m];
+		} catch {}
+	});
+}
+function nextTick(m, x = 0) {
+	return setTimeout(m, x);
+}
+function now() {
+	return Date.now();
+}
+function getComputedStyle$1(m) {
+	let x = getWindow(), S;
+	return x.getComputedStyle && (S = x.getComputedStyle(m, null)), !S && m.currentStyle && (S = m.currentStyle), S ||= m.style, S;
+}
+function getTranslate(m, x = "x") {
+	let S = getWindow(), C, T, D, O = getComputedStyle$1(m);
+	return S.WebKitCSSMatrix ? (T = O.transform || O.webkitTransform, T.split(",").length > 6 && (T = T.split(", ").map((m) => m.replace(",", ".")).join(", ")), D = new S.WebKitCSSMatrix(T === "none" ? "" : T)) : (D = O.MozTransform || O.OTransform || O.MsTransform || O.msTransform || O.transform || O.getPropertyValue("transform").replace("translate(", "matrix(1, 0, 0, 1,"), C = D.toString().split(",")), x === "x" && (T = S.WebKitCSSMatrix ? D.m41 : C.length === 16 ? parseFloat(C[12]) : parseFloat(C[4])), x === "y" && (T = S.WebKitCSSMatrix ? D.m42 : C.length === 16 ? parseFloat(C[13]) : parseFloat(C[5])), T || 0;
+}
+function isObject$1(m) {
+	return typeof m == "object" && !!m && m.constructor && Object.prototype.toString.call(m).slice(8, -1) === "Object";
+}
+function isNode(m) {
+	return typeof window < "u" && window.HTMLElement !== void 0 ? m instanceof HTMLElement : m && (m.nodeType === 1 || m.nodeType === 11);
+}
+function extend$1(...m) {
+	let x = Object(m[0]), S = [
+		"__proto__",
+		"constructor",
+		"prototype"
+	];
+	for (let C = 1; C < m.length; C += 1) {
+		let T = m[C];
+		if (T != null && !isNode(T)) {
+			let m = Object.keys(Object(T)).filter((m) => S.indexOf(m) < 0);
+			for (let S = 0, C = m.length; S < C; S += 1) {
+				let C = m[S], D = Object.getOwnPropertyDescriptor(T, C);
+				D !== void 0 && D.enumerable && (isObject$1(x[C]) && isObject$1(T[C]) ? T[C].__swiper__ ? x[C] = T[C] : extend$1(x[C], T[C]) : !isObject$1(x[C]) && isObject$1(T[C]) ? (x[C] = {}, T[C].__swiper__ ? x[C] = T[C] : extend$1(x[C], T[C])) : x[C] = T[C]);
+			}
+		}
+	}
+	return x;
+}
+function setCSSProperty(m, x, S) {
+	m.style.setProperty(x, S);
+}
+function animateCSSModeScroll({ swiper: m, targetPosition: x, side: S }) {
+	let C = getWindow(), T = -m.translate, D = null, O, k = m.params.speed;
+	m.wrapperEl.style.scrollSnapType = "none", C.cancelAnimationFrame(m.cssModeFrameID);
+	let A = x > T ? "next" : "prev", j = (m, x) => A === "next" && m >= x || A === "prev" && m <= x, M = () => {
+		O = (/* @__PURE__ */ new Date()).getTime(), D === null && (D = O);
+		let A = Math.max(Math.min((O - D) / k, 1), 0), N = T + (.5 - Math.cos(A * Math.PI) / 2) * (x - T);
+		if (j(N, x) && (N = x), m.wrapperEl.scrollTo({ [S]: N }), j(N, x)) {
+			m.wrapperEl.style.overflow = "hidden", m.wrapperEl.style.scrollSnapType = "", setTimeout(() => {
+				m.wrapperEl.style.overflow = "", m.wrapperEl.scrollTo({ [S]: N });
+			}), C.cancelAnimationFrame(m.cssModeFrameID);
+			return;
+		}
+		m.cssModeFrameID = C.requestAnimationFrame(M);
+	};
+	M();
+}
+function elementChildren(m, x = "") {
+	let S = getWindow(), C = [...m.children];
+	return S.HTMLSlotElement && m instanceof HTMLSlotElement && C.push(...m.assignedElements()), x ? C.filter((m) => m.matches(x)) : C;
+}
+function elementIsChildOfSlot(m, x) {
+	let S = [x];
+	for (; S.length > 0;) {
+		let x = S.shift();
+		if (m === x) return !0;
+		S.push(...x.children, ...x.shadowRoot ? x.shadowRoot.children : [], ...x.assignedElements ? x.assignedElements() : []);
+	}
+}
+function elementIsChildOf(m, x) {
+	let S = getWindow(), C = x.contains(m);
+	return !C && S.HTMLSlotElement && x instanceof HTMLSlotElement && (C = [...x.assignedElements()].includes(m), C ||= elementIsChildOfSlot(m, x)), C;
+}
+function showWarning(m) {
+	try {
+		console.warn(m);
+		return;
+	} catch {}
+}
+function createElement$1(m, x = []) {
+	let S = document.createElement(m);
+	return S.classList.add(...Array.isArray(x) ? x : classesToTokens(x)), S;
+}
+function elementPrevAll(m, x) {
+	let S = [];
+	for (; m.previousElementSibling;) {
+		let C = m.previousElementSibling;
+		x ? C.matches(x) && S.push(C) : S.push(C), m = C;
+	}
+	return S;
+}
+function elementNextAll(m, x) {
+	let S = [];
+	for (; m.nextElementSibling;) {
+		let C = m.nextElementSibling;
+		x ? C.matches(x) && S.push(C) : S.push(C), m = C;
+	}
+	return S;
+}
+function elementStyle(m, x) {
+	return getWindow().getComputedStyle(m, null).getPropertyValue(x);
+}
+function elementIndex(m) {
+	let x = m, S;
+	if (x) {
+		for (S = 0; (x = x.previousSibling) !== null;) x.nodeType === 1 && (S += 1);
+		return S;
+	}
+}
+function elementParents(m, x) {
+	let S = [], C = m.parentElement;
+	for (; C;) x ? C.matches(x) && S.push(C) : S.push(C), C = C.parentElement;
+	return S;
+}
+function elementOuterSize(m, x, S) {
+	let C = getWindow();
+	return S ? m[x === "width" ? "offsetWidth" : "offsetHeight"] + parseFloat(C.getComputedStyle(m, null).getPropertyValue(x === "width" ? "margin-right" : "margin-top")) + parseFloat(C.getComputedStyle(m, null).getPropertyValue(x === "width" ? "margin-left" : "margin-bottom")) : m.offsetWidth;
+}
+function setInnerHTML(m, x = "") {
+	typeof trustedTypes < "u" ? m.innerHTML = trustedTypes.createPolicy("html", { createHTML: (m) => m }).createHTML(x) : m.innerHTML = x;
+}
+var support;
+function calcSupport() {
+	let m = getWindow(), x = getDocument();
+	return {
+		smoothScroll: x.documentElement && x.documentElement.style && "scrollBehavior" in x.documentElement.style,
+		touch: !!("ontouchstart" in m || m.DocumentTouch && x instanceof m.DocumentTouch)
+	};
+}
+function getSupport() {
+	return support ||= calcSupport(), support;
+}
+var deviceCached;
+function calcDevice({ userAgent: m } = {}) {
+	let x = getSupport(), S = getWindow(), C = S.navigator.platform, T = m || S.navigator.userAgent, D = {
+		ios: !1,
+		android: !1
+	}, O = S.screen.width, k = S.screen.height, A = T.match(/(Android);?[\s\/]+([\d.]+)?/), j = T.match(/(iPad)(?!\1).*OS\s([\d_]+)/), M = T.match(/(iPod)(.*OS\s([\d_]+))?/), N = !j && T.match(/(iPhone\sOS|iOS)\s([\d_]+)/), P = C === "Win32", F = C === "MacIntel";
+	return !j && F && x.touch && [
+		"1024x1366",
+		"1366x1024",
+		"834x1194",
+		"1194x834",
+		"834x1112",
+		"1112x834",
+		"768x1024",
+		"1024x768",
+		"820x1180",
+		"1180x820",
+		"810x1080",
+		"1080x810"
+	].indexOf(`${O}x${k}`) >= 0 && (j = T.match(/(Version)\/([\d.]+)/), j ||= [
+		0,
+		1,
+		"13_0_0"
+	], F = !1), A && !P && (D.os = "android", D.android = !0), (j || N || M) && (D.os = "ios", D.ios = !0), D;
+}
+function getDevice(m = {}) {
+	return deviceCached ||= calcDevice(m), deviceCached;
+}
+var browser;
+function calcBrowser() {
+	let m = getWindow(), x = getDevice(), S = !1;
+	function C() {
+		let x = m.navigator.userAgent.toLowerCase();
+		return x.indexOf("safari") >= 0 && x.indexOf("chrome") < 0 && x.indexOf("android") < 0;
+	}
+	if (C()) {
+		let x = String(m.navigator.userAgent);
+		if (x.includes("Version/")) {
+			let [m, C] = x.split("Version/")[1].split(" ")[0].split(".").map((m) => Number(m));
+			S = m < 16 || m === 16 && C < 2;
+		}
+	}
+	let T = /(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/i.test(m.navigator.userAgent), D = C(), O = D || T && x.ios;
+	return {
+		isSafari: S || D,
+		needPerspectiveFix: S,
+		need3dFix: O,
+		isWebView: T
+	};
+}
+function getBrowser() {
+	return browser ||= calcBrowser(), browser;
+}
+function Resize({ swiper: m, on: x, emit: S }) {
+	let C = getWindow(), T = null, D = null, O = () => {
+		!m || m.destroyed || !m.initialized || (S("beforeResize"), S("resize"));
+	}, k = () => {
+		!m || m.destroyed || !m.initialized || (T = new ResizeObserver((x) => {
+			D = C.requestAnimationFrame(() => {
+				let { width: S, height: C } = m, T = S, D = C;
+				x.forEach(({ contentBoxSize: x, contentRect: S, target: C }) => {
+					C && C !== m.el || (T = S ? S.width : (x[0] || x).inlineSize, D = S ? S.height : (x[0] || x).blockSize);
+				}), (T !== S || D !== C) && O();
+			});
+		}), T.observe(m.el));
+	}, A = () => {
+		D && C.cancelAnimationFrame(D), T && T.unobserve && m.el && (T.unobserve(m.el), T = null);
+	}, j = () => {
+		!m || m.destroyed || !m.initialized || S("orientationchange");
+	};
+	x("init", () => {
+		if (m.params.resizeObserver && C.ResizeObserver !== void 0) {
+			k();
+			return;
+		}
+		C.addEventListener("resize", O), C.addEventListener("orientationchange", j);
+	}), x("destroy", () => {
+		A(), C.removeEventListener("resize", O), C.removeEventListener("orientationchange", j);
+	});
+}
+function Observer({ swiper: m, extendParams: x, on: S, emit: C }) {
+	let T = [], D = getWindow(), O = (x, S = {}) => {
+		let O = new (D.MutationObserver || D.WebkitMutationObserver)((x) => {
+			if (m.__preventObserver__) return;
+			if (x.length === 1) {
+				C("observerUpdate", x[0]);
+				return;
+			}
+			let S = function() {
+				C("observerUpdate", x[0]);
+			};
+			D.requestAnimationFrame ? D.requestAnimationFrame(S) : D.setTimeout(S, 0);
+		});
+		O.observe(x, {
+			attributes: S.attributes === void 0 ? !0 : S.attributes,
+			childList: m.isElement || (S.childList === void 0 ? !0 : S).childList,
+			characterData: S.characterData === void 0 ? !0 : S.characterData
+		}), T.push(O);
+	};
+	x({
+		observer: !1,
+		observeParents: !1,
+		observeSlideChildren: !1
+	}), S("init", () => {
+		if (m.params.observer) {
+			if (m.params.observeParents) {
+				let x = elementParents(m.hostEl);
+				for (let m = 0; m < x.length; m += 1) O(x[m]);
+			}
+			O(m.hostEl, { childList: m.params.observeSlideChildren }), O(m.wrapperEl, { attributes: !1 });
+		}
+	}), S("destroy", () => {
+		T.forEach((m) => {
+			m.disconnect();
+		}), T.splice(0, T.length);
+	});
+}
+var eventsEmitter = {
+	on(m, x, S) {
+		let C = this;
+		if (!C.eventsListeners || C.destroyed || typeof x != "function") return C;
+		let T = S ? "unshift" : "push";
+		return m.split(" ").forEach((m) => {
+			C.eventsListeners[m] || (C.eventsListeners[m] = []), C.eventsListeners[m][T](x);
+		}), C;
+	},
+	once(m, x, S) {
+		let C = this;
+		if (!C.eventsListeners || C.destroyed || typeof x != "function") return C;
+		function T(...S) {
+			C.off(m, T), T.__emitterProxy && delete T.__emitterProxy, x.apply(C, S);
+		}
+		return T.__emitterProxy = x, C.on(m, T, S);
+	},
+	onAny(m, x) {
+		let S = this;
+		if (!S.eventsListeners || S.destroyed || typeof m != "function") return S;
+		let C = x ? "unshift" : "push";
+		return S.eventsAnyListeners.indexOf(m) < 0 && S.eventsAnyListeners[C](m), S;
+	},
+	offAny(m) {
+		let x = this;
+		if (!x.eventsListeners || x.destroyed || !x.eventsAnyListeners) return x;
+		let S = x.eventsAnyListeners.indexOf(m);
+		return S >= 0 && x.eventsAnyListeners.splice(S, 1), x;
+	},
+	off(m, x) {
+		let S = this;
+		return !S.eventsListeners || S.destroyed || !S.eventsListeners || m.split(" ").forEach((m) => {
+			x === void 0 ? S.eventsListeners[m] = [] : S.eventsListeners[m] && S.eventsListeners[m].forEach((C, T) => {
+				(C === x || C.__emitterProxy && C.__emitterProxy === x) && S.eventsListeners[m].splice(T, 1);
+			});
+		}), S;
+	},
+	emit(...m) {
+		let x = this;
+		if (!x.eventsListeners || x.destroyed || !x.eventsListeners) return x;
+		let S, C, T;
+		return typeof m[0] == "string" || Array.isArray(m[0]) ? (S = m[0], C = m.slice(1, m.length), T = x) : (S = m[0].events, C = m[0].data, T = m[0].context || x), C.unshift(T), (Array.isArray(S) ? S : S.split(" ")).forEach((m) => {
+			x.eventsAnyListeners && x.eventsAnyListeners.length && x.eventsAnyListeners.forEach((x) => {
+				x.apply(T, [m, ...C]);
+			}), x.eventsListeners && x.eventsListeners[m] && x.eventsListeners[m].forEach((m) => {
+				m.apply(T, C);
+			});
+		}), x;
+	}
+};
+function updateSize() {
+	let m = this, x, S, C = m.el;
+	x = m.params.width !== void 0 && m.params.width !== null ? m.params.width : C.clientWidth, S = m.params.height !== void 0 && m.params.height !== null ? m.params.height : C.clientHeight, !(x === 0 && m.isHorizontal() || S === 0 && m.isVertical()) && (x = x - parseInt(elementStyle(C, "padding-left") || 0, 10) - parseInt(elementStyle(C, "padding-right") || 0, 10), S = S - parseInt(elementStyle(C, "padding-top") || 0, 10) - parseInt(elementStyle(C, "padding-bottom") || 0, 10), Number.isNaN(x) && (x = 0), Number.isNaN(S) && (S = 0), Object.assign(m, {
+		width: x,
+		height: S,
+		size: m.isHorizontal() ? x : S
+	}));
+}
+function updateSlides() {
+	let m = this;
+	function x(x, S) {
+		return parseFloat(x.getPropertyValue(m.getDirectionLabel(S)) || 0);
+	}
+	let S = m.params, { wrapperEl: C, slidesEl: T, rtlTranslate: D, wrongRTL: O } = m, k = m.virtual && S.virtual.enabled, A = k ? m.virtual.slides.length : m.slides.length, j = elementChildren(T, `.${m.params.slideClass}, swiper-slide`), M = k ? m.virtual.slides.length : j.length, N = [], P = [], F = [], I = S.slidesOffsetBefore;
+	typeof I == "function" && (I = S.slidesOffsetBefore.call(m));
+	let L = S.slidesOffsetAfter;
+	typeof L == "function" && (L = S.slidesOffsetAfter.call(m));
+	let R = m.snapGrid.length, z = m.slidesGrid.length, B = m.size - I - L, H = S.spaceBetween, U = -I, W = 0, G = 0;
+	if (B === void 0) return;
+	typeof H == "string" && H.indexOf("%") >= 0 ? H = parseFloat(H.replace("%", "")) / 100 * B : typeof H == "string" && (H = parseFloat(H)), m.virtualSize = -H - I - L, j.forEach((m) => {
+		D ? m.style.marginLeft = "" : m.style.marginRight = "", m.style.marginBottom = "", m.style.marginTop = "";
+	}), S.centeredSlides && S.cssMode && (setCSSProperty(C, "--swiper-centered-offset-before", ""), setCSSProperty(C, "--swiper-centered-offset-after", ""));
+	let K = S.grid && S.grid.rows > 1 && m.grid;
+	K ? m.grid.initSlides(j) : m.grid && m.grid.unsetSlides();
+	let q, J = S.slidesPerView === "auto" && S.breakpoints && Object.keys(S.breakpoints).filter((m) => S.breakpoints[m].slidesPerView !== void 0).length > 0;
+	for (let C = 0; C < M; C += 1) {
+		q = 0;
+		let T = j[C];
+		if (!(T && (K && m.grid.updateSlide(C, T, j), elementStyle(T, "display") === "none"))) {
+			if (k && S.slidesPerView === "auto") S.virtual.slidesPerViewAutoSlideSize && (q = S.virtual.slidesPerViewAutoSlideSize), q && T && (S.roundLengths && (q = Math.floor(q)), T.style[m.getDirectionLabel("width")] = `${q}px`);
+			else if (S.slidesPerView === "auto") {
+				J && (T.style[m.getDirectionLabel("width")] = "");
+				let C = getComputedStyle(T), D = T.style.transform, O = T.style.webkitTransform;
+				if (D && (T.style.transform = "none"), O && (T.style.webkitTransform = "none"), S.roundLengths) q = m.isHorizontal() ? elementOuterSize(T, "width", !0) : elementOuterSize(T, "height", !0);
+				else {
+					let m = x(C, "width"), S = x(C, "padding-left"), D = x(C, "padding-right"), O = x(C, "margin-left"), k = x(C, "margin-right"), A = C.getPropertyValue("box-sizing");
+					if (A && A === "border-box") q = m + O + k;
+					else {
+						let { clientWidth: x, offsetWidth: C } = T;
+						q = m + S + D + O + k + (C - x);
+					}
+				}
+				D && (T.style.transform = D), O && (T.style.webkitTransform = O), S.roundLengths && (q = Math.floor(q));
+			} else q = (B - (S.slidesPerView - 1) * H) / S.slidesPerView, S.roundLengths && (q = Math.floor(q)), T && (T.style[m.getDirectionLabel("width")] = `${q}px`);
+			T && (T.swiperSlideSize = q), F.push(q), S.centeredSlides ? (U = U + q / 2 + W / 2 + H, W === 0 && C !== 0 && (U = U - B / 2 - H), C === 0 && (U = U - B / 2 - H), Math.abs(U) < 1 / 1e3 && (U = 0), S.roundLengths && (U = Math.floor(U)), G % S.slidesPerGroup === 0 && N.push(U), P.push(U)) : (S.roundLengths && (U = Math.floor(U)), (G - Math.min(m.params.slidesPerGroupSkip, G)) % m.params.slidesPerGroup === 0 && N.push(U), P.push(U), U = U + q + H), m.virtualSize += q + H, W = q, G += 1;
+		}
+	}
+	if (m.virtualSize = Math.max(m.virtualSize, B) + L, D && O && (S.effect === "slide" || S.effect === "coverflow") && (C.style.width = `${m.virtualSize + H}px`), S.setWrapperSize && (C.style[m.getDirectionLabel("width")] = `${m.virtualSize + H}px`), K && m.grid.updateWrapperSize(q, N), !S.centeredSlides) {
+		let x = [];
+		for (let C = 0; C < N.length; C += 1) {
+			let T = N[C];
+			S.roundLengths && (T = Math.floor(T)), N[C] <= m.virtualSize - B && x.push(T);
+		}
+		N = x, Math.floor(m.virtualSize - B) - Math.floor(N[N.length - 1]) > 1 && N.push(m.virtualSize - B);
+	}
+	if (k && S.loop) {
+		let x = F[0] + H;
+		if (S.slidesPerGroup > 1) {
+			let C = Math.ceil((m.virtual.slidesBefore + m.virtual.slidesAfter) / S.slidesPerGroup), T = x * S.slidesPerGroup;
+			for (let m = 0; m < C; m += 1) N.push(N[N.length - 1] + T);
+		}
+		for (let C = 0; C < m.virtual.slidesBefore + m.virtual.slidesAfter; C += 1) S.slidesPerGroup === 1 && N.push(N[N.length - 1] + x), P.push(P[P.length - 1] + x), m.virtualSize += x;
+	}
+	if (N.length === 0 && (N = [0]), H !== 0) {
+		let x = m.isHorizontal() && D ? "marginLeft" : m.getDirectionLabel("marginRight");
+		j.filter((m, x) => !S.cssMode || S.loop ? !0 : x !== j.length - 1).forEach((m) => {
+			m.style[x] = `${H}px`;
+		});
+	}
+	if (S.centeredSlides && S.centeredSlidesBounds) {
+		let m = 0;
+		F.forEach((x) => {
+			m += x + (H || 0);
+		}), m -= H;
+		let x = m > B ? m - B : 0;
+		N = N.map((m) => m <= 0 ? -I : m > x ? x + L : m);
+	}
+	if (S.centerInsufficientSlides) {
+		let m = 0;
+		F.forEach((x) => {
+			m += x + (H || 0);
+		}), m -= H;
+		let x = (I || 0) + (L || 0);
+		if (m + x < B) {
+			let S = (B - m - x) / 2;
+			N.forEach((m, x) => {
+				N[x] = m - S;
+			}), P.forEach((m, x) => {
+				P[x] = m + S;
+			});
+		}
+	}
+	if (Object.assign(m, {
+		slides: j,
+		snapGrid: N,
+		slidesGrid: P,
+		slidesSizesGrid: F
+	}), S.centeredSlides && S.cssMode && !S.centeredSlidesBounds) {
+		setCSSProperty(C, "--swiper-centered-offset-before", `${-N[0]}px`), setCSSProperty(C, "--swiper-centered-offset-after", `${m.size / 2 - F[F.length - 1] / 2}px`);
+		let x = -m.snapGrid[0], S = -m.slidesGrid[0];
+		m.snapGrid = m.snapGrid.map((m) => m + x), m.slidesGrid = m.slidesGrid.map((m) => m + S);
+	}
+	if (M !== A && m.emit("slidesLengthChange"), N.length !== R && (m.params.watchOverflow && m.checkOverflow(), m.emit("snapGridLengthChange")), P.length !== z && m.emit("slidesGridLengthChange"), S.watchSlidesProgress && m.updateSlidesOffset(), m.emit("slidesUpdated"), !k && !S.cssMode && (S.effect === "slide" || S.effect === "fade")) {
+		let x = `${S.containerModifierClass}backface-hidden`, C = m.el.classList.contains(x);
+		M <= S.maxBackfaceHiddenSlides ? C || m.el.classList.add(x) : C && m.el.classList.remove(x);
+	}
+}
+function updateAutoHeight(m) {
+	let x = this, S = [], C = x.virtual && x.params.virtual.enabled, T = 0, D;
+	typeof m == "number" ? x.setTransition(m) : m === !0 && x.setTransition(x.params.speed);
+	let O = (m) => C ? x.slides[x.getSlideIndexByData(m)] : x.slides[m];
+	if (x.params.slidesPerView !== "auto" && x.params.slidesPerView > 1) if (x.params.centeredSlides) (x.visibleSlides || []).forEach((m) => {
+		S.push(m);
+	});
+	else for (D = 0; D < Math.ceil(x.params.slidesPerView); D += 1) {
+		let m = x.activeIndex + D;
+		if (m > x.slides.length && !C) break;
+		S.push(O(m));
+	}
+	else S.push(O(x.activeIndex));
+	for (D = 0; D < S.length; D += 1) if (S[D] !== void 0) {
+		let m = S[D].offsetHeight;
+		T = m > T ? m : T;
+	}
+	(T || T === 0) && (x.wrapperEl.style.height = `${T}px`);
+}
+function updateSlidesOffset() {
+	let m = this, x = m.slides, S = m.isElement ? m.isHorizontal() ? m.wrapperEl.offsetLeft : m.wrapperEl.offsetTop : 0;
+	for (let C = 0; C < x.length; C += 1) x[C].swiperSlideOffset = (m.isHorizontal() ? x[C].offsetLeft : x[C].offsetTop) - S - m.cssOverflowAdjustment();
+}
+var toggleSlideClasses$1 = (m, x, S) => {
+	x && !m.classList.contains(S) ? m.classList.add(S) : !x && m.classList.contains(S) && m.classList.remove(S);
+};
+function updateSlidesProgress(m = this && this.translate || 0) {
+	let x = this, S = x.params, { slides: C, rtlTranslate: T, snapGrid: D } = x;
+	if (C.length === 0) return;
+	C[0].swiperSlideOffset === void 0 && x.updateSlidesOffset();
+	let O = -m;
+	T && (O = m), x.visibleSlidesIndexes = [], x.visibleSlides = [];
+	let k = S.spaceBetween;
+	typeof k == "string" && k.indexOf("%") >= 0 ? k = parseFloat(k.replace("%", "")) / 100 * x.size : typeof k == "string" && (k = parseFloat(k));
+	for (let m = 0; m < C.length; m += 1) {
+		let A = C[m], j = A.swiperSlideOffset;
+		S.cssMode && S.centeredSlides && (j -= C[0].swiperSlideOffset);
+		let M = (O + (S.centeredSlides ? x.minTranslate() : 0) - j) / (A.swiperSlideSize + k), N = (O - D[0] + (S.centeredSlides ? x.minTranslate() : 0) - j) / (A.swiperSlideSize + k), P = -(O - j), F = P + x.slidesSizesGrid[m], I = P >= 0 && P <= x.size - x.slidesSizesGrid[m], L = P >= 0 && P < x.size - 1 || F > 1 && F <= x.size || P <= 0 && F >= x.size;
+		L && (x.visibleSlides.push(A), x.visibleSlidesIndexes.push(m)), toggleSlideClasses$1(A, L, S.slideVisibleClass), toggleSlideClasses$1(A, I, S.slideFullyVisibleClass), A.progress = T ? -M : M, A.originalProgress = T ? -N : N;
+	}
+}
+function updateProgress(m) {
+	let x = this;
+	if (m === void 0) {
+		let S = x.rtlTranslate ? -1 : 1;
+		m = x && x.translate && x.translate * S || 0;
+	}
+	let S = x.params, C = x.maxTranslate() - x.minTranslate(), { progress: T, isBeginning: D, isEnd: O, progressLoop: k } = x, A = D, j = O;
+	if (C === 0) T = 0, D = !0, O = !0;
+	else {
+		T = (m - x.minTranslate()) / C;
+		let S = Math.abs(m - x.minTranslate()) < 1, k = Math.abs(m - x.maxTranslate()) < 1;
+		D = S || T <= 0, O = k || T >= 1, S && (T = 0), k && (T = 1);
+	}
+	if (S.loop) {
+		let S = x.getSlideIndexByData(0), C = x.getSlideIndexByData(x.slides.length - 1), T = x.slidesGrid[S], D = x.slidesGrid[C], O = x.slidesGrid[x.slidesGrid.length - 1], A = Math.abs(m);
+		k = A >= T ? (A - T) / O : (A + O - D) / O, k > 1 && --k;
+	}
+	Object.assign(x, {
+		progress: T,
+		progressLoop: k,
+		isBeginning: D,
+		isEnd: O
+	}), (S.watchSlidesProgress || S.centeredSlides && S.autoHeight) && x.updateSlidesProgress(m), D && !A && x.emit("reachBeginning toEdge"), O && !j && x.emit("reachEnd toEdge"), (A && !D || j && !O) && x.emit("fromEdge"), x.emit("progress", T);
+}
+var toggleSlideClasses = (m, x, S) => {
+	x && !m.classList.contains(S) ? m.classList.add(S) : !x && m.classList.contains(S) && m.classList.remove(S);
+};
+function updateSlidesClasses() {
+	let m = this, { slides: x, params: S, slidesEl: C, activeIndex: T } = m, D = m.virtual && S.virtual.enabled, O = m.grid && S.grid && S.grid.rows > 1, k = (m) => elementChildren(C, `.${S.slideClass}${m}, swiper-slide${m}`)[0], A, j, M;
+	if (D) if (S.loop) {
+		let x = T - m.virtual.slidesBefore;
+		x < 0 && (x = m.virtual.slides.length + x), x >= m.virtual.slides.length && (x -= m.virtual.slides.length), A = k(`[data-swiper-slide-index="${x}"]`);
+	} else A = k(`[data-swiper-slide-index="${T}"]`);
+	else O ? (A = x.find((m) => m.column === T), M = x.find((m) => m.column === T + 1), j = x.find((m) => m.column === T - 1)) : A = x[T];
+	A && (O || (M = elementNextAll(A, `.${S.slideClass}, swiper-slide`)[0], S.loop && !M && (M = x[0]), j = elementPrevAll(A, `.${S.slideClass}, swiper-slide`)[0], S.loop)), x.forEach((m) => {
+		toggleSlideClasses(m, m === A, S.slideActiveClass), toggleSlideClasses(m, m === M, S.slideNextClass), toggleSlideClasses(m, m === j, S.slidePrevClass);
+	}), m.emitSlidesClasses();
+}
+var processLazyPreloader = (m, x) => {
+	if (!m || m.destroyed || !m.params) return;
+	let S = x.closest((() => m.isElement ? "swiper-slide" : `.${m.params.slideClass}`)());
+	if (S) {
+		let x = S.querySelector(`.${m.params.lazyPreloaderClass}`);
+		!x && m.isElement && (S.shadowRoot ? x = S.shadowRoot.querySelector(`.${m.params.lazyPreloaderClass}`) : requestAnimationFrame(() => {
+			S.shadowRoot && (x = S.shadowRoot.querySelector(`.${m.params.lazyPreloaderClass}`), x && x.remove());
+		})), x && x.remove();
+	}
+}, unlazy = (m, x) => {
+	if (!m.slides[x]) return;
+	let S = m.slides[x].querySelector("[loading=\"lazy\"]");
+	S && S.removeAttribute("loading");
+}, preload = (m) => {
+	if (!m || m.destroyed || !m.params) return;
+	let x = m.params.lazyPreloadPrevNext, S = m.slides.length;
+	if (!S || !x || x < 0) return;
+	x = Math.min(x, S);
+	let C = m.params.slidesPerView === "auto" ? m.slidesPerViewDynamic() : Math.ceil(m.params.slidesPerView), T = m.activeIndex;
+	if (m.params.grid && m.params.grid.rows > 1) {
+		let S = T, D = [S - x];
+		D.push(...Array.from({ length: x }).map((m, x) => S + C + x)), m.slides.forEach((x, S) => {
+			D.includes(x.column) && unlazy(m, S);
+		});
+		return;
+	}
+	let D = T + C - 1;
+	if (m.params.rewind || m.params.loop) for (let C = T - x; C <= D + x; C += 1) {
+		let x = (C % S + S) % S;
+		(x < T || x > D) && unlazy(m, x);
+	}
+	else for (let C = Math.max(T - x, 0); C <= Math.min(D + x, S - 1); C += 1) C !== T && (C > D || C < T) && unlazy(m, C);
+};
+function getActiveIndexByTranslate(m) {
+	let { slidesGrid: x, params: S } = m, C = m.rtlTranslate ? m.translate : -m.translate, T;
+	for (let m = 0; m < x.length; m += 1) x[m + 1] === void 0 ? C >= x[m] && (T = m) : C >= x[m] && C < x[m + 1] - (x[m + 1] - x[m]) / 2 ? T = m : C >= x[m] && C < x[m + 1] && (T = m + 1);
+	return S.normalizeSlideIndex && (T < 0 || T === void 0) && (T = 0), T;
+}
+function updateActiveIndex(m) {
+	let x = this, S = x.rtlTranslate ? x.translate : -x.translate, { snapGrid: C, params: T, activeIndex: D, realIndex: O, snapIndex: k } = x, A = m, j, M = (m) => {
+		let S = m - x.virtual.slidesBefore;
+		return S < 0 && (S = x.virtual.slides.length + S), S >= x.virtual.slides.length && (S -= x.virtual.slides.length), S;
+	};
+	if (A === void 0 && (A = getActiveIndexByTranslate(x)), C.indexOf(S) >= 0) j = C.indexOf(S);
+	else {
+		let m = Math.min(T.slidesPerGroupSkip, A);
+		j = m + Math.floor((A - m) / T.slidesPerGroup);
+	}
+	if (j >= C.length && (j = C.length - 1), A === D && !x.params.loop) {
+		j !== k && (x.snapIndex = j, x.emit("snapIndexChange"));
+		return;
+	}
+	if (A === D && x.params.loop && x.virtual && x.params.virtual.enabled) {
+		x.realIndex = M(A);
+		return;
+	}
+	let N = x.grid && T.grid && T.grid.rows > 1, P;
+	if (x.virtual && T.virtual.enabled && T.loop) P = M(A);
+	else if (N) {
+		let m = x.slides.find((m) => m.column === A), S = parseInt(m.getAttribute("data-swiper-slide-index"), 10);
+		Number.isNaN(S) && (S = Math.max(x.slides.indexOf(m), 0)), P = Math.floor(S / T.grid.rows);
+	} else if (x.slides[A]) {
+		let m = x.slides[A].getAttribute("data-swiper-slide-index");
+		P = m ? parseInt(m, 10) : A;
+	} else P = A;
+	Object.assign(x, {
+		previousSnapIndex: k,
+		snapIndex: j,
+		previousRealIndex: O,
+		realIndex: P,
+		previousIndex: D,
+		activeIndex: A
+	}), x.initialized && preload(x), x.emit("activeIndexChange"), x.emit("snapIndexChange"), (x.initialized || x.params.runCallbacksOnInit) && (O !== P && x.emit("realIndexChange"), x.emit("slideChange"));
+}
+function updateClickedSlide(m, x) {
+	let S = this, C = S.params, T = m.closest(`.${C.slideClass}, swiper-slide`);
+	!T && S.isElement && x && x.length > 1 && x.includes(m) && [...x.slice(x.indexOf(m) + 1, x.length)].forEach((m) => {
+		!T && m.matches && m.matches(`.${C.slideClass}, swiper-slide`) && (T = m);
+	});
+	let D = !1, O;
+	if (T) {
+		for (let m = 0; m < S.slides.length; m += 1) if (S.slides[m] === T) {
+			D = !0, O = m;
+			break;
+		}
+	}
+	if (T && D) S.clickedSlide = T, S.virtual && S.params.virtual.enabled ? S.clickedIndex = parseInt(T.getAttribute("data-swiper-slide-index"), 10) : S.clickedIndex = O;
+	else {
+		S.clickedSlide = void 0, S.clickedIndex = void 0;
+		return;
+	}
+	C.slideToClickedSlide && S.clickedIndex !== void 0 && S.clickedIndex !== S.activeIndex && S.slideToClickedSlide();
+}
+var update = {
+	updateSize,
+	updateSlides,
+	updateAutoHeight,
+	updateSlidesOffset,
+	updateSlidesProgress,
+	updateProgress,
+	updateSlidesClasses,
+	updateActiveIndex,
+	updateClickedSlide
+};
+function getSwiperTranslate(m = this.isHorizontal() ? "x" : "y") {
+	let x = this, { params: S, rtlTranslate: C, translate: T, wrapperEl: D } = x;
+	if (S.virtualTranslate) return C ? -T : T;
+	if (S.cssMode) return T;
+	let O = getTranslate(D, m);
+	return O += x.cssOverflowAdjustment(), C && (O = -O), O || 0;
+}
+function setTranslate(m, x) {
+	let S = this, { rtlTranslate: C, params: T, wrapperEl: D, progress: O } = S, k = 0, A = 0;
+	S.isHorizontal() ? k = C ? -m : m : A = m, T.roundLengths && (k = Math.floor(k), A = Math.floor(A)), S.previousTranslate = S.translate, S.translate = S.isHorizontal() ? k : A, T.cssMode ? D[S.isHorizontal() ? "scrollLeft" : "scrollTop"] = S.isHorizontal() ? -k : -A : T.virtualTranslate || (S.isHorizontal() ? k -= S.cssOverflowAdjustment() : A -= S.cssOverflowAdjustment(), D.style.transform = `translate3d(${k}px, ${A}px, 0px)`);
+	let j, M = S.maxTranslate() - S.minTranslate();
+	j = M === 0 ? 0 : (m - S.minTranslate()) / M, j !== O && S.updateProgress(m), S.emit("setTranslate", S.translate, x);
+}
+function minTranslate() {
+	return -this.snapGrid[0];
+}
+function maxTranslate() {
+	return -this.snapGrid[this.snapGrid.length - 1];
+}
+function translateTo(m = 0, x = this.params.speed, S = !0, C = !0, T) {
+	let D = this, { params: O, wrapperEl: k } = D;
+	if (D.animating && O.preventInteractionOnTransition) return !1;
+	let A = D.minTranslate(), j = D.maxTranslate(), M;
+	if (M = C && m > A ? A : C && m < j ? j : m, D.updateProgress(M), O.cssMode) {
+		let m = D.isHorizontal();
+		if (x === 0) k[m ? "scrollLeft" : "scrollTop"] = -M;
+		else {
+			if (!D.support.smoothScroll) return animateCSSModeScroll({
+				swiper: D,
+				targetPosition: -M,
+				side: m ? "left" : "top"
+			}), !0;
+			k.scrollTo({
+				[m ? "left" : "top"]: -M,
+				behavior: "smooth"
+			});
+		}
+		return !0;
+	}
+	return x === 0 ? (D.setTransition(0), D.setTranslate(M), S && (D.emit("beforeTransitionStart", x, T), D.emit("transitionEnd"))) : (D.setTransition(x), D.setTranslate(M), S && (D.emit("beforeTransitionStart", x, T), D.emit("transitionStart")), D.animating || (D.animating = !0, D.onTranslateToWrapperTransitionEnd ||= function(m) {
+		!D || D.destroyed || m.target === this && (D.wrapperEl.removeEventListener("transitionend", D.onTranslateToWrapperTransitionEnd), D.onTranslateToWrapperTransitionEnd = null, delete D.onTranslateToWrapperTransitionEnd, D.animating = !1, S && D.emit("transitionEnd"));
+	}, D.wrapperEl.addEventListener("transitionend", D.onTranslateToWrapperTransitionEnd))), !0;
+}
+var translate = {
+	getTranslate: getSwiperTranslate,
+	setTranslate,
+	minTranslate,
+	maxTranslate,
+	translateTo
+};
+function setTransition(m, x) {
+	let S = this;
+	S.params.cssMode || (S.wrapperEl.style.transitionDuration = `${m}ms`, S.wrapperEl.style.transitionDelay = m === 0 ? "0ms" : ""), S.emit("setTransition", m, x);
+}
+function transitionEmit({ swiper: m, runCallbacks: x, direction: S, step: C }) {
+	let { activeIndex: T, previousIndex: D } = m, O = S;
+	O ||= T > D ? "next" : T < D ? "prev" : "reset", m.emit(`transition${C}`), x && O === "reset" ? m.emit(`slideResetTransition${C}`) : x && T !== D && (m.emit(`slideChangeTransition${C}`), O === "next" ? m.emit(`slideNextTransition${C}`) : m.emit(`slidePrevTransition${C}`));
+}
+function transitionStart(m = !0, x) {
+	let S = this, { params: C } = S;
+	C.cssMode || (C.autoHeight && S.updateAutoHeight(), transitionEmit({
+		swiper: S,
+		runCallbacks: m,
+		direction: x,
+		step: "Start"
+	}));
+}
+function transitionEnd(m = !0, x) {
+	let S = this, { params: C } = S;
+	S.animating = !1, !C.cssMode && (S.setTransition(0), transitionEmit({
+		swiper: S,
+		runCallbacks: m,
+		direction: x,
+		step: "End"
+	}));
+}
+var transition = {
+	setTransition,
+	transitionStart,
+	transitionEnd
+};
+function slideTo(m = 0, x, S = !0, C, T) {
+	typeof m == "string" && (m = parseInt(m, 10));
+	let D = this, O = m;
+	O < 0 && (O = 0);
+	let { params: k, snapGrid: A, slidesGrid: j, previousIndex: M, activeIndex: N, rtlTranslate: P, wrapperEl: F, enabled: I } = D;
+	if (!I && !C && !T || D.destroyed || D.animating && k.preventInteractionOnTransition) return !1;
+	x === void 0 && (x = D.params.speed);
+	let L = Math.min(D.params.slidesPerGroupSkip, O), R = L + Math.floor((O - L) / D.params.slidesPerGroup);
+	R >= A.length && (R = A.length - 1);
+	let z = -A[R];
+	if (k.normalizeSlideIndex) for (let m = 0; m < j.length; m += 1) {
+		let x = -Math.floor(z * 100), S = Math.floor(j[m] * 100), C = Math.floor(j[m + 1] * 100);
+		j[m + 1] === void 0 ? x >= S && (O = m) : x >= S && x < C - (C - S) / 2 ? O = m : x >= S && x < C && (O = m + 1);
+	}
+	if (D.initialized && O !== N && (!D.allowSlideNext && (P ? z > D.translate && z > D.minTranslate() : z < D.translate && z < D.minTranslate()) || !D.allowSlidePrev && z > D.translate && z > D.maxTranslate() && (N || 0) !== O)) return !1;
+	O !== (M || 0) && S && D.emit("beforeSlideChangeStart"), D.updateProgress(z);
+	let B;
+	B = O > N ? "next" : O < N ? "prev" : "reset";
+	let H = D.virtual && D.params.virtual.enabled;
+	if (!(H && T) && (P && -z === D.translate || !P && z === D.translate)) return D.updateActiveIndex(O), k.autoHeight && D.updateAutoHeight(), D.updateSlidesClasses(), k.effect !== "slide" && D.setTranslate(z), B !== "reset" && (D.transitionStart(S, B), D.transitionEnd(S, B)), !1;
+	if (k.cssMode) {
+		let m = D.isHorizontal(), S = P ? z : -z;
+		if (x === 0) H && (D.wrapperEl.style.scrollSnapType = "none", D._immediateVirtual = !0), H && !D._cssModeVirtualInitialSet && D.params.initialSlide > 0 ? (D._cssModeVirtualInitialSet = !0, requestAnimationFrame(() => {
+			F[m ? "scrollLeft" : "scrollTop"] = S;
+		})) : F[m ? "scrollLeft" : "scrollTop"] = S, H && requestAnimationFrame(() => {
+			D.wrapperEl.style.scrollSnapType = "", D._immediateVirtual = !1;
+		});
+		else {
+			if (!D.support.smoothScroll) return animateCSSModeScroll({
+				swiper: D,
+				targetPosition: S,
+				side: m ? "left" : "top"
+			}), !0;
+			F.scrollTo({
+				[m ? "left" : "top"]: S,
+				behavior: "smooth"
+			});
+		}
+		return !0;
+	}
+	let U = getBrowser().isSafari;
+	return H && !T && U && D.isElement && D.virtual.update(!1, !1, O), D.setTransition(x), D.setTranslate(z), D.updateActiveIndex(O), D.updateSlidesClasses(), D.emit("beforeTransitionStart", x, C), D.transitionStart(S, B), x === 0 ? D.transitionEnd(S, B) : D.animating || (D.animating = !0, D.onSlideToWrapperTransitionEnd ||= function(m) {
+		!D || D.destroyed || m.target === this && (D.wrapperEl.removeEventListener("transitionend", D.onSlideToWrapperTransitionEnd), D.onSlideToWrapperTransitionEnd = null, delete D.onSlideToWrapperTransitionEnd, D.transitionEnd(S, B));
+	}, D.wrapperEl.addEventListener("transitionend", D.onSlideToWrapperTransitionEnd)), !0;
+}
+function slideToLoop(m = 0, x, S = !0, C) {
+	typeof m == "string" && (m = parseInt(m, 10));
+	let T = this;
+	if (T.destroyed) return;
+	x === void 0 && (x = T.params.speed);
+	let D = T.grid && T.params.grid && T.params.grid.rows > 1, O = m;
+	if (T.params.loop) if (T.virtual && T.params.virtual.enabled) O += T.virtual.slidesBefore;
+	else {
+		let m;
+		if (D) {
+			let x = O * T.params.grid.rows;
+			m = T.slides.find((m) => m.getAttribute("data-swiper-slide-index") * 1 === x).column;
+		} else m = T.getSlideIndexByData(O);
+		let x = D ? Math.ceil(T.slides.length / T.params.grid.rows) : T.slides.length, { centeredSlides: S, slidesOffsetBefore: k, slidesOffsetAfter: A } = T.params, j = S || !!k || !!A, M = T.params.slidesPerView;
+		M === "auto" ? M = T.slidesPerViewDynamic() : (M = Math.ceil(parseFloat(T.params.slidesPerView, 10)), j && M % 2 == 0 && (M += 1));
+		let N = x - m < M;
+		if (j && (N ||= m < Math.ceil(M / 2)), C && j && T.params.slidesPerView !== "auto" && !D && (N = !1), N) {
+			let S = j ? m < T.activeIndex ? "prev" : "next" : m - T.activeIndex - 1 < T.params.slidesPerView ? "next" : "prev";
+			T.loopFix({
+				direction: S,
+				slideTo: !0,
+				activeSlideIndex: S === "next" ? m + 1 : m - x + 1,
+				slideRealIndex: S === "next" ? T.realIndex : void 0
+			});
+		}
+		if (D) {
+			let m = O * T.params.grid.rows;
+			O = T.slides.find((x) => x.getAttribute("data-swiper-slide-index") * 1 === m).column;
+		} else O = T.getSlideIndexByData(O);
+	}
+	return requestAnimationFrame(() => {
+		T.slideTo(O, x, S, C);
+	}), T;
+}
+function slideNext(m, x = !0, S) {
+	let C = this, { enabled: T, params: D, animating: O } = C;
+	if (!T || C.destroyed) return C;
+	m === void 0 && (m = C.params.speed);
+	let k = D.slidesPerGroup;
+	D.slidesPerView === "auto" && D.slidesPerGroup === 1 && D.slidesPerGroupAuto && (k = Math.max(C.slidesPerViewDynamic("current", !0), 1));
+	let A = C.activeIndex < D.slidesPerGroupSkip ? 1 : k, j = C.virtual && D.virtual.enabled;
+	if (D.loop) {
+		if (O && !j && D.loopPreventsSliding) return !1;
+		if (C.loopFix({ direction: "next" }), C._clientLeft = C.wrapperEl.clientLeft, C.activeIndex === C.slides.length - 1 && D.cssMode) return requestAnimationFrame(() => {
+			C.slideTo(C.activeIndex + A, m, x, S);
+		}), !0;
+	}
+	return D.rewind && C.isEnd ? C.slideTo(0, m, x, S) : C.slideTo(C.activeIndex + A, m, x, S);
+}
+function slidePrev(m, x = !0, S) {
+	let C = this, { params: T, snapGrid: D, slidesGrid: O, rtlTranslate: k, enabled: A, animating: j } = C;
+	if (!A || C.destroyed) return C;
+	m === void 0 && (m = C.params.speed);
+	let M = C.virtual && T.virtual.enabled;
+	if (T.loop) {
+		if (j && !M && T.loopPreventsSliding) return !1;
+		C.loopFix({ direction: "prev" }), C._clientLeft = C.wrapperEl.clientLeft;
+	}
+	let N = k ? C.translate : -C.translate;
+	function P(m) {
+		return m < 0 ? -Math.floor(Math.abs(m)) : Math.floor(m);
+	}
+	let F = P(N), I = D.map((m) => P(m)), L = T.freeMode && T.freeMode.enabled, R = D[I.indexOf(F) - 1];
+	if (R === void 0 && (T.cssMode || L)) {
+		let m;
+		D.forEach((x, S) => {
+			F >= x && (m = S);
+		}), m !== void 0 && (R = L ? D[m] : D[m > 0 ? m - 1 : m]);
+	}
+	let z = 0;
+	if (R !== void 0 && (z = O.indexOf(R), z < 0 && (z = C.activeIndex - 1), T.slidesPerView === "auto" && T.slidesPerGroup === 1 && T.slidesPerGroupAuto && (z = z - C.slidesPerViewDynamic("previous", !0) + 1, z = Math.max(z, 0))), T.rewind && C.isBeginning) {
+		let T = C.params.virtual && C.params.virtual.enabled && C.virtual ? C.virtual.slides.length - 1 : C.slides.length - 1;
+		return C.slideTo(T, m, x, S);
+	} else if (T.loop && C.activeIndex === 0 && T.cssMode) return requestAnimationFrame(() => {
+		C.slideTo(z, m, x, S);
+	}), !0;
+	return C.slideTo(z, m, x, S);
+}
+function slideReset(m, x = !0, S) {
+	let C = this;
+	if (!C.destroyed) return m === void 0 && (m = C.params.speed), C.slideTo(C.activeIndex, m, x, S);
+}
+function slideToClosest(m, x = !0, S, C = .5) {
+	let T = this;
+	if (T.destroyed) return;
+	m === void 0 && (m = T.params.speed);
+	let D = T.activeIndex, O = Math.min(T.params.slidesPerGroupSkip, D), k = O + Math.floor((D - O) / T.params.slidesPerGroup), A = T.rtlTranslate ? T.translate : -T.translate;
+	if (A >= T.snapGrid[k]) {
+		let m = T.snapGrid[k], x = T.snapGrid[k + 1];
+		A - m > (x - m) * C && (D += T.params.slidesPerGroup);
+	} else {
+		let m = T.snapGrid[k - 1], x = T.snapGrid[k];
+		A - m <= (x - m) * C && (D -= T.params.slidesPerGroup);
+	}
+	return D = Math.max(D, 0), D = Math.min(D, T.slidesGrid.length - 1), T.slideTo(D, m, x, S);
+}
+function slideToClickedSlide() {
+	let m = this;
+	if (m.destroyed) return;
+	let { params: x, slidesEl: S } = m, C = x.slidesPerView === "auto" ? m.slidesPerViewDynamic() : x.slidesPerView, T = m.getSlideIndexWhenGrid(m.clickedIndex), D, O = m.isElement ? "swiper-slide" : `.${x.slideClass}`, k = m.grid && m.params.grid && m.params.grid.rows > 1;
+	if (x.loop) {
+		if (m.animating) return;
+		D = parseInt(m.clickedSlide.getAttribute("data-swiper-slide-index"), 10), x.centeredSlides ? m.slideToLoop(D) : T > (k ? (m.slides.length - C) / 2 - (m.params.grid.rows - 1) : m.slides.length - C) ? (m.loopFix(), T = m.getSlideIndex(elementChildren(S, `${O}[data-swiper-slide-index="${D}"]`)[0]), nextTick(() => {
+			m.slideTo(T);
+		})) : m.slideTo(T);
+	} else m.slideTo(T);
+}
+var slide = {
+	slideTo,
+	slideToLoop,
+	slideNext,
+	slidePrev,
+	slideReset,
+	slideToClosest,
+	slideToClickedSlide
+};
+function loopCreate(m, x) {
+	let S = this, { params: C, slidesEl: T } = S;
+	if (!C.loop || S.virtual && S.params.virtual.enabled) return;
+	let D = () => {
+		elementChildren(T, `.${C.slideClass}, swiper-slide`).forEach((m, x) => {
+			m.setAttribute("data-swiper-slide-index", x);
+		});
+	}, O = () => {
+		let m = elementChildren(T, `.${C.slideBlankClass}`);
+		m.forEach((m) => {
+			m.remove();
+		}), m.length > 0 && (S.recalcSlides(), S.updateSlides());
+	}, k = S.grid && C.grid && C.grid.rows > 1;
+	C.loopAddBlankSlides && (C.slidesPerGroup > 1 || k) && O();
+	let A = C.slidesPerGroup * (k ? C.grid.rows : 1), j = S.slides.length % A !== 0, M = k && S.slides.length % C.grid.rows !== 0, N = (m) => {
+		for (let x = 0; x < m; x += 1) {
+			let m = S.isElement ? createElement$1("swiper-slide", [C.slideBlankClass]) : createElement$1("div", [C.slideClass, C.slideBlankClass]);
+			S.slidesEl.append(m);
+		}
+	};
+	j ? (C.loopAddBlankSlides ? (N(A - S.slides.length % A), S.recalcSlides(), S.updateSlides()) : showWarning("Swiper Loop Warning: The number of slides is not even to slidesPerGroup, loop mode may not function properly. You need to add more slides (or make duplicates, or empty slides)"), D()) : (M && (C.loopAddBlankSlides ? (N(C.grid.rows - S.slides.length % C.grid.rows), S.recalcSlides(), S.updateSlides()) : showWarning("Swiper Loop Warning: The number of slides is not even to grid.rows, loop mode may not function properly. You need to add more slides (or make duplicates, or empty slides)")), D());
+	let P = C.centeredSlides || !!C.slidesOffsetBefore || !!C.slidesOffsetAfter;
+	S.loopFix({
+		slideRealIndex: m,
+		direction: P ? void 0 : "next",
+		initial: x
+	});
+}
+function loopFix({ slideRealIndex: m, slideTo: x = !0, direction: S, setTranslate: C, activeSlideIndex: T, initial: D, byController: O, byMousewheel: k } = {}) {
+	let A = this;
+	if (!A.params.loop) return;
+	A.emit("beforeLoopFix");
+	let { slides: j, allowSlidePrev: M, allowSlideNext: N, slidesEl: P, params: F } = A, { centeredSlides: I, slidesOffsetBefore: L, slidesOffsetAfter: R, initialSlide: z } = F, B = I || !!L || !!R;
+	if (A.allowSlidePrev = !0, A.allowSlideNext = !0, A.virtual && F.virtual.enabled) {
+		x && (!B && A.snapIndex === 0 ? A.slideTo(A.virtual.slides.length, 0, !1, !0) : B && A.snapIndex < F.slidesPerView ? A.slideTo(A.virtual.slides.length + A.snapIndex, 0, !1, !0) : A.snapIndex === A.snapGrid.length - 1 && A.slideTo(A.virtual.slidesBefore, 0, !1, !0)), A.allowSlidePrev = M, A.allowSlideNext = N, A.emit("loopFix");
+		return;
+	}
+	let H = F.slidesPerView;
+	H === "auto" ? H = A.slidesPerViewDynamic() : (H = Math.ceil(parseFloat(F.slidesPerView, 10)), B && H % 2 == 0 && (H += 1));
+	let U = F.slidesPerGroupAuto ? H : F.slidesPerGroup, W = B ? Math.max(U, Math.ceil(H / 2)) : U;
+	W % U !== 0 && (W += U - W % U), W += F.loopAdditionalSlides, A.loopedSlides = W;
+	let G = A.grid && F.grid && F.grid.rows > 1;
+	j.length < H + W || A.params.effect === "cards" && j.length < H + W * 2 ? showWarning("Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled or not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters") : G && F.grid.fill === "row" && showWarning("Swiper Loop Warning: Loop mode is not compatible with grid.fill = `row`");
+	let K = [], q = [], J = G ? Math.ceil(j.length / F.grid.rows) : j.length, RV = D && J - z < H && !B, zV = RV ? z : A.activeIndex;
+	T === void 0 ? T = A.getSlideIndex(j.find((m) => m.classList.contains(F.slideActiveClass))) : zV = T;
+	let Y = S === "next" || !S, X = S === "prev" || !S, Z = 0, Q = 0, BV = (G ? j[T].column : T) + (B && C === void 0 ? -H / 2 + .5 : 0);
+	if (BV < W) {
+		Z = Math.max(W - BV, U);
+		for (let m = 0; m < W - BV; m += 1) {
+			let x = m - Math.floor(m / J) * J;
+			if (G) {
+				let m = J - x - 1;
+				for (let x = j.length - 1; x >= 0; --x) j[x].column === m && K.push(x);
+			} else K.push(J - x - 1);
+		}
+	} else if (BV + H > J - W) {
+		Q = Math.max(BV - (J - W * 2), U), RV && (Q = Math.max(Q, H - J + z + 1));
+		for (let m = 0; m < Q; m += 1) {
+			let x = m - Math.floor(m / J) * J;
+			G ? j.forEach((m, S) => {
+				m.column === x && q.push(S);
+			}) : q.push(x);
+		}
+	}
+	if (A.__preventObserver__ = !0, requestAnimationFrame(() => {
+		A.__preventObserver__ = !1;
+	}), A.params.effect === "cards" && j.length < H + W * 2 && (q.includes(T) && q.splice(q.indexOf(T), 1), K.includes(T) && K.splice(K.indexOf(T), 1)), X && K.forEach((m) => {
+		j[m].swiperLoopMoveDOM = !0, P.prepend(j[m]), j[m].swiperLoopMoveDOM = !1;
+	}), Y && q.forEach((m) => {
+		j[m].swiperLoopMoveDOM = !0, P.append(j[m]), j[m].swiperLoopMoveDOM = !1;
+	}), A.recalcSlides(), F.slidesPerView === "auto" ? A.updateSlides() : G && (K.length > 0 && X || q.length > 0 && Y) && A.slides.forEach((m, x) => {
+		A.grid.updateSlide(x, m, A.slides);
+	}), F.watchSlidesProgress && A.updateSlidesOffset(), x) {
+		if (K.length > 0 && X) {
+			if (m === void 0) {
+				let m = A.slidesGrid[zV], x = A.slidesGrid[zV + Z] - m;
+				k ? A.setTranslate(A.translate - x) : (A.slideTo(zV + Math.ceil(Z), 0, !1, !0), C && (A.touchEventsData.startTranslate = A.touchEventsData.startTranslate - x, A.touchEventsData.currentTranslate = A.touchEventsData.currentTranslate - x));
+			} else if (C) {
+				let m = G ? K.length / F.grid.rows : K.length;
+				A.slideTo(A.activeIndex + m, 0, !1, !0), A.touchEventsData.currentTranslate = A.translate;
+			}
+		} else if (q.length > 0 && Y) if (m === void 0) {
+			let m = A.slidesGrid[zV], x = A.slidesGrid[zV - Q] - m;
+			k ? A.setTranslate(A.translate - x) : (A.slideTo(zV - Q, 0, !1, !0), C && (A.touchEventsData.startTranslate = A.touchEventsData.startTranslate - x, A.touchEventsData.currentTranslate = A.touchEventsData.currentTranslate - x));
+		} else {
+			let m = G ? q.length / F.grid.rows : q.length;
+			A.slideTo(A.activeIndex - m, 0, !1, !0);
+		}
+	}
+	if (A.allowSlidePrev = M, A.allowSlideNext = N, A.controller && A.controller.control && !O) {
+		let D = {
+			slideRealIndex: m,
+			direction: S,
+			setTranslate: C,
+			activeSlideIndex: T,
+			byController: !0
+		};
+		Array.isArray(A.controller.control) ? A.controller.control.forEach((m) => {
+			!m.destroyed && m.params.loop && m.loopFix({
+				...D,
+				slideTo: m.params.slidesPerView === F.slidesPerView ? x : !1
+			});
+		}) : A.controller.control instanceof A.constructor && A.controller.control.params.loop && A.controller.control.loopFix({
+			...D,
+			slideTo: A.controller.control.params.slidesPerView === F.slidesPerView ? x : !1
+		});
+	}
+	A.emit("loopFix");
+}
+function loopDestroy() {
+	let m = this, { params: x, slidesEl: S } = m;
+	if (!x.loop || !S || m.virtual && m.params.virtual.enabled) return;
+	m.recalcSlides();
+	let C = [];
+	m.slides.forEach((m) => {
+		let x = m.swiperSlideIndex === void 0 ? m.getAttribute("data-swiper-slide-index") * 1 : m.swiperSlideIndex;
+		C[x] = m;
+	}), m.slides.forEach((m) => {
+		m.removeAttribute("data-swiper-slide-index");
+	}), C.forEach((m) => {
+		S.append(m);
+	}), m.recalcSlides(), m.slideTo(m.realIndex, 0);
+}
+var loop = {
+	loopCreate,
+	loopFix,
+	loopDestroy
+};
+function setGrabCursor(m) {
+	let x = this;
+	if (!x.params.simulateTouch || x.params.watchOverflow && x.isLocked || x.params.cssMode) return;
+	let S = x.params.touchEventsTarget === "container" ? x.el : x.wrapperEl;
+	x.isElement && (x.__preventObserver__ = !0), S.style.cursor = "move", S.style.cursor = m ? "grabbing" : "grab", x.isElement && requestAnimationFrame(() => {
+		x.__preventObserver__ = !1;
+	});
+}
+function unsetGrabCursor() {
+	let m = this;
+	m.params.watchOverflow && m.isLocked || m.params.cssMode || (m.isElement && (m.__preventObserver__ = !0), m[m.params.touchEventsTarget === "container" ? "el" : "wrapperEl"].style.cursor = "", m.isElement && requestAnimationFrame(() => {
+		m.__preventObserver__ = !1;
+	}));
+}
+var grabCursor = {
+	setGrabCursor,
+	unsetGrabCursor
+};
+function closestElement(m, x = this) {
+	function S(x) {
+		if (!x || x === getDocument() || x === getWindow()) return null;
+		x.assignedSlot && (x = x.assignedSlot);
+		let C = x.closest(m);
+		return !C && !x.getRootNode ? null : C || S(x.getRootNode().host);
+	}
+	return S(x);
+}
+function preventEdgeSwipe(m, x, S) {
+	let C = getWindow(), { params: T } = m, D = T.edgeSwipeDetection, O = T.edgeSwipeThreshold;
+	return D && (S <= O || S >= C.innerWidth - O) ? D === "prevent" ? (x.preventDefault(), !0) : !1 : !0;
+}
+function onTouchStart(m) {
+	let x = this, S = getDocument(), C = m;
+	C.originalEvent && (C = C.originalEvent);
+	let T = x.touchEventsData;
+	if (C.type === "pointerdown") {
+		if (T.pointerId !== null && T.pointerId !== C.pointerId) return;
+		T.pointerId = C.pointerId;
+	} else C.type === "touchstart" && C.targetTouches.length === 1 && (T.touchId = C.targetTouches[0].identifier);
+	if (C.type === "touchstart") {
+		preventEdgeSwipe(x, C, C.targetTouches[0].pageX);
+		return;
+	}
+	let { params: D, touches: O, enabled: k } = x;
+	if (!k || !D.simulateTouch && C.pointerType === "mouse" || x.animating && D.preventInteractionOnTransition) return;
+	!x.animating && D.cssMode && D.loop && x.loopFix();
+	let A = C.target;
+	if (D.touchEventsTarget === "wrapper" && !elementIsChildOf(A, x.wrapperEl) || "which" in C && C.which === 3 || "button" in C && C.button > 0 || T.isTouched && T.isMoved) return;
+	let j = !!D.noSwipingClass && D.noSwipingClass !== "", M = C.composedPath ? C.composedPath() : C.path;
+	j && C.target && C.target.shadowRoot && M && (A = M[0]);
+	let N = D.noSwipingSelector ? D.noSwipingSelector : `.${D.noSwipingClass}`, P = !!(C.target && C.target.shadowRoot);
+	if (D.noSwiping && (P ? closestElement(N, A) : A.closest(N))) {
+		x.allowClick = !0;
+		return;
+	}
+	if (D.swipeHandler && !A.closest(D.swipeHandler)) return;
+	O.currentX = C.pageX, O.currentY = C.pageY;
+	let F = O.currentX, I = O.currentY;
+	if (!preventEdgeSwipe(x, C, F)) return;
+	Object.assign(T, {
+		isTouched: !0,
+		isMoved: !1,
+		allowTouchCallbacks: !0,
+		isScrolling: void 0,
+		startMoving: void 0
+	}), O.startX = F, O.startY = I, T.touchStartTime = now(), x.allowClick = !0, x.updateSize(), x.swipeDirection = void 0, D.threshold > 0 && (T.allowThresholdMove = !1);
+	let L = !0;
+	A.matches(T.focusableElements) && (L = !1, A.nodeName === "SELECT" && (T.isTouched = !1)), S.activeElement && S.activeElement.matches(T.focusableElements) && S.activeElement !== A && (C.pointerType === "mouse" || C.pointerType !== "mouse" && !A.matches(T.focusableElements)) && S.activeElement.blur();
+	let R = L && x.allowTouchMove && D.touchStartPreventDefault;
+	(D.touchStartForcePreventDefault || R) && !A.isContentEditable && C.preventDefault(), D.freeMode && D.freeMode.enabled && x.freeMode && x.animating && !D.cssMode && x.freeMode.onTouchStart(), x.emit("touchStart", C);
+}
+function onTouchMove(m) {
+	let x = getDocument(), S = this, C = S.touchEventsData, { params: T, touches: D, rtlTranslate: O, enabled: k } = S;
+	if (!k || !T.simulateTouch && m.pointerType === "mouse") return;
+	let A = m;
+	if (A.originalEvent && (A = A.originalEvent), A.type === "pointermove" && (C.touchId !== null || A.pointerId !== C.pointerId)) return;
+	let j;
+	if (A.type === "touchmove") {
+		if (j = [...A.changedTouches].find((m) => m.identifier === C.touchId), !j || j.identifier !== C.touchId) return;
+	} else j = A;
+	if (!C.isTouched) {
+		C.startMoving && C.isScrolling && S.emit("touchMoveOpposite", A);
+		return;
+	}
+	let M = j.pageX, N = j.pageY;
+	if (A.preventedByNestedSwiper) {
+		D.startX = M, D.startY = N;
+		return;
+	}
+	if (!S.allowTouchMove) {
+		A.target.matches(C.focusableElements) || (S.allowClick = !1), C.isTouched && (Object.assign(D, {
+			startX: M,
+			startY: N,
+			currentX: M,
+			currentY: N
+		}), C.touchStartTime = now());
+		return;
+	}
+	if (T.touchReleaseOnEdges && !T.loop) {
+		if (S.isVertical()) {
+			if (N < D.startY && S.translate <= S.maxTranslate() || N > D.startY && S.translate >= S.minTranslate()) {
+				C.isTouched = !1, C.isMoved = !1;
+				return;
+			}
+		} else if (O && (M > D.startX && -S.translate <= S.maxTranslate() || M < D.startX && -S.translate >= S.minTranslate())) return;
+		else if (!O && (M < D.startX && S.translate <= S.maxTranslate() || M > D.startX && S.translate >= S.minTranslate())) return;
+	}
+	if (x.activeElement && x.activeElement.matches(C.focusableElements) && x.activeElement !== A.target && A.pointerType !== "mouse" && x.activeElement.blur(), x.activeElement && A.target === x.activeElement && A.target.matches(C.focusableElements)) {
+		C.isMoved = !0, S.allowClick = !1;
+		return;
+	}
+	C.allowTouchCallbacks && S.emit("touchMove", A), D.previousX = D.currentX, D.previousY = D.currentY, D.currentX = M, D.currentY = N;
+	let P = D.currentX - D.startX, F = D.currentY - D.startY;
+	if (S.params.threshold && Math.sqrt(P ** 2 + F ** 2) < S.params.threshold) return;
+	if (C.isScrolling === void 0) {
+		let m;
+		S.isHorizontal() && D.currentY === D.startY || S.isVertical() && D.currentX === D.startX ? C.isScrolling = !1 : P * P + F * F >= 25 && (m = Math.atan2(Math.abs(F), Math.abs(P)) * 180 / Math.PI, C.isScrolling = S.isHorizontal() ? m > T.touchAngle : 90 - m > T.touchAngle);
+	}
+	if (C.isScrolling && S.emit("touchMoveOpposite", A), C.startMoving === void 0 && (D.currentX !== D.startX || D.currentY !== D.startY) && (C.startMoving = !0), C.isScrolling || A.type === "touchmove" && C.preventTouchMoveFromPointerMove) {
+		C.isTouched = !1;
+		return;
+	}
+	if (!C.startMoving) return;
+	S.allowClick = !1, !T.cssMode && A.cancelable && A.preventDefault(), T.touchMoveStopPropagation && !T.nested && A.stopPropagation();
+	let I = S.isHorizontal() ? P : F, L = S.isHorizontal() ? D.currentX - D.previousX : D.currentY - D.previousY;
+	T.oneWayMovement && (I = Math.abs(I) * (O ? 1 : -1), L = Math.abs(L) * (O ? 1 : -1)), D.diff = I, I *= T.touchRatio, O && (I = -I, L = -L);
+	let R = S.touchesDirection;
+	S.swipeDirection = I > 0 ? "prev" : "next", S.touchesDirection = L > 0 ? "prev" : "next";
+	let z = S.params.loop && !T.cssMode, B = S.touchesDirection === "next" && S.allowSlideNext || S.touchesDirection === "prev" && S.allowSlidePrev;
+	if (!C.isMoved) {
+		if (z && B && S.loopFix({ direction: S.swipeDirection }), C.startTranslate = S.getTranslate(), S.setTransition(0), S.animating) {
+			let m = new window.CustomEvent("transitionend", {
+				bubbles: !0,
+				cancelable: !0,
+				detail: { bySwiperTouchMove: !0 }
+			});
+			S.wrapperEl.dispatchEvent(m);
+		}
+		C.allowMomentumBounce = !1, T.grabCursor && (S.allowSlideNext === !0 || S.allowSlidePrev === !0) && S.setGrabCursor(!0), S.emit("sliderFirstMove", A);
+	}
+	if ((/* @__PURE__ */ new Date()).getTime(), T._loopSwapReset !== !1 && C.isMoved && C.allowThresholdMove && R !== S.touchesDirection && z && B && Math.abs(I) >= 1) {
+		Object.assign(D, {
+			startX: M,
+			startY: N,
+			currentX: M,
+			currentY: N,
+			startTranslate: C.currentTranslate
+		}), C.loopSwapReset = !0, C.startTranslate = C.currentTranslate;
+		return;
+	}
+	S.emit("sliderMove", A), C.isMoved = !0, C.currentTranslate = I + C.startTranslate;
+	let H = !0, U = T.resistanceRatio;
+	if (T.touchReleaseOnEdges && (U = 0), I > 0 ? (z && B && C.allowThresholdMove && C.currentTranslate > (T.centeredSlides ? S.minTranslate() - S.slidesSizesGrid[S.activeIndex + 1] - (T.slidesPerView !== "auto" && S.slides.length - T.slidesPerView >= 2 ? S.slidesSizesGrid[S.activeIndex + 1] + S.params.spaceBetween : 0) - S.params.spaceBetween : S.minTranslate()) && S.loopFix({
+		direction: "prev",
+		setTranslate: !0,
+		activeSlideIndex: 0
+	}), C.currentTranslate > S.minTranslate() && (H = !1, T.resistance && (C.currentTranslate = S.minTranslate() - 1 + (-S.minTranslate() + C.startTranslate + I) ** U))) : I < 0 && (z && B && C.allowThresholdMove && C.currentTranslate < (T.centeredSlides ? S.maxTranslate() + S.slidesSizesGrid[S.slidesSizesGrid.length - 1] + S.params.spaceBetween + (T.slidesPerView !== "auto" && S.slides.length - T.slidesPerView >= 2 ? S.slidesSizesGrid[S.slidesSizesGrid.length - 1] + S.params.spaceBetween : 0) : S.maxTranslate()) && S.loopFix({
+		direction: "next",
+		setTranslate: !0,
+		activeSlideIndex: S.slides.length - (T.slidesPerView === "auto" ? S.slidesPerViewDynamic() : Math.ceil(parseFloat(T.slidesPerView, 10)))
+	}), C.currentTranslate < S.maxTranslate() && (H = !1, T.resistance && (C.currentTranslate = S.maxTranslate() + 1 - (S.maxTranslate() - C.startTranslate - I) ** U))), H && (A.preventedByNestedSwiper = !0), !S.allowSlideNext && S.swipeDirection === "next" && C.currentTranslate < C.startTranslate && (C.currentTranslate = C.startTranslate), !S.allowSlidePrev && S.swipeDirection === "prev" && C.currentTranslate > C.startTranslate && (C.currentTranslate = C.startTranslate), !S.allowSlidePrev && !S.allowSlideNext && (C.currentTranslate = C.startTranslate), T.threshold > 0) if (Math.abs(I) > T.threshold || C.allowThresholdMove) {
+		if (!C.allowThresholdMove) {
+			C.allowThresholdMove = !0, D.startX = D.currentX, D.startY = D.currentY, C.currentTranslate = C.startTranslate, D.diff = S.isHorizontal() ? D.currentX - D.startX : D.currentY - D.startY;
+			return;
+		}
+	} else {
+		C.currentTranslate = C.startTranslate;
+		return;
+	}
+	!T.followFinger || T.cssMode || ((T.freeMode && T.freeMode.enabled && S.freeMode || T.watchSlidesProgress) && (S.updateActiveIndex(), S.updateSlidesClasses()), T.freeMode && T.freeMode.enabled && S.freeMode && S.freeMode.onTouchMove(), S.updateProgress(C.currentTranslate), S.setTranslate(C.currentTranslate));
+}
+function onTouchEnd(m) {
+	let x = this, S = x.touchEventsData, C = m;
+	C.originalEvent && (C = C.originalEvent);
+	let T;
+	if (C.type === "touchend" || C.type === "touchcancel") {
+		if (T = [...C.changedTouches].find((m) => m.identifier === S.touchId), !T || T.identifier !== S.touchId) return;
+	} else {
+		if (S.touchId !== null || C.pointerId !== S.pointerId) return;
+		T = C;
+	}
+	if ([
+		"pointercancel",
+		"pointerout",
+		"pointerleave",
+		"contextmenu"
+	].includes(C.type) && !(["pointercancel", "contextmenu"].includes(C.type) && (x.browser.isSafari || x.browser.isWebView))) return;
+	S.pointerId = null, S.touchId = null;
+	let { params: D, touches: O, rtlTranslate: k, slidesGrid: A, enabled: j } = x;
+	if (!j || !D.simulateTouch && C.pointerType === "mouse") return;
+	if (S.allowTouchCallbacks && x.emit("touchEnd", C), S.allowTouchCallbacks = !1, !S.isTouched) {
+		S.isMoved && D.grabCursor && x.setGrabCursor(!1), S.isMoved = !1, S.startMoving = !1;
+		return;
+	}
+	D.grabCursor && S.isMoved && S.isTouched && (x.allowSlideNext === !0 || x.allowSlidePrev === !0) && x.setGrabCursor(!1);
+	let M = now(), N = M - S.touchStartTime;
+	if (x.allowClick) {
+		let m = C.path || C.composedPath && C.composedPath();
+		x.updateClickedSlide(m && m[0] || C.target, m), x.emit("tap click", C), N < 300 && M - S.lastClickTime < 300 && x.emit("doubleTap doubleClick", C);
+	}
+	if (S.lastClickTime = now(), nextTick(() => {
+		x.destroyed || (x.allowClick = !0);
+	}), !S.isTouched || !S.isMoved || !x.swipeDirection || O.diff === 0 && !S.loopSwapReset || S.currentTranslate === S.startTranslate && !S.loopSwapReset) {
+		S.isTouched = !1, S.isMoved = !1, S.startMoving = !1;
+		return;
+	}
+	S.isTouched = !1, S.isMoved = !1, S.startMoving = !1;
+	let P;
+	if (P = D.followFinger ? k ? x.translate : -x.translate : -S.currentTranslate, D.cssMode) return;
+	if (D.freeMode && D.freeMode.enabled) {
+		x.freeMode.onTouchEnd({ currentPos: P });
+		return;
+	}
+	let F = P >= -x.maxTranslate() && !x.params.loop, I = 0, L = x.slidesSizesGrid[0];
+	for (let m = 0; m < A.length; m += m < D.slidesPerGroupSkip ? 1 : D.slidesPerGroup) {
+		let x = m < D.slidesPerGroupSkip - 1 ? 1 : D.slidesPerGroup;
+		A[m + x] === void 0 ? (F || P >= A[m]) && (I = m, L = A[A.length - 1] - A[A.length - 2]) : (F || P >= A[m] && P < A[m + x]) && (I = m, L = A[m + x] - A[m]);
+	}
+	let R = null, z = null;
+	D.rewind && (x.isBeginning ? z = D.virtual && D.virtual.enabled && x.virtual ? x.virtual.slides.length - 1 : x.slides.length - 1 : x.isEnd && (R = 0));
+	let B = (P - A[I]) / L, H = I < D.slidesPerGroupSkip - 1 ? 1 : D.slidesPerGroup;
+	if (N > D.longSwipesMs) {
+		if (!D.longSwipes) {
+			x.slideTo(x.activeIndex);
+			return;
+		}
+		x.swipeDirection === "next" && (B >= D.longSwipesRatio ? x.slideTo(D.rewind && x.isEnd ? R : I + H) : x.slideTo(I)), x.swipeDirection === "prev" && (B > 1 - D.longSwipesRatio ? x.slideTo(I + H) : z !== null && B < 0 && Math.abs(B) > D.longSwipesRatio ? x.slideTo(z) : x.slideTo(I));
+	} else {
+		if (!D.shortSwipes) {
+			x.slideTo(x.activeIndex);
+			return;
+		}
+		x.navigation && (C.target === x.navigation.nextEl || C.target === x.navigation.prevEl) ? C.target === x.navigation.nextEl ? x.slideTo(I + H) : x.slideTo(I) : (x.swipeDirection === "next" && x.slideTo(R === null ? I + H : R), x.swipeDirection === "prev" && x.slideTo(z === null ? I : z));
+	}
+}
+function onResize() {
+	let m = this, { params: x, el: S } = m;
+	if (S && S.offsetWidth === 0) return;
+	x.breakpoints && m.setBreakpoint();
+	let { allowSlideNext: C, allowSlidePrev: T, snapGrid: D } = m, O = m.virtual && m.params.virtual.enabled;
+	m.allowSlideNext = !0, m.allowSlidePrev = !0, m.updateSize(), m.updateSlides(), m.updateSlidesClasses();
+	let k = O && x.loop;
+	(x.slidesPerView === "auto" || x.slidesPerView > 1) && m.isEnd && !m.isBeginning && !m.params.centeredSlides && !k ? m.slideTo(m.slides.length - 1, 0, !1, !0) : m.params.loop && !O ? m.slideToLoop(m.realIndex, 0, !1, !0) : m.slideTo(m.activeIndex, 0, !1, !0), m.autoplay && m.autoplay.running && m.autoplay.paused && (clearTimeout(m.autoplay.resizeTimeout), m.autoplay.resizeTimeout = setTimeout(() => {
+		m.autoplay && m.autoplay.running && m.autoplay.paused && m.autoplay.resume();
+	}, 500)), m.allowSlidePrev = T, m.allowSlideNext = C, m.params.watchOverflow && D !== m.snapGrid && m.checkOverflow();
+}
+function onClick(m) {
+	let x = this;
+	x.enabled && (x.allowClick || (x.params.preventClicks && m.preventDefault(), x.params.preventClicksPropagation && x.animating && (m.stopPropagation(), m.stopImmediatePropagation())));
+}
+function onScroll() {
+	let m = this, { wrapperEl: x, rtlTranslate: S, enabled: C } = m;
+	if (!C) return;
+	m.previousTranslate = m.translate, m.isHorizontal() ? m.translate = -x.scrollLeft : m.translate = -x.scrollTop, m.translate === 0 && (m.translate = 0), m.updateActiveIndex(), m.updateSlidesClasses();
+	let T, D = m.maxTranslate() - m.minTranslate();
+	T = D === 0 ? 0 : (m.translate - m.minTranslate()) / D, T !== m.progress && m.updateProgress(S ? -m.translate : m.translate), m.emit("setTranslate", m.translate, !1);
+}
+function onLoad(m) {
+	let x = this;
+	processLazyPreloader(x, m.target), !(x.params.cssMode || x.params.slidesPerView !== "auto" && !x.params.autoHeight) && x.update();
+}
+function onDocumentTouchStart() {
+	let m = this;
+	m.documentTouchHandlerProceeded || (m.documentTouchHandlerProceeded = !0, m.params.touchReleaseOnEdges && (m.el.style.touchAction = "auto"));
+}
+var events = (m, x) => {
+	let S = getDocument(), { params: C, el: T, wrapperEl: D, device: O } = m, k = !!C.nested, A = x === "on" ? "addEventListener" : "removeEventListener", j = x;
+	!T || typeof T == "string" || (S[A]("touchstart", m.onDocumentTouchStart, {
+		passive: !1,
+		capture: k
+	}), T[A]("touchstart", m.onTouchStart, { passive: !1 }), T[A]("pointerdown", m.onTouchStart, { passive: !1 }), S[A]("touchmove", m.onTouchMove, {
+		passive: !1,
+		capture: k
+	}), S[A]("pointermove", m.onTouchMove, {
+		passive: !1,
+		capture: k
+	}), S[A]("touchend", m.onTouchEnd, { passive: !0 }), S[A]("pointerup", m.onTouchEnd, { passive: !0 }), S[A]("pointercancel", m.onTouchEnd, { passive: !0 }), S[A]("touchcancel", m.onTouchEnd, { passive: !0 }), S[A]("pointerout", m.onTouchEnd, { passive: !0 }), S[A]("pointerleave", m.onTouchEnd, { passive: !0 }), S[A]("contextmenu", m.onTouchEnd, { passive: !0 }), (C.preventClicks || C.preventClicksPropagation) && T[A]("click", m.onClick, !0), C.cssMode && D[A]("scroll", m.onScroll), C.updateOnWindowResize ? m[j](O.ios || O.android ? "resize orientationchange observerUpdate" : "resize observerUpdate", onResize, !0) : m[j]("observerUpdate", onResize, !0), T[A]("load", m.onLoad, { capture: !0 }));
+};
+function attachEvents() {
+	let m = this, { params: x } = m;
+	m.onTouchStart = onTouchStart.bind(m), m.onTouchMove = onTouchMove.bind(m), m.onTouchEnd = onTouchEnd.bind(m), m.onDocumentTouchStart = onDocumentTouchStart.bind(m), x.cssMode && (m.onScroll = onScroll.bind(m)), m.onClick = onClick.bind(m), m.onLoad = onLoad.bind(m), events(m, "on");
+}
+function detachEvents() {
+	events(this, "off");
+}
+var events$1 = {
+	attachEvents,
+	detachEvents
+}, isGridEnabled = (m, x) => m.grid && x.grid && x.grid.rows > 1;
+function setBreakpoint() {
+	let m = this, { realIndex: x, initialized: S, params: C, el: T } = m, D = C.breakpoints;
+	if (!D || D && Object.keys(D).length === 0) return;
+	let O = getDocument(), k = C.breakpointsBase === "window" || !C.breakpointsBase ? C.breakpointsBase : "container", A = ["window", "container"].includes(C.breakpointsBase) || !C.breakpointsBase ? m.el : O.querySelector(C.breakpointsBase), j = m.getBreakpoint(D, k, A);
+	if (!j || m.currentBreakpoint === j) return;
+	let M = (j in D ? D[j] : void 0) || m.originalParams, N = isGridEnabled(m, C), P = isGridEnabled(m, M), F = m.params.grabCursor, I = M.grabCursor, L = C.enabled;
+	N && !P ? (T.classList.remove(`${C.containerModifierClass}grid`, `${C.containerModifierClass}grid-column`), m.emitContainerClasses()) : !N && P && (T.classList.add(`${C.containerModifierClass}grid`), (M.grid.fill && M.grid.fill === "column" || !M.grid.fill && C.grid.fill === "column") && T.classList.add(`${C.containerModifierClass}grid-column`), m.emitContainerClasses()), F && !I ? m.unsetGrabCursor() : !F && I && m.setGrabCursor(), [
+		"navigation",
+		"pagination",
+		"scrollbar"
+	].forEach((x) => {
+		if (M[x] === void 0) return;
+		let S = C[x] && C[x].enabled, T = M[x] && M[x].enabled;
+		S && !T && m[x].disable(), !S && T && m[x].enable();
+	});
+	let R = M.direction && M.direction !== C.direction, z = C.loop && (M.slidesPerView !== C.slidesPerView || R), B = C.loop;
+	R && S && m.changeDirection(), extend$1(m.params, M);
+	let H = m.params.enabled, U = m.params.loop;
+	Object.assign(m, {
+		allowTouchMove: m.params.allowTouchMove,
+		allowSlideNext: m.params.allowSlideNext,
+		allowSlidePrev: m.params.allowSlidePrev
+	}), L && !H ? m.disable() : !L && H && m.enable(), m.currentBreakpoint = j, m.emit("_beforeBreakpoint", M), S && (z ? (m.loopDestroy(), m.loopCreate(x), m.updateSlides()) : !B && U ? (m.loopCreate(x), m.updateSlides()) : B && !U && m.loopDestroy()), m.emit("breakpoint", M);
+}
+function getBreakpoint(m, x = "window", S) {
+	if (!m || x === "container" && !S) return;
+	let C = !1, T = getWindow(), D = x === "window" ? T.innerHeight : S.clientHeight, O = Object.keys(m).map((m) => typeof m == "string" && m.indexOf("@") === 0 ? {
+		value: D * parseFloat(m.substr(1)),
+		point: m
+	} : {
+		value: m,
+		point: m
+	});
+	O.sort((m, x) => parseInt(m.value, 10) - parseInt(x.value, 10));
+	for (let m = 0; m < O.length; m += 1) {
+		let { point: D, value: k } = O[m];
+		x === "window" ? T.matchMedia(`(min-width: ${k}px)`).matches && (C = D) : k <= S.clientWidth && (C = D);
+	}
+	return C || "max";
+}
+var breakpoints = {
+	setBreakpoint,
+	getBreakpoint
+};
+function prepareClasses(m, x) {
+	let S = [];
+	return m.forEach((m) => {
+		typeof m == "object" ? Object.keys(m).forEach((C) => {
+			m[C] && S.push(x + C);
+		}) : typeof m == "string" && S.push(x + m);
+	}), S;
+}
+function addClasses() {
+	let m = this, { classNames: x, params: S, rtl: C, el: T, device: D } = m, O = prepareClasses([
+		"initialized",
+		S.direction,
+		{ "free-mode": m.params.freeMode && S.freeMode.enabled },
+		{ autoheight: S.autoHeight },
+		{ rtl: C },
+		{ grid: S.grid && S.grid.rows > 1 },
+		{ "grid-column": S.grid && S.grid.rows > 1 && S.grid.fill === "column" },
+		{ android: D.android },
+		{ ios: D.ios },
+		{ "css-mode": S.cssMode },
+		{ centered: S.cssMode && S.centeredSlides },
+		{ "watch-progress": S.watchSlidesProgress }
+	], S.containerModifierClass);
+	x.push(...O), T.classList.add(...x), m.emitContainerClasses();
+}
+function removeClasses() {
+	let m = this, { el: x, classNames: S } = m;
+	!x || typeof x == "string" || (x.classList.remove(...S), m.emitContainerClasses());
+}
+var classes = {
+	addClasses,
+	removeClasses
+};
+function checkOverflow() {
+	let m = this, { isLocked: x, params: S } = m, { slidesOffsetBefore: C } = S;
+	if (C) {
+		let x = m.slides.length - 1, S = m.slidesGrid[x] + m.slidesSizesGrid[x] + C * 2;
+		m.isLocked = m.size > S;
+	} else m.isLocked = m.snapGrid.length === 1;
+	S.allowSlideNext === !0 && (m.allowSlideNext = !m.isLocked), S.allowSlidePrev === !0 && (m.allowSlidePrev = !m.isLocked), x && x !== m.isLocked && (m.isEnd = !1), x !== m.isLocked && m.emit(m.isLocked ? "lock" : "unlock");
+}
+var checkOverflow$1 = { checkOverflow }, defaults = {
+	init: !0,
+	direction: "horizontal",
+	oneWayMovement: !1,
+	swiperElementNodeName: "SWIPER-CONTAINER",
+	touchEventsTarget: "wrapper",
+	initialSlide: 0,
+	speed: 300,
+	cssMode: !1,
+	updateOnWindowResize: !0,
+	resizeObserver: !0,
+	nested: !1,
+	createElements: !1,
+	eventsPrefix: "swiper",
+	enabled: !0,
+	focusableElements: "input, select, option, textarea, button, video, label",
+	width: null,
+	height: null,
+	preventInteractionOnTransition: !1,
+	userAgent: null,
+	url: null,
+	edgeSwipeDetection: !1,
+	edgeSwipeThreshold: 20,
+	autoHeight: !1,
+	setWrapperSize: !1,
+	virtualTranslate: !1,
+	effect: "slide",
+	breakpoints: void 0,
+	breakpointsBase: "window",
+	spaceBetween: 0,
+	slidesPerView: 1,
+	slidesPerGroup: 1,
+	slidesPerGroupSkip: 0,
+	slidesPerGroupAuto: !1,
+	centeredSlides: !1,
+	centeredSlidesBounds: !1,
+	slidesOffsetBefore: 0,
+	slidesOffsetAfter: 0,
+	normalizeSlideIndex: !0,
+	centerInsufficientSlides: !1,
+	watchOverflow: !0,
+	roundLengths: !1,
+	touchRatio: 1,
+	touchAngle: 45,
+	simulateTouch: !0,
+	shortSwipes: !0,
+	longSwipes: !0,
+	longSwipesRatio: .5,
+	longSwipesMs: 300,
+	followFinger: !0,
+	allowTouchMove: !0,
+	threshold: 5,
+	touchMoveStopPropagation: !1,
+	touchStartPreventDefault: !0,
+	touchStartForcePreventDefault: !1,
+	touchReleaseOnEdges: !1,
+	uniqueNavElements: !0,
+	resistance: !0,
+	resistanceRatio: .85,
+	watchSlidesProgress: !1,
+	grabCursor: !1,
+	preventClicks: !0,
+	preventClicksPropagation: !0,
+	slideToClickedSlide: !1,
+	loop: !1,
+	loopAddBlankSlides: !0,
+	loopAdditionalSlides: 0,
+	loopPreventsSliding: !0,
+	rewind: !1,
+	allowSlidePrev: !0,
+	allowSlideNext: !0,
+	swipeHandler: null,
+	noSwiping: !0,
+	noSwipingClass: "swiper-no-swiping",
+	noSwipingSelector: null,
+	passiveListeners: !0,
+	maxBackfaceHiddenSlides: 10,
+	containerModifierClass: "swiper-",
+	slideClass: "swiper-slide",
+	slideBlankClass: "swiper-slide-blank",
+	slideActiveClass: "swiper-slide-active",
+	slideVisibleClass: "swiper-slide-visible",
+	slideFullyVisibleClass: "swiper-slide-fully-visible",
+	slideNextClass: "swiper-slide-next",
+	slidePrevClass: "swiper-slide-prev",
+	wrapperClass: "swiper-wrapper",
+	lazyPreloaderClass: "swiper-lazy-preloader",
+	lazyPreloadPrevNext: 0,
+	runCallbacksOnInit: !0,
+	_emitClasses: !1
+};
+function moduleExtendParams(m, x) {
+	return function(S = {}) {
+		let C = Object.keys(S)[0], T = S[C];
+		if (typeof T != "object" || !T) {
+			extend$1(x, S);
+			return;
+		}
+		if (m[C] === !0 && (m[C] = { enabled: !0 }), C === "navigation" && m[C] && m[C].enabled && !m[C].prevEl && !m[C].nextEl && (m[C].auto = !0), ["pagination", "scrollbar"].indexOf(C) >= 0 && m[C] && m[C].enabled && !m[C].el && (m[C].auto = !0), !(C in m && "enabled" in T)) {
+			extend$1(x, S);
+			return;
+		}
+		typeof m[C] == "object" && !("enabled" in m[C]) && (m[C].enabled = !0), m[C] || (m[C] = { enabled: !1 }), extend$1(x, S);
+	};
+}
+var prototypes = {
+	eventsEmitter,
+	update,
+	translate,
+	transition,
+	slide,
+	loop,
+	grabCursor,
+	events: events$1,
+	breakpoints,
+	checkOverflow: checkOverflow$1,
+	classes
+}, extendedDefaults = {}, Swiper$1 = class m {
+	constructor(...x) {
+		let S, C;
+		x.length === 1 && x[0].constructor && Object.prototype.toString.call(x[0]).slice(8, -1) === "Object" ? C = x[0] : [S, C] = x, C ||= {}, C = extend$1({}, C), S && !C.el && (C.el = S);
+		let T = getDocument();
+		if (C.el && typeof C.el == "string" && T.querySelectorAll(C.el).length > 1) {
+			let x = [];
+			return T.querySelectorAll(C.el).forEach((S) => {
+				let T = extend$1({}, C, { el: S });
+				x.push(new m(T));
+			}), x;
+		}
+		let D = this;
+		D.__swiper__ = !0, D.support = getSupport(), D.device = getDevice({ userAgent: C.userAgent }), D.browser = getBrowser(), D.eventsListeners = {}, D.eventsAnyListeners = [], D.modules = [...D.__modules__], C.modules && Array.isArray(C.modules) && D.modules.push(...C.modules);
+		let O = {};
+		return D.modules.forEach((m) => {
+			m({
+				params: C,
+				swiper: D,
+				extendParams: moduleExtendParams(C, O),
+				on: D.on.bind(D),
+				once: D.once.bind(D),
+				off: D.off.bind(D),
+				emit: D.emit.bind(D)
+			});
+		}), D.params = extend$1({}, extend$1({}, defaults, O), extendedDefaults, C), D.originalParams = extend$1({}, D.params), D.passedParams = extend$1({}, C), D.params && D.params.on && Object.keys(D.params.on).forEach((m) => {
+			D.on(m, D.params.on[m]);
+		}), D.params && D.params.onAny && D.onAny(D.params.onAny), Object.assign(D, {
+			enabled: D.params.enabled,
+			el: S,
+			classNames: [],
+			slides: [],
+			slidesGrid: [],
+			snapGrid: [],
+			slidesSizesGrid: [],
+			isHorizontal() {
+				return D.params.direction === "horizontal";
+			},
+			isVertical() {
+				return D.params.direction === "vertical";
+			},
+			activeIndex: 0,
+			realIndex: 0,
+			isBeginning: !0,
+			isEnd: !1,
+			translate: 0,
+			previousTranslate: 0,
+			progress: 0,
+			velocity: 0,
+			animating: !1,
+			cssOverflowAdjustment() {
+				return Math.trunc(this.translate / 2 ** 23) * 2 ** 23;
+			},
+			allowSlideNext: D.params.allowSlideNext,
+			allowSlidePrev: D.params.allowSlidePrev,
+			touchEventsData: {
+				isTouched: void 0,
+				isMoved: void 0,
+				allowTouchCallbacks: void 0,
+				touchStartTime: void 0,
+				isScrolling: void 0,
+				currentTranslate: void 0,
+				startTranslate: void 0,
+				allowThresholdMove: void 0,
+				focusableElements: D.params.focusableElements,
+				lastClickTime: 0,
+				clickTimeout: void 0,
+				velocities: [],
+				allowMomentumBounce: void 0,
+				startMoving: void 0,
+				pointerId: null,
+				touchId: null
+			},
+			allowClick: !0,
+			allowTouchMove: D.params.allowTouchMove,
+			touches: {
+				startX: 0,
+				startY: 0,
+				currentX: 0,
+				currentY: 0,
+				diff: 0
+			},
+			imagesToLoad: [],
+			imagesLoaded: 0
+		}), D.emit("_swiper"), D.params.init && D.init(), D;
+	}
+	getDirectionLabel(m) {
+		return this.isHorizontal() ? m : {
+			width: "height",
+			"margin-top": "margin-left",
+			"margin-bottom ": "margin-right",
+			"margin-left": "margin-top",
+			"margin-right": "margin-bottom",
+			"padding-left": "padding-top",
+			"padding-right": "padding-bottom",
+			marginRight: "marginBottom"
+		}[m];
+	}
+	getSlideIndex(m) {
+		let { slidesEl: x, params: S } = this, C = elementIndex(elementChildren(x, `.${S.slideClass}, swiper-slide`)[0]);
+		return elementIndex(m) - C;
+	}
+	getSlideIndexByData(m) {
+		return this.getSlideIndex(this.slides.find((x) => x.getAttribute("data-swiper-slide-index") * 1 === m));
+	}
+	getSlideIndexWhenGrid(m) {
+		return this.grid && this.params.grid && this.params.grid.rows > 1 && (this.params.grid.fill === "column" ? m = Math.floor(m / this.params.grid.rows) : this.params.grid.fill === "row" && (m %= Math.ceil(this.slides.length / this.params.grid.rows))), m;
+	}
+	recalcSlides() {
+		let m = this, { slidesEl: x, params: S } = m;
+		m.slides = elementChildren(x, `.${S.slideClass}, swiper-slide`);
+	}
+	enable() {
+		let m = this;
+		m.enabled || (m.enabled = !0, m.params.grabCursor && m.setGrabCursor(), m.emit("enable"));
+	}
+	disable() {
+		let m = this;
+		m.enabled && (m.enabled = !1, m.params.grabCursor && m.unsetGrabCursor(), m.emit("disable"));
+	}
+	setProgress(m, x) {
+		let S = this;
+		m = Math.min(Math.max(m, 0), 1);
+		let C = S.minTranslate(), T = (S.maxTranslate() - C) * m + C;
+		S.translateTo(T, x === void 0 ? 0 : x), S.updateActiveIndex(), S.updateSlidesClasses();
+	}
+	emitContainerClasses() {
+		let m = this;
+		if (!m.params._emitClasses || !m.el) return;
+		let x = m.el.className.split(" ").filter((x) => x.indexOf("swiper") === 0 || x.indexOf(m.params.containerModifierClass) === 0);
+		m.emit("_containerClasses", x.join(" "));
+	}
+	getSlideClasses(m) {
+		let x = this;
+		return x.destroyed ? "" : m.className.split(" ").filter((m) => m.indexOf("swiper-slide") === 0 || m.indexOf(x.params.slideClass) === 0).join(" ");
+	}
+	emitSlidesClasses() {
+		let m = this;
+		if (!m.params._emitClasses || !m.el) return;
+		let x = [];
+		m.slides.forEach((S) => {
+			let C = m.getSlideClasses(S);
+			x.push({
+				slideEl: S,
+				classNames: C
+			}), m.emit("_slideClass", S, C);
+		}), m.emit("_slideClasses", x);
+	}
+	slidesPerViewDynamic(m = "current", x = !1) {
+		let { params: S, slides: C, slidesGrid: T, slidesSizesGrid: D, size: O, activeIndex: k } = this, A = 1;
+		if (typeof S.slidesPerView == "number") return S.slidesPerView;
+		if (S.centeredSlides) {
+			let m = C[k] ? Math.ceil(C[k].swiperSlideSize) : 0, x;
+			for (let S = k + 1; S < C.length; S += 1) C[S] && !x && (m += Math.ceil(C[S].swiperSlideSize), A += 1, m > O && (x = !0));
+			for (let S = k - 1; S >= 0; --S) C[S] && !x && (m += C[S].swiperSlideSize, A += 1, m > O && (x = !0));
+		} else if (m === "current") for (let m = k + 1; m < C.length; m += 1) (x ? T[m] + D[m] - T[k] < O : T[m] - T[k] < O) && (A += 1);
+		else for (let m = k - 1; m >= 0; --m) T[k] - T[m] < O && (A += 1);
+		return A;
+	}
+	update() {
+		let m = this;
+		if (!m || m.destroyed) return;
+		let { snapGrid: x, params: S } = m;
+		S.breakpoints && m.setBreakpoint(), [...m.el.querySelectorAll("[loading=\"lazy\"]")].forEach((x) => {
+			x.complete && processLazyPreloader(m, x);
+		}), m.updateSize(), m.updateSlides(), m.updateProgress(), m.updateSlidesClasses();
+		function C() {
+			let x = m.rtlTranslate ? m.translate * -1 : m.translate, S = Math.min(Math.max(x, m.maxTranslate()), m.minTranslate());
+			m.setTranslate(S), m.updateActiveIndex(), m.updateSlidesClasses();
+		}
+		let T;
+		if (S.freeMode && S.freeMode.enabled && !S.cssMode) C(), S.autoHeight && m.updateAutoHeight();
+		else {
+			if ((S.slidesPerView === "auto" || S.slidesPerView > 1) && m.isEnd && !S.centeredSlides) {
+				let x = m.virtual && S.virtual.enabled ? m.virtual.slides : m.slides;
+				T = m.slideTo(x.length - 1, 0, !1, !0);
+			} else T = m.slideTo(m.activeIndex, 0, !1, !0);
+			T || C();
+		}
+		S.watchOverflow && x !== m.snapGrid && m.checkOverflow(), m.emit("update");
+	}
+	changeDirection(m, x = !0) {
+		let S = this, C = S.params.direction;
+		return m ||= C === "horizontal" ? "vertical" : "horizontal", m === C || m !== "horizontal" && m !== "vertical" ? S : (S.el.classList.remove(`${S.params.containerModifierClass}${C}`), S.el.classList.add(`${S.params.containerModifierClass}${m}`), S.emitContainerClasses(), S.params.direction = m, S.slides.forEach((x) => {
+			m === "vertical" ? x.style.width = "" : x.style.height = "";
+		}), S.emit("changeDirection"), x && S.update(), S);
+	}
+	changeLanguageDirection(m) {
+		let x = this;
+		x.rtl && m === "rtl" || !x.rtl && m === "ltr" || (x.rtl = m === "rtl", x.rtlTranslate = x.params.direction === "horizontal" && x.rtl, x.rtl ? (x.el.classList.add(`${x.params.containerModifierClass}rtl`), x.el.dir = "rtl") : (x.el.classList.remove(`${x.params.containerModifierClass}rtl`), x.el.dir = "ltr"), x.update());
+	}
+	mount(m) {
+		let x = this;
+		if (x.mounted) return !0;
+		let S = m || x.params.el;
+		if (typeof S == "string" && (S = document.querySelector(S)), !S) return !1;
+		S.swiper = x, S.parentNode && S.parentNode.host && S.parentNode.host.nodeName === x.params.swiperElementNodeName.toUpperCase() && (x.isElement = !0);
+		let C = () => `.${(x.params.wrapperClass || "").trim().split(" ").join(".")}`, T = (() => S && S.shadowRoot && S.shadowRoot.querySelector ? S.shadowRoot.querySelector(C()) : elementChildren(S, C())[0])();
+		return !T && x.params.createElements && (T = createElement$1("div", x.params.wrapperClass), S.append(T), elementChildren(S, `.${x.params.slideClass}`).forEach((m) => {
+			T.append(m);
+		})), Object.assign(x, {
+			el: S,
+			wrapperEl: T,
+			slidesEl: x.isElement && !S.parentNode.host.slideSlots ? S.parentNode.host : T,
+			hostEl: x.isElement ? S.parentNode.host : S,
+			mounted: !0,
+			rtl: S.dir.toLowerCase() === "rtl" || elementStyle(S, "direction") === "rtl",
+			rtlTranslate: x.params.direction === "horizontal" && (S.dir.toLowerCase() === "rtl" || elementStyle(S, "direction") === "rtl"),
+			wrongRTL: elementStyle(T, "display") === "-webkit-box"
+		}), !0;
+	}
+	init(m) {
+		let x = this;
+		if (x.initialized || x.mount(m) === !1) return x;
+		x.emit("beforeInit"), x.params.breakpoints && x.setBreakpoint(), x.addClasses(), x.updateSize(), x.updateSlides(), x.params.watchOverflow && x.checkOverflow(), x.params.grabCursor && x.enabled && x.setGrabCursor(), x.params.loop && x.virtual && x.params.virtual.enabled ? x.slideTo(x.params.initialSlide + x.virtual.slidesBefore, 0, x.params.runCallbacksOnInit, !1, !0) : x.slideTo(x.params.initialSlide, 0, x.params.runCallbacksOnInit, !1, !0), x.params.loop && x.loopCreate(void 0, !0), x.attachEvents();
+		let S = [...x.el.querySelectorAll("[loading=\"lazy\"]")];
+		return x.isElement && S.push(...x.hostEl.querySelectorAll("[loading=\"lazy\"]")), S.forEach((m) => {
+			m.complete ? processLazyPreloader(x, m) : m.addEventListener("load", (m) => {
+				processLazyPreloader(x, m.target);
+			});
+		}), preload(x), x.initialized = !0, preload(x), x.emit("init"), x.emit("afterInit"), x;
+	}
+	destroy(m = !0, x = !0) {
+		let S = this, { params: C, el: T, wrapperEl: D, slides: O } = S;
+		return S.params === void 0 || S.destroyed ? null : (S.emit("beforeDestroy"), S.initialized = !1, S.detachEvents(), C.loop && S.loopDestroy(), x && (S.removeClasses(), T && typeof T != "string" && T.removeAttribute("style"), D && D.removeAttribute("style"), O && O.length && O.forEach((m) => {
+			m.classList.remove(C.slideVisibleClass, C.slideFullyVisibleClass, C.slideActiveClass, C.slideNextClass, C.slidePrevClass), m.removeAttribute("style"), m.removeAttribute("data-swiper-slide-index");
+		})), S.emit("destroy"), Object.keys(S.eventsListeners).forEach((m) => {
+			S.off(m);
+		}), m !== !1 && (S.el && typeof S.el != "string" && (S.el.swiper = null), deleteProps(S)), S.destroyed = !0, null);
+	}
+	static extendDefaults(m) {
+		extend$1(extendedDefaults, m);
+	}
+	static get extendedDefaults() {
+		return extendedDefaults;
+	}
+	static get defaults() {
+		return defaults;
+	}
+	static installModule(x) {
+		m.prototype.__modules__ || (m.prototype.__modules__ = []);
+		let S = m.prototype.__modules__;
+		typeof x == "function" && S.indexOf(x) < 0 && S.push(x);
+	}
+	static use(x) {
+		return Array.isArray(x) ? (x.forEach((x) => m.installModule(x)), m) : (m.installModule(x), m);
+	}
+};
+Object.keys(prototypes).forEach((m) => {
+	Object.keys(prototypes[m]).forEach((x) => {
+		Swiper$1.prototype[x] = prototypes[m][x];
+	});
+}), Swiper$1.use([Resize, Observer]);
+var paramsList = /* @__PURE__ */ "eventsPrefix.injectStyles.injectStylesUrls.modules.init._direction.oneWayMovement.swiperElementNodeName.touchEventsTarget.initialSlide._speed.cssMode.updateOnWindowResize.resizeObserver.nested.focusableElements._enabled._width._height.preventInteractionOnTransition.userAgent.url._edgeSwipeDetection._edgeSwipeThreshold._freeMode._autoHeight.setWrapperSize.virtualTranslate._effect.breakpoints.breakpointsBase._spaceBetween._slidesPerView.maxBackfaceHiddenSlides._grid._slidesPerGroup._slidesPerGroupSkip._slidesPerGroupAuto._centeredSlides._centeredSlidesBounds._slidesOffsetBefore._slidesOffsetAfter.normalizeSlideIndex._centerInsufficientSlides._watchOverflow.roundLengths.touchRatio.touchAngle.simulateTouch._shortSwipes._longSwipes.longSwipesRatio.longSwipesMs._followFinger.allowTouchMove._threshold.touchMoveStopPropagation.touchStartPreventDefault.touchStartForcePreventDefault.touchReleaseOnEdges.uniqueNavElements._resistance._resistanceRatio._watchSlidesProgress._grabCursor.preventClicks.preventClicksPropagation._slideToClickedSlide._loop.loopAdditionalSlides.loopAddBlankSlides.loopPreventsSliding._rewind._allowSlidePrev._allowSlideNext._swipeHandler._noSwiping.noSwipingClass.noSwipingSelector.passiveListeners.containerModifierClass.slideClass.slideActiveClass.slideVisibleClass.slideFullyVisibleClass.slideNextClass.slidePrevClass.slideBlankClass.wrapperClass.lazyPreloaderClass.lazyPreloadPrevNext.runCallbacksOnInit.observer.observeParents.observeSlideChildren.a11y._autoplay._controller.coverflowEffect.cubeEffect.fadeEffect.flipEffect.creativeEffect.cardsEffect.hashNavigation.history.keyboard.mousewheel._navigation._pagination.parallax._scrollbar._thumbs.virtual.zoom.control".split(".");
+function isObject(m) {
+	return typeof m == "object" && !!m && m.constructor && Object.prototype.toString.call(m).slice(8, -1) === "Object" && !m.__swiper__;
+}
+function extend(m, x) {
+	let S = [
+		"__proto__",
+		"constructor",
+		"prototype"
+	];
+	Object.keys(x).filter((m) => S.indexOf(m) < 0).forEach((S) => {
+		m[S] === void 0 ? m[S] = x[S] : isObject(x[S]) && isObject(m[S]) && Object.keys(x[S]).length > 0 ? x[S].__swiper__ ? m[S] = x[S] : extend(m[S], x[S]) : m[S] = x[S];
+	});
+}
+function needsNavigation(m = {}) {
+	return m.navigation && m.navigation.nextEl === void 0 && m.navigation.prevEl === void 0;
+}
+function needsPagination(m = {}) {
+	return m.pagination && m.pagination.el === void 0;
+}
+function needsScrollbar(m = {}) {
+	return m.scrollbar && m.scrollbar.el === void 0;
+}
+function uniqueClasses(m = "") {
+	let x = m.split(" ").map((m) => m.trim()).filter((m) => !!m), S = [];
+	return x.forEach((m) => {
+		S.indexOf(m) < 0 && S.push(m);
+	}), S.join(" ");
+}
+function wrapperClass(m = "") {
+	return m ? m.includes("swiper-wrapper") ? m : `swiper-wrapper ${m}` : "swiper-wrapper";
+}
+function updateSwiper({ swiper: m, slides: x, passedParams: S, changedParams: C, nextEl: T, prevEl: D, scrollbarEl: O, paginationEl: k }) {
+	let A = C.filter((m) => m !== "children" && m !== "direction" && m !== "wrapperClass"), { params: j, pagination: M, navigation: N, scrollbar: P, virtual: F, thumbs: I } = m, L, R, z, B, H, U, W, G;
+	C.includes("thumbs") && S.thumbs && S.thumbs.swiper && !S.thumbs.swiper.destroyed && j.thumbs && (!j.thumbs.swiper || j.thumbs.swiper.destroyed) && (L = !0), C.includes("controller") && S.controller && S.controller.control && j.controller && !j.controller.control && (R = !0), C.includes("pagination") && S.pagination && (S.pagination.el || k) && (j.pagination || j.pagination === !1) && M && !M.el && (z = !0), C.includes("scrollbar") && S.scrollbar && (S.scrollbar.el || O) && (j.scrollbar || j.scrollbar === !1) && P && !P.el && (B = !0), C.includes("navigation") && S.navigation && (S.navigation.prevEl || D) && (S.navigation.nextEl || T) && (j.navigation || j.navigation === !1) && N && !N.prevEl && !N.nextEl && (H = !0);
+	let K = (x) => {
+		m[x] && (m[x].destroy(), x === "navigation" ? (m.isElement && (m[x].prevEl.remove(), m[x].nextEl.remove()), j[x].prevEl = void 0, j[x].nextEl = void 0, m[x].prevEl = void 0, m[x].nextEl = void 0) : (m.isElement && m[x].el.remove(), j[x].el = void 0, m[x].el = void 0));
+	};
+	C.includes("loop") && m.isElement && (j.loop && !S.loop ? U = !0 : !j.loop && S.loop ? W = !0 : G = !0), A.forEach((m) => {
+		if (isObject(j[m]) && isObject(S[m])) Object.assign(j[m], S[m]), (m === "navigation" || m === "pagination" || m === "scrollbar") && "enabled" in S[m] && !S[m].enabled && K(m);
+		else {
+			let x = S[m];
+			(x === !0 || x === !1) && (m === "navigation" || m === "pagination" || m === "scrollbar") ? x === !1 && K(m) : j[m] = S[m];
+		}
+	}), A.includes("controller") && !R && m.controller && m.controller.control && j.controller && j.controller.control && (m.controller.control = j.controller.control), C.includes("children") && x && F && j.virtual.enabled ? (F.slides = x, F.update(!0)) : C.includes("virtual") && F && j.virtual.enabled && (x && (F.slides = x), F.update(!0)), C.includes("children") && x && j.loop && (G = !0), L && I.init() && I.update(!0), R && (m.controller.control = j.controller.control), z && (m.isElement && (!k || typeof k == "string") && (k = document.createElement("div"), k.classList.add("swiper-pagination"), k.part.add("pagination"), m.el.appendChild(k)), k && (j.pagination.el = k), M.init(), M.render(), M.update()), B && (m.isElement && (!O || typeof O == "string") && (O = document.createElement("div"), O.classList.add("swiper-scrollbar"), O.part.add("scrollbar"), m.el.appendChild(O)), O && (j.scrollbar.el = O), P.init(), P.updateSize(), P.setTranslate()), H && (m.isElement && ((!T || typeof T == "string") && (T = document.createElement("div"), T.classList.add("swiper-button-next"), setInnerHTML(T, m.navigation.arrowSvg), T.part.add("button-next"), m.el.appendChild(T)), (!D || typeof D == "string") && (D = document.createElement("div"), D.classList.add("swiper-button-prev"), setInnerHTML(D, m.navigation.arrowSvg), D.part.add("button-prev"), m.el.appendChild(D))), T && (j.navigation.nextEl = T), D && (j.navigation.prevEl = D), N.init(), N.update()), C.includes("allowSlideNext") && (m.allowSlideNext = S.allowSlideNext), C.includes("allowSlidePrev") && (m.allowSlidePrev = S.allowSlidePrev), C.includes("direction") && m.changeDirection(S.direction, !1), (U || G) && m.loopDestroy(), (W || G) && m.loopCreate(), m.update();
+}
+function getParams(m = {}, x = !0) {
+	let S = { on: {} }, C = {}, T = {};
+	extend(S, defaults), S._emitClasses = !0, S.init = !1;
+	let D = {}, O = paramsList.map((m) => m.replace(/_/, "")), k = Object.assign({}, m);
+	return Object.keys(k).forEach((k) => {
+		m[k] !== void 0 && (O.indexOf(k) >= 0 ? isObject(m[k]) ? (S[k] = {}, T[k] = {}, extend(S[k], m[k]), extend(T[k], m[k])) : (S[k] = m[k], T[k] = m[k]) : k.search(/on[A-Z]/) === 0 && typeof m[k] == "function" ? x ? C[`${k[2].toLowerCase()}${k.substr(3)}`] = m[k] : S.on[`${k[2].toLowerCase()}${k.substr(3)}`] = m[k] : D[k] = m[k]);
+	}), [
+		"navigation",
+		"pagination",
+		"scrollbar"
+	].forEach((m) => {
+		S[m] === !0 && (S[m] = {}), S[m] === !1 && delete S[m];
+	}), {
+		params: S,
+		passedParams: T,
+		rest: D,
+		events: C
+	};
+}
+function mountSwiper({ el: m, nextEl: x, prevEl: S, paginationEl: C, scrollbarEl: T, swiper: D }, O) {
+	needsNavigation(O) && x && S && (D.params.navigation.nextEl = x, D.originalParams.navigation.nextEl = x, D.params.navigation.prevEl = S, D.originalParams.navigation.prevEl = S), needsPagination(O) && C && (D.params.pagination.el = C, D.originalParams.pagination.el = C), needsScrollbar(O) && T && (D.params.scrollbar.el = T, D.originalParams.scrollbar.el = T), D.init(m);
+}
+function getChangedParams(m, x, S, C, T) {
+	let D = [];
+	if (!x) return D;
+	let O = (m) => {
+		D.indexOf(m) < 0 && D.push(m);
+	};
+	if (S && C) {
+		let m = C.map(T), x = S.map(T);
+		m.join("") !== x.join("") && O("children"), C.length !== S.length && O("children");
+	}
+	return paramsList.filter((m) => m[0] === "_").map((m) => m.replace(/_/, "")).forEach((S) => {
+		if (S in m && S in x) if (isObject(m[S]) && isObject(x[S])) {
+			let C = Object.keys(m[S]), T = Object.keys(x[S]);
+			C.length === T.length ? (C.forEach((C) => {
+				m[S][C] !== x[S][C] && O(S);
+			}), T.forEach((C) => {
+				m[S][C] !== x[S][C] && O(S);
+			})) : O(S);
+		} else m[S] !== x[S] && O(S);
+	}), D;
+}
+var updateOnVirtualData = (m) => {
+	!m || m.destroyed || !m.params.virtual || m.params.virtual && !m.params.virtual.enabled || (m.updateSlides(), m.updateProgress(), m.updateSlidesClasses(), m.emit("_virtualUpdated"), m.parallax && m.params.parallax && m.params.parallax.enabled && m.parallax.setTranslate());
+};
+function _extends() {
+	return _extends = Object.assign ? Object.assign.bind() : function(m) {
+		for (var x = 1; x < arguments.length; x++) {
+			var S = arguments[x];
+			for (var C in S) Object.prototype.hasOwnProperty.call(S, C) && (m[C] = S[C]);
+		}
+		return m;
+	}, _extends.apply(this, arguments);
+}
+function isChildSwiperSlide(m) {
+	return m.type && m.type.displayName && m.type.displayName.includes("SwiperSlide");
+}
+function processChildren(m) {
+	let S = [];
+	return React.Children.toArray(m).forEach((m) => {
+		isChildSwiperSlide(m) ? S.push(m) : m.props && m.props.children && processChildren(m.props.children).forEach((m) => S.push(m));
+	}), S;
+}
+function getChildren(m) {
+	let S = [], C = {
+		"container-start": [],
+		"container-end": [],
+		"wrapper-start": [],
+		"wrapper-end": []
+	};
+	return React.Children.toArray(m).forEach((m) => {
+		if (isChildSwiperSlide(m)) S.push(m);
+		else if (m.props && m.props.slot && C[m.props.slot]) C[m.props.slot].push(m);
+		else if (m.props && m.props.children) {
+			let x = processChildren(m.props.children);
+			x.length > 0 ? x.forEach((m) => S.push(m)) : C["container-end"].push(m);
+		} else C["container-end"].push(m);
+	}), {
+		slides: S,
+		slots: C
+	};
+}
+function renderVirtual(m, S, C) {
+	if (!C) return null;
+	let T = (m) => {
+		let x = m;
+		return m < 0 ? x = S.length + m : x >= S.length && (x -= S.length), x;
+	}, D = m.isHorizontal() ? { [m.rtlTranslate ? "right" : "left"]: `${C.offset}px` } : { top: `${C.offset}px` }, { from: O, to: k } = C, A = m.params.loop ? -S.length : 0, j = m.params.loop ? S.length * 2 : S.length, M = [];
+	for (let m = A; m < j; m += 1) m >= O && m <= k && M.push(S[T(m)]);
+	return M.map((S, C) => /* @__PURE__ */ React.cloneElement(S, {
+		swiper: m,
+		style: D,
+		key: S.props.virtualIndex || S.key || `slide-${C}`
+	}));
+}
+function useIsomorphicLayoutEffect(m, x) {
+	return typeof window > "u" ? useEffect(m, x) : useLayoutEffect(m, x);
+}
+var SwiperSlideContext = /* @__PURE__ */ createContext(null), SwiperContext = /* @__PURE__ */ createContext(null), Swiper = /* @__PURE__ */ forwardRef(({ className: m, tag: S = "div", wrapperTag: C = "div", children: T, onSwiper: D, ...O } = {}, k) => {
+	let A = !1, [j, M] = useState("swiper"), [N, F] = useState(null), [I, L] = useState(!1), R = useRef(!1), z = useRef(null), U = useRef(null), W = useRef(null), G = useRef(null), K = useRef(null), q = useRef(null), J = useRef(null), RV = useRef(null), { params: zV, passedParams: Y, rest: X, events: Z } = getParams(O), { slides: Q, slots: BV } = getChildren(T), VV = () => {
+		L(!I);
+	};
+	Object.assign(zV.on, { _containerClasses(m, x) {
+		M(x);
+	} });
+	let HV = () => {
+		Object.assign(zV.on, Z), A = !0;
+		let m = { ...zV };
+		if (delete m.wrapperClass, U.current = new Swiper$1(m), U.current.virtual && U.current.params.virtual.enabled) {
+			U.current.virtual.slides = Q;
+			let m = {
+				cache: !1,
+				slides: Q,
+				renderExternal: F,
+				renderExternalUpdate: !1
+			};
+			extend(U.current.params.virtual, m), extend(U.current.originalParams.virtual, m);
+		}
+	};
+	z.current || HV(), U.current && U.current.on("_beforeBreakpoint", VV);
+	let UV = () => {
+		A || !Z || !U.current || Object.keys(Z).forEach((m) => {
+			U.current.on(m, Z[m]);
+		});
+	}, WV = () => {
+		!Z || !U.current || Object.keys(Z).forEach((m) => {
+			U.current.off(m, Z[m]);
+		});
+	};
+	useEffect(() => () => {
+		U.current && U.current.off("_beforeBreakpoint", VV);
+	}), useEffect(() => {
+		!R.current && U.current && (U.current.emitSlidesClasses(), R.current = !0);
+	}), useIsomorphicLayoutEffect(() => {
+		if (k && (k.current = z.current), z.current) return U.current.destroyed && HV(), mountSwiper({
+			el: z.current,
+			nextEl: K.current,
+			prevEl: q.current,
+			paginationEl: J.current,
+			scrollbarEl: RV.current,
+			swiper: U.current
+		}, zV), D && !U.current.destroyed && D(U.current), () => {
+			U.current && !U.current.destroyed && U.current.destroy(!0, !1);
+		};
+	}, []), useIsomorphicLayoutEffect(() => {
+		UV();
+		let m = getChangedParams(Y, W.current, Q, G.current, (m) => m.key);
+		return W.current = Y, G.current = Q, m.length && U.current && !U.current.destroyed && updateSwiper({
+			swiper: U.current,
+			slides: Q,
+			passedParams: Y,
+			changedParams: m,
+			nextEl: K.current,
+			prevEl: q.current,
+			scrollbarEl: RV.current,
+			paginationEl: J.current
+		}), () => {
+			WV();
+		};
+	}), useIsomorphicLayoutEffect(() => {
+		updateOnVirtualData(U.current);
+	}, [N]);
+	function GV() {
+		return zV.virtual ? renderVirtual(U.current, Q, N) : Q.map((m, S) => /* @__PURE__ */ React.cloneElement(m, {
+			swiper: U.current,
+			swiperSlideIndex: S
+		}));
+	}
+	return /* @__PURE__ */ React.createElement(S, _extends({
+		ref: z,
+		className: uniqueClasses(`${j}${m ? ` ${m}` : ""}`)
+	}, X), /* @__PURE__ */ React.createElement(SwiperContext.Provider, { value: U.current }, BV["container-start"], /* @__PURE__ */ React.createElement(C, { className: wrapperClass(zV.wrapperClass) }, BV["wrapper-start"], GV(), BV["wrapper-end"]), needsNavigation(zV) && /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("div", {
+		ref: q,
+		className: "swiper-button-prev"
+	}), /* @__PURE__ */ React.createElement("div", {
+		ref: K,
+		className: "swiper-button-next"
+	})), needsScrollbar(zV) && /* @__PURE__ */ React.createElement("div", {
+		ref: RV,
+		className: "swiper-scrollbar"
+	}), needsPagination(zV) && /* @__PURE__ */ React.createElement("div", {
+		ref: J,
+		className: "swiper-pagination"
+	}), BV["container-end"]));
+});
+Swiper.displayName = "Swiper";
+var SwiperSlide = /* @__PURE__ */ forwardRef(({ tag: m = "div", children: S, className: C = "", swiper: T, zoom: D, lazy: O, virtualIndex: k, swiperSlideIndex: A, ...j } = {}, M) => {
+	let N = useRef(null), [P, F] = useState("swiper-slide"), [I, L] = useState(!1);
+	function R(m, x, S) {
+		x === N.current && F(S);
+	}
+	useIsomorphicLayoutEffect(() => {
+		if (A !== void 0 && (N.current.swiperSlideIndex = A), M && (M.current = N.current), !(!N.current || !T)) {
+			if (T.destroyed) {
+				P !== "swiper-slide" && F("swiper-slide");
+				return;
+			}
+			return T.on("_slideClass", R), () => {
+				T && T.off("_slideClass", R);
+			};
+		}
+	}), useIsomorphicLayoutEffect(() => {
+		T && N.current && !T.destroyed && F(T.getSlideClasses(N.current));
+	}, [T]);
+	let z = {
+		isActive: P.indexOf("swiper-slide-active") >= 0,
+		isVisible: P.indexOf("swiper-slide-visible") >= 0,
+		isPrev: P.indexOf("swiper-slide-prev") >= 0,
+		isNext: P.indexOf("swiper-slide-next") >= 0
+	}, U = () => typeof S == "function" ? S(z) : S, W = () => {
+		L(!0);
+	};
+	return /* @__PURE__ */ React.createElement(m, _extends({
+		ref: N,
+		className: uniqueClasses(`${P}${C ? ` ${C}` : ""}`),
+		"data-swiper-slide-index": k,
+		onLoad: W
+	}, j), D && /* @__PURE__ */ React.createElement(SwiperSlideContext.Provider, { value: z }, /* @__PURE__ */ React.createElement("div", {
+		className: "swiper-zoom-container",
+		"data-swiper-zoom": typeof D == "number" ? D : void 0
+	}, U(), O && !I && /* @__PURE__ */ React.createElement("div", { className: "swiper-lazy-preloader" }))), !D && /* @__PURE__ */ React.createElement(SwiperSlideContext.Provider, { value: z }, U(), O && !I && /* @__PURE__ */ React.createElement("div", { className: "swiper-lazy-preloader" })));
+});
+SwiperSlide.displayName = "SwiperSlide";
+function ItemSlider({ items: m, variant: x = "default", language: S = "en" }) {
+	let [C, T] = useState("desktop"), D = `viewport-${C}`;
+	switch (useEffect(() => {
+		let m = document?.getElementById("puck-canvas-root"), x = null, S = () => {
+			let x = m ? m.getBoundingClientRect().width : window.innerWidth;
+			T(x > 1024 ? "desktop" : x > 768 ? "tablet" : "mobile");
+		};
+		return m ? (x = new ResizeObserver(S), x.observe(m)) : (S(), window.addEventListener("resize", S)), () => {
+			x && m ? (x.unobserve(m), x.disconnect()) : window.removeEventListener("resize", S);
+		};
+	}, []), x) {
+		case "voodvale": return /* @__PURE__ */ jsx(VoodvaleItemSlider, {
+			items: m,
+			language: S,
+			viewPort: C
+		}, D);
+		case "skyscrapper": return /* @__PURE__ */ jsx(SkyscrapperItemSlider, {
+			items: m,
+			language: S,
+			viewPort: C
+		}, D);
+		default: return /* @__PURE__ */ jsx(DefaultItemSlider, {
+			items: m,
+			language: S,
+			viewPort: C
+		}, D);
+	}
+}
+var DefaultItemSlider = ({ items: m, language: x, viewPort: S }) => {
+	let C = x === "ar", T = S === "desktop" ? {
+		spaceBetween: 60,
+		slidesPerView: 4,
+		slidesOffsetAfter: 60
+	} : {
+		spaceBetween: 15,
+		slidesPerView: 1.3,
+		slidesOffsetAfter: 15
+	};
+	return /* @__PURE__ */ jsx(Swiper, {
+		dir: C ? "rtl" : "ltr",
+		spaceBetween: T.spaceBetween,
+		slidesPerView: T.slidesPerView,
+		slidesOffsetAfter: T.slidesOffsetAfter,
+		preventClicks: !1,
+		preventClicksPropagation: !1,
+		children: m.map((m, x) => /* @__PURE__ */ jsx(SwiperSlide, { children: m }, `swiperSlider${x}`))
+	}, C ? "rtl" : "ltr");
+}, VoodvaleItemSlider = ({ items: m, language: x, viewPort: S }) => {
+	let C = x === "ar", T = S === "desktop" ? {
+		spaceBetween: 30,
+		slidesPerView: 3,
+		slidesOffsetAfter: 0
+	} : {
+		spaceBetween: 30,
+		slidesPerView: 1.2,
+		slidesOffsetAfter: 30
+	};
+	return /* @__PURE__ */ jsx(Swiper, {
+		dir: C ? "rtl" : "ltr",
+		spaceBetween: T.spaceBetween,
+		slidesPerView: T.slidesPerView,
+		slidesOffsetAfter: T.slidesOffsetAfter,
+		preventClicks: !1,
+		preventClicksPropagation: !1,
+		children: m.map((m, x) => /* @__PURE__ */ jsx(SwiperSlide, { children: m }, `swiperSlider${x}`))
+	});
+}, SkyscrapperItemSlider = ({ items: m, language: x, viewPort: S }) => {
+	let C = x === "ar", T = S === "desktop" ? {
+		spaceBetween: 60,
+		slidesPerView: 2.2,
+		slidesOffsetAfter: 60
+	} : {
+		spaceBetween: 13,
+		slidesPerView: 1.2,
+		slidesOffsetAfter: 90
+	};
+	return /* @__PURE__ */ jsx(Swiper, {
+		dir: C ? "rtl" : "ltr",
+		spaceBetween: T.spaceBetween,
+		slidesPerView: T.slidesPerView,
+		slidesOffsetAfter: T.slidesOffsetAfter,
+		preventClicks: !1,
+		preventClicksPropagation: !1,
+		children: m.map((m, x) => /* @__PURE__ */ jsx(SwiperSlide, { children: m }, `swiperSlider${x}`))
+	}, C ? "rtl" : "ltr");
+};
+const PlotThumbCardRoot = ({ children: m }) => /* @__PURE__ */ jsx("div", {
+	className: "flex flex-grow flex-col space-y-2.5",
+	children: m
+}), PlotThumbCardImage = ({ imageUrl: m }) => m ? /* @__PURE__ */ jsx("img", {
+	src: m,
+	alt: "Plot Image",
+	className: "mobile:w-full w-full h-[156px] object-cover"
+}) : /* @__PURE__ */ jsx("div", {
+	className: "mobile:w-full w-full h-[156px] bg-gray-300 rounded flex items-center justify-center",
+	children: /* @__PURE__ */ jsx("span", {
+		className: "text-gray-500",
+		children: "Image"
+	})
+}), PlotThumbCardBody = ({ plot: m }) => /* @__PURE__ */ jsxs("div", {
+	className: "flex justify-between items-end",
+	children: [/* @__PURE__ */ jsxs("div", {
+		className: "flex space-x-2.5 rtl:space-x-reverse items-end",
+		children: [/* @__PURE__ */ jsx("div", {
+			style: { lineHeight: "1rem" },
+			children: m.plotName || `Plot ${m.plotNumber || m.id}`
+		}), m.price && /* @__PURE__ */ jsxs("div", {
+			className: "text-xs opacity-50",
+			children: ["$", m.price.toLocaleString()]
+		})]
+	}), m.plotStatus && /* @__PURE__ */ jsx("div", {
+		className: "text-xs px-2 py-1 bg-gray-200 rounded",
+		children: m.plotStatus
+	})]
+}), VoodvalePlotThumbCardRoot = ({ children: m, plot: x }) => /* @__PURE__ */ jsxs("div", {
+	className: "flex flex-grow flex-col rounded-[12px] overflow-hidden relative border border-[#E6E6E6]",
+	children: [m, x.plotStatus && /* @__PURE__ */ jsx("div", {
+		className: "absolute top-[1.25rem] left-[1.25rem]",
+		children: /* @__PURE__ */ jsx("div", {
+			className: "px-[1.25rem] py-[0.625rem] rounded-[7px] text-[0.75rem] leading-[normal] font-medium text-[#FFF] min-w-0 min-h-0 bg-gray-600",
+			children: x.plotStatus
+		})
+	})]
+}), VoodvalePlotThumbCardImage = ({ imageUrl: m }) => m ? /* @__PURE__ */ jsx("img", {
+	src: m,
+	alt: "Plot Image",
+	className: "w-full h-[240px] object-cover"
+}) : /* @__PURE__ */ jsx("div", {
+	className: "w-full h-[240px] object-cover bg-gray-300 rounded flex items-center justify-center",
+	children: /* @__PURE__ */ jsx("span", {
+		className: "text-gray-500",
+		children: "Image "
+	})
+}), VoodvalePlotThumbCardBody = ({ plot: m }) => /* @__PURE__ */ jsxs("div", {
+	className: "flex justify-between items-center bg-white px-[1.25rem] pt-[1.4018rem] pb-[1.625rem]",
+	children: [/* @__PURE__ */ jsx("div", {
+		className: "text-[1.125rem] leading-[100%] text-[#181A20] font-medium",
+		children: m.plotName || `Plot ${m.plotNumber || m.id}`
+	}), m.price && /* @__PURE__ */ jsxs("div", {
+		className: "text-[1.125rem] leading-[158.333%] text-[#A87D6F] font-medium",
+		children: ["$", m.price.toLocaleString()]
+	})]
+}), SkyscrapperPlotThumbCardRoot = ({ children: m }) => /* @__PURE__ */ jsx("div", {
+	className: "flex flex-grow flex-col space-y-[1.5rem]",
+	children: m
+}), SkyscrapperPlotThumbCardImage = ({ plot: m }) => {
+	let x = !m.imageUrl;
+	return /* @__PURE__ */ jsxs("div", {
+		className: "rounded-[24px] overflow-hidden relative",
+		children: [/* @__PURE__ */ jsx("div", {
+			className: "h-[19.375rem] w-full",
+			style: { background: x ? "black" : `linear-gradient(0deg, rgba(0, 0, 0, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%), url(${m.imageUrl ?? ""}) lightgray -76.39px 0.265px / 114.913% 99.858% no-repeat` },
+			children: x && /* @__PURE__ */ jsx("div", {
+				className: "w-full h-full flex items-center justify-center",
+				children: /* @__PURE__ */ jsx("span", {
+					className: "text-gray-400",
+					children: "Loading..."
+				})
+			})
+		}), m.plotStatus && /* @__PURE__ */ jsx(SkyscrapperBadge, {
+			plot: m,
+			className: "absolute top-[1.5rem] left-[1.5rem]"
+		})]
+	});
+}, SkyscrapperPlotThumbCardBody = ({ plot: m }) => /* @__PURE__ */ jsx("div", {
+	className: "flex justify-between items-end",
+	children: /* @__PURE__ */ jsxs("div", {
+		className: "flex justify-between w-full items-center text-[1.125rem]",
+		children: [/* @__PURE__ */ jsx("div", {
+			style: { lineHeight: "1rem" },
+			children: m.plotName || `Plot ${m.plotNumber || m.id}`
+		}), m.price && /* @__PURE__ */ jsxs("div", {
+			className: "text-[#FABA6C] text-[1.375rem]",
+			children: ["$", m.price.toLocaleString()]
+		})]
+	})
+});
+var SkyscrapperBadge = ({ plot: m, className: x }) => /* @__PURE__ */ jsxs("div", {
+	className: cn("border flex items-center gap-[0.5rem] border-white/17 rounded-[11px] px-[0.75rem] py-[0.62rem] font-general-sans text-[0.625rem] text-white tracking-[0.01875rem]", x),
+	style: { backgroundColor: "#00000066" },
+	children: [/* @__PURE__ */ jsx("div", { className: "w-[5px] h-[5px] rounded-full bg-white" }), /* @__PURE__ */ jsx("div", { children: m.plotStatus || "Available" })]
+});
+function PlotThumbCard({ plot: m, variant: x = "default" }) {
+	switch (x) {
+		case "voodvale": return /* @__PURE__ */ jsx(VoodvalePlotThumbCard, { plot: m });
+		case "skyscrapper": return /* @__PURE__ */ jsx(SkyscrapperPlotThumbCard, { plot: m });
+		default: return /* @__PURE__ */ jsx(DefaultPlotThumbCard, { plot: m });
+	}
+}
+var DefaultPlotThumbCard = ({ plot: m }) => /* @__PURE__ */ jsxs(PlotThumbCardRoot, {
+	plot: m,
+	children: [/* @__PURE__ */ jsx(PlotThumbCardImage, { imageUrl: m.imageUrl }), /* @__PURE__ */ jsx(PlotThumbCardBody, { plot: m })]
+});
+const SkyscrapperPlotThumbCard = ({ plot: m }) => /* @__PURE__ */ jsxs(SkyscrapperPlotThumbCardRoot, {
+	plot: m,
+	children: [/* @__PURE__ */ jsx(SkyscrapperPlotThumbCardImage, { plot: m }), /* @__PURE__ */ jsx(SkyscrapperPlotThumbCardBody, { plot: m })]
+});
+function VoodvalePlotThumbCard({ plot: m }) {
+	return /* @__PURE__ */ jsxs(VoodvalePlotThumbCardRoot, {
+		plot: m,
+		children: [/* @__PURE__ */ jsx(VoodvalePlotThumbCardImage, { imageUrl: m.imageUrl }), /* @__PURE__ */ jsx(VoodvalePlotThumbCardBody, { plot: m })]
+	});
+}
+function PlotsShowcase({ plots: m, title: x = "Available Units", showAllLink: S, language: C = "en" }) {
+	let T = m.map((m, x) => /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx(PlotThumbCard, {
+		plot: m,
+		variant: "default"
+	}, `showcase_card${x}`) }, `detail_link${x}`));
+	return /* @__PURE__ */ jsx("div", {
+		className: "w-full h-full mx-auto flex flex-col",
+		children: /* @__PURE__ */ jsx("div", {
+			className: "page-container",
+			children: /* @__PURE__ */ jsxs("div", {
+				className: "space-y-5 px-5 lg:px-7.5 py-5 lg:py-10",
+				children: [/* @__PURE__ */ jsxs("div", {
+					className: "flex justify-between items-end",
+					children: [/* @__PURE__ */ jsxs("div", {
+						className: "space-x-2.5 rtl:space-x-reverse flex items-end",
+						children: [/* @__PURE__ */ jsx("h3", {
+							className: "text-2xl",
+							suppressHydrationWarning: !0,
+							children: x
+						}), /* @__PURE__ */ jsx("h6", {
+							className: "opacity-50 text-xs",
+							suppressHydrationWarning: !0,
+							children: `${m.length} units`
+						})]
+					}), S && /* @__PURE__ */ jsx("a", {
+						href: S,
+						children: /* @__PURE__ */ jsx("div", {
+							suppressHydrationWarning: !0,
+							children: "Show All"
+						})
+					})]
+				}), /* @__PURE__ */ jsx(ItemSlider, {
+					items: T.slice(0, 5),
+					variant: "default",
+					language: C
+				})]
+			})
+		})
+	});
+}
+function PlotsShowcaseWrapper(m) {
+	let { plots: x = [], title: S = "Available Units", showAllLink: C = "/availability", locale: T = "en", language: D = "en" } = m;
+	return /* @__PURE__ */ jsx(PlotsShowcase, {
+		plots: x,
+		title: S,
+		showAllLink: C,
+		locale: T,
+		language: D
+	});
+}
 var background_default = "data:image/webp;base64,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";
 function SkyscrapperHomeFirstSection({ projectName: m, heading: x, subheadingLine1: S, subheadingLine2: C, description: T, buttonLabel: D, buttonHref: O, backgroundData: k }) {
 	let A = k?.backgroundUrl ? {
@@ -18503,6 +20856,160 @@ function SkyscrapperHomesSecondSectionWrapper(m) {
 		gridTitle: D,
 		gridLead: O,
 		gridItems: k
+	});
+}
+function SkyscrapperShowcaseCard({ plot: m, index: x, variant: S }) {
+	switch (S) {
+		case "first": return /* @__PURE__ */ jsx(FirstShowcaseCard, {
+			plot: m,
+			index: x
+		});
+		case "default": return /* @__PURE__ */ jsx(DefaultShowcaseCard, {
+			plot: m,
+			index: x
+		});
+	}
+}
+var FirstShowcaseCard = ({ plot: m, index: x }) => {
+	let S = !m.imageUrl;
+	return /* @__PURE__ */ jsxs("div", {
+		className: "group rounded-[24px] bg-[#1A1A1A] w-full h-[29.9375rem] mobile:h-[15.18rem] pl-[1.75rem] mobile:pl-[0.89rem]\n        pr-[1.82rem] mobile:pr-[0.92rem] pt-[2rem] mobile:pt-[1.17rem] pb-[1.62rem] mobile:pb-[0.82rem] relative",
+		children: [
+			/* @__PURE__ */ jsx("div", {
+				className: "absolute top-[1.13rem] right-[0.69rem] invisible group-hover:visible transition-all duration-300",
+				children: /* @__PURE__ */ jsx(Arrow$1, {})
+			}),
+			/* @__PURE__ */ jsx("div", {
+				className: "mb-[2.2rem] mobile:mb-[0.99rem] pl-[1.22rem] mobile:pl-[0.62rem] flex gap-[1.75rem] items-center",
+				children: /* @__PURE__ */ jsx("div", {
+					className: "text-[#CED7D8] text-[1.5rem] tracking-[0.045rem] mobile:text-[0.875rem] mobile:tracking-[0.02rem]",
+					children: (x + 1).toString().padStart(2, "0")
+				})
+			}),
+			/* @__PURE__ */ jsx(Name, {
+				name: m.plotName ?? "",
+				className: "pl-[1.22rem] mobile:pl-[0.62rem] mb-[2.49rem] mobile:mb-[1.11rem]"
+			}),
+			S ? /* @__PURE__ */ jsx(LoaderComp, { className: "w-full h-[15.437rem]" }) : /* @__PURE__ */ jsx("div", {
+				className: "object-cover object-center w-full h-[15.437rem] mobile:h-[7.83rem] rounded-[11px] bg-gray-700 flex items-center justify-center",
+				style: {
+					backgroundImage: m.imageUrl ? `url(${m.imageUrl})` : void 0,
+					backgroundSize: "cover",
+					backgroundPosition: "center"
+				},
+				children: !m.imageUrl && /* @__PURE__ */ jsx("span", {
+					className: "text-gray-400",
+					children: "No Image"
+				})
+			})
+		]
+	});
+}, DefaultShowcaseCard = ({ plot: m, index: x }) => /* @__PURE__ */ jsxs("div", {
+	className: "group rounded-[24px] flex flex-col justify-between h-[29.9375rem] mobile:h-[15.18rem] relative",
+	children: [
+		/* @__PURE__ */ jsx("div", {
+			style: { background: m.imageUrl ? `linear-gradient(0deg, rgba(0, 0, 0, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%), url(${m.imageUrl ?? ""}) lightgray -76.39px 0.265px / 114.913% 99.858% no-repeat` : "black" },
+			className: "absolute rounded-[24px] overflow-hidden top-0 left-0 w-full h-full !bg-cover !bg-center z-[4]"
+		}),
+		/* @__PURE__ */ jsx("div", {
+			className: "absolute z-[6] top-[1.13rem] right-[0.69rem] invisible group-hover:visible transition-all duration-300",
+			children: /* @__PURE__ */ jsx(Arrow$1, {})
+		}),
+		/* @__PURE__ */ jsx("div", {
+			className: "pl-[2.02rem] mobile:pl-[1.02rem] pr-[1.82rem] mobile:pr-[0.92rem] pt-[2rem] mobile:pt-[1.17rem] pb-[1.62rem]\n          mobile:pb-[0.82rem] flex gap-[1.75rem] items-center z-[6]",
+			children: /* @__PURE__ */ jsx("div", {
+				className: "text-[#CED7D8] text-[1.5rem] tracking-[0.045rem] mobile:text-[0.875rem] mobile:tracking-[0.02rem]",
+				children: (x + 1).toString().padStart(2, "0")
+			})
+		}),
+		/* @__PURE__ */ jsx(Name, {
+			name: m.plotName ?? "",
+			className: "pl-[2.02rem] mobile:pl-[1.02rem] mb-[2.49rem] mobile:mb-[1.11rem] z-[6]"
+		})
+	]
+}), LoaderComp = ({ className: m }) => /* @__PURE__ */ jsx("div", {
+	className: cn("select-none w-full min-h-[11.25rem] max-w-full h-full flex grow", m),
+	children: /* @__PURE__ */ jsx("div", {
+		className: "w-full max-w-full grow flex animate-pulse items-center justify-center bg-gray-300 rounded dark:bg-gray-700",
+		children: /* @__PURE__ */ jsx("svg", {
+			className: "w-12 h-12 text-gray-200",
+			xmlns: "http://www.w3.org/2000/svg",
+			"aria-hidden": "true",
+			fill: "currentColor",
+			viewBox: "0 0 640 512",
+			children: /* @__PURE__ */ jsx("path", { d: "M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" })
+		})
+	})
+}), Name = ({ name: m, className: x }) => /* @__PURE__ */ jsx("div", {
+	className: cn("text-[2.5rem] mobile:text-[1.25rem] mobile:tracking-[-0.0125rem] leading-[75%] tracking-[-0.025rem] text-[#CED7D8]", x),
+	children: m
+}), Arrow$1 = () => /* @__PURE__ */ jsxs("svg", {
+	width: "72",
+	height: "72",
+	viewBox: "0 0 72 72",
+	fill: "none",
+	xmlns: "http://www.w3.org/2000/svg",
+	children: [/* @__PURE__ */ jsx("path", {
+		d: "M21 51L51 21",
+		stroke: "#EFB76F",
+		strokeWidth: "2",
+		strokeLinecap: "round",
+		strokeLinejoin: "round"
+	}), /* @__PURE__ */ jsx("path", {
+		d: "M21 21H51V51",
+		stroke: "#EFB76F",
+		strokeWidth: "2",
+		strokeLinecap: "round",
+		strokeLinejoin: "round"
+	})]
+});
+function SkyscrapperPlotsShowcase({ plots: m, title: x = "Available Units", subtitle: S = "Five distinct residence types, tailored to your needs.", language: C = "en" }) {
+	let T = m.map((m, x) => /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx(SkyscrapperShowcaseCard, {
+		plot: m,
+		index: x,
+		variant: x === 0 ? "first" : "default"
+	}) }, `detail_link${x}`));
+	return /* @__PURE__ */ jsx("div", {
+		className: "relative w-full h-full mx-auto flex flex-col bg-black",
+		children: /* @__PURE__ */ jsx("div", {
+			className: "relative z-[1] page-container",
+			children: /* @__PURE__ */ jsxs("div", {
+				className: "pt-[6.8125rem] mobile:pt-[4.1875rem] pb-[7.5rem] mobile:pb-[9rem] mobile:pl-[1.3rem] mobile:pr-0",
+				children: [/* @__PURE__ */ jsx("div", {
+					className: "mb-[3.875rem] mobile:mb-[2rem] flex justify-between items-center",
+					children: /* @__PURE__ */ jsx("div", {
+						suppressHydrationWarning: !0,
+						children: /* @__PURE__ */ jsxs("div", {
+							className: "pl-[11.57rem] mobile:pl-0",
+							children: [/* @__PURE__ */ jsx("div", {
+								className: "mb-[2.87rem] mobile:mb-[2.25rem] text-[2.75rem] mobile:text-[2.25rem] leading-[100%] text-[#FFF]\n                    font-medium",
+								children: x
+							}), /* @__PURE__ */ jsx("p", {
+								className: "text-[1.25rem] mobile:text-[1rem] text-white",
+								children: S
+							})]
+						})
+					})
+				}), /* @__PURE__ */ jsx("div", {
+					className: "pl-[3.87rem] mobile:pl-0",
+					children: /* @__PURE__ */ jsx(ItemSlider, {
+						items: T.slice(0, 5),
+						variant: "skyscrapper",
+						language: C
+					})
+				})]
+			})
+		})
+	});
+}
+function SkyscrapperPlotsShowcaseWrapper(m) {
+	let { plots: x = [], title: S = "Available Units", subtitle: C = "Five distinct residence types, tailored to your needs.", locale: T = "en", language: D = "en" } = m;
+	return /* @__PURE__ */ jsx(SkyscrapperPlotsShowcase, {
+		plots: x,
+		title: S,
+		subtitle: C,
+		locale: T,
+		language: D
 	});
 }
 function HeaderSection({ title: m, description: x, animationEase: S = "easeOut" }) {
@@ -18785,6 +21292,100 @@ function VoodvaleHomeSecondSectionWrapper(m) {
 		contentImage1: O,
 		contentImage2: k,
 		contentImage3: A
+	});
+}
+function VoodvalePlotsShowcase({ plots: m, title: x = "Available Units", showAllLink: S, language: C = "en", showcaseVectorUrl: T, showcaseMobileVectorUrl: D }) {
+	let O = m.map((m, x) => /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx(VoodvalePlotThumbCard, { plot: m }, `showcase_card${x}`) }, `detail_link${x}`));
+	return /* @__PURE__ */ jsxs("div", {
+		className: "relative w-full h-full mx-auto flex flex-col",
+		style: { background: "radial-gradient(113.94% 104.88% at 55.95% -2.12%, #DECFCD 0%, #B38A82 56.73%, #988289 100%)" },
+		children: [
+			/* @__PURE__ */ jsx("div", {
+				className: "relative z-[1] page-container",
+				children: /* @__PURE__ */ jsxs("div", {
+					className: "pt-[6.8125rem] mobile:pt-[4.1875rem] pb-[7.8125rem] mobile:pb-[9rem] px-[8.4375rem] mobile:pl-[1rem] mobile:pr-0",
+					children: [/* @__PURE__ */ jsxs("div", {
+						className: "mb-[3.875rem] mobile:mb-[2rem] flex justify-between items-center",
+						children: [/* @__PURE__ */ jsx("h3", {
+							className: "text-[2.75rem] mobile:text-[2.25rem] leading-[118.182%] text-[#FFF] font-medium",
+							suppressHydrationWarning: !0,
+							children: x
+						}), /* @__PURE__ */ jsx(SeeAllProperties, {
+							className: "mobile:hidden",
+							pathname: S || ""
+						})]
+					}), /* @__PURE__ */ jsx(ItemSlider, {
+						items: O.slice(0, 3),
+						variant: "voodvale",
+						language: C
+					})]
+				})
+			}),
+			/* @__PURE__ */ jsx(SeeAllProperties, {
+				className: "hidden mobile:block absolute z-[1] left-1/2 -translate-x-1/2 bottom-[4.1875rem]",
+				pathname: S || ""
+			}),
+			T && /* @__PURE__ */ jsx("div", {
+				className: "mobile:hidden z-[0] absolute w-[100vw] h-auto object-contain -bottom-[12.72vw] left-1/2 -translate-x-1/2",
+				children: /* @__PURE__ */ jsx("img", {
+					src: T,
+					alt: "showcase vector",
+					className: "w-full h-full object-contain"
+				})
+			}),
+			D && /* @__PURE__ */ jsx("div", {
+				className: "mobile:block hidden z-[0] absolute w-[100vw] h-auto object-contain -bottom-[21vw] left-1/2 -translate-x-1/2",
+				children: /* @__PURE__ */ jsx("img", {
+					src: D,
+					alt: "showcase mobile vector",
+					className: "w-full h-full object-contain"
+				})
+			})
+		]
+	});
+}
+var SeeAllProperties = ({ pathname: m, className: x }) => /* @__PURE__ */ jsx("a", {
+	className: cn("mobile:hidden", x),
+	href: m,
+	children: /* @__PURE__ */ jsxs("div", {
+		className: "flex items-center gap-4",
+		children: [/* @__PURE__ */ jsx("div", {
+			className: "text-[1rem] text-[#FFF]",
+			children: "See All Properties"
+		}), /* @__PURE__ */ jsx(Arrow, {})]
+	})
+}), Arrow = () => /* @__PURE__ */ jsxs("svg", {
+	width: "15",
+	height: "15",
+	viewBox: "0 0 15 15",
+	fill: "none",
+	xmlns: "http://www.w3.org/2000/svg",
+	children: [/* @__PURE__ */ jsx("g", {
+		clipPath: "url(#clip0_4171_3931)",
+		children: /* @__PURE__ */ jsx("path", {
+			d: "M15 0.65V10.35C15 10.5167 14.9417 10.6667 14.825 10.8C14.7083 10.9333 14.5583 11 14.375 11C14.1917 11 14.0333 10.9333 13.9 10.8C13.7667 10.6667 13.7 10.5167 13.7 10.35V2.2L1.1 14.8C0.966667 14.9333 0.808333 15 0.625 15C0.441667 15 0.291667 14.9417 0.175 14.825C0.0583333 14.7083 0 14.5583 0 14.375C0 14.1917 0.0666667 14.0333 0.2 13.9L12.8 1.3H4.65C4.48333 1.3 4.33333 1.23333 4.2 1.1C4.06667 0.966666 4 0.808333 4 0.625C4 0.441667 4.06667 0.291666 4.2 0.175C4.33333 0.0583334 4.48333 0 4.65 0H14.35C14.55 0 14.7083 0.0583334 14.825 0.175C14.9417 0.291666 15 0.45 15 0.65Z",
+			fill: "white"
+		})
+	}), /* @__PURE__ */ jsx("defs", { children: /* @__PURE__ */ jsx("clipPath", {
+		id: "clip0_4171_3931",
+		children: /* @__PURE__ */ jsx("rect", {
+			width: "15",
+			height: "15",
+			fill: "white",
+			transform: "matrix(1 0 0 -1 0 15)"
+		})
+	}) })]
+});
+function VoodvalePlotsShowcaseWrapper(m) {
+	let { plots: x = [], title: S = "Available Units", showAllLink: C = "/availability", locale: T = "en", language: D = "en", showcaseVectorUrl: O = "", showcaseMobileVectorUrl: k = "" } = m;
+	return /* @__PURE__ */ jsx(VoodvalePlotsShowcase, {
+		plots: x,
+		title: S,
+		showAllLink: C,
+		locale: T,
+		language: D,
+		showcaseVectorUrl: O,
+		showcaseMobileVectorUrl: k
 	});
 }
 function VoodvaleSection(m) {
@@ -19462,10 +22063,10 @@ var require___vite_browser_external = /* @__PURE__ */ __commonJSMin(((m, x) => {
 				var q = Math.sqrt(1 - G / (B * H));
 				C *= q, D *= q;
 			} else K = (k === A ? -1 : 1) * Math.sqrt(G / (B * U + H * W));
-			var J = K * C * z / D, NR = -K * D * R / C, PR = F * J - P * NR + m * .5, Y = P * J + F * NR + S * .5, X = O(1, 0, (R - J) / C, (z - NR) / D), Z = O((R - J) / C, (z - NR) / D, (-R - J) / C, (-z - NR) / D);
+			var J = K * C * z / D, RV = -K * D * R / C, zV = F * J - P * RV + m * .5, Y = P * J + F * RV + S * .5, X = O(1, 0, (R - J) / C, (z - RV) / D), Z = O((R - J) / C, (z - RV) / D, (-R - J) / C, (-z - RV) / D);
 			A === 0 && Z > 0 ? Z -= 2 * M : A === 1 && Z < 0 && (Z += 2 * M);
-			for (var Q = Math.ceil(Math.abs(Z / M * 2)), FR = [], IR = Z / Q, LR = 8 / 3 * Math.sin(IR / 4) * Math.sin(IR / 4) / Math.sin(IR / 2), RR = X + IR, zR = 0; zR < Q; zR++) FR[zR] = T(X, RR, F, P, C, D, PR, Y, LR, I, L), I = FR[zR][5], L = FR[zR][6], X = RR, RR += IR;
-			return FR;
+			for (var Q = Math.ceil(Math.abs(Z / M * 2)), BV = [], VV = Z / Q, HV = 8 / 3 * Math.sin(VV / 4) * Math.sin(VV / 4) / Math.sin(VV / 2), UV = X + VV, WV = 0; WV < Q; WV++) BV[WV] = T(X, UV, F, P, C, D, zV, Y, HV, I, L), I = BV[WV][5], L = BV[WV][6], X = UV, UV += VV;
+			return BV;
 		}
 		function O(m, x, S, C) {
 			var T = Math.atan2(x, m), D = Math.atan2(C, S);
@@ -19484,7 +22085,7 @@ var require___vite_browser_external = /* @__PURE__ */ __commonJSMin(((m, x) => {
 				}
 				K = B * B - 4 * H * z, !(K < 0) && (q = N(K), W = (-B + q) / (2 * z), 0 < W && W < 1 && L.push(W), G = (-B - q) / (2 * z), 0 < G && G < 1 && L.push(G));
 			}
-			for (var NR, PR, Y = L.length, X = Y, Z; Y--;) U = L[Y], Z = 1 - U, NR = Z * Z * Z * S + 3 * Z * Z * U * T + 3 * Z * U * U * O + U * U * U * A, R[0][Y] = NR, PR = Z * Z * Z * C + 3 * Z * Z * U * D + 3 * Z * U * U * k + U * U * U * j, R[1][Y] = PR;
+			for (var RV, zV, Y = L.length, X = Y, Z; Y--;) U = L[Y], Z = 1 - U, RV = Z * Z * Z * S + 3 * Z * Z * U * T + 3 * Z * U * U * O + U * U * U * A, R[0][Y] = RV, zV = Z * Z * Z * C + 3 * Z * Z * U * D + 3 * Z * U * U * k + U * U * U * j, R[1][Y] = zV;
 			R[0][X] = S, R[1][X] = C, R[0][X + 1] = A, R[1][X + 1] = j;
 			var Q = [{
 				x: P.apply(null, R[0]),
@@ -19667,7 +22268,7 @@ var require___vite_browser_external = /* @__PURE__ */ __commonJSMin(((m, x) => {
 				case "Q": return K(D, S);
 			}
 		}
-		function NR(m) {
+		function RV(m) {
 			var T = [], D = [], O, k, A = x.rePathCommand, j = "[-+]?(?:\\d*\\.\\d+|\\d+\\.?)(?:[eE][-+]?\\d+)?\\s*", M = "(" + j + ")" + x.commaWsp, N = "([01])" + x.commaWsp + "?", P = M + "?" + M + "?" + M + N + N + M + "?(" + j + ")", F = new RegExp(P, "g"), I, L, R;
 			if (!m || !m.match) return T;
 			R = m.match(/[mzlhvcsqta][^mzlhvcsqta]*/gi);
@@ -19678,12 +22279,12 @@ var require___vite_browser_external = /* @__PURE__ */ __commonJSMin(((m, x) => {
 				else for (; I = A.exec(L);) D.push(I[0]);
 				for (var G = 0, K = D.length; G < K; G++) k = parseFloat(D[G]), isNaN(k) || B.push(k);
 				var q = S[U.toLowerCase()], J = C[U] || U;
-				if (B.length - 1 > q) for (var NR = 1, PR = B.length; NR < PR; NR += q) T.push([U].concat(B.slice(NR, NR + q))), U = J;
+				if (B.length - 1 > q) for (var RV = 1, zV = B.length; RV < zV; RV += q) T.push([U].concat(B.slice(RV, RV + q))), U = J;
 				else T.push(B);
 			}
 			return T;
 		}
-		function PR(m, S) {
+		function zV(m, S) {
 			var C = [], T, D = new x.Point(m[0].x, m[0].y), O = new x.Point(m[1].x, m[1].y), k = m.length, A = 1, j = 0, M = k > 2;
 			for (S ||= 0, M && (A = m[2].x < O.x ? -1 : m[2].x === O.x ? 0 : 1, j = m[2].y < O.y ? -1 : m[2].y === O.y ? 0 : 1), C.push([
 				"M",
@@ -19725,7 +22326,7 @@ var require___vite_browser_external = /* @__PURE__ */ __commonJSMin(((m, x) => {
 			return m.map(function(m) {
 				return m.join(" ");
 			}).join(" ");
-		}, x.util.parsePath = NR, x.util.makePathSimpler = j, x.util.getSmoothPathFromPoints = PR, x.util.getPathSegmentsInfo = q, x.util.getBoundsOfCurve = k, x.util.getPointOnPath = J, x.util.transformPath = Y;
+		}, x.util.parsePath = RV, x.util.makePathSimpler = j, x.util.getSmoothPathFromPoints = zV, x.util.getPathSegmentsInfo = q, x.util.getBoundsOfCurve = k, x.util.getPointOnPath = J, x.util.transformPath = Y;
 	})(), (function() {
 		var m = Array.prototype.slice;
 		function S(x, S) {
@@ -20206,14 +22807,14 @@ var require___vite_browser_external = /* @__PURE__ */ __commonJSMin(((m, x) => {
 		function J(m, x, S, C, T) {
 			return T === void 0 && (T = 1.70158), m /= C / 2, m < 1 ? S / 2 * (m * m * (((T *= 1.525) + 1) * m - T)) + x : S / 2 * ((m -= 2) * m * (((T *= 1.525) + 1) * m + T) + 2) + x;
 		}
-		function NR(m, x, S, C) {
-			return S - PR(C - m, 0, S, C) + x;
+		function RV(m, x, S, C) {
+			return S - zV(C - m, 0, S, C) + x;
 		}
-		function PR(m, x, S, C) {
+		function zV(m, x, S, C) {
 			return (m /= C) < 1 / 2.75 ? S * (7.5625 * m * m) + x : m < 2 / 2.75 ? S * (7.5625 * (m -= 1.5 / 2.75) * m + .75) + x : m < 2.5 / 2.75 ? S * (7.5625 * (m -= 2.25 / 2.75) * m + .9375) + x : S * (7.5625 * (m -= 2.625 / 2.75) * m + .984375) + x;
 		}
 		function Y(m, x, S, C) {
-			return m < C / 2 ? NR(m * 2, 0, S, C) * .5 + x : PR(m * 2 - C, 0, S, C) * .5 + S * .5 + x;
+			return m < C / 2 ? RV(m * 2, 0, S, C) * .5 + x : zV(m * 2 - C, 0, S, C) * .5 + S * .5 + x;
 		}
 		x.util.ease = {
 			easeInQuad: function(m, x, S, C) {
@@ -20251,8 +22852,8 @@ var require___vite_browser_external = /* @__PURE__ */ __commonJSMin(((m, x) => {
 			easeInBack: K,
 			easeOutBack: q,
 			easeInOutBack: J,
-			easeInBounce: NR,
-			easeOutBounce: PR,
+			easeInBounce: RV,
+			easeOutBounce: zV,
 			easeInOutBounce: Y
 		};
 	})(), (function(m) {
@@ -20444,17 +23045,17 @@ var require___vite_browser_external = /* @__PURE__ */ __commonJSMin(((m, x) => {
 			if (x = x.replace(D, ""), T && x.length && (D = RegExp("#" + T + "(?![a-zA-Z\\-]+)", "i"), x = x.replace(D, "")), C && x.length) for (C = C.split(" "), O = C.length; O--;) D = RegExp("\\." + C[O] + "(?![a-zA-Z\\-]+)", "i"), x = x.replace(D, "");
 			return x.length === 0;
 		}
-		function NR(m, x) {
+		function RV(m, x) {
 			var S;
 			if (m.getElementById && (S = m.getElementById(x)), S) return S;
 			var C, T, D, O = m.getElementsByTagName("*");
 			for (T = 0, D = O.length; T < D; T++) if (C = O[T], x === C.getAttribute("id")) return C;
 		}
-		function PR(m) {
+		function zV(m) {
 			for (var S = H(m, ["use", "svg:use"]), C = 0; S.length && C < S.length;) {
 				var T = S[C], D = T.getAttribute("xlink:href") || T.getAttribute("href");
 				if (D === null) return;
-				var O = D.slice(1), k = T.getAttribute("x") || 0, A = T.getAttribute("y") || 0, j = NR(m, O).cloneNode(!0), M = (j.getAttribute("transform") || "") + " translate(" + k + ", " + A + ")", N, P = S.length, F, I, L, R, z = x.svgNS;
+				var O = D.slice(1), k = T.getAttribute("x") || 0, A = T.getAttribute("y") || 0, j = RV(m, O).cloneNode(!0), M = (j.getAttribute("transform") || "") + " translate(" + k + ", " + A + ")", N, P = S.length, F, I, L, R, z = x.svgNS;
 				if (X(j), /^svg$/i.test(j.nodeName)) {
 					var B = j.ownerDocument.createElementNS(z, "g");
 					for (I = 0, L = j.attributes, R = L.length; I < R; I++) F = L.item(I), B.setAttributeNS(z, F.nodeName, F.nodeValue);
@@ -20484,7 +23085,7 @@ var require___vite_browser_external = /* @__PURE__ */ __commonJSMin(((m, x) => {
 		}
 		x.parseSVGDocument = function(m, S, T, D) {
 			if (m) {
-				PR(m);
+				zV(m);
 				var O = x.Object.__uid++, k, A, j = X(m), M = x.util.toArray(m.getElementsByTagName("*"));
 				if (j.crossOrigin = D && D.crossOrigin, j.svgUid = O, M.length === 0 && x.isLikelyNode) {
 					M = m.selectNodes("//*[name(.)!=\"svg\"]");
@@ -20525,16 +23126,16 @@ var require___vite_browser_external = /* @__PURE__ */ __commonJSMin(((m, x) => {
 				"r",
 				"fx",
 				"fy"
-			], C = "xlink:href", T = NR(m, x.getAttribute(C).slice(1));
+			], C = "xlink:href", T = RV(m, x.getAttribute(C).slice(1));
 			if (T && T.getAttribute(C) && Q(m, T), S.forEach(function(m) {
 				T && !x.hasAttribute(m) && T.hasAttribute(m) && x.setAttribute(m, T.getAttribute(m));
 			}), !x.children.length) for (var D = T.cloneNode(!0); D.firstChild;) x.appendChild(D.firstChild);
 			x.removeAttribute(C);
 		}
-		var FR = /* @__PURE__ */ RegExp("(normal|italic)?\\s*(normal|small-caps)?\\s*(normal|bold|bolder|lighter|100|200|300|400|500|600|700|800|900)?\\s*(" + x.reNum + "(?:px|cm|mm|em|pt|pc|in)*)(?:\\/(normal|" + x.reNum + "))?\\s+(.*)");
+		var BV = /* @__PURE__ */ RegExp("(normal|italic)?\\s*(normal|small-caps)?\\s*(normal|bold|bolder|lighter|100|200|300|400|500|600|700|800|900)?\\s*(" + x.reNum + "(?:px|cm|mm|em|pt|pc|in)*)(?:\\/(normal|" + x.reNum + "))?\\s+(.*)");
 		S(x, {
 			parseFontDeclaration: function(m, x) {
-				var S = m.match(FR);
+				var S = m.match(BV);
 				if (S) {
 					var C = S[1], T = S[3], O = S[4], k = S[5], A = S[6];
 					C && (x.fontStyle = C), T && (x.fontWeight = isNaN(parseFloat(T)) ? T : parseFloat(T)), O && (x.fontSize = D(O)), A && (x.fontFamily = A), k && (x.lineHeight = k === "normal" ? 1 : k);
@@ -21234,11 +23835,11 @@ var require___vite_browser_external = /* @__PURE__ */ __commonJSMin(((m, x) => {
 				return O && I(m, K(S, C, T, D)), O;
 			};
 		}
-		function NR(m, S, C, T, D) {
+		function RV(m, S, C, T, D) {
 			var O = m.target, k = O.controls[m.corner], A = O.canvas.getZoom(), j = O.padding / A, M = O.toLocalPoint(new x.Point(T, D), S, C);
 			return M.x >= j && (M.x -= j), M.x <= -j && (M.x += j), M.y >= j && (M.y -= j), M.y <= j && (M.y += j), M.x -= k.offsetX, M.y -= k.offsetY, M;
 		}
-		function PR(m) {
+		function zV(m) {
 			return m.flipX !== m.flipY;
 		}
 		function Y(m, x, S, C, T) {
@@ -21248,8 +23849,8 @@ var require___vite_browser_external = /* @__PURE__ */ __commonJSMin(((m, x) => {
 			}
 		}
 		function X(m, x, S, C) {
-			var T = x.target, j = T._getTransformedDimensions(0, T.skewY), M = NR(x, x.originX, x.originY, S, C), P = Math.abs(M.x * 2) - j.x, F = T.skewX, I;
-			P < 2 ? I = 0 : (I = N(Math.atan2(P / T.scaleX, j.y / T.scaleY)), x.originX === D && x.originY === A && (I = -I), x.originX === k && x.originY === O && (I = -I), PR(T) && (I = -I));
+			var T = x.target, j = T._getTransformedDimensions(0, T.skewY), M = RV(x, x.originX, x.originY, S, C), P = Math.abs(M.x * 2) - j.x, F = T.skewX, I;
+			P < 2 ? I = 0 : (I = N(Math.atan2(P / T.scaleX, j.y / T.scaleY)), x.originX === D && x.originY === A && (I = -I), x.originX === k && x.originY === O && (I = -I), zV(T) && (I = -I));
 			var L = F !== I;
 			if (L) {
 				var R = T._getTransformedDimensions().y;
@@ -21258,8 +23859,8 @@ var require___vite_browser_external = /* @__PURE__ */ __commonJSMin(((m, x) => {
 			return L;
 		}
 		function Z(m, x, S, C) {
-			var T = x.target, j = T._getTransformedDimensions(T.skewX, 0), M = NR(x, x.originX, x.originY, S, C), P = Math.abs(M.y * 2) - j.y, F = T.skewY, I;
-			P < 2 ? I = 0 : (I = N(Math.atan2(P / T.scaleY, j.x / T.scaleX)), x.originX === D && x.originY === A && (I = -I), x.originX === k && x.originY === O && (I = -I), PR(T) && (I = -I));
+			var T = x.target, j = T._getTransformedDimensions(T.skewX, 0), M = RV(x, x.originX, x.originY, S, C), P = Math.abs(M.y * 2) - j.y, F = T.skewY, I;
+			P < 2 ? I = 0 : (I = N(Math.atan2(P / T.scaleY, j.x / T.scaleX)), x.originX === D && x.originY === A && (I = -I), x.originX === k && x.originY === O && (I = -I), zV(T) && (I = -I));
 			var L = F !== I;
 			if (L) {
 				var R = T._getTransformedDimensions().x;
@@ -21269,13 +23870,13 @@ var require___vite_browser_external = /* @__PURE__ */ __commonJSMin(((m, x) => {
 		}
 		function Q(m, x, S, C) {
 			var T = x.target, A = T.skewX, M, N = x.originY;
-			return T.lockSkewingX ? !1 : (A === 0 ? M = NR(x, j, j, S, C).x > 0 ? D : k : (A > 0 && (M = N === O ? D : k), A < 0 && (M = N === O ? k : D), PR(T) && (M = M === D ? k : D)), x.originX = M, J("skewing", q(X))(m, x, S, C));
+			return T.lockSkewingX ? !1 : (A === 0 ? M = RV(x, j, j, S, C).x > 0 ? D : k : (A > 0 && (M = N === O ? D : k), A < 0 && (M = N === O ? k : D), zV(T) && (M = M === D ? k : D)), x.originX = M, J("skewing", q(X))(m, x, S, C));
 		}
-		function FR(m, x, S, C) {
+		function BV(m, x, S, C) {
 			var T = x.target, k = T.skewY, M, N = x.originX;
-			return T.lockSkewingY ? !1 : (k === 0 ? M = NR(x, j, j, S, C).y > 0 ? O : A : (k > 0 && (M = N === D ? O : A), k < 0 && (M = N === D ? A : O), PR(T) && (M = M === O ? A : O)), x.originY = M, J("skewing", q(Z))(m, x, S, C));
+			return T.lockSkewingY ? !1 : (k === 0 ? M = RV(x, j, j, S, C).y > 0 ? O : A : (k > 0 && (M = N === D ? O : A), k < 0 && (M = N === D ? A : O), zV(T) && (M = M === O ? A : O)), x.originY = M, J("skewing", q(Z))(m, x, S, C));
 		}
-		function IR(m, x, S, C) {
+		function VV(m, x, S, C) {
 			var T = x, D = T.target, O = D.translateToOriginPoint(D.getCenterPoint(), T.originX, T.originY);
 			if (D.lockRotation) return !1;
 			var k = Math.atan2(T.ey - O.y, T.ex - O.x), A = N(Math.atan2(C - O.y, S - O.x) - k + T.theta), j = !0;
@@ -21285,46 +23886,46 @@ var require___vite_browser_external = /* @__PURE__ */ __commonJSMin(((m, x) => {
 			}
 			return A < 0 && (A = 360 + A), A %= 360, j = D.angle !== A, D.angle = A, j;
 		}
-		function LR(m, x, S, C, T) {
+		function HV(m, x, S, C, T) {
 			T ||= {};
 			var D = x.target, O = D.lockScalingX, k = D.lockScalingY, A = T.by, j, N, F, I, B = L(m, D), H = z(D, A, B), U, W, G = x.gestureScale;
 			if (H) return !1;
 			if (G) N = x.scaleX * G, F = x.scaleY * G;
 			else {
-				if (j = NR(x, x.originX, x.originY, S, C), U = A === "y" ? 1 : P(j.x), W = A === "x" ? 1 : P(j.y), x.signX ||= U, x.signY ||= W, D.lockScalingFlip && (x.signX !== U || x.signY !== W)) return !1;
+				if (j = RV(x, x.originX, x.originY, S, C), U = A === "y" ? 1 : P(j.x), W = A === "x" ? 1 : P(j.y), x.signX ||= U, x.signY ||= W, D.lockScalingFlip && (x.signX !== U || x.signY !== W)) return !1;
 				if (I = D._getTransformedDimensions(), B && !A) {
 					var K = Math.abs(j.x) + Math.abs(j.y), q = x.original, J = K / (Math.abs(I.x * q.scaleX / D.scaleX) + Math.abs(I.y * q.scaleY / D.scaleY));
 					N = q.scaleX * J, F = q.scaleY * J;
 				} else N = Math.abs(j.x * D.scaleX / I.x), F = Math.abs(j.y * D.scaleY / I.y);
 				R(x) && (N *= 2, F *= 2), x.signX !== U && A !== "y" && (x.originX = M[x.originX], N *= -1, x.signX = U), x.signY !== W && A !== "x" && (x.originY = M[x.originY], F *= -1, x.signY = W);
 			}
-			var PR = D.scaleX, Y = D.scaleY;
-			return A ? (A === "x" && D.set("scaleX", N), A === "y" && D.set("scaleY", F)) : (!O && D.set("scaleX", N), !k && D.set("scaleY", F)), PR !== D.scaleX || Y !== D.scaleY;
+			var zV = D.scaleX, Y = D.scaleY;
+			return A ? (A === "x" && D.set("scaleX", N), A === "y" && D.set("scaleY", F)) : (!O && D.set("scaleX", N), !k && D.set("scaleY", F)), zV !== D.scaleX || Y !== D.scaleY;
 		}
-		function RR(m, x, S, C) {
-			return LR(m, x, S, C);
+		function UV(m, x, S, C) {
+			return HV(m, x, S, C);
 		}
-		function zR(m, x, S, C) {
-			return LR(m, x, S, C, { by: "x" });
+		function WV(m, x, S, C) {
+			return HV(m, x, S, C, { by: "x" });
 		}
-		function BR(m, x, S, C) {
-			return LR(m, x, S, C, { by: "y" });
+		function GV(m, x, S, C) {
+			return HV(m, x, S, C, { by: "y" });
 		}
-		function VR(m, x, S, C) {
+		function KV(m, x, S, C) {
 			return m[x.target.canvas.altActionKey] ? T.skewHandlerX(m, x, S, C) : T.scalingY(m, x, S, C);
 		}
-		function HR(m, x, S, C) {
+		function qV(m, x, S, C) {
 			return m[x.target.canvas.altActionKey] ? T.skewHandlerY(m, x, S, C) : T.scalingX(m, x, S, C);
 		}
 		function $(m, x, S, C) {
-			var T = x.target, D = NR(x, x.originX, x.originY, S, C), O = T.strokeWidth / (T.strokeUniform ? T.scaleX : 1), k = R(x) ? 2 : 1, A = T.width, j = Math.abs(D.x * k / T.scaleX) - O;
+			var T = x.target, D = RV(x, x.originX, x.originY, S, C), O = T.strokeWidth / (T.strokeUniform ? T.scaleX : 1), k = R(x) ? 2 : 1, A = T.width, j = Math.abs(D.x * k / T.scaleX) - O;
 			return T.set("width", Math.max(j, 0)), A !== j;
 		}
-		function UR(m, x, S, C) {
+		function JV(m, x, S, C) {
 			var T = x.target, D = S - x.offsetX, O = C - x.offsetY, k = !T.get("lockMovementX") && T.left !== D, A = !T.get("lockMovementY") && T.top !== O;
 			return k && T.set("left", D), A && T.set("top", O), (k || A) && I("moving", K(m, x, S, C)), k || A;
 		}
-		T.scaleCursorStyleHandler = B, T.skewCursorStyleHandler = H, T.scaleSkewCursorStyleHandler = U, T.rotationWithSnapping = J("rotating", q(IR)), T.scalingEqually = J("scaling", q(RR)), T.scalingX = J("scaling", q(zR)), T.scalingY = J("scaling", q(BR)), T.scalingYOrSkewingX = VR, T.scalingXOrSkewingY = HR, T.changeWidth = J("resizing", q($)), T.skewHandlerX = Q, T.skewHandlerY = FR, T.dragHandler = UR, T.scaleOrSkewActionName = W, T.rotationStyleHandler = G, T.fireEvent = I, T.wrapWithFixedAnchor = q, T.wrapWithFireEvent = J, T.getLocalPoint = NR, x.controlsUtils = T;
+		T.scaleCursorStyleHandler = B, T.skewCursorStyleHandler = H, T.scaleSkewCursorStyleHandler = U, T.rotationWithSnapping = J("rotating", q(VV)), T.scalingEqually = J("scaling", q(UV)), T.scalingX = J("scaling", q(WV)), T.scalingY = J("scaling", q(GV)), T.scalingYOrSkewingX = KV, T.scalingXOrSkewingY = qV, T.changeWidth = J("resizing", q($)), T.skewHandlerX = Q, T.skewHandlerY = BV, T.dragHandler = JV, T.scaleOrSkewActionName = W, T.rotationStyleHandler = G, T.fireEvent = I, T.wrapWithFixedAnchor = q, T.wrapWithFireEvent = J, T.getLocalPoint = RV, x.controlsUtils = T;
 	})(m), (function(m) {
 		var x = m.fabric ||= {}, S = x.util.degreesToRadians, C = x.controlsUtils;
 		function T(m, x, S, C, T) {
@@ -26189,13 +28790,13 @@ var require___vite_browser_external = /* @__PURE__ */ __commonJSMin(((m, x) => {
 			},
 			lanczosResize: function(m, x, O, k, j) {
 				function M(m) {
-					var A, q, J, NR, PR, Y, X, Z, Q, FR, IR;
+					var A, q, J, RV, zV, Y, X, Z, Q, BV, VV;
 					for (G.x = (m + .5) * L, K.x = C(G.x), A = 0; A < j; A++) {
-						for (G.y = (A + .5) * R, K.y = C(G.y), PR = 0, Y = 0, X = 0, Z = 0, Q = 0, q = K.x - H; q <= K.x + H; q++) if (!(q < 0 || q >= x)) {
-							FR = C(1e3 * D(q - G.x)), W[FR] || (W[FR] = {});
-							for (var LR = K.y - U; LR <= K.y + U; LR++) LR < 0 || LR >= O || (IR = C(1e3 * D(LR - G.y)), W[FR][IR] || (W[FR][IR] = I(T(S(FR * z, 2) + S(IR * B, 2)) / 1e3)), J = W[FR][IR], J > 0 && (NR = (LR * x + q) * 4, PR += J, Y += J * N[NR], X += J * N[NR + 1], Z += J * N[NR + 2], Q += J * N[NR + 3]));
+						for (G.y = (A + .5) * R, K.y = C(G.y), zV = 0, Y = 0, X = 0, Z = 0, Q = 0, q = K.x - H; q <= K.x + H; q++) if (!(q < 0 || q >= x)) {
+							BV = C(1e3 * D(q - G.x)), W[BV] || (W[BV] = {});
+							for (var HV = K.y - U; HV <= K.y + U; HV++) HV < 0 || HV >= O || (VV = C(1e3 * D(HV - G.y)), W[BV][VV] || (W[BV][VV] = I(T(S(BV * z, 2) + S(VV * B, 2)) / 1e3)), J = W[BV][VV], J > 0 && (RV = (HV * x + q) * 4, zV += J, Y += J * N[RV], X += J * N[RV + 1], Z += J * N[RV + 2], Q += J * N[RV + 3]));
 						}
-						NR = (A * k + m) * 4, F[NR] = Y / PR, F[NR + 1] = X / PR, F[NR + 2] = Z / PR, F[NR + 3] = Q / PR;
+						RV = (A * k + m) * 4, F[RV] = Y / zV, F[RV + 1] = X / zV, F[RV + 2] = Z / zV, F[RV + 3] = Q / zV;
 					}
 					return ++m < k ? M(m) : P;
 				}
@@ -26209,9 +28810,9 @@ var require___vite_browser_external = /* @__PURE__ */ __commonJSMin(((m, x) => {
 			},
 			hermiteFastResize: function(m, x, S, O, k) {
 				for (var j = this.rcpScaleX, M = this.rcpScaleY, N = A(j / 2), P = A(M / 2), F = m.imageData.data, I = m.ctx.createImageData(O, k), L = I.data, R = 0; R < k; R++) for (var z = 0; z < O; z++) {
-					for (var B = (z + R * O) * 4, H = 0, U = 0, W = 0, G = 0, K = 0, q = 0, J = 0, NR = (R + .5) * M, PR = C(R * M); PR < (R + 1) * M; PR++) for (var Y = D(NR - (PR + .5)) / P, X = (z + .5) * j, Z = Y * Y, Q = C(z * j); Q < (z + 1) * j; Q++) {
-						var FR = D(X - (Q + .5)) / N, IR = T(Z + FR * FR);
-						IR > 1 && IR < -1 || (H = 2 * IR * IR * IR - 3 * IR * IR + 1, H > 0 && (FR = 4 * (Q + PR * x), J += H * F[FR + 3], W += H, F[FR + 3] < 255 && (H = H * F[FR + 3] / 250), G += H * F[FR], K += H * F[FR + 1], q += H * F[FR + 2], U += H));
+					for (var B = (z + R * O) * 4, H = 0, U = 0, W = 0, G = 0, K = 0, q = 0, J = 0, RV = (R + .5) * M, zV = C(R * M); zV < (R + 1) * M; zV++) for (var Y = D(RV - (zV + .5)) / P, X = (z + .5) * j, Z = Y * Y, Q = C(z * j); Q < (z + 1) * j; Q++) {
+						var BV = D(X - (Q + .5)) / N, VV = T(Z + BV * BV);
+						VV > 1 && VV < -1 || (H = 2 * VV * VV * VV - 3 * VV * VV + 1, H > 0 && (BV = 4 * (Q + zV * x), J += H * F[BV + 3], W += H, F[BV + 3] < 255 && (H = H * F[BV + 3] / 250), G += H * F[BV], K += H * F[BV + 1], q += H * F[BV + 2], U += H));
 					}
 					L[B] = G / U, L[B + 1] = K / U, L[B + 2] = q / U, L[B + 3] = J / W;
 				}
@@ -26767,13 +29368,13 @@ var require___vite_browser_external = /* @__PURE__ */ __commonJSMin(((m, x) => {
 							continue;
 						}
 						A = this._textLines[K], z = S / this.lineHeight, D = this._getLineLeftOffset(K), F = 0, I = 0, j = this.getValueOfPropertyAt(K, 0, x), H = this.getValueOfPropertyAt(K, 0, "fill"), P = N + z * (1 - this._fontSizeFraction), C = this.getHeightOfChar(K, 0), O = this.getValueOfPropertyAt(K, 0, "deltaY");
-						for (var J = 0, NR = A.length; J < NR; J++) if (L = this.__charBounds[K][J], R = this.getValueOfPropertyAt(K, J, x), B = this.getValueOfPropertyAt(K, J, "fill"), T = this.getHeightOfChar(K, J), k = this.getValueOfPropertyAt(K, J, "deltaY"), U && R && B) m.save(), m.fillStyle = H, m.translate(L.renderLeft, L.renderTop), m.rotate(L.angle), m.fillRect(-L.kernedWidth / 2, G * T + k, L.kernedWidth, this.fontSize / 15), m.restore();
+						for (var J = 0, RV = A.length; J < RV; J++) if (L = this.__charBounds[K][J], R = this.getValueOfPropertyAt(K, J, x), B = this.getValueOfPropertyAt(K, J, "fill"), T = this.getHeightOfChar(K, J), k = this.getValueOfPropertyAt(K, J, "deltaY"), U && R && B) m.save(), m.fillStyle = H, m.translate(L.renderLeft, L.renderTop), m.rotate(L.angle), m.fillRect(-L.kernedWidth / 2, G * T + k, L.kernedWidth, this.fontSize / 15), m.restore();
 						else if ((R !== j || B !== H || T !== C || k !== O) && I > 0) {
-							var PR = M + D + F;
-							this.direction === "rtl" && (PR = this.width - PR - I), j && H && (m.fillStyle = H, m.fillRect(PR, P + G * C + O, I, this.fontSize / 15)), F = L.left, I = L.width, j = R, H = B, C = T, O = k;
+							var zV = M + D + F;
+							this.direction === "rtl" && (zV = this.width - zV - I), j && H && (m.fillStyle = H, m.fillRect(zV, P + G * C + O, I, this.fontSize / 15)), F = L.left, I = L.width, j = R, H = B, C = T, O = k;
 						} else I += L.kernedWidth;
-						var PR = M + D + F;
-						this.direction === "rtl" && (PR = this.width - PR - I), m.fillStyle = B, R && B && m.fillRect(PR, P + G * C + O, I - W, this.fontSize / 15), N += S;
+						var zV = M + D + F;
+						this.direction === "rtl" && (zV = this.width - zV - I), m.fillStyle = B, R && B && m.fillRect(zV, P + G * C + O, I - W, this.fontSize / 15), N += S;
 					}
 					m.restore();
 				}
@@ -29165,8 +31766,8 @@ var bindToProps = (m, x, S) => (C, T, D, O = {}, k = !1) => {
 	S && j && (M += "Passive"), m[M] = m[M] || [], m[M].push(D);
 };
 function useRecognizers(m, S = {}, C, T) {
-	let D = React2.useMemo(() => new Controller(m), []);
-	if (D.applyHandlers(m, T), D.applyConfig(S, C), React2.useEffect(D.effect.bind(D)), React2.useEffect(() => D.clean.bind(D), []), S.target === void 0) return D.bind.bind(D);
+	let D = React.useMemo(() => new Controller(m), []);
+	if (D.applyHandlers(m, T), D.applyConfig(S, C), React.useEffect(D.effect.bind(D)), React.useEffect(() => D.clean.bind(D), []), S.target === void 0) return D.bind.bind(D);
 }
 function usePinch(m, x) {
 	return registerAction(pinchAction), useRecognizers({ pinch: m }, x || {}, "pinch");
@@ -29409,7 +32010,7 @@ function ContainerPlanPopup({ canvas: m, obj: x, item: S, onClickOutside: C, onN
 		]
 	});
 }
-var FloorViewPopup = React2.forwardRef(({ canvas: m, obj: x, item: S, onClickOutside: C, onNavigate: T, measurementSystem: D = "metric" }, O) => {
+var FloorViewPopup = React.forwardRef(({ canvas: m, obj: x, item: S, onClickOutside: C, onNavigate: T, measurementSystem: D = "metric" }, O) => {
 	let k = useRef(null), [A, j] = useState([1, 1]), M = useRef(!1), N = (m) => {
 		k.current && !k.current.contains(m.target) && (m.type === "mousedown" ? (m.preventDefault(), C()) : m.type === "touchmove" ? (m.preventDefault(), M.current = !0) : m.type === "touchend" && (m.preventDefault(), M.current ? M.current = !1 : C()));
 	};
@@ -29469,25 +32070,43 @@ var FloorViewPopup = React2.forwardRef(({ canvas: m, obj: x, item: S, onClickOut
 FloorViewPopup.displayName = "FloorViewPopup";
 var floor_view_popup_default = FloorViewPopup, import_fabric = require_fabric();
 function PlanView({ planId: m, objects: x, items: S, background: C, color: T, canvasSubject: D, useHalfWidth: O, onNavigate: k, formatCurrency: A, formatArea: j, t: N, showPrice: F, measurementSystem: I }) {
-	let L = useRef(null), R = useRef(null), z = useRef(null), U = useRef(null), W = useRef(null), G = useRef(null), q = useRef(null), J = useRef(0), Y = useRef(0), X = useRef(!1), Z = useRef(!1), Q = useRef(0), FR = useRef(1), IR = useRef(new PlanItemController(S)), LR = useRef(new PlanObjectController(x)), RR = useRef(x), zR = useRef(""), BR = useRef(null), VR = useRef(0), HR = useRef(0), $ = useRef(0), UR = useRef(null), [WR, GR] = useState([]), KR = useRef(null);
+	let L = useRef(null), R = useRef(null), z = useRef(null), U = useRef(null), W = useRef(null), G = useRef(null), q = useRef(null), J = useRef(0), Y = useRef(0), X = useRef(!1), Z = useRef(!1), Q = useRef(0), BV = useRef(1), VV = useRef(new PlanItemController(S)), HV = useRef(new PlanObjectController(x)), UV = useRef(x), WV = useRef(""), GV = useRef(null), KV = useRef(0), qV = useRef(0), $ = useRef(0), JV = useRef(null), [YV, XV] = useState([]), ZV = useRef(null), QV = () => {
+		let m = ZV.current;
+		m && q.current.setDimensions({
+			width: m.clientWidth,
+			height: m.clientHeight
+		});
+	}, $V = () => {
+		QV();
+		let m = 1;
+		if (R.current?.width !== 0 || R.current?.height !== 0) {
+			let x = q.current.getWidth() / (O ? 2 : 1), S = R.current.width, C = R.current.height, T = q.current.getHeight(), D = x / S, k = T / C;
+			m = Math.min(D, k), q.current.setZoom(m), q.current.absolutePan(new import_fabric.fabric.Point((S * m - x) / 2, (C * m - T) / 2)), BV.current = m;
+		}
+		q.current.renderAll(), GV.current = q.current?.viewportTransform;
+	};
 	useEffect(() => {
-		let m = (m) => m.preventDefault(), x = KR.current ?? document;
-		return x.addEventListener("gesturestart", m), x.addEventListener("gesturechange", m), x.addEventListener("gestureend", m), () => {
-			x.removeEventListener("gesturestart", m), x.removeEventListener("gesturechange", m), x.removeEventListener("gestureend", m);
+		let m = (m) => m.preventDefault(), x = ZV.current ?? document, S = document?.getElementById("puck-canvas-root");
+		x.addEventListener("gesturestart", m), x.addEventListener("gesturechange", m), x.addEventListener("gestureend", m);
+		let C = null;
+		return S && (C = new ResizeObserver(() => {
+			$V();
+		}), C.observe(S)), () => {
+			x.removeEventListener("gesturestart", m), x.removeEventListener("gesturechange", m), x.removeEventListener("gestureend", m), C && S && (C.unobserve(S), C.disconnect());
 		};
-	}, [KR]), usePinch((m) => {
+	}, [ZV]), usePinch((m) => {
 		let { da: x } = m;
 		m.event.preventDefault(), Q.current == 0 && (Q.current = x[0]);
 		let S = x[0] / Q.current * q.current.getZoom();
-		S > 20 && (S = 20), S < FR.current && (S = FR.current), q.current.setZoom(S), az(), Q.current = x[0], q.current.renderAll();
-	}, { target: UR }), useEffect(() => {
+		S > 20 && (S = 20), S < BV.current && (S = BV.current), q.current.setZoom(S), uH(), Q.current = x[0], q.current.renderAll();
+	}, { target: JV }), useEffect(() => {
 		q.current && D && D.attach(() => {
-			YR();
+			$V();
 		}, "onFit");
 	}, [D, q.current]), useEffect(() => {
 		if (!C?.objectUrl) return;
 		let m = typeof window < "u" ? window.document : document;
-		return m.addEventListener("gesturestart", (m) => m.preventDefault()), m.addEventListener("gesturechange", (m) => m.preventDefault()), qR(), () => {
+		return m.addEventListener("gesturestart", (m) => m.preventDefault()), m.addEventListener("gesturechange", (m) => m.preventDefault()), eH(), () => {
 			try {
 				q.current && (q.current?.dispose(), R.current?.dispose());
 			} catch (m) {
@@ -29495,50 +32114,39 @@ function PlanView({ planId: m, objects: x, items: S, background: C, color: T, ca
 			}
 		};
 	}, [C]), useEffect(() => {
-		let C = m == zR.current;
-		if (q.current && C) q.current.remove(...q.current.getObjects()), LR.current.deleteObjects(), IR.current = new PlanItemController(S), LR.current = new PlanObjectController(x), LR.current.initContainerObjects(z.current), LR.current.containerObjects.forEach((m) => {
-			let x = IR.current.getItem(m.itemId);
+		let C = m == WV.current;
+		if (q.current && C) q.current.remove(...q.current.getObjects()), HV.current.deleteObjects(), VV.current = new PlanItemController(S), HV.current = new PlanObjectController(x), HV.current.initContainerObjects(z.current), HV.current.containerObjects.forEach((m) => {
+			let x = VV.current.getItem(m.itemId);
 			x && (m.assign(x), q.current.add(m, m.label));
 		}), q.current?.requestRenderAll();
 		else if (q.current && !C) try {
-			q.current && (q.current.remove(...q.current.getObjects()), R.current?.dispose(), LR.current.deleteObjects(), IR.current = new PlanItemController(S), LR.current = new PlanObjectController(x), qR());
+			q.current && (q.current.remove(...q.current.getObjects()), R.current?.dispose(), HV.current.deleteObjects(), VV.current = new PlanItemController(S), HV.current = new PlanObjectController(x), eH());
 		} catch (m) {
 			console.error(m);
 		}
-		RR.current = x, zR.current = m;
+		UV.current = x, WV.current = m;
 	}, [x]);
-	let qR = () => {
+	let eH = () => {
 		import_fabric.fabric.Image.fromURL(C.objectUrl ?? "", (m) => {
 			m.setOptions({
 				stroke: "#333333",
 				strokeWidth: 0,
 				opacity: 1,
 				hasBorders: !1
-			}), R.current = m, z.current = new import_fabric.fabric.Point(R.current.width ?? 0, R.current.height ?? 0), QR(), iz(R.current?.width ?? 0, R.current?.height ?? 0), YR();
+			}), R.current = m, z.current = new import_fabric.fabric.Point(R.current.width ?? 0, R.current.height ?? 0), rH(), lH(R.current?.width ?? 0, R.current?.height ?? 0), $V();
 		});
-	}, JR = () => {
-		let m = KR.current;
-		m && q.current.setWidth(m.clientWidth).setHeight(m.clientHeight);
-	}, YR = () => {
-		JR();
-		let m = 1;
-		if (R.current?.width !== 0 || R.current?.height !== 0) {
-			let x = q.current.getWidth() / (O ? 2 : 1), S = R.current.width, C = R.current.height, T = q.current.getHeight(), D = x / S, k = T / C;
-			m = Math.min(D, k), q.current.setZoom(m), q.current.absolutePan(new import_fabric.fabric.Point((S * m - x) / 2, (C * m - T) / 2)), FR.current = m;
-		}
-		q.current.renderAll(), BR.current = q.current?.viewportTransform;
-	}, XR = (m) => {
+	}, tH = (m) => {
 		if (m.target instanceof PlanRectangleObject || m.target instanceof PlanCircleObject || m.target instanceof PlanPolygonObject) {
-			let x = m.target, S = getPlanItemTypeEnum(IR.current.getItem(x.itemId)?.type ?? "");
-			S == PlanItemTypeEnum.Room && (G.current = S, ez(x));
+			let x = m.target, S = getPlanItemTypeEnum(VV.current.getItem(x.itemId)?.type ?? "");
+			S == PlanItemTypeEnum.Room && (G.current = S, aH(x));
 		}
-	}, ZR = (m) => {
+	}, nH = (m) => {
 		if ((m.target instanceof PlanRectangleObject || m.target instanceof PlanCircleObject || m.target instanceof PlanPolygonObject) && G.current == PlanItemTypeEnum.Room) {
 			let x = U.current?.getBoundingClientRect(), { clientX: S, clientY: C } = m.e;
 			if (S >= Math.round((x?.left ?? 0) - 10) && S <= Math.round((x?.right ?? 0) + 10) && C >= Math.round((x?.top ?? 0) - 10) && C <= Math.round((x?.bottom ?? 0) + 10)) return;
-			tz();
+			oH();
 		}
-	}, QR = () => {
+	}, rH = () => {
 		R.current && (q.current, q.current = new import_fabric.fabric.Canvas(L.current, {
 			hoverCursor: "move",
 			selection: !0,
@@ -29549,36 +32157,36 @@ function PlanView({ planId: m, objects: x, items: S, background: C, color: T, ca
 			backgroundImage: R.current
 		}), q.current.backgroundColor = T ?? "#ff00", q.current.selection = !1, q.current.defaultCursor = "grab", q.current.on("mouse:wheel", function(m) {
 			let x = m.e.deltaY, S = q.current.getZoom(), C = new import_fabric.fabric.Point(q.current.getWidth() / 2, q.current.getHeight() / 2);
-			S *= .999 ** x, S > 20 && (S = 20), S < FR.current && (S = FR.current);
+			S *= .999 ** x, S > 20 && (S = 20), S < BV.current && (S = BV.current);
 			let T = q.current.getPointer(m.e), D = new import_fabric.fabric.Point(T.x, T.y), O = import_fabric.fabric.util.transformPoint(D, q.current.viewportTransform);
 			q.current.zoomToPoint(C, S);
 			let k = import_fabric.fabric.util.transformPoint(D, q.current.viewportTransform), A = new import_fabric.fabric.Point(O.x - k.x, O.y - k.y);
-			q.current.relativePan(A), az(), q.current.renderAll(), m.e.preventDefault(), m.e.stopPropagation();
+			q.current.relativePan(A), uH(), q.current.renderAll(), m.e.preventDefault(), m.e.stopPropagation();
 		}), q.current.on("mouse:move", function(m) {
-			X.current && (m.e.type == "mousemove" ? sz(m.e.clientX, m.e.clientY) : m.e.touches && m.e.touches.length > 1 || sz(m.e.touches[0].clientX, m.e.touches[0].clientY));
-		}), q.current.on("mouse:up", rz), q.current.on("mouse:down", nz), q.current.on("mouse:over", XR), q.current.on("mouse:out", ZR), LR.current.initContainerObjects(z.current), LR.current.containerObjects.forEach((m) => {
-			let x = IR.current.getItem(m.itemId);
+			X.current && (m.e.type == "mousemove" ? fH(m.e.clientX, m.e.clientY) : m.e.touches && m.e.touches.length > 1 || fH(m.e.touches[0].clientX, m.e.touches[0].clientY));
+		}), q.current.on("mouse:up", cH), q.current.on("mouse:down", sH), q.current.on("mouse:over", tH), q.current.on("mouse:out", nH), HV.current.initContainerObjects(z.current), HV.current.containerObjects.forEach((m) => {
+			let x = VV.current.getItem(m.itemId);
 			if (x) if (m.itemType == "Room") {
 				x && m.assign(x);
 				let S = m.fill;
 				m.fill = "#ff00", m.label = new PlanLabelObject(x.name, S ?? "0x000000", m.left ?? 0, m.top ?? 0, m.width ?? 0, m.height ?? 0, 1, 56), m.label.hideBackground(), m.label.addStroke(), q.current.add(m, m.label);
 			} else x && m.assign(x), q.current.add(m, m.label);
 		}), q.current.on("mouse:mouseup", (m) => {
-			(m.target instanceof PlanRectangleObject || m.target instanceof PlanCircleObject || m.target instanceof PlanPolygonObject) && (ez(m.target), q.current?.requestRenderAll());
+			(m.target instanceof PlanRectangleObject || m.target instanceof PlanCircleObject || m.target instanceof PlanPolygonObject) && (aH(m.target), q.current?.requestRenderAll());
 		}), q.current.requestRenderAll(), Z.current = !0);
-	}, $R = async (m) => {
+	}, iH = async (m) => {
 		let x = getPlanItemTypeEnum(m?.itemType ?? ""), S = "/availability/site-plan";
 		x === PlanItemTypeEnum.PlotContainer ? (S = `/availability/site-plan/plot-container/${m?.itemId}`, k && k(S)) : x === PlanItemTypeEnum.Plot && (S = `/plot/${m?.itemId}`, k && k(S));
-	}, ez = (m) => {
-		let x = IR.current.getItem(m.itemId), S = getPlanItemTypeEnum(x?.type ?? "");
+	}, aH = (m) => {
+		let x = VV.current.getItem(m.itemId), S = getPlanItemTypeEnum(x?.type ?? "");
 		switch (G.current = S, S) {
 			case PlanItemTypeEnum.Plot:
-				GR([/* @__PURE__ */ jsx(PlanViewPopup, {
+				XV([/* @__PURE__ */ jsx(PlanViewPopup, {
 					canvas: q.current,
 					obj: m,
 					item: x,
 					onClickOutside: () => {
-						tz();
+						oH();
 					},
 					onNavigate: k,
 					formatCurrency: A,
@@ -29588,12 +32196,12 @@ function PlanView({ planId: m, objects: x, items: S, background: C, color: T, ca
 				}, "container_element")]);
 				break;
 			case PlanItemTypeEnum.PlotContainer:
-				GR([/* @__PURE__ */ jsx(ContainerPlanPopup, {
+				XV([/* @__PURE__ */ jsx(ContainerPlanPopup, {
 					canvas: q.current,
 					obj: m,
 					item: x,
 					onClickOutside: () => {
-						tz();
+						oH();
 					},
 					onNavigate: k,
 					formatCurrency: A,
@@ -29602,47 +32210,47 @@ function PlanView({ planId: m, objects: x, items: S, background: C, color: T, ca
 				}, "container_element")]);
 				break;
 			case PlanItemTypeEnum.Room:
-				GR([/* @__PURE__ */ jsx(floor_view_popup_default, {
+				XV([/* @__PURE__ */ jsx(floor_view_popup_default, {
 					ref: U,
 					canvas: q.current,
 					obj: m,
 					item: x,
 					onClickOutside: () => {
-						tz();
+						oH();
 					},
 					onNavigate: k,
 					measurementSystem: I
 				}, "container_element")]);
 				break;
 		}
-	}, tz = useCallback(() => {
-		G.current = null, GR([]), W.current = null;
-	}, [WR]), nz = (m) => {
-		X.current = !0, m.e.type.includes("mouse") && (J.current = m.e.clientX, Y.current = m.e.clientY), m.e.type.includes("touch") && (J.current = m.e.touches[0].clientX, Y.current = m.e.touches[0].clientY), (m.target instanceof PlanRectangleObject || m.target instanceof PlanCircleObject || m.target instanceof PlanPolygonObject) && W.current && W.current.itemId == m.target.itemId ? $R(W.current) : (m.target instanceof PlanRectangleObject || m.target instanceof PlanCircleObject || m.target instanceof PlanPolygonObject) && setTimeout(() => {
-			ez(m.target), q.current?.requestRenderAll();
+	}, oH = useCallback(() => {
+		G.current = null, XV([]), W.current = null;
+	}, [YV]), sH = (m) => {
+		X.current = !0, m.e.type.includes("mouse") && (J.current = m.e.clientX, Y.current = m.e.clientY), m.e.type.includes("touch") && (J.current = m.e.touches[0].clientX, Y.current = m.e.touches[0].clientY), (m.target instanceof PlanRectangleObject || m.target instanceof PlanCircleObject || m.target instanceof PlanPolygonObject) && W.current && W.current.itemId == m.target.itemId ? iH(W.current) : (m.target instanceof PlanRectangleObject || m.target instanceof PlanCircleObject || m.target instanceof PlanPolygonObject) && setTimeout(() => {
+			aH(m.target), q.current?.requestRenderAll();
 		}, 150);
-	}, rz = (m) => {
+	}, cH = (m) => {
 		X.current = !1, q.current?.fire("canvas:dragEnd"), Q.current = 0;
-	}, iz = (m, x) => {
-		VR.current = m, HR.current = x;
-	}, az = () => {
-		Date.now() - $.current < 8 || ($.current = Date.now(), oz(), q.current?.requestRenderAll());
-	}, oz = () => {
-		if (VR.current === 0 || HR.current === 0 || !q.current?.viewportTransform) return;
-		let m = q.current?.viewportTransform, x = q.current?.getZoom(), S = q.current?.getWidth(), C = VR.current, T = HR.current, D = q.current?.getHeight(), O = BR.current[4], k = BR.current[5];
-		m[4] >= BR.current[4] ? q.current.viewportTransform[4] = BR.current[4] : m[4] < S - C * x - O && (q.current.viewportTransform[4] = S - C * x - O), m[5] >= BR.current[5] ? q.current.viewportTransform[5] = BR.current[5] : m[5] < D - T * x - k && (q.current.viewportTransform[5] = D - T * x - k);
-	}, sz = (m, x) => {
-		if (q.current?.getZoom() == FR.current) return;
+	}, lH = (m, x) => {
+		KV.current = m, qV.current = x;
+	}, uH = () => {
+		Date.now() - $.current < 8 || ($.current = Date.now(), dH(), q.current?.requestRenderAll());
+	}, dH = () => {
+		if (KV.current === 0 || qV.current === 0 || !q.current?.viewportTransform) return;
+		let m = q.current?.viewportTransform, x = q.current?.getZoom(), S = q.current?.getWidth(), C = KV.current, T = qV.current, D = q.current?.getHeight(), O = GV.current[4], k = GV.current[5];
+		m[4] >= GV.current[4] ? q.current.viewportTransform[4] = GV.current[4] : m[4] < S - C * x - O && (q.current.viewportTransform[4] = S - C * x - O), m[5] >= GV.current[5] ? q.current.viewportTransform[5] = GV.current[5] : m[5] < D - T * x - k && (q.current.viewportTransform[5] = D - T * x - k);
+	}, fH = (m, x) => {
+		if (q.current?.getZoom() == BV.current) return;
 		let S = new import_fabric.fabric.Point(m - J.current, x - Y.current);
-		q.current.relativePan(S), az(), q.current?.requestRenderAll(), J.current = m, Y.current = x;
+		q.current.relativePan(S), uH(), q.current?.requestRenderAll(), J.current = m, Y.current = x;
 	};
 	return /* @__PURE__ */ jsx("div", {
-		className: "w-full h-[600px]",
-		ref: KR,
+		className: "w-full xl:h-[600px] h-[300px] overflow-hidden",
+		ref: ZV,
 		children: /* @__PURE__ */ jsxs("div", {
-			ref: UR,
+			ref: JV,
 			className: "relative",
-			children: [WR.map((m) => createPortal(m, UR.current)), /* @__PURE__ */ jsx("canvas", { ref: L })]
+			children: [YV.map((m) => createPortal(m, JV.current)), /* @__PURE__ */ jsx("canvas", { ref: L })]
 		})
 	});
 }
@@ -29670,7 +32278,10 @@ function PlanViewWrapper(m) {
 			children: "Error: Invalid JSON data for PlanView component"
 		});
 	}
-	return P ? x ? /* @__PURE__ */ jsx(PlanView, {
+	return !P || !x ? /* @__PURE__ */ jsx("div", {
+		className: "w-full h-[600px] flex items-center justify-center p-4",
+		children: /* @__PURE__ */ jsx("div", { className: "w-8 h-8 border-4 border-gray-200 border-t-[#5ec6d3] rounded-full animate-spin" })
+	}) : /* @__PURE__ */ jsx(PlanView, {
 		planId: x,
 		objects: M,
 		items: N,
@@ -29680,12 +32291,6 @@ function PlanViewWrapper(m) {
 		useHalfWidth: k,
 		showPrice: A,
 		measurementSystem: j
-	}) : /* @__PURE__ */ jsx("div", {
-		className: "p-4 text-yellow-600",
-		children: "Warning: Plan ID is required"
-	}) : /* @__PURE__ */ jsx("div", {
-		className: "p-4 text-yellow-600",
-		children: "Warning: Background asset is required for PlanView"
 	});
 }
-export { CanvasSubject, ColorPickerField, ContainerPlanPopup, ContentSection, ContentSectionWrapper, floor_view_popup_default as FloorViewPopup, GridSection, GridSectionWrapper, HeaderSection, HeaderSectionWrapper, HomeFirstSection, HomeFirstSectionWrapper, HomePageContent, HomePageContentWrapper, PlanCircleObject, PlanItemController, PlanItemTypeEnum, PlanLabelObject, PlanObjectController, PlanObjectTypeEnum, PlanPolygonObject, PlanRectangleObject, PlanView, PlanViewPopup, PlanViewWrapper, Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectScrollDownButton, SelectScrollUpButton, SelectSeparator, SelectTrigger, SelectValue, SkyscrapperHomeFirstSection, SkyscrapperHomeFirstSectionWrapper, SkyscrapperHomesSecondSection, SkyscrapperHomesSecondSectionWrapper, VoodvaleHomeFirstSection, VoodvaleHomeFirstSectionWrapper, VoodvaleHomeSecondSection, VoodvaleHomeSecondSectionWrapper, VoodvaleSection, colorPickerField };
+export { CanvasSubject, ColorPickerField, ContainerPlanPopup, ContentSection, ContentSectionWrapper, floor_view_popup_default as FloorViewPopup, GridSection, GridSectionWrapper, HeaderSection, HeaderSectionWrapper, HomeFirstSection, HomeFirstSectionWrapper, HomePageContent, HomePageContentWrapper, ItemSlider, PlanCircleObject, PlanItemController, PlanItemTypeEnum, PlanLabelObject, PlanObjectController, PlanObjectTypeEnum, PlanPolygonObject, PlanRectangleObject, PlanView, PlanViewPopup, PlanViewWrapper, PlotThumbCard, PlotThumbCardBody, PlotThumbCardImage, PlotThumbCardRoot, PlotsShowcase, PlotsShowcaseWrapper, Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectScrollDownButton, SelectScrollUpButton, SelectSeparator, SelectTrigger, SelectValue, SkyscrapperHomeFirstSection, SkyscrapperHomeFirstSectionWrapper, SkyscrapperHomesSecondSection, SkyscrapperHomesSecondSectionWrapper, SkyscrapperPlotThumbCard, SkyscrapperPlotThumbCardBody, SkyscrapperPlotThumbCardImage, SkyscrapperPlotThumbCardRoot, SkyscrapperPlotsShowcase, SkyscrapperPlotsShowcaseWrapper, SkyscrapperShowcaseCard, VoodvaleHomeFirstSection, VoodvaleHomeFirstSectionWrapper, VoodvaleHomeSecondSection, VoodvaleHomeSecondSectionWrapper, VoodvalePlotThumbCard, VoodvalePlotThumbCardBody, VoodvalePlotThumbCardImage, VoodvalePlotThumbCardRoot, VoodvalePlotsShowcase, VoodvalePlotsShowcaseWrapper, VoodvaleSection, colorPickerField };

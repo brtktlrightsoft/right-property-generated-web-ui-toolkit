@@ -28,4 +28,14 @@ export type HomeFirstSectionEditableProps = Omit<HomeFirstSectionProps, 'backgro
   backgroundUrl: string;
 };
 
+import type { PlotThumbResult } from './plot.types';
+
+export type PlotsShowcaseEditableProps = {
+  plots: PlotThumbResult[];
+  title?: string;
+  showAllLink?: string;
+  locale?: string;
+  language?: string;
+};
+
 

@@ -1,0 +1,1 @@
+{"version":3,"file":"ItemSlider.d.ts","sourceRoot":"","sources":["../../../src/components/common/ItemSlider.tsx"],"names":[],"mappings":"AAEA,OAAO,mBAAmB,CAAC;AAE3B,UAAU,eAAe;IACvB,KAAK,EAAE,KAAK,CAAC,SAAS,EAAE,CAAC;IACzB,OAAO,CAAC,EAAE,SAAS,GAAG,UAAU,GAAG,aAAa,CAAC;IACjD,QAAQ,CAAC,EAAE,MAAM,CAAC;CACnB;AAED,wBAAgB,UAAU,CAAC,EAAE,KAAK,EAAE,OAAmB,EAAE,QAAe,EAAE,EAAE,eAAe,2CA6C1F"}

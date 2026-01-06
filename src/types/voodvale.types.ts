@@ -45,4 +45,16 @@ export type VoodvaleHomeFirstSectionEditableProps = Omit<VoodvaleHomeFirstSectio
   backgroundUrl: string;
 };
 
+import type { PlotThumbResult } from './plot.types';
+
+export type VoodvalePlotsShowcaseEditableProps = {
+  plots: PlotThumbResult[];
+  title?: string;
+  showAllLink?: string;
+  locale?: string;
+  language?: string;
+  showcaseVectorUrl?: string;
+  showcaseMobileVectorUrl?: string;
+};
+
 

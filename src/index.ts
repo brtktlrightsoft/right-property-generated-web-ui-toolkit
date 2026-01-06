@@ -7,6 +7,7 @@ export * from './types/default.types';
 export * from './types/skyscrapper.types';
 export * from './types/voodvale.types';
 export * from './types/puck.types';
+export * from './types/plot.types';
 
 // ui
 export * from './components/ui/select';
@@ -19,12 +20,22 @@ export * from './components/default/HomeFirstSection';
 export * from './components/default/HomeFirstSectionWrapper';
 export * from './components/default/HomePageContent';
 export * from './components/default/HomePageContentWrapper';
+export * from './components/common/PlotsShowcase';
+export * from './components/default/PlotsShowcaseWrapper';
+export * from './components/common/ItemSlider';
+export * from './components/common/PlotThumbCard';
+export * from './components/common/plot-thumb-card/plot-thumb-card-parts';
+export * from './components/common/plot-thumb-card/voodvale-plot-thumb-card/voodvale-plot-thumb-card-parts';
+export * from './components/common/plot-thumb-card/skyscrapper-plot-thumb-card/skyscrapper-plot-thumb-card-parts';
 
 // skyscrapper components
 export * from './components/skyscrapper/SkyscrapperHomeFirstSection';
 export * from './components/skyscrapper/SkyscrapperHomeFirstSectionWrapper';
 export * from './components/skyscrapper/SkyscrapperHomesSecondSection';
 export * from './components/skyscrapper/SkyscrapperHomesSecondSectionWrapper';
+export * from './components/skyscrapper/SkyscrapperPlotsShowcase';
+export * from './components/skyscrapper/SkyscrapperPlotsShowcaseWrapper';
+export * from './components/skyscrapper/SkyscrapperShowcaseCard';
 
 // voodvale components
 export * from './components/voodvale/HeaderSection';
@@ -37,6 +48,8 @@ export * from './components/voodvale/VoodvaleHomeFirstSection';
 export * from './components/voodvale/VoodvaleHomeFirstSectionWrapper';
 export * from './components/voodvale/VoodvaleHomeSecondSection';
 export * from './components/voodvale/VoodvaleHomeSecondSectionWrapper';
+export * from './components/voodvale/VoodvalePlotsShowcase';
+export * from './components/voodvale/VoodvalePlotsShowcaseWrapper';
 export * from './components/VoodvaleSection';
 
 // plan-view components

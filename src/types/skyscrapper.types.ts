@@ -39,4 +39,14 @@ export type SkyscrapperHomesSecondSectionProps = {
   gridItems: SkyscrapperGridItem[];
 };
 
+import type { PlotThumbResult } from './plot.types';
+
+export type SkyscrapperPlotsShowcaseEditableProps = {
+  plots: PlotThumbResult[];
+  title?: string;
+  subtitle?: string;
+  locale?: string;
+  language?: string;
+};
+
 

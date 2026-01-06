@@ -5,6 +5,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import './fonts.css';
+@import 'swiper/css';
 @custom-variant dark (&:is(.dark *));
 @custom-variant mobile (@media (max-width: 800px));
 @custom-variant xsMobile (@media (max-width: 393px));

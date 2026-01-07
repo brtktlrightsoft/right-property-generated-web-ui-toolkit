@@ -26,7 +26,7 @@ export type HomeFirstSectionEditableProps = Omit<HomeFirstSectionProps, 'backgro
 };
 import type { PlotThumbResult } from './plot.types';
 export type PlotsShowcaseEditableProps = {
-    plots: PlotThumbResult[];
+    plots?: PlotThumbResult[];
     title?: string;
     showAllLink?: string;
     locale?: string;

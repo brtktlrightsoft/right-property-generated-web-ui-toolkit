@@ -33,7 +33,7 @@ export function VoodvalePlotsShowcase({
 
   return (
     <div
-      className="relative w-full h-full mx-auto flex flex-col"
+      className="relative w-full mx-auto flex flex-col"
       style={{
         background: 'radial-gradient(113.94% 104.88% at 55.95% -2.12%, #DECFCD 0%, #B38A82 56.73%, #988289 100%)',
       }}

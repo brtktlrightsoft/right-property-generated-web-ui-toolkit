@@ -25,7 +25,7 @@ export function SkyscrapperPlotsShowcase({
   });
 
   return (
-    <div className="relative w-full h-full mx-auto flex flex-col bg-black">
+    <div className="relative w-full mx-auto flex flex-col bg-black">
       <div className="relative z-[1] page-container">
         <div className="pt-[6.8125rem] mobile:pt-[4.1875rem] pb-[7.5rem] mobile:pb-[9rem] mobile:pl-[1.3rem] mobile:pr-0">
           <div className="mb-[3.875rem] mobile:mb-[2rem] flex justify-between items-center">

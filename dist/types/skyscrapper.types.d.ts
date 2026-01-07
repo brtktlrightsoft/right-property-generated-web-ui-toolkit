@@ -33,7 +33,7 @@ export type SkyscrapperHomesSecondSectionProps = {
 };
 import type { PlotThumbResult } from './plot.types';
 export type SkyscrapperPlotsShowcaseEditableProps = {
-    plots: PlotThumbResult[];
+    plots?: PlotThumbResult[];
     title?: string;
     subtitle?: string;
     locale?: string;

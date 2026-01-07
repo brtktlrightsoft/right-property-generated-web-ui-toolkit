@@ -38,7 +38,7 @@ export type VoodvaleHomeFirstSectionEditableProps = Omit<VoodvaleHomeFirstSectio
 };
 import type { PlotThumbResult } from './plot.types';
 export type VoodvalePlotsShowcaseEditableProps = {
-    plots: PlotThumbResult[];
+    plots?: PlotThumbResult[];
     title?: string;
     showAllLink?: string;
     locale?: string;

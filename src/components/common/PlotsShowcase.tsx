@@ -25,7 +25,7 @@ export function PlotsShowcase({
   });
 
   return (
-    <div className="w-full h-full mx-auto flex flex-col">
+    <div className="w-full mx-auto flex flex-col">
       <div className="page-container">
         <div className="space-y-5 px-5 lg:px-7.5 py-5 lg:py-10">
           <div className="flex justify-between items-end">

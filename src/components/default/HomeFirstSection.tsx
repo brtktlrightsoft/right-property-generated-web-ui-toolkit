@@ -28,7 +28,7 @@ export function HomeFirstSection({
         />
         <div className="page-container z-30 justify-end lg:justify-center px-5 py-5 lg:px-7.5 lg:py-7.5 mobile:p-0">
           <div className="mb-12.5 flex flex-col justify-end lg:justify-center lg:grow">
-            <h1 className="font-bold text-5xl mb-2.5 text-[#FAF9FD]!">{projectName}</h1>
+            <h1 className="font-bold text-5xl mb-2.5 text-[#FAF9FD]">{projectName}</h1>
             <h3 className="text-[1rem] mobile:text-[0.8rem] mobile:leading-[1.2rem] leading-[1.45rem] w-[37.5rem] mobile:w-[100%] text-[#FAF9FD] font-light whitespace-pre-wrap">
               {projectDescription}
             </h3>

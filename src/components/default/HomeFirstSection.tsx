@@ -34,6 +34,7 @@ export function HomeFirstSection({
             </h3>
           </div>
           <motion.div
+            id="scroll-indicator"
             className="flex space-x-2.5 rtl:space-x-reverse items-center py-5 lg:mt-auto"
             style={{ opacity: scrollIndicatorOpacity }}
           >

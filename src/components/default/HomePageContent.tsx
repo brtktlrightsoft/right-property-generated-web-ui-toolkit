@@ -17,7 +17,7 @@ export function HomePageContent({
   return (
     <div className='font-fira'>
       {/* Desktop Version */}
-      <div className="hidden md:block pb-15 px-24 pt-20">
+      <div className="hidden md:block pb-15 px-24 pt-20 max-w-[1440px] mx-auto">
         <div className="grid grid-cols-2 gap-10">
           <div className="col-span-1 flex flex-col space-y-5">
             <h1 className="font-bold text-5xl" style={titleStyle}>

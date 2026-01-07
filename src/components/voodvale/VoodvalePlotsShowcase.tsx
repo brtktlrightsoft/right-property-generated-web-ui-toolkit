@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils';
 interface VoodvalePlotsShowcaseProps {
   plots: PlotThumbResult[];
   title?: string;
+  seeAllTitle?: string;
   showAllLink?: string;
   locale?: string;
   language?: string;
@@ -16,6 +17,7 @@ interface VoodvalePlotsShowcaseProps {
 export function VoodvalePlotsShowcase({
   plots,
   title = 'Available Units',
+  seeAllTitle = 'See All Properties',
   showAllLink,
   language = 'en',
   showcaseVectorUrl,
@@ -42,12 +44,12 @@ export function VoodvalePlotsShowcase({
             <h3 className="text-[2.75rem] mobile:text-[2.25rem] leading-[118.182%] text-[#FFF] font-medium" suppressHydrationWarning>
               {title}
             </h3>
-            <SeeAllProperties className="mobile:hidden" pathname={showAllLink || ''} />
+            <SeeAllProperties className="mobile:hidden" pathname={showAllLink || ''} title={seeAllTitle || 'See All Properties'} />
           </div>
           <ItemSlider items={plotItems.slice(0, 3)} variant="voodvale" language={language} />
         </div>
       </div>
-      <SeeAllProperties className="hidden mobile:block absolute z-[1] left-1/2 -translate-x-1/2 bottom-[4.1875rem]"  pathname={showAllLink || ''} />
+      <SeeAllProperties className="hidden mobile:block absolute z-[1] left-1/2 -translate-x-1/2 bottom-[4.1875rem]"  pathname={showAllLink || ''} title={seeAllTitle || 'See All Properties'} />
       {showcaseVectorUrl && (
         <div className="mobile:hidden z-[0] absolute w-[100vw] h-auto object-contain -bottom-[12.72vw] left-1/2 -translate-x-1/2">
           <img src={showcaseVectorUrl} alt="showcase vector" className="w-full h-full object-contain" />
@@ -62,11 +64,11 @@ export function VoodvalePlotsShowcase({
   );
 }
 
-const SeeAllProperties = ({ pathname, className }: { pathname: string; className?: string }) => {
+const SeeAllProperties = ({ pathname,title, className }: { pathname: string; title: string; className?: string }) => {
   return (
     <a className={cn('mobile:hidden', className)} href={pathname}>
       <div className="flex items-center gap-4">
-        <div className="text-[1rem] text-[#FFF]">See All Properties</div>
+        <div className="text-[1rem] text-[#FFF]">{title}</div>
         <Arrow />
       </div>
     </a>

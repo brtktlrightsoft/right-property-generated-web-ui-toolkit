@@ -380,58 +380,16 @@ export const puckConfig: Config<Components, object, Category>  = {
       render: SkyscrapperHomesSecondSectionWrapper,
     },
     VoodvalePlotsShowcase: {
-      resolveData: async ({ props }) => {
-        const response = await fetch('https://api-test.rightproperty.app/api/v1/web/main?language=en',{
-          headers: {
-            Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbi10eXBlIjoiV2ViU2l0ZSIsIm5hbWUiOiJlNWYxNDIyYi1jMTAzLTRjZGItYjJkMy00ZWY4NTVmNGZmNmMiLCJ0b2tlbi10eXBlIjoiT3RoZXIiLCJqdGkiOiJhY2FkNTQzYS04YmI1LTRkMmMtYjA3MC00YjI1Yjg4Y2YyZmMiLCJuYmYiOjE3Njc2MTg3NzQsImV4cCI6MTc3MDIxMDc3NCwiaWF0IjoxNzY3NjE4Nzc0LCJpc3MiOiJSaWdodFNvZnRJc3N1ZXIiLCJhdWQiOiJSaWdodFNvZnRBdWRpZW5jZSJ9.e3lVxA5DgJTQaj3Z-k-hoSw2RroI6_ecC50d0AaNaDI',
-          },
-        })
-        const data = await response.json();
-        return {
-          props: {
-            ...props,
-            plots: data.availablePlots,
-          },
-        };
-      },
       render: props => {
         return React.createElement(VoodvalePlotsShowcaseWrapper, props);
       },
     },
     PlotsShowcase: {
-      resolveData: async ({ props }) => {
-        const response = await fetch('https://api-test.rightproperty.app/api/v1/web/main?language=en',{
-          headers: {
-            Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbi10eXBlIjoiV2ViU2l0ZSIsIm5hbWUiOiJlNWYxNDIyYi1jMTAzLTRjZGItYjJkMy00ZWY4NTVmNGZmNmMiLCJ0b2tlbi10eXBlIjoiT3RoZXIiLCJqdGkiOiJhY2FkNTQzYS04YmI1LTRkMmMtYjA3MC00YjI1Yjg4Y2YyZmMiLCJuYmYiOjE3Njc2MTg3NzQsImV4cCI6MTc3MDIxMDc3NCwiaWF0IjoxNzY3NjE4Nzc0LCJpc3MiOiJSaWdodFNvZnRJc3N1ZXIiLCJhdWQiOiJSaWdodFNvZnRBdWRpZW5jZSJ9.e3lVxA5DgJTQaj3Z-k-hoSw2RroI6_ecC50d0AaNaDI',
-          },
-        })
-        const data = await response.json();
-        return {
-          props: {
-            ...props,
-            plots: data.availablePlots,
-          },
-        };
-      },
       render: props => {
         return React.createElement(PlotsShowcaseWrapper, props);
       },
     },
     SkyscrapperPlotsShowcase: {
-      resolveData: async ({ props }) => {
-        const response = await fetch('https://api-test.rightproperty.app/api/v1/web/main?language=en',{
-          headers: {
-            Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbi10eXBlIjoiV2ViU2l0ZSIsIm5hbWUiOiJlNWYxNDIyYi1jMTAzLTRjZGItYjJkMy00ZWY4NTVmNGZmNmMiLCJ0b2tlbi10eXBlIjoiT3RoZXIiLCJqdGkiOiJhY2FkNTQzYS04YmI1LTRkMmMtYjA3MC00YjI1Yjg4Y2YyZmMiLCJuYmYiOjE3Njc2MTg3NzQsImV4cCI6MTc3MDIxMDc3NCwiaWF0IjoxNzY3NjE4Nzc0LCJpc3MiOiJSaWdodFNvZnRJc3N1ZXIiLCJhdWQiOiJSaWdodFNvZnRBdWRpZW5jZSJ9.e3lVxA5DgJTQaj3Z-k-hoSw2RroI6_ecC50d0AaNaDI',
-          },
-        })
-        const data = await response.json();
-        return {
-          props: {
-            ...props,
-            plots: data.availablePlots,
-          },
-        };
-      },
       render: props => {
         return React.createElement(SkyscrapperPlotsShowcaseWrapper, props);
       },

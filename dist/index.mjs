@@ -20623,7 +20623,7 @@ function PlotsShowcase({ plots: m, title: x = "Available Units", showAllLink: S,
 		variant: "default"
 	}, `showcase_card${x}`) }, `detail_link${x}`));
 	return /* @__PURE__ */ jsx("div", {
-		className: "w-full h-full mx-auto flex flex-col",
+		className: "w-full mx-auto flex flex-col",
 		children: /* @__PURE__ */ jsx("div", {
 			className: "page-container",
 			children: /* @__PURE__ */ jsxs("div", {
@@ -20971,7 +20971,7 @@ function SkyscrapperPlotsShowcase({ plots: m, title: x = "Available Units", subt
 		variant: x === 0 ? "first" : "default"
 	}) }, `detail_link${x}`));
 	return /* @__PURE__ */ jsx("div", {
-		className: "relative w-full h-full mx-auto flex flex-col bg-black",
+		className: "relative w-full mx-auto flex flex-col bg-black",
 		children: /* @__PURE__ */ jsx("div", {
 			className: "relative z-[1] page-container",
 			children: /* @__PURE__ */ jsxs("div", {
@@ -21298,7 +21298,7 @@ function VoodvaleHomeSecondSectionWrapper(m) {
 function VoodvalePlotsShowcase({ plots: m, title: x = "Available Units", seeAllTitle: S = "See All Properties", showAllLink: C, language: T = "en", showcaseVectorUrl: D, showcaseMobileVectorUrl: O }) {
 	let k = m.map((m, x) => /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx(VoodvalePlotThumbCard, { plot: m }, `showcase_card${x}`) }, `detail_link${x}`));
 	return /* @__PURE__ */ jsxs("div", {
-		className: "relative w-full h-full mx-auto flex flex-col",
+		className: "relative w-full mx-auto flex flex-col",
 		style: { background: "radial-gradient(113.94% 104.88% at 55.95% -2.12%, #DECFCD 0%, #B38A82 56.73%, #988289 100%)" },
 		children: [
 			/* @__PURE__ */ jsx("div", {

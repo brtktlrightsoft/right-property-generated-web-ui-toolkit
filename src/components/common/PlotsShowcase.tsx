@@ -18,9 +18,9 @@ export function PlotsShowcase({
 }: PlotsShowcaseProps) {
   const plotItems = plots.map((plot, index) => {
     return (
-      <div key={`detail_link${index}`}>
+      <a href={plot.href} key={`detail_link${index}`}>
         <PlotThumbCard key={`showcase_card${index}`} plot={plot} variant="default" />
-      </div>
+      </a>
     );
   });
 

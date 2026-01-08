@@ -25,9 +25,9 @@ export function VoodvalePlotsShowcase({
 }: VoodvalePlotsShowcaseProps) {
   const plotItems = plots.map((plot, index) => {
     return (
-      <div key={`detail_link${index}`}>
+      <a href={plot.href} key={`detail_link${index}`}>
         <VoodvalePlotThumbCard key={`showcase_card${index}`} plot={plot} />
-      </div>
+      </a>
     );
   });
 

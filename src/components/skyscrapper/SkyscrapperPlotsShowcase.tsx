@@ -18,9 +18,9 @@ export function SkyscrapperPlotsShowcase({
 }: SkyscrapperPlotsShowcaseProps) {
   const plotItems = plots.map((plot, index) => {
     return (
-      <div key={`detail_link${index}`}>
+      <a href={plot.href} key={`detail_link${index}`}>
         <SkyscrapperShowcaseCard plot={plot} index={index} variant={index === 0 ? 'first' : 'default'} />
-      </div>
+      </a>
     );
   });
 

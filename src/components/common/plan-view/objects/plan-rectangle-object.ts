@@ -101,7 +101,7 @@ export class PlanRectangleObject extends fabric.Rect implements IPlanObject {
     this.evented = true;
     this.hasControls = true;
     this.lockRotation = true;
-    this.hoverCursor = 'pointer';
+    this.hoverCursor = 'default';
     this.text.visible = true;
   }
 

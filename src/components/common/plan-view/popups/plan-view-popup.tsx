@@ -161,7 +161,7 @@ export default function PlanViewPopup({
     <div
       ref={ref}
       onClick={navigateHandler}
-      className="cursor-pointer mobile:text-[0.8rem] absolute p-4 bg-thirdLayer text-bodyContetColor touch-none"
+      className="cursor-pointer mobile:text-[0.8rem] absolute p-4 bg-thirdLayer text-bodyContentColor touch-none"
       style={{
         scale: 1,
       }}

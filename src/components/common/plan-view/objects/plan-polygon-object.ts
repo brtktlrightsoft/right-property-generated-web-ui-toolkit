@@ -76,7 +76,7 @@ export class PlanPolygonObject extends fabric.Polygon implements IPlanObject {
       height: height,
       opacity: model.opacity ?? 0.6,
       fill: model.fill,
-      hoverCursor: 'pointer',
+      hoverCursor: 'default',
       selectable: false,
       hasControls: false,
       evented: false,

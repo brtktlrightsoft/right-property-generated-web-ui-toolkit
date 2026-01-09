@@ -58,6 +58,7 @@ export function PlanViewWrapper(props: PlanViewWrapperProps & Record<string, unk
 
   return (
       <PlanView
+        key={sitePlanResult?.plan.id??'siteplan'}
         planId={planId}
         objects={parsedObjects}
         items={sitePlanResult?.plan.items ?? []}

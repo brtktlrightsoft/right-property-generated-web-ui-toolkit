@@ -46,7 +46,6 @@ export default function PlanView({
   useHalfWidth,
   onNavigate,
   formatCurrency,
-  formatArea,
   t,
   showPrice,
   measurementSystem,
@@ -410,11 +409,6 @@ export default function PlanView({
             onClickOutside={() => {
               hidePopup();
             }}
-            onNavigate={onNavigate}
-            formatCurrency={formatCurrency}
-            formatArea={formatArea}
-            t={t}
-            showPrice={showPrice}
           />,
         ]);
         break;
@@ -555,6 +549,7 @@ export default function PlanView({
     <div className='w-full xl:h-[600px] h-[300px] overflow-hidden' ref={$canvasContainer}>
 
       <div ref={ref} className="relative">
+        {popupContainer.map((c) => createPortal(c, ref.current!))}
         <canvas ref={canvasRef}></canvas>
       </div>
     </div>

@@ -2,6 +2,19 @@
 // Import global styles so consumers get compiled Tailwind/theme CSS with components
 import './index.css';
 
+// context
+export * from './context/UiToolkitContext';
+
+// hooks
+export * from './hooks/usePlotRepository';
+
+// data
+export { plotRepository, createPlotRepository } from './data/plot-repository';
+export type { SitePlanResult, PlotTableResult, PlanResult, ImageResult } from './data/plot-repository';
+
+// domain
+export type { MainModuleResult, PlotThumbResult } from './domain/plot-models';
+
 // types
 export * from './types/default.types';
 export * from './types/skyscrapper.types';

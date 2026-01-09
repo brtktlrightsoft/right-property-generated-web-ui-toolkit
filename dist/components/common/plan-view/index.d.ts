@@ -1,7 +1,6 @@
 export { default as PlanView } from './PlanView';
 export type { PlanViewProps } from './PlanView';
 export { default as PlanViewPopup } from './popups/plan-view-popup';
-export type { PlanViewPopupProps } from './popups/plan-view-popup';
 export { default as ContainerPlanPopup } from './popups/container-plan-popup';
 export type { ContainerPlanPopupProps } from './popups/container-plan-popup';
 export { default as FloorViewPopup } from './popups/floor-view-popup';

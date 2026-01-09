@@ -9,6 +9,7 @@ export interface PlanViewWrapperProps {
     useHalfWidth?: boolean;
     showPrice?: boolean;
     measurementSystem?: 'metric' | 'imperial';
+    websiteAddress: string;
 }
 export declare function PlanViewWrapper(props: PlanViewWrapperProps & Record<string, unknown>): import("react/jsx-runtime").JSX.Element;
 //# sourceMappingURL=PlanViewWrapper.d.ts.map

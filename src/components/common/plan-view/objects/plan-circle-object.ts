@@ -106,7 +106,7 @@ export class PlanCircleObject extends fabric.Circle implements IPlanObject {
     this.evented = true;
     this.hasControls = true;
     this.centeredScaling = true;
-    this.hoverCursor = 'default';
+    this.hoverCursor = 'pointer';
     this.text.visible = true;
     this.label.visible = true;
     this.setCoords();

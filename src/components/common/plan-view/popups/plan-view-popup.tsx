@@ -1,72 +1,70 @@
-import { fabric } from 'fabric';
-import { useEffect, useRef, useState } from 'react';
-import type { PlanItemResultModel } from '../models/plan-item-result-model';
-import { PlanCircleObject } from '../objects/plan-circle-object';
-import { PlanItemTypeEnum, getPlanItemTypeEnum } from '../enums/plan-item-type-enum';
-import { PlanPolygonObject } from '../objects/plan-polygon-object';
-import { PlanRectangleObject } from '../objects/plan-rectangle-object';
+import { useMainModuleResult, useTranslation } from "@/context/UiToolkitContext";
+import type { PlanItemResultModel } from "../models/plan-item-result-model";
+import type { PlanCircleObject } from "../objects/plan-circle-object";
+import type { PlanPolygonObject } from "../objects/plan-polygon-object";
+import type { PlanRectangleObject } from "../objects/plan-rectangle-object";
+import { useEffect, useRef, useState, type RefObject } from "react";
+import usePlotStatus from "@/hooks/use-plot-status";
+import { useProjectArea } from "@/hooks/use-project-area";
+import BedroomIcon from "@/components/icons/bedroom-icon";
+import RulerIcon from "@/components/icons/ruler-icon";
+import BathroomIcon from "@/components/icons/bathroom-icon";
+import { PlanItemTypeEnum } from "../enums/plan-item-type-enum";
+import { formatCurrency, generatePlotUrl } from "@/lib/utils";
+import useOnClickOutside from "@/hooks/use-on-click-outside";
 
-export interface PlanViewPopupProps {
-  canvas: fabric.Canvas;
-  obj: PlanRectangleObject | PlanCircleObject | PlanPolygonObject;
-  item: PlanItemResultModel;
-  onClickOutside: () => void;
-  onNavigate?: (path: string) => void;
-  formatCurrency?: (amount: number) => string;
-  formatArea?: (area: number) => string;
-  t?: (key: string) => string;
-  showPrice?: boolean;
-}
 
 export default function PlanViewPopup({
   canvas,
   obj,
   item,
   onClickOutside,
-  onNavigate,
-  formatCurrency = (amount: number) => `£${amount.toLocaleString()}`,
-  formatArea = (area: number) => `${area} m²`,
-  t = (key: string) => key,
-  showPrice = true,
-}: PlanViewPopupProps) {
+}: {
+  canvas: fabric.Canvas;
+  obj: PlanRectangleObject | PlanCircleObject | PlanPolygonObject;
+  item: PlanItemResultModel;
+  onClickOutside: () => void;
+}) {
+  const { t } = useTranslation();
   const ref = useRef<HTMLDivElement | null>(null);
   const [direction, setDirection] = useState([1, 1]);
+  const { showPrice, currency, clientName, projectName, country, city, district } = useMainModuleResult();
+  const status = usePlotStatus(item.plotInfo?.statusName ?? 'available');
   const $isMoving = useRef<boolean>(false);
-
-  const handleClickOutside = (e: MouseEvent | TouchEvent) => {
-    if (ref.current && !ref.current.contains(e.target as Node)) {
-      if (e.type === 'mousedown') {
-        e.preventDefault();
+  const { prepareArea } = useProjectArea();
+  useOnClickOutside(
+    ref as RefObject<HTMLElement>,
+    e => {
+      e.preventDefault();
+      onClickOutside();
+    },
+    'mousedown'
+  );
+  useOnClickOutside(
+    ref as RefObject<HTMLElement>,
+    e => {
+      e.preventDefault();
+      $isMoving.current = true;
+    },
+    'touchmove'
+  );
+  useOnClickOutside(
+    ref as RefObject<HTMLElement>,
+    e => {
+      e.preventDefault();
+      if ($isMoving.current) {
+        $isMoving.current = false;
+      } else {
         onClickOutside();
-      } else if (e.type === 'touchmove') {
-        e.preventDefault();
-        $isMoving.current = true;
-      } else if (e.type === 'touchend') {
-        e.preventDefault();
-        if ($isMoving.current) {
-          $isMoving.current = false;
-        } else {
-          onClickOutside();
-        }
       }
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
-    document.addEventListener('touchmove', handleClickOutside);
-    document.addEventListener('touchend', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('touchmove', handleClickOutside);
-      document.removeEventListener('touchend', handleClickOutside);
-    };
-  }, [onClickOutside]);
-
-  const getPositionDetails = (canvas: fabric.Canvas) => {
+    },
+    'touchend'
+  );
+  const getPositionDetails = (canvas: fabric.Canvas, _: fabric.Object) => {
     const zoom = canvas.getZoom();
     const canvaswidth = canvas.getWidth();
     const canvasHeight = canvas.getHeight();
+    // Use label position instead of object bounding rect
     const labelBounds = obj.label.getBoundingRect();
     const objectTop = labelBounds.top + labelBounds.height / 2;
     const objectLeft = labelBounds.left + labelBounds.width / 2;
@@ -86,7 +84,7 @@ export default function PlanViewPopup({
 
   const position = () => {
     if (ref.current == null) return;
-    const positionDetails = getPositionDetails(canvas);
+    const positionDetails = getPositionDetails(canvas, obj);
     const direction = [1, 1];
     let popupX = positionDetails?.objectLeft ?? 0,
       popupY = (positionDetails?.objectTop ?? 0) - positionDetails.popupHeight;
@@ -99,13 +97,12 @@ export default function PlanViewPopup({
       popupY = positionDetails?.objectTop;
       direction[1] = -1;
     }
-    const [offsetX, offsetY] = getOffset(direction[0], direction[1]);
+    const [offsetX, offsetY] = getOfset(direction[0], direction[1]);
     setDirection(direction);
     ref.current!.style.left = popupX + offsetX + 'px';
     ref.current!.style.top = popupY + offsetY + 'px';
   };
-
-  const getOffset = (directionX: number, directionY: number) => {
+  const getOfset = (directionX: number, directionY: number) => {
     if (directionX > 0 && directionY > 0) {
       return [10, -20];
     } else if (directionX > 0 && directionY < 0) {
@@ -114,9 +111,8 @@ export default function PlanViewPopup({
       return [20, -20];
     } else if (directionX < 0 && directionY < 0) {
       return [10, 40];
-    } else return [0, 0];
+    } else return [0.0];
   };
-
   const getTrianglePosition = (directionX: number, directionY: number) => {
     if (directionX > 0 && directionY > 0) {
       return 'triangle-bottom-left';
@@ -128,35 +124,27 @@ export default function PlanViewPopup({
       return 'triangle-top-right';
     }
   };
-
   useEffect(() => {
-    const updatePosition = () => {
+    position();
+    canvas.on('before:render', () => {
       position();
-    };
-    updatePosition();
-    canvas.on('before:render', updatePosition);
-    return () => {
-      canvas.off('before:render', updatePosition);
-    };
-  }, [canvas, obj]);
-
-  const statusName = item.plotInfo?.statusName?.toLowerCase() ?? 'available';
+    });
+  }, []);
   const price =
-    statusName == 'sold' ? t('web.availability.status.Sold') : formatCurrency(item.plotInfo?.price ?? 0);
-
+    status?.name.toLowerCase() == 'sold' ? t('web.availability.status.Sold') : formatCurrency(item.plotInfo?.price ?? 0, null, showPrice, currency, document.documentElement.lang);
   const navigateHandler = async () => {
-    const itemType: PlanItemTypeEnum = getPlanItemTypeEnum(obj?.itemType ?? '');
+    const itemType: PlanItemTypeEnum = PlanItemTypeEnum[(obj?.itemType ?? '') as keyof typeof PlanItemTypeEnum];
     let path = `/availability/site-plan`;
+    const language = document.documentElement.lang;
     if (itemType === PlanItemTypeEnum.PlotContainer) {
-      path = `/availability/site-plan/plot-container/${obj?.itemId}`;
+      path = language === 'en' ? '' : `/${language}` + `/availability/site-plan/plot-container/${obj?.itemId}`;
+      window.location.href = path;
     } else if (itemType === PlanItemTypeEnum.Plot) {
-      path = `/plot/${obj?.itemId}`;
+      const plotPath = await generatePlotUrl(obj.itemId.toString(), clientName, projectName, country, city, district, item.plotInfo?.name, item.plotInfo?.bedrooms);
+      window.location.href = plotPath;
     }
-    if (onNavigate) {
-      onNavigate(path);
-    }
+    // if(item.plotInfo?.plotType == 2) {
   };
-
   return (
     <div
       ref={ref}
@@ -169,7 +157,7 @@ export default function PlanViewPopup({
       <div className="text-[1em] leading-[1.375em] font-bold flex justify-between">
         <div>{item.plotInfo?.typeName}</div>
         <div className="flex items-center gap-1 text-[0.8125em] leading-[1.375em]">
-          <span>{t(statusName)}</span>
+          <span style={{ color: status?.color }}>{t(`${status?.name}`)}</span>
           <svg
             width="16"
             height="16"
@@ -180,7 +168,7 @@ export default function PlanViewPopup({
           >
             <path
               d="M11.3546 8.00004C11.3546 7.75416 11.2606 7.54444 11.0726 7.35642L5.43193 1.83868C5.27283 1.67958 5.07758 1.60004 4.84616 1.60004C4.37611 1.60004 4.00006 1.96162 4.00006 2.43168C4.00006 2.66309 4.09407 2.8728 4.25317 3.03913L9.34424 8.00004L4.25317 12.9609C4.1013 13.12 4.00006 13.3298 4.00006 13.5612C4.00006 14.0385 4.37611 14.4 4.84616 14.4C5.07758 14.4 5.27283 14.3205 5.43193 14.1614L11.0726 8.64365C11.2679 8.45563 11.3546 8.24591 11.3546 8.00004Z"
-              fill="currentColor"
+              fill={status?.color}
             />
           </svg>
         </div>
@@ -188,7 +176,7 @@ export default function PlanViewPopup({
       <div className="text-xs leading-[1.375em] text-inActiveBodyContentColor mb-4">{item.plotInfo?.name}</div>
       <div className="flex grid grid-cols-2 gap-[0.7081rem] mobile:gap-[2.125em] whitespace-pre text-[0.75rem]">
         {showPrice && (
-          <div className="flex flex-[1] gap-[0.25em] items-center">
+          <div style={{ color: status?.color }} className="flex flex-[1] gap-[0.25em] items-center">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g clipPath="url(#clip0_679_1027)">
                 <path
@@ -208,22 +196,22 @@ export default function PlanViewPopup({
             <span className="text-bodyContentColor">{price}</span>
           </div>
         )}
-        <div className="flex gap-[0.25em] items-center">
-          <span className="text-bodyContentColor">
-            {item.plotInfo?.bedrooms + ` ${t('web.unit_detail.bedroom')}`}
-          </span>
+        <div style={{ color: status?.color }} className="flex gap-[0.25em] items-center">
+          <BedroomIcon className="stroke-footerTextColor" width="1rem" />
+          <span className="text-bodyContentColor">{item.plotInfo?.bedrooms + ` ${t('web.unit_detail.bedroom')}`}</span>
         </div>
-        <div className="mobile:-mt-[1.625em] flex gap-[0.25em] items-center">
-          <span className="text-bodyContentColor">{formatArea(item.plotInfo?.metricArea ?? 0)}</span>
+        <div style={{ color: status?.color }} className="mobile:-mt-[1.625em] flex gap-[0.25em] items-center">
+          <RulerIcon className="w-4 h-4" />
+          <span className="text-bodyContentColor">{prepareArea(item.plotInfo?.metricArea ?? 0)}</span>
         </div>
-        <div className="mobile:-mt-[1.625em] flex gap-[0.25em] items-center">
+        <div style={{ color: status?.color }} className="mobile:-mt-[1.625em] flex gap-[0.25em] items-center">
+          <BathroomIcon className="stroke-footerTextColor" width="1rem" />
           <span className="text-bodyContentColor">
             {item.plotInfo?.bathrooms + ` ${t('web.unit_detail.bathrooms').toLowerCase()}`}
           </span>
         </div>
       </div>
-      <div className={`absolute w-0 h-0 ${getTrianglePosition(direction[0], direction[1])}`}></div>
+      <div className={`absolute w-0 h-0 ${getTrianglePosition(direction[0], direction[1])} `}></div>
     </div>
   );
 }
-

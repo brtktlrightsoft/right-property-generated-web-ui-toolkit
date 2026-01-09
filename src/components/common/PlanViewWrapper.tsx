@@ -11,6 +11,7 @@ export interface PlanViewWrapperProps {
   useHalfWidth?: boolean;
   showPrice?: boolean;
   measurementSystem?: 'metric' | 'imperial';
+  websiteAddress: string;
 }
 
 export function PlanViewWrapper(props: PlanViewWrapperProps & Record<string, unknown>) {
@@ -30,7 +31,6 @@ export function PlanViewWrapper(props: PlanViewWrapperProps & Record<string, unk
   let parsedObjects: PlanObjectResultModel[] = [];
   let parsedItems: PlanItemResultModel[] = [];
   let parsedBackground: AssetResult | null = null;
-
   try {
     parsedObjects = typeof objects === 'string' ? (objects ? JSON.parse(objects) : []) : objects || [];
     parsedItems = typeof items === 'string' ? (items ? JSON.parse(items) : []) : items || [];

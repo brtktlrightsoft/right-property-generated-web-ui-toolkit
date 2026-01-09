@@ -1,4 +1,9 @@
 import './index.css';
+export * from './context/UiToolkitContext';
+export * from './hooks/usePlotRepository';
+export { plotRepository, createPlotRepository } from './data/plot-repository';
+export type { SitePlanResult, PlotTableResult, PlanResult, ImageResult } from './data/plot-repository';
+export type { MainModuleResult, PlotThumbResult } from './domain/plot-models';
 export * from './types/default.types';
 export * from './types/skyscrapper.types';
 export * from './types/voodvale.types';

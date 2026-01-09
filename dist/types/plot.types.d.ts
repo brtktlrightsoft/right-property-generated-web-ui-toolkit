@@ -5,6 +5,7 @@ export interface PlotThumbResult {
     plotName?: string;
     price: number;
     imageUrl?: string;
+    href?: string;
     plotStatus?: string;
 }
 //# sourceMappingURL=plot.types.d.ts.map

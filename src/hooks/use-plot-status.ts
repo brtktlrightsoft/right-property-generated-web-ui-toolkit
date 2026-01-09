@@ -1,11 +1,11 @@
-'use client'
-import { useMainModuleResult } from "../context/UiToolkitContext";
-export default function usePlotStatus(name?: string) {
-    const { plotStatusList } = useMainModuleResult();
+'use client';
 
-    if (Array.isArray(plotStatusList)) {
-        return plotStatusList.find((s) => s.name.toLowerCase() == name?.toLowerCase());
-    }
+import type { PlotStatusDto } from "@/domain/plot-models";
 
-    return undefined;
+export default function usePlotStatus(name?: string, plotStatuses?: PlotStatusDto[]) {
+  if (Array.isArray(plotStatuses)) {
+    return plotStatuses.find(s => s.name.toLowerCase() == name?.toLowerCase());
+  }
+
+  return undefined;
 }

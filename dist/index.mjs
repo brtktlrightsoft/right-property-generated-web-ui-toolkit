@@ -31905,8 +31905,7 @@ function useRecognizers(m, S = {}, C, T) {
 function usePinch(m, x) {
 	return registerAction(pinchAction), useRecognizers({ pinch: m }, x || {}, "pinch");
 }
-function usePlotStatus(m) {
-	let { plotStatusList: x } = useMainModuleResult();
+function usePlotStatus(m, x) {
 	if (Array.isArray(x)) return x.find((x) => x.name.toLowerCase() == m?.toLowerCase());
 }
 const useProjectArea = () => {
@@ -32027,15 +32026,19 @@ function useOnClickOutside(m, x, S = "mousedown", C = []) {
 }
 var use_on_click_outside_default = useOnClickOutside;
 function PlanViewPopup({ canvas: m, obj: x, item: S, onClickOutside: C }) {
-	let { t: T } = useTranslation(), D = useRef(null), [O, k] = useState([1, 1]), { showPrice: A, currency: j, clientName: M, projectName: N, country: F, city: I, district: L } = useMainModuleResult(), R = usePlotStatus(S.plotInfo?.statusName ?? "available"), z = useRef(!1), { prepareArea: U } = useProjectArea();
-	use_on_click_outside_default(D, (m) => {
+	let { t: T } = useTranslation(), D = useRef(null), [O, k] = useState([1, 1]), { showPrice: A, currency: j, clientName: M, projectName: N, country: F, city: I, district: L } = useMainModuleResult(), [R, z] = useState([]), U = usePlotRepository(), W = usePlotStatus(S.plotInfo?.statusName ?? "available", R), q = useRef(!1), { prepareArea: J } = useProjectArea();
+	useEffect(() => {
+		U.fetchMain().then((m) => {
+			z(m.plotStatusList);
+		});
+	}, []), use_on_click_outside_default(D, (m) => {
 		m.preventDefault(), C();
 	}, "mousedown"), use_on_click_outside_default(D, (m) => {
-		m.preventDefault(), z.current = !0;
+		m.preventDefault(), q.current = !0;
 	}, "touchmove"), use_on_click_outside_default(D, (m) => {
-		m.preventDefault(), z.current ? z.current = !1 : C();
+		m.preventDefault(), q.current ? q.current = !1 : C();
 	}, "touchend");
-	let W = (m, S) => {
+	let Y = (m, S) => {
 		let C = m.getZoom(), T = m.getWidth(), O = m.getHeight(), k = x.label.getBoundingRect(), A = k.top + k.height / 2, j = k.left + k.width / 2;
 		return {
 			canvasTop: 0,
@@ -32048,19 +32051,19 @@ function PlanViewPopup({ canvas: m, obj: x, item: S, onClickOutside: C }) {
 			popupHeight: D.current?.offsetHeight ?? 0,
 			zoom: C
 		};
-	}, q = () => {
+	}, X = () => {
 		if (D.current == null) return;
-		let S = W(m, x), C = [1, 1], T = S?.objectLeft ?? 0, O = (S?.objectTop ?? 0) - S.popupHeight;
+		let S = Y(m, x), C = [1, 1], T = S?.objectLeft ?? 0, O = (S?.objectTop ?? 0) - S.popupHeight;
 		T + S.popupWidth > S.canvasRight && (T = S?.objectLeft - S.popupWidth, C[0] = -1), O - S.popupHeight < S.canvasTop && (O = S?.objectTop, C[1] = -1);
-		let [A, j] = J(C[0], C[1]);
+		let [A, j] = Z(C[0], C[1]);
 		k(C), D.current.style.left = T + A + "px", D.current.style.top = O + j + "px";
-	}, J = (m, x) => m > 0 && x > 0 ? [10, -20] : m > 0 && x < 0 ? [20, 40] : m < 0 && x > 0 ? [20, -20] : m < 0 && x < 0 ? [10, 40] : [0], Y = (m, x) => m > 0 && x > 0 ? "triangle-bottom-left" : m > 0 && x < 0 ? "triangle-top-left" : m < 0 && x > 0 ? "triangle-bottom-right" : "triangle-top-right";
+	}, Z = (m, x) => m > 0 && x > 0 ? [10, -20] : m > 0 && x < 0 ? [20, 40] : m < 0 && x > 0 ? [20, -20] : m < 0 && x < 0 ? [10, 40] : [0], sH = (m, x) => m > 0 && x > 0 ? "triangle-bottom-left" : m > 0 && x < 0 ? "triangle-top-left" : m < 0 && x > 0 ? "triangle-bottom-right" : "triangle-top-right";
 	useEffect(() => {
-		q(), m.on("before:render", () => {
-			q();
+		X(), m.on("before:render", () => {
+			X();
 		});
 	}, []);
-	let X = R?.name.toLowerCase() == "sold" ? T("web.availability.status.Sold") : formatCurrency(S.plotInfo?.price ?? 0, null, A, j, document.documentElement.lang);
+	let Q = W?.name.toLowerCase() == "sold" ? T("web.availability.status.Sold") : formatCurrency(S.plotInfo?.price ?? 0, null, A, j, document.documentElement.lang);
 	return /* @__PURE__ */ jsxs("div", {
 		ref: D,
 		onClick: async () => {
@@ -32079,8 +32082,8 @@ function PlanViewPopup({ canvas: m, obj: x, item: S, onClickOutside: C }) {
 				children: [/* @__PURE__ */ jsx("div", { children: S.plotInfo?.typeName }), /* @__PURE__ */ jsxs("div", {
 					className: "flex items-center gap-1 text-[0.8125em] leading-[1.375em]",
 					children: [/* @__PURE__ */ jsx("span", {
-						style: { color: R?.color },
-						children: T(`${R?.name}`)
+						style: { color: W?.color },
+						children: T(`${W?.name}`)
 					}), /* @__PURE__ */ jsx("svg", {
 						width: "16",
 						height: "16",
@@ -32090,7 +32093,7 @@ function PlanViewPopup({ canvas: m, obj: x, item: S, onClickOutside: C }) {
 						xmlns: "http://www.w3.org/2000/svg",
 						children: /* @__PURE__ */ jsx("path", {
 							d: "M11.3546 8.00004C11.3546 7.75416 11.2606 7.54444 11.0726 7.35642L5.43193 1.83868C5.27283 1.67958 5.07758 1.60004 4.84616 1.60004C4.37611 1.60004 4.00006 1.96162 4.00006 2.43168C4.00006 2.66309 4.09407 2.8728 4.25317 3.03913L9.34424 8.00004L4.25317 12.9609C4.1013 13.12 4.00006 13.3298 4.00006 13.5612C4.00006 14.0385 4.37611 14.4 4.84616 14.4C5.07758 14.4 5.27283 14.3205 5.43193 14.1614L11.0726 8.64365C11.2679 8.45563 11.3546 8.24591 11.3546 8.00004Z",
-							fill: R?.color
+							fill: W?.color
 						})
 					})]
 				})]
@@ -32103,7 +32106,7 @@ function PlanViewPopup({ canvas: m, obj: x, item: S, onClickOutside: C }) {
 				className: "flex grid grid-cols-2 gap-[0.7081rem] mobile:gap-[2.125em] whitespace-pre text-[0.75rem]",
 				children: [
 					A && /* @__PURE__ */ jsxs("div", {
-						style: { color: R?.color },
+						style: { color: W?.color },
 						className: "flex flex-[1] gap-[0.25em] items-center",
 						children: [/* @__PURE__ */ jsxs("svg", {
 							width: "16",
@@ -32130,11 +32133,11 @@ function PlanViewPopup({ canvas: m, obj: x, item: S, onClickOutside: C }) {
 							}) })]
 						}), /* @__PURE__ */ jsx("span", {
 							className: "text-bodyContentColor",
-							children: X
+							children: Q
 						})]
 					}),
 					/* @__PURE__ */ jsxs("div", {
-						style: { color: R?.color },
+						style: { color: W?.color },
 						className: "flex gap-[0.25em] items-center",
 						children: [/* @__PURE__ */ jsx(BedroomIcon, {
 							className: "stroke-footerTextColor",
@@ -32145,15 +32148,15 @@ function PlanViewPopup({ canvas: m, obj: x, item: S, onClickOutside: C }) {
 						})]
 					}),
 					/* @__PURE__ */ jsxs("div", {
-						style: { color: R?.color },
+						style: { color: W?.color },
 						className: "mobile:-mt-[1.625em] flex gap-[0.25em] items-center",
 						children: [/* @__PURE__ */ jsx(RulerIcon, { className: "w-4 h-4" }), /* @__PURE__ */ jsx("span", {
 							className: "text-bodyContentColor",
-							children: U(S.plotInfo?.metricArea ?? 0)
+							children: J(S.plotInfo?.metricArea ?? 0)
 						})]
 					}),
 					/* @__PURE__ */ jsxs("div", {
-						style: { color: R?.color },
+						style: { color: W?.color },
 						className: "mobile:-mt-[1.625em] flex gap-[0.25em] items-center",
 						children: [/* @__PURE__ */ jsx(BathroomIcon, {
 							className: "stroke-footerTextColor",
@@ -32165,7 +32168,7 @@ function PlanViewPopup({ canvas: m, obj: x, item: S, onClickOutside: C }) {
 					})
 				]
 			}),
-			/* @__PURE__ */ jsx("div", { className: `absolute w-0 h-0 ${Y(O[0], O[1])} ` })
+			/* @__PURE__ */ jsx("div", { className: `absolute w-0 h-0 ${sH(O[0], O[1])} ` })
 		]
 	});
 }

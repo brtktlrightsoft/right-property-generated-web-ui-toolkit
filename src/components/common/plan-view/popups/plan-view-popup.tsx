@@ -12,6 +12,8 @@ import BathroomIcon from "@/components/icons/bathroom-icon";
 import { PlanItemTypeEnum } from "../enums/plan-item-type-enum";
 import { formatCurrency, generatePlotUrl } from "@/lib/utils";
 import useOnClickOutside from "@/hooks/use-on-click-outside";
+import type { PlotStatusDto } from "@/domain/plot-models";
+import { usePlotRepository } from "@/hooks/usePlotRepository";
 
 
 export default function PlanViewPopup({
@@ -29,9 +31,16 @@ export default function PlanViewPopup({
   const ref = useRef<HTMLDivElement | null>(null);
   const [direction, setDirection] = useState([1, 1]);
   const { showPrice, currency, clientName, projectName, country, city, district } = useMainModuleResult();
-  const status = usePlotStatus(item.plotInfo?.statusName ?? 'available');
+  const [plotStatuses, setPlotStatuses] = useState<PlotStatusDto[]>([]);
+  const plotRepository = usePlotRepository();
+  const status = usePlotStatus(item.plotInfo?.statusName ?? 'available', plotStatuses);
   const $isMoving = useRef<boolean>(false);
   const { prepareArea } = useProjectArea();
+  useEffect(() => {
+    plotRepository.fetchMain().then((result) => {
+      setPlotStatuses(result.plotStatusList);
+    });
+  }, [])
   useOnClickOutside(
     ref as RefObject<HTMLElement>,
     e => {

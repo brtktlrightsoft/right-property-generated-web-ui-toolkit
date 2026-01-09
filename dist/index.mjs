@@ -88,7 +88,7 @@ var PlotRepository = class {
 		return this.makeGET("web/main");
 	}
 	async fetchSitePlan() {
-		return this.makeGET("web/availability/siteplan");
+		return this.makeGET(`web/availability/siteplan?language=${document.documentElement.lang}`);
 	}
 	async fetchPlotsTableData() {
 		return this.makeGET("web/availability/plots");
@@ -32026,19 +32026,15 @@ function useOnClickOutside(m, x, S = "mousedown", C = []) {
 }
 var use_on_click_outside_default = useOnClickOutside;
 function PlanViewPopup({ canvas: m, obj: x, item: S, onClickOutside: C }) {
-	let { t: T } = useTranslation(), D = useRef(null), [O, k] = useState([1, 1]), { showPrice: A, currency: j, clientName: M, projectName: N, country: F, city: I, district: L } = useMainModuleResult(), [R, z] = useState([]), U = usePlotRepository(), W = usePlotStatus(S.plotInfo?.statusName ?? "available", R), q = useRef(!1), { prepareArea: J } = useProjectArea();
-	useEffect(() => {
-		U.fetchMain().then((m) => {
-			z(m.plotStatusList);
-		});
-	}, []), use_on_click_outside_default(D, (m) => {
+	let { t: T } = useTranslation(), D = useRef(null), [O, k] = useState([1, 1]), { showPrice: A, currency: j, clientName: M, projectName: N, country: F, city: I, district: L } = useMainModuleResult(), R = usePlotStatus(S.plotInfo?.statusName ?? "available"), z = useRef(!1), { prepareArea: U } = useProjectArea();
+	use_on_click_outside_default(D, (m) => {
 		m.preventDefault(), C();
 	}, "mousedown"), use_on_click_outside_default(D, (m) => {
-		m.preventDefault(), q.current = !0;
+		m.preventDefault(), z.current = !0;
 	}, "touchmove"), use_on_click_outside_default(D, (m) => {
-		m.preventDefault(), q.current ? q.current = !1 : C();
+		m.preventDefault(), z.current ? z.current = !1 : C();
 	}, "touchend");
-	let Y = (m, S) => {
+	let W = (m, S) => {
 		let C = m.getZoom(), T = m.getWidth(), O = m.getHeight(), k = x.label.getBoundingRect(), A = k.top + k.height / 2, j = k.left + k.width / 2;
 		return {
 			canvasTop: 0,
@@ -32051,19 +32047,19 @@ function PlanViewPopup({ canvas: m, obj: x, item: S, onClickOutside: C }) {
 			popupHeight: D.current?.offsetHeight ?? 0,
 			zoom: C
 		};
-	}, X = () => {
+	}, q = () => {
 		if (D.current == null) return;
-		let S = Y(m, x), C = [1, 1], T = S?.objectLeft ?? 0, O = (S?.objectTop ?? 0) - S.popupHeight;
+		let S = W(m, x), C = [1, 1], T = S?.objectLeft ?? 0, O = (S?.objectTop ?? 0) - S.popupHeight;
 		T + S.popupWidth > S.canvasRight && (T = S?.objectLeft - S.popupWidth, C[0] = -1), O - S.popupHeight < S.canvasTop && (O = S?.objectTop, C[1] = -1);
-		let [A, j] = Z(C[0], C[1]);
+		let [A, j] = J(C[0], C[1]);
 		k(C), D.current.style.left = T + A + "px", D.current.style.top = O + j + "px";
-	}, Z = (m, x) => m > 0 && x > 0 ? [10, -20] : m > 0 && x < 0 ? [20, 40] : m < 0 && x > 0 ? [20, -20] : m < 0 && x < 0 ? [10, 40] : [0], sH = (m, x) => m > 0 && x > 0 ? "triangle-bottom-left" : m > 0 && x < 0 ? "triangle-top-left" : m < 0 && x > 0 ? "triangle-bottom-right" : "triangle-top-right";
+	}, J = (m, x) => m > 0 && x > 0 ? [10, -20] : m > 0 && x < 0 ? [20, 40] : m < 0 && x > 0 ? [20, -20] : m < 0 && x < 0 ? [10, 40] : [0], Y = (m, x) => m > 0 && x > 0 ? "triangle-bottom-left" : m > 0 && x < 0 ? "triangle-top-left" : m < 0 && x > 0 ? "triangle-bottom-right" : "triangle-top-right";
 	useEffect(() => {
-		X(), m.on("before:render", () => {
-			X();
+		q(), m.on("before:render", () => {
+			q();
 		});
 	}, []);
-	let Q = W?.name.toLowerCase() == "sold" ? T("web.availability.status.Sold") : formatCurrency(S.plotInfo?.price ?? 0, null, A, j, document.documentElement.lang);
+	let X = R?.name.toLowerCase() == "sold" ? T("web.availability.status.Sold") : formatCurrency(S.plotInfo?.price ?? 0, null, A, j, document.documentElement.lang);
 	return /* @__PURE__ */ jsxs("div", {
 		ref: D,
 		onClick: async () => {
@@ -32082,8 +32078,8 @@ function PlanViewPopup({ canvas: m, obj: x, item: S, onClickOutside: C }) {
 				children: [/* @__PURE__ */ jsx("div", { children: S.plotInfo?.typeName }), /* @__PURE__ */ jsxs("div", {
 					className: "flex items-center gap-1 text-[0.8125em] leading-[1.375em]",
 					children: [/* @__PURE__ */ jsx("span", {
-						style: { color: W?.color },
-						children: T(`${W?.name}`)
+						style: { color: R?.color },
+						children: T(`${R?.name}`)
 					}), /* @__PURE__ */ jsx("svg", {
 						width: "16",
 						height: "16",
@@ -32093,7 +32089,7 @@ function PlanViewPopup({ canvas: m, obj: x, item: S, onClickOutside: C }) {
 						xmlns: "http://www.w3.org/2000/svg",
 						children: /* @__PURE__ */ jsx("path", {
 							d: "M11.3546 8.00004C11.3546 7.75416 11.2606 7.54444 11.0726 7.35642L5.43193 1.83868C5.27283 1.67958 5.07758 1.60004 4.84616 1.60004C4.37611 1.60004 4.00006 1.96162 4.00006 2.43168C4.00006 2.66309 4.09407 2.8728 4.25317 3.03913L9.34424 8.00004L4.25317 12.9609C4.1013 13.12 4.00006 13.3298 4.00006 13.5612C4.00006 14.0385 4.37611 14.4 4.84616 14.4C5.07758 14.4 5.27283 14.3205 5.43193 14.1614L11.0726 8.64365C11.2679 8.45563 11.3546 8.24591 11.3546 8.00004Z",
-							fill: W?.color
+							fill: R?.color
 						})
 					})]
 				})]
@@ -32106,7 +32102,7 @@ function PlanViewPopup({ canvas: m, obj: x, item: S, onClickOutside: C }) {
 				className: "flex grid grid-cols-2 gap-[0.7081rem] mobile:gap-[2.125em] whitespace-pre text-[0.75rem]",
 				children: [
 					A && /* @__PURE__ */ jsxs("div", {
-						style: { color: W?.color },
+						style: { color: R?.color },
 						className: "flex flex-[1] gap-[0.25em] items-center",
 						children: [/* @__PURE__ */ jsxs("svg", {
 							width: "16",
@@ -32133,11 +32129,11 @@ function PlanViewPopup({ canvas: m, obj: x, item: S, onClickOutside: C }) {
 							}) })]
 						}), /* @__PURE__ */ jsx("span", {
 							className: "text-bodyContentColor",
-							children: Q
+							children: X
 						})]
 					}),
 					/* @__PURE__ */ jsxs("div", {
-						style: { color: W?.color },
+						style: { color: R?.color },
 						className: "flex gap-[0.25em] items-center",
 						children: [/* @__PURE__ */ jsx(BedroomIcon, {
 							className: "stroke-footerTextColor",
@@ -32148,15 +32144,15 @@ function PlanViewPopup({ canvas: m, obj: x, item: S, onClickOutside: C }) {
 						})]
 					}),
 					/* @__PURE__ */ jsxs("div", {
-						style: { color: W?.color },
+						style: { color: R?.color },
 						className: "mobile:-mt-[1.625em] flex gap-[0.25em] items-center",
 						children: [/* @__PURE__ */ jsx(RulerIcon, { className: "w-4 h-4" }), /* @__PURE__ */ jsx("span", {
 							className: "text-bodyContentColor",
-							children: J(S.plotInfo?.metricArea ?? 0)
+							children: U(S.plotInfo?.metricArea ?? 0)
 						})]
 					}),
 					/* @__PURE__ */ jsxs("div", {
-						style: { color: W?.color },
+						style: { color: R?.color },
 						className: "mobile:-mt-[1.625em] flex gap-[0.25em] items-center",
 						children: [/* @__PURE__ */ jsx(BathroomIcon, {
 							className: "stroke-footerTextColor",
@@ -32168,7 +32164,7 @@ function PlanViewPopup({ canvas: m, obj: x, item: S, onClickOutside: C }) {
 					})
 				]
 			}),
-			/* @__PURE__ */ jsx("div", { className: `absolute w-0 h-0 ${sH(O[0], O[1])} ` })
+			/* @__PURE__ */ jsx("div", { className: `absolute w-0 h-0 ${Y(O[0], O[1])} ` })
 		]
 	});
 }
@@ -32537,28 +32533,34 @@ var CanvasSubject = class {
 	}
 };
 function PlanViewWrapper(m) {
-	let { planId: x, objects: S, items: C, background: T, color: D, elementId: O = "canvas_container", useHalfWidth: k = !1, showPrice: A = !0, measurementSystem: j = "metric" } = m, M = [], N = [], P = null;
+	let { planId: x, objects: S, background: C, color: T, elementId: D = "canvas_container", useHalfWidth: O = !1, showPrice: k = !0, measurementSystem: A = "metric" } = m, [j, M] = useState(null), N = usePlotRepository();
+	useEffect(() => {
+		N.fetchSitePlan().then((m) => {
+			M(m);
+		});
+	}, []);
+	let F = [], I = null;
 	try {
-		M = typeof S == "string" ? S ? JSON.parse(S) : [] : S || [], N = typeof C == "string" ? C ? JSON.parse(C) : [] : C || [], P = typeof T == "string" ? T ? JSON.parse(T) : null : T;
+		F = typeof S == "string" ? S ? JSON.parse(S) : [] : S || [], I = typeof C == "string" ? C ? JSON.parse(C) : null : C;
 	} catch (m) {
 		return console.error("Error parsing PlanView props:", m), /* @__PURE__ */ jsx("div", {
 			className: "p-4 text-red-600",
 			children: "Error: Invalid JSON data for PlanView component"
 		});
 	}
-	return !P || !x ? /* @__PURE__ */ jsx("div", {
+	return !I || !x ? /* @__PURE__ */ jsx("div", {
 		className: "w-full h-[600px] flex items-center justify-center p-4",
 		children: /* @__PURE__ */ jsx("div", { className: "w-8 h-8 border-4 border-gray-200 border-t-[#5ec6d3] rounded-full animate-spin" })
 	}) : /* @__PURE__ */ jsx(PlanView, {
 		planId: x,
-		objects: M,
-		items: N,
-		background: P,
-		color: D,
-		elementId: O,
-		useHalfWidth: k,
-		showPrice: A,
-		measurementSystem: j
+		objects: F,
+		items: j?.plan.items ?? [],
+		background: I,
+		color: T,
+		elementId: D,
+		useHalfWidth: O,
+		showPrice: k,
+		measurementSystem: A
 	});
 }
 export { CanvasSubject, ColorPickerField, ContainerPlanPopup, ContentSection, ContentSectionWrapper, floor_view_popup_default as FloorViewPopup, GridSection, GridSectionWrapper, HeaderSection, HeaderSectionWrapper, HomeFirstSection, HomeFirstSectionWrapper, HomePageContent, HomePageContentWrapper, ItemSlider, PlanCircleObject, PlanItemController, PlanItemTypeEnum, PlanLabelObject, PlanObjectController, PlanObjectTypeEnum, PlanPolygonObject, PlanRectangleObject, PlanView, PlanViewPopup, PlanViewWrapper, PlotThumbCard, PlotThumbCardBody, PlotThumbCardImage, PlotThumbCardRoot, PlotsShowcase, PlotsShowcaseWrapper, Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectScrollDownButton, SelectScrollUpButton, SelectSeparator, SelectTrigger, SelectValue, SkyscrapperHomeFirstSection, SkyscrapperHomeFirstSectionWrapper, SkyscrapperHomesSecondSection, SkyscrapperHomesSecondSectionWrapper, SkyscrapperPlotThumbCard, SkyscrapperPlotThumbCardBody, SkyscrapperPlotThumbCardImage, SkyscrapperPlotThumbCardRoot, SkyscrapperPlotsShowcase, SkyscrapperPlotsShowcaseWrapper, SkyscrapperShowcaseCard, UiToolkitProvider, VoodvaleHomeFirstSection, VoodvaleHomeFirstSectionWrapper, VoodvaleHomeSecondSection, VoodvaleHomeSecondSectionWrapper, VoodvalePlotThumbCard, VoodvalePlotThumbCardBody, VoodvalePlotThumbCardImage, VoodvalePlotThumbCardRoot, VoodvalePlotsShowcase, VoodvalePlotsShowcaseWrapper, VoodvaleSection, colorPickerField, createPlotRepository, plotRepository, useMainModuleResult, usePlotRepository, useTranslation, useUiToolkitConfig, useUiToolkitConfigOptional };

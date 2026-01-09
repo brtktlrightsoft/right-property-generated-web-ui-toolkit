@@ -152,7 +152,7 @@ export class PlotRepository {
   }
 
   async fetchSitePlan() {
-    return this.makeGET<SitePlanResult>(`web/availability/siteplan`);
+    return this.makeGET<SitePlanResult>(`web/availability/siteplan?language=${document.documentElement.lang}`);
   }
 
   async fetchPlotsTableData() {

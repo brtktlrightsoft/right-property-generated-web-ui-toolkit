@@ -1,5 +1,8 @@
+import { usePlotRepository } from '@/hooks/usePlotRepository';
 import { PlanView } from './plan-view';
 import type { PlanObjectResultModel, PlanItemResultModel, AssetResult } from './plan-view';
+import { useEffect, useState } from 'react';
+import type { SitePlanResult } from '@/data/plot-repository';
 
 export interface PlanViewWrapperProps {
   planId: string;
@@ -18,7 +21,6 @@ export function PlanViewWrapper(props: PlanViewWrapperProps & Record<string, unk
   const {
     planId,
     objects,
-    items,
     background,
     color,
     elementId = 'canvas_container',
@@ -26,14 +28,18 @@ export function PlanViewWrapper(props: PlanViewWrapperProps & Record<string, unk
     showPrice = true,
     measurementSystem = 'metric',
   } = props;
-
+  const [sitePlanResult, setSitePlanResult] = useState<SitePlanResult | null>(null);
+  const plotRepository = usePlotRepository();
+  useEffect(()=>{
+    plotRepository.fetchSitePlan().then((result)=>{
+      setSitePlanResult(result);
+    });
+  },[])
   // Parse JSON strings if needed
   let parsedObjects: PlanObjectResultModel[] = [];
-  let parsedItems: PlanItemResultModel[] = [];
   let parsedBackground: AssetResult | null = null;
   try {
     parsedObjects = typeof objects === 'string' ? (objects ? JSON.parse(objects) : []) : objects || [];
-    parsedItems = typeof items === 'string' ? (items ? JSON.parse(items) : []) : items || [];
     parsedBackground = typeof background === 'string' ? (background ? JSON.parse(background) : null) : background;
   } catch (error) {
     console.error('Error parsing PlanView props:', error);
@@ -54,7 +60,7 @@ export function PlanViewWrapper(props: PlanViewWrapperProps & Record<string, unk
       <PlanView
         planId={planId}
         objects={parsedObjects}
-        items={parsedItems}
+        items={sitePlanResult?.plan.items ?? []}
         background={parsedBackground}
         color={color}
         elementId={elementId}

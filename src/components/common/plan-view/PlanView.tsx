@@ -548,7 +548,7 @@ export default function PlanView({
   };
 
   return (
-    <div className='w-full xl:h-[600px] h-[300px] overflow-hidden' ref={$canvasContainer}>
+    <div className='w-full max-w-[90rem] mx-auto xl:h-[600px] h-[300px] overflow-hidden' ref={$canvasContainer}>
 
       <div ref={ref} className="relative">
         {popupContainer.map((c) => createPortal(c, ref.current!))}

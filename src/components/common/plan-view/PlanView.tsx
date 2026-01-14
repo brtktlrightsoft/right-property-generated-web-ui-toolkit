@@ -105,12 +105,13 @@ export default function PlanView({
 
   useEffect(() => {
     const handler = (e: Event) => e.preventDefault();
+    const resizeHandler = () => fitToScreen();
     const doc = $canvasContainer.current ?? document;
     const puckRoot = document?.getElementById('puck-canvas-root');
     doc.addEventListener('gesturestart', handler);
     doc.addEventListener('gesturechange', handler);
     doc.addEventListener('gestureend', handler);
-
+    window.addEventListener("resize", resizeHandler);
     let resizeObserver: ResizeObserver | null = null;
     if (puckRoot) {
       resizeObserver = new ResizeObserver(() => {
@@ -123,6 +124,7 @@ export default function PlanView({
       doc.removeEventListener('gesturestart', handler);
       doc.removeEventListener('gesturechange', handler);
       doc.removeEventListener('gestureend', handler);
+      window.removeEventListener("resize", resizeHandler);
       if (resizeObserver && puckRoot) {
         resizeObserver.unobserve(puckRoot);
         resizeObserver.disconnect();

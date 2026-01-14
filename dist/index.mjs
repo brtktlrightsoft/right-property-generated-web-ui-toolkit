@@ -31905,7 +31905,8 @@ function useRecognizers(m, S = {}, C, T) {
 function usePinch(m, x) {
 	return registerAction(pinchAction), useRecognizers({ pinch: m }, x || {}, "pinch");
 }
-function usePlotStatus(m, x) {
+function usePlotStatus(m) {
+	let { plotStatusList: x } = useMainModuleResult();
 	if (Array.isArray(x)) return x.find((x) => x.name.toLowerCase() == m?.toLowerCase());
 }
 const useProjectArea = () => {
@@ -32561,6 +32562,6 @@ function PlanViewWrapper(m) {
 		useHalfWidth: O,
 		showPrice: k,
 		measurementSystem: A
-	});
+	}, j?.plan.id ?? "siteplan");
 }
 export { CanvasSubject, ColorPickerField, ContainerPlanPopup, ContentSection, ContentSectionWrapper, floor_view_popup_default as FloorViewPopup, GridSection, GridSectionWrapper, HeaderSection, HeaderSectionWrapper, HomeFirstSection, HomeFirstSectionWrapper, HomePageContent, HomePageContentWrapper, ItemSlider, PlanCircleObject, PlanItemController, PlanItemTypeEnum, PlanLabelObject, PlanObjectController, PlanObjectTypeEnum, PlanPolygonObject, PlanRectangleObject, PlanView, PlanViewPopup, PlanViewWrapper, PlotThumbCard, PlotThumbCardBody, PlotThumbCardImage, PlotThumbCardRoot, PlotsShowcase, PlotsShowcaseWrapper, Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectScrollDownButton, SelectScrollUpButton, SelectSeparator, SelectTrigger, SelectValue, SkyscrapperHomeFirstSection, SkyscrapperHomeFirstSectionWrapper, SkyscrapperHomesSecondSection, SkyscrapperHomesSecondSectionWrapper, SkyscrapperPlotThumbCard, SkyscrapperPlotThumbCardBody, SkyscrapperPlotThumbCardImage, SkyscrapperPlotThumbCardRoot, SkyscrapperPlotsShowcase, SkyscrapperPlotsShowcaseWrapper, SkyscrapperShowcaseCard, UiToolkitProvider, VoodvaleHomeFirstSection, VoodvaleHomeFirstSectionWrapper, VoodvaleHomeSecondSection, VoodvaleHomeSecondSectionWrapper, VoodvalePlotThumbCard, VoodvalePlotThumbCardBody, VoodvalePlotThumbCardImage, VoodvalePlotThumbCardRoot, VoodvalePlotsShowcase, VoodvalePlotsShowcaseWrapper, VoodvaleSection, colorPickerField, createPlotRepository, plotRepository, useMainModuleResult, usePlotRepository, useTranslation, useUiToolkitConfig, useUiToolkitConfigOptional };

@@ -1,6 +1,6 @@
 {
   "name": "right-property-generated-web-ui-toolkit",
-  "version": "0.7.27",
+  "version": "0.7.28",
   "type": "module",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -33,7 +33,6 @@
     "@use-gesture/react": "^10.3.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "fabric": "^5.3.0",
     "framer-motion": "^12.23.25",
     "lucide-react": "^0.555.0",
     "react-router-dom": "^7.0.0",
@@ -45,7 +44,8 @@
   "peerDependencies": {
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-router-dom": "^7.0.0"
+    "react-router-dom": "^7.0.0",
+    "fabric": "^5.3.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",

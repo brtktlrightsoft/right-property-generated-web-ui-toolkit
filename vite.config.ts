@@ -30,6 +30,7 @@ export default defineConfig({
         'react/jsx-dev-runtime',
         'react-dom/client',
         'react-dom/server',
+        'fabric',
       ],
       output: {
         globals: {

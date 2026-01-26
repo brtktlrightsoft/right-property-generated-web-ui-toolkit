@@ -1,9 +1,9 @@
+import { a as usePlotRepository, c as UiToolkitProvider, d as useUiToolkitConfig, f as useUiToolkitConfigOptional, l as useMainModuleResult, n as cn, o as createPlotRepository, s as plotRepository, t as v4_default, u as useTranslation } from "./v4-CS0MDZ9E.js";
 import * as React$1 from "react";
 import React, { Component, Fragment, createContext, createElement, forwardRef, isValidElement, memo, startTransition, useCallback, useContext, useEffect, useId, useImperativeHandle, useInsertionEffect, useLayoutEffect, useMemo, useRef, useState, useTransition } from "react";
 import { Fragment as Fragment$1, jsx, jsxs } from "react/jsx-runtime";
 import * as ReactDOM$1 from "react-dom";
 import ReactDOM, { createPortal, flushSync } from "react-dom";
-import { fabric } from "fabric";
 var __create$7 = Object.create, __defProp$8 = Object.defineProperty, __getOwnPropDesc$7 = Object.getOwnPropertyDescriptor, __getOwnPropNames$1 = Object.getOwnPropertyNames, __getProtoOf$1 = Object.getPrototypeOf, __hasOwnProp$8 = Object.prototype.hasOwnProperty, __esmMin = (m, x) => () => (m && (x = m(m = 0)), x), __commonJSMin = (m, x) => () => (x || m((x = { exports: {} }).exports, x), x.exports), __export = (m) => {
 	let x = {};
 	for (var S in m) __defProp$8(x, S, {
@@ -23,91 +23,8 @@ var __create$7 = Object.create, __defProp$8 = Object.defineProperty, __getOwnPro
 }) : S, m)), __toCommonJS = (m) => __copyProps$1(__defProp$8({}, "__esModule", { value: !0 }), m), __require = /* @__PURE__ */ ((m) => typeof require < "u" ? require : typeof Proxy < "u" ? new Proxy(m, { get: (m, x) => (typeof require < "u" ? require : m)[x] }) : m)(function(m) {
 	if (typeof require < "u") return require.apply(this, arguments);
 	throw Error("Calling `require` for \"" + m + "\" in an environment that doesn't expose the `require` function.");
-}), UiToolkitContext = createContext(null);
-function UiToolkitProvider({ children: m, config: x }) {
-	return /* @__PURE__ */ jsx(UiToolkitContext.Provider, {
-		value: x,
-		children: m
-	});
-}
-function useUiToolkitConfig() {
-	let m = useContext(UiToolkitContext);
-	if (!m) throw Error("useUiToolkitConfig must be used within a UiToolkitProvider");
-	return m;
-}
-function useUiToolkitConfigOptional() {
-	return useContext(UiToolkitContext);
-}
-function useTranslation() {
-	let m = useContext(UiToolkitContext);
-	return {
-		t: useCallback((x) => m && m.translations[x] || x, [m]),
-		locale: m?.locale ?? "en"
-	};
-}
-function useMainModuleResult() {
-	let m = useContext(UiToolkitContext);
-	if (!m) throw Error("useMainModuleResult must be used within a UiToolkitProvider");
-	return m.mainModuleResult;
-}
-var PlotRepository = class {
-	constructor() {
-		this.config = null;
-	}
-	configure(m) {
-		this.config = m;
-	}
-	getConfig() {
-		if (!this.config) throw Error("PlotRepository is not configured. Either use UiToolkitProvider or call plotRepository.configure()");
-		return this.config;
-	}
-	getAuthHeader() {
-		let { accessToken: m } = this.getConfig();
-		return m.startsWith("Bearer ") ? m : `Bearer ${m}`;
-	}
-	getBaseUrl() {
-		let { apiUrl: m } = this.getConfig();
-		return m.endsWith("/") ? m.slice(0, -1) : m;
-	}
-	async makeGET(m) {
-		return (await fetch(`${this.getBaseUrl()}/${m}`, { headers: { Authorization: this.getAuthHeader() } })).json();
-	}
-	async makePOST(m, x) {
-		return (await fetch(`${this.getBaseUrl()}/${m}`, {
-			method: "POST",
-			headers: {
-				Authorization: this.getAuthHeader(),
-				"Content-Type": "application/json"
-			},
-			body: JSON.stringify(x)
-		})).json();
-	}
-	async fetchMain() {
-		return this.makeGET("web/main");
-	}
-	async login(m) {
-		return this.makeGET("web/main");
-	}
-	async fetchSitePlan() {
-		return this.makeGET(`web/availability/siteplan?language=${document.documentElement.lang}`);
-	}
-	async fetchPlotsTableData() {
-		return this.makeGET("web/availability/plots");
-	}
-	async fetchImage(m, x) {
-		return this.makeGET(`asset/presignedurl/${m}?width=${x}&isThumbnail=false`);
-	}
-};
-const plotRepository = new PlotRepository();
-function createPlotRepository(m) {
-	let x = new PlotRepository();
-	return x.configure(m), x;
-}
-function usePlotRepository() {
-	let m = useUiToolkitConfig();
-	return useMemo(() => createPlotRepository(m), [m]);
-}
-function clamp$2(m, [x, S]) {
+});
+function clamp$1(m, [x, S]) {
 	return Math.min(S, Math.max(x, m));
 }
 typeof window < "u" && window.document && window.document.createElement;
@@ -116,59 +33,59 @@ function composeEventHandlers(m, x, { checkForDefaultPrevented: S = !0 } = {}) {
 		if (m?.(C), S === !1 || !C.defaultPrevented) return x?.(C);
 	};
 }
-function createContextScope(x, S = []) {
-	let C = [];
-	function T(S, T) {
-		let D = React$1.createContext(T), O = C.length;
-		C = [...C, T];
-		let k = (S) => {
-			let { scope: C, children: T, ...k } = S, A = C?.[x]?.[O] || D, j = React$1.useMemo(() => k, Object.values(k));
-			return /* @__PURE__ */ jsx(A.Provider, {
-				value: j,
-				children: T
+function createContextScope(m, x = []) {
+	let S = [];
+	function C(x, C) {
+		let T = React$1.createContext(C), D = S.length;
+		S = [...S, C];
+		let O = (x) => {
+			let { scope: S, children: C, ...O } = x, k = S?.[m]?.[D] || T, A = React$1.useMemo(() => O, Object.values(O));
+			return /* @__PURE__ */ jsx(k.Provider, {
+				value: A,
+				children: C
 			});
 		};
-		k.displayName = S + "Provider";
-		function A(C, k) {
-			let A = k?.[x]?.[O] || D, j = React$1.useContext(A);
-			if (j) return j;
-			if (T !== void 0) return T;
-			throw Error(`\`${C}\` must be used within \`${S}\``);
+		O.displayName = x + "Provider";
+		function k(S, O) {
+			let k = O?.[m]?.[D] || T, A = React$1.useContext(k);
+			if (A) return A;
+			if (C !== void 0) return C;
+			throw Error(`\`${S}\` must be used within \`${x}\``);
 		}
-		return [k, A];
+		return [O, k];
 	}
-	let D = () => {
-		let S = C.map((x) => React$1.createContext(x));
-		return function(C) {
-			let T = C?.[x] || S;
-			return React$1.useMemo(() => ({ [`__scope${x}`]: {
-				...C,
-				[x]: T
-			} }), [C, T]);
+	let T = () => {
+		let x = S.map((m) => React$1.createContext(m));
+		return function(S) {
+			let C = S?.[m] || x;
+			return React$1.useMemo(() => ({ [`__scope${m}`]: {
+				...S,
+				[m]: C
+			} }), [S, C]);
 		};
 	};
-	return D.scopeName = x, [T, composeContextScopes(D, ...S)];
+	return T.scopeName = m, [C, composeContextScopes(T, ...x)];
 }
-function composeContextScopes(...x) {
-	let S = x[0];
-	if (x.length === 1) return S;
-	let C = () => {
-		let C = x.map((m) => ({
+function composeContextScopes(...m) {
+	let x = m[0];
+	if (m.length === 1) return x;
+	let S = () => {
+		let S = m.map((m) => ({
 			useScope: m(),
 			scopeName: m.scopeName
 		}));
-		return function(x) {
-			let T = C.reduce((m, { useScope: S, scopeName: C }) => {
-				let T = S(x)[`__scope${C}`];
+		return function(m) {
+			let C = S.reduce((x, { useScope: S, scopeName: C }) => {
+				let T = S(m)[`__scope${C}`];
 				return {
-					...m,
+					...x,
 					...T
 				};
 			}, {});
-			return React$1.useMemo(() => ({ [`__scope${S.scopeName}`]: T }), [T]);
+			return React$1.useMemo(() => ({ [`__scope${x.scopeName}`]: C }), [C]);
 		};
 	};
-	return C.scopeName = S.scopeName, C;
+	return S.scopeName = x.scopeName, S;
 }
 function setRef(m, x) {
 	if (typeof m == "function") return m(x);
@@ -188,44 +105,44 @@ function composeRefs(...m) {
 		};
 	};
 }
-function useComposedRefs(...x) {
-	return React$1.useCallback(composeRefs(...x), x);
+function useComposedRefs(...m) {
+	return React$1.useCallback(composeRefs(...m), m);
 }
 /* @__NO_SIDE_EFFECTS__ */
-function createSlot(x) {
-	let S = /* @__PURE__ */ createSlotClone(x), C = React$1.forwardRef((x, C) => {
-		let { children: T, ...D } = x, O = React$1.Children.toArray(T), k = O.find(isSlottable);
-		if (k) {
-			let x = k.props.children, T = O.map((S) => S === k ? React$1.Children.count(x) > 1 ? React$1.Children.only(null) : React$1.isValidElement(x) ? x.props.children : null : S);
-			return /* @__PURE__ */ jsx(S, {
-				...D,
-				ref: C,
-				children: React$1.isValidElement(x) ? React$1.cloneElement(x, void 0, T) : null
+function createSlot(m) {
+	let x = /* @__PURE__ */ createSlotClone(m), S = React$1.forwardRef((m, S) => {
+		let { children: C, ...T } = m, D = React$1.Children.toArray(C), O = D.find(isSlottable);
+		if (O) {
+			let m = O.props.children, C = D.map((x) => x === O ? React$1.Children.count(m) > 1 ? React$1.Children.only(null) : React$1.isValidElement(m) ? m.props.children : null : x);
+			return /* @__PURE__ */ jsx(x, {
+				...T,
+				ref: S,
+				children: React$1.isValidElement(m) ? React$1.cloneElement(m, void 0, C) : null
 			});
 		}
-		return /* @__PURE__ */ jsx(S, {
-			...D,
-			ref: C,
-			children: T
+		return /* @__PURE__ */ jsx(x, {
+			...T,
+			ref: S,
+			children: C
 		});
 	});
-	return C.displayName = `${x}.Slot`, C;
+	return S.displayName = `${m}.Slot`, S;
 }
 /* @__NO_SIDE_EFFECTS__ */
-function createSlotClone(x) {
-	let S = React$1.forwardRef((x, S) => {
-		let { children: C, ...T } = x;
-		if (React$1.isValidElement(C)) {
-			let x = getElementRef(C), D = mergeProps(T, C.props);
-			return C.type !== React$1.Fragment && (D.ref = S ? composeRefs(S, x) : x), React$1.cloneElement(C, D);
+function createSlotClone(m) {
+	let x = React$1.forwardRef((m, x) => {
+		let { children: S, ...C } = m;
+		if (React$1.isValidElement(S)) {
+			let m = getElementRef(S), T = mergeProps(C, S.props);
+			return S.type !== React$1.Fragment && (T.ref = x ? composeRefs(x, m) : m), React$1.cloneElement(S, T);
 		}
-		return React$1.Children.count(C) > 1 ? React$1.Children.only(null) : null;
+		return React$1.Children.count(S) > 1 ? React$1.Children.only(null) : null;
 	});
-	return S.displayName = `${x}.SlotClone`, S;
+	return x.displayName = `${m}.SlotClone`, x;
 }
 var SLOTTABLE_IDENTIFIER = Symbol("radix.slottable");
-function isSlottable(x) {
-	return React$1.isValidElement(x) && typeof x.type == "function" && "__radixId" in x.type && x.type.__radixId === SLOTTABLE_IDENTIFIER;
+function isSlottable(m) {
+	return React$1.isValidElement(m) && typeof m.type == "function" && "__radixId" in m.type && m.type.__radixId === SLOTTABLE_IDENTIFIER;
 }
 function mergeProps(m, x) {
 	let S = { ...x };
@@ -249,62 +166,62 @@ function getElementRef(m) {
 	return S ? m.ref : (x = Object.getOwnPropertyDescriptor(m, "ref")?.get, S = x && "isReactWarning" in x && x.isReactWarning, S ? m.props.ref : m.props.ref || m.ref);
 }
 function createCollection(m) {
-	let S = m + "CollectionProvider", [C, T] = createContextScope(S), [D, O] = C(S, {
+	let x = m + "CollectionProvider", [S, C] = createContextScope(x), [T, D] = S(x, {
 		collectionRef: { current: null },
 		itemMap: /* @__PURE__ */ new Map()
-	}), k = (m) => {
-		let { scope: S, children: C } = m, T = React.useRef(null), O = React.useRef(/* @__PURE__ */ new Map()).current;
-		return /* @__PURE__ */ jsx(D, {
-			scope: S,
-			itemMap: O,
-			collectionRef: T,
-			children: C
+	}), O = (m) => {
+		let { scope: x, children: S } = m, C = React.useRef(null), D = React.useRef(/* @__PURE__ */ new Map()).current;
+		return /* @__PURE__ */ jsx(T, {
+			scope: x,
+			itemMap: D,
+			collectionRef: C,
+			children: S
 		});
 	};
-	k.displayName = S;
-	let A = m + "CollectionSlot", j = /* @__PURE__ */ createSlot(A), M = React.forwardRef((m, x) => {
+	O.displayName = x;
+	let k = m + "CollectionSlot", A = /* @__PURE__ */ createSlot(k), j = React.forwardRef((m, x) => {
 		let { scope: S, children: C } = m;
-		return /* @__PURE__ */ jsx(j, {
-			ref: useComposedRefs(x, O(A, S).collectionRef),
+		return /* @__PURE__ */ jsx(A, {
+			ref: useComposedRefs(x, D(k, S).collectionRef),
 			children: C
 		});
 	});
-	M.displayName = A;
-	let N = m + "CollectionItemSlot", P = "data-radix-collection-item", F = /* @__PURE__ */ createSlot(N), I = React.forwardRef((m, S) => {
-		let { scope: C, children: T, ...D } = m, k = React.useRef(null), A = useComposedRefs(S, k), j = O(N, C);
-		return React.useEffect(() => (j.itemMap.set(k, {
-			ref: k,
-			...D
-		}), () => void j.itemMap.delete(k))), /* @__PURE__ */ jsx(F, {
+	j.displayName = k;
+	let M = m + "CollectionItemSlot", P = "data-radix-collection-item", F = /* @__PURE__ */ createSlot(M), I = React.forwardRef((m, x) => {
+		let { scope: S, children: C, ...T } = m, O = React.useRef(null), k = useComposedRefs(x, O), A = D(M, S);
+		return React.useEffect(() => (A.itemMap.set(O, {
+			ref: O,
+			...T
+		}), () => void A.itemMap.delete(O))), /* @__PURE__ */ jsx(F, {
 			[P]: "",
-			ref: A,
-			children: T
+			ref: k,
+			children: C
 		});
 	});
-	I.displayName = N;
-	function L(S) {
-		let C = O(m + "CollectionConsumer", S);
+	I.displayName = M;
+	function L(x) {
+		let S = D(m + "CollectionConsumer", x);
 		return React.useCallback(() => {
-			let m = C.collectionRef.current;
+			let m = S.collectionRef.current;
 			if (!m) return [];
 			let x = Array.from(m.querySelectorAll(`[${P}]`));
-			return Array.from(C.itemMap.values()).sort((m, S) => x.indexOf(m.ref.current) - x.indexOf(S.ref.current));
-		}, [C.collectionRef, C.itemMap]);
+			return Array.from(S.itemMap.values()).sort((m, S) => x.indexOf(m.ref.current) - x.indexOf(S.ref.current));
+		}, [S.collectionRef, S.itemMap]);
 	}
 	return [
 		{
-			Provider: k,
-			Slot: M,
+			Provider: O,
+			Slot: j,
 			ItemSlot: I
 		},
 		L,
-		T
+		C
 	];
 }
 var DirectionContext = React$1.createContext(void 0);
-function useDirection(x) {
-	let S = React$1.useContext(DirectionContext);
-	return x || S || "ltr";
+function useDirection(m) {
+	let x = React$1.useContext(DirectionContext);
+	return m || x || "ltr";
 }
 var Primitive = [
 	"a",
@@ -324,120 +241,120 @@ var Primitive = [
 	"span",
 	"svg",
 	"ul"
-].reduce((x, S) => {
-	let C = /* @__PURE__ */ createSlot(`Primitive.${S}`), T = React$1.forwardRef((m, x) => {
-		let { asChild: T, ...D } = m, O = T ? C : S;
+].reduce((m, x) => {
+	let S = /* @__PURE__ */ createSlot(`Primitive.${x}`), C = React$1.forwardRef((m, C) => {
+		let { asChild: T, ...D } = m, O = T ? S : x;
 		return typeof window < "u" && (window[Symbol.for("radix-ui")] = !0), /* @__PURE__ */ jsx(O, {
 			...D,
-			ref: x
+			ref: C
 		});
 	});
-	return T.displayName = `Primitive.${S}`, {
-		...x,
-		[S]: T
+	return C.displayName = `Primitive.${x}`, {
+		...m,
+		[x]: C
 	};
 }, {});
 function dispatchDiscreteCustomEvent(m, x) {
 	m && ReactDOM$1.flushSync(() => m.dispatchEvent(x));
 }
-function useCallbackRef(x) {
-	let S = React$1.useRef(x);
+function useCallbackRef(m) {
+	let x = React$1.useRef(m);
 	return React$1.useEffect(() => {
-		S.current = x;
-	}), React$1.useMemo(() => (...m) => S.current?.(...m), []);
+		x.current = m;
+	}), React$1.useMemo(() => (...m) => x.current?.(...m), []);
 }
-function useEscapeKeydown(x, S = globalThis?.document) {
-	let C = useCallbackRef(x);
+function useEscapeKeydown(m, x = globalThis?.document) {
+	let S = useCallbackRef(m);
 	React$1.useEffect(() => {
 		let m = (m) => {
-			m.key === "Escape" && C(m);
+			m.key === "Escape" && S(m);
 		};
-		return S.addEventListener("keydown", m, { capture: !0 }), () => S.removeEventListener("keydown", m, { capture: !0 });
-	}, [C, S]);
+		return x.addEventListener("keydown", m, { capture: !0 }), () => x.removeEventListener("keydown", m, { capture: !0 });
+	}, [S, x]);
 }
 var DISMISSABLE_LAYER_NAME = "DismissableLayer", CONTEXT_UPDATE = "dismissableLayer.update", POINTER_DOWN_OUTSIDE = "dismissableLayer.pointerDownOutside", FOCUS_OUTSIDE = "dismissableLayer.focusOutside", originalBodyPointerEvents, DismissableLayerContext = React$1.createContext({
 	layers: /* @__PURE__ */ new Set(),
 	layersWithOutsidePointerEventsDisabled: /* @__PURE__ */ new Set(),
 	branches: /* @__PURE__ */ new Set()
-}), DismissableLayer = React$1.forwardRef((x, S) => {
-	let { disableOutsidePointerEvents: C = !1, onEscapeKeyDown: T, onPointerDownOutside: D, onFocusOutside: O, onInteractOutside: k, onDismiss: A, ...j } = x, M = React$1.useContext(DismissableLayerContext), [N, P] = React$1.useState(null), F = N?.ownerDocument ?? globalThis?.document, [, I] = React$1.useState({}), L = useComposedRefs(S, (m) => P(m)), R = Array.from(M.layers), [z] = [...M.layersWithOutsidePointerEventsDisabled].slice(-1), B = R.indexOf(z), H = N ? R.indexOf(N) : -1, U = M.layersWithOutsidePointerEventsDisabled.size > 0, W = H >= B, K = usePointerDownOutside((m) => {
-		let x = m.target, S = [...M.branches].some((m) => m.contains(x));
-		!W || S || (D?.(m), k?.(m), m.defaultPrevented || A?.());
-	}, F), q = useFocusOutside((m) => {
+}), DismissableLayer = React$1.forwardRef((m, x) => {
+	let { disableOutsidePointerEvents: S = !1, onEscapeKeyDown: C, onPointerDownOutside: T, onFocusOutside: D, onInteractOutside: O, onDismiss: k, ...A } = m, j = React$1.useContext(DismissableLayerContext), [N, P] = React$1.useState(null), F = N?.ownerDocument ?? globalThis?.document, [, I] = React$1.useState({}), L = useComposedRefs(x, (m) => P(m)), R = Array.from(j.layers), [z] = [...j.layersWithOutsidePointerEventsDisabled].slice(-1), B = R.indexOf(z), V = N ? R.indexOf(N) : -1, H = j.layersWithOutsidePointerEventsDisabled.size > 0, U = V >= B, W = usePointerDownOutside((m) => {
+		let x = m.target, S = [...j.branches].some((m) => m.contains(x));
+		!U || S || (T?.(m), O?.(m), m.defaultPrevented || k?.());
+	}, F), G = useFocusOutside((m) => {
 		let x = m.target;
-		[...M.branches].some((m) => m.contains(x)) || (O?.(m), k?.(m), m.defaultPrevented || A?.());
+		[...j.branches].some((m) => m.contains(x)) || (D?.(m), O?.(m), m.defaultPrevented || k?.());
 	}, F);
 	return useEscapeKeydown((m) => {
-		H === M.layers.size - 1 && (T?.(m), !m.defaultPrevented && A && (m.preventDefault(), A()));
+		V === j.layers.size - 1 && (C?.(m), !m.defaultPrevented && k && (m.preventDefault(), k()));
 	}, F), React$1.useEffect(() => {
-		if (N) return C && (M.layersWithOutsidePointerEventsDisabled.size === 0 && (originalBodyPointerEvents = F.body.style.pointerEvents, F.body.style.pointerEvents = "none"), M.layersWithOutsidePointerEventsDisabled.add(N)), M.layers.add(N), dispatchUpdate(), () => {
-			C && M.layersWithOutsidePointerEventsDisabled.size === 1 && (F.body.style.pointerEvents = originalBodyPointerEvents);
+		if (N) return S && (j.layersWithOutsidePointerEventsDisabled.size === 0 && (originalBodyPointerEvents = F.body.style.pointerEvents, F.body.style.pointerEvents = "none"), j.layersWithOutsidePointerEventsDisabled.add(N)), j.layers.add(N), dispatchUpdate(), () => {
+			S && j.layersWithOutsidePointerEventsDisabled.size === 1 && (F.body.style.pointerEvents = originalBodyPointerEvents);
 		};
 	}, [
 		N,
 		F,
-		C,
-		M
+		S,
+		j
 	]), React$1.useEffect(() => () => {
-		N && (M.layers.delete(N), M.layersWithOutsidePointerEventsDisabled.delete(N), dispatchUpdate());
-	}, [N, M]), React$1.useEffect(() => {
+		N && (j.layers.delete(N), j.layersWithOutsidePointerEventsDisabled.delete(N), dispatchUpdate());
+	}, [N, j]), React$1.useEffect(() => {
 		let m = () => I({});
 		return document.addEventListener(CONTEXT_UPDATE, m), () => document.removeEventListener(CONTEXT_UPDATE, m);
 	}, []), /* @__PURE__ */ jsx(Primitive.div, {
-		...j,
+		...A,
 		ref: L,
 		style: {
-			pointerEvents: U ? W ? "auto" : "none" : void 0,
-			...x.style
+			pointerEvents: H ? U ? "auto" : "none" : void 0,
+			...m.style
 		},
-		onFocusCapture: composeEventHandlers(x.onFocusCapture, q.onFocusCapture),
-		onBlurCapture: composeEventHandlers(x.onBlurCapture, q.onBlurCapture),
-		onPointerDownCapture: composeEventHandlers(x.onPointerDownCapture, K.onPointerDownCapture)
+		onFocusCapture: composeEventHandlers(m.onFocusCapture, G.onFocusCapture),
+		onBlurCapture: composeEventHandlers(m.onBlurCapture, G.onBlurCapture),
+		onPointerDownCapture: composeEventHandlers(m.onPointerDownCapture, W.onPointerDownCapture)
 	});
 });
 DismissableLayer.displayName = DISMISSABLE_LAYER_NAME;
-var BRANCH_NAME = "DismissableLayerBranch", DismissableLayerBranch = React$1.forwardRef((x, S) => {
-	let C = React$1.useContext(DismissableLayerContext), T = React$1.useRef(null), D = useComposedRefs(S, T);
+var BRANCH_NAME = "DismissableLayerBranch", DismissableLayerBranch = React$1.forwardRef((m, x) => {
+	let S = React$1.useContext(DismissableLayerContext), C = React$1.useRef(null), T = useComposedRefs(x, C);
 	return React$1.useEffect(() => {
-		let m = T.current;
-		if (m) return C.branches.add(m), () => {
-			C.branches.delete(m);
+		let m = C.current;
+		if (m) return S.branches.add(m), () => {
+			S.branches.delete(m);
 		};
-	}, [C.branches]), /* @__PURE__ */ jsx(Primitive.div, {
-		...x,
-		ref: D
+	}, [S.branches]), /* @__PURE__ */ jsx(Primitive.div, {
+		...m,
+		ref: T
 	});
 });
 DismissableLayerBranch.displayName = BRANCH_NAME;
-function usePointerDownOutside(x, S = globalThis?.document) {
-	let C = useCallbackRef(x), T = React$1.useRef(!1), D = React$1.useRef(() => {});
+function usePointerDownOutside(m, x = globalThis?.document) {
+	let S = useCallbackRef(m), C = React$1.useRef(!1), T = React$1.useRef(() => {});
 	return React$1.useEffect(() => {
 		let m = (m) => {
-			if (m.target && !T.current) {
-				let x = function() {
-					handleAndDispatchCustomEvent(POINTER_DOWN_OUTSIDE, C, T, { discrete: !0 });
-				}, T = { originalEvent: m };
-				m.pointerType === "touch" ? (S.removeEventListener("click", D.current), D.current = x, S.addEventListener("click", D.current, { once: !0 })) : x();
-			} else S.removeEventListener("click", D.current);
-			T.current = !1;
-		}, x = window.setTimeout(() => {
-			S.addEventListener("pointerdown", m);
+			if (m.target && !C.current) {
+				let C = function() {
+					handleAndDispatchCustomEvent(POINTER_DOWN_OUTSIDE, S, D, { discrete: !0 });
+				}, D = { originalEvent: m };
+				m.pointerType === "touch" ? (x.removeEventListener("click", T.current), T.current = C, x.addEventListener("click", T.current, { once: !0 })) : C();
+			} else x.removeEventListener("click", T.current);
+			C.current = !1;
+		}, D = window.setTimeout(() => {
+			x.addEventListener("pointerdown", m);
 		}, 0);
 		return () => {
-			window.clearTimeout(x), S.removeEventListener("pointerdown", m), S.removeEventListener("click", D.current);
+			window.clearTimeout(D), x.removeEventListener("pointerdown", m), x.removeEventListener("click", T.current);
 		};
-	}, [S, C]), { onPointerDownCapture: () => T.current = !0 };
+	}, [x, S]), { onPointerDownCapture: () => C.current = !0 };
 }
-function useFocusOutside(x, S = globalThis?.document) {
-	let C = useCallbackRef(x), T = React$1.useRef(!1);
+function useFocusOutside(m, x = globalThis?.document) {
+	let S = useCallbackRef(m), C = React$1.useRef(!1);
 	return React$1.useEffect(() => {
 		let m = (m) => {
-			m.target && !T.current && handleAndDispatchCustomEvent(FOCUS_OUTSIDE, C, { originalEvent: m }, { discrete: !1 });
+			m.target && !C.current && handleAndDispatchCustomEvent(FOCUS_OUTSIDE, S, { originalEvent: m }, { discrete: !1 });
 		};
-		return S.addEventListener("focusin", m), () => S.removeEventListener("focusin", m);
-	}, [S, C]), {
-		onFocusCapture: () => T.current = !0,
-		onBlurCapture: () => T.current = !1
+		return x.addEventListener("focusin", m), () => x.removeEventListener("focusin", m);
+	}, [x, S]), {
+		onFocusCapture: () => C.current = !0,
+		onBlurCapture: () => C.current = !1
 	};
 }
 function dispatchUpdate() {
@@ -468,8 +385,8 @@ function createFocusGuard() {
 var AUTOFOCUS_ON_MOUNT = "focusScope.autoFocusOnMount", AUTOFOCUS_ON_UNMOUNT = "focusScope.autoFocusOnUnmount", EVENT_OPTIONS = {
 	bubbles: !1,
 	cancelable: !0
-}, FOCUS_SCOPE_NAME = "FocusScope", FocusScope = React$1.forwardRef((x, S) => {
-	let { loop: C = !1, trapped: T = !1, onMountAutoFocus: D, onUnmountAutoFocus: O, ...k } = x, [A, j] = React$1.useState(null), M = useCallbackRef(D), N = useCallbackRef(O), P = React$1.useRef(null), F = useComposedRefs(S, (m) => j(m)), I = React$1.useRef({
+}, FOCUS_SCOPE_NAME = "FocusScope", FocusScope = React$1.forwardRef((m, x) => {
+	let { loop: S = !1, trapped: C = !1, onMountAutoFocus: T, onUnmountAutoFocus: D, ...O } = m, [k, A] = React$1.useState(null), j = useCallbackRef(T), N = useCallbackRef(D), P = React$1.useRef(null), F = useComposedRefs(x, (m) => A(m)), I = React$1.useRef({
 		paused: !1,
 		pause() {
 			this.paused = !0;
@@ -479,21 +396,21 @@ var AUTOFOCUS_ON_MOUNT = "focusScope.autoFocusOnMount", AUTOFOCUS_ON_UNMOUNT = "
 		}
 	}).current;
 	React$1.useEffect(() => {
-		if (T) {
+		if (C) {
 			let m = function(m) {
-				if (I.paused || !A) return;
+				if (I.paused || !k) return;
 				let x = m.target;
-				A.contains(x) ? P.current = x : focus(P.current, { select: !0 });
+				k.contains(x) ? P.current = x : focus(P.current, { select: !0 });
 			}, x = function(m) {
-				if (I.paused || !A) return;
+				if (I.paused || !k) return;
 				let x = m.relatedTarget;
-				x !== null && (A.contains(x) || focus(P.current, { select: !0 }));
+				x !== null && (k.contains(x) || focus(P.current, { select: !0 }));
 			}, S = function(m) {
-				if (document.activeElement === document.body) for (let x of m) x.removedNodes.length > 0 && focus(A);
+				if (document.activeElement === document.body) for (let x of m) x.removedNodes.length > 0 && focus(k);
 			};
 			document.addEventListener("focusin", m), document.addEventListener("focusout", x);
 			let C = new MutationObserver(S);
-			return A && C.observe(A, {
+			return k && C.observe(k, {
 				childList: !0,
 				subtree: !0
 			}), () => {
@@ -501,45 +418,45 @@ var AUTOFOCUS_ON_MOUNT = "focusScope.autoFocusOnMount", AUTOFOCUS_ON_UNMOUNT = "
 			};
 		}
 	}, [
-		T,
-		A,
+		C,
+		k,
 		I.paused
 	]), React$1.useEffect(() => {
-		if (A) {
+		if (k) {
 			focusScopesStack.add(I);
 			let m = document.activeElement;
-			if (!A.contains(m)) {
+			if (!k.contains(m)) {
 				let x = new CustomEvent(AUTOFOCUS_ON_MOUNT, EVENT_OPTIONS);
-				A.addEventListener(AUTOFOCUS_ON_MOUNT, M), A.dispatchEvent(x), x.defaultPrevented || (focusFirst(removeLinks(getTabbableCandidates(A)), { select: !0 }), document.activeElement === m && focus(A));
+				k.addEventListener(AUTOFOCUS_ON_MOUNT, j), k.dispatchEvent(x), x.defaultPrevented || (focusFirst(removeLinks(getTabbableCandidates(k)), { select: !0 }), document.activeElement === m && focus(k));
 			}
 			return () => {
-				A.removeEventListener(AUTOFOCUS_ON_MOUNT, M), setTimeout(() => {
+				k.removeEventListener(AUTOFOCUS_ON_MOUNT, j), setTimeout(() => {
 					let x = new CustomEvent(AUTOFOCUS_ON_UNMOUNT, EVENT_OPTIONS);
-					A.addEventListener(AUTOFOCUS_ON_UNMOUNT, N), A.dispatchEvent(x), x.defaultPrevented || focus(m ?? document.body, { select: !0 }), A.removeEventListener(AUTOFOCUS_ON_UNMOUNT, N), focusScopesStack.remove(I);
+					k.addEventListener(AUTOFOCUS_ON_UNMOUNT, N), k.dispatchEvent(x), x.defaultPrevented || focus(m ?? document.body, { select: !0 }), k.removeEventListener(AUTOFOCUS_ON_UNMOUNT, N), focusScopesStack.remove(I);
 				}, 0);
 			};
 		}
 	}, [
-		A,
-		M,
+		k,
+		j,
 		N,
 		I
 	]);
 	let L = React$1.useCallback((m) => {
-		if (!C && !T || I.paused) return;
-		let x = m.key === "Tab" && !m.altKey && !m.ctrlKey && !m.metaKey, S = document.activeElement;
-		if (x && S) {
-			let x = m.currentTarget, [T, D] = getTabbableEdges(x);
-			T && D ? !m.shiftKey && S === D ? (m.preventDefault(), C && focus(T, { select: !0 })) : m.shiftKey && S === T && (m.preventDefault(), C && focus(D, { select: !0 })) : S === x && m.preventDefault();
+		if (!S && !C || I.paused) return;
+		let x = m.key === "Tab" && !m.altKey && !m.ctrlKey && !m.metaKey, T = document.activeElement;
+		if (x && T) {
+			let x = m.currentTarget, [C, D] = getTabbableEdges(x);
+			C && D ? !m.shiftKey && T === D ? (m.preventDefault(), S && focus(C, { select: !0 })) : m.shiftKey && T === C && (m.preventDefault(), S && focus(D, { select: !0 })) : T === x && m.preventDefault();
 		}
 	}, [
+		S,
 		C,
-		T,
 		I.paused
 	]);
 	return /* @__PURE__ */ jsx(Primitive.div, {
 		tabIndex: -1,
-		...k,
+		...O,
 		ref: F,
 		onKeyDown: L
 	});
@@ -603,11 +520,11 @@ function removeLinks(m) {
 	return m.filter((m) => m.tagName !== "A");
 }
 var useLayoutEffect2 = globalThis?.document ? React$1.useLayoutEffect : () => {}, useReactId = React$1.useId || (() => void 0), count = 0;
-function useId$1(x) {
-	let [S, C] = React$1.useState(useReactId());
+function useId$1(m) {
+	let [x, S] = React$1.useState(useReactId());
 	return useLayoutEffect2(() => {
-		x || C((m) => m ?? String(count++));
-	}, [x]), x || (S ? `radix-${S}` : "");
+		m || S((m) => m ?? String(count++));
+	}, [m]), m || (x ? `radix-${x}` : "");
 }
 var sides = [
 	"top",
@@ -626,7 +543,7 @@ var sides = [
 	start: "end",
 	end: "start"
 };
-function clamp$3(m, x, S) {
+function clamp$2(m, x, S) {
 	return max(m, min(x, S));
 }
 function evaluate(m, x) {
@@ -763,7 +680,7 @@ var computePosition$1 = async (m, x, S) => {
 		strategy: T
 	}), { x: M, y: N } = computeCoordsFromPlacement(j, C, A), P = C, F = {}, I = 0;
 	for (let S = 0; S < k.length; S++) {
-		let { name: D, fn: L } = k[S], { x: R, y: z, data: B, reset: H } = await L({
+		let { name: D, fn: L } = k[S], { x: R, y: z, data: B, reset: V } = await L({
 			x: M,
 			y: N,
 			initialPlacement: C,
@@ -783,11 +700,11 @@ var computePosition$1 = async (m, x, S) => {
 				...F[D],
 				...B
 			}
-		}, H && I <= 50 && (I++, typeof H == "object" && (H.placement && (P = H.placement), H.rects && (j = H.rects === !0 ? await O.getElementRects({
+		}, V && I <= 50 && (I++, typeof V == "object" && (V.placement && (P = V.placement), V.rects && (j = V.rects === !0 ? await O.getElementRects({
 			reference: m,
 			floating: x,
 			strategy: T
-		}) : H.rects), {x: M, y: N} = computeCoordsFromPlacement(j, P, A)), S = -1);
+		}) : V.rects), {x: M, y: N} = computeCoordsFromPlacement(j, P, A)), S = -1);
 	}
 	return {
 		x: M,
@@ -812,17 +729,17 @@ async function detectOverflow$1(m, x) {
 	} : D.reference, z = await (T.getOffsetParent == null ? void 0 : T.getOffsetParent(O.floating)), B = await (T.isElement == null ? void 0 : T.isElement(z)) && await (T.getScale == null ? void 0 : T.getScale(z)) || {
 		x: 1,
 		y: 1
-	}, H = rectToClientRect(T.convertOffsetParentRelativeRectToViewportRelativeRect ? await T.convertOffsetParentRelativeRectToViewportRelativeRect({
+	}, V = rectToClientRect(T.convertOffsetParentRelativeRectToViewportRelativeRect ? await T.convertOffsetParentRelativeRectToViewportRelativeRect({
 		elements: O,
 		rect: R,
 		offsetParent: z,
 		strategy: k
 	}) : R);
 	return {
-		top: (L.top - H.top + F.top) / B.y,
-		bottom: (H.bottom - L.bottom + F.bottom) / B.y,
-		left: (L.left - H.left + F.left) / B.x,
-		right: (H.right - L.right + F.right) / B.x
+		top: (L.top - V.top + F.top) / B.y,
+		bottom: (V.bottom - L.bottom + F.bottom) / B.y,
+		left: (L.left - V.left + F.left) / B.x,
+		right: (V.right - L.right + F.right) / B.x
 	};
 }
 var arrow$2 = (m) => ({
@@ -834,17 +751,17 @@ var arrow$2 = (m) => ({
 		let N = getPaddingObject(M), P = {
 			x: S,
 			y: C
-		}, F = getAlignmentAxis(T), I = getAxisLength(F), L = await O.getDimensions(j), R = F === "y", z = R ? "top" : "left", B = R ? "bottom" : "right", H = R ? "clientHeight" : "clientWidth", U = D.reference[I] + D.reference[F] - P[F] - D.floating[I], W = P[F] - D.reference[F], G = await (O.getOffsetParent == null ? void 0 : O.getOffsetParent(j)), K = G ? G[H] : 0;
-		(!K || !await (O.isElement == null ? void 0 : O.isElement(G))) && (K = k.floating[H] || D.floating[I]);
-		let q = U / 2 - W / 2, J = K / 2 - L[I] / 2 - 1, $V = min(N[z], J), Y = min(N[B], J), X = $V, Z = K - L[I] - Y, eH = K / 2 - L[I] / 2 + q, Q = clamp$3(X, eH, Z), tH = !A.arrow && getAlignment(T) != null && eH !== Q && D.reference[I] / 2 - (eH < X ? $V : Y) - L[I] / 2 < 0, nH = tH ? eH < X ? eH - X : eH - Z : 0;
+		}, F = getAlignmentAxis(T), I = getAxisLength(F), L = await O.getDimensions(j), R = F === "y", z = R ? "top" : "left", B = R ? "bottom" : "right", V = R ? "clientHeight" : "clientWidth", H = D.reference[I] + D.reference[F] - P[F] - D.floating[I], U = P[F] - D.reference[F], W = await (O.getOffsetParent == null ? void 0 : O.getOffsetParent(j)), G = W ? W[V] : 0;
+		(!G || !await (O.isElement == null ? void 0 : O.isElement(W))) && (G = k.floating[V] || D.floating[I]);
+		let K = H / 2 - U / 2, q = G / 2 - L[I] / 2 - 1, J = min(N[z], q), Uz = min(N[B], q), Y = J, Wz = G - L[I] - Uz, X = G / 2 - L[I] / 2 + K, Z = clamp$2(Y, X, Wz), Gz = !A.arrow && getAlignment(T) != null && X !== Z && D.reference[I] / 2 - (X < Y ? J : Uz) - L[I] / 2 < 0, Kz = Gz ? X < Y ? X - Y : X - Wz : 0;
 		return {
-			[F]: P[F] + nH,
+			[F]: P[F] + Kz,
 			data: {
-				[F]: Q,
-				centerOffset: eH - Q - nH,
-				...tH && { alignmentOffset: nH }
+				[F]: Z,
+				centerOffset: X - Z - Kz,
+				...Gz && { alignmentOffset: Kz }
 			},
-			reset: tH
+			reset: Gz
 		};
 	}
 }), flip$2 = function(m) {
@@ -855,30 +772,30 @@ var arrow$2 = (m) => ({
 			var S;
 			let { placement: C, middlewareData: T, rects: D, initialPlacement: O, platform: k, elements: A } = x, { mainAxis: j = !0, crossAxis: M = !0, fallbackPlacements: N, fallbackStrategy: P = "bestFit", fallbackAxisSideDirection: F = "none", flipAlignment: I = !0, ...L } = evaluate(m, x);
 			if ((S = T.arrow) != null && S.alignmentOffset) return {};
-			let R = getSide(C), z = getSideAxis(O), B = getSide(O) === O, H = await (k.isRTL == null ? void 0 : k.isRTL(A.floating)), U = N || (B || !I ? [getOppositePlacement(O)] : getExpandedPlacements(O)), W = F !== "none";
-			!N && W && U.push(...getOppositeAxisPlacements(O, I, F, H));
-			let G = [O, ...U], K = await detectOverflow$1(x, L), q = [], J = T.flip?.overflows || [];
-			if (j && q.push(K[R]), M) {
-				let m = getAlignmentSides(C, D, H);
-				q.push(K[m[0]], K[m[1]]);
+			let R = getSide(C), z = getSideAxis(O), B = getSide(O) === O, V = await (k.isRTL == null ? void 0 : k.isRTL(A.floating)), H = N || (B || !I ? [getOppositePlacement(O)] : getExpandedPlacements(O)), U = F !== "none";
+			!N && U && H.push(...getOppositeAxisPlacements(O, I, F, V));
+			let W = [O, ...H], G = await detectOverflow$1(x, L), K = [], q = T.flip?.overflows || [];
+			if (j && K.push(G[R]), M) {
+				let m = getAlignmentSides(C, D, V);
+				K.push(G[m[0]], G[m[1]]);
 			}
-			if (J = [...J, {
+			if (q = [...q, {
 				placement: C,
-				overflows: q
-			}], !q.every((m) => m <= 0)) {
-				let m = (T.flip?.index || 0) + 1, x = G[m];
-				if (x && (!(M === "alignment" && z !== getSideAxis(x)) || J.every((m) => getSideAxis(m.placement) === z ? m.overflows[0] > 0 : !0))) return {
+				overflows: K
+			}], !K.every((m) => m <= 0)) {
+				let m = (T.flip?.index || 0) + 1, x = W[m];
+				if (x && (!(M === "alignment" && z !== getSideAxis(x)) || q.every((m) => getSideAxis(m.placement) === z ? m.overflows[0] > 0 : !0))) return {
 					data: {
 						index: m,
-						overflows: J
+						overflows: q
 					},
 					reset: { placement: x }
 				};
-				let S = J.filter((m) => m.overflows[0] <= 0).sort((m, x) => m.overflows[1] - x.overflows[1])[0]?.placement;
+				let S = q.filter((m) => m.overflows[0] <= 0).sort((m, x) => m.overflows[1] - x.overflows[1])[0]?.placement;
 				if (!S) switch (P) {
 					case "bestFit": {
-						let m = J.filter((m) => {
-							if (W) {
+						let m = q.filter((m) => {
+							if (U) {
 								let x = getSideAxis(m.placement);
 								return x === z || x === "y";
 							}
@@ -992,11 +909,11 @@ var offset$2 = function(m) {
 			}, M = await detectOverflow$1(x, A), N = getSideAxis(getSide(T)), P = getOppositeAxis(N), F = j[P], I = j[N];
 			if (D) {
 				let m = P === "y" ? "top" : "left", x = P === "y" ? "bottom" : "right", S = F + M[m], C = F - M[x];
-				F = clamp$3(S, F, C);
+				F = clamp$2(S, F, C);
 			}
 			if (O) {
 				let m = N === "y" ? "top" : "left", x = N === "y" ? "bottom" : "right", S = I + M[m], C = I - M[x];
-				I = clamp$3(S, I, C);
+				I = clamp$2(S, I, C);
 			}
 			let L = k.fn({
 				...x,
@@ -1053,18 +970,18 @@ var offset$2 = function(m) {
 			var S, C;
 			let { placement: T, rects: D, platform: O, elements: k } = x, { apply: A = () => {}, ...j } = evaluate(m, x), M = await detectOverflow$1(x, j), N = getSide(T), P = getAlignment(T), F = getSideAxis(T) === "y", { width: I, height: L } = D.floating, R, z;
 			N === "top" || N === "bottom" ? (R = N, z = P === (await (O.isRTL == null ? void 0 : O.isRTL(k.floating)) ? "start" : "end") ? "left" : "right") : (z = N, R = P === "end" ? "top" : "bottom");
-			let B = L - M.top - M.bottom, H = I - M.left - M.right, U = min(L - M[R], B), W = min(I - M[z], H), G = !x.middlewareData.shift, K = U, q = W;
-			if ((S = x.middlewareData.shift) != null && S.enabled.x && (q = H), (C = x.middlewareData.shift) != null && C.enabled.y && (K = B), G && !P) {
+			let B = L - M.top - M.bottom, V = I - M.left - M.right, H = min(L - M[R], B), U = min(I - M[z], V), W = !x.middlewareData.shift, G = H, K = U;
+			if ((S = x.middlewareData.shift) != null && S.enabled.x && (K = V), (C = x.middlewareData.shift) != null && C.enabled.y && (G = B), W && !P) {
 				let m = max(M.left, 0), x = max(M.right, 0), S = max(M.top, 0), C = max(M.bottom, 0);
-				F ? q = I - 2 * (m !== 0 || x !== 0 ? m + x : max(M.left, M.right)) : K = L - 2 * (S !== 0 || C !== 0 ? S + C : max(M.top, M.bottom));
+				F ? K = I - 2 * (m !== 0 || x !== 0 ? m + x : max(M.left, M.right)) : G = L - 2 * (S !== 0 || C !== 0 ? S + C : max(M.top, M.bottom));
 			}
 			await A({
 				...x,
-				availableWidth: q,
-				availableHeight: K
+				availableWidth: K,
+				availableHeight: G
 			});
-			let J = await O.getDimensions(k.floating);
-			return I !== J.width || L !== J.height ? { reset: { rects: !0 } } : {};
+			let q = await O.getDimensions(k.floating);
+			return I !== q.width || L !== q.height ? { reset: { rects: !0 } } : {};
 		}
 	};
 };
@@ -1451,24 +1368,24 @@ function observeMove(m, x) {
 		let I = floor(N), L = floor(T.clientWidth - (M + P)), R = floor(T.clientHeight - (N + F)), z = floor(M), B = {
 			rootMargin: -I + "px " + -L + "px " + -R + "px " + -z + "px",
 			threshold: max(0, min(1, A)) || 1
-		}, H = !0;
-		function U(x) {
+		}, V = !0;
+		function H(x) {
 			let S = x[0].intersectionRatio;
 			if (S !== A) {
-				if (!H) return O();
+				if (!V) return O();
 				S ? O(!1, S) : C = setTimeout(() => {
 					O(!1, 1e-7);
 				}, 1e3);
 			}
-			S === 1 && !rectsAreEqual(j, m.getBoundingClientRect()) && O(), H = !1;
+			S === 1 && !rectsAreEqual(j, m.getBoundingClientRect()) && O(), V = !1;
 		}
 		try {
-			S = new IntersectionObserver(U, {
+			S = new IntersectionObserver(H, {
 				...B,
 				root: T.ownerDocument
 			});
 		} catch {
-			S = new IntersectionObserver(U, B);
+			S = new IntersectionObserver(H, B);
 		}
 		S.observe(m);
 	}
@@ -1542,115 +1459,115 @@ function roundByDPR(m, x) {
 	let S = getDPR(m);
 	return Math.round(x * S) / S;
 }
-function useLatestRef(x) {
-	let S = React$1.useRef(x);
+function useLatestRef(m) {
+	let x = React$1.useRef(m);
 	return index(() => {
-		S.current = x;
-	}), S;
+		x.current = m;
+	}), x;
 }
-function useFloating(x) {
-	x === void 0 && (x = {});
-	let { placement: S = "bottom", strategy: C = "absolute", middleware: T = [], platform: D, elements: { reference: O, floating: k } = {}, transform: A = !0, whileElementsMounted: j, open: M } = x, [N, P] = React$1.useState({
+function useFloating(m) {
+	m === void 0 && (m = {});
+	let { placement: x = "bottom", strategy: S = "absolute", middleware: C = [], platform: T, elements: { reference: D, floating: O } = {}, transform: k = !0, whileElementsMounted: A, open: j } = m, [N, P] = React$1.useState({
 		x: 0,
 		y: 0,
-		strategy: C,
-		placement: S,
+		strategy: S,
+		placement: x,
 		middlewareData: {},
 		isPositioned: !1
-	}), [F, I] = React$1.useState(T);
-	deepEqual$1(F, T) || I(T);
-	let [L, R] = React$1.useState(null), [z, B] = React$1.useState(null), H = React$1.useCallback((m) => {
-		m !== K.current && (K.current = m, R(m));
-	}, []), U = React$1.useCallback((m) => {
-		m !== J.current && (J.current = m, B(m));
-	}, []), W = O || L, G = k || z, K = React$1.useRef(null), J = React$1.useRef(null), $V = React$1.useRef(N), Y = j != null, X = useLatestRef(j), Z = useLatestRef(D), eH = useLatestRef(M), Q = React$1.useCallback(() => {
-		if (!K.current || !J.current) return;
+	}), [F, I] = React$1.useState(C);
+	deepEqual$1(F, C) || I(C);
+	let [L, R] = React$1.useState(null), [z, B] = React$1.useState(null), V = React$1.useCallback((m) => {
+		m !== G.current && (G.current = m, R(m));
+	}, []), H = React$1.useCallback((m) => {
+		m !== K.current && (K.current = m, B(m));
+	}, []), U = D || L, W = O || z, G = React$1.useRef(null), K = React$1.useRef(null), q = React$1.useRef(N), J = A != null, Uz = useLatestRef(A), Y = useLatestRef(T), Wz = useLatestRef(j), X = React$1.useCallback(() => {
+		if (!G.current || !K.current) return;
 		let m = {
-			placement: S,
-			strategy: C,
+			placement: x,
+			strategy: S,
 			middleware: F
 		};
-		Z.current && (m.platform = Z.current), computePosition(K.current, J.current, m).then((m) => {
+		Y.current && (m.platform = Y.current), computePosition(G.current, K.current, m).then((m) => {
 			let x = {
 				...m,
-				isPositioned: eH.current !== !1
+				isPositioned: Wz.current !== !1
 			};
-			tH.current && !deepEqual$1($V.current, x) && ($V.current = x, ReactDOM$1.flushSync(() => {
+			Z.current && !deepEqual$1(q.current, x) && (q.current = x, ReactDOM$1.flushSync(() => {
 				P(x);
 			}));
 		});
 	}, [
 		F,
+		x,
 		S,
-		C,
-		Z,
-		eH
+		Y,
+		Wz
 	]);
 	index(() => {
-		M === !1 && $V.current.isPositioned && ($V.current.isPositioned = !1, P((m) => ({
+		j === !1 && q.current.isPositioned && (q.current.isPositioned = !1, P((m) => ({
 			...m,
 			isPositioned: !1
 		})));
-	}, [M]);
-	let tH = React$1.useRef(!1);
-	index(() => (tH.current = !0, () => {
-		tH.current = !1;
+	}, [j]);
+	let Z = React$1.useRef(!1);
+	index(() => (Z.current = !0, () => {
+		Z.current = !1;
 	}), []), index(() => {
-		if (W && (K.current = W), G && (J.current = G), W && G) {
-			if (X.current) return X.current(W, G, Q);
-			Q();
+		if (U && (G.current = U), W && (K.current = W), U && W) {
+			if (Uz.current) return Uz.current(U, W, X);
+			X();
 		}
 	}, [
+		U,
 		W,
-		G,
-		Q,
 		X,
-		Y
+		Uz,
+		J
 	]);
-	let nH = React$1.useMemo(() => ({
-		reference: K,
-		floating: J,
-		setReference: H,
-		setFloating: U
-	}), [H, U]), rH = React$1.useMemo(() => ({
-		reference: W,
-		floating: G
-	}), [W, G]), iH = React$1.useMemo(() => {
+	let Gz = React$1.useMemo(() => ({
+		reference: G,
+		floating: K,
+		setReference: V,
+		setFloating: H
+	}), [V, H]), Kz = React$1.useMemo(() => ({
+		reference: U,
+		floating: W
+	}), [U, W]), Jz = React$1.useMemo(() => {
 		let m = {
-			position: C,
+			position: S,
 			left: 0,
 			top: 0
 		};
-		if (!rH.floating) return m;
-		let x = roundByDPR(rH.floating, N.x), S = roundByDPR(rH.floating, N.y);
-		return A ? {
+		if (!Kz.floating) return m;
+		let x = roundByDPR(Kz.floating, N.x), C = roundByDPR(Kz.floating, N.y);
+		return k ? {
 			...m,
-			transform: "translate(" + x + "px, " + S + "px)",
-			...getDPR(rH.floating) >= 1.5 && { willChange: "transform" }
+			transform: "translate(" + x + "px, " + C + "px)",
+			...getDPR(Kz.floating) >= 1.5 && { willChange: "transform" }
 		} : {
-			position: C,
+			position: S,
 			left: x,
-			top: S
+			top: C
 		};
 	}, [
-		C,
-		A,
-		rH.floating,
+		S,
+		k,
+		Kz.floating,
 		N.x,
 		N.y
 	]);
 	return React$1.useMemo(() => ({
 		...N,
-		update: Q,
-		refs: nH,
-		elements: rH,
-		floatingStyles: iH
+		update: X,
+		refs: Gz,
+		elements: Kz,
+		floatingStyles: Jz
 	}), [
 		N,
-		Q,
-		nH,
-		rH,
-		iH
+		X,
+		Gz,
+		Kz,
+		Jz
 	]);
 }
 var arrow$1$1 = (m) => {
@@ -1706,136 +1623,136 @@ var arrow$1$1 = (m) => {
 });
 Arrow$3.displayName = NAME$1;
 var Root = Arrow$3;
-function useSize(x) {
-	let [S, C] = React$1.useState(void 0);
+function useSize(m) {
+	let [x, S] = React$1.useState(void 0);
 	return useLayoutEffect2(() => {
-		if (x) {
-			C({
-				width: x.offsetWidth,
-				height: x.offsetHeight
+		if (m) {
+			S({
+				width: m.offsetWidth,
+				height: m.offsetHeight
 			});
-			let m = new ResizeObserver((m) => {
-				if (!Array.isArray(m) || !m.length) return;
-				let S = m[0], T, D;
-				if ("borderBoxSize" in S) {
-					let m = S.borderBoxSize, x = Array.isArray(m) ? m[0] : m;
+			let x = new ResizeObserver((x) => {
+				if (!Array.isArray(x) || !x.length) return;
+				let C = x[0], T, D;
+				if ("borderBoxSize" in C) {
+					let m = C.borderBoxSize, x = Array.isArray(m) ? m[0] : m;
 					T = x.inlineSize, D = x.blockSize;
-				} else T = x.offsetWidth, D = x.offsetHeight;
-				C({
+				} else T = m.offsetWidth, D = m.offsetHeight;
+				S({
 					width: T,
 					height: D
 				});
 			});
-			return m.observe(x, { box: "border-box" }), () => m.unobserve(x);
-		} else C(void 0);
-	}, [x]), S;
+			return x.observe(m, { box: "border-box" }), () => x.unobserve(m);
+		} else S(void 0);
+	}, [m]), x;
 }
-var POPPER_NAME = "Popper", [createPopperContext, createPopperScope] = createContextScope(POPPER_NAME), [PopperProvider, usePopperContext] = createPopperContext(POPPER_NAME), Popper = (x) => {
-	let { __scopePopper: S, children: C } = x, [T, D] = React$1.useState(null);
+var POPPER_NAME = "Popper", [createPopperContext, createPopperScope] = createContextScope(POPPER_NAME), [PopperProvider, usePopperContext] = createPopperContext(POPPER_NAME), Popper = (m) => {
+	let { __scopePopper: x, children: S } = m, [C, T] = React$1.useState(null);
 	return /* @__PURE__ */ jsx(PopperProvider, {
-		scope: S,
-		anchor: T,
-		onAnchorChange: D,
-		children: C
+		scope: x,
+		anchor: C,
+		onAnchorChange: T,
+		children: S
 	});
 };
 Popper.displayName = POPPER_NAME;
-var ANCHOR_NAME = "PopperAnchor", PopperAnchor = React$1.forwardRef((x, S) => {
-	let { __scopePopper: C, virtualRef: T, ...D } = x, O = usePopperContext(ANCHOR_NAME, C), k = React$1.useRef(null), A = useComposedRefs(S, k), j = React$1.useRef(null);
+var ANCHOR_NAME = "PopperAnchor", PopperAnchor = React$1.forwardRef((m, x) => {
+	let { __scopePopper: S, virtualRef: C, ...T } = m, D = usePopperContext(ANCHOR_NAME, S), O = React$1.useRef(null), k = useComposedRefs(x, O), A = React$1.useRef(null);
 	return React$1.useEffect(() => {
-		let m = j.current;
-		j.current = T?.current || k.current, m !== j.current && O.onAnchorChange(j.current);
-	}), T ? null : /* @__PURE__ */ jsx(Primitive.div, {
-		...D,
-		ref: A
+		let m = A.current;
+		A.current = C?.current || O.current, m !== A.current && D.onAnchorChange(A.current);
+	}), C ? null : /* @__PURE__ */ jsx(Primitive.div, {
+		...T,
+		ref: k
 	});
 });
 PopperAnchor.displayName = ANCHOR_NAME;
-var CONTENT_NAME$1 = "PopperContent", [PopperContentProvider, useContentContext] = createPopperContext(CONTENT_NAME$1), PopperContent = React$1.forwardRef((x, S) => {
-	let { __scopePopper: C, side: T = "bottom", sideOffset: D = 0, align: O = "center", alignOffset: k = 0, arrowPadding: A = 0, avoidCollisions: j = !0, collisionBoundary: M = [], collisionPadding: N = 0, sticky: P = "partial", hideWhenDetached: F = !1, updatePositionStrategy: I = "optimized", onPlaced: L, ...R } = x, z = usePopperContext(CONTENT_NAME$1, C), [B, H] = React$1.useState(null), U = useComposedRefs(S, (m) => H(m)), [W, K] = React$1.useState(null), q = useSize(W), J = q?.width ?? 0, $V = q?.height ?? 0, Y = T + (O === "center" ? "" : "-" + O), X = typeof N == "number" ? N : {
+var CONTENT_NAME$1 = "PopperContent", [PopperContentProvider, useContentContext] = createPopperContext(CONTENT_NAME$1), PopperContent = React$1.forwardRef((m, x) => {
+	let { __scopePopper: S, side: C = "bottom", sideOffset: T = 0, align: D = "center", alignOffset: O = 0, arrowPadding: k = 0, avoidCollisions: A = !0, collisionBoundary: j = [], collisionPadding: N = 0, sticky: P = "partial", hideWhenDetached: F = !1, updatePositionStrategy: I = "optimized", onPlaced: L, ...R } = m, z = usePopperContext(CONTENT_NAME$1, S), [B, V] = React$1.useState(null), H = useComposedRefs(x, (m) => V(m)), [U, W] = React$1.useState(null), G = useSize(U), K = G?.width ?? 0, q = G?.height ?? 0, J = C + (D === "center" ? "" : "-" + D), Uz = typeof N == "number" ? N : {
 		top: 0,
 		right: 0,
 		bottom: 0,
 		left: 0,
 		...N
-	}, Z = Array.isArray(M) ? M : [M], eH = Z.length > 0, Q = {
-		padding: X,
-		boundary: Z.filter(isNotNull$2),
-		altBoundary: eH
-	}, { refs: tH, floatingStyles: nH, placement: rH, isPositioned: iH, middlewareData: aH } = useFloating({
+	}, Y = Array.isArray(j) ? j : [j], Wz = Y.length > 0, X = {
+		padding: Uz,
+		boundary: Y.filter(isNotNull$2),
+		altBoundary: Wz
+	}, { refs: Z, floatingStyles: Kz, placement: qz, isPositioned: Jz, middlewareData: Yz } = useFloating({
 		strategy: "fixed",
-		placement: Y,
+		placement: J,
 		whileElementsMounted: (...m) => autoUpdate(...m, { animationFrame: I === "always" }),
 		elements: { reference: z.anchor },
 		middleware: [
 			offset({
-				mainAxis: D + $V,
-				alignmentAxis: k
+				mainAxis: T + q,
+				alignmentAxis: O
 			}),
-			j && shift({
+			A && shift({
 				mainAxis: !0,
 				crossAxis: !1,
 				limiter: P === "partial" ? limitShift() : void 0,
-				...Q
+				...X
 			}),
-			j && flip({ ...Q }),
+			A && flip({ ...X }),
 			size({
-				...Q,
+				...X,
 				apply: ({ elements: m, rects: x, availableWidth: S, availableHeight: C }) => {
 					let { width: T, height: D } = x.reference, O = m.floating.style;
 					O.setProperty("--radix-popper-available-width", `${S}px`), O.setProperty("--radix-popper-available-height", `${C}px`), O.setProperty("--radix-popper-anchor-width", `${T}px`), O.setProperty("--radix-popper-anchor-height", `${D}px`);
 				}
 			}),
-			W && arrow({
-				element: W,
-				padding: A
+			U && arrow({
+				element: U,
+				padding: k
 			}),
 			transformOrigin({
-				arrowWidth: J,
-				arrowHeight: $V
+				arrowWidth: K,
+				arrowHeight: q
 			}),
 			F && hide({
 				strategy: "referenceHidden",
-				...Q
+				...X
 			})
 		]
-	}), [oH, sH] = getSideAndAlignFromPlacement(rH), cH = useCallbackRef(L);
+	}), [Xz, Q] = getSideAndAlignFromPlacement(qz), Zz = useCallbackRef(L);
 	useLayoutEffect2(() => {
-		iH && cH?.();
-	}, [iH, cH]);
-	let $ = aH.arrow?.x, lH = aH.arrow?.y, uH = aH.arrow?.centerOffset !== 0, [dH, fH] = React$1.useState();
+		Jz && Zz?.();
+	}, [Jz, Zz]);
+	let $ = Yz.arrow?.x, Qz = Yz.arrow?.y, $z = Yz.arrow?.centerOffset !== 0, [eB, tB] = React$1.useState();
 	return useLayoutEffect2(() => {
-		B && fH(window.getComputedStyle(B).zIndex);
+		B && tB(window.getComputedStyle(B).zIndex);
 	}, [B]), /* @__PURE__ */ jsx("div", {
-		ref: tH.setFloating,
+		ref: Z.setFloating,
 		"data-radix-popper-content-wrapper": "",
 		style: {
-			...nH,
-			transform: iH ? nH.transform : "translate(0, -200%)",
+			...Kz,
+			transform: Jz ? Kz.transform : "translate(0, -200%)",
 			minWidth: "max-content",
-			zIndex: dH,
-			"--radix-popper-transform-origin": [aH.transformOrigin?.x, aH.transformOrigin?.y].join(" "),
-			...aH.hide?.referenceHidden && {
+			zIndex: eB,
+			"--radix-popper-transform-origin": [Yz.transformOrigin?.x, Yz.transformOrigin?.y].join(" "),
+			...Yz.hide?.referenceHidden && {
 				visibility: "hidden",
 				pointerEvents: "none"
 			}
 		},
-		dir: x.dir,
+		dir: m.dir,
 		children: /* @__PURE__ */ jsx(PopperContentProvider, {
-			scope: C,
-			placedSide: oH,
-			onArrowChange: K,
+			scope: S,
+			placedSide: Xz,
+			onArrowChange: W,
 			arrowX: $,
-			arrowY: lH,
-			shouldHideArrow: uH,
+			arrowY: Qz,
+			shouldHideArrow: $z,
 			children: /* @__PURE__ */ jsx(Primitive.div, {
-				"data-side": oH,
-				"data-align": sH,
+				"data-side": Xz,
+				"data-align": Q,
 				...R,
-				ref: U,
+				ref: H,
 				style: {
 					...R.style,
-					animation: iH ? void 0 : "none"
+					animation: Jz ? void 0 : "none"
 				}
 			})
 		})
@@ -1903,66 +1820,66 @@ function getSideAndAlignFromPlacement(m) {
 	let [x, S = "center"] = m.split("-");
 	return [x, S];
 }
-var Root2$1 = Popper, Anchor = PopperAnchor, Content = PopperContent, Arrow$2 = PopperArrow, PORTAL_NAME$1 = "Portal", Portal = React$1.forwardRef((x, S) => {
-	let { container: C, ...T } = x, [D, O] = React$1.useState(!1);
-	useLayoutEffect2(() => O(!0), []);
-	let k = C || D && globalThis?.document?.body;
-	return k ? ReactDOM.createPortal(/* @__PURE__ */ jsx(Primitive.div, {
-		...T,
-		ref: S
-	}), k) : null;
+var Root2$1 = Popper, Anchor = PopperAnchor, Content = PopperContent, Arrow$2 = PopperArrow, PORTAL_NAME$1 = "Portal", Portal = React$1.forwardRef((m, x) => {
+	let { container: S, ...C } = m, [T, D] = React$1.useState(!1);
+	useLayoutEffect2(() => D(!0), []);
+	let O = S || T && globalThis?.document?.body;
+	return O ? ReactDOM.createPortal(/* @__PURE__ */ jsx(Primitive.div, {
+		...C,
+		ref: x
+	}), O) : null;
 });
 Portal.displayName = PORTAL_NAME$1;
 var useInsertionEffect$1 = React$1.useInsertionEffect || useLayoutEffect2;
-function useControllableState({ prop: x, defaultProp: S, onChange: C = () => {}, caller: T }) {
-	let [D, O, k] = useUncontrolledState({
-		defaultProp: S,
-		onChange: C
-	}), A = x !== void 0, j = A ? x : D;
+function useControllableState({ prop: m, defaultProp: x, onChange: S = () => {}, caller: C }) {
+	let [T, D, O] = useUncontrolledState({
+		defaultProp: x,
+		onChange: S
+	}), k = m !== void 0, A = k ? m : T;
 	{
-		let S = React$1.useRef(x !== void 0);
+		let x = React$1.useRef(m !== void 0);
 		React$1.useEffect(() => {
-			let m = S.current;
-			if (m !== A) {
-				let x = m ? "controlled" : "uncontrolled", S = A ? "controlled" : "uncontrolled";
-				console.warn(`${T} is changing from ${x} to ${S}. Components should not switch from controlled to uncontrolled (or vice versa). Decide between using a controlled or uncontrolled value for the lifetime of the component.`);
+			let m = x.current;
+			if (m !== k) {
+				let x = m ? "controlled" : "uncontrolled", S = k ? "controlled" : "uncontrolled";
+				console.warn(`${C} is changing from ${x} to ${S}. Components should not switch from controlled to uncontrolled (or vice versa). Decide between using a controlled or uncontrolled value for the lifetime of the component.`);
 			}
-			S.current = A;
-		}, [A, T]);
+			x.current = k;
+		}, [k, C]);
 	}
-	return [j, React$1.useCallback((m) => {
-		if (A) {
-			let S = isFunction(m) ? m(x) : m;
-			S !== x && k.current?.(S);
-		} else O(m);
+	return [A, React$1.useCallback((x) => {
+		if (k) {
+			let S = isFunction(x) ? x(m) : x;
+			S !== m && O.current?.(S);
+		} else D(x);
 	}, [
-		A,
-		x,
-		O,
-		k
+		k,
+		m,
+		D,
+		O
 	])];
 }
-function useUncontrolledState({ defaultProp: x, onChange: S }) {
-	let [C, T] = React$1.useState(x), D = React$1.useRef(C), O = React$1.useRef(S);
+function useUncontrolledState({ defaultProp: m, onChange: x }) {
+	let [S, C] = React$1.useState(m), T = React$1.useRef(S), D = React$1.useRef(x);
 	return useInsertionEffect$1(() => {
-		O.current = S;
-	}, [S]), React$1.useEffect(() => {
-		D.current !== C && (O.current?.(C), D.current = C);
-	}, [C, D]), [
+		D.current = x;
+	}, [x]), React$1.useEffect(() => {
+		T.current !== S && (D.current?.(S), T.current = S);
+	}, [S, T]), [
+		S,
 		C,
-		T,
-		O
+		D
 	];
 }
 function isFunction(m) {
 	return typeof m == "function";
 }
-function usePrevious(x) {
-	let S = React$1.useRef({
-		value: x,
-		previous: x
+function usePrevious(m) {
+	let x = React$1.useRef({
+		value: m,
+		previous: m
 	});
-	return React$1.useMemo(() => (S.current.value !== x && (S.current.previous = S.current.value, S.current.value = x), S.current.previous), [x]);
+	return React$1.useMemo(() => (x.current.value !== m && (x.current.previous = x.current.value, x.current.value = m), x.current.previous), [m]);
 }
 var VISUALLY_HIDDEN_STYLES = Object.freeze({
 	position: "absolute",
@@ -2064,14 +1981,14 @@ function useCallbackRef$1(m, x) {
 	})[0];
 	return S.callback = x, S.facade;
 }
-var useIsomorphicLayoutEffect$4 = typeof window < "u" ? React$1.useLayoutEffect : React$1.useEffect, currentValues = /* @__PURE__ */ new WeakMap();
+var useIsomorphicLayoutEffect$3 = typeof window < "u" ? React$1.useLayoutEffect : React$1.useEffect, currentValues = /* @__PURE__ */ new WeakMap();
 function useMergeRefs(m, x) {
 	var S = useCallbackRef$1(x || null, function(x) {
 		return m.forEach(function(m) {
 			return assignRef$1(m, x);
 		});
 	});
-	return useIsomorphicLayoutEffect$4(function() {
+	return useIsomorphicLayoutEffect$3(function() {
 		var x = currentValues.get(S);
 		if (x) {
 			var C = new Set(x), T = new Set(m), D = S.current;
@@ -2149,23 +2066,23 @@ function createSidecarMedium(m) {
 		ssr: !1
 	}, m), x;
 }
-var SideCar = function(x) {
-	var S = x.sideCar, C = __rest(x, ["sideCar"]);
-	if (!S) throw Error("Sidecar: please provide `sideCar` property to import the right car");
-	var T = S.read();
-	if (!T) throw Error("Sidecar medium not found");
-	return React$1.createElement(T, __assign({}, C));
+var SideCar = function(m) {
+	var x = m.sideCar, S = __rest(m, ["sideCar"]);
+	if (!x) throw Error("Sidecar: please provide `sideCar` property to import the right car");
+	var C = x.read();
+	if (!C) throw Error("Sidecar medium not found");
+	return React$1.createElement(C, __assign({}, S));
 };
 SideCar.isSideCarExport = !0;
 function exportSidecar(m, x) {
 	return m.useMedium(x), SideCar;
 }
-var effectCar = createSidecarMedium(), nothing = function() {}, RemoveScroll = React$1.forwardRef(function(x, S) {
-	var C = React$1.useRef(null), T = React$1.useState({
+var effectCar = createSidecarMedium(), nothing = function() {}, RemoveScroll = React$1.forwardRef(function(m, x) {
+	var S = React$1.useRef(null), C = React$1.useState({
 		onScrollCapture: nothing,
 		onWheelCapture: nothing,
 		onTouchMoveCapture: nothing
-	}), D = T[0], O = T[1], k = x.forwardProps, A = x.children, j = x.className, M = x.removeScrollBar, N = x.enabled, P = x.shards, F = x.sideCar, I = x.noRelative, L = x.noIsolation, R = x.inert, z = x.allowPinchZoom, B = x.as, H = B === void 0 ? "div" : B, U = x.gapMode, W = __rest(x, [
+	}), T = C[0], D = C[1], O = m.forwardProps, k = m.children, A = m.className, j = m.removeScrollBar, N = m.enabled, P = m.shards, F = m.sideCar, I = m.noRelative, L = m.noIsolation, R = m.inert, z = m.allowPinchZoom, B = m.as, V = B === void 0 ? "div" : B, H = m.gapMode, U = __rest(m, [
 		"forwardProps",
 		"children",
 		"className",
@@ -2179,22 +2096,22 @@ var effectCar = createSidecarMedium(), nothing = function() {}, RemoveScroll = R
 		"allowPinchZoom",
 		"as",
 		"gapMode"
-	]), G = F, K = useMergeRefs([C, S]), q = __assign(__assign({}, W), D);
-	return React$1.createElement(React$1.Fragment, null, N && React$1.createElement(G, {
+	]), W = F, G = useMergeRefs([S, x]), K = __assign(__assign({}, U), T);
+	return React$1.createElement(React$1.Fragment, null, N && React$1.createElement(W, {
 		sideCar: effectCar,
-		removeScrollBar: M,
+		removeScrollBar: j,
 		shards: P,
 		noRelative: I,
 		noIsolation: L,
 		inert: R,
-		setCallbacks: O,
+		setCallbacks: D,
 		allowPinchZoom: !!z,
-		lockRef: C,
-		gapMode: U
-	}), k ? React$1.cloneElement(React$1.Children.only(A), __assign(__assign({}, q), { ref: K })) : React$1.createElement(H, __assign({}, q, {
-		className: j,
-		ref: K
-	}), A));
+		lockRef: S,
+		gapMode: H
+	}), O ? React$1.cloneElement(React$1.Children.only(k), __assign(__assign({}, K), { ref: G })) : React$1.createElement(V, __assign({}, K, {
+		className: A,
+		ref: G
+	}), k));
 });
 RemoveScroll.defaultProps = {
 	enabled: !0,
@@ -2232,13 +2149,13 @@ var stylesheetSingleton = function() {
 		}
 	};
 }, styleHookSingleton = function() {
-	var x = stylesheetSingleton();
-	return function(S, C) {
+	var m = stylesheetSingleton();
+	return function(x, S) {
 		React$1.useEffect(function() {
-			return x.add(S), function() {
-				x.remove();
+			return m.add(x), function() {
+				m.remove();
 			};
-		}, [S && C]);
+		}, [x && S]);
 	};
 }, styleSingleton = function() {
 	var m = styleHookSingleton();
@@ -2251,14 +2168,14 @@ var stylesheetSingleton = function() {
 	top: 0,
 	right: 0,
 	gap: 0
-}, parse$2 = function(m) {
+}, parse$1 = function(m) {
 	return parseInt(m || "", 10) || 0;
 }, getOffset = function(m) {
 	var x = window.getComputedStyle(document.body), S = x[m === "padding" ? "paddingLeft" : "marginLeft"], C = x[m === "padding" ? "paddingTop" : "marginTop"], T = x[m === "padding" ? "paddingRight" : "marginRight"];
 	return [
-		parse$2(S),
-		parse$2(C),
-		parse$2(T)
+		parse$1(S),
+		parse$1(C),
+		parse$1(T)
 	];
 }, getGapWidth = function(m) {
 	if (m === void 0 && (m = "margin"), typeof window > "u") return zeroGap;
@@ -2323,13 +2240,13 @@ var stylesheetSingleton = function() {
 			m <= 0 ? document.body.removeAttribute(lockAttribute) : document.body.setAttribute(lockAttribute, m.toString());
 		};
 	}, []);
-}, RemoveScrollBar = function(x) {
-	var S = x.noRelative, C = x.noImportant, T = x.gapMode, D = T === void 0 ? "margin" : T;
+}, RemoveScrollBar = function(m) {
+	var x = m.noRelative, S = m.noImportant, C = m.gapMode, T = C === void 0 ? "margin" : C;
 	useLockAttribute();
-	var O = React$1.useMemo(function() {
-		return getGapWidth(D);
-	}, [D]);
-	return React$1.createElement(Style, { styles: getStyles$1(O, !S, D, C ? "" : "!important") });
+	var D = React$1.useMemo(function() {
+		return getGapWidth(T);
+	}, [T]);
+	return React$1.createElement(Style, { styles: getStyles$1(D, !x, T, S ? "" : "!important") });
 }, passiveSupported = !1;
 if (typeof window < "u") try {
 	var options$1 = Object.defineProperty({}, "passive", { get: function() {
@@ -2401,100 +2318,100 @@ var nonPassive = passiveSupported ? { passive: !1 } : !1, alwaysContainsScroll =
   .allow-interactivity-${m} {pointer-events: all;}
 `;
 }, idCounter = 0, lockStack = [];
-function RemoveScrollSideCar(x) {
-	var S = React$1.useRef([]), C = React$1.useRef([0, 0]), T = React$1.useRef(), D = React$1.useState(idCounter++)[0], O = React$1.useState(styleSingleton)[0], k = React$1.useRef(x);
+function RemoveScrollSideCar(m) {
+	var x = React$1.useRef([]), S = React$1.useRef([0, 0]), C = React$1.useRef(), T = React$1.useState(idCounter++)[0], D = React$1.useState(styleSingleton)[0], O = React$1.useRef(m);
 	React$1.useEffect(function() {
-		k.current = x;
-	}, [x]), React$1.useEffect(function() {
-		if (x.inert) {
-			document.body.classList.add(`block-interactivity-${D}`);
-			var m = __spreadArray([x.lockRef.current], (x.shards || []).map(extractRef), !0).filter(Boolean);
-			return m.forEach(function(m) {
-				return m.classList.add(`allow-interactivity-${D}`);
+		O.current = m;
+	}, [m]), React$1.useEffect(function() {
+		if (m.inert) {
+			document.body.classList.add(`block-interactivity-${T}`);
+			var x = __spreadArray([m.lockRef.current], (m.shards || []).map(extractRef), !0).filter(Boolean);
+			return x.forEach(function(m) {
+				return m.classList.add(`allow-interactivity-${T}`);
 			}), function() {
-				document.body.classList.remove(`block-interactivity-${D}`), m.forEach(function(m) {
-					return m.classList.remove(`allow-interactivity-${D}`);
+				document.body.classList.remove(`block-interactivity-${T}`), x.forEach(function(m) {
+					return m.classList.remove(`allow-interactivity-${T}`);
 				});
 			};
 		}
 	}, [
-		x.inert,
-		x.lockRef.current,
-		x.shards
+		m.inert,
+		m.lockRef.current,
+		m.shards
 	]);
-	var A = React$1.useCallback(function(m, x) {
-		if ("touches" in m && m.touches.length === 2 || m.type === "wheel" && m.ctrlKey) return !k.current.allowPinchZoom;
-		var S = getTouchXY(m), D = C.current, O = "deltaX" in m ? m.deltaX : D[0] - S[0], A = "deltaY" in m ? m.deltaY : D[1] - S[1], j, M = m.target, N = Math.abs(O) > Math.abs(A) ? "h" : "v";
+	var k = React$1.useCallback(function(m, x) {
+		if ("touches" in m && m.touches.length === 2 || m.type === "wheel" && m.ctrlKey) return !O.current.allowPinchZoom;
+		var T = getTouchXY(m), D = S.current, k = "deltaX" in m ? m.deltaX : D[0] - T[0], A = "deltaY" in m ? m.deltaY : D[1] - T[1], j, M = m.target, N = Math.abs(k) > Math.abs(A) ? "h" : "v";
 		if ("touches" in m && N === "h" && M.type === "range") return !1;
 		var P = window.getSelection(), F = P && P.anchorNode;
 		if (F && (F === M || F.contains(M))) return !1;
 		var I = locationCouldBeScrolled(N, M);
 		if (!I) return !0;
 		if (I ? j = N : (j = N === "v" ? "h" : "v", I = locationCouldBeScrolled(N, M)), !I) return !1;
-		if (!T.current && "changedTouches" in m && (O || A) && (T.current = j), !j) return !0;
-		var L = T.current || j;
-		return handleScroll(L, x, m, L === "h" ? O : A, !0);
-	}, []), j = React$1.useCallback(function(m) {
-		var x = m;
-		if (!(!lockStack.length || lockStack[lockStack.length - 1] !== O)) {
-			var C = "deltaY" in x ? getDeltaXY(x) : getTouchXY(x), T = S.current.filter(function(m) {
-				return m.name === x.type && (m.target === x.target || x.target === m.shadowParent) && deltaCompare(m.delta, C);
+		if (!C.current && "changedTouches" in m && (k || A) && (C.current = j), !j) return !0;
+		var L = C.current || j;
+		return handleScroll(L, x, m, L === "h" ? k : A, !0);
+	}, []), A = React$1.useCallback(function(m) {
+		var S = m;
+		if (!(!lockStack.length || lockStack[lockStack.length - 1] !== D)) {
+			var C = "deltaY" in S ? getDeltaXY(S) : getTouchXY(S), T = x.current.filter(function(m) {
+				return m.name === S.type && (m.target === S.target || S.target === m.shadowParent) && deltaCompare(m.delta, C);
 			})[0];
 			if (T && T.should) {
-				x.cancelable && x.preventDefault();
+				S.cancelable && S.preventDefault();
 				return;
 			}
 			if (!T) {
-				var D = (k.current.shards || []).map(extractRef).filter(Boolean).filter(function(m) {
-					return m.contains(x.target);
+				var A = (O.current.shards || []).map(extractRef).filter(Boolean).filter(function(m) {
+					return m.contains(S.target);
 				});
-				(D.length > 0 ? A(x, D[0]) : !k.current.noIsolation) && x.cancelable && x.preventDefault();
+				(A.length > 0 ? k(S, A[0]) : !O.current.noIsolation) && S.cancelable && S.preventDefault();
 			}
 		}
-	}, []), M = React$1.useCallback(function(m, x, C, T) {
+	}, []), j = React$1.useCallback(function(m, S, C, T) {
 		var D = {
 			name: m,
-			delta: x,
+			delta: S,
 			target: C,
 			should: T,
 			shadowParent: getOutermostShadowParent(C)
 		};
-		S.current.push(D), setTimeout(function() {
-			S.current = S.current.filter(function(m) {
+		x.current.push(D), setTimeout(function() {
+			x.current = x.current.filter(function(m) {
 				return m !== D;
 			});
 		}, 1);
 	}, []), N = React$1.useCallback(function(m) {
-		C.current = getTouchXY(m), T.current = void 0;
-	}, []), P = React$1.useCallback(function(m) {
-		M(m.type, getDeltaXY(m), m.target, A(m, x.lockRef.current));
-	}, []), F = React$1.useCallback(function(m) {
-		M(m.type, getTouchXY(m), m.target, A(m, x.lockRef.current));
+		S.current = getTouchXY(m), C.current = void 0;
+	}, []), P = React$1.useCallback(function(x) {
+		j(x.type, getDeltaXY(x), x.target, k(x, m.lockRef.current));
+	}, []), F = React$1.useCallback(function(x) {
+		j(x.type, getTouchXY(x), x.target, k(x, m.lockRef.current));
 	}, []);
 	React$1.useEffect(function() {
-		return lockStack.push(O), x.setCallbacks({
+		return lockStack.push(D), m.setCallbacks({
 			onScrollCapture: P,
 			onWheelCapture: P,
 			onTouchMoveCapture: F
-		}), document.addEventListener("wheel", j, nonPassive), document.addEventListener("touchmove", j, nonPassive), document.addEventListener("touchstart", N, nonPassive), function() {
+		}), document.addEventListener("wheel", A, nonPassive), document.addEventListener("touchmove", A, nonPassive), document.addEventListener("touchstart", N, nonPassive), function() {
 			lockStack = lockStack.filter(function(m) {
-				return m !== O;
-			}), document.removeEventListener("wheel", j, nonPassive), document.removeEventListener("touchmove", j, nonPassive), document.removeEventListener("touchstart", N, nonPassive);
+				return m !== D;
+			}), document.removeEventListener("wheel", A, nonPassive), document.removeEventListener("touchmove", A, nonPassive), document.removeEventListener("touchstart", N, nonPassive);
 		};
 	}, []);
-	var I = x.removeScrollBar, L = x.inert;
-	return React$1.createElement(React$1.Fragment, null, L ? React$1.createElement(O, { styles: generateStyle(D) }) : null, I ? React$1.createElement(RemoveScrollBar, {
-		noRelative: x.noRelative,
-		gapMode: x.gapMode
+	var I = m.removeScrollBar, L = m.inert;
+	return React$1.createElement(React$1.Fragment, null, L ? React$1.createElement(D, { styles: generateStyle(T) }) : null, I ? React$1.createElement(RemoveScrollBar, {
+		noRelative: m.noRelative,
+		gapMode: m.gapMode
 	}) : null);
 }
 function getOutermostShadowParent(m) {
 	for (var x = null; m !== null;) m instanceof ShadowRoot && (x = m.host, m = m.host), m = m.parentNode;
 	return x;
 }
-var sidecar_default = exportSidecar(effectCar, RemoveScrollSideCar), ReactRemoveScroll = React$1.forwardRef(function(x, S) {
-	return React$1.createElement(RemoveScroll, __assign({}, x, {
-		ref: S,
+var sidecar_default = exportSidecar(effectCar, RemoveScrollSideCar), ReactRemoveScroll = React$1.forwardRef(function(m, x) {
+	return React$1.createElement(RemoveScroll, __assign({}, m, {
+		ref: x,
 		sideCar: sidecar_default
 	}));
 });
@@ -2504,104 +2421,104 @@ var Combination_default = ReactRemoveScroll, OPEN_KEYS = [
 	"Enter",
 	"ArrowUp",
 	"ArrowDown"
-], SELECTION_KEYS = [" ", "Enter"], SELECT_NAME = "Select", [Collection, useCollection, createCollectionScope] = createCollection(SELECT_NAME), [createSelectContext, createSelectScope] = createContextScope(SELECT_NAME, [createCollectionScope, createPopperScope]), usePopperScope = createPopperScope(), [SelectProvider, useSelectContext] = createSelectContext(SELECT_NAME), [SelectNativeOptionsProvider, useSelectNativeOptionsContext] = createSelectContext(SELECT_NAME), Select$1 = (x) => {
-	let { __scopeSelect: S, children: C, open: T, defaultOpen: D, onOpenChange: O, value: k, defaultValue: A, onValueChange: j, dir: M, name: N, autoComplete: P, disabled: F, required: I, form: L } = x, R = usePopperScope(S), [z, B] = React$1.useState(null), [H, U] = React$1.useState(null), [W, q] = React$1.useState(!1), J = useDirection(M), [$V, Y] = useControllableState({
-		prop: T,
-		defaultProp: D ?? !1,
-		onChange: O,
+], SELECTION_KEYS = [" ", "Enter"], SELECT_NAME = "Select", [Collection, useCollection, createCollectionScope] = createCollection(SELECT_NAME), [createSelectContext, createSelectScope] = createContextScope(SELECT_NAME, [createCollectionScope, createPopperScope]), usePopperScope = createPopperScope(), [SelectProvider, useSelectContext] = createSelectContext(SELECT_NAME), [SelectNativeOptionsProvider, useSelectNativeOptionsContext] = createSelectContext(SELECT_NAME), Select$1 = (m) => {
+	let { __scopeSelect: x, children: S, open: C, defaultOpen: T, onOpenChange: D, value: O, defaultValue: k, onValueChange: A, dir: j, name: N, autoComplete: P, disabled: F, required: I, form: L } = m, R = usePopperScope(x), [z, B] = React$1.useState(null), [V, H] = React$1.useState(null), [U, W] = React$1.useState(!1), G = useDirection(j), [K, q] = useControllableState({
+		prop: C,
+		defaultProp: T ?? !1,
+		onChange: D,
 		caller: SELECT_NAME
-	}), [X, Z] = useControllableState({
-		prop: k,
-		defaultProp: A,
-		onChange: j,
+	}), [J, Uz] = useControllableState({
+		prop: O,
+		defaultProp: k,
+		onChange: A,
 		caller: SELECT_NAME
-	}), eH = React$1.useRef(null), Q = z ? L || !!z.closest("form") : !0, [tH, nH] = React$1.useState(/* @__PURE__ */ new Set()), rH = Array.from(tH).map((m) => m.props.value).join(";");
+	}), Y = React$1.useRef(null), Wz = z ? L || !!z.closest("form") : !0, [X, Z] = React$1.useState(/* @__PURE__ */ new Set()), qz = Array.from(X).map((m) => m.props.value).join(";");
 	return /* @__PURE__ */ jsx(Root2$1, {
 		...R,
 		children: /* @__PURE__ */ jsxs(SelectProvider, {
 			required: I,
-			scope: S,
+			scope: x,
 			trigger: z,
 			onTriggerChange: B,
-			valueNode: H,
-			onValueNodeChange: U,
-			valueNodeHasChildren: W,
-			onValueNodeHasChildrenChange: q,
+			valueNode: V,
+			onValueNodeChange: H,
+			valueNodeHasChildren: U,
+			onValueNodeHasChildrenChange: W,
 			contentId: useId$1(),
-			value: X,
-			onValueChange: Z,
-			open: $V,
-			onOpenChange: Y,
-			dir: J,
-			triggerPointerDownPosRef: eH,
+			value: J,
+			onValueChange: Uz,
+			open: K,
+			onOpenChange: q,
+			dir: G,
+			triggerPointerDownPosRef: Y,
 			disabled: F,
 			children: [/* @__PURE__ */ jsx(Collection.Provider, {
-				scope: S,
+				scope: x,
 				children: /* @__PURE__ */ jsx(SelectNativeOptionsProvider, {
-					scope: x.__scopeSelect,
+					scope: m.__scopeSelect,
 					onNativeOptionAdd: React$1.useCallback((m) => {
-						nH((x) => new Set(x).add(m));
+						Z((x) => new Set(x).add(m));
 					}, []),
 					onNativeOptionRemove: React$1.useCallback((m) => {
-						nH((x) => {
+						Z((x) => {
 							let S = new Set(x);
 							return S.delete(m), S;
 						});
 					}, []),
-					children: C
+					children: S
 				})
-			}), Q ? /* @__PURE__ */ jsxs(SelectBubbleInput, {
+			}), Wz ? /* @__PURE__ */ jsxs(SelectBubbleInput, {
 				"aria-hidden": !0,
 				required: I,
 				tabIndex: -1,
 				name: N,
 				autoComplete: P,
-				value: X,
-				onChange: (m) => Z(m.target.value),
+				value: J,
+				onChange: (m) => Uz(m.target.value),
 				disabled: F,
 				form: L,
-				children: [X === void 0 ? /* @__PURE__ */ jsx("option", { value: "" }) : null, Array.from(tH)]
-			}, rH) : null]
+				children: [J === void 0 ? /* @__PURE__ */ jsx("option", { value: "" }) : null, Array.from(X)]
+			}, qz) : null]
 		})
 	});
 };
 Select$1.displayName = SELECT_NAME;
-var TRIGGER_NAME = "SelectTrigger", SelectTrigger$1 = React$1.forwardRef((x, S) => {
-	let { __scopeSelect: C, disabled: T = !1, ...D } = x, O = usePopperScope(C), k = useSelectContext(TRIGGER_NAME, C), A = k.disabled || T, j = useComposedRefs(S, k.onTriggerChange), M = useCollection(C), N = React$1.useRef("touch"), [P, F, I] = useTypeaheadSearch((m) => {
-		let x = M().filter((m) => !m.disabled), S = findNextItem(x, m, x.find((m) => m.value === k.value));
-		S !== void 0 && k.onValueChange(S.value);
+var TRIGGER_NAME = "SelectTrigger", SelectTrigger$1 = React$1.forwardRef((m, x) => {
+	let { __scopeSelect: S, disabled: C = !1, ...T } = m, D = usePopperScope(S), O = useSelectContext(TRIGGER_NAME, S), k = O.disabled || C, A = useComposedRefs(x, O.onTriggerChange), j = useCollection(S), N = React$1.useRef("touch"), [P, F, I] = useTypeaheadSearch((m) => {
+		let x = j().filter((m) => !m.disabled), S = findNextItem(x, m, x.find((m) => m.value === O.value));
+		S !== void 0 && O.onValueChange(S.value);
 	}), L = (m) => {
-		A || (k.onOpenChange(!0), I()), m && (k.triggerPointerDownPosRef.current = {
+		k || (O.onOpenChange(!0), I()), m && (O.triggerPointerDownPosRef.current = {
 			x: Math.round(m.pageX),
 			y: Math.round(m.pageY)
 		});
 	};
 	return /* @__PURE__ */ jsx(Anchor, {
 		asChild: !0,
-		...O,
+		...D,
 		children: /* @__PURE__ */ jsx(Primitive.button, {
 			type: "button",
 			role: "combobox",
-			"aria-controls": k.contentId,
-			"aria-expanded": k.open,
-			"aria-required": k.required,
+			"aria-controls": O.contentId,
+			"aria-expanded": O.open,
+			"aria-required": O.required,
 			"aria-autocomplete": "none",
-			dir: k.dir,
-			"data-state": k.open ? "open" : "closed",
-			disabled: A,
-			"data-disabled": A ? "" : void 0,
-			"data-placeholder": shouldShowPlaceholder(k.value) ? "" : void 0,
-			...D,
-			ref: j,
-			onClick: composeEventHandlers(D.onClick, (m) => {
+			dir: O.dir,
+			"data-state": O.open ? "open" : "closed",
+			disabled: k,
+			"data-disabled": k ? "" : void 0,
+			"data-placeholder": shouldShowPlaceholder(O.value) ? "" : void 0,
+			...T,
+			ref: A,
+			onClick: composeEventHandlers(T.onClick, (m) => {
 				m.currentTarget.focus(), N.current !== "mouse" && L(m);
 			}),
-			onPointerDown: composeEventHandlers(D.onPointerDown, (m) => {
+			onPointerDown: composeEventHandlers(T.onPointerDown, (m) => {
 				N.current = m.pointerType;
 				let x = m.target;
 				x.hasPointerCapture(m.pointerId) && x.releasePointerCapture(m.pointerId), m.button === 0 && m.ctrlKey === !1 && m.pointerType === "mouse" && (L(m), m.preventDefault());
 			}),
-			onKeyDown: composeEventHandlers(D.onKeyDown, (m) => {
+			onKeyDown: composeEventHandlers(T.onKeyDown, (m) => {
 				let x = P.current !== "";
 				!(m.ctrlKey || m.altKey || m.metaKey) && m.key.length === 1 && F(m.key), !(x && m.key === " ") && OPEN_KEYS.includes(m.key) && (L(), m.preventDefault());
 			})
@@ -2636,57 +2553,57 @@ var PORTAL_NAME = "SelectPortal", SelectPortal = (m) => /* @__PURE__ */ jsx(Port
 	...m
 });
 SelectPortal.displayName = PORTAL_NAME;
-var CONTENT_NAME = "SelectContent", SelectContent$1 = React$1.forwardRef((x, S) => {
-	let C = useSelectContext(CONTENT_NAME, x.__scopeSelect), [T, D] = React$1.useState();
+var CONTENT_NAME = "SelectContent", SelectContent$1 = React$1.forwardRef((m, x) => {
+	let S = useSelectContext(CONTENT_NAME, m.__scopeSelect), [C, T] = React$1.useState();
 	if (useLayoutEffect2(() => {
-		D(new DocumentFragment());
-	}, []), !C.open) {
-		let m = T;
-		return m ? ReactDOM$1.createPortal(/* @__PURE__ */ jsx(SelectContentProvider, {
-			scope: x.__scopeSelect,
+		T(new DocumentFragment());
+	}, []), !S.open) {
+		let x = C;
+		return x ? ReactDOM$1.createPortal(/* @__PURE__ */ jsx(SelectContentProvider, {
+			scope: m.__scopeSelect,
 			children: /* @__PURE__ */ jsx(Collection.Slot, {
-				scope: x.__scopeSelect,
-				children: /* @__PURE__ */ jsx("div", { children: x.children })
+				scope: m.__scopeSelect,
+				children: /* @__PURE__ */ jsx("div", { children: m.children })
 			})
-		}), m) : null;
+		}), x) : null;
 	}
 	return /* @__PURE__ */ jsx(SelectContentImpl, {
-		...x,
-		ref: S
+		...m,
+		ref: x
 	});
 });
 SelectContent$1.displayName = CONTENT_NAME;
-var CONTENT_MARGIN = 10, [SelectContentProvider, useSelectContentContext] = createSelectContext(CONTENT_NAME), CONTENT_IMPL_NAME = "SelectContentImpl", Slot = /* @__PURE__ */ createSlot("SelectContent.RemoveScroll"), SelectContentImpl = React$1.forwardRef((x, S) => {
-	let { __scopeSelect: C, position: T = "item-aligned", onCloseAutoFocus: D, onEscapeKeyDown: O, onPointerDownOutside: k, side: A, sideOffset: j, align: M, alignOffset: N, arrowPadding: P, collisionBoundary: F, collisionPadding: I, sticky: L, hideWhenDetached: R, avoidCollisions: z, ...B } = x, H = useSelectContext(CONTENT_NAME, C), [U, W] = React$1.useState(null), [K, q] = React$1.useState(null), J = useComposedRefs(S, (m) => W(m)), [$V, Y] = React$1.useState(null), [X, Z] = React$1.useState(null), eH = useCollection(C), [Q, tH] = React$1.useState(!1), nH = React$1.useRef(!1);
+var CONTENT_MARGIN = 10, [SelectContentProvider, useSelectContentContext] = createSelectContext(CONTENT_NAME), CONTENT_IMPL_NAME = "SelectContentImpl", Slot = /* @__PURE__ */ createSlot("SelectContent.RemoveScroll"), SelectContentImpl = React$1.forwardRef((m, x) => {
+	let { __scopeSelect: S, position: C = "item-aligned", onCloseAutoFocus: T, onEscapeKeyDown: D, onPointerDownOutside: O, side: k, sideOffset: A, align: j, alignOffset: N, arrowPadding: P, collisionBoundary: F, collisionPadding: I, sticky: L, hideWhenDetached: R, avoidCollisions: z, ...B } = m, V = useSelectContext(CONTENT_NAME, S), [H, U] = React$1.useState(null), [W, G] = React$1.useState(null), K = useComposedRefs(x, (m) => U(m)), [q, J] = React$1.useState(null), [Uz, Y] = React$1.useState(null), Wz = useCollection(S), [X, Z] = React$1.useState(!1), Kz = React$1.useRef(!1);
 	React$1.useEffect(() => {
-		if (U) return hideOthers(U);
-	}, [U]), useFocusGuards();
-	let rH = React$1.useCallback((m) => {
-		let [x, ...S] = eH().map((m) => m.ref.current), [C] = S.slice(-1), T = document.activeElement;
-		for (let S of m) if (S === T || (S?.scrollIntoView({ block: "nearest" }), S === x && K && (K.scrollTop = 0), S === C && K && (K.scrollTop = K.scrollHeight), S?.focus(), document.activeElement !== T)) return;
-	}, [eH, K]), iH = React$1.useCallback(() => rH([$V, U]), [
-		rH,
-		$V,
-		U
+		if (H) return hideOthers(H);
+	}, [H]), useFocusGuards();
+	let qz = React$1.useCallback((m) => {
+		let [x, ...S] = Wz().map((m) => m.ref.current), [C] = S.slice(-1), T = document.activeElement;
+		for (let S of m) if (S === T || (S?.scrollIntoView({ block: "nearest" }), S === x && W && (W.scrollTop = 0), S === C && W && (W.scrollTop = W.scrollHeight), S?.focus(), document.activeElement !== T)) return;
+	}, [Wz, W]), Jz = React$1.useCallback(() => qz([q, H]), [
+		qz,
+		q,
+		H
 	]);
 	React$1.useEffect(() => {
-		Q && iH();
-	}, [Q, iH]);
-	let { onOpenChange: aH, triggerPointerDownPosRef: oH } = H;
+		X && Jz();
+	}, [X, Jz]);
+	let { onOpenChange: Yz, triggerPointerDownPosRef: Xz } = V;
 	React$1.useEffect(() => {
-		if (U) {
+		if (H) {
 			let m = {
 				x: 0,
 				y: 0
 			}, x = (x) => {
 				m = {
-					x: Math.abs(Math.round(x.pageX) - (oH.current?.x ?? 0)),
-					y: Math.abs(Math.round(x.pageY) - (oH.current?.y ?? 0))
+					x: Math.abs(Math.round(x.pageX) - (Xz.current?.x ?? 0)),
+					y: Math.abs(Math.round(x.pageY) - (Xz.current?.y ?? 0))
 				};
 			}, S = (S) => {
-				m.x <= 10 && m.y <= 10 ? S.preventDefault() : U.contains(S.target) || aH(!1), document.removeEventListener("pointermove", x), oH.current = null;
+				m.x <= 10 && m.y <= 10 ? S.preventDefault() : H.contains(S.target) || Yz(!1), document.removeEventListener("pointermove", x), Xz.current = null;
 			};
-			return oH.current !== null && (document.addEventListener("pointermove", x), document.addEventListener("pointerup", S, {
+			return Xz.current !== null && (document.addEventListener("pointermove", x), document.addEventListener("pointerup", S, {
 				capture: !0,
 				once: !0
 			})), () => {
@@ -2694,28 +2611,28 @@ var CONTENT_MARGIN = 10, [SelectContentProvider, useSelectContentContext] = crea
 			};
 		}
 	}, [
-		U,
-		aH,
-		oH
+		H,
+		Yz,
+		Xz
 	]), React$1.useEffect(() => {
-		let m = () => aH(!1);
+		let m = () => Yz(!1);
 		return window.addEventListener("blur", m), window.addEventListener("resize", m), () => {
 			window.removeEventListener("blur", m), window.removeEventListener("resize", m);
 		};
-	}, [aH]);
-	let [sH, cH] = useTypeaheadSearch((m) => {
-		let x = eH().filter((m) => !m.disabled), S = findNextItem(x, m, x.find((m) => m.ref.current === document.activeElement));
+	}, [Yz]);
+	let [Q, Zz] = useTypeaheadSearch((m) => {
+		let x = Wz().filter((m) => !m.disabled), S = findNextItem(x, m, x.find((m) => m.ref.current === document.activeElement));
 		S && setTimeout(() => S.ref.current.focus());
 	}), $ = React$1.useCallback((m, x, S) => {
-		let C = !nH.current && !S;
-		(H.value !== void 0 && H.value === x || C) && (Y(m), C && (nH.current = !0));
-	}, [H.value]), lH = React$1.useCallback(() => U?.focus(), [U]), uH = React$1.useCallback((m, x, S) => {
-		let C = !nH.current && !S;
-		(H.value !== void 0 && H.value === x || C) && Z(m);
-	}, [H.value]), dH = T === "popper" ? SelectPopperPosition : SelectItemAlignedPosition, fH = dH === SelectPopperPosition ? {
-		side: A,
-		sideOffset: j,
-		align: M,
+		let C = !Kz.current && !S;
+		(V.value !== void 0 && V.value === x || C) && (J(m), C && (Kz.current = !0));
+	}, [V.value]), Qz = React$1.useCallback(() => H?.focus(), [H]), $z = React$1.useCallback((m, x, S) => {
+		let C = !Kz.current && !S;
+		(V.value !== void 0 && V.value === x || C) && Y(m);
+	}, [V.value]), eB = C === "popper" ? SelectPopperPosition : SelectItemAlignedPosition, tB = eB === SelectPopperPosition ? {
+		side: k,
+		sideOffset: A,
+		align: j,
 		alignOffset: N,
 		arrowPadding: P,
 		collisionBoundary: F,
@@ -2725,48 +2642,48 @@ var CONTENT_MARGIN = 10, [SelectContentProvider, useSelectContentContext] = crea
 		avoidCollisions: z
 	} : {};
 	return /* @__PURE__ */ jsx(SelectContentProvider, {
-		scope: C,
-		content: U,
-		viewport: K,
-		onViewportChange: q,
+		scope: S,
+		content: H,
+		viewport: W,
+		onViewportChange: G,
 		itemRefCallback: $,
-		selectedItem: $V,
-		onItemLeave: lH,
-		itemTextRefCallback: uH,
-		focusSelectedItem: iH,
-		selectedItemText: X,
-		position: T,
-		isPositioned: Q,
-		searchRef: sH,
+		selectedItem: q,
+		onItemLeave: Qz,
+		itemTextRefCallback: $z,
+		focusSelectedItem: Jz,
+		selectedItemText: Uz,
+		position: C,
+		isPositioned: X,
+		searchRef: Q,
 		children: /* @__PURE__ */ jsx(Combination_default, {
 			as: Slot,
 			allowPinchZoom: !0,
 			children: /* @__PURE__ */ jsx(FocusScope, {
 				asChild: !0,
-				trapped: H.open,
+				trapped: V.open,
 				onMountAutoFocus: (m) => {
 					m.preventDefault();
 				},
-				onUnmountAutoFocus: composeEventHandlers(D, (m) => {
-					H.trigger?.focus({ preventScroll: !0 }), m.preventDefault();
+				onUnmountAutoFocus: composeEventHandlers(T, (m) => {
+					V.trigger?.focus({ preventScroll: !0 }), m.preventDefault();
 				}),
 				children: /* @__PURE__ */ jsx(DismissableLayer, {
 					asChild: !0,
 					disableOutsidePointerEvents: !0,
-					onEscapeKeyDown: O,
-					onPointerDownOutside: k,
+					onEscapeKeyDown: D,
+					onPointerDownOutside: O,
 					onFocusOutside: (m) => m.preventDefault(),
-					onDismiss: () => H.onOpenChange(!1),
-					children: /* @__PURE__ */ jsx(dH, {
+					onDismiss: () => V.onOpenChange(!1),
+					children: /* @__PURE__ */ jsx(eB, {
 						role: "listbox",
-						id: H.contentId,
-						"data-state": H.open ? "open" : "closed",
-						dir: H.dir,
+						id: V.contentId,
+						"data-state": V.open ? "open" : "closed",
+						dir: V.dir,
 						onContextMenu: (m) => m.preventDefault(),
 						...B,
-						...fH,
-						onPlaced: () => tH(!0),
-						ref: J,
+						...tB,
+						onPlaced: () => Z(!0),
+						ref: K,
 						style: {
 							display: "flex",
 							flexDirection: "column",
@@ -2775,18 +2692,18 @@ var CONTENT_MARGIN = 10, [SelectContentProvider, useSelectContentContext] = crea
 						},
 						onKeyDown: composeEventHandlers(B.onKeyDown, (m) => {
 							let x = m.ctrlKey || m.altKey || m.metaKey;
-							if (m.key === "Tab" && m.preventDefault(), !x && m.key.length === 1 && cH(m.key), [
+							if (m.key === "Tab" && m.preventDefault(), !x && m.key.length === 1 && Zz(m.key), [
 								"ArrowUp",
 								"ArrowDown",
 								"Home",
 								"End"
 							].includes(m.key)) {
-								let x = eH().filter((m) => !m.disabled).map((m) => m.ref.current);
+								let x = Wz().filter((m) => !m.disabled).map((m) => m.ref.current);
 								if (["ArrowUp", "End"].includes(m.key) && (x = x.slice().reverse()), ["ArrowUp", "ArrowDown"].includes(m.key)) {
 									let S = m.target, C = x.indexOf(S);
 									x = x.slice(C + 1);
 								}
-								setTimeout(() => rH(x)), m.preventDefault();
+								setTimeout(() => qz(x)), m.preventDefault();
 							}
 						})
 					})
@@ -2796,69 +2713,69 @@ var CONTENT_MARGIN = 10, [SelectContentProvider, useSelectContentContext] = crea
 	});
 });
 SelectContentImpl.displayName = CONTENT_IMPL_NAME;
-var ITEM_ALIGNED_POSITION_NAME = "SelectItemAlignedPosition", SelectItemAlignedPosition = React$1.forwardRef((x, S) => {
-	let { __scopeSelect: C, onPlaced: T, ...D } = x, O = useSelectContext(CONTENT_NAME, C), k = useSelectContentContext(CONTENT_NAME, C), [A, j] = React$1.useState(null), [M, N] = React$1.useState(null), P = useComposedRefs(S, (m) => N(m)), F = useCollection(C), I = React$1.useRef(!1), L = React$1.useRef(!0), { viewport: R, selectedItem: z, selectedItemText: B, focusSelectedItem: H } = k, U = React$1.useCallback(() => {
-		if (O.trigger && O.valueNode && A && M && R && z && B) {
-			let m = O.trigger.getBoundingClientRect(), x = M.getBoundingClientRect(), S = O.valueNode.getBoundingClientRect(), C = B.getBoundingClientRect();
-			if (O.dir !== "rtl") {
-				let T = C.left - x.left, D = S.left - T, O = m.left - D, k = m.width + O, j = Math.max(k, x.width), M = window.innerWidth - CONTENT_MARGIN, N = clamp$2(D, [CONTENT_MARGIN, Math.max(CONTENT_MARGIN, M - j)]);
-				A.style.minWidth = k + "px", A.style.left = N + "px";
+var ITEM_ALIGNED_POSITION_NAME = "SelectItemAlignedPosition", SelectItemAlignedPosition = React$1.forwardRef((m, x) => {
+	let { __scopeSelect: S, onPlaced: C, ...T } = m, D = useSelectContext(CONTENT_NAME, S), O = useSelectContentContext(CONTENT_NAME, S), [k, A] = React$1.useState(null), [j, N] = React$1.useState(null), P = useComposedRefs(x, (m) => N(m)), F = useCollection(S), I = React$1.useRef(!1), L = React$1.useRef(!0), { viewport: R, selectedItem: z, selectedItemText: B, focusSelectedItem: V } = O, H = React$1.useCallback(() => {
+		if (D.trigger && D.valueNode && k && j && R && z && B) {
+			let m = D.trigger.getBoundingClientRect(), x = j.getBoundingClientRect(), S = D.valueNode.getBoundingClientRect(), T = B.getBoundingClientRect();
+			if (D.dir !== "rtl") {
+				let C = T.left - x.left, D = S.left - C, O = m.left - D, A = m.width + O, j = Math.max(A, x.width), M = window.innerWidth - CONTENT_MARGIN, N = clamp$1(D, [CONTENT_MARGIN, Math.max(CONTENT_MARGIN, M - j)]);
+				k.style.minWidth = A + "px", k.style.left = N + "px";
 			} else {
-				let T = x.right - C.right, D = window.innerWidth - S.right - T, O = window.innerWidth - m.right - D, k = m.width + O, j = Math.max(k, x.width), M = window.innerWidth - CONTENT_MARGIN, N = clamp$2(D, [CONTENT_MARGIN, Math.max(CONTENT_MARGIN, M - j)]);
-				A.style.minWidth = k + "px", A.style.right = N + "px";
+				let C = x.right - T.right, D = window.innerWidth - S.right - C, O = window.innerWidth - m.right - D, A = m.width + O, j = Math.max(A, x.width), M = window.innerWidth - CONTENT_MARGIN, N = clamp$1(D, [CONTENT_MARGIN, Math.max(CONTENT_MARGIN, M - j)]);
+				k.style.minWidth = A + "px", k.style.right = N + "px";
 			}
-			let D = F(), k = window.innerHeight - CONTENT_MARGIN * 2, j = R.scrollHeight, N = window.getComputedStyle(M), P = parseInt(N.borderTopWidth, 10), L = parseInt(N.paddingTop, 10), H = parseInt(N.borderBottomWidth, 10), U = parseInt(N.paddingBottom, 10), W = P + L + j + U + H, G = Math.min(z.offsetHeight * 5, W), K = window.getComputedStyle(R), q = parseInt(K.paddingTop, 10), J = parseInt(K.paddingBottom, 10), $V = m.top + m.height / 2 - CONTENT_MARGIN, Y = k - $V, X = z.offsetHeight / 2, Z = z.offsetTop + X, eH = P + L + Z, Q = W - eH;
-			if (eH <= $V) {
-				let m = D.length > 0 && z === D[D.length - 1].ref.current;
-				A.style.bottom = "0px";
-				let x = M.clientHeight - R.offsetTop - R.offsetHeight, S = eH + Math.max(Y, X + (m ? J : 0) + x + H);
-				A.style.height = S + "px";
+			let O = F(), A = window.innerHeight - CONTENT_MARGIN * 2, M = R.scrollHeight, N = window.getComputedStyle(j), P = parseInt(N.borderTopWidth, 10), L = parseInt(N.paddingTop, 10), V = parseInt(N.borderBottomWidth, 10), H = parseInt(N.paddingBottom, 10), U = P + L + M + H + V, W = Math.min(z.offsetHeight * 5, U), G = window.getComputedStyle(R), K = parseInt(G.paddingTop, 10), q = parseInt(G.paddingBottom, 10), J = m.top + m.height / 2 - CONTENT_MARGIN, Uz = A - J, Y = z.offsetHeight / 2, Wz = z.offsetTop + Y, X = P + L + Wz, Z = U - X;
+			if (X <= J) {
+				let m = O.length > 0 && z === O[O.length - 1].ref.current;
+				k.style.bottom = "0px";
+				let x = j.clientHeight - R.offsetTop - R.offsetHeight, S = X + Math.max(Uz, Y + (m ? q : 0) + x + V);
+				k.style.height = S + "px";
 			} else {
-				let m = D.length > 0 && z === D[0].ref.current;
-				A.style.top = "0px";
-				let x = Math.max($V, P + R.offsetTop + (m ? q : 0) + X) + Q;
-				A.style.height = x + "px", R.scrollTop = eH - $V + R.offsetTop;
+				let m = O.length > 0 && z === O[0].ref.current;
+				k.style.top = "0px";
+				let x = Math.max(J, P + R.offsetTop + (m ? K : 0) + Y) + Z;
+				k.style.height = x + "px", R.scrollTop = X - J + R.offsetTop;
 			}
-			A.style.margin = `${CONTENT_MARGIN}px 0`, A.style.minHeight = G + "px", A.style.maxHeight = k + "px", T?.(), requestAnimationFrame(() => I.current = !0);
+			k.style.margin = `${CONTENT_MARGIN}px 0`, k.style.minHeight = W + "px", k.style.maxHeight = A + "px", C?.(), requestAnimationFrame(() => I.current = !0);
 		}
 	}, [
 		F,
-		O.trigger,
-		O.valueNode,
-		A,
-		M,
+		D.trigger,
+		D.valueNode,
+		k,
+		j,
 		R,
 		z,
 		B,
-		O.dir,
-		T
+		D.dir,
+		C
 	]);
-	useLayoutEffect2(() => U(), [U]);
-	let [W, K] = React$1.useState();
+	useLayoutEffect2(() => H(), [H]);
+	let [U, W] = React$1.useState();
 	return useLayoutEffect2(() => {
-		M && K(window.getComputedStyle(M).zIndex);
-	}, [M]), /* @__PURE__ */ jsx(SelectViewportProvider, {
-		scope: C,
-		contentWrapper: A,
+		j && W(window.getComputedStyle(j).zIndex);
+	}, [j]), /* @__PURE__ */ jsx(SelectViewportProvider, {
+		scope: S,
+		contentWrapper: k,
 		shouldExpandOnScrollRef: I,
 		onScrollButtonChange: React$1.useCallback((m) => {
-			m && L.current === !0 && (U(), H?.(), L.current = !1);
-		}, [U, H]),
+			m && L.current === !0 && (H(), V?.(), L.current = !1);
+		}, [H, V]),
 		children: /* @__PURE__ */ jsx("div", {
-			ref: j,
+			ref: A,
 			style: {
 				display: "flex",
 				flexDirection: "column",
 				position: "fixed",
-				zIndex: W
+				zIndex: U
 			},
 			children: /* @__PURE__ */ jsx(Primitive.div, {
-				...D,
+				...T,
 				ref: P,
 				style: {
 					boxSizing: "border-box",
 					maxHeight: "100%",
-					...D.style
+					...T.style
 				}
 			})
 		})
@@ -2885,28 +2802,28 @@ var POPPER_POSITION_NAME = "SelectPopperPosition", SelectPopperPosition = React$
 	});
 });
 SelectPopperPosition.displayName = POPPER_POSITION_NAME;
-var [SelectViewportProvider, useSelectViewportContext] = createSelectContext(CONTENT_NAME, {}), VIEWPORT_NAME = "SelectViewport", SelectViewport = React$1.forwardRef((x, S) => {
-	let { __scopeSelect: C, nonce: T, ...D } = x, O = useSelectContentContext(VIEWPORT_NAME, C), k = useSelectViewportContext(VIEWPORT_NAME, C), A = useComposedRefs(S, O.onViewportChange), j = React$1.useRef(0);
+var [SelectViewportProvider, useSelectViewportContext] = createSelectContext(CONTENT_NAME, {}), VIEWPORT_NAME = "SelectViewport", SelectViewport = React$1.forwardRef((m, x) => {
+	let { __scopeSelect: S, nonce: C, ...T } = m, D = useSelectContentContext(VIEWPORT_NAME, S), O = useSelectViewportContext(VIEWPORT_NAME, S), k = useComposedRefs(x, D.onViewportChange), A = React$1.useRef(0);
 	return /* @__PURE__ */ jsxs(Fragment$1, { children: [/* @__PURE__ */ jsx("style", {
 		dangerouslySetInnerHTML: { __html: "[data-radix-select-viewport]{scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch;}[data-radix-select-viewport]::-webkit-scrollbar{display:none}" },
-		nonce: T
+		nonce: C
 	}), /* @__PURE__ */ jsx(Collection.Slot, {
-		scope: C,
+		scope: S,
 		children: /* @__PURE__ */ jsx(Primitive.div, {
 			"data-radix-select-viewport": "",
 			role: "presentation",
-			...D,
-			ref: A,
+			...T,
+			ref: k,
 			style: {
 				position: "relative",
 				flex: 1,
 				overflow: "hidden auto",
-				...D.style
+				...T.style
 			},
-			onScroll: composeEventHandlers(D.onScroll, (m) => {
-				let x = m.currentTarget, { contentWrapper: S, shouldExpandOnScrollRef: C } = k;
+			onScroll: composeEventHandlers(T.onScroll, (m) => {
+				let x = m.currentTarget, { contentWrapper: S, shouldExpandOnScrollRef: C } = O;
 				if (C?.current && S) {
-					let m = Math.abs(j.current - x.scrollTop);
+					let m = Math.abs(A.current - x.scrollTop);
 					if (m > 0) {
 						let C = window.innerHeight - CONTENT_MARGIN * 2, T = parseFloat(S.style.minHeight), D = parseFloat(S.style.height), O = Math.max(T, D);
 						if (O < C) {
@@ -2915,7 +2832,7 @@ var [SelectViewportProvider, useSelectViewportContext] = createSelectContext(CON
 						}
 					}
 				}
-				j.current = x.scrollTop;
+				A.current = x.scrollTop;
 			})
 		})
 	})] });
@@ -2944,80 +2861,80 @@ var LABEL_NAME = "SelectLabel", SelectLabel$1 = React$1.forwardRef((m, x) => {
 	});
 });
 SelectLabel$1.displayName = LABEL_NAME;
-var ITEM_NAME = "SelectItem", [SelectItemContextProvider, useSelectItemContext] = createSelectContext(ITEM_NAME), SelectItem$1 = React$1.forwardRef((x, S) => {
-	let { __scopeSelect: C, value: T, disabled: D = !1, textValue: O, ...k } = x, A = useSelectContext(ITEM_NAME, C), j = useSelectContentContext(ITEM_NAME, C), M = A.value === T, [N, P] = React$1.useState(O ?? ""), [F, I] = React$1.useState(!1), L = useComposedRefs(S, (m) => j.itemRefCallback?.(m, T, D)), R = useId$1(), z = React$1.useRef("touch"), B = () => {
-		D || (A.onValueChange(T), A.onOpenChange(!1));
+var ITEM_NAME = "SelectItem", [SelectItemContextProvider, useSelectItemContext] = createSelectContext(ITEM_NAME), SelectItem$1 = React$1.forwardRef((m, x) => {
+	let { __scopeSelect: S, value: C, disabled: T = !1, textValue: D, ...O } = m, k = useSelectContext(ITEM_NAME, S), A = useSelectContentContext(ITEM_NAME, S), j = k.value === C, [N, P] = React$1.useState(D ?? ""), [F, I] = React$1.useState(!1), L = useComposedRefs(x, (m) => A.itemRefCallback?.(m, C, T)), R = useId$1(), z = React$1.useRef("touch"), B = () => {
+		T || (k.onValueChange(C), k.onOpenChange(!1));
 	};
-	if (T === "") throw Error("A <Select.Item /> must have a value prop that is not an empty string. This is because the Select value can be set to an empty string to clear the selection and show the placeholder.");
+	if (C === "") throw Error("A <Select.Item /> must have a value prop that is not an empty string. This is because the Select value can be set to an empty string to clear the selection and show the placeholder.");
 	return /* @__PURE__ */ jsx(SelectItemContextProvider, {
-		scope: C,
-		value: T,
-		disabled: D,
+		scope: S,
+		value: C,
+		disabled: T,
 		textId: R,
-		isSelected: M,
+		isSelected: j,
 		onItemTextChange: React$1.useCallback((m) => {
 			P((x) => x || (m?.textContent ?? "").trim());
 		}, []),
 		children: /* @__PURE__ */ jsx(Collection.ItemSlot, {
-			scope: C,
-			value: T,
-			disabled: D,
+			scope: S,
+			value: C,
+			disabled: T,
 			textValue: N,
 			children: /* @__PURE__ */ jsx(Primitive.div, {
 				role: "option",
 				"aria-labelledby": R,
 				"data-highlighted": F ? "" : void 0,
-				"aria-selected": M && F,
-				"data-state": M ? "checked" : "unchecked",
-				"aria-disabled": D || void 0,
-				"data-disabled": D ? "" : void 0,
-				tabIndex: D ? void 0 : -1,
-				...k,
+				"aria-selected": j && F,
+				"data-state": j ? "checked" : "unchecked",
+				"aria-disabled": T || void 0,
+				"data-disabled": T ? "" : void 0,
+				tabIndex: T ? void 0 : -1,
+				...O,
 				ref: L,
-				onFocus: composeEventHandlers(k.onFocus, () => I(!0)),
-				onBlur: composeEventHandlers(k.onBlur, () => I(!1)),
-				onClick: composeEventHandlers(k.onClick, () => {
+				onFocus: composeEventHandlers(O.onFocus, () => I(!0)),
+				onBlur: composeEventHandlers(O.onBlur, () => I(!1)),
+				onClick: composeEventHandlers(O.onClick, () => {
 					z.current !== "mouse" && B();
 				}),
-				onPointerUp: composeEventHandlers(k.onPointerUp, () => {
+				onPointerUp: composeEventHandlers(O.onPointerUp, () => {
 					z.current === "mouse" && B();
 				}),
-				onPointerDown: composeEventHandlers(k.onPointerDown, (m) => {
+				onPointerDown: composeEventHandlers(O.onPointerDown, (m) => {
 					z.current = m.pointerType;
 				}),
-				onPointerMove: composeEventHandlers(k.onPointerMove, (m) => {
-					z.current = m.pointerType, D ? j.onItemLeave?.() : z.current === "mouse" && m.currentTarget.focus({ preventScroll: !0 });
+				onPointerMove: composeEventHandlers(O.onPointerMove, (m) => {
+					z.current = m.pointerType, T ? A.onItemLeave?.() : z.current === "mouse" && m.currentTarget.focus({ preventScroll: !0 });
 				}),
-				onPointerLeave: composeEventHandlers(k.onPointerLeave, (m) => {
-					m.currentTarget === document.activeElement && j.onItemLeave?.();
+				onPointerLeave: composeEventHandlers(O.onPointerLeave, (m) => {
+					m.currentTarget === document.activeElement && A.onItemLeave?.();
 				}),
-				onKeyDown: composeEventHandlers(k.onKeyDown, (m) => {
-					j.searchRef?.current !== "" && m.key === " " || (SELECTION_KEYS.includes(m.key) && B(), m.key === " " && m.preventDefault());
+				onKeyDown: composeEventHandlers(O.onKeyDown, (m) => {
+					A.searchRef?.current !== "" && m.key === " " || (SELECTION_KEYS.includes(m.key) && B(), m.key === " " && m.preventDefault());
 				})
 			})
 		})
 	});
 });
 SelectItem$1.displayName = ITEM_NAME;
-var ITEM_TEXT_NAME = "SelectItemText", SelectItemText = React$1.forwardRef((x, S) => {
-	let { __scopeSelect: C, className: T, style: D, ...O } = x, k = useSelectContext(ITEM_TEXT_NAME, C), A = useSelectContentContext(ITEM_TEXT_NAME, C), j = useSelectItemContext(ITEM_TEXT_NAME, C), M = useSelectNativeOptionsContext(ITEM_TEXT_NAME, C), [N, P] = React$1.useState(null), F = useComposedRefs(S, (m) => P(m), j.onItemTextChange, (m) => A.itemTextRefCallback?.(m, j.value, j.disabled)), I = N?.textContent, L = React$1.useMemo(() => /* @__PURE__ */ jsx("option", {
-		value: j.value,
-		disabled: j.disabled,
+var ITEM_TEXT_NAME = "SelectItemText", SelectItemText = React$1.forwardRef((m, x) => {
+	let { __scopeSelect: S, className: C, style: T, ...D } = m, O = useSelectContext(ITEM_TEXT_NAME, S), k = useSelectContentContext(ITEM_TEXT_NAME, S), A = useSelectItemContext(ITEM_TEXT_NAME, S), j = useSelectNativeOptionsContext(ITEM_TEXT_NAME, S), [N, P] = React$1.useState(null), F = useComposedRefs(x, (m) => P(m), A.onItemTextChange, (m) => k.itemTextRefCallback?.(m, A.value, A.disabled)), I = N?.textContent, L = React$1.useMemo(() => /* @__PURE__ */ jsx("option", {
+		value: A.value,
+		disabled: A.disabled,
 		children: I
-	}, j.value), [
-		j.disabled,
-		j.value,
+	}, A.value), [
+		A.disabled,
+		A.value,
 		I
-	]), { onNativeOptionAdd: R, onNativeOptionRemove: z } = M;
+	]), { onNativeOptionAdd: R, onNativeOptionRemove: z } = j;
 	return useLayoutEffect2(() => (R(L), () => z(L)), [
 		R,
 		z,
 		L
 	]), /* @__PURE__ */ jsxs(Fragment$1, { children: [/* @__PURE__ */ jsx(Primitive.span, {
-		id: j.textId,
-		...O,
+		id: A.textId,
+		...D,
 		ref: F
-	}), j.isSelected && k.valueNode && !k.valueNodeHasChildren ? ReactDOM$1.createPortal(O.children, k.valueNode) : null] });
+	}), A.isSelected && O.valueNode && !O.valueNodeHasChildren ? ReactDOM$1.createPortal(D.children, O.valueNode) : null] });
 });
 SelectItemText.displayName = ITEM_TEXT_NAME;
 var ITEM_INDICATOR_NAME = "SelectItemIndicator", SelectItemIndicator = React$1.forwardRef((m, x) => {
@@ -3029,67 +2946,67 @@ var ITEM_INDICATOR_NAME = "SelectItemIndicator", SelectItemIndicator = React$1.f
 	}) : null;
 });
 SelectItemIndicator.displayName = ITEM_INDICATOR_NAME;
-var SCROLL_UP_BUTTON_NAME = "SelectScrollUpButton", SelectScrollUpButton$1 = React$1.forwardRef((x, S) => {
-	let C = useSelectContentContext(SCROLL_UP_BUTTON_NAME, x.__scopeSelect), T = useSelectViewportContext(SCROLL_UP_BUTTON_NAME, x.__scopeSelect), [D, O] = React$1.useState(!1), k = useComposedRefs(S, T.onScrollButtonChange);
+var SCROLL_UP_BUTTON_NAME = "SelectScrollUpButton", SelectScrollUpButton$1 = React$1.forwardRef((m, x) => {
+	let S = useSelectContentContext(SCROLL_UP_BUTTON_NAME, m.__scopeSelect), C = useSelectViewportContext(SCROLL_UP_BUTTON_NAME, m.__scopeSelect), [T, D] = React$1.useState(!1), O = useComposedRefs(x, C.onScrollButtonChange);
 	return useLayoutEffect2(() => {
-		if (C.viewport && C.isPositioned) {
+		if (S.viewport && S.isPositioned) {
 			let m = function() {
-				O(x.scrollTop > 0);
-			}, x = C.viewport;
+				D(x.scrollTop > 0);
+			}, x = S.viewport;
 			return m(), x.addEventListener("scroll", m), () => x.removeEventListener("scroll", m);
 		}
-	}, [C.viewport, C.isPositioned]), D ? /* @__PURE__ */ jsx(SelectScrollButtonImpl, {
-		...x,
-		ref: k,
+	}, [S.viewport, S.isPositioned]), T ? /* @__PURE__ */ jsx(SelectScrollButtonImpl, {
+		...m,
+		ref: O,
 		onAutoScroll: () => {
-			let { viewport: m, selectedItem: x } = C;
+			let { viewport: m, selectedItem: x } = S;
 			m && x && (m.scrollTop -= x.offsetHeight);
 		}
 	}) : null;
 });
 SelectScrollUpButton$1.displayName = SCROLL_UP_BUTTON_NAME;
-var SCROLL_DOWN_BUTTON_NAME = "SelectScrollDownButton", SelectScrollDownButton$1 = React$1.forwardRef((x, S) => {
-	let C = useSelectContentContext(SCROLL_DOWN_BUTTON_NAME, x.__scopeSelect), T = useSelectViewportContext(SCROLL_DOWN_BUTTON_NAME, x.__scopeSelect), [D, O] = React$1.useState(!1), k = useComposedRefs(S, T.onScrollButtonChange);
+var SCROLL_DOWN_BUTTON_NAME = "SelectScrollDownButton", SelectScrollDownButton$1 = React$1.forwardRef((m, x) => {
+	let S = useSelectContentContext(SCROLL_DOWN_BUTTON_NAME, m.__scopeSelect), C = useSelectViewportContext(SCROLL_DOWN_BUTTON_NAME, m.__scopeSelect), [T, D] = React$1.useState(!1), O = useComposedRefs(x, C.onScrollButtonChange);
 	return useLayoutEffect2(() => {
-		if (C.viewport && C.isPositioned) {
+		if (S.viewport && S.isPositioned) {
 			let m = function() {
 				let m = x.scrollHeight - x.clientHeight;
-				O(Math.ceil(x.scrollTop) < m);
-			}, x = C.viewport;
+				D(Math.ceil(x.scrollTop) < m);
+			}, x = S.viewport;
 			return m(), x.addEventListener("scroll", m), () => x.removeEventListener("scroll", m);
 		}
-	}, [C.viewport, C.isPositioned]), D ? /* @__PURE__ */ jsx(SelectScrollButtonImpl, {
-		...x,
-		ref: k,
+	}, [S.viewport, S.isPositioned]), T ? /* @__PURE__ */ jsx(SelectScrollButtonImpl, {
+		...m,
+		ref: O,
 		onAutoScroll: () => {
-			let { viewport: m, selectedItem: x } = C;
+			let { viewport: m, selectedItem: x } = S;
 			m && x && (m.scrollTop += x.offsetHeight);
 		}
 	}) : null;
 });
 SelectScrollDownButton$1.displayName = SCROLL_DOWN_BUTTON_NAME;
-var SelectScrollButtonImpl = React$1.forwardRef((x, S) => {
-	let { __scopeSelect: C, onAutoScroll: T, ...D } = x, O = useSelectContentContext("SelectScrollButton", C), k = React$1.useRef(null), A = useCollection(C), j = React$1.useCallback(() => {
-		k.current !== null && (window.clearInterval(k.current), k.current = null);
+var SelectScrollButtonImpl = React$1.forwardRef((m, x) => {
+	let { __scopeSelect: S, onAutoScroll: C, ...T } = m, D = useSelectContentContext("SelectScrollButton", S), O = React$1.useRef(null), k = useCollection(S), A = React$1.useCallback(() => {
+		O.current !== null && (window.clearInterval(O.current), O.current = null);
 	}, []);
-	return React$1.useEffect(() => () => j(), [j]), useLayoutEffect2(() => {
-		A().find((m) => m.ref.current === document.activeElement)?.ref.current?.scrollIntoView({ block: "nearest" });
-	}, [A]), /* @__PURE__ */ jsx(Primitive.div, {
+	return React$1.useEffect(() => () => A(), [A]), useLayoutEffect2(() => {
+		k().find((m) => m.ref.current === document.activeElement)?.ref.current?.scrollIntoView({ block: "nearest" });
+	}, [k]), /* @__PURE__ */ jsx(Primitive.div, {
 		"aria-hidden": !0,
-		...D,
-		ref: S,
+		...T,
+		ref: x,
 		style: {
 			flexShrink: 0,
-			...D.style
+			...T.style
 		},
-		onPointerDown: composeEventHandlers(D.onPointerDown, () => {
-			k.current === null && (k.current = window.setInterval(T, 50));
+		onPointerDown: composeEventHandlers(T.onPointerDown, () => {
+			O.current === null && (O.current = window.setInterval(C, 50));
 		}),
-		onPointerMove: composeEventHandlers(D.onPointerMove, () => {
-			O.onItemLeave?.(), k.current === null && (k.current = window.setInterval(T, 50));
+		onPointerMove: composeEventHandlers(T.onPointerMove, () => {
+			D.onItemLeave?.(), O.current === null && (O.current = window.setInterval(C, 50));
 		}),
-		onPointerLeave: composeEventHandlers(D.onPointerLeave, () => {
-			j();
+		onPointerLeave: composeEventHandlers(T.onPointerLeave, () => {
+			A();
 		})
 	});
 }), SEPARATOR_NAME = "SelectSeparator", SelectSeparator$1 = React$1.forwardRef((m, x) => {
@@ -3110,43 +3027,43 @@ var ARROW_NAME = "SelectArrow", SelectArrow = React$1.forwardRef((m, x) => {
 	}) : null;
 });
 SelectArrow.displayName = ARROW_NAME;
-var BUBBLE_INPUT_NAME = "SelectBubbleInput", SelectBubbleInput = React$1.forwardRef(({ __scopeSelect: x, value: S, ...C }, T) => {
-	let D = React$1.useRef(null), O = useComposedRefs(T, D), k = usePrevious(S);
+var BUBBLE_INPUT_NAME = "SelectBubbleInput", SelectBubbleInput = React$1.forwardRef(({ __scopeSelect: m, value: x, ...S }, C) => {
+	let T = React$1.useRef(null), D = useComposedRefs(C, T), O = usePrevious(x);
 	return React$1.useEffect(() => {
-		let m = D.current;
+		let m = T.current;
 		if (!m) return;
-		let x = window.HTMLSelectElement.prototype, C = Object.getOwnPropertyDescriptor(x, "value").set;
-		if (k !== S && C) {
-			let x = new Event("change", { bubbles: !0 });
-			C.call(m, S), m.dispatchEvent(x);
+		let S = window.HTMLSelectElement.prototype, C = Object.getOwnPropertyDescriptor(S, "value").set;
+		if (O !== x && C) {
+			let S = new Event("change", { bubbles: !0 });
+			C.call(m, x), m.dispatchEvent(S);
 		}
-	}, [k, S]), /* @__PURE__ */ jsx(Primitive.select, {
-		...C,
+	}, [O, x]), /* @__PURE__ */ jsx(Primitive.select, {
+		...S,
 		style: {
 			...VISUALLY_HIDDEN_STYLES,
-			...C.style
+			...S.style
 		},
-		ref: O,
-		defaultValue: S
+		ref: D,
+		defaultValue: x
 	});
 });
 SelectBubbleInput.displayName = BUBBLE_INPUT_NAME;
 function shouldShowPlaceholder(m) {
 	return m === "" || m === void 0;
 }
-function useTypeaheadSearch(x) {
-	let S = useCallbackRef(x), C = React$1.useRef(""), T = React$1.useRef(0), D = React$1.useCallback((m) => {
-		let x = C.current + m;
-		S(x), (function m(x) {
-			C.current = x, window.clearTimeout(T.current), x !== "" && (T.current = window.setTimeout(() => m(""), 1e3));
-		})(x);
-	}, [S]), O = React$1.useCallback(() => {
-		C.current = "", window.clearTimeout(T.current);
+function useTypeaheadSearch(m) {
+	let x = useCallbackRef(m), S = React$1.useRef(""), C = React$1.useRef(0), T = React$1.useCallback((m) => {
+		let T = S.current + m;
+		x(T), (function m(x) {
+			S.current = x, window.clearTimeout(C.current), x !== "" && (C.current = window.setTimeout(() => m(""), 1e3));
+		})(T);
+	}, [x]), D = React$1.useCallback(() => {
+		S.current = "", window.clearTimeout(C.current);
 	}, []);
-	return React$1.useEffect(() => () => window.clearTimeout(T.current), []), [
-		C,
-		D,
-		O
+	return React$1.useEffect(() => () => window.clearTimeout(C.current), []), [
+		S,
+		T,
+		D
 	];
 }
 function findNextItem(m, x, S) {
@@ -3173,17 +3090,17 @@ var Root2 = Select$1, Trigger = SelectTrigger$1, Value = SelectValue$1, Icon$2 =
 	strokeWidth: 2,
 	strokeLinecap: "round",
 	strokeLinejoin: "round"
-}, Icon$1 = forwardRef(({ color: m = "currentColor", size: x = 24, strokeWidth: S = 2, absoluteStrokeWidth: C, className: T = "", children: O, iconNode: k, ...A }, j) => createElement("svg", {
-	ref: j,
+}, Icon$1 = forwardRef(({ color: m = "currentColor", size: x = 24, strokeWidth: S = 2, absoluteStrokeWidth: C, className: T = "", children: D, iconNode: O, ...k }, A) => createElement("svg", {
+	ref: A,
 	...defaultAttributes$2,
 	width: x,
 	height: x,
 	stroke: m,
 	strokeWidth: C ? Number(S) * 24 / Number(x) : S,
 	className: mergeClasses$1("lucide", T),
-	...!O && !hasA11yProp(A) && { "aria-hidden": "true" },
-	...A
-}, [...k.map(([m, x]) => createElement(m, x)), ...Array.isArray(O) ? O : [O]])), createLucideIcon$1 = (m, x) => {
+	...!D && !hasA11yProp(k) && { "aria-hidden": "true" },
+	...k
+}, [...O.map(([m, x]) => createElement(m, x)), ...Array.isArray(D) ? D : [D]])), createLucideIcon$1 = (m, x) => {
 	let S = forwardRef(({ className: S, ...C }, T) => createElement(Icon$1, {
 		ref: T,
 		iconNode: x,
@@ -3201,47 +3118,6 @@ var Root2 = Select$1, Trigger = SelectTrigger$1, Value = SelectValue$1, Icon$2 =
 	d: "m18 15-6-6-6 6",
 	key: "153udz"
 }]]);
-function cn(...m) {
-	return m.filter(Boolean).join(" ");
-}
-function formatCurrency(m, x, S, C, T, D) {
-	if (!S && !D) return "";
-	if (!m) return "N/A";
-	let O = Math.round(m * 100) / 100, k = x === null ? "decimal" : x ?? "currency", A = {
-		style: k,
-		minimumFractionDigits: 0,
-		maximumFractionDigits: 0
-	};
-	return k === "currency" && (A.currency = C || "GBP"), O.toLocaleString(T, A);
-}
-const toLowerKebabCase = (m) => {
-	let x = {
-		ç: "c",
-		ğ: "g",
-		ı: "i",
-		ö: "o",
-		ş: "s",
-		ü: "u",
-		Ç: "c",
-		Ğ: "g",
-		İ: "i",
-		Ö: "o",
-		Ş: "s",
-		Ü: "u"
-	};
-	return m.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[çğışöüÇĞİŞÖÜ]/g, (m) => x[m] ?? m).toLowerCase().replace(/ /g, "-");
-}, generatePlotUrl = async (m, x, S, C, T, D, O, k) => {
-	let A = [
-		x,
-		S,
-		C,
-		T,
-		D
-	], j = document.documentElement.lang, M = j === "en" ? "/" : `/${j}/`;
-	return A.forEach((m, x) => {
-		m && (M += `${toLowerKebabCase(m)}${x + 1 == A.length ? "" : "-"}`);
-	}), `${M}${k ? "-" + k + "-bedrooms" : ""}${O ? "-" + toLowerKebabCase(O) : ""}/${m}`;
-};
 function Select({ ...m }) {
 	return /* @__PURE__ */ jsx(Root2, {
 		"data-slot": "select",
@@ -3771,29 +3647,7 @@ var SlotRenderPure = (m) => /* @__PURE__ */ jsx(SlotRender, __spreadValues({}, m
 			metadata: T
 		}, m.props.id) : null)
 	});
-}), getRandomValues, rnds8 = new Uint8Array(16);
-function rng() {
-	if (!getRandomValues && (getRandomValues = typeof crypto < "u" && crypto.getRandomValues && crypto.getRandomValues.bind(crypto), !getRandomValues)) throw Error("crypto.getRandomValues() not supported. See https://github.com/uuidjs/uuid#getrandomvalues-not-supported");
-	return getRandomValues(rnds8);
-}
-var byteToHex = [];
-for (let m = 0; m < 256; ++m) byteToHex.push((m + 256).toString(16).slice(1));
-function unsafeStringify(m, x = 0) {
-	return byteToHex[m[x + 0]] + byteToHex[m[x + 1]] + byteToHex[m[x + 2]] + byteToHex[m[x + 3]] + "-" + byteToHex[m[x + 4]] + byteToHex[m[x + 5]] + "-" + byteToHex[m[x + 6]] + byteToHex[m[x + 7]] + "-" + byteToHex[m[x + 8]] + byteToHex[m[x + 9]] + "-" + byteToHex[m[x + 10]] + byteToHex[m[x + 11]] + byteToHex[m[x + 12]] + byteToHex[m[x + 13]] + byteToHex[m[x + 14]] + byteToHex[m[x + 15]];
-}
-var native_default = { randomUUID: typeof crypto < "u" && crypto.randomUUID && crypto.randomUUID.bind(crypto) };
-function v4(m, x, S) {
-	if (native_default.randomUUID && !x && !m) return native_default.randomUUID();
-	m ||= {};
-	let C = m.random || (m.rng || rng)();
-	if (C[6] = C[6] & 15 | 64, C[8] = C[8] & 63 | 128, x) {
-		S ||= 0;
-		for (let m = 0; m < 16; ++m) x[S + m] = C[m];
-		return x;
-	}
-	return unsafeStringify(C);
-}
-var v4_default = v4, createStoreImpl = (m) => {
+}), createStoreImpl = (m) => {
 	let x, S = /* @__PURE__ */ new Set(), C = (m, C) => {
 		let T = typeof m == "function" ? m(x) : m;
 		if (!Object.is(T, x)) {
@@ -3807,10 +3661,10 @@ var v4_default = v4, createStoreImpl = (m) => {
 		subscribe: (m) => (S.add(m), () => S.delete(m))
 	}, O = x = m(C, T, D);
 	return D;
-}, createStore = ((m) => m ? createStoreImpl(m) : createStoreImpl), identity$1 = (m) => m;
-function useStore(m, S = identity$1) {
-	let C = React.useSyncExternalStore(m.subscribe, React.useCallback(() => S(m.getState()), [m, S]), React.useCallback(() => S(m.getInitialState()), [m, S]));
-	return React.useDebugValue(C), C;
+}, createStore = ((m) => m ? createStoreImpl(m) : createStoreImpl), identity = (m) => m;
+function useStore(m, x = identity) {
+	let S = React.useSyncExternalStore(m.subscribe, React.useCallback(() => x(m.getState()), [m, x]), React.useCallback(() => x(m.getInitialState()), [m, x]));
+	return React.useDebugValue(S), S;
 }
 var createImpl = (m) => {
 	let x = createStore(m), S = (m) => useStore(x, m);
@@ -4116,7 +3970,7 @@ var __create$5 = Object.create, __defProp$6 = Object.defineProperty, __defProps$
 		}
 	}, S));
 	N ? F && N < 4 && __name$3(D, (N > 2 ? "set " : N > 1 ? "get " : "") + S) : __name$3(T, S);
-	for (var H = C.length - 1; H >= 0; H--) j = __decoratorContext$5(N, S, A = {}, m[3], z), N && (j.static = P, j.private = F, M = j.access = { has: F ? (m) => __privateIn$3(T, m) : (m) => S in m }, N ^ 3 && (M.get = F ? (m) => (N ^ 1 ? __privateGet$6 : __privateMethod$4)(m, T, N ^ 4 ? D : B.get) : (m) => m[S]), N > 2 && (M.set = F ? (m, x) => __privateSet$6(m, T, x, N ^ 4 ? D : B.set) : (m, x) => m[S] = x)), k = (0, C[H])(N ? N < 4 ? F ? D : B[L] : N > 4 ? void 0 : {
+	for (var V = C.length - 1; V >= 0; V--) j = __decoratorContext$5(N, S, A = {}, m[3], z), N && (j.static = P, j.private = F, M = j.access = { has: F ? (m) => __privateIn$3(T, m) : (m) => S in m }, N ^ 3 && (M.get = F ? (m) => (N ^ 1 ? __privateGet$6 : __privateMethod$4)(m, T, N ^ 4 ? D : B.get) : (m) => m[S]), N > 2 && (M.set = F ? (m, x) => __privateSet$6(m, T, x, N ^ 4 ? D : B.set) : (m, x) => m[S] = x)), k = (0, C[V])(N ? N < 4 ? F ? D : B[L] : N > 4 ? void 0 : {
 		get: B.get,
 		set: B.set
 	} : T, j), A._ = 1, N ^ 4 || k === void 0 ? __expectFn$5(k) && (N > 4 ? R.unshift(k) : N ? F ? D = k : B[L] = k : T = k) : typeof k != "object" || !k ? __typeError$6("Object expected") : (__expectFn$5(O = k.get) && (B.get = O), __expectFn$5(O = k.set) && (B.set = O), __expectFn$5(O = k.init) && R.unshift(O));
@@ -4278,7 +4132,7 @@ var __create$4 = Object.create, __defProp$5 = Object.defineProperty, __getOwnPro
 		}
 	}, S));
 	N ? F && N < 4 && __name$2(D, (N > 2 ? "set " : N > 1 ? "get " : "") + S) : __name$2(T, S);
-	for (var H = C.length - 1; H >= 0; H--) j = __decoratorContext$4(N, S, A = {}, m[3], z), N && (j.static = P, j.private = F, M = j.access = { has: F ? (m) => __privateIn$2(T, m) : (m) => S in m }, N ^ 3 && (M.get = F ? (m) => (N ^ 1 ? __privateGet$5 : __privateMethod$3)(m, T, N ^ 4 ? D : B.get) : (m) => m[S]), N > 2 && (M.set = F ? (m, x) => __privateSet$5(m, T, x, N ^ 4 ? D : B.set) : (m, x) => m[S] = x)), k = (0, C[H])(N ? N < 4 ? F ? D : B[L] : N > 4 ? void 0 : {
+	for (var V = C.length - 1; V >= 0; V--) j = __decoratorContext$4(N, S, A = {}, m[3], z), N && (j.static = P, j.private = F, M = j.access = { has: F ? (m) => __privateIn$2(T, m) : (m) => S in m }, N ^ 3 && (M.get = F ? (m) => (N ^ 1 ? __privateGet$5 : __privateMethod$3)(m, T, N ^ 4 ? D : B.get) : (m) => m[S]), N > 2 && (M.set = F ? (m, x) => __privateSet$5(m, T, x, N ^ 4 ? D : B.set) : (m, x) => m[S] = x)), k = (0, C[V])(N ? N < 4 ? F ? D : B[L] : N > 4 ? void 0 : {
 		get: B.get,
 		set: B.set
 	} : T, j), A._ = 1, N ^ 4 || k === void 0 ? __expectFn$4(k) && (N > 4 ? R.unshift(k) : N ? F ? D = k : B[L] = k : T = k) : typeof k != "object" || !k ? __typeError$5("Object expected") : (__expectFn$4(O = k.get) && (B.get = O), __expectFn$4(O = k.set) && (B.set = O), __expectFn$4(O = k.init) && R.unshift(O));
@@ -4509,7 +4363,7 @@ var Axis$1 = /* @__PURE__ */ ((m) => (m.Horizontal = "x", m.Vertical = "y", m))(
 		}
 	}, S));
 	N ? F && N < 4 && __name$1(D, (N > 2 ? "set " : N > 1 ? "get " : "") + S) : __name$1(T, S);
-	for (var H = C.length - 1; H >= 0; H--) j = __decoratorContext$3(N, S, A = {}, m[3], z), N && (j.static = P, j.private = F, M = j.access = { has: F ? (m) => __privateIn$1(T, m) : (m) => S in m }, N ^ 3 && (M.get = F ? (m) => (N ^ 1 ? __privateGet$4 : __privateMethod$2)(m, T, N ^ 4 ? D : B.get) : (m) => m[S]), N > 2 && (M.set = F ? (m, x) => __privateSet$4(m, T, x, N ^ 4 ? D : B.set) : (m, x) => m[S] = x)), k = (0, C[H])(N ? N < 4 ? F ? D : B[L] : N > 4 ? void 0 : {
+	for (var V = C.length - 1; V >= 0; V--) j = __decoratorContext$3(N, S, A = {}, m[3], z), N && (j.static = P, j.private = F, M = j.access = { has: F ? (m) => __privateIn$1(T, m) : (m) => S in m }, N ^ 3 && (M.get = F ? (m) => (N ^ 1 ? __privateGet$4 : __privateMethod$2)(m, T, N ^ 4 ? D : B.get) : (m) => m[S]), N > 2 && (M.set = F ? (m, x) => __privateSet$4(m, T, x, N ^ 4 ? D : B.set) : (m, x) => m[S] = x)), k = (0, C[V])(N ? N < 4 ? F ? D : B[L] : N > 4 ? void 0 : {
 		get: B.get,
 		set: B.set
 	} : T, j), A._ = 1, N ^ 4 || k === void 0 ? __expectFn$3(k) && (N > 4 ? R.unshift(k) : N ? F ? D = k : B[L] = k : T = k) : typeof k != "object" || !k ? __typeError$4("Object expected") : (__expectFn$3(O = k.get) && (B.get = O), __expectFn$3(O = k.set) && (B.set = O), __expectFn$3(O = k.init) && R.unshift(O));
@@ -5559,16 +5413,16 @@ function detectScrollIntent(m, x, S, C = 25, T = defaultThreshold, D = defaultTo
 	let { x: O, y: k } = x, { rect: A, isTop: j, isBottom: M, isLeft: N, isRight: P } = getScrollPosition(m), F = getFrameTransform(m), I = parseTransform(getComputedStyles(m, !0)), L = I === null ? !1 : I?.scaleX < 0, R = I === null ? !1 : I?.scaleY < 0, z = new Rectangle(A.left * F.scaleX + F.x, A.top * F.scaleY + F.y, A.width * F.scaleX, A.height * F.scaleY), B = {
 		x: 0,
 		y: 0
-	}, H = {
+	}, V = {
 		x: 0,
 		y: 0
-	}, U = {
+	}, H = {
 		height: z.height * T.y,
 		width: z.width * T.x
 	};
-	return (!j || R && !M) && k <= z.top + U.height && S?.y !== 1 && O >= z.left - D.x && O <= z.right + D.x ? (B.y = R ? 1 : -1, H.y = C * Math.abs((z.top + U.height - k) / U.height)) : (!M || R && !j) && k >= z.bottom - U.height && S?.y !== -1 && O >= z.left - D.x && O <= z.right + D.x && (B.y = R ? -1 : 1, H.y = C * Math.abs((z.bottom - U.height - k) / U.height)), (!P || L && !N) && O >= z.right - U.width && S?.x !== -1 && k >= z.top - D.y && k <= z.bottom + D.y ? (B.x = L ? -1 : 1, H.x = C * Math.abs((z.right - U.width - O) / U.width)) : (!N || L && !P) && O <= z.left + U.width && S?.x !== 1 && k >= z.top - D.y && k <= z.bottom + D.y && (B.x = L ? 1 : -1, H.x = C * Math.abs((z.left + U.width - O) / U.width)), {
+	return (!j || R && !M) && k <= z.top + H.height && S?.y !== 1 && O >= z.left - D.x && O <= z.right + D.x ? (B.y = R ? 1 : -1, V.y = C * Math.abs((z.top + H.height - k) / H.height)) : (!M || R && !j) && k >= z.bottom - H.height && S?.y !== -1 && O >= z.left - D.x && O <= z.right + D.x && (B.y = R ? -1 : 1, V.y = C * Math.abs((z.bottom - H.height - k) / H.height)), (!P || L && !N) && O >= z.right - H.width && S?.x !== -1 && k >= z.top - D.y && k <= z.bottom + D.y ? (B.x = L ? -1 : 1, V.x = C * Math.abs((z.right - H.width - O) / H.width)) : (!N || L && !P) && O <= z.left + H.width && S?.x !== 1 && k >= z.top - D.y && k <= z.bottom + D.y && (B.x = L ? 1 : -1, V.x = C * Math.abs((z.left + H.width - O) / H.width)), {
 		direction: B,
-		speed: H
+		speed: V
 	};
 }
 function supportsScrollIntoViewIfNeeded(m) {
@@ -5848,7 +5702,7 @@ var pointerIntersection$2 = ({ dragOperation: m, droppable: x }) => {
 		}
 	}, S));
 	N ? F && N < 4 && __name(D, (N > 2 ? "set " : N > 1 ? "get " : "") + S) : __name(T, S);
-	for (var H = C.length - 1; H >= 0; H--) j = __decoratorContext$2(N, S, A = {}, m[3], z), N && (j.static = P, j.private = F, M = j.access = { has: F ? (m) => __privateIn(T, m) : (m) => S in m }, N ^ 3 && (M.get = F ? (m) => (N ^ 1 ? __privateGet$2 : __privateMethod)(m, T, N ^ 4 ? D : B.get) : (m) => m[S]), N > 2 && (M.set = F ? (m, x) => __privateSet$2(m, T, x, N ^ 4 ? D : B.set) : (m, x) => m[S] = x)), k = (0, C[H])(N ? N < 4 ? F ? D : B[L] : N > 4 ? void 0 : {
+	for (var V = C.length - 1; V >= 0; V--) j = __decoratorContext$2(N, S, A = {}, m[3], z), N && (j.static = P, j.private = F, M = j.access = { has: F ? (m) => __privateIn(T, m) : (m) => S in m }, N ^ 3 && (M.get = F ? (m) => (N ^ 1 ? __privateGet$2 : __privateMethod)(m, T, N ^ 4 ? D : B.get) : (m) => m[S]), N > 2 && (M.set = F ? (m, x) => __privateSet$2(m, T, x, N ^ 4 ? D : B.set) : (m, x) => m[S] = x)), k = (0, C[V])(N ? N < 4 ? F ? D : B[L] : N > 4 ? void 0 : {
 		get: B.get,
 		set: B.set
 	} : T, j), A._ = 1, N ^ 4 || k === void 0 ? __expectFn$2(k) && (N > 4 ? R.unshift(k) : N ? F ? D = k : B[L] = k : T = k) : typeof k != "object" || !k ? __typeError$2("Object expected") : (__expectFn$2(O = k.get) && (B.get = O), __expectFn$2(O = k.set) && (B.set = O), __expectFn$2(O = k.init) && R.unshift(O));
@@ -5898,25 +5752,25 @@ var debouncedEvents = ["dragover", "dragmove"], Accessibility = class extends Pl
 		})), B = () => {
 			let m = [];
 			M?.isConnected || (M = createHiddenText(A, O.draggable), m.push(M)), N?.isConnected || (N = createLiveRegion(j), P = document.createTextNode(""), N.appendChild(P), m.push(N)), m.length > 0 && document.body.append(...m);
-		}, H = /* @__PURE__ */ new Set();
-		function U() {
-			for (let m of H) m();
+		}, V = /* @__PURE__ */ new Set();
+		function H() {
+			for (let m of V) m();
 		}
 		this.registerEffect(() => {
-			H.clear();
+			V.clear();
 			for (let m of this.manager.registry.draggables.value) {
 				let x = m.handle ?? m.element;
 				if (x) {
-					(!M || !N) && H.add(B), (!isFocusable(x) || isSafari()) && !x.hasAttribute("tabindex") && H.add(() => x.setAttribute("tabindex", "0")), !x.hasAttribute("role") && x.tagName.toLowerCase() !== "button" && H.add(() => x.setAttribute("role", defaultAttributes$1.role)), x.hasAttribute("aria-roledescription") || H.add(() => x.setAttribute("aria-roledescription", defaultAttributes$1.roleDescription)), x.hasAttribute("aria-describedby") || H.add(() => x.setAttribute("aria-describedby", A));
+					(!M || !N) && V.add(B), (!isFocusable(x) || isSafari()) && !x.hasAttribute("tabindex") && V.add(() => x.setAttribute("tabindex", "0")), !x.hasAttribute("role") && x.tagName.toLowerCase() !== "button" && V.add(() => x.setAttribute("role", defaultAttributes$1.role)), x.hasAttribute("aria-roledescription") || V.add(() => x.setAttribute("aria-roledescription", defaultAttributes$1.roleDescription)), x.hasAttribute("aria-describedby") || V.add(() => x.setAttribute("aria-describedby", A));
 					for (let S of ["aria-pressed", "aria-grabbed"]) {
 						let C = String(m.isDragging);
-						x.getAttribute(S) !== C && H.add(() => x.setAttribute(S, C));
+						x.getAttribute(S) !== C && V.add(() => x.setAttribute(S, C));
 					}
 					let S = String(m.disabled);
-					x.getAttribute("aria-disabled") !== S && H.add(() => x.setAttribute("aria-disabled", S));
+					x.getAttribute("aria-disabled") !== S && V.add(() => x.setAttribute("aria-disabled", S));
 				}
 			}
-			H.size > 0 && scheduler.schedule(U);
+			V.size > 0 && scheduler.schedule(H);
 		}), this.destroy = () => {
 			super.destroy(), M?.remove(), N?.remove(), z.forEach((m) => m());
 		};
@@ -6074,24 +5928,24 @@ _init$2 = __decoratorStart$2(_a$1), _overlay = /* @__PURE__ */ new WeakMap(), _F
 	}), L = {
 		x: P.scaleX / N.scaleX,
 		y: P.scaleY / N.scaleY
-	}, { width: R, height: z, top: B, left: H } = I;
+	}, { width: R, height: z, top: B, left: V } = I;
 	F && (R /= L.x, z /= L.y);
-	let U, W, G = new Styles(M), { transition: K, translate: q, boxSizing: J, paddingBlockStart: $V, paddingBlockEnd: Y, paddingInlineStart: X, paddingInlineEnd: Z, borderInlineStartWidth: eH, borderInlineEndWidth: Q, borderBlockStartWidth: tH, borderBlockEndWidth: nH } = getComputedStyles(k), rH = A === "clone", iH = J === "content-box", aH = iH ? parseInt(X) + parseInt(Z) + parseInt(eH) + parseInt(Q) : 0, oH = iH ? parseInt($V) + parseInt(Y) + parseInt(tH) + parseInt(nH) : 0, sH = A !== "move" && !this.overlay ? createPlaceholder(D, rH ? "clone" : "hidden") : null, cH = n(() => isKeyboardEvent(x.dragOperation.activatorEvent));
-	if (q !== "none") {
-		let m = parseTranslate(q);
+	let H, U, W = new Styles(M), { transition: G, translate: K, boxSizing: q, paddingBlockStart: J, paddingBlockEnd: Uz, paddingInlineStart: Y, paddingInlineEnd: Wz, borderInlineStartWidth: X, borderInlineEndWidth: Z, borderBlockStartWidth: Gz, borderBlockEndWidth: Kz } = getComputedStyles(k), qz = A === "clone", Jz = q === "content-box", Yz = Jz ? parseInt(Y) + parseInt(Wz) + parseInt(X) + parseInt(Z) : 0, Xz = Jz ? parseInt(J) + parseInt(Uz) + parseInt(Gz) + parseInt(Kz) : 0, Q = A !== "move" && !this.overlay ? createPlaceholder(D, qz ? "clone" : "hidden") : null, Zz = n(() => isKeyboardEvent(x.dragOperation.activatorEvent));
+	if (K !== "none") {
+		let m = parseTranslate(K);
 		m && !j.translate && (j.translate = m);
 	}
 	if (!j.transformOrigin) {
 		let m = n(() => T.current);
 		j.transformOrigin = {
-			x: (m.x - H * N.scaleX - N.x) / (R * N.scaleX),
+			x: (m.x - V * N.scaleX - N.x) / (R * N.scaleX),
 			y: (m.y - B * N.scaleY - N.y) / (z * N.scaleY)
 		};
 	}
-	let { transformOrigin: $ } = j, lH = B * N.scaleY + N.y, uH = H * N.scaleX + N.x;
+	let { transformOrigin: $ } = j, Qz = B * N.scaleY + N.y, $z = V * N.scaleX + N.x;
 	if (!j.coordinates && (j.coordinates = {
-		x: uH,
-		y: lH
+		x: $z,
+		y: Qz
 	}, L.x !== 1 || L.y !== 1)) {
 		let { scaleX: m, scaleY: x } = P, { x: S, y: C } = $;
 		j.coordinates.x += (R * m - R) * S, j.coordinates.y += (z * x - z) * C;
@@ -6100,62 +5954,62 @@ _init$2 = __decoratorStart$2(_a$1), _overlay = /* @__PURE__ */ new WeakMap(), _F
 		width: R,
 		height: z
 	}, j.frameTransform ||= N;
-	let dH = {
-		x: j.coordinates.x - uH,
-		y: j.coordinates.y - lH
-	}, fH = {
+	let eB = {
+		x: j.coordinates.x - $z,
+		y: j.coordinates.y - Qz
+	}, tB = {
 		width: (j.dimensions.width * j.frameTransform.scaleX - R * N.scaleX) * $.x,
 		height: (j.dimensions.height * j.frameTransform.scaleY - z * N.scaleY) * $.y
-	}, pH = {
-		x: dH.x / N.scaleX + fH.width,
-		y: dH.y / N.scaleY + fH.height
-	}, mH = {
-		left: H + pH.x,
-		top: B + pH.y
+	}, nB = {
+		x: eB.x / N.scaleX + tB.width,
+		y: eB.y / N.scaleY + tB.height
+	}, rB = {
+		left: V + nB.x,
+		top: B + nB.y
 	};
 	M.setAttribute(ATTRIBUTE, "true");
-	let hH = n(() => C.transform), gH = j.translate ?? {
+	let iB = n(() => C.transform), aB = j.translate ?? {
 		x: 0,
 		y: 0
-	}, _H = `${hH.x * N.scaleX + gH.x}px ${hH.y * N.scaleY + gH.y}px 0`, vH = K ? `${K}, translate 0ms linear` : "";
-	G.set({
-		width: R - aH,
-		height: z - oH,
-		top: mH.top,
-		left: mH.left,
-		translate: _H,
-		transition: vH,
+	}, oB = `${iB.x * N.scaleX + aB.x}px ${iB.y * N.scaleY + aB.y}px 0`, sB = G ? `${G}, translate 0ms linear` : "";
+	W.set({
+		width: R - Yz,
+		height: z - Xz,
+		top: rB.top,
+		left: rB.left,
+		translate: oB,
+		transition: sB,
 		scale: F ? `${L.x} ${L.y}` : "",
 		"transform-origin": `${$.x * 100}% ${$.y * 100}%`
-	}, CSS_PREFIX), sH && (k.insertAdjacentElement("afterend", sH), S?.rootElement && (typeof S.rootElement == "function" ? S.rootElement(D) : S.rootElement).appendChild(k)), supportsPopover(M) && (M.hasAttribute("popover") || M.setAttribute("popover", "manual"), showPopover(M), M.addEventListener("beforetoggle", preventPopoverClose));
-	let yH = new ResizeObserver(() => {
-		if (!sH) return;
-		let m = new DOMRectangle(sH, {
+	}, CSS_PREFIX), Q && (k.insertAdjacentElement("afterend", Q), S?.rootElement && (typeof S.rootElement == "function" ? S.rootElement(D) : S.rootElement).appendChild(k)), supportsPopover(M) && (M.hasAttribute("popover") || M.setAttribute("popover", "manual"), showPopover(M), M.addEventListener("beforetoggle", preventPopoverClose));
+	let cB = new ResizeObserver(() => {
+		if (!Q) return;
+		let m = new DOMRectangle(Q, {
 			frameTransform: N,
 			ignoreTransforms: !0
 		}), x = $ ?? {
 			x: 1,
 			y: 1
-		}, S = (R - m.width) * x.x + pH.x, T = (z - m.height) * x.y + pH.y;
-		if (G.set({
-			width: m.width - aH,
-			height: m.height - oH,
+		}, S = (R - m.width) * x.x + nB.x, T = (z - m.height) * x.y + nB.y;
+		if (W.set({
+			width: m.width - Yz,
+			height: m.height - Xz,
 			top: B + T,
-			left: H + S
-		}, CSS_PREFIX), U?.takeRecords(), isTableRow(k) && isTableRow(sH)) {
-			let m = Array.from(k.cells), x = Array.from(sH.cells);
+			left: V + S
+		}, CSS_PREFIX), H?.takeRecords(), isTableRow(k) && isTableRow(Q)) {
+			let m = Array.from(k.cells), x = Array.from(Q.cells);
 			for (let [S, C] of m.entries()) {
 				let m = x[S];
 				C.style.width = `${m.offsetWidth}px`;
 			}
 		}
 		C.shape = new DOMRectangle(M);
-	}), bH = new DOMRectangle(M);
-	n(() => C.shape = bH);
-	let xH = getWindow$1(M), SH = (m) => {
+	}), lB = new DOMRectangle(M);
+	n(() => C.shape = lB);
+	let uB = getWindow$1(M), dB = (m) => {
 		this.manager.actions.stop({ event: m });
 	};
-	cH && xH.addEventListener("resize", SH), n(() => D.status) === "idle" && requestAnimationFrame(() => D.status = "dragging"), sH && (yH.observe(sH), U = new MutationObserver((m) => {
+	Zz && uB.addEventListener("resize", dB), n(() => D.status) === "idle" && requestAnimationFrame(() => D.status = "dragging"), Q && (cB.observe(Q), H = new MutationObserver((m) => {
 		let x = !1;
 		for (let S of m) {
 			if (S.target !== k) {
@@ -6167,46 +6021,46 @@ _init$2 = __decoratorStart$2(_a$1), _overlay = /* @__PURE__ */ new WeakMap(), _F
 			if (m.startsWith("aria-") || IGNORED_ATTRIBUTES.includes(m)) continue;
 			let C = k.getAttribute(m);
 			if (m === "style") {
-				if (supportsStyle(k) && supportsStyle(sH)) {
+				if (supportsStyle(k) && supportsStyle(Q)) {
 					let m = k.style;
-					for (let x of Array.from(sH.style)) m.getPropertyValue(x) === "" && sH.style.removeProperty(x);
+					for (let x of Array.from(Q.style)) m.getPropertyValue(x) === "" && Q.style.removeProperty(x);
 					for (let x of Array.from(m)) {
 						if (IGNORED_STYLES.includes(x) || x.startsWith(CSS_PREFIX)) continue;
 						let S = m.getPropertyValue(x);
-						sH.style.setProperty(x, S);
+						Q.style.setProperty(x, S);
 					}
 				}
-			} else C === null ? sH.removeAttribute(m) : sH.setAttribute(m, C);
+			} else C === null ? Q.removeAttribute(m) : Q.setAttribute(m, C);
 		}
-		x && rH && (sH.innerHTML = k.innerHTML);
-	}), U.observe(k, {
+		x && qz && (Q.innerHTML = k.innerHTML);
+	}), H.observe(k, {
 		attributes: !0,
 		subtree: !0,
 		childList: !0
-	}), W = new MutationObserver((m) => {
+	}), U = new MutationObserver((m) => {
 		for (let x of m) if (x.addedNodes.length !== 0) for (let m of Array.from(x.addedNodes)) {
-			if (m.contains(k) && k.nextElementSibling !== sH) {
-				k.insertAdjacentElement("afterend", sH), showPopover(M);
+			if (m.contains(k) && k.nextElementSibling !== Q) {
+				k.insertAdjacentElement("afterend", Q), showPopover(M);
 				return;
 			}
-			if (m.contains(sH) && sH.previousElementSibling !== k) {
-				sH.insertAdjacentElement("beforebegin", k), showPopover(M);
+			if (m.contains(Q) && Q.previousElementSibling !== k) {
+				Q.insertAdjacentElement("beforebegin", k), showPopover(M);
 				return;
 			}
 		}
-	}), W.observe(k.ownerDocument.body, {
+	}), U.observe(k.ownerDocument.body, {
 		childList: !0,
 		subtree: !0
 	}));
-	let CH = x.dragOperation.source?.id, wH = () => {
-		if (!cH || CH == null) return;
-		let m = x.registry.draggables.get(CH), S = m?.handle ?? m?.element;
+	let fB = x.dragOperation.source?.id, pB = () => {
+		if (!Zz || fB == null) return;
+		let m = x.registry.draggables.get(fB), S = m?.handle ?? m?.element;
 		isHTMLElement$1(S) && S.focus();
-	}, TH = () => {
-		U?.disconnect(), W?.disconnect(), yH.disconnect(), xH.removeEventListener("resize", SH), supportsPopover(M) && (M.removeEventListener("beforetoggle", preventPopoverClose), M.removeAttribute("popover")), M.removeAttribute(ATTRIBUTE), G.reset(), D.status = "idle";
+	}, mB = () => {
+		H?.disconnect(), U?.disconnect(), cB.disconnect(), uB.removeEventListener("resize", dB), supportsPopover(M) && (M.removeEventListener("beforetoggle", preventPopoverClose), M.removeAttribute("popover")), M.removeAttribute(ATTRIBUTE), W.reset(), D.status = "idle";
 		let x = m.current.translate != null;
-		sH && (x || sH.parentElement !== M.parentElement) && M.isConnected && sH.replaceWith(M), sH?.remove();
-	}, EH = effects(() => {
+		Q && (x || Q.parentElement !== M.parentElement) && M.isConnected && Q.replaceWith(M), Q?.remove();
+	}, hB = effects(() => {
 		let { transform: x, status: S } = C;
 		if (!(!x.x && !x.y && !m.current.translate) && S.dragging) {
 			let S = j.translate ?? {
@@ -6215,11 +6069,11 @@ _init$2 = __decoratorStart$2(_a$1), _overlay = /* @__PURE__ */ new WeakMap(), _F
 			}, T = {
 				x: x.x / N.scaleX + S.x,
 				y: x.y / N.scaleY + S.y
-			}, D = m.current.translate, O = n(() => C.modifiers), k = n(() => C.shape?.current), A = cH ? "250ms cubic-bezier(0.25, 1, 0.5, 1)" : "0ms linear";
-			if (G.set({
-				transition: `${K}, translate ${A}`,
+			}, D = m.current.translate, O = n(() => C.modifiers), k = n(() => C.shape?.current), A = Zz ? "250ms cubic-bezier(0.25, 1, 0.5, 1)" : "0ms linear";
+			if (W.set({
+				transition: `${G}, translate ${A}`,
 				translate: `${T.x}px ${T.y}px 0`
-			}, CSS_PREFIX), U?.takeRecords(), k && k !== bH && D && !O.length) {
+			}, CSS_PREFIX), H?.takeRecords(), k && k !== lB && D && !O.length) {
 				let m = Point.delta(T, D);
 				C.shape = Rectangle.from(k.boundingRectangle).translate(m.x * N.scaleX, m.y * N.scaleY);
 			} else C.shape = new DOMRectangle(M);
@@ -6233,7 +6087,7 @@ _init$2 = __decoratorStart$2(_a$1), _overlay = /* @__PURE__ */ new WeakMap(), _F
 				x: 0,
 				y: 0
 			}), !S) {
-				TH();
+				mB();
 				return;
 			}
 			x.renderer.rendering.then(() => {
@@ -6241,7 +6095,7 @@ _init$2 = __decoratorStart$2(_a$1), _overlay = /* @__PURE__ */ new WeakMap(), _F
 					showPopover(M);
 					let [, m] = getFinalKeyframe$2(M, (m) => "translate" in m) ?? [];
 					m?.pause();
-					let x = sH ?? k, T = { frameTransform: isSameFrame(M, x) ? null : void 0 }, O = new DOMRectangle(M, T), A = parseTranslate(getComputedStyles(M).translate) ?? S, j = new DOMRectangle(x, T), N = Rectangle.delta(O, j, D.alignment), P = {
+					let x = Q ?? k, T = { frameTransform: isSameFrame(M, x) ? null : void 0 }, O = new DOMRectangle(M, T), A = parseTranslate(getComputedStyles(M).translate) ?? S, j = new DOMRectangle(x, T), N = Rectangle.delta(O, j, D.alignment), P = {
 						x: A.x - N.x,
 						y: A.y - N.y
 					}, F = Math.round(O.intrinsicHeight) === Math.round(j.intrinsicHeight) ? {} : {
@@ -6251,7 +6105,7 @@ _init$2 = __decoratorStart$2(_a$1), _overlay = /* @__PURE__ */ new WeakMap(), _F
 						minWidth: [`${O.intrinsicWidth}px`, `${j.intrinsicWidth}px`],
 						maxWidth: [`${O.intrinsicWidth}px`, `${j.intrinsicWidth}px`]
 					};
-					G.set({ transition: K }, CSS_PREFIX), M.setAttribute(DROPPING_ATTRIBUTE, ""), U?.takeRecords(), animateTransform({
+					W.set({ transition: G }, CSS_PREFIX), M.setAttribute(DROPPING_ATTRIBUTE, ""), H?.takeRecords(), animateTransform({
 						element: M,
 						keyframes: __spreadProps$4(__spreadValues$4(__spreadValues$4({}, F), I), { translate: [`${A.x}px ${A.y}px 0`, `${P.x}px ${P.y}px 0`] }),
 						options: {
@@ -6259,14 +6113,14 @@ _init$2 = __decoratorStart$2(_a$1), _overlay = /* @__PURE__ */ new WeakMap(), _F
 							easing: "ease"
 						}
 					}).then(() => {
-						M.removeAttribute(DROPPING_ATTRIBUTE), m?.finish(), TH(), requestAnimationFrame(wH);
+						M.removeAttribute(DROPPING_ATTRIBUTE), m?.finish(), mB(), requestAnimationFrame(pB);
 					});
 				}
 			});
 		}
 	});
 	return () => {
-		TH(), EH();
+		mB(), hB();
 	};
 }, injectStyles_fn = function() {
 	let { status: m, source: x, target: S } = this.manager.dragOperation, { nonce: C } = this.options ?? {};
@@ -6803,10 +6657,10 @@ function isCapturedBySensor(m) {
 function preventDefault(m) {
 	m.preventDefault();
 }
-function noop$2() {}
+function noop$1() {}
 var windows = /* @__PURE__ */ new WeakSet();
 function patchWindow(m) {
-	!m || windows.has(m) || (m.addEventListener("touchmove", noop$2, {
+	!m || windows.has(m) || (m.addEventListener("touchmove", noop$1, {
 		capture: !1,
 		passive: !1
 	}), windows.add(m));
@@ -6910,7 +6764,7 @@ function isRef(m) {
 function currentValue(m) {
 	if (m != null) return isRef(m) ? m.current ?? void 0 : m;
 }
-var useIsomorphicLayoutEffect$3 = typeof window < "u" && window.document !== void 0 && window.document.createElement !== void 0 ? useLayoutEffect : useEffect;
+var useIsomorphicLayoutEffect$2 = typeof window < "u" && window.document !== void 0 && window.document.createElement !== void 0 ? useLayoutEffect : useEffect;
 function useForceUpdate() {
 	let m = useState(0)[1];
 	return useCallback(() => {
@@ -6919,7 +6773,7 @@ function useForceUpdate() {
 }
 function useDeepSignal(m, x) {
 	let S = useRef(/* @__PURE__ */ new Map()), C = useForceUpdate();
-	return useIsomorphicLayoutEffect$3(() => {
+	return useIsomorphicLayoutEffect$2(() => {
 		if (!m) {
 			S.current.clear();
 			return;
@@ -6942,7 +6796,7 @@ function useImmediateEffect(m, x) {
 }
 function useLatest(m) {
 	let x = useRef(m);
-	return useIsomorphicLayoutEffect$3(() => {
+	return useIsomorphicLayoutEffect$2(() => {
 		x.current = m;
 	}, [m]), x;
 }
@@ -6955,7 +6809,7 @@ function useOnValueChange(m, x, S = useEffect, C = Object.is) {
 }
 function useOnElementChange(m, x) {
 	let S = useRef(currentValue(m));
-	useIsomorphicLayoutEffect$3(() => {
+	useIsomorphicLayoutEffect$2(() => {
 		let C = currentValue(m);
 		C !== S.current && (S.current = C, x(C));
 	});
@@ -6987,13 +6841,13 @@ var __defProp$2 = Object.defineProperty, __defProps$2 = Object.defineProperties,
 			});
 		}
 	}), []);
-	return useIsomorphicLayoutEffect$3(() => {
+	return useIsomorphicLayoutEffect$2(() => {
 		var m;
 		(m = D.current) == null || m.call(D), T.current = null;
 	}, [m, S]), useImperativeHandle(x, () => O), null;
 })), options = [void 0, deepEqual];
 function DragDropProvider(m) {
-	var x = m, { children: S, onCollision: C, onBeforeDragStart: T, onDragStart: D, onDragMove: O, onDragOver: k, onDragEnd: A } = x, M = __objRest$2(x, [
+	var x = m, { children: S, onCollision: C, onBeforeDragStart: T, onDragStart: D, onDragMove: O, onDragOver: k, onDragEnd: A } = x, j = __objRest$2(x, [
 		"children",
 		"onCollision",
 		"onBeforeDragStart",
@@ -7002,27 +6856,27 @@ function DragDropProvider(m) {
 		"onDragOver",
 		"onDragEnd"
 	]);
-	let N = useRef(null), [F, I] = useState(M.manager ?? null), { plugins: L, modifiers: R, sensors: z } = M, U = useLatest(T), W = useLatest(D), q = useLatest(k), J = useLatest(O), $V = useLatest(A), Y = useLatest(C);
+	let M = useRef(null), [N, P] = useState(j.manager ?? null), { plugins: F, modifiers: I, sensors: L } = j, R = useLatest(T), z = useLatest(D), B = useLatest(k), H = useLatest(O), U = useLatest(A), G = useLatest(C);
 	return useEffect(() => {
-		if (!N.current) throw Error("Renderer not found");
-		let { renderer: m, trackRendering: x } = N.current, S = M.manager ?? new DragDropManager(M);
+		if (!M.current) throw Error("Renderer not found");
+		let { renderer: m, trackRendering: x } = M.current, S = j.manager ?? new DragDropManager(j);
 		return S.renderer = m, S.monitor.addEventListener("beforedragstart", (m) => {
-			let C = U.current;
+			let C = R.current;
 			C && x(() => C(m, S));
-		}), S.monitor.addEventListener("dragstart", (m) => W.current?.call(W, m, S)), S.monitor.addEventListener("dragover", (m) => {
-			let C = q.current;
+		}), S.monitor.addEventListener("dragstart", (m) => z.current?.call(z, m, S)), S.monitor.addEventListener("dragover", (m) => {
+			let C = B.current;
 			C && x(() => C(m, S));
 		}), S.monitor.addEventListener("dragmove", (m) => {
-			let C = J.current;
+			let C = H.current;
 			C && x(() => C(m, S));
 		}), S.monitor.addEventListener("dragend", (m) => {
-			let C = $V.current;
+			let C = U.current;
 			C && x(() => C(m, S));
-		}), S.monitor.addEventListener("collision", (m) => Y.current?.call(Y, m, S)), startTransition(() => I(S)), S.destroy;
-	}, [M.manager]), useOnValueChange(L, () => F && (F.plugins = L ?? defaultPreset.plugins), ...options), useOnValueChange(z, () => F && (F.sensors = z ?? defaultPreset.sensors), ...options), useOnValueChange(R, () => F && (F.modifiers = R ?? defaultPreset.modifiers), ...options), /* @__PURE__ */ jsxs(DragDropContext$1.Provider, {
-		value: F,
+		}), S.monitor.addEventListener("collision", (m) => G.current?.call(G, m, S)), startTransition(() => P(S)), S.destroy;
+	}, [j.manager]), useOnValueChange(F, () => N && (N.plugins = F ?? defaultPreset.plugins), ...options), useOnValueChange(L, () => N && (N.sensors = L ?? defaultPreset.sensors), ...options), useOnValueChange(I, () => N && (N.modifiers = I ?? defaultPreset.modifiers), ...options), /* @__PURE__ */ jsxs(DragDropContext$1.Provider, {
+		value: N,
 		children: [/* @__PURE__ */ jsx(Renderer, {
-			ref: N,
+			ref: M,
 			children: S
 		}), S]
 	});
@@ -7032,7 +6886,7 @@ function useDragDropManager() {
 }
 function useInstance(m) {
 	let x = useDragDropManager() ?? void 0, [S] = useState(() => m(x));
-	return S.manager !== x && (S.manager = x), useIsomorphicLayoutEffect$3(S.register, [x, S]), S;
+	return S.manager !== x && (S.manager = x), useIsomorphicLayoutEffect$2(S.register, [x, S]), S;
 }
 function useDraggable(m) {
 	let { disabled: x, data: S, element: C, handle: T, id: D, modifiers: O, sensors: k } = m, A = useInstance((x) => new Draggable(__spreadProps$3(__spreadValues$3({}, m), {
@@ -7243,7 +7097,7 @@ var __create = Object.create, __defProp$1 = Object.defineProperty, __defProps$1 
 		set [S](m) {
 			return __privateSet(this, D, m);
 		}
-	}, S)), H = C.length - 1; H >= 0; H--) j = __decoratorContext(N, S, A = {}, m[3], z), j.static = P, j.private = F, M = j.access = { has: (m) => S in m }, M.get = (m) => m[S], M.set = (m, x) => m[S] = x, k = (0, C[H])({
+	}, S)), V = C.length - 1; V >= 0; V--) j = __decoratorContext(N, S, A = {}, m[3], z), j.static = P, j.private = F, M = j.access = { has: (m) => S in m }, M.get = (m) => m[S], M.set = (m, x) => m[S] = x, k = (0, C[V])({
 		get: B.get,
 		set: B.set
 	}, j), A._ = 1, k === void 0 ? __expectFn(k) && (B[L] = k) : typeof k != "object" || !k ? __typeError("Object expected") : (__expectFn(O = k.get) && (B.get = O), __expectFn(O = k.set) && (B.set = O), __expectFn(O = k.init) && R.unshift(O));
@@ -7388,8 +7242,8 @@ var defaultGroup = "__default__", OptimisticSortingPlugin = class extends Plugin
 						[L]: F
 					}, z = move(R, m);
 					if (R === z) return;
-					let B = z[L].indexOf(T.sortable), H = z[L].indexOf(D.sortable);
-					S.collisionObserver.disable(), reorder$1(M, B, N, H), r(() => {
+					let B = z[L].indexOf(T.sortable), V = z[L].indexOf(D.sortable);
+					S.collisionObserver.disable(), reorder$1(M, B, N, V), r(() => {
 						for (let [m, x] of z[I].entries()) x.index = m;
 						if (!k) for (let [m, x] of z[L].entries()) x.group = D.sortable.group, x.index = m;
 					}), S.actions.setDropTarget(T.id).then(() => S.collisionObserver.enable());
@@ -7651,50 +7505,50 @@ var SortableDraggable = class extends Draggable {
 	return m;
 }, __spreadProps$1 = (m, x) => __defProps(m, __getOwnPropDescs(x));
 function useSortable(m) {
-	let { accept: x, collisionDetector: S, collisionPriority: C, id: T, data: D, element: O, handle: k, index: A, group: j, disabled: N, feedback: P, modifiers: F, sensors: I, target: L, type: R } = m, z = __spreadValues$1(__spreadValues$1({}, defaultSortableTransition), m.transition), B = useInstance((x) => new Sortable2(__spreadProps$1(__spreadValues$1({}, m), {
-		transition: z,
+	let { accept: x, collisionDetector: S, collisionPriority: C, id: T, data: D, element: O, handle: k, index: A, group: j, disabled: M, feedback: N, modifiers: P, sensors: F, target: I, type: L } = m, R = __spreadValues$1(__spreadValues$1({}, defaultSortableTransition), m.transition), z = useInstance((x) => new Sortable2(__spreadProps$1(__spreadValues$1({}, m), {
+		transition: R,
 		register: !1,
 		handle: currentValue(k),
 		element: currentValue(O),
-		target: currentValue(L),
-		feedback: P
-	}), x)), H = useDeepSignal(B, shouldUpdateSynchronously);
-	return useOnValueChange(T, () => B.id = T), useIsomorphicLayoutEffect$3(() => {
+		target: currentValue(I),
+		feedback: N
+	}), x)), B = useDeepSignal(z, shouldUpdateSynchronously);
+	return useOnValueChange(T, () => z.id = T), useIsomorphicLayoutEffect$2(() => {
 		r(() => {
-			B.group = j, B.index = A;
+			z.group = j, z.index = A;
 		});
 	}, [
-		B,
+		z,
 		j,
 		A
-	]), useOnValueChange(R, () => B.type = R), useOnValueChange(x, () => B.accept = x, void 0, deepEqual), useOnValueChange(D, () => D && (B.data = D)), useOnValueChange(A, () => {
-		B.manager?.dragOperation.status.idle && z?.idle && B.refreshShape();
-	}, useImmediateEffect), useOnElementChange(k, (m) => B.handle = m), useOnElementChange(O, (m) => B.element = m), useOnElementChange(L, (m) => B.target = m), useOnValueChange(N, () => B.disabled = N === !0), useOnValueChange(I, () => B.sensors = I), useOnValueChange(S, () => B.collisionDetector = S), useOnValueChange(C, () => B.collisionPriority = C), useOnValueChange(P, () => B.feedback = P ?? "default"), useOnValueChange(z, () => B.transition = z, void 0, deepEqual), useOnValueChange(F, () => B.modifiers = F, void 0, deepEqual), useOnValueChange(m.alignment, () => B.alignment = m.alignment), {
-		sortable: H,
+	]), useOnValueChange(L, () => z.type = L), useOnValueChange(x, () => z.accept = x, void 0, deepEqual), useOnValueChange(D, () => D && (z.data = D)), useOnValueChange(A, () => {
+		z.manager?.dragOperation.status.idle && R?.idle && z.refreshShape();
+	}, useImmediateEffect), useOnElementChange(k, (m) => z.handle = m), useOnElementChange(O, (m) => z.element = m), useOnElementChange(I, (m) => z.target = m), useOnValueChange(M, () => z.disabled = M === !0), useOnValueChange(F, () => z.sensors = F), useOnValueChange(S, () => z.collisionDetector = S), useOnValueChange(C, () => z.collisionPriority = C), useOnValueChange(N, () => z.feedback = N ?? "default"), useOnValueChange(R, () => z.transition = R, void 0, deepEqual), useOnValueChange(P, () => z.modifiers = P, void 0, deepEqual), useOnValueChange(m.alignment, () => z.alignment = m.alignment), {
+		sortable: B,
 		get isDragging() {
-			return H.isDragging;
+			return B.isDragging;
 		},
 		get isDropping() {
-			return H.isDropping;
+			return B.isDropping;
 		},
 		get isDragSource() {
-			return H.isDragSource;
+			return B.isDragSource;
 		},
 		get isDropTarget() {
-			return H.isDropTarget;
+			return B.isDropTarget;
 		},
 		handleRef: useCallback((m) => {
-			B.handle = m ?? void 0;
-		}, [B]),
+			z.handle = m ?? void 0;
+		}, [z]),
 		ref: useCallback((m) => {
-			!m && B.element?.isConnected && !B.manager?.dragOperation.status.idle || (B.element = m ?? void 0);
-		}, [B]),
+			!m && z.element?.isConnected && !z.manager?.dragOperation.status.idle || (z.element = m ?? void 0);
+		}, [z]),
 		sourceRef: useCallback((m) => {
-			!m && B.source?.isConnected && !B.manager?.dragOperation.status.idle || (B.source = m ?? void 0);
-		}, [B]),
+			!m && z.source?.isConnected && !z.manager?.dragOperation.status.idle || (z.source = m ?? void 0);
+		}, [z]),
 		targetRef: useCallback((m) => {
-			!m && B.target?.isConnected && !B.manager?.dragOperation.status.idle || (B.target = m ?? void 0);
-		}, [B])
+			!m && z.target?.isConnected && !z.manager?.dragOperation.status.idle || (z.target = m ?? void 0);
+		}, [z])
 	};
 }
 function shouldUpdateSynchronously(m, x, S) {
@@ -7717,10 +7571,10 @@ function shallow(m, x) {
 	return Object.is(m, x) ? !0 : typeof m != "object" || !m || typeof x != "object" || !x || Object.getPrototypeOf(m) !== Object.getPrototypeOf(x) ? !1 : isIterable(m) && isIterable(x) ? hasIterableEntries(m) && hasIterableEntries(x) ? compareEntries(m, x) : compareIterables(m, x) : compareEntries({ entries: () => Object.entries(m) }, { entries: () => Object.entries(x) });
 }
 function useShallow(m) {
-	let S = React.useRef(void 0);
-	return (x) => {
-		let C = m(x);
-		return shallow(S.current, C) ? S.current : S.current = C;
+	let x = React.useRef(void 0);
+	return (S) => {
+		let C = m(S);
+		return shallow(x.current, C) ? x.current : x.current = C;
 	};
 }
 function c(m, x, S) {
@@ -7728,10 +7582,10 @@ function c(m, x, S) {
 	useEffect(function() {
 		M.current = m;
 	}, [m]);
-	var F = !x && x !== 0 && typeof window < "u";
+	var P = !x && x !== 0 && typeof window < "u";
 	if (typeof m != "function") throw TypeError("Expected a function");
 	x = +x || 0;
-	var I = !!(S ||= {}).leading, L = !("trailing" in S) || !!S.trailing, R = "maxWait" in S, H = R ? Math.max(+S.maxWait || 0, x) : null;
+	var F = !!(S ||= {}).leading, I = !("trailing" in S) || !!S.trailing, L = "maxWait" in S, R = L ? Math.max(+S.maxWait || 0, x) : null;
 	return useEffect(function() {
 		return N.current = !0, function() {
 			N.current = !1;
@@ -7741,42 +7595,42 @@ function c(m, x, S) {
 			var x = k.current, S = A.current;
 			return k.current = A.current = null, D.current = m, j.current = M.current.apply(S, x);
 		}, S = function(m, x) {
-			F && cancelAnimationFrame(O.current), O.current = F ? requestAnimationFrame(m) : setTimeout(m, x);
-		}, P = function(m) {
+			P && cancelAnimationFrame(O.current), O.current = P ? requestAnimationFrame(m) : setTimeout(m, x);
+		}, z = function(m) {
 			if (!N.current) return !1;
 			var S = m - T.current;
-			return !T.current || S >= x || S < 0 || R && m - D.current >= H;
-		}, z = function(x) {
-			return O.current = null, L && k.current ? m(x) : (k.current = A.current = null, j.current);
-		}, B = function m() {
+			return !T.current || S >= x || S < 0 || L && m - D.current >= R;
+		}, B = function(x) {
+			return O.current = null, I && k.current ? m(x) : (k.current = A.current = null, j.current);
+		}, V = function m() {
 			var C = Date.now();
-			if (P(C)) return z(C);
+			if (z(C)) return B(C);
 			if (N.current) {
 				var O = x - (C - T.current);
-				S(m, R ? Math.min(O, H - (C - D.current)) : O);
+				S(m, L ? Math.min(O, R - (C - D.current)) : O);
 			}
-		}, U = function() {
-			var M = Date.now(), F = P(M);
-			if (k.current = [].slice.call(arguments), A.current = C, T.current = M, F) {
-				if (!O.current && N.current) return D.current = T.current, S(B, x), I ? m(T.current) : j.current;
-				if (R) return S(B, x), m(T.current);
+		}, H = function() {
+			var M = Date.now(), P = z(M);
+			if (k.current = [].slice.call(arguments), A.current = C, T.current = M, P) {
+				if (!O.current && N.current) return D.current = T.current, S(V, x), F ? m(T.current) : j.current;
+				if (L) return S(V, x), m(T.current);
 			}
-			return O.current || S(B, x), j.current;
+			return O.current || S(V, x), j.current;
 		};
-		return U.cancel = function() {
-			O.current && (F ? cancelAnimationFrame(O.current) : clearTimeout(O.current)), D.current = 0, k.current = T.current = A.current = O.current = null;
-		}, U.isPending = function() {
+		return H.cancel = function() {
+			O.current && (P ? cancelAnimationFrame(O.current) : clearTimeout(O.current)), D.current = 0, k.current = T.current = A.current = O.current = null;
+		}, H.isPending = function() {
 			return !!O.current;
-		}, U.flush = function() {
-			return O.current ? z(Date.now()) : j.current;
-		}, U;
+		}, H.flush = function() {
+			return O.current ? B(Date.now()) : j.current;
+		}, H;
 	}, [
-		I,
-		R,
-		x,
-		H,
+		F,
 		L,
-		F
+		x,
+		R,
+		I,
+		P
 	]);
 }
 var import_object_hash = /* @__PURE__ */ __toESM$1((/* @__PURE__ */ __commonJSMin(((m, x) => {
@@ -7809,7 +7663,7 @@ var import_object_hash = /* @__PURE__ */ __toESM$1((/* @__PURE__ */ __commonJSMi
 					function F(m, x) {
 						x = R(m, x);
 						var S;
-						return (S = x.algorithm === "passthrough" ? new H() : P.createHash(x.algorithm)).write === void 0 && (S.write = S.update, S.end = S.update), B(x, S).dispatch(m), S.update || S.end(""), S.digest ? S.digest(x.encoding === "buffer" ? void 0 : x.encoding) : (m = S.read(), x.encoding === "buffer" ? m : m.toString(x.encoding));
+						return (S = x.algorithm === "passthrough" ? new V() : P.createHash(x.algorithm)).write === void 0 && (S.write = S.update, S.end = S.update), B(x, S).dispatch(m), S.update || S.end(""), S.digest ? S.digest(x.encoding === "buffer" ? void 0 : x.encoding) : (m = S.read(), x.encoding === "buffer" ? m : m.toString(x.encoding));
 					}
 					(S = x.exports = F).sha1 = function(m) {
 						return F(m);
@@ -7879,7 +7733,7 @@ var import_object_hash = /* @__PURE__ */ __toESM$1((/* @__PURE__ */ __commonJSMi
 									return D.dispatch(m);
 								});
 								var O = [], T = x.map(function(x) {
-									var C = new H(), T = S.slice();
+									var C = new V(), T = S.slice();
 									return B(m, C, T).dispatch(x), O = O.concat(T.slice(S.length)), C.read().toString();
 								});
 								return S = S.concat(O), T.sort(), this._array(T, !1);
@@ -8027,7 +7881,7 @@ var import_object_hash = /* @__PURE__ */ __toESM$1((/* @__PURE__ */ __commonJSMi
 							}
 						};
 					}
-					function H() {
+					function V() {
 						return {
 							buf: "",
 							write: function(m) {
@@ -8093,26 +7947,26 @@ var import_object_hash = /* @__PURE__ */ __toESM$1((/* @__PURE__ */ __commonJSMi
 						if (!(this instanceof T)) return new T(m, x, S);
 						var C, D, O, k, A = typeof m;
 						if (x === "base64" && A == "string") for (m = (k = m).trim ? k.trim() : k.replace(/^\s+|\s+$/g, ""); m.length % 4 != 0;) m += "=";
-						if (A == "number") C = eH(m);
+						if (A == "number") C = X(m);
 						else if (A == "string") C = T.byteLength(m, x);
 						else {
 							if (A != "object") throw Error("First argument needs to be a number, array or string.");
-							C = eH(m.length);
+							C = X(m.length);
 						}
 						if (T._useTypedArrays ? D = T._augment(new Uint8Array(C)) : ((D = this).length = C, D._isBuffer = !0), T._useTypedArrays && typeof m.byteLength == "number") D._set(m);
-						else if (Q(k = m) || T.isBuffer(k) || k && typeof k == "object" && typeof k.length == "number") for (O = 0; O < C; O++) T.isBuffer(m) ? D[O] = m.readUInt8(O) : D[O] = m[O];
+						else if (Z(k = m) || T.isBuffer(k) || k && typeof k == "object" && typeof k.length == "number") for (O = 0; O < C; O++) T.isBuffer(m) ? D[O] = m.readUInt8(O) : D[O] = m[O];
 						else if (A == "string") D.write(m, 0, x);
 						else if (A == "number" && !T._useTypedArrays && !S) for (O = 0; O < C; O++) D[O] = 0;
 						return D;
 					}
 					function F(m, x, S, C) {
-						return T._charsWritten = iH(function(m) {
+						return T._charsWritten = Jz(function(m) {
 							for (var x = [], S = 0; S < m.length; S++) x.push(255 & m.charCodeAt(S));
 							return x;
 						}(x), m, S, C);
 					}
 					function I(m, x, S, C) {
-						return T._charsWritten = iH(function(m) {
+						return T._charsWritten = Jz(function(m) {
 							for (var x, S, C = [], T = 0; T < m.length; T++) S = m.charCodeAt(T), x = S >> 8, S %= 256, C.push(S), C.push(x);
 							return C;
 						}(x), m, S, C);
@@ -8136,32 +7990,32 @@ var import_object_hash = /* @__PURE__ */ __toESM$1((/* @__PURE__ */ __commonJSMi
 					function B(m, x, S, C) {
 						if (C || ($(typeof S == "boolean", "missing or invalid endian"), $(x != null, "missing offset"), $(x + 1 < m.length, "Trying to read beyond buffer length")), !(m.length <= x)) return C = R(m, x, S, !0), 32768 & C ? -1 * (65535 - C + 1) : C;
 					}
-					function H(m, x, S, C) {
+					function V(m, x, S, C) {
 						if (C || ($(typeof S == "boolean", "missing or invalid endian"), $(x != null, "missing offset"), $(x + 3 < m.length, "Trying to read beyond buffer length")), !(m.length <= x)) return C = z(m, x, S, !0), 2147483648 & C ? -1 * (4294967295 - C + 1) : C;
 					}
-					function U(m, x, S, C) {
+					function H(m, x, S, C) {
 						return C || ($(typeof S == "boolean", "missing or invalid endian"), $(x + 3 < m.length, "Trying to read beyond buffer length")), P.read(m, x, S, 23, 4);
 					}
-					function W(m, x, S, C) {
+					function U(m, x, S, C) {
 						return C || ($(typeof S == "boolean", "missing or invalid endian"), $(x + 7 < m.length, "Trying to read beyond buffer length")), P.read(m, x, S, 52, 8);
 					}
+					function W(m, x, S, C, T) {
+						if (T || ($(x != null, "missing value"), $(typeof C == "boolean", "missing or invalid endian"), $(S != null, "missing offset"), $(S + 1 < m.length, "trying to write beyond buffer length"), Xz(x, 65535)), T = m.length, !(T <= S)) for (var D = 0, O = Math.min(T - S, 2); D < O; D++) m[S + D] = (x & 255 << 8 * (C ? D : 1 - D)) >>> 8 * (C ? D : 1 - D);
+					}
 					function G(m, x, S, C, T) {
-						if (T || ($(x != null, "missing value"), $(typeof C == "boolean", "missing or invalid endian"), $(S != null, "missing offset"), $(S + 1 < m.length, "trying to write beyond buffer length"), oH(x, 65535)), T = m.length, !(T <= S)) for (var D = 0, O = Math.min(T - S, 2); D < O; D++) m[S + D] = (x & 255 << 8 * (C ? D : 1 - D)) >>> 8 * (C ? D : 1 - D);
+						if (T || ($(x != null, "missing value"), $(typeof C == "boolean", "missing or invalid endian"), $(S != null, "missing offset"), $(S + 3 < m.length, "trying to write beyond buffer length"), Xz(x, 4294967295)), T = m.length, !(T <= S)) for (var D = 0, O = Math.min(T - S, 4); D < O; D++) m[S + D] = x >>> 8 * (C ? D : 3 - D) & 255;
 					}
 					function K(m, x, S, C, T) {
-						if (T || ($(x != null, "missing value"), $(typeof C == "boolean", "missing or invalid endian"), $(S != null, "missing offset"), $(S + 3 < m.length, "trying to write beyond buffer length"), oH(x, 4294967295)), T = m.length, !(T <= S)) for (var D = 0, O = Math.min(T - S, 4); D < O; D++) m[S + D] = x >>> 8 * (C ? D : 3 - D) & 255;
+						T || ($(x != null, "missing value"), $(typeof C == "boolean", "missing or invalid endian"), $(S != null, "missing offset"), $(S + 1 < m.length, "Trying to write beyond buffer length"), Q(x, 32767, -32768)), m.length <= S || W(m, 0 <= x ? x : 65535 + x + 1, S, C, T);
 					}
 					function q(m, x, S, C, T) {
-						T || ($(x != null, "missing value"), $(typeof C == "boolean", "missing or invalid endian"), $(S != null, "missing offset"), $(S + 1 < m.length, "Trying to write beyond buffer length"), sH(x, 32767, -32768)), m.length <= S || G(m, 0 <= x ? x : 65535 + x + 1, S, C, T);
+						T || ($(x != null, "missing value"), $(typeof C == "boolean", "missing or invalid endian"), $(S != null, "missing offset"), $(S + 3 < m.length, "Trying to write beyond buffer length"), Q(x, 2147483647, -2147483648)), m.length <= S || G(m, 0 <= x ? x : 4294967295 + x + 1, S, C, T);
 					}
 					function J(m, x, S, C, T) {
-						T || ($(x != null, "missing value"), $(typeof C == "boolean", "missing or invalid endian"), $(S != null, "missing offset"), $(S + 3 < m.length, "Trying to write beyond buffer length"), sH(x, 2147483647, -2147483648)), m.length <= S || K(m, 0 <= x ? x : 4294967295 + x + 1, S, C, T);
+						T || ($(x != null, "missing value"), $(typeof C == "boolean", "missing or invalid endian"), $(S != null, "missing offset"), $(S + 3 < m.length, "Trying to write beyond buffer length"), Zz(x, 34028234663852886e22, -34028234663852886e22)), m.length <= S || P.write(m, x, S, C, 23, 4);
 					}
-					function $V(m, x, S, C, T) {
-						T || ($(x != null, "missing value"), $(typeof C == "boolean", "missing or invalid endian"), $(S != null, "missing offset"), $(S + 3 < m.length, "Trying to write beyond buffer length"), cH(x, 34028234663852886e22, -34028234663852886e22)), m.length <= S || P.write(m, x, S, C, 23, 4);
-					}
-					function Y(m, x, S, C, T) {
-						T || ($(x != null, "missing value"), $(typeof C == "boolean", "missing or invalid endian"), $(S != null, "missing offset"), $(S + 7 < m.length, "Trying to write beyond buffer length"), cH(x, 17976931348623157e292, -17976931348623157e292)), m.length <= S || P.write(m, x, S, C, 52, 8);
+					function Uz(m, x, S, C, T) {
+						T || ($(x != null, "missing value"), $(typeof C == "boolean", "missing or invalid endian"), $(S != null, "missing offset"), $(S + 7 < m.length, "Trying to write beyond buffer length"), Zz(x, 17976931348623157e292, -17976931348623157e292)), m.length <= S || P.write(m, x, S, C, 52, 8);
 					}
 					S.Buffer = T, S.SlowBuffer = T, S.INSPECT_MAX_BYTES = 50, T.poolSize = 8192, T._useTypedArrays = function() {
 						try {
@@ -8197,7 +8051,7 @@ var import_object_hash = /* @__PURE__ */ __toESM$1((/* @__PURE__ */ __commonJSMi
 								break;
 							case "utf8":
 							case "utf-8":
-								S = nH(m).length;
+								S = Kz(m).length;
 								break;
 							case "ascii":
 							case "binary":
@@ -8205,7 +8059,7 @@ var import_object_hash = /* @__PURE__ */ __toESM$1((/* @__PURE__ */ __commonJSMi
 								S = m.length;
 								break;
 							case "base64":
-								S = rH(m).length;
+								S = qz(m).length;
 								break;
 							case "ucs2":
 							case "ucs-2":
@@ -8217,7 +8071,7 @@ var import_object_hash = /* @__PURE__ */ __toESM$1((/* @__PURE__ */ __commonJSMi
 						}
 						return S;
 					}, T.concat = function(m, x) {
-						if ($(Q(m), "Usage: Buffer.concat(list, [totalLength])\nlist should be an Array."), m.length === 0) return new T(0);
+						if ($(Z(m), "Usage: Buffer.concat(list, [totalLength])\nlist should be an Array."), m.length === 0) return new T(0);
 						if (m.length === 1) return m[0];
 						if (typeof x != "number") for (D = x = 0; D < m.length; D++) x += m[D].length;
 						for (var S = new T(x), C = 0, D = 0; D < m.length; D++) {
@@ -8243,14 +8097,14 @@ var import_object_hash = /* @__PURE__ */ __toESM$1((/* @__PURE__ */ __commonJSMi
 								break;
 							case "utf8":
 							case "utf-8":
-								O = this, k = x, A = S, D = T._charsWritten = iH(nH(m), O, k, A);
+								O = this, k = x, A = S, D = T._charsWritten = Jz(Kz(m), O, k, A);
 								break;
 							case "ascii":
 							case "binary":
 								D = F(this, m, x, S);
 								break;
 							case "base64":
-								O = this, k = x, A = S, D = T._charsWritten = iH(rH(m), O, k, A);
+								O = this, k = x, A = S, D = T._charsWritten = Jz(qz(m), O, k, A);
 								break;
 							case "ucs2":
 							case "ucs-2":
@@ -8269,7 +8123,7 @@ var import_object_hash = /* @__PURE__ */ __toESM$1((/* @__PURE__ */ __commonJSMi
 								C = function(m, x, S) {
 									var C = m.length;
 									(!x || x < 0) && (x = 0), (!S || S < 0 || C < S) && (S = C);
-									for (var T = "", D = x; D < S; D++) T += tH(m[D]);
+									for (var T = "", D = x; D < S; D++) T += Gz(m[D]);
 									return T;
 								}(k, x, S);
 								break;
@@ -8278,8 +8132,8 @@ var import_object_hash = /* @__PURE__ */ __toESM$1((/* @__PURE__ */ __commonJSMi
 								C = function(m, x, S) {
 									var C = "", T = "";
 									S = Math.min(m.length, S);
-									for (var D = x; D < S; D++) m[D] <= 127 ? (C += aH(T) + String.fromCharCode(m[D]), T = "") : T += "%" + m[D].toString(16);
-									return C + aH(T);
+									for (var D = x; D < S; D++) m[D] <= 127 ? (C += Yz(T) + String.fromCharCode(m[D]), T = "") : T += "%" + m[D].toString(16);
+									return C + Yz(T);
 								}(k, x, S);
 								break;
 							case "ascii":
@@ -8315,7 +8169,7 @@ var import_object_hash = /* @__PURE__ */ __toESM$1((/* @__PURE__ */ __commonJSMi
 						}
 					}, T.prototype.slice = function(m, x) {
 						var S = this.length;
-						if (m = Z(m, S, 0), x = Z(x, S, S), T._useTypedArrays) return T._augment(this.subarray(m, x));
+						if (m = Wz(m, S, 0), x = Wz(x, S, S), T._useTypedArrays) return T._augment(this.subarray(m, x));
 						for (var C = x - m, D = new T(C, void 0, !0), O = 0; O < C; O++) D[O] = this[O + m];
 						return D;
 					}, T.prototype.get = function(m) {
@@ -8339,52 +8193,52 @@ var import_object_hash = /* @__PURE__ */ __toESM$1((/* @__PURE__ */ __commonJSMi
 					}, T.prototype.readInt16BE = function(m, x) {
 						return B(this, m, !1, x);
 					}, T.prototype.readInt32LE = function(m, x) {
-						return H(this, m, !0, x);
+						return V(this, m, !0, x);
 					}, T.prototype.readInt32BE = function(m, x) {
-						return H(this, m, !1, x);
+						return V(this, m, !1, x);
 					}, T.prototype.readFloatLE = function(m, x) {
-						return U(this, m, !0, x);
+						return H(this, m, !0, x);
 					}, T.prototype.readFloatBE = function(m, x) {
-						return U(this, m, !1, x);
+						return H(this, m, !1, x);
 					}, T.prototype.readDoubleLE = function(m, x) {
-						return W(this, m, !0, x);
+						return U(this, m, !0, x);
 					}, T.prototype.readDoubleBE = function(m, x) {
-						return W(this, m, !1, x);
+						return U(this, m, !1, x);
 					}, T.prototype.writeUInt8 = function(m, x, S) {
-						S || ($(m != null, "missing value"), $(x != null, "missing offset"), $(x < this.length, "trying to write beyond buffer length"), oH(m, 255)), x >= this.length || (this[x] = m);
+						S || ($(m != null, "missing value"), $(x != null, "missing offset"), $(x < this.length, "trying to write beyond buffer length"), Xz(m, 255)), x >= this.length || (this[x] = m);
 					}, T.prototype.writeUInt16LE = function(m, x, S) {
-						G(this, m, x, !0, S);
+						W(this, m, x, !0, S);
 					}, T.prototype.writeUInt16BE = function(m, x, S) {
-						G(this, m, x, !1, S);
+						W(this, m, x, !1, S);
 					}, T.prototype.writeUInt32LE = function(m, x, S) {
-						K(this, m, x, !0, S);
+						G(this, m, x, !0, S);
 					}, T.prototype.writeUInt32BE = function(m, x, S) {
-						K(this, m, x, !1, S);
+						G(this, m, x, !1, S);
 					}, T.prototype.writeInt8 = function(m, x, S) {
-						S || ($(m != null, "missing value"), $(x != null, "missing offset"), $(x < this.length, "Trying to write beyond buffer length"), sH(m, 127, -128)), x >= this.length || (0 <= m ? this.writeUInt8(m, x, S) : this.writeUInt8(255 + m + 1, x, S));
+						S || ($(m != null, "missing value"), $(x != null, "missing offset"), $(x < this.length, "Trying to write beyond buffer length"), Q(m, 127, -128)), x >= this.length || (0 <= m ? this.writeUInt8(m, x, S) : this.writeUInt8(255 + m + 1, x, S));
 					}, T.prototype.writeInt16LE = function(m, x, S) {
-						q(this, m, x, !0, S);
+						K(this, m, x, !0, S);
 					}, T.prototype.writeInt16BE = function(m, x, S) {
-						q(this, m, x, !1, S);
+						K(this, m, x, !1, S);
 					}, T.prototype.writeInt32LE = function(m, x, S) {
-						J(this, m, x, !0, S);
+						q(this, m, x, !0, S);
 					}, T.prototype.writeInt32BE = function(m, x, S) {
-						J(this, m, x, !1, S);
+						q(this, m, x, !1, S);
 					}, T.prototype.writeFloatLE = function(m, x, S) {
-						$V(this, m, x, !0, S);
+						J(this, m, x, !0, S);
 					}, T.prototype.writeFloatBE = function(m, x, S) {
-						$V(this, m, x, !1, S);
+						J(this, m, x, !1, S);
 					}, T.prototype.writeDoubleLE = function(m, x, S) {
-						Y(this, m, x, !0, S);
+						Uz(this, m, x, !0, S);
 					}, T.prototype.writeDoubleBE = function(m, x, S) {
-						Y(this, m, x, !1, S);
+						Uz(this, m, x, !1, S);
 					}, T.prototype.fill = function(m, x, S) {
 						if (x ||= 0, S ||= this.length, $(typeof (m = typeof (m ||= 0) == "string" ? m.charCodeAt(0) : m) == "number" && !isNaN(m), "value is not a number"), $(x <= S, "end < start"), S !== x && this.length !== 0) {
 							$(0 <= x && x < this.length, "start out of bounds"), $(0 <= S && S <= this.length, "end out of bounds");
 							for (var C = x; C < S; C++) this[C] = m;
 						}
 					}, T.prototype.inspect = function() {
-						for (var m = [], x = this.length, C = 0; C < x; C++) if (m[C] = tH(this[C]), C === S.INSPECT_MAX_BYTES) {
+						for (var m = [], x = this.length, C = 0; C < x; C++) if (m[C] = Gz(this[C]), C === S.INSPECT_MAX_BYTES) {
 							m[C + 1] = "...";
 							break;
 						}
@@ -8395,22 +8249,22 @@ var import_object_hash = /* @__PURE__ */ __toESM$1((/* @__PURE__ */ __commonJSMi
 						for (var m = new Uint8Array(this.length), x = 0, S = m.length; x < S; x += 1) m[x] = this[x];
 						return m.buffer;
 					};
-					var X = T.prototype;
-					function Z(m, x, S) {
+					var Y = T.prototype;
+					function Wz(m, x, S) {
 						return typeof m == "number" ? x <= (m = ~~m) ? x : 0 <= m || 0 <= (m += x) ? m : 0 : S;
 					}
-					function eH(m) {
+					function X(m) {
 						return (m = ~~Math.ceil(+m)) < 0 ? 0 : m;
 					}
-					function Q(m) {
+					function Z(m) {
 						return (Array.isArray || function(m) {
 							return Object.prototype.toString.call(m) === "[object Array]";
 						})(m);
 					}
-					function tH(m) {
+					function Gz(m) {
 						return m < 16 ? "0" + m.toString(16) : m.toString(16);
 					}
-					function nH(m) {
+					function Kz(m) {
 						for (var x = [], S = 0; S < m.length; S++) {
 							var C = m.charCodeAt(S);
 							if (C <= 127) x.push(m.charCodeAt(S));
@@ -8418,34 +8272,34 @@ var import_object_hash = /* @__PURE__ */ __toESM$1((/* @__PURE__ */ __commonJSMi
 						}
 						return x;
 					}
-					function rH(m) {
+					function qz(m) {
 						return N.toByteArray(m);
 					}
-					function iH(m, x, S, C) {
+					function Jz(m, x, S, C) {
 						for (var T = 0; T < C && !(T + S >= x.length || T >= m.length); T++) x[T + S] = m[T];
 						return T;
 					}
-					function aH(m) {
+					function Yz(m) {
 						try {
 							return decodeURIComponent(m);
 						} catch {
 							return "�";
 						}
 					}
-					function oH(m, x) {
+					function Xz(m, x) {
 						$(typeof m == "number", "cannot write a non-number as a number"), $(0 <= m, "specified a negative value for writing an unsigned value"), $(m <= x, "value is larger than maximum value for type"), $(Math.floor(m) === m, "value has a fractional component");
 					}
-					function sH(m, x, S) {
+					function Q(m, x, S) {
 						$(typeof m == "number", "cannot write a non-number as a number"), $(m <= x, "value larger than maximum allowed value"), $(S <= m, "value smaller than minimum allowed value"), $(Math.floor(m) === m, "value has a fractional component");
 					}
-					function cH(m, x, S) {
+					function Zz(m, x, S) {
 						$(typeof m == "number", "cannot write a non-number as a number"), $(m <= x, "value larger than maximum allowed value"), $(S <= m, "value smaller than minimum allowed value");
 					}
 					function $(m, x) {
 						if (!m) throw Error(x || "Failed assertion");
 					}
 					T._augment = function(m) {
-						return m._isBuffer = !0, m._get = m.get, m._set = m.set, m.get = X.get, m.set = X.set, m.write = X.write, m.toString = X.toString, m.toLocaleString = X.toString, m.toJSON = X.toJSON, m.copy = X.copy, m.slice = X.slice, m.readUInt8 = X.readUInt8, m.readUInt16LE = X.readUInt16LE, m.readUInt16BE = X.readUInt16BE, m.readUInt32LE = X.readUInt32LE, m.readUInt32BE = X.readUInt32BE, m.readInt8 = X.readInt8, m.readInt16LE = X.readInt16LE, m.readInt16BE = X.readInt16BE, m.readInt32LE = X.readInt32LE, m.readInt32BE = X.readInt32BE, m.readFloatLE = X.readFloatLE, m.readFloatBE = X.readFloatBE, m.readDoubleLE = X.readDoubleLE, m.readDoubleBE = X.readDoubleBE, m.writeUInt8 = X.writeUInt8, m.writeUInt16LE = X.writeUInt16LE, m.writeUInt16BE = X.writeUInt16BE, m.writeUInt32LE = X.writeUInt32LE, m.writeUInt32BE = X.writeUInt32BE, m.writeInt8 = X.writeInt8, m.writeInt16LE = X.writeInt16LE, m.writeInt16BE = X.writeInt16BE, m.writeInt32LE = X.writeInt32LE, m.writeInt32BE = X.writeInt32BE, m.writeFloatLE = X.writeFloatLE, m.writeFloatBE = X.writeFloatBE, m.writeDoubleLE = X.writeDoubleLE, m.writeDoubleBE = X.writeDoubleBE, m.fill = X.fill, m.inspect = X.inspect, m.toArrayBuffer = X.toArrayBuffer, m;
+						return m._isBuffer = !0, m._get = m.get, m._set = m.set, m.get = Y.get, m.set = Y.set, m.write = Y.write, m.toString = Y.toString, m.toLocaleString = Y.toString, m.toJSON = Y.toJSON, m.copy = Y.copy, m.slice = Y.slice, m.readUInt8 = Y.readUInt8, m.readUInt16LE = Y.readUInt16LE, m.readUInt16BE = Y.readUInt16BE, m.readUInt32LE = Y.readUInt32LE, m.readUInt32BE = Y.readUInt32BE, m.readInt8 = Y.readInt8, m.readInt16LE = Y.readInt16LE, m.readInt16BE = Y.readInt16BE, m.readInt32LE = Y.readInt32LE, m.readInt32BE = Y.readInt32BE, m.readFloatLE = Y.readFloatLE, m.readFloatBE = Y.readFloatBE, m.readDoubleLE = Y.readDoubleLE, m.readDoubleBE = Y.readDoubleBE, m.writeUInt8 = Y.writeUInt8, m.writeUInt16LE = Y.writeUInt16LE, m.writeUInt16BE = Y.writeUInt16BE, m.writeUInt32LE = Y.writeUInt32LE, m.writeUInt32BE = Y.writeUInt32BE, m.writeInt8 = Y.writeInt8, m.writeInt16LE = Y.writeInt16LE, m.writeInt16BE = Y.writeInt16BE, m.writeInt32LE = Y.writeInt32LE, m.writeInt32BE = Y.writeInt32BE, m.writeFloatLE = Y.writeFloatLE, m.writeFloatBE = Y.writeFloatBE, m.writeDoubleLE = Y.writeDoubleLE, m.writeDoubleBE = Y.writeDoubleBE, m.fill = Y.fill, m.inspect = Y.inspect, m.toArrayBuffer = Y.toArrayBuffer, m;
 					};
 				}).call(this, m("lYpoI2"), typeof self < "u" ? self : typeof window < "u" ? window : {}, m("buffer").Buffer, arguments[3], arguments[4], arguments[5], arguments[6], "/node_modules/gulp-browserify/node_modules/buffer/index.js", "/node_modules/gulp-browserify/node_modules/buffer");
 			}, {
@@ -8511,7 +8365,7 @@ var import_object_hash = /* @__PURE__ */ __toESM$1((/* @__PURE__ */ __commonJSMi
 							x(m);
 						}
 					};
-					var H, U = [
+					var V, H = [
 						"createCredentials",
 						"createCipher",
 						"createCipheriv",
@@ -8521,12 +8375,12 @@ var import_object_hash = /* @__PURE__ */ __toESM$1((/* @__PURE__ */ __commonJSMi
 						"createVerify",
 						"createDiffieHellman",
 						"pbkdf2"
-					], W = function(m) {
+					], U = function(m) {
 						S[m] = function() {
 							B("sorry,", m, "is not implemented yet");
 						};
 					};
-					for (H in U) W(U[H], H);
+					for (V in H) U(H[V], V);
 				}).call(this, m("lYpoI2"), typeof self < "u" ? self : typeof window < "u" ? window : {}, m("buffer").Buffer, arguments[3], arguments[4], arguments[5], arguments[6], "/node_modules/gulp-browserify/node_modules/crypto-browserify/index.js", "/node_modules/gulp-browserify/node_modules/crypto-browserify");
 			}, {
 				"./md5": 6,
@@ -8598,9 +8452,9 @@ var import_object_hash = /* @__PURE__ */ __toESM$1((/* @__PURE__ */ __commonJSMi
 					function P(m, x) {
 						m[x >> 5] |= 128 << 24 - x % 32, m[15 + (x + 64 >> 9 << 4)] = x;
 						for (var S, C, T, D = Array(80), O = 1732584193, k = -271733879, A = -1732584194, j = 271733878, M = -1009589776, N = 0; N < m.length; N += 16) {
-							for (var P = O, L = k, R = A, z = j, B = M, H = 0; H < 80; H++) {
-								D[H] = H < 16 ? m[N + H] : I(D[H - 3] ^ D[H - 8] ^ D[H - 14] ^ D[H - 16], 1);
-								var U = F(F(I(O, 5), (U = k, C = A, T = j, (S = H) < 20 ? U & C | ~U & T : !(S < 40) && S < 60 ? U & C | U & T | C & T : U ^ C ^ T)), F(F(M, D[H]), (S = H) < 20 ? 1518500249 : S < 40 ? 1859775393 : S < 60 ? -1894007588 : -899497514)), M = j, j = A, A = I(k, 30), k = O, O = U;
+							for (var P = O, L = k, R = A, z = j, B = M, V = 0; V < 80; V++) {
+								D[V] = V < 16 ? m[N + V] : I(D[V - 3] ^ D[V - 8] ^ D[V - 14] ^ D[V - 16], 1);
+								var H = F(F(I(O, 5), (H = k, C = A, T = j, (S = V) < 20 ? H & C | ~H & T : !(S < 40) && S < 60 ? H & C | H & T | C & T : H ^ C ^ T)), F(F(M, D[V]), (S = V) < 20 ? 1518500249 : S < 40 ? 1859775393 : S < 60 ? -1894007588 : -899497514)), M = j, j = A, A = I(k, 30), k = O, O = H;
 							}
 							O = F(O, P), k = F(k, L), A = F(A, R), j = F(j, z), M = F(M, B);
 						}
@@ -8712,8 +8566,8 @@ var import_object_hash = /* @__PURE__ */ __toESM$1((/* @__PURE__ */ __commonJSMi
 						], D = Array(64);
 						m[x >> 5] |= 128 << 24 - x % 32, m[15 + (x + 64 >> 9 << 4)] = x;
 						for (var O, k, A = 0; A < m.length; A += 16) {
-							for (var j = T[0], M = T[1], P = T[2], F = T[3], R = T[4], z = T[5], B = T[6], H = T[7], U = 0; U < 64; U++) D[U] = U < 16 ? m[U + A] : N(N(N((k = D[U - 2], I(k, 17) ^ I(k, 19) ^ L(k, 10)), D[U - 7]), (k = D[U - 15], I(k, 7) ^ I(k, 18) ^ L(k, 3))), D[U - 16]), S = N(N(N(N(H, I(k = R, 6) ^ I(k, 11) ^ I(k, 25)), R & z ^ ~R & B), C[U]), D[U]), O = N(I(O = j, 2) ^ I(O, 13) ^ I(O, 22), j & M ^ j & P ^ M & P), H = B, B = z, z = R, R = N(F, S), F = P, P = M, M = j, j = N(S, O);
-							T[0] = N(j, T[0]), T[1] = N(M, T[1]), T[2] = N(P, T[2]), T[3] = N(F, T[3]), T[4] = N(R, T[4]), T[5] = N(z, T[5]), T[6] = N(B, T[6]), T[7] = N(H, T[7]);
+							for (var j = T[0], M = T[1], P = T[2], F = T[3], R = T[4], z = T[5], B = T[6], V = T[7], H = 0; H < 64; H++) D[H] = H < 16 ? m[H + A] : N(N(N((k = D[H - 2], I(k, 17) ^ I(k, 19) ^ L(k, 10)), D[H - 7]), (k = D[H - 15], I(k, 7) ^ I(k, 18) ^ L(k, 3))), D[H - 16]), S = N(N(N(N(V, I(k = R, 6) ^ I(k, 11) ^ I(k, 25)), R & z ^ ~R & B), C[H]), D[H]), O = N(I(O = j, 2) ^ I(O, 13) ^ I(O, 22), j & M ^ j & P ^ M & P), V = B, B = z, z = R, R = N(F, S), F = P, P = M, M = j, j = N(S, O);
+							T[0] = N(j, T[0]), T[1] = N(M, T[1]), T[2] = N(P, T[2]), T[3] = N(F, T[3]), T[4] = N(R, T[4]), T[5] = N(z, T[5]), T[6] = N(B, T[6]), T[7] = N(V, T[7]);
 						}
 						return T;
 					}
@@ -8947,7 +8801,7 @@ init_react_import(), init_react_import(), init_react_import();
 var remove = (m, x) => {
 	let S = Array.from(m);
 	return S.splice(x, 1), S;
-}, moveAction$1 = (m, x, S) => {
+}, moveAction = (m, x, S) => {
 	if (x.sourceZone === x.destinationZone && x.sourceIndex === x.destinationIndex) return m;
 	let C = getItem({
 		zone: x.sourceZone,
@@ -8959,7 +8813,7 @@ var remove = (m, x) => {
 		let [O] = x.sourceZone.split(":"), [k] = x.destinationZone.split(":"), A = m.props.id;
 		return O === A || k === A || C.props.id === A || T.indexOf(A) > -1 || D.indexOf(A) > -1 || S.includes(x.destinationZone) ? m : null;
 	});
-}, reorderAction = (m, x, S) => moveAction$1(m, {
+}, reorderAction = (m, x, S) => moveAction(m, {
 	type: "move",
 	sourceIndex: x.sourceIndex,
 	sourceZone: x.destinationZone,
@@ -9026,7 +8880,7 @@ function storeInterceptor(m, x, S) {
 	};
 }
 function createReducer({ record: m, onAction: x, appStore: S }) {
-	return storeInterceptor((m, x) => x.type === "set" ? setAction(m, x, S) : x.type === "insert" ? insertAction(m, x, S) : x.type === "replace" ? replaceAction(m, x, S) : x.type === "replaceRoot" ? replaceRootAction(m, x, S) : x.type === "duplicate" ? duplicateAction(m, x, S) : x.type === "reorder" ? reorderAction(m, x, S) : x.type === "move" ? moveAction$1(m, x, S) : x.type === "remove" ? removeAction(m, x, S) : x.type === "registerZone" ? registerZoneAction(m, x) : x.type === "unregisterZone" ? unregisterZoneAction(m, x) : x.type === "setData" ? setDataAction(m, x, S) : x.type === "setUi" ? setUiAction(m, x) : m, m, x);
+	return storeInterceptor((m, x) => x.type === "set" ? setAction(m, x, S) : x.type === "insert" ? insertAction(m, x, S) : x.type === "replace" ? replaceAction(m, x, S) : x.type === "replaceRoot" ? replaceRootAction(m, x, S) : x.type === "duplicate" ? duplicateAction(m, x, S) : x.type === "reorder" ? reorderAction(m, x, S) : x.type === "move" ? moveAction(m, x, S) : x.type === "remove" ? removeAction(m, x, S) : x.type === "registerZone" ? registerZoneAction(m, x) : x.type === "unregisterZone" ? unregisterZoneAction(m, x) : x.type === "setData" ? setDataAction(m, x, S) : x.type === "setUi" ? setUiAction(m, x) : m, m, x);
 }
 init_react_import(), init_react_import();
 var keyCodeMap = {
@@ -9524,7 +9378,7 @@ var getRect = function(m) {
 		border: D,
 		padding: k
 	};
-}, parse$1 = function(m) {
+}, parse = function(m) {
 	var x = m.slice(0, -2);
 	if (m.slice(-2) !== "px") return 0;
 	var S = Number(x);
@@ -9533,22 +9387,22 @@ var getRect = function(m) {
 	return createBox$1({
 		borderBox: m,
 		margin: {
-			top: parse$1(x.marginTop),
-			right: parse$1(x.marginRight),
-			bottom: parse$1(x.marginBottom),
-			left: parse$1(x.marginLeft)
+			top: parse(x.marginTop),
+			right: parse(x.marginRight),
+			bottom: parse(x.marginBottom),
+			left: parse(x.marginLeft)
 		},
 		padding: {
-			top: parse$1(x.paddingTop),
-			right: parse$1(x.paddingRight),
-			bottom: parse$1(x.paddingBottom),
-			left: parse$1(x.paddingLeft)
+			top: parse(x.paddingTop),
+			right: parse(x.paddingRight),
+			bottom: parse(x.paddingBottom),
+			left: parse(x.paddingLeft)
 		},
 		border: {
-			top: parse$1(x.borderTopWidth),
-			right: parse$1(x.borderRightWidth),
-			bottom: parse$1(x.borderBottomWidth),
-			left: parse$1(x.borderLeftWidth)
+			top: parse(x.borderTopWidth),
+			right: parse(x.borderRightWidth),
+			bottom: parse(x.borderBottomWidth),
+			left: parse(x.borderLeftWidth)
 		}
 	});
 }, getBox = function(m) {
@@ -9636,7 +9490,7 @@ var dataAttrRe = /^(data-.*)$/, filterDataAttrs = (m) => {
 	for (let S in m) Object.prototype.hasOwnProperty.call(m, S) && dataAttrRe.test(S) && (x[S] = m[S]);
 	return x;
 }, getClassName4 = get_class_name_factory_default("Button", Button_module_default), Button = (m) => {
-	var x = m, { children: S, href: C, onClick: T, variant: D = "primary", type: O, disabled: k, tabIndex: A, newTab: j, fullWidth: M, icon: N, size: F = "medium", loading: I = !1 } = x, L = __objRest(x, [
+	var x = m, { children: S, href: C, onClick: T, variant: D = "primary", type: O, disabled: k, tabIndex: A, newTab: j, fullWidth: M, icon: N, size: P = "medium", loading: F = !1 } = x, I = __objRest(x, [
 		"children",
 		"href",
 		"onClick",
@@ -9650,35 +9504,35 @@ var dataAttrRe = /^(data-.*)$/, filterDataAttrs = (m) => {
 		"size",
 		"loading"
 	]);
-	let [R, z] = useState(I);
-	useEffect(() => z(I), [I]);
-	let B = C ? "a" : O ? "button" : "span", U = filterDataAttrs(L);
-	return /* @__PURE__ */ jsxs(B, __spreadProps(__spreadValues({
+	let [L, R] = useState(F);
+	useEffect(() => R(F), [F]);
+	let z = C ? "a" : O ? "button" : "span", B = filterDataAttrs(I);
+	return /* @__PURE__ */ jsxs(z, __spreadProps(__spreadValues({
 		className: getClassName4({
 			primary: D === "primary",
 			secondary: D === "secondary",
 			disabled: k,
 			fullWidth: M,
-			[F]: !0
+			[P]: !0
 		}),
 		onClick: (m) => {
-			T && (z(!0), Promise.resolve(T(m)).then(() => {
-				z(!1);
+			T && (R(!0), Promise.resolve(T(m)).then(() => {
+				R(!1);
 			}));
 		},
 		type: O,
-		disabled: k || R,
+		disabled: k || L,
 		tabIndex: A,
 		target: j ? "_blank" : void 0,
 		rel: j ? "noreferrer" : void 0,
 		href: C
-	}, U), { children: [
+	}, B), { children: [
 		N && /* @__PURE__ */ jsx("div", {
 			className: getClassName4("icon"),
 			children: N
 		}),
 		S,
-		R && /* @__PURE__ */ jsx("div", {
+		L && /* @__PURE__ */ jsx("div", {
 			className: getClassName4("spinner"),
 			children: /* @__PURE__ */ jsx(Loader, { size: 14 })
 		})
@@ -9729,7 +9583,7 @@ var defaultAttributes = {
 	strokeLinecap: "round",
 	strokeLinejoin: "round"
 }, Icon = forwardRef((m, x) => {
-	var S = m, { color: C = "currentColor", size: T = 24, strokeWidth: O = 2, absoluteStrokeWidth: k, className: A = "", children: j, iconNode: M } = S, N = __objRest(S, [
+	var S = m, { color: C = "currentColor", size: T = 24, strokeWidth: D = 2, absoluteStrokeWidth: O, className: k = "", children: A, iconNode: j } = S, M = __objRest(S, [
 		"color",
 		"size",
 		"strokeWidth",
@@ -9742,17 +9596,17 @@ var defaultAttributes = {
 		width: T,
 		height: T,
 		stroke: C,
-		strokeWidth: k ? Number(O) * 24 / Number(T) : O,
-		className: mergeClasses("lucide", A)
-	}), N), [...M.map(([m, x]) => createElement(m, x)), ...Array.isArray(j) ? j : [j]]);
+		strokeWidth: O ? Number(D) * 24 / Number(T) : D,
+		className: mergeClasses("lucide", k)
+	}), M), [...j.map(([m, x]) => createElement(m, x)), ...Array.isArray(A) ? A : [A]]);
 }), createLucideIcon = (m, x) => {
 	let S = forwardRef((S, C) => {
-		var T = S, { className: O } = T, k = __objRest(T, ["className"]);
+		var T = S, { className: D } = T, O = __objRest(T, ["className"]);
 		return createElement(Icon, __spreadValues({
 			ref: C,
 			iconNode: x,
-			className: mergeClasses(`lucide-${toKebabCase(m)}`, O)
-		}, k));
+			className: mergeClasses(`lucide-${toKebabCase(m)}`, D)
+		}, O));
 	});
 	return S.displayName = `${m}`, S;
 };
@@ -10478,93 +10332,93 @@ var NestedFieldContext = createContext({}), useNestedFieldContext = () => {
 		children: m
 	});
 }, getClassName6 = get_class_name_factory_default("ArrayField", styles_module_default4), getClassNameItem = get_class_name_factory_default("ArrayFieldItem", styles_module_default4), ArrayField = ({ field: m, onChange: x, value: S, name: C, label: T, labelIcon: D, readOnly: O, id: k, Label: A = (m) => /* @__PURE__ */ jsx("div", __spreadValues({}, m)) }) => {
-	let j = useAppStore((m) => m.state.ui.arrayState[k]), N = useAppStore((m) => m.setUi), { readOnlyFields: F, localName: I = C } = useNestedFieldContext(), L = S, R = j || {
-		items: Array.from(L || []).map((m, x) => ({
+	let j = useAppStore((m) => m.state.ui.arrayState[k]), M = useAppStore((m) => m.setUi), { readOnlyFields: N, localName: P = C } = useNestedFieldContext(), F = S, I = j || {
+		items: Array.from(F || []).map((m, x) => ({
 			_originalIndex: x,
 			_arrayId: `${k}-${x}`
 		})),
 		openId: ""
-	}, [z, U] = useState({
-		arrayState: R,
-		value: L
+	}, [L, R] = useState({
+		arrayState: I,
+		value: F
 	});
 	useEffect(() => {
-		U({
-			arrayState: W.getState().state.ui.arrayState[k] ?? R,
-			value: L
+		R({
+			arrayState: z.getState().state.ui.arrayState[k] ?? I,
+			value: F
 		});
-	}, [L]);
-	let W = useAppStoreApi(), q = useCallback((m) => {
-		let x = W.getState().state;
-		return { arrayState: __spreadProps(__spreadValues({}, x.ui.arrayState), { [k]: __spreadValues(__spreadValues({}, R), m) }) };
-	}, [R, W]), J = useCallback(() => R.items.reduce((m, x) => x._originalIndex > m ? x._originalIndex : m, -1), [R]), $V = useCallback((m) => {
-		let x = J(), S = Array.from(m || []).map((m, S) => {
-			let C = R.items[S], T = {
+	}, [F]);
+	let z = useAppStoreApi(), B = useCallback((m) => {
+		let x = z.getState().state;
+		return { arrayState: __spreadProps(__spreadValues({}, x.ui.arrayState), { [k]: __spreadValues(__spreadValues({}, I), m) }) };
+	}, [I, z]), V = useCallback(() => I.items.reduce((m, x) => x._originalIndex > m ? x._originalIndex : m, -1), [I]), U = useCallback((m) => {
+		let x = V(), S = Array.from(m || []).map((m, S) => {
+			let C = I.items[S], T = {
 				_originalIndex: C?._originalIndex === void 0 ? x + 1 : C._originalIndex,
-				_arrayId: R.items[S]?._arrayId || `${k}-${x + 1}`
+				_arrayId: I.items[S]?._arrayId || `${k}-${x + 1}`
 			};
 			return T._originalIndex > x && (x = T._originalIndex), T;
 		});
-		return __spreadProps(__spreadValues({}, R), { items: S });
-	}, [R]);
+		return __spreadProps(__spreadValues({}, I), { items: S });
+	}, [I]);
 	useEffect(() => {
-		R.items.length > 0 && N(q(R));
+		I.items.length > 0 && M(B(I));
 	}, []);
-	let [Y, X] = useState(""), Z = !!Y, eH = !useAppStore((m) => m.permissions.getPermissions({ item: m.selectedItem }).edit), Q = useRef(L), tH = useCallback((x) => {
+	let [G, K] = useState(""), q = !!G, J = !useAppStore((m) => m.permissions.getPermissions({ item: m.selectedItem }).edit), Uz = useRef(F), X = useCallback((x) => {
 		if (m.type !== "array" || !m.arrayFields) return;
-		let S = W.getState().config;
+		let S = z.getState().config;
 		return walkField({
 			value: x,
 			fields: m.arrayFields,
 			mappers: { slot: ({ value: m }) => m.map((m) => populateIds(m, S, !0)) },
 			config: S
 		});
-	}, [W, m]);
+	}, [z, m]);
 	if (m.type !== "array" || !m.arrayFields) return null;
-	let nH = m.max !== void 0 && z.arrayState.items.length >= m.max || O;
+	let Z = m.max !== void 0 && L.arrayState.items.length >= m.max || O;
 	return /* @__PURE__ */ jsx(A, {
 		label: T || C,
 		icon: D || /* @__PURE__ */ jsx(List, { size: 16 }),
 		el: "div",
 		readOnly: O,
 		children: /* @__PURE__ */ jsx(SortableProvider, {
-			onDragStart: (m) => X(m),
+			onDragStart: (m) => K(m),
 			onDragEnd: () => {
-				X(""), x(Q.current);
+				K(""), x(Uz.current);
 			},
 			onMove: (m) => {
-				if (R.items[m.source]._arrayId !== Y) return;
-				let x = reorder(z.value, m.source, m.target), S = reorder(R.items, m.source, m.target), C = W.getState().state;
-				N({ arrayState: __spreadProps(__spreadValues({}, C.ui.arrayState), { [k]: __spreadProps(__spreadValues({}, R), { items: S }) }) }, !1), U({
+				if (I.items[m.source]._arrayId !== G) return;
+				let x = reorder(L.value, m.source, m.target), S = reorder(I.items, m.source, m.target), C = z.getState().state;
+				M({ arrayState: __spreadProps(__spreadValues({}, C.ui.arrayState), { [k]: __spreadProps(__spreadValues({}, I), { items: S }) }) }, !1), R({
 					value: x,
-					arrayState: __spreadProps(__spreadValues({}, R), { items: S })
-				}), Q.current = x;
+					arrayState: __spreadProps(__spreadValues({}, I), { items: S })
+				}), Uz.current = x;
 			},
 			children: /* @__PURE__ */ jsxs("div", {
 				className: getClassName6({
-					hasItems: Array.isArray(L) && L.length > 0,
-					addDisabled: nH
+					hasItems: Array.isArray(F) && F.length > 0,
+					addDisabled: Z
 				}),
-				children: [z.arrayState.items.length > 0 && /* @__PURE__ */ jsx("div", {
+				children: [L.arrayState.items.length > 0 && /* @__PURE__ */ jsx("div", {
 					className: getClassName6("inner"),
 					"data-dnd-container": !0,
-					children: z.arrayState.items.map((S, T) => {
-						let { _arrayId: D = `${k}-${T}`, _originalIndex: A = T } = S, j = Array.from(z.value || [])[T] || {};
+					children: L.arrayState.items.map((S, T) => {
+						let { _arrayId: D = `${k}-${T}`, _originalIndex: A = T } = S, j = Array.from(L.value || [])[T] || {};
 						return /* @__PURE__ */ jsx(Sortable, {
 							id: D,
 							index: T,
 							disabled: O,
-							children: ({ isDragging: S, ref: k, handleRef: M }) => /* @__PURE__ */ jsxs("div", {
+							children: ({ isDragging: S, ref: k, handleRef: R }) => /* @__PURE__ */ jsxs("div", {
 								ref: k,
 								className: getClassNameItem({
-									isExpanded: R.openId === D,
+									isExpanded: I.openId === D,
 									isDragging: S,
 									readOnly: O
 								}),
 								children: [/* @__PURE__ */ jsxs("div", {
-									ref: M,
+									ref: R,
 									onClick: (m) => {
-										S || (m.preventDefault(), m.stopPropagation(), R.openId === D ? N(q({ openId: "" })) : N(q({ openId: D })));
+										S || (m.preventDefault(), m.stopPropagation(), I.openId === D ? M(B({ openId: "" })) : M(B({ openId: D })));
 									},
 									className: getClassNameItem("summary"),
 									children: [m.getItemSummary ? m.getItemSummary(j, T) : `Item #${A}`, /* @__PURE__ */ jsxs("div", {
@@ -10575,11 +10429,11 @@ var NestedFieldContext = createContext({}), useNestedFieldContext = () => {
 												className: getClassNameItem("action"),
 												children: /* @__PURE__ */ jsx(IconButton, {
 													type: "button",
-													disabled: !!nH,
+													disabled: !!Z,
 													onClick: (m) => {
 														m.stopPropagation();
-														let S = [...L || []], C = tH(S[T]);
-														S.splice(T, 0, C), N(q($V(S)), !1), x(S);
+														let S = [...F || []], C = X(S[T]);
+														S.splice(T, 0, C), M(B(U(S)), !1), x(S);
 													},
 													title: "Duplicate",
 													children: /* @__PURE__ */ jsx(Copy, { size: 16 })
@@ -10588,11 +10442,11 @@ var NestedFieldContext = createContext({}), useNestedFieldContext = () => {
 												className: getClassNameItem("action"),
 												children: /* @__PURE__ */ jsx(IconButton, {
 													type: "button",
-													disabled: m.min !== void 0 && m.min >= z.arrayState.items.length,
+													disabled: m.min !== void 0 && m.min >= L.arrayState.items.length,
 													onClick: (m) => {
 														m.stopPropagation();
-														let S = [...L || []], C = [...R.items || []];
-														S.splice(T, 1), C.splice(T, 1), N(q({ items: C }), !1), x(S);
+														let S = [...F || []], C = [...I.items || []];
+														S.splice(T, 1), C.splice(T, 1), M(B({ items: C }), !1), x(S);
 													},
 													title: "Delete",
 													children: /* @__PURE__ */ jsx(Trash, { size: 16 })
@@ -10602,15 +10456,15 @@ var NestedFieldContext = createContext({}), useNestedFieldContext = () => {
 									})]
 								}), /* @__PURE__ */ jsx("div", {
 									className: getClassNameItem("body"),
-									children: R.openId === D && /* @__PURE__ */ jsx("fieldset", {
+									children: I.openId === D && /* @__PURE__ */ jsx("fieldset", {
 										className: getClassNameItem("fieldset"),
 										children: Object.keys(m.arrayFields).map((S) => {
-											let O = m.arrayFields[S], k = `${`${C}[${T}]`}.${S}`, A = `${I}[${T}]`, M = `${I}[*]`, N = `${A}.${S}`, P = `${M}.${S}`, R = eH || (F[k] === void 0 ? F[P] : F[N]), z = O.label || S;
+											let O = m.arrayFields[S], k = `${`${C}[${T}]`}.${S}`, A = `${P}[${T}]`, M = `${P}[*]`, I = `${A}.${S}`, L = `${M}.${S}`, R = J || (N[k] === void 0 ? N[L] : N[I]), z = O.label || S;
 											return /* @__PURE__ */ jsx(NestedFieldProvider, {
 												name: A,
 												wildcardName: M,
 												subName: S,
-												readOnlyFields: F,
+												readOnlyFields: N,
 												children: /* @__PURE__ */ jsx(AutoFieldPrivate, {
 													name: k,
 													label: z,
@@ -10619,7 +10473,7 @@ var NestedFieldContext = createContext({}), useNestedFieldContext = () => {
 													field: __spreadProps(__spreadValues({}, O), { label: z }),
 													value: j[S],
 													onChange: (m, C) => {
-														x(replace(L, T, __spreadProps(__spreadValues({}, j), { [S]: m })), C);
+														x(replace(F, T, __spreadProps(__spreadValues({}, j), { [S]: m })), C);
 													}
 												})
 											}, k);
@@ -10629,13 +10483,13 @@ var NestedFieldContext = createContext({}), useNestedFieldContext = () => {
 							})
 						}, D);
 					})
-				}), !nH && /* @__PURE__ */ jsx("button", {
+				}), !Z && /* @__PURE__ */ jsx("button", {
 					type: "button",
 					className: getClassName6("addButton"),
 					onClick: () => {
-						if (Z) return;
-						let S = L || [], C = defaultSlots(tH(m.defaultItemProps ?? {}), m.arrayFields), T = [...S, C];
-						N(q($V(T)), !1), x(T);
+						if (q) return;
+						let S = F || [], C = defaultSlots(X(m.defaultItemProps ?? {}), m.arrayFields), T = [...S, C];
+						M(B(U(T)), !1), x(T);
 					},
 					children: /* @__PURE__ */ jsx(Plus, { size: 21 })
 				})]
@@ -10744,18 +10598,18 @@ var getClassName9 = get_class_name_factory_default("Heading", {
 });
 init_react_import();
 var getClassName10 = get_class_name_factory_default("ExternalInput", styles_module_default6), getClassNameModal = get_class_name_factory_default("ExternalInputModal", styles_module_default6), dataCache = {}, ExternalInput = ({ field: m, onChange: x, value: S = null, name: C, id: T, readOnly: D }) => {
-	let { mapProp: O = (m) => m, mapRow: A = (m) => m, filterFields: j } = m || {}, [N, F] = useState([]), [I, L] = useState(!1), [R, B] = useState(!0), U = !!j, [q, J] = useState(m.initialFilters || {}), [$V, Y] = useState(U), X = useMemo(() => N.map(A), [N]), Z = useMemo(() => {
+	let { mapProp: O = (m) => m, mapRow: k = (m) => m, filterFields: A } = m || {}, [j, M] = useState([]), [N, P] = useState(!1), [F, I] = useState(!0), L = !!A, [R, B] = useState(m.initialFilters || {}), [V, U] = useState(L), G = useMemo(() => j.map(k), [j]), K = useMemo(() => {
 		let m = /* @__PURE__ */ new Set();
-		for (let x of X) for (let S of Object.keys(x)) (typeof x[S] == "string" || typeof x[S] == "number" || isValidElement(x[S])) && m.add(S);
+		for (let x of G) for (let S of Object.keys(x)) (typeof x[S] == "string" || typeof x[S] == "number" || isValidElement(x[S])) && m.add(S);
 		return Array.from(m);
-	}, [X]), [eH, Q] = useState(m.initialQuery || ""), tH = useCallback((x, S) => __async(void 0, null, function* () {
-		B(!0);
+	}, [G]), [q, J] = useState(m.initialQuery || ""), Y = useCallback((x, S) => __async(void 0, null, function* () {
+		I(!0);
 		let C = `${T}-${x}-${JSON.stringify(S)}`, D = dataCache[C] || (yield m.fetchList({
 			query: x,
 			filters: S
 		}));
-		D && (F(D), B(!1), dataCache[C] = D);
-	}), [T, m]), nH = useCallback((x) => m.renderFooter ? m.renderFooter(x) : /* @__PURE__ */ jsxs("span", {
+		D && (M(D), I(!1), dataCache[C] = D);
+	}), [T, m]), X = useCallback((x) => m.renderFooter ? m.renderFooter(x) : /* @__PURE__ */ jsxs("span", {
 		className: getClassNameModal("footer"),
 		children: [
 			x.items.length,
@@ -10764,11 +10618,11 @@ var getClassName10 = get_class_name_factory_default("ExternalInput", styles_modu
 		]
 	}), [m.renderFooter]);
 	return useEffect(() => {
-		tH(eH, q);
+		Y(q, R);
 	}, []), /* @__PURE__ */ jsxs("div", {
 		className: getClassName10({
 			dataSelected: !!S,
-			modalVisible: I,
+			modalVisible: N,
 			readOnly: D
 		}),
 		id: T,
@@ -10776,7 +10630,7 @@ var getClassName10 = get_class_name_factory_default("ExternalInput", styles_modu
 			className: getClassName10("actions"),
 			children: [/* @__PURE__ */ jsx("button", {
 				type: "button",
-				onClick: () => L(!0),
+				onClick: () => P(!0),
 				className: getClassName10("button"),
 				disabled: D,
 				children: S ? m.getItemSummary ? m.getItemSummary(S) : "External item" : /* @__PURE__ */ jsxs(Fragment$1, { children: [/* @__PURE__ */ jsx(Link, { size: "16" }), /* @__PURE__ */ jsx("span", { children: m.placeholder })] })
@@ -10790,17 +10644,17 @@ var getClassName10 = get_class_name_factory_default("ExternalInput", styles_modu
 				children: /* @__PURE__ */ jsx(LockOpen, { size: 16 })
 			})]
 		}), /* @__PURE__ */ jsx(Modal, {
-			onClose: () => L(!1),
-			isOpen: I,
+			onClose: () => P(!1),
+			isOpen: N,
 			children: /* @__PURE__ */ jsxs("form", {
 				className: getClassNameModal({
-					isLoading: R,
-					loaded: !R,
-					hasData: X.length > 0,
-					filtersToggled: $V
+					isLoading: F,
+					loaded: !F,
+					hasData: G.length > 0,
+					filtersToggled: V
 				}),
 				onSubmit: (m) => {
-					m.preventDefault(), tH(eH, q);
+					m.preventDefault(), Y(q, R);
 				},
 				children: [
 					/* @__PURE__ */ jsx("div", {
@@ -10824,26 +10678,26 @@ var getClassName10 = get_class_name_factory_default("ExternalInput", styles_modu
 										type: "search",
 										placeholder: m.placeholder,
 										onChange: (m) => {
-											Q(m.currentTarget.value);
+											J(m.currentTarget.value);
 										},
 										autoComplete: "off",
-										value: eH
+										value: q
 									})
 								]
 							}), /* @__PURE__ */ jsxs("div", {
 								className: getClassNameModal("searchActions"),
 								children: [/* @__PURE__ */ jsx(Button, {
 									type: "submit",
-									loading: R,
+									loading: F,
 									fullWidth: !0,
 									children: "Search"
-								}), U && /* @__PURE__ */ jsx("div", {
+								}), L && /* @__PURE__ */ jsx("div", {
 									className: getClassNameModal("searchActionIcon"),
 									children: /* @__PURE__ */ jsx(IconButton, {
 										type: "button",
 										title: "Toggle filters",
 										onClick: (m) => {
-											m.preventDefault(), m.stopPropagation(), Y(!$V);
+											m.preventDefault(), m.stopPropagation(), U(!V);
 										},
 										children: /* @__PURE__ */ jsx(SlidersHorizontal, { size: 20 })
 									})
@@ -10857,10 +10711,10 @@ var getClassName10 = get_class_name_factory_default("ExternalInput", styles_modu
 					}),
 					/* @__PURE__ */ jsxs("div", {
 						className: getClassNameModal("grid"),
-						children: [U && /* @__PURE__ */ jsx("div", {
+						children: [L && /* @__PURE__ */ jsx("div", {
 							className: getClassNameModal("filters"),
-							children: U && Object.keys(j).map((m) => {
-								let x = j[m];
+							children: L && Object.keys(A).map((m) => {
+								let x = A[m];
 								return /* @__PURE__ */ jsx("div", {
 									className: getClassNameModal("field"),
 									children: /* @__PURE__ */ jsx(AutoFieldPrivate, {
@@ -10868,10 +10722,10 @@ var getClassName10 = get_class_name_factory_default("ExternalInput", styles_modu
 										name: m,
 										id: `external_field_${m}_filter`,
 										label: x.label || m,
-										value: q[m],
+										value: R[m],
 										onChange: (x) => {
-											let S = __spreadProps(__spreadValues({}, q), { [m]: x });
-											J(S), tH(eH, S);
+											let S = __spreadProps(__spreadValues({}, R), { [m]: x });
+											B(S), Y(q, S);
 										}
 									})
 								}, m);
@@ -10884,7 +10738,7 @@ var getClassName10 = get_class_name_factory_default("ExternalInput", styles_modu
 									className: getClassNameModal("thead"),
 									children: /* @__PURE__ */ jsx("tr", {
 										className: getClassNameModal("tr"),
-										children: Z.map((m) => /* @__PURE__ */ jsx("th", {
+										children: K.map((m) => /* @__PURE__ */ jsx("th", {
 											className: getClassNameModal("th"),
 											style: { textAlign: "left" },
 											children: m
@@ -10892,13 +10746,13 @@ var getClassName10 = get_class_name_factory_default("ExternalInput", styles_modu
 									})
 								}), /* @__PURE__ */ jsx("tbody", {
 									className: getClassNameModal("tbody"),
-									children: X.map((m, S) => /* @__PURE__ */ jsx("tr", {
+									children: G.map((m, S) => /* @__PURE__ */ jsx("tr", {
 										style: { whiteSpace: "nowrap" },
 										className: getClassNameModal("tr"),
 										onClick: () => {
-											x(O(N[S])), L(!1);
+											x(O(j[S])), P(!1);
 										},
-										children: Z.map((x) => /* @__PURE__ */ jsx("td", {
+										children: K.map((x) => /* @__PURE__ */ jsx("td", {
 											className: getClassNameModal("td"),
 											children: m[x]
 										}, x))
@@ -10912,7 +10766,7 @@ var getClassName10 = get_class_name_factory_default("ExternalInput", styles_modu
 					}),
 					/* @__PURE__ */ jsx("div", {
 						className: getClassNameModal("footerContainer"),
-						children: /* @__PURE__ */ jsx(nH, { items: X })
+						children: /* @__PURE__ */ jsx(X, { items: G })
 					})
 				]
 			})
@@ -11092,7 +10946,7 @@ var useSafeId = () => {
 	number: DefaultField
 };
 function AutoFieldInternal(m) {
-	let x = useAppStore((m) => m.dispatch), S = useAppStore((m) => m.overrides), C = useAppStore((m) => m.selectedItem?.readOnly), T = useContext(NestedFieldContext), { id: D, Label: O = FieldLabelInternal } = m, k = m.field, A = k.label, j = k.labelIcon, P = useSafeId(), F = D || P, I = useMemo(() => __spreadProps(__spreadValues({}, S.fieldTypes), {
+	let x = useAppStore((m) => m.dispatch), S = useAppStore((m) => m.overrides), C = useAppStore((m) => m.selectedItem?.readOnly), T = useContext(NestedFieldContext), { id: D, Label: O = FieldLabelInternal } = m, k = m.field, A = k.label, j = k.labelIcon, M = useSafeId(), N = D || M, P = useMemo(() => __spreadProps(__spreadValues({}, S.fieldTypes), {
 		array: S.fieldTypes?.array || defaultFields.array,
 		external: S.fieldTypes?.external || defaultFields.external,
 		object: S.fieldTypes?.object || defaultFields.object,
@@ -11101,48 +10955,48 @@ function AutoFieldInternal(m) {
 		radio: S.fieldTypes?.radio || defaultFields.radio,
 		text: S.fieldTypes?.text || defaultFields.text,
 		number: S.fieldTypes?.number || defaultFields.number
-	}), [S]), L = useMemo(() => __spreadProps(__spreadValues({}, m), {
+	}), [S]), F = useMemo(() => __spreadProps(__spreadValues({}, m), {
 		field: k,
 		label: A,
 		labelIcon: j,
 		Label: O,
-		id: F
+		id: N
 	}), [
 		m,
 		k,
 		A,
 		j,
 		O,
-		F
-	]), R = useCallback((m) => {
-		L.name && (m.target.nodeName === "INPUT" || m.target.nodeName === "TEXTAREA") && (m.stopPropagation(), x({
+		N
+	]), I = useCallback((m) => {
+		F.name && (m.target.nodeName === "INPUT" || m.target.nodeName === "TEXTAREA") && (m.stopPropagation(), x({
 			type: "setUi",
-			ui: { field: { focus: L.name } }
+			ui: { field: { focus: F.name } }
 		}));
-	}, [L.name]), B = useCallback((m) => {
+	}, [F.name]), L = useCallback((m) => {
 		"name" in m.target && x({
 			type: "setUi",
 			ui: { field: { focus: null } }
 		});
-	}, []), H = useMemo(() => k.type !== "custom" && k.type !== "slot" ? defaultFields[k.type] : (m) => null, [k.type]), U = useMemo(() => {
+	}, []), R = useMemo(() => k.type !== "custom" && k.type !== "slot" ? defaultFields[k.type] : (m) => null, [k.type]), z = useMemo(() => {
 		if (k.type === "custom") return k.render ? k.render : null;
-		if (k.type !== "slot") return I[k.type];
-	}, [k.type, I]), { visible: W = !0 } = m.field;
-	if (!W || k.type === "slot") return null;
-	if (!U) throw Error(`Field type for ${k.type} did not exist.`);
+		if (k.type !== "slot") return P[k.type];
+	}, [k.type, P]), { visible: B = !0 } = m.field;
+	if (!B || k.type === "slot") return null;
+	if (!z) throw Error(`Field type for ${k.type} did not exist.`);
 	return /* @__PURE__ */ jsx(NestedFieldContext.Provider, {
 		value: {
 			readOnlyFields: T.readOnlyFields || C || {},
-			localName: T.localName ?? L.name
+			localName: T.localName ?? F.name
 		},
 		children: /* @__PURE__ */ jsx("div", {
 			className: getClassNameWrapper(),
-			onFocus: R,
-			onBlur: B,
+			onFocus: I,
+			onBlur: L,
 			onClick: (m) => {
 				m.stopPropagation();
 			},
-			children: /* @__PURE__ */ jsx(U, __spreadProps(__spreadValues({}, L), { children: /* @__PURE__ */ jsx(H, __spreadValues({}, L)) }))
+			children: /* @__PURE__ */ jsx(z, __spreadProps(__spreadValues({}, F), { children: /* @__PURE__ */ jsx(R, __spreadValues({}, F)) }))
 		})
 	});
 }
@@ -11244,39 +11098,39 @@ var useOnDragFinished = (m, x = []) => {
 			C(m);
 		})), x;
 	}, [S, ...x]);
-}, getClassName16 = get_class_name_factory_default("DraggableComponent", styles_module_default10), DEBUG2 = !1, space = 8, actionsOverlayTop = space * 6.5, actionsTop = -(actionsOverlayTop - 8), actionsSide = space, DefaultActionBar = ({ label: m, children: x, parentAction: S }) => /* @__PURE__ */ jsxs(ActionBar, { children: [/* @__PURE__ */ jsxs(ActionBar.Group, { children: [S, m && /* @__PURE__ */ jsx(ActionBar.Label, { label: m })] }), /* @__PURE__ */ jsx(ActionBar.Group, { children: x })] }), DefaultOverlay = ({ children: m }) => /* @__PURE__ */ jsx(Fragment$1, { children: m }), DraggableComponent = ({ children: m, depth: x, componentType: S, id: C, index: T, zoneCompound: D, isLoading: O = !1, isSelected: k = !1, debug: A, label: j, autoDragAxis: F, userDragAxis: I, inDroppableZone: L = !0 }) => {
-	let R = useAppStore((m) => m.selectedItem?.props.id === C ? m.zoomConfig.zoom : 1), W = useAppStore((m) => m.overrides), q = useAppStore((m) => m.dispatch), J = useAppStore((m) => m.iframe), Y = useContext(dropZoneContext), [X, Z] = useState({}), eH = useCallback((m, x) => {
+}, getClassName16 = get_class_name_factory_default("DraggableComponent", styles_module_default10), DEBUG2 = !1, space = 8, actionsOverlayTop = space * 6.5, actionsTop = -(actionsOverlayTop - 8), actionsSide = space, DefaultActionBar = ({ label: m, children: x, parentAction: S }) => /* @__PURE__ */ jsxs(ActionBar, { children: [/* @__PURE__ */ jsxs(ActionBar.Group, { children: [S, m && /* @__PURE__ */ jsx(ActionBar.Label, { label: m })] }), /* @__PURE__ */ jsx(ActionBar.Group, { children: x })] }), DefaultOverlay = ({ children: m }) => /* @__PURE__ */ jsx(Fragment$1, { children: m }), DraggableComponent = ({ children: m, depth: x, componentType: S, id: C, index: T, zoneCompound: D, isLoading: O = !1, isSelected: k = !1, debug: A, label: j, autoDragAxis: M, userDragAxis: N, inDroppableZone: P = !0 }) => {
+	let F = useAppStore((m) => m.selectedItem?.props.id === C ? m.zoomConfig.zoom : 1), I = useAppStore((m) => m.overrides), L = useAppStore((m) => m.dispatch), R = useAppStore((m) => m.iframe), z = useContext(dropZoneContext), [B, V] = useState({}), G = useCallback((m, x) => {
 		var S;
-		(S = Y?.registerLocalZone) == null || S.call(Y, m, x), Z((S) => __spreadProps(__spreadValues({}, S), { [m]: x }));
-	}, [Z]), Q = useCallback((m) => {
+		(S = z?.registerLocalZone) == null || S.call(z, m, x), V((S) => __spreadProps(__spreadValues({}, S), { [m]: x }));
+	}, [V]), K = useCallback((m) => {
 		var x;
-		(x = Y?.unregisterLocalZone) == null || x.call(Y, m), Z((x) => {
+		(x = z?.unregisterLocalZone) == null || x.call(z, m), V((x) => {
 			let S = __spreadValues({}, x);
 			return delete S[m], S;
 		});
-	}, [Z]), tH = Object.values(X).filter(Boolean).length > 0, nH = useAppStore(useShallow((m) => m.state.indexes.nodes[C]?.path)), rH = useAppStore(useShallow((m) => {
+	}, [V]), q = Object.values(B).filter(Boolean).length > 0, J = useAppStore(useShallow((m) => m.state.indexes.nodes[C]?.path)), Z = useAppStore(useShallow((m) => {
 		let x = getItem({
 			index: T,
 			zone: D
 		}, m.state);
 		return m.permissions.getPermissions({ item: x });
-	})), iH = useContext(ZoneStoreContext), [aH, oH] = useState(I || F), sH = useMemo(() => createDynamicCollisionDetector(aH), [aH]), { ref: cH, isDragging: $, sortable: lH } = useSortable({
+	})), qz = useContext(ZoneStoreContext), [Jz, Xz] = useState(N || M), Q = useMemo(() => createDynamicCollisionDetector(Jz), [Jz]), { ref: Zz, isDragging: $, sortable: Qz } = useSortable({
 		id: C,
 		index: T,
 		group: D,
 		type: "component",
 		data: {
-			areaId: Y?.areaId,
+			areaId: z?.areaId,
 			zone: D,
 			index: T,
 			componentType: S,
-			containsActiveZone: tH,
+			containsActiveZone: q,
 			depth: x,
-			path: nH || [],
-			inDroppableZone: L
+			path: J || [],
+			inDroppableZone: P
 		},
 		collisionPriority: x,
-		collisionDetector: sH,
+		collisionDetector: Q,
 		transition: {
 			duration: 200,
 			easing: "cubic-bezier(0.2, 0, 0, 1)"
@@ -11284,65 +11138,65 @@ var useOnDragFinished = (m, x = []) => {
 		feedback: "clone"
 	});
 	useEffect(() => {
-		let m = iH.getState().enabledIndex[D];
-		lH.droppable.disabled = !m, lH.draggable.disabled = !rH.drag;
-		let x = iH.subscribe((m) => {
-			lH.droppable.disabled = !m.enabledIndex[D];
+		let m = qz.getState().enabledIndex[D];
+		Qz.droppable.disabled = !m, Qz.draggable.disabled = !Z.drag;
+		let x = qz.subscribe((m) => {
+			Qz.droppable.disabled = !m.enabledIndex[D];
 		});
-		return uH.current && !rH.drag ? (uH.current.setAttribute("data-puck-disabled", ""), () => {
+		return $z.current && !Z.drag ? ($z.current.setAttribute("data-puck-disabled", ""), () => {
 			var m;
-			(m = uH.current) == null || m.removeAttribute("data-puck-disabled"), x();
+			(m = $z.current) == null || m.removeAttribute("data-puck-disabled"), x();
 		}) : x;
-	}, [rH.drag, D]);
-	let uH = useRef(null), dH = useCallback((m) => {
-		cH(m), m && (uH.current = m);
-	}, [cH]), [fH, pH] = useState();
+	}, [Z.drag, D]);
+	let $z = useRef(null), eB = useCallback((m) => {
+		Zz(m), m && ($z.current = m);
+	}, [Zz]), [tB, nB] = useState();
 	useEffect(() => {
-		pH(J.enabled ? uH.current?.ownerDocument.body : uH.current?.closest("[data-puck-preview]") ?? document.body);
-	}, [J.enabled, uH.current]);
-	let mH = useCallback(() => {
-		if (!uH.current) return;
-		let m = uH.current.getBoundingClientRect(), x = getDeepScrollPosition(uH.current), S = J.enabled ? null : uH.current?.closest("[data-puck-preview]"), C = S?.getBoundingClientRect(), T = S ? getDeepScrollPosition(S) : {
+		nB(R.enabled ? $z.current?.ownerDocument.body : $z.current?.closest("[data-puck-preview]") ?? document.body);
+	}, [R.enabled, $z.current]);
+	let rB = useCallback(() => {
+		if (!$z.current) return;
+		let m = $z.current.getBoundingClientRect(), x = getDeepScrollPosition($z.current), S = R.enabled ? null : $z.current?.closest("[data-puck-preview]"), C = S?.getBoundingClientRect(), T = S ? getDeepScrollPosition(S) : {
 			x: 0,
 			y: 0
 		}, D = {
 			x: x.x - T.x - (C?.left ?? 0),
 			y: x.y - T.y - (C?.top ?? 0)
 		}, O = {
-			height: uH.current.offsetHeight,
-			width: uH.current.offsetWidth
-		}, k = accumulateTransform(uH.current);
+			height: $z.current.offsetHeight,
+			width: $z.current.offsetWidth
+		}, k = accumulateTransform($z.current);
 		return {
 			left: `${(m.left + D.x) / k.scaleX}px`,
 			top: `${(m.top + D.y) / k.scaleY}px`,
 			height: `${O.height}px`,
 			width: `${O.width}px`
 		};
-	}, [uH.current]), [hH, gH] = useState(), _H = useCallback(() => {
-		gH(mH());
-	}, [uH.current, J]);
+	}, [$z.current]), [iB, aB] = useState(), oB = useCallback(() => {
+		aB(rB());
+	}, [$z.current, R]);
 	useEffect(() => {
-		if (uH.current) {
-			let m = new ResizeObserver(_H);
-			return m.observe(uH.current), () => {
+		if ($z.current) {
+			let m = new ResizeObserver(oB);
+			return m.observe($z.current), () => {
 				m.disconnect();
 			};
 		}
-	}, [uH.current]);
-	let vH = useAppStore((m) => m.nodes.registerNode), yH = useCallback(() => {
-		MH(!1);
-	}, []), bH = useCallback(() => {
-		MH(!0);
+	}, [$z.current]);
+	let sB = useAppStore((m) => m.nodes.registerNode), cB = useCallback(() => {
+		xB(!1);
+	}, []), lB = useCallback(() => {
+		xB(!0);
 	}, []);
-	useEffect(() => (vH(C, {
+	useEffect(() => (sB(C, {
 		methods: {
-			sync: _H,
-			showOverlay: bH,
-			hideOverlay: yH
+			sync: oB,
+			showOverlay: lB,
+			hideOverlay: cB
 		},
-		element: uH.current ?? null
+		element: $z.current ?? null
 	}), () => {
-		vH(C, {
+		sB(C, {
 			methods: {
 				sync: () => null,
 				hideOverlay: () => null,
@@ -11355,10 +11209,10 @@ var useOnDragFinished = (m, x = []) => {
 		D,
 		T,
 		S,
-		_H
+		oB
 	]);
-	let xH = useMemo(() => W.actionBar || DefaultActionBar, [W.actionBar]), SH = useMemo(() => W.componentOverlay || DefaultOverlay, [W.componentOverlay]), CH = useCallback((m) => {
-		m.target.closest("[data-puck-overlay-portal]") || m.stopPropagation(), q({
+	let uB = useMemo(() => I.actionBar || DefaultActionBar, [I.actionBar]), dB = useMemo(() => I.componentOverlay || DefaultOverlay, [I.componentOverlay]), fB = useCallback((m) => {
+		m.target.closest("[data-puck-overlay-portal]") || m.stopPropagation(), L({
 			type: "setUi",
 			ui: { itemSelector: {
 				index: T,
@@ -11369,123 +11223,123 @@ var useOnDragFinished = (m, x = []) => {
 		T,
 		D,
 		C
-	]), wH = useAppStoreApi(), TH = useCallback(() => {
-		let { nodes: m, zones: x } = wH.getState().state.indexes, S = m[C], T = S?.parentId ? m[S?.parentId] : null;
+	]), pB = useAppStoreApi(), mB = useCallback(() => {
+		let { nodes: m, zones: x } = pB.getState().state.indexes, S = m[C], T = S?.parentId ? m[S?.parentId] : null;
 		if (!T || !S.parentId) return;
 		let D = `${T.parentId}:${T.zone}`;
-		q({
+		L({
 			type: "setUi",
 			ui: { itemSelector: {
 				zone: D,
 				index: x[D].contentIds.indexOf(S.parentId)
 			} }
 		});
-	}, [Y, nH]), EH = useCallback(() => {
-		q({
+	}, [z, J]), hB = useCallback(() => {
+		L({
 			type: "duplicate",
 			sourceIndex: T,
 			sourceZone: D
 		});
-	}, [T, D]), DH = useCallback(() => {
-		q({
+	}, [T, D]), gB = useCallback(() => {
+		L({
 			type: "remove",
 			index: T,
 			zone: D
 		});
-	}, [T, D]), [OH, kH] = useState(!1), AH = useContextStore(ZoneStoreContext, (m) => m.hoveringComponent === C);
+	}, [T, D]), [_B, vB] = useState(!1), yB = useContextStore(ZoneStoreContext, (m) => m.hoveringComponent === C);
 	useEffect(() => {
-		if (!uH.current) return;
-		let m = uH.current, x = (m) => {
-			iH.getState().draggedItem ? kH(!!$) : kH(!0), m.stopPropagation();
+		if (!$z.current) return;
+		let m = $z.current, x = (m) => {
+			qz.getState().draggedItem ? vB(!!$) : vB(!0), m.stopPropagation();
 		}, S = (m) => {
-			m.stopPropagation(), kH(!1);
+			m.stopPropagation(), vB(!1);
 		};
-		return m.setAttribute("data-puck-component", C), m.setAttribute("data-puck-dnd", C), m.style.position = "relative", m.addEventListener("click", CH), m.addEventListener("mouseover", x), m.addEventListener("mouseout", S), () => {
-			m.removeAttribute("data-puck-component"), m.removeAttribute("data-puck-dnd"), m.removeEventListener("click", CH), m.removeEventListener("mouseover", x), m.removeEventListener("mouseout", S);
+		return m.setAttribute("data-puck-component", C), m.setAttribute("data-puck-dnd", C), m.style.position = "relative", m.addEventListener("click", fB), m.addEventListener("mouseover", x), m.addEventListener("mouseout", S), () => {
+			m.removeAttribute("data-puck-component"), m.removeAttribute("data-puck-dnd"), m.removeEventListener("click", fB), m.removeEventListener("mouseover", x), m.removeEventListener("mouseout", S);
 		};
 	}, [
-		uH.current,
-		CH,
-		tH,
+		$z.current,
+		fB,
+		q,
 		D,
 		C,
 		$,
-		L
+		P
 	]);
-	let [jH, MH] = useState(!1), [NH, PH] = useState(!0), [FH, IH] = useTransition();
+	let [bB, xB] = useState(!1), [SB, CB] = useState(!0), [wB, TB] = useTransition();
 	useEffect(() => {
-		IH(() => {
-			OH || AH || k ? (_H(), MH(!0), RH(!1)) : MH(!1);
+		TB(() => {
+			_B || yB || k ? (oB(), xB(!0), DB(!1)) : xB(!1);
 		});
 	}, [
-		OH,
-		AH,
+		_B,
+		yB,
 		k,
-		J
+		R
 	]);
-	let [LH, RH] = useState(!1), zH = useOnDragFinished((m) => {
-		m ? IH(() => {
-			_H(), PH(!0);
-		}) : PH(!1);
+	let [EB, DB] = useState(!1), OB = useOnDragFinished((m) => {
+		m ? TB(() => {
+			oB(), CB(!0);
+		}) : CB(!1);
 	});
 	useEffect(() => {
-		$ && RH(!0);
+		$ && DB(!0);
 	}, [$]), useEffect(() => {
-		if (LH) return zH();
-	}, [LH, zH]);
-	let BH = useCallback((m) => {
+		if (EB) return OB();
+	}, [EB, OB]);
+	let kB = useCallback((m) => {
 		if (m && m.ownerDocument.defaultView) {
 			let x = m.getBoundingClientRect(), S = x.x < 0, C = x.y < 0;
 			S && (m.style.transformOrigin = "left top", m.style.left = "0px"), C && (m.style.top = "12px", S || (m.style.transformOrigin = "right top"));
 		}
-	}, [R]);
+	}, [F]);
 	useEffect(() => {
-		if (I) {
-			oH(I);
+		if (N) {
+			Xz(N);
 			return;
 		}
-		if (uH.current) {
-			let m = window.getComputedStyle(uH.current);
+		if ($z.current) {
+			let m = window.getComputedStyle($z.current);
 			if (m.display === "inline" || m.display === "inline-block") {
-				oH("x");
+				Xz("x");
 				return;
 			}
 		}
-		oH(F);
+		Xz(M);
 	}, [
-		uH,
-		I,
-		F
+		$z,
+		N,
+		M
 	]);
-	let VH = useMemo(() => Y?.areaId && Y?.areaId !== "root" && /* @__PURE__ */ jsx(ActionBar.Action, {
-		onClick: TH,
+	let AB = useMemo(() => z?.areaId && z?.areaId !== "root" && /* @__PURE__ */ jsx(ActionBar.Action, {
+		onClick: mB,
 		label: "Select parent",
 		children: /* @__PURE__ */ jsx(CornerLeftUp, { size: 16 })
-	}), [Y?.areaId]);
+	}), [z?.areaId]);
 	return /* @__PURE__ */ jsxs(DropZoneProvider, {
-		value: useMemo(() => __spreadProps(__spreadValues({}, Y), {
+		value: useMemo(() => __spreadProps(__spreadValues({}, z), {
 			areaId: C,
 			zoneCompound: D,
 			index: T,
 			depth: x + 1,
-			registerLocalZone: eH,
-			unregisterLocalZone: Q
+			registerLocalZone: G,
+			unregisterLocalZone: K
 		}), [
-			Y,
+			z,
 			C,
 			D,
 			T,
 			x,
-			eH,
-			Q
+			G,
+			K
 		]),
-		children: [NH && jH && createPortal(/* @__PURE__ */ jsxs("div", {
+		children: [SB && bB && createPortal(/* @__PURE__ */ jsxs("div", {
 			className: getClassName16({
 				isSelected: k,
 				isDragging: $,
-				hover: OH || AH
+				hover: _B || yB
 			}),
-			style: __spreadValues({}, hH),
+			style: __spreadValues({}, iB),
 			"data-puck-overlay": !0,
 			children: [
 				A,
@@ -11495,26 +11349,26 @@ var useOnDragFinished = (m, x = []) => {
 				}),
 				/* @__PURE__ */ jsx("div", {
 					className: getClassName16("actionsOverlay"),
-					style: { top: actionsOverlayTop / R },
+					style: { top: actionsOverlayTop / F },
 					children: /* @__PURE__ */ jsx("div", {
 						className: getClassName16("actions"),
 						style: {
-							transform: `scale(${1 / R}`,
-							top: actionsTop / R,
+							transform: `scale(${1 / F}`,
+							top: actionsTop / F,
 							right: 0,
 							paddingLeft: actionsSide,
 							paddingRight: actionsSide
 						},
-						ref: BH,
-						children: /* @__PURE__ */ jsxs(xH, {
-							parentAction: VH,
+						ref: kB,
+						children: /* @__PURE__ */ jsxs(uB, {
+							parentAction: AB,
 							label: DEBUG2 ? C : j,
-							children: [rH.duplicate && /* @__PURE__ */ jsx(ActionBar.Action, {
-								onClick: EH,
+							children: [Z.duplicate && /* @__PURE__ */ jsx(ActionBar.Action, {
+								onClick: hB,
 								label: "Duplicate",
 								children: /* @__PURE__ */ jsx(Copy, { size: 16 })
-							}), rH.delete && /* @__PURE__ */ jsx(ActionBar.Action, {
-								onClick: DH,
+							}), Z.delete && /* @__PURE__ */ jsx(ActionBar.Action, {
+								onClick: gB,
 								label: "Delete",
 								children: /* @__PURE__ */ jsx(Trash, { size: 16 })
 							})]
@@ -11523,16 +11377,16 @@ var useOnDragFinished = (m, x = []) => {
 				}),
 				/* @__PURE__ */ jsx("div", {
 					className: getClassName16("overlayWrapper"),
-					children: /* @__PURE__ */ jsx(SH, {
+					children: /* @__PURE__ */ jsx(dB, {
 						componentId: C,
 						componentType: S,
-						hover: OH,
+						hover: _B,
 						isSelected: k,
 						children: /* @__PURE__ */ jsx("div", { className: getClassName16("overlay") })
 					})
 				})
 			]
-		}), fH || document.body), m(dH)]
+		}), tB || document.body), m(eB)]
 	});
 };
 init_react_import();
@@ -11774,14 +11628,14 @@ var AREA_CHANGE_DEBOUNCE_MS = 100, useTempDisableFallback = (m) => {
 		}), O(x), setTimeout(() => {
 			x.collisionObserver.forceUpdate(!0);
 		}, 50), D.current = null);
-	}, [k]), N = c(j, AREA_CHANGE_DEBOUNCE_MS), F = () => {
-		N.cancel(), D.current = null;
+	}, [k]), M = c(j, AREA_CHANGE_DEBOUNCE_MS), N = () => {
+		M.cancel(), D.current = null;
 	};
 	useEffect(() => {
 		DEBUG3 && k.subscribe((m) => console.log(m.previewIndex, Object.entries(m.zoneDepthIndex || {})[0]?.[0], Object.entries(m.areaDepthIndex || {})[0]?.[0]));
 	}, []);
-	let [I] = useState(() => [...x ? defaultPreset.plugins.filter((m) => m !== AutoScroller) : defaultPreset.plugins, createNestedDroppablePlugin({ onChange: (m, x) => {
-		let S = k.getState(), { zoneChanged: C, areaChanged: O } = A(m, T), M = x.dragOperation.status.dragging;
+	let [P] = useState(() => [...x ? defaultPreset.plugins.filter((m) => m !== AutoScroller) : defaultPreset.plugins, createNestedDroppablePlugin({ onChange: (m, x) => {
+		let S = k.getState(), { zoneChanged: C, areaChanged: O } = A(m, T), P = x.dragOperation.status.dragging;
 		if (O || C) {
 			let x = {}, S = {};
 			m.zone && (x = { [m.zone]: !0 }), m.area && (S = { [m.area]: !0 }), k.setState({
@@ -11794,14 +11648,14 @@ var AREA_CHANGE_DEBOUNCE_MS = 100, useTempDisableFallback = (m) => {
 			return;
 		}
 		if (O) {
-			if (M) {
+			if (P) {
 				let S = D.current;
-				S && S.area === m.area && S.zone === m.zone || (F(), N(m, x), D.current = m);
-			} else F(), j(m, x);
+				S && S.area === m.area && S.zone === m.zone || (N(), M(m, x), D.current = m);
+			} else N(), j(m, x);
 			return;
 		}
-		C && j(m, x), F();
-	} }, T)]), L = useSensors(), [R, U] = useState({}), W = useRef(null), K = useRef(void 0), q = useMemo(() => ({
+		C && j(m, x), N();
+	} }, T)]), F = useSensors(), [I, L] = useState({}), R = useRef(null), z = useRef(void 0), B = useMemo(() => ({
 		mode: "edit",
 		areaId: "root",
 		depth: 0
@@ -11810,12 +11664,12 @@ var AREA_CHANGE_DEBOUNCE_MS = 100, useTempDisableFallback = (m) => {
 		id: T,
 		children: /* @__PURE__ */ jsx(dragListenerContext.Provider, {
 			value: {
-				dragListeners: R,
-				setDragListeners: U
+				dragListeners: I,
+				setDragListeners: L
 			},
 			children: /* @__PURE__ */ jsx(DragDropProvider, {
-				plugins: I,
-				sensors: L,
+				plugins: P,
+				sensors: F,
 				onDragEnd: (m, x) => {
 					(getFrame()?.querySelector("[data-puck-entry]"))?.removeAttribute("data-puck-dragging");
 					let { source: T, target: D } = m.operation;
@@ -11826,7 +11680,7 @@ var AREA_CHANGE_DEBOUNCE_MS = 100, useTempDisableFallback = (m) => {
 					let { zone: O, index: A } = T.data, { previewIndex: j = {} } = k.getState() || {}, M = j[O]?.props.id === T.id ? j[O] : null, N = () => {
 						var T, j;
 						if (k.setState({ draggedItem: null }), m.canceled || D?.type === "void") {
-							k.setState({ previewIndex: {} }), (T = R.dragend) == null || T.forEach((S) => {
+							k.setState({ previewIndex: {} }), (T = I.dragend) == null || T.forEach((S) => {
 								S(m, x);
 							}), S({
 								type: "setUi",
@@ -11837,10 +11691,10 @@ var AREA_CHANGE_DEBOUNCE_MS = 100, useTempDisableFallback = (m) => {
 							});
 							return;
 						}
-						M && (k.setState({ previewIndex: {} }), M.type === "insert" ? insertComponent(M.componentType, M.zone, M.index, C.getState()) : K.current && S({
+						M && (k.setState({ previewIndex: {} }), M.type === "insert" ? insertComponent(M.componentType, M.zone, M.index, C.getState()) : z.current && S({
 							type: "move",
-							sourceIndex: K.current.index,
-							sourceZone: K.current.zone,
+							sourceIndex: z.current.index,
+							sourceZone: z.current.zone,
 							destinationIndex: M.index,
 							destinationZone: M.zone,
 							recordHistory: !1
@@ -11854,7 +11708,7 @@ var AREA_CHANGE_DEBOUNCE_MS = 100, useTempDisableFallback = (m) => {
 								isDragging: !1
 							},
 							recordHistory: !0
-						}), (j = R.dragend) == null || j.forEach((S) => {
+						}), (j = I.dragend) == null || j.forEach((S) => {
 							S(m, x);
 						});
 					}, P;
@@ -11865,45 +11719,45 @@ var AREA_CHANGE_DEBOUNCE_MS = 100, useTempDisableFallback = (m) => {
 				onDragOver: (m, x) => {
 					var S;
 					if (m.preventDefault(), !k.getState()?.draggedItem) return;
-					F();
+					N();
 					let { source: T, target: D } = m.operation;
 					if (!D || !T || D.type === "void") return;
-					let [O] = T.id.split(":"), [A] = D.id.split(":"), j = T.data, M = j.zone, N = j.index, P = "", I = 0;
+					let [O] = T.id.split(":"), [A] = D.id.split(":"), j = T.data, M = j.zone, P = j.index, F = "", L = 0;
 					if (D.type === "component") {
 						let m = D.data;
-						P = m.zone, I = m.index;
+						F = m.zone, L = m.index;
 						let S = x.collisionObserver.collisions[0]?.data, C = getDeepDir(D.element), T = S?.direction === "up" || C === "ltr" && S?.direction === "left" || C === "rtl" && S?.direction === "right" ? "before" : "after";
-						I >= N && M === P && --I, T === "after" && (I += 1);
-					} else P = D.id.toString(), I = 0;
-					let L = C.getState().state.indexes.nodes[D.id]?.path || [];
-					if (!(A === O || L.find((m) => {
+						L >= P && M === F && --L, T === "after" && (L += 1);
+					} else F = D.id.toString(), L = 0;
+					let B = C.getState().state.indexes.nodes[D.id]?.path || [];
+					if (!(A === O || B.find((m) => {
 						let [x] = m.split(":");
 						return x === O;
 					}))) {
-						if (W.current === "new") k.setState({ previewIndex: { [P]: {
+						if (R.current === "new") k.setState({ previewIndex: { [F]: {
 							componentType: j.componentType,
 							type: "insert",
-							index: I,
-							zone: P,
+							index: L,
+							zone: F,
 							element: T.element,
 							props: { id: T.id.toString() }
 						} } });
 						else {
-							K.current ||= {
+							z.current ||= {
 								zone: j.zone,
 								index: j.index
 							};
-							let m = getItem(K.current, C.getState().state);
-							m && k.setState({ previewIndex: { [P]: {
+							let m = getItem(z.current, C.getState().state);
+							m && k.setState({ previewIndex: { [F]: {
 								componentType: j.componentType,
 								type: "move",
-								index: I,
-								zone: P,
+								index: L,
+								zone: F,
 								props: m.props,
 								element: T.element
 							} } });
 						}
-						(S = R.dragover) == null || S.forEach((S) => {
+						(S = I.dragover) == null || S.forEach((S) => {
 							S(m, x);
 						});
 					}
@@ -11925,12 +11779,12 @@ var AREA_CHANGE_DEBOUNCE_MS = 100, useTempDisableFallback = (m) => {
 							element: T.element
 						} } });
 					}
-					(S = R.dragstart) == null || S.forEach((S) => {
+					(S = I.dragstart) == null || S.forEach((S) => {
 						S(m, x);
 					});
 				},
 				onBeforeDragStart: (m) => {
-					W.current = m.operation.source?.type === "drawer" ? "new" : "existing", K.current = void 0, k.setState({ draggedItem: m.operation.source }), C.getState().selectedItem?.props.id === m.operation.source?.id ? S({
+					R.current = m.operation.source?.type === "drawer" ? "new" : "existing", z.current = void 0, k.setState({ draggedItem: m.operation.source }), C.getState().selectedItem?.props.id === m.operation.source?.id ? S({
 						type: "setUi",
 						ui: { isDragging: !0 },
 						recordHistory: !1
@@ -11946,7 +11800,7 @@ var AREA_CHANGE_DEBOUNCE_MS = 100, useTempDisableFallback = (m) => {
 				children: /* @__PURE__ */ jsx(ZoneStoreProvider, {
 					store: k,
 					children: /* @__PURE__ */ jsx(DropZoneProvider, {
-						value: q,
+						value: B,
 						children: m
 					})
 				})
@@ -12262,7 +12116,7 @@ var getSelectorForId = (m, x) => {
 		isReadOnly: T
 	}) : m
 }), getClassName19 = get_class_name_factory_default("DropZone", styles_module_default11), getRandomColor = () => `#${Math.floor(Math.random() * 16777215).toString(16)}`, RENDER_DEBUG = !1, DropZoneEditPure = (m) => /* @__PURE__ */ jsx(DropZoneEdit, __spreadValues({}, m)), DropZoneChildMemo = memo(({ zoneCompound: m, componentId: x, index: S, dragAxis: C, collisionAxis: T, inDroppableZone: D }) => {
-	let O = useAppStore((m) => m.metadata), { depth: k = 1 } = useContext(dropZoneContext) ?? {}, A = useContext(ZoneStoreContext), j = useAppStore(useShallow((m) => m.state.indexes.nodes[x]?.flatData.props)), M = useAppStore((m) => m.state.indexes.nodes[x]?.data.type), P = useAppStore(useShallow((m) => m.state.indexes.nodes[x]?.data.readOnly)), F = useMemo(() => {
+	let O = useAppStore((m) => m.metadata), { depth: k = 1 } = useContext(dropZoneContext) ?? {}, A = useContext(ZoneStoreContext), j = useAppStore(useShallow((m) => m.state.indexes.nodes[x]?.flatData.props)), M = useAppStore((m) => m.state.indexes.nodes[x]?.data.type), N = useAppStore(useShallow((m) => m.state.indexes.nodes[x]?.data.readOnly)), P = useMemo(() => {
 		if (j) return expandNode({
 			type: M,
 			props: j
@@ -12280,145 +12134,145 @@ var getSelectorForId = (m, x) => {
 		m,
 		M,
 		j
-	]), I = useAppStore((m) => F?.type ? m.config.components[F.type] : null), L = useMemo(() => ({
+	]), F = useAppStore((m) => P?.type ? m.config.components[P.type] : null), I = useMemo(() => ({
 		renderDropZone: DropZoneEditPure,
 		isEditing: !0,
 		dragRef: null,
-		metadata: __spreadValues(__spreadValues({}, O), I?.metadata)
-	}), [O, I?.metadata]), R = useAppStore((m) => m.overrides), B = useAppStore((m) => m.componentState[x]?.loadingCount > 0), H = useAppStore((m) => m.selectedItem?.props.id === x || !1), U = I?.label ?? F?.type.toString() ?? "Component", q = useMemo(() => function() {
-		return F && "element" in F && F.element ? /* @__PURE__ */ jsx("div", { dangerouslySetInnerHTML: { __html: F.element.outerHTML } }) : /* @__PURE__ */ jsx(DrawerItemInner, {
-			name: U,
-			children: R.componentItem ?? R.drawerItem
+		metadata: __spreadValues(__spreadValues({}, O), F?.metadata)
+	}), [O, F?.metadata]), L = useAppStore((m) => m.overrides), R = useAppStore((m) => m.componentState[x]?.loadingCount > 0), z = useAppStore((m) => m.selectedItem?.props.id === x || !1), B = F?.label ?? P?.type.toString() ?? "Component", V = useMemo(() => function() {
+		return P && "element" in P && P.element ? /* @__PURE__ */ jsx("div", { dangerouslySetInnerHTML: { __html: P.element.outerHTML } }) : /* @__PURE__ */ jsx(DrawerItemInner, {
+			name: B,
+			children: L.componentItem ?? L.drawerItem
 		});
 	}, [
 		x,
-		U,
-		R
-	]), J = useMemo(() => __spreadProps(__spreadValues(__spreadValues({}, I?.defaultProps), F?.props), {
-		puck: L,
+		B,
+		L
+	]), H = useMemo(() => __spreadProps(__spreadValues(__spreadValues({}, F?.defaultProps), P?.props), {
+		puck: I,
 		editMode: !0
 	}), [
-		I?.defaultProps,
-		F?.props,
-		L
-	]), $V = useMemo(() => ({
-		type: F?.type ?? M,
-		props: J
+		F?.defaultProps,
+		P?.props,
+		I
+	]), W = useMemo(() => ({
+		type: P?.type ?? M,
+		props: H
 	}), [
-		F?.type,
+		P?.type,
 		M,
-		J
-	]), Y = useAppStore((m) => m.config), X = useAppStore((m) => m.plugins), Z = useAppStore((m) => m.fieldTransforms), eH = useFieldTransforms(Y, $V, useMemo(() => __spreadValues(__spreadValues(__spreadValues(__spreadValues({}, getSlotTransform(DropZoneEditPure, (m) => /* @__PURE__ */ jsx(ContextSlotRender, {
+		H
+	]), G = useAppStore((m) => m.config), K = useAppStore((m) => m.plugins), q = useAppStore((m) => m.fieldTransforms), J = useFieldTransforms(G, W, useMemo(() => __spreadValues(__spreadValues(__spreadValues(__spreadValues({}, getSlotTransform(DropZoneEditPure, (m) => /* @__PURE__ */ jsx(ContextSlotRender, {
 		componentId: x,
 		zone: m.zone
-	}))), getInlineTextTransform()), X.reduce((m, x) => __spreadValues(__spreadValues({}, m), x.fieldTransforms), {})), Z), [X, Z]), P, B);
-	if (!F) return;
-	let Q = I ? I.render : () => /* @__PURE__ */ jsxs("div", {
+	}))), getInlineTextTransform()), K.reduce((m, x) => __spreadValues(__spreadValues({}, m), x.fieldTransforms), {})), q), [K, q]), N, R);
+	if (!P) return;
+	let Y = F ? F.render : () => /* @__PURE__ */ jsxs("div", {
 		style: {
 			padding: 48,
 			textAlign: "center"
 		},
-		children: ["No configuration for ", F.type]
-	}), tH = F.type, nH = "previewType" in F ? F.previewType === "insert" : !1;
-	return nH && (Q = q), /* @__PURE__ */ jsx(DraggableComponent, {
+		children: ["No configuration for ", P.type]
+	}), Wz = P.type, X = "previewType" in P ? P.previewType === "insert" : !1;
+	return X && (Y = V), /* @__PURE__ */ jsx(DraggableComponent, {
 		id: x,
-		componentType: tH,
+		componentType: Wz,
 		zoneCompound: m,
 		depth: k + 1,
 		index: S,
-		isLoading: B,
-		isSelected: H,
-		label: U,
+		isLoading: R,
+		isSelected: z,
+		label: B,
 		autoDragAxis: C,
 		userDragAxis: T,
 		inDroppableZone: D,
-		children: (m) => I?.inline && !nH ? /* @__PURE__ */ jsx(Fragment$1, { children: /* @__PURE__ */ jsx(Q, __spreadProps(__spreadValues({}, eH), { puck: __spreadProps(__spreadValues({}, eH.puck), { dragRef: m }) })) }) : /* @__PURE__ */ jsx("div", {
+		children: (m) => F?.inline && !X ? /* @__PURE__ */ jsx(Fragment$1, { children: /* @__PURE__ */ jsx(Y, __spreadProps(__spreadValues({}, J), { puck: __spreadProps(__spreadValues({}, J.puck), { dragRef: m }) })) }) : /* @__PURE__ */ jsx("div", {
 			ref: m,
-			children: /* @__PURE__ */ jsx(Q, __spreadValues({}, eH))
+			children: /* @__PURE__ */ jsx(Y, __spreadValues({}, J))
 		})
 	});
 }), DropZoneEdit = forwardRef(function({ zone: m, allow: x, disallow: S, style: C, className: T, minEmptyHeight: D = 128, collisionAxis: O }, k) {
-	let A = useContext(dropZoneContext), j = useAppStoreApi(), { areaId: F, depth: I = 0, registerLocalZone: L, unregisterLocalZone: R } = A ?? {}, H = useAppStore(useShallow((m) => F ? m.state.indexes.nodes[F]?.path : null)), U = rootDroppableId;
-	F && m !== rootDroppableId && (U = `${F}:${m}`);
-	let W = U === rootDroppableId || m === rootDroppableId || F === "root", K = useContextStore(ZoneStoreContext, (m) => m.nextAreaDepthIndex[F || ""]), q = useAppStore(useShallow((m) => m.state.indexes.zones[U]?.contentIds)), J = useAppStore(useShallow((m) => m.state.indexes.zones[U]?.type));
+	let A = useContext(dropZoneContext), j = useAppStoreApi(), { areaId: M, depth: N = 0, registerLocalZone: P, unregisterLocalZone: F } = A ?? {}, I = useAppStore(useShallow((m) => M ? m.state.indexes.nodes[M]?.path : null)), L = rootDroppableId;
+	M && m !== rootDroppableId && (L = `${M}:${m}`);
+	let R = L === rootDroppableId || m === rootDroppableId || M === "root", z = useContextStore(ZoneStoreContext, (m) => m.nextAreaDepthIndex[M || ""]), B = useAppStore(useShallow((m) => m.state.indexes.zones[L]?.contentIds)), V = useAppStore(useShallow((m) => m.state.indexes.zones[L]?.type));
 	useEffect(() => {
-		(!J || J === "dropzone") && A?.registerZone && A?.registerZone(U);
-	}, [J, j]), useEffect(() => {
-		J === "dropzone" && U !== rootDroppableId && console.warn("DropZones have been deprecated in favor of slot fields and will be removed in a future version of Puck. Please see the migration guide: https://www.puckeditor.com/docs/guides/migrations/dropzones-to-slots");
-	}, [J]);
-	let $V = useMemo(() => q || [], [q]), Y = useRef(null), X = useCallback((m) => {
+		(!V || V === "dropzone") && A?.registerZone && A?.registerZone(L);
+	}, [V, j]), useEffect(() => {
+		V === "dropzone" && L !== rootDroppableId && console.warn("DropZones have been deprecated in favor of slot fields and will be removed in a future version of Puck. Please see the migration guide: https://www.puckeditor.com/docs/guides/migrations/dropzones-to-slots");
+	}, [V]);
+	let G = useMemo(() => B || [], [B]), K = useRef(null), q = useCallback((m) => {
 		if (!m) return !0;
 		if (S) {
 			let C = x || [];
 			if ((S || []).filter((m) => C.indexOf(m) === -1).indexOf(m) !== -1) return !1;
 		} else if (x && x.indexOf(m) === -1) return !1;
 		return !0;
-	}, [x, S]), Z = useContextStore(ZoneStoreContext, (m) => X(m.draggedItem?.data.componentType)), eH = K || W, Q = useContextStore(ZoneStoreContext, (m) => {
+	}, [x, S]), J = useContextStore(ZoneStoreContext, (m) => q(m.draggedItem?.data.componentType)), Wz = z || R, X = useContextStore(ZoneStoreContext, (m) => {
 		let x = !0;
-		return x = m.zoneDepthIndex[U] ?? !1, x &&= Z, x;
+		return x = m.zoneDepthIndex[L] ?? !1, x &&= J, x;
 	});
-	useEffect(() => (L && L(U, Z || Q), () => {
-		R && R(U);
+	useEffect(() => (P && P(L, J || X), () => {
+		F && F(L);
 	}), [
-		Z,
-		Q,
-		U
+		J,
+		X,
+		L
 	]);
-	let [tH, nH] = useContentIdsWithPreview($V, U), rH = Q && (nH ? tH.length === 1 : tH.length === 0), iH = useContext(ZoneStoreContext);
+	let [Z, Kz] = useContentIdsWithPreview(G, L), qz = X && (Kz ? Z.length === 1 : Z.length === 0), Jz = useContext(ZoneStoreContext);
 	useEffect(() => {
-		let { enabledIndex: m } = iH.getState();
-		iH.setState({ enabledIndex: __spreadProps(__spreadValues({}, m), { [U]: Q }) });
+		let { enabledIndex: m } = Jz.getState();
+		Jz.setState({ enabledIndex: __spreadProps(__spreadValues({}, m), { [L]: X }) });
 	}, [
-		Q,
-		iH,
-		U
+		X,
+		Jz,
+		L
 	]);
-	let { ref: aH } = useDroppable({
-		id: U,
-		collisionPriority: Q ? I : 0,
-		disabled: !rH,
+	let { ref: Yz } = useDroppable({
+		id: L,
+		collisionPriority: X ? N : 0,
+		disabled: !qz,
 		collisionDetector: pointerIntersection,
 		type: "dropzone",
 		data: {
-			areaId: F,
-			depth: I,
-			isDroppableTarget: Z,
-			path: H || []
+			areaId: M,
+			depth: N,
+			isDroppableTarget: J,
+			path: I || []
 		}
-	}), oH = useAppStore((m) => m?.selectedItem && F === m?.selectedItem.props.id), [sH] = useDragAxis(Y, O), [cH, $] = useMinEmptyHeight({
-		zoneCompound: U,
+	}), Xz = useAppStore((m) => m?.selectedItem && M === m?.selectedItem.props.id), [Q] = useDragAxis(K, O), [Zz, $] = useMinEmptyHeight({
+		zoneCompound: L,
 		userMinEmptyHeight: D,
-		ref: Y
+		ref: K
 	});
 	return /* @__PURE__ */ jsx("div", {
 		className: `${getClassName19({
-			isRootZone: W,
-			hoveringOverArea: eH,
-			isEnabled: Q,
-			isAreaSelected: oH,
-			hasChildren: $V.length > 0,
+			isRootZone: R,
+			hoveringOverArea: Wz,
+			isEnabled: X,
+			isAreaSelected: Xz,
+			hasChildren: G.length > 0,
 			isAnimating: $
 		})}${T ? ` ${T}` : ""}`,
 		ref: (m) => {
 			assignRefs([
-				Y,
-				aH,
+				K,
+				Yz,
 				k
 			], m);
 		},
-		"data-testid": `dropzone:${U}`,
-		"data-puck-dropzone": U,
+		"data-testid": `dropzone:${L}`,
+		"data-puck-dropzone": L,
 		style: __spreadProps(__spreadValues({}, C), {
-			"--min-empty-height": `${cH}px`,
+			"--min-empty-height": `${Zz}px`,
 			backgroundColor: RENDER_DEBUG ? getRandomColor() : C?.backgroundColor
 		}),
-		children: tH.map((m, x) => /* @__PURE__ */ jsx(DropZoneChildMemo, {
-			zoneCompound: U,
+		children: Z.map((m, x) => /* @__PURE__ */ jsx(DropZoneChildMemo, {
+			zoneCompound: L,
 			componentId: m,
-			dragAxis: sH,
+			dragAxis: Q,
 			index: x,
 			collisionAxis: O,
-			inDroppableZone: Z
+			inDroppableZone: J
 		}, m))
 	});
 }), DropZoneRenderItem = ({ config: m, item: x, metadata: S }) => {
@@ -12905,19 +12759,19 @@ function AutoFrame(m) {
 		"onNotReady",
 		"frameRef"
 	]);
-	let [M, N] = useState(!1), [F, I] = useState({}), [L, R] = useState(), [z, B] = useState(!1);
+	let [M, N] = useState(!1), [P, F] = useState({}), [I, L] = useState(), [R, z] = useState(!1);
 	return useEffect(() => {
 		if (A.current) {
 			let m = A.current.contentDocument, x = A.current.contentWindow;
-			I({
+			F({
 				document: m || void 0,
 				window: x || void 0
-			}), R(A.current.contentDocument?.getElementById("frame-root")), m && x && z ? O() : k();
+			}), L(A.current.contentDocument?.getElementById("frame-root")), m && x && R ? O() : k();
 		}
 	}, [
 		A,
 		M,
-		z
+		R
 	]), /* @__PURE__ */ jsx("iframe", __spreadProps(__spreadValues({}, j), {
 		className: C,
 		id: D,
@@ -12927,11 +12781,11 @@ function AutoFrame(m) {
 			N(!0);
 		},
 		children: /* @__PURE__ */ jsx(autoFrameContext.Provider, {
-			value: F,
-			children: M && L && /* @__PURE__ */ jsx(CopyHostStyles, {
+			value: P,
+			children: M && I && /* @__PURE__ */ jsx(CopyHostStyles, {
 				debug: T,
-				onStylesLoaded: () => B(!0),
-				children: createPortal(S, L)
+				onStylesLoaded: () => z(!0),
+				children: createPortal(S, I)
 			})
 		})
 	}));
@@ -12974,13 +12828,13 @@ var getClassName23 = get_class_name_factory_default("PuckPreview", {
 			props: m
 		}, DropZoneEditPure);
 		return C.root?.render ? C.root?.render(__spreadValues({ id: "puck-root" }, x)) : /* @__PURE__ */ jsx(Fragment$1, { children: x.children });
-	}, [C]), N = useMemo(() => O.iframe, [O]), F = S.props || S, I = useRef(null);
-	useBubbleIframeEvents(I);
-	let L = A ? /* @__PURE__ */ jsx(Render, {
+	}, [C]), M = useMemo(() => O.iframe, [O]), N = S.props || S, P = useRef(null);
+	useBubbleIframeEvents(P);
+	let F = A ? /* @__PURE__ */ jsx(Render, {
 		data: A,
 		config: C,
 		metadata: k
-	}) : /* @__PURE__ */ jsx(j, __spreadProps(__spreadValues({}, F), {
+	}) : /* @__PURE__ */ jsx(j, __spreadProps(__spreadValues({}, N), {
 		puck: {
 			renderDropZone: DropZonePure,
 			isEditing: !0,
@@ -13013,17 +12867,17 @@ var getClassName23 = get_class_name_factory_default("PuckPreview", {
 			onNotReady: () => {
 				T("MOUNTED");
 			},
-			frameRef: I,
-			children: /* @__PURE__ */ jsx(autoFrameContext.Consumer, { children: ({ document: m }) => N ? /* @__PURE__ */ jsx(N, {
+			frameRef: P,
+			children: /* @__PURE__ */ jsx(autoFrameContext.Consumer, { children: ({ document: m }) => M ? /* @__PURE__ */ jsx(M, {
 				document: m,
-				children: L
-			}) : L })
+				children: F
+			}) : F })
 		}) : /* @__PURE__ */ jsx("div", {
 			id: "preview-frame",
 			className: getClassName23("frame"),
-			ref: I,
+			ref: P,
 			"data-puck-entry": !0,
-			children: L
+			children: F
 		})
 	});
 };
@@ -13066,16 +12920,16 @@ var onScrollEnd = (m, x) => {
 			type: "setUi",
 			ui: { itemSelector: m }
 		});
-	}, [D]), k = useAppStore((m) => m.selectedItem?.props.id) === x || T && T.zone === rootDroppableId && !S, A = useAppStore((m) => m.state.indexes.nodes[x]), j = useAppStore(useShallow((m) => Object.keys(m.state.indexes.zones).filter((m) => m.split(":")[0] === x))), P = j.length > 0, F = useContext(ZoneStoreContext), I = useContextStore(ZoneStoreContext, (m) => m.hoveringComponent === x), L = useAppStore((m) => m.state.indexes.nodes[m.selectedItem?.props.id]?.path.some((m) => {
+	}, [D]), k = useAppStore((m) => m.selectedItem?.props.id) === x || T && T.zone === rootDroppableId && !S, A = useAppStore((m) => m.state.indexes.nodes[x]), j = useAppStore(useShallow((m) => Object.keys(m.state.indexes.zones).filter((m) => m.split(":")[0] === x))), M = j.length > 0, N = useContext(ZoneStoreContext), P = useContextStore(ZoneStoreContext, (m) => m.hoveringComponent === x), F = useAppStore((m) => m.state.indexes.nodes[m.selectedItem?.props.id]?.path.some((m) => {
 		let [S] = m.split(":");
 		return S === x;
-	}) ?? !1), R = C.components[A.data.type]?.label ?? A.data.type.toString();
+	}) ?? !1), I = C.components[A.data.type]?.label ?? A.data.type.toString();
 	return /* @__PURE__ */ jsxs("li", {
 		className: getClassNameLayer({
 			isSelected: k,
-			isHovering: I,
-			containsZone: P,
-			childIsSelected: L
+			isHovering: P,
+			containsZone: M,
+			childIsSelected: F
 		}),
 		children: [/* @__PURE__ */ jsx("div", {
 			className: getClassNameLayer("inner"),
@@ -13103,12 +12957,12 @@ var onScrollEnd = (m, x) => {
 					});
 				},
 				onMouseEnter: (m) => {
-					m.stopPropagation(), F.setState({ hoveringComponent: x });
+					m.stopPropagation(), N.setState({ hoveringComponent: x });
 				},
 				onMouseLeave: (m) => {
-					m.stopPropagation(), F.setState({ hoveringComponent: null });
+					m.stopPropagation(), N.setState({ hoveringComponent: null });
 				},
-				children: [P && /* @__PURE__ */ jsx("div", {
+				children: [M && /* @__PURE__ */ jsx("div", {
 					className: getClassNameLayer("chevron"),
 					title: k ? "Collapse" : "Expand",
 					children: /* @__PURE__ */ jsx(ChevronDown, { size: "12" })
@@ -13119,11 +12973,11 @@ var onScrollEnd = (m, x) => {
 						children: A.data.type === "Text" || A.data.type === "Heading" ? /* @__PURE__ */ jsx(Type, { size: "16" }) : /* @__PURE__ */ jsx(LayoutGrid, { size: "16" })
 					}), /* @__PURE__ */ jsx("div", {
 						className: getClassNameLayer("name"),
-						children: R
+						children: I
 					})]
 				})]
 			})
-		}), P && j.map((m) => /* @__PURE__ */ jsx("div", {
+		}), M && j.map((m) => /* @__PURE__ */ jsx("div", {
 			className: getClassNameLayer("zones"),
 			children: /* @__PURE__ */ jsx(LayerTree, { zoneCompound: m })
 		}, m))]
@@ -13305,13 +13159,13 @@ var FrameContext = createContext(null), FrameProvider = ({ children: m }) => {
 		setZoomConfig: m.setZoomConfig,
 		status: m.status,
 		iframe: m.iframe
-	}))), { leftSideBarVisible: j, rightSideBarVisible: N, leftSideBarWidth: F, rightSideBarWidth: I, viewports: L } = useAppStore(useShallow((m) => ({
+	}))), { leftSideBarVisible: j, rightSideBarVisible: M, leftSideBarWidth: N, rightSideBarWidth: P, viewports: F } = useAppStore(useShallow((m) => ({
 		leftSideBarVisible: m.state.ui.leftSideBarVisible,
 		rightSideBarVisible: m.state.ui.rightSideBarVisible,
 		leftSideBarWidth: m.state.ui.leftSideBarWidth,
 		rightSideBarWidth: m.state.ui.rightSideBarWidth,
 		viewports: m.state.ui.viewports
-	}))), [R, U] = useState(!1), q = useRef(!1), J = useMemo(() => ({ children: m }) => /* @__PURE__ */ jsx(Fragment$1, { children: m }), []), $V = useMemo(() => C.preview || J, [C]), Y = useCallback(() => {
+	}))), [I, L] = useState(!1), R = useRef(!1), z = useMemo(() => ({ children: m }) => /* @__PURE__ */ jsx(Fragment$1, { children: m }), []), B = useMemo(() => C.preview || z, [C]), V = useCallback(() => {
 		if (m.current) {
 			let x = m.current, S = getBox(x);
 			return {
@@ -13329,37 +13183,37 @@ var FrameContext = createContext(null), FrameProvider = ({ children: m }) => {
 	}, [
 		m,
 		j,
+		M,
 		N,
-		F,
-		I,
-		L
+		P,
+		F
 	]), useEffect(() => {
-		let { height: m } = Y();
-		L.current.height === "auto" && O(__spreadProps(__spreadValues({}, D), { rootHeight: m / D.zoom }));
+		let { height: m } = V();
+		F.current.height === "auto" && O(__spreadProps(__spreadValues({}, D), { rootHeight: m / D.zoom }));
 	}, [
 		D.zoom,
-		Y,
+		V,
 		O
 	]), useEffect(() => {
 		ZOOM_ON_CHANGE && x();
-	}, [L.current.width, L]), useEffect(() => {
+	}, [F.current.width, F]), useEffect(() => {
 		if (!m.current) return;
 		let S = new ResizeObserver(() => {
-			q.current || x();
+			R.current || x();
 		});
 		return S.observe(m.current), () => {
 			S.disconnect();
 		};
 	}, [m.current]);
-	let [X, Z] = useState(!1);
+	let [U, G] = useState(!1);
 	return useEffect(() => {
 		setTimeout(() => {
-			Z(!0);
+			G(!0);
 		}, 500);
 	}, []), /* @__PURE__ */ jsxs("div", {
 		className: getClassName26({
 			ready: k === "READY" || !A.enabled || !A.waitForStyles,
-			showLoader: X
+			showLoader: U
 		}),
 		onClick: (m) => {
 			let x = m.target;
@@ -13369,21 +13223,21 @@ var FrameContext = createContext(null), FrameProvider = ({ children: m }) => {
 				recordHistory: !0
 			});
 		},
-		children: [L.controlsVisible && A.enabled && /* @__PURE__ */ jsx("div", {
+		children: [F.controlsVisible && A.enabled && /* @__PURE__ */ jsx("div", {
 			className: getClassName26("controls"),
 			children: /* @__PURE__ */ jsx(ViewportControls, {
 				autoZoom: D.autoZoom,
 				zoom: D.zoom,
 				onViewportChange: (m) => {
-					U(!0), q.current = !0;
+					L(!0), R.current = !0;
 					let S = __spreadProps(__spreadValues({}, m), {
 						height: m.height || "auto",
 						zoom: D.zoom
 					});
-					T({ viewports: __spreadProps(__spreadValues({}, L), { current: S }) }), ZOOM_ON_CHANGE && x({ viewports: __spreadProps(__spreadValues({}, L), { current: S }) });
+					T({ viewports: __spreadProps(__spreadValues({}, F), { current: S }) }), ZOOM_ON_CHANGE && x({ viewports: __spreadProps(__spreadValues({}, F), { current: S }) });
 				},
 				onZoom: (m) => {
-					U(!0), q.current = !0, O(__spreadProps(__spreadValues({}, D), { zoom: m }));
+					L(!0), R.current = !0, O(__spreadProps(__spreadValues({}, D), { zoom: m }));
 				}
 			})
 		}), /* @__PURE__ */ jsxs("div", {
@@ -13392,18 +13246,18 @@ var FrameContext = createContext(null), FrameProvider = ({ children: m }) => {
 			children: [/* @__PURE__ */ jsx("div", {
 				className: getClassName26("root"),
 				style: {
-					width: A.enabled ? L.current.width : "100%",
+					width: A.enabled ? F.current.width : "100%",
 					height: D.rootHeight,
 					transform: A.enabled ? `scale(${D.zoom})` : void 0,
-					transition: R ? `width ${TRANSITION_DURATION}ms ease-out, height ${TRANSITION_DURATION}ms ease-out, transform ${TRANSITION_DURATION}ms ease-out` : "",
+					transition: I ? `width ${TRANSITION_DURATION}ms ease-out, height ${TRANSITION_DURATION}ms ease-out, transform ${TRANSITION_DURATION}ms ease-out` : "",
 					overflow: A.enabled ? void 0 : "auto"
 				},
 				suppressHydrationWarning: !0,
 				id: "puck-canvas-root",
 				onTransitionEnd: () => {
-					U(!1), q.current = !1;
+					L(!1), R.current = !1;
 				},
-				children: /* @__PURE__ */ jsx($V, { children: /* @__PURE__ */ jsx(Preview2, {}) })
+				children: /* @__PURE__ */ jsx(B, { children: /* @__PURE__ */ jsx(Preview2, {}) })
 			}), /* @__PURE__ */ jsx("div", {
 				className: getClassName26("loader"),
 				children: /* @__PURE__ */ jsx(Loader, { size: 24 })
@@ -13529,19 +13383,19 @@ var getClassName28 = get_class_name_factory_default("PuckHeader", {
 			dispatch: O,
 			state: C
 		}));
-	}) : DefaultOverride, [S]), N = useAppStore((m) => m.overrides.header || A), P = useAppStore((m) => m.overrides.headerActions || j), [F, I] = useState(!1), L = useAppStore((m) => (m.state.indexes.nodes.root?.data).props.title ?? ""), R = useAppStore((m) => m.state.ui.leftSideBarVisible), B = useAppStore((m) => m.state.ui.rightSideBarVisible), U = useCallback((m) => {
-		let x = window.matchMedia("(min-width: 638px)").matches, S = m === "left" ? R : B, C = m === "left" ? "rightSideBarVisible" : "leftSideBarVisible";
+	}) : DefaultOverride, [S]), M = useAppStore((m) => m.overrides.header || A), N = useAppStore((m) => m.overrides.headerActions || j), [P, F] = useState(!1), I = useAppStore((m) => (m.state.indexes.nodes.root?.data).props.title ?? ""), L = useAppStore((m) => m.state.ui.leftSideBarVisible), R = useAppStore((m) => m.state.ui.rightSideBarVisible), z = useCallback((m) => {
+		let x = window.matchMedia("(min-width: 638px)").matches, S = m === "left" ? L : R, C = m === "left" ? "rightSideBarVisible" : "leftSideBarVisible";
 		O({
 			type: "setUi",
 			ui: __spreadValues({ [`${m}SideBarVisible`]: !S }, x ? {} : { [C]: !1 })
 		});
 	}, [
 		O,
-		R,
-		B
+		L,
+		R
 	]);
-	return /* @__PURE__ */ jsx(N, {
-		actions: /* @__PURE__ */ jsx(Fragment$1, { children: /* @__PURE__ */ jsx(P, { children: /* @__PURE__ */ jsx(Button, {
+	return /* @__PURE__ */ jsx(M, {
+		actions: /* @__PURE__ */ jsx(Fragment$1, { children: /* @__PURE__ */ jsx(N, { children: /* @__PURE__ */ jsx(Button, {
 			onClick: () => {
 				let x = k.getState().state.data;
 				m && m(x);
@@ -13551,8 +13405,8 @@ var getClassName28 = get_class_name_factory_default("PuckHeader", {
 		}) }) }),
 		children: /* @__PURE__ */ jsx("header", {
 			className: getClassName28({
-				leftSideBarVisible: R,
-				rightSideBarVisible: B
+				leftSideBarVisible: L,
+				rightSideBarVisible: R
 			}),
 			children: /* @__PURE__ */ jsxs("div", {
 				className: getClassName28("inner"),
@@ -13564,7 +13418,7 @@ var getClassName28 = get_class_name_factory_default("PuckHeader", {
 							children: /* @__PURE__ */ jsx(IconButton, {
 								type: "button",
 								onClick: () => {
-									U("left");
+									z("left");
 								},
 								title: "Toggle left sidebar",
 								children: /* @__PURE__ */ jsx(PanelLeft, { focusable: "false" })
@@ -13574,7 +13428,7 @@ var getClassName28 = get_class_name_factory_default("PuckHeader", {
 							children: /* @__PURE__ */ jsx(IconButton, {
 								type: "button",
 								onClick: () => {
-									U("right");
+									z("right");
 								},
 								title: "Toggle right sidebar",
 								children: /* @__PURE__ */ jsx(PanelRight, { focusable: "false" })
@@ -13586,7 +13440,7 @@ var getClassName28 = get_class_name_factory_default("PuckHeader", {
 						children: /* @__PURE__ */ jsxs(Heading, {
 							rank: "2",
 							size: "xs",
-							children: [C || L || "Page", T && /* @__PURE__ */ jsxs(Fragment$1, { children: [" ", /* @__PURE__ */ jsx("code", {
+							children: [C || I || "Page", T && /* @__PURE__ */ jsxs(Fragment$1, { children: [" ", /* @__PURE__ */ jsx("code", {
 								className: getClassName28("path"),
 								children: T
 							})] })]
@@ -13598,15 +13452,15 @@ var getClassName28 = get_class_name_factory_default("PuckHeader", {
 							className: getClassName28("menuButton"),
 							children: /* @__PURE__ */ jsx(IconButton, {
 								type: "button",
-								onClick: () => I(!F),
+								onClick: () => F(!P),
 								title: "Toggle menu bar",
-								children: jsx(F ? ChevronUp : ChevronDown, { focusable: "false" })
+								children: jsx(P ? ChevronUp : ChevronDown, { focusable: "false" })
 							})
 						}), /* @__PURE__ */ jsx(MenuBar, {
 							dispatch: O,
 							onPublish: m,
-							menuOpen: F,
-							renderHeaderActions: () => /* @__PURE__ */ jsx(P, { children: /* @__PURE__ */ jsx(Button, {
+							menuOpen: P,
+							renderHeaderActions: () => /* @__PURE__ */ jsx(N, { children: /* @__PURE__ */ jsx(Button, {
 								onClick: () => {
 									let x = k.getState().state.data;
 									m && m(x);
@@ -13614,7 +13468,7 @@ var getClassName28 = get_class_name_factory_default("PuckHeader", {
 								icon: /* @__PURE__ */ jsx(Globe, { size: "14px" }),
 								children: "Publish"
 							}) }),
-							setMenuOpen: I
+							setMenuOpen: F
 						})]
 					})
 				]
@@ -13628,28 +13482,28 @@ var getClassName29 = get_class_name_factory_default("ResizeHandle", {
 	"ResizeHandle--left": "_ResizeHandle--left_144bf_16",
 	"ResizeHandle--right": "_ResizeHandle--right_144bf_20"
 }), ResizeHandle = ({ position: m, sidebarRef: x, onResize: S, onResizeEnd: C }) => {
-	let { frameRef: T } = useCanvasFrame(), D = useResetAutoZoom(T), O = useRef(null), k = useRef(!1), A = useRef(0), j = useRef(0), N = useCallback((x) => {
+	let { frameRef: T } = useCanvasFrame(), D = useResetAutoZoom(T), O = useRef(null), k = useRef(!1), A = useRef(0), j = useRef(0), M = useCallback((x) => {
 		if (!k.current) return;
 		let C = x.clientX - A.current, T = m === "left" ? j.current + C : j.current - C;
 		S(Math.max(192, T)), x.preventDefault();
-	}, [S, m]), P = useCallback(() => {
+	}, [S, m]), N = useCallback(() => {
 		if (!k.current) return;
 		k.current = !1, document.body.style.cursor = "", document.body.style.userSelect = "";
 		let m = document.getElementById("resize-overlay");
-		m && document.body.removeChild(m), document.removeEventListener("mousemove", N), document.removeEventListener("mouseup", P), C(x.current?.getBoundingClientRect().width || 0), D();
-	}, [C]), F = useCallback((m) => {
+		m && document.body.removeChild(m), document.removeEventListener("mousemove", M), document.removeEventListener("mouseup", N), C(x.current?.getBoundingClientRect().width || 0), D();
+	}, [C]), P = useCallback((m) => {
 		k.current = !0, A.current = m.clientX, j.current = x.current?.getBoundingClientRect().width || 0, document.body.style.cursor = "col-resize", document.body.style.userSelect = "none";
 		let S = document.createElement("div");
-		S.id = "resize-overlay", S.setAttribute("data-resize-overlay", ""), document.body.appendChild(S), document.addEventListener("mousemove", N), document.addEventListener("mouseup", P), m.preventDefault();
+		S.id = "resize-overlay", S.setAttribute("data-resize-overlay", ""), document.body.appendChild(S), document.addEventListener("mousemove", M), document.addEventListener("mouseup", N), m.preventDefault();
 	}, [
 		m,
-		N,
-		P
+		M,
+		N
 	]);
 	return /* @__PURE__ */ jsx("div", {
 		ref: O,
 		className: getClassName29({ [m]: !0 }),
-		onMouseDown: F
+		onMouseDown: P
 	});
 };
 init_react_import();
@@ -13733,10 +13587,10 @@ function PropsProvider(m) {
 }
 var usePropsContext = () => useContext(propsContext);
 function PuckProvider({ children: m }) {
-	let { config: x, data: S, ui: C, onChange: T, permissions: D = {}, plugins: O, overrides: k, viewports: A = defaultViewports, iframe: j, initialHistory: N, metadata: F, onAction: I, fieldTransforms: L } = usePropsContext(), R = useMemo(() => __spreadValues({
+	let { config: x, data: S, ui: C, onChange: T, permissions: D = {}, plugins: O, overrides: k, viewports: A = defaultViewports, iframe: j, initialHistory: M, metadata: N, onAction: P, fieldTransforms: F } = usePropsContext(), I = useMemo(() => __spreadValues({
 		enabled: !0,
 		waitForStyles: !0
-	}, j), [j]), [U] = useState(() => {
+	}, j), [j]), [L] = useState(() => {
 		let m = __spreadValues(__spreadValues({}, defaultAppState.ui), C), T = {};
 		if (typeof window < "u") {
 			window.matchMedia("(max-width: 638px)").matches && (T = __spreadProps(__spreadValues({}, T), {
@@ -13747,7 +13601,7 @@ function PuckProvider({ children: m }) {
 				key: m,
 				diff: Math.abs(x - S.width)
 			})).sort((m, x) => m.diff > x.diff ? 1 : -1)[0].key;
-			R.enabled && (T = __spreadProps(__spreadValues({}, T), { viewports: __spreadProps(__spreadValues({}, m.viewports), { current: __spreadProps(__spreadValues({}, m.viewports.current), {
+			I.enabled && (T = __spreadProps(__spreadValues({}, T), { viewports: __spreadProps(__spreadValues({}, m.viewports), { current: __spreadProps(__spreadValues({}, m.viewports.current), {
 				height: C?.viewports?.current?.height || A[S]?.height || "auto",
 				width: C?.viewports?.current?.width || A[S]?.width
 			}) }) }));
@@ -13766,68 +13620,68 @@ function PuckProvider({ children: m }) {
 				visible: S.visible
 			} }), {}) : {} })
 		}), x);
-	}), { appendData: W = !0 } = N || {}, [K] = useState([...N?.histories || [], ...W ? [{ state: U }] : []].map((m) => {
-		let S = __spreadValues(__spreadValues({}, U), m.state);
+	}), { appendData: R = !0 } = M || {}, [z] = useState([...M?.histories || [], ...R ? [{ state: L }] : []].map((m) => {
+		let S = __spreadValues(__spreadValues({}, L), m.state);
 		return m.state.indexes || (S = walkAppState(S, x)), __spreadProps(__spreadValues({}, m), { state: S });
-	})), q = N?.index || K.length - 1, J = K[q].state, $V = useLoadedOverrides({
+	})), B = M?.index || z.length - 1, V = z[B].state, U = useLoadedOverrides({
 		overrides: k,
 		plugins: O
-	}), Y = useMemo(() => __spreadValues(__spreadValues({}, (O || []).reduce((m, x) => __spreadValues(__spreadValues({}, m), x.fieldTransforms), {})), L), [L, O]), X = useCallback((m) => ({
+	}), G = useMemo(() => __spreadValues(__spreadValues({}, (O || []).reduce((m, x) => __spreadValues(__spreadValues({}, m), x.fieldTransforms), {})), F), [F, O]), K = useCallback((m) => ({
 		state: m,
 		config: x,
 		plugins: O || [],
-		overrides: $V,
+		overrides: U,
 		viewports: A,
-		iframe: R,
-		onAction: I,
-		metadata: F,
-		fieldTransforms: Y
+		iframe: I,
+		onAction: P,
+		metadata: N,
+		fieldTransforms: G
 	}), [
-		J,
+		V,
 		x,
 		O,
-		$V,
+		U,
 		A,
-		R,
 		I,
-		F,
-		Y
-	]), [Z] = useState(() => createAppStore(X(J)));
+		P,
+		N,
+		G
+	]), [q] = useState(() => createAppStore(K(V)));
 	useEffect(() => {
-		process.env.NODE_ENV !== "production" && (window.__PUCK_INTERNAL_DO_NOT_USE = { appStore: Z });
-	}, [Z]), useEffect(() => {
-		let m = Z.getState().state;
-		Z.setState(__spreadValues({}, X(m)));
+		process.env.NODE_ENV !== "production" && (window.__PUCK_INTERNAL_DO_NOT_USE = { appStore: q });
+	}, [q]), useEffect(() => {
+		let m = q.getState().state;
+		q.setState(__spreadValues({}, K(m)));
 	}, [
 		x,
 		O,
-		$V,
+		U,
 		A,
-		R,
 		I,
-		F
-	]), useRegisterHistorySlice(Z, {
-		histories: K,
-		index: q,
-		initialAppState: J
+		P,
+		N
+	]), useRegisterHistorySlice(q, {
+		histories: z,
+		index: B,
+		initialAppState: V
 	});
-	let eH = useRef(null);
+	let J = useRef(null);
 	useEffect(() => {
-		Z.subscribe((m) => m.state.data, (m) => {
+		q.subscribe((m) => m.state.data, (m) => {
 			if (T) {
-				if ((0, import_fast_deep_equal.default)(m, eH.current)) return;
-				T(m), eH.current = m;
+				if ((0, import_fast_deep_equal.default)(m, J.current)) return;
+				T(m), J.current = m;
 			}
 		});
-	}, []), useRegisterPermissionsSlice(Z, D);
-	let Q = useRegisterUsePuckStore(Z);
+	}, []), useRegisterPermissionsSlice(q, D);
+	let X = useRegisterUsePuckStore(q);
 	return useEffect(() => {
-		let { resolveAndCommitData: m } = Z.getState();
+		let { resolveAndCommitData: m } = q.getState();
 		m();
 	}, []), /* @__PURE__ */ jsx(appStoreContext.Provider, {
-		value: Z,
+		value: q,
 		children: /* @__PURE__ */ jsx(UsePuckStoreContext.Provider, {
-			value: Q,
+			value: X,
 			children: m
 		})
 	});
@@ -13838,7 +13692,7 @@ function PuckLayout({ children: m }) {
 		waitForStyles: !0
 	}, x), [x]);
 	useInjectGlobalCss(T.enabled);
-	let D = useAppStore((m) => m.dispatch), O = useAppStore((m) => m.state.ui.leftSideBarVisible), k = useAppStore((m) => m.state.ui.rightSideBarVisible), { width: A, setWidth: j, sidebarRef: M, handleResizeEnd: N } = useSidebarResize("left", D), { width: F, setWidth: I, sidebarRef: L, handleResizeEnd: R } = useSidebarResize("right", D);
+	let D = useAppStore((m) => m.dispatch), O = useAppStore((m) => m.state.ui.leftSideBarVisible), k = useAppStore((m) => m.state.ui.rightSideBarVisible), { width: A, setWidth: j, sidebarRef: M, handleResizeEnd: N } = useSidebarResize("left", D), { width: P, setWidth: F, sidebarRef: I, handleResizeEnd: L } = useSidebarResize("right", D);
 	useEffect(() => {
 		window.matchMedia("(min-width: 638px)").matches || D({
 			type: "setUi",
@@ -13857,31 +13711,31 @@ function PuckLayout({ children: m }) {
 			window.removeEventListener("resize", m);
 		};
 	}, []);
-	let B = useAppStore((m) => m.overrides), U = useMemo(() => B.puck || DefaultOverride, [B]), [W, q] = useState(!1);
+	let R = useAppStore((m) => m.overrides), z = useMemo(() => R.puck || DefaultOverride, [R]), [B, V] = useState(!1);
 	useEffect(() => {
-		q(!0);
+		V(!0);
 	}, []);
-	let J = useAppStore((m) => m.status === "READY");
+	let H = useAppStore((m) => m.status === "READY");
 	useMonitorHotkeys(), useEffect(() => {
-		if (J && T.enabled) {
+		if (H && T.enabled) {
 			let m = getFrame();
 			if (m) return monitorHotkeys(m);
 		}
-	}, [J, T.enabled]), usePreviewModeHotkeys();
-	let $V = {};
-	return A && ($V["--puck-user-left-side-bar-width"] = `${A}px`), F && ($V["--puck-user-right-side-bar-width"] = `${F}px`), /* @__PURE__ */ jsxs("div", {
+	}, [H, T.enabled]), usePreviewModeHotkeys();
+	let U = {};
+	return A && (U["--puck-user-left-side-bar-width"] = `${A}px`), P && (U["--puck-user-right-side-bar-width"] = `${P}px`), /* @__PURE__ */ jsxs("div", {
 		className: `Puck ${getClassName31()}`,
 		children: [/* @__PURE__ */ jsx(DragDropContext, {
 			disableAutoScroll: S?.disableAutoScroll,
-			children: /* @__PURE__ */ jsx(U, { children: m || /* @__PURE__ */ jsx(FrameProvider, { children: /* @__PURE__ */ jsx("div", {
+			children: /* @__PURE__ */ jsx(z, { children: m || /* @__PURE__ */ jsx(FrameProvider, { children: /* @__PURE__ */ jsx("div", {
 				className: getLayoutClassName({
 					leftSideBarVisible: O,
-					mounted: W,
+					mounted: B,
 					rightSideBarVisible: k
 				}),
 				children: /* @__PURE__ */ jsxs("div", {
 					className: getLayoutClassName("inner"),
-					style: $V,
+					style: U,
 					children: [
 						/* @__PURE__ */ jsx(Header, {}),
 						/* @__PURE__ */ jsxs(Sidebar, {
@@ -13902,10 +13756,10 @@ function PuckLayout({ children: m }) {
 						/* @__PURE__ */ jsx(Canvas, {}),
 						/* @__PURE__ */ jsx(Sidebar, {
 							position: "right",
-							sidebarRef: L,
+							sidebarRef: I,
 							isVisible: k,
-							onResize: I,
-							onResizeEnd: R,
+							onResize: F,
+							onResizeEnd: L,
 							children: /* @__PURE__ */ jsx(FieldSideBar, {})
 						})
 					]
@@ -13970,7 +13824,7 @@ function useConstant(m) {
 	let x = useRef(null);
 	return x.current === null && (x.current = m()), x.current;
 }
-var isBrowser$1 = typeof window < "u", useIsomorphicLayoutEffect$2 = isBrowser$1 ? useLayoutEffect : useEffect, PresenceContext = /* @__PURE__ */ createContext(null);
+var isBrowser = typeof window < "u", useIsomorphicLayoutEffect$1 = isBrowser ? useLayoutEffect : useEffect, PresenceContext = /* @__PURE__ */ createContext(null);
 function addUniqueItem(m, x) {
 	m.indexOf(x) === -1 && m.push(x);
 }
@@ -13978,7 +13832,7 @@ function removeItem(m, x) {
 	let S = m.indexOf(x);
 	S > -1 && m.splice(S, 1);
 }
-var clamp$1 = (m, x, S) => S > x ? x : S < m ? m : S;
+var clamp = (m, x, S) => S > x ? x : S < m ? m : S;
 function formatErrorMessage(m, x) {
 	return x ? `${m}. For more information and steps for solving, visit https://motion.dev/troubleshooting/${x}` : m;
 }
@@ -13998,7 +13852,7 @@ function memo$1(m) {
 	let x;
 	return () => (x === void 0 && (x = m()), x);
 }
-var noop$1 = /* @__NO_SIDE_EFFECTS__ */ (m) => m, combineFunctions = (m, x) => (S) => x(m(S)), pipe = (...m) => m.reduce(combineFunctions), progress = /* @__NO_SIDE_EFFECTS__ */ (m, x, S) => {
+var noop = /* @__NO_SIDE_EFFECTS__ */ (m) => m, combineFunctions = (m, x) => (S) => x(m(S)), pipe = (...m) => m.reduce(combineFunctions), progress = /* @__NO_SIDE_EFFECTS__ */ (m, x, S) => {
 	let C = x - m;
 	return C === 0 ? 1 : (S - m) / C;
 }, SubscriptionManager = class {
@@ -14039,12 +13893,12 @@ function binarySubdivide(m, x, S, C, T) {
 	return O;
 }
 function cubicBezier(m, x, S, C) {
-	if (m === x && S === C) return noop$1;
+	if (m === x && S === C) return noop;
 	let T = (x) => binarySubdivide(x, 0, 1, m, S);
 	return (m) => m === 0 || m === 1 ? m : calcBezier(T(m), x, C);
 }
 var mirrorEasing = (m) => (x) => x <= .5 ? m(2 * x) / 2 : (2 - m(2 * (1 - x))) / 2, reverseEasing = (m) => (x) => 1 - m(1 - x), backOut = /* @__PURE__ */ cubicBezier(.33, 1.53, .69, .99), backIn = /* @__PURE__ */ reverseEasing(backOut), backInOut = /* @__PURE__ */ mirrorEasing(backIn), anticipate = (m) => (m *= 2) < 1 ? .5 * backIn(m) : .5 * (2 - 2 ** (-10 * (m - 1))), circIn = (m) => 1 - Math.sin(Math.acos(m)), circOut = reverseEasing(circIn), circInOut = mirrorEasing(circIn), easeIn = /* @__PURE__ */ cubicBezier(.42, 0, 1, 1), easeOut = /* @__PURE__ */ cubicBezier(0, 0, .58, 1), easeInOut = /* @__PURE__ */ cubicBezier(.42, 0, .58, 1), isEasingArray = (m) => Array.isArray(m) && typeof m[0] != "number", isBezierDefinition = (m) => Array.isArray(m) && typeof m[0] == "number", easingLookup = {
-	linear: noop$1,
+	linear: noop,
 	easeIn,
 	easeInOut,
 	easeOut,
@@ -14126,7 +13980,7 @@ function createRenderBatcher(m, x) {
 		steps: O
 	};
 }
-var { schedule: frame, cancel: cancelFrame, state: frameData, steps: frameSteps } = /* @__PURE__ */ createRenderBatcher(typeof requestAnimationFrame < "u" ? requestAnimationFrame : noop$1, !0), now$1;
+var { schedule: frame, cancel: cancelFrame, state: frameData, steps: frameSteps } = /* @__PURE__ */ createRenderBatcher(typeof requestAnimationFrame < "u" ? requestAnimationFrame : noop, !0), now$1;
 function clearTime() {
 	now$1 = void 0;
 }
@@ -14145,7 +13999,7 @@ var time = {
 	transform: (m) => m
 }, alpha = {
 	...number,
-	transform: (m) => clamp$1(0, 1, m)
+	transform: (m) => clamp(0, 1, m)
 }, scale = {
 	...number,
 	default: 1
@@ -14162,7 +14016,7 @@ var singleColorRegex = /^(?:#[\da-f]{3,8}|(?:rgb|hsl)a?\((?:-?[\d.]+%?[,\s]+){2}
 		[S]: parseFloat(O),
 		alpha: k === void 0 ? 1 : parseFloat(k)
 	};
-}, clampRgbUnit = (m) => clamp$1(0, 255, m), rgbUnit = {
+}, clampRgbUnit = (m) => clamp(0, 255, m), rgbUnit = {
 	...number,
 	transform: (m) => Math.round(clampRgbUnit(m))
 }, rgba = {
@@ -14391,7 +14245,7 @@ function findSpring({ duration: m = springDefaults.duration, bounce: x = springD
 	let T, D;
 	warning(m <= /* @__PURE__ */ secondsToMilliseconds(springDefaults.maxDuration), "Spring duration must be 10 seconds or less", "spring-duration-limit");
 	let O = 1 - x;
-	O = clamp$1(springDefaults.minDamping, springDefaults.maxDamping, O), m = clamp$1(springDefaults.minDuration, springDefaults.maxDuration, /* @__PURE__ */ millisecondsToSeconds(m)), O < 1 ? (T = (x) => {
+	O = clamp(springDefaults.minDamping, springDefaults.maxDamping, O), m = clamp(springDefaults.minDuration, springDefaults.maxDuration, /* @__PURE__ */ millisecondsToSeconds(m)), O < 1 ? (T = (x) => {
 		let C = x * O, T = C * m, D = C - S, k = calcAngularFreq(x, O), A = Math.exp(-T);
 		return safeMin - D / k * A;
 	}, D = (x) => {
@@ -14443,7 +14297,7 @@ function getSpringOptions(m) {
 		...m
 	};
 	if (!isSpringType(m, physicsKeys) && isSpringType(m, durationKeys)) if (m.visualDuration) {
-		let S = m.visualDuration, C = 2 * Math.PI / (S * 1.2), T = C * C, D = 2 * clamp$1(.05, 1, 1 - (m.bounce || 0)) * Math.sqrt(T);
+		let S = m.visualDuration, C = 2 * Math.PI / (S * 1.2), T = C * C, D = 2 * clamp(.05, 1, 1 - (m.bounce || 0)) * Math.sqrt(T);
 		x = {
 			...x,
 			mass: springDefaults.mass,
@@ -14473,38 +14327,38 @@ function spring(m = springDefaults.visualDuration, x = springDefaults.bounce) {
 		velocity: -/* @__PURE__ */ millisecondsToSeconds(S.velocity || 0)
 	}), I = P || 0, L = j / (2 * Math.sqrt(A * M)), R = O - D, z = /* @__PURE__ */ millisecondsToSeconds(Math.sqrt(A / M)), B = Math.abs(R) < 5;
 	C ||= B ? springDefaults.restSpeed.granular : springDefaults.restSpeed.default, T ||= B ? springDefaults.restDelta.granular : springDefaults.restDelta.default;
-	let H;
+	let V;
 	if (L < 1) {
 		let m = calcAngularFreq(z, L);
-		H = (x) => O - Math.exp(-L * z * x) * ((I + L * z * R) / m * Math.sin(m * x) + R * Math.cos(m * x));
-	} else if (L === 1) H = (m) => O - Math.exp(-z * m) * (R + (I + z * R) * m);
+		V = (x) => O - Math.exp(-L * z * x) * ((I + L * z * R) / m * Math.sin(m * x) + R * Math.cos(m * x));
+	} else if (L === 1) V = (m) => O - Math.exp(-z * m) * (R + (I + z * R) * m);
 	else {
 		let m = z * Math.sqrt(L * L - 1);
-		H = (x) => {
+		V = (x) => {
 			let S = Math.exp(-L * z * x), C = Math.min(m * x, 300);
 			return O - S * ((I + L * z * R) * Math.sinh(C) + m * R * Math.cosh(C)) / m;
 		};
 	}
-	let U = {
+	let H = {
 		calculatedDuration: F && N || null,
 		next: (m) => {
-			let x = H(m);
+			let x = V(m);
 			if (F) k.done = m >= N;
 			else {
 				let S = m === 0 ? I : 0;
-				L < 1 && (S = m === 0 ? /* @__PURE__ */ secondsToMilliseconds(I) : calcGeneratorVelocity(H, m, x));
+				L < 1 && (S = m === 0 ? /* @__PURE__ */ secondsToMilliseconds(I) : calcGeneratorVelocity(V, m, x));
 				let D = Math.abs(S) <= C, A = Math.abs(O - x) <= T;
 				k.done = D && A;
 			}
 			return k.value = k.done ? O : x, k;
 		},
 		toString: () => {
-			let m = Math.min(calcGeneratorDuration(U), maxGeneratorDuration), x = generateLinearEasing((x) => U.next(m * x).value, m, 30);
+			let m = Math.min(calcGeneratorDuration(H), maxGeneratorDuration), x = generateLinearEasing((x) => H.next(m * x).value, m, 30);
 			return m + "ms " + x;
 		},
 		toTransition: () => {}
 	};
-	return U;
+	return H;
 }
 spring.applyToOptions = (m) => {
 	let x = createGeneratorEasing(m, 100, spring);
@@ -14516,24 +14370,24 @@ function inertia({ keyframes: m, velocity: x = 0, power: S = .8, timeConstant: C
 		value: N
 	}, F = (m) => k !== void 0 && m < k || A !== void 0 && m > A, I = (m) => k === void 0 ? A : A === void 0 || Math.abs(k - m) < Math.abs(A - m) ? k : A, L = S * x, R = N + L, z = O === void 0 ? R : O(R);
 	z !== R && (L = z - N);
-	let B = (m) => -L * Math.exp(-m / C), H = (m) => z + B(m), U = (m) => {
-		let x = B(m), S = H(m);
+	let B = (m) => -L * Math.exp(-m / C), V = (m) => z + B(m), H = (m) => {
+		let x = B(m), S = V(m);
 		P.done = Math.abs(x) <= j, P.value = P.done ? z : S;
-	}, W, G, K = (m) => {
-		F(P.value) && (W = m, G = spring({
+	}, U, W, G = (m) => {
+		F(P.value) && (U = m, W = spring({
 			keyframes: [P.value, I(P.value)],
-			velocity: calcGeneratorVelocity(H, m, P.value),
+			velocity: calcGeneratorVelocity(V, m, P.value),
 			damping: T,
 			stiffness: D,
 			restDelta: j,
 			restSpeed: M
 		}));
 	};
-	return K(0), {
+	return G(0), {
 		calculatedDuration: null,
 		next: (m) => {
 			let x = !1;
-			return !G && W === void 0 && (x = !0, U(m), K(m)), W !== void 0 && m >= W ? G.next(m - W) : (!x && U(m), P);
+			return !W && U === void 0 && (x = !0, H(m), G(m)), U !== void 0 && m >= U ? W.next(m - U) : (!x && H(m), P);
 		}
 	};
 }
@@ -14541,7 +14395,7 @@ function createMixers(m, x, S) {
 	let C = [], T = S || MotionGlobalConfig.mix || mix, D = m.length - 1;
 	for (let S = 0; S < D; S++) {
 		let D = T(m[S], m[S + 1]);
-		x && (D = pipe(Array.isArray(x) ? x[S] || noop$1 : x, D)), C.push(D);
+		x && (D = pipe(Array.isArray(x) ? x[S] || noop : x, D)), C.push(D);
 	}
 	return C;
 }
@@ -14558,7 +14412,7 @@ function interpolate(m, x, { clamp: S = !0, ease: C, mixer: T } = {}) {
 		let T = /* @__PURE__ */ progress(m[C], m[C + 1], S);
 		return k[C](T);
 	};
-	return S ? (x) => j(clamp$1(m[0], m[D - 1], x)) : j;
+	return S ? (x) => j(clamp(m[0], m[D - 1], x)) : j;
 }
 function fillOffset(m, x) {
 	let S = m[m.length - 1];
@@ -14655,20 +14509,20 @@ var WithPromise = class {
 		this.speed > 0 ? this.startTime = Math.min(this.startTime, m) : this.speed < 0 && (this.startTime = Math.min(m - C / this.speed, this.startTime)), x ? this.currentTime = m : this.updateTime(m);
 		let R = this.currentTime - A * (this.playbackSpeed >= 0 ? 1 : -1), z = this.playbackSpeed >= 0 ? R < 0 : R > C;
 		this.currentTime = Math.max(R, 0), this.state === "finished" && this.holdTime === null && (this.currentTime = C);
-		let B = this.currentTime, H = S;
+		let B = this.currentTime, V = S;
 		if (M) {
 			let m = Math.min(this.currentTime, C) / O, x = Math.floor(m), S = m % 1;
-			!S && m >= 1 && (S = 1), S === 1 && x--, x = Math.min(x, M + 1), x % 2 && (N === "reverse" ? (S = 1 - S, P && (S -= P / O)) : N === "mirror" && (H = D)), B = clamp$1(0, 1, S) * O;
+			!S && m >= 1 && (S = 1), S === 1 && x--, x = Math.min(x, M + 1), x % 2 && (N === "reverse" ? (S = 1 - S, P && (S -= P / O)) : N === "mirror" && (V = D)), B = clamp(0, 1, S) * O;
 		}
-		let U = z ? {
+		let H = z ? {
 			done: !1,
 			value: j[0]
-		} : H.next(B);
-		T && (U.value = T(U.value));
-		let { done: W } = U;
-		!z && k !== null && (W = this.playbackSpeed >= 0 ? this.currentTime >= C : this.currentTime <= 0);
-		let G = this.holdTime === null && (this.state === "finished" || this.state === "running" && W);
-		return G && F !== inertia && (U.value = getFinalKeyframe$1(j, this.options, L, this.speed)), I && I(U.value), G && this.finish(), U;
+		} : V.next(B);
+		T && (H.value = T(H.value));
+		let { done: U } = H;
+		!z && k !== null && (U = this.playbackSpeed >= 0 ? this.currentTime >= C : this.currentTime <= 0);
+		let W = this.holdTime === null && (this.state === "finished" || this.state === "running" && U);
+		return W && F !== inertia && (H.value = getFinalKeyframe$1(j, this.options, L, this.speed)), I && I(H.value), W && this.finish(), H;
 	}
 	then(m, x) {
 		return this.finished.then(m, x);
@@ -15025,7 +14879,7 @@ var NativeAnimation = class extends WithPromise {
 		this.animation.startTime = m;
 	}
 	attachTimeline({ timeline: m, observe: x }) {
-		return this.allowFlatten && this.animation.effect?.updateTiming({ easing: "linear" }), this.animation.onfinish = null, m && supportsScrollTimeline() ? (this.animation.timeline = m, noop$1) : x(this);
+		return this.allowFlatten && this.animation.effect?.updateTiming({ easing: "linear" }), this.animation.onfinish = null, m && supportsScrollTimeline() ? (this.animation.timeline = m, noop) : x(this);
 	}
 }, unsupportedEasingFunctions = {
 	anticipate,
@@ -15115,7 +14969,7 @@ var MAX_RESOLVE_DELAY = 40, AsyncMotionValueAnimation = class extends WithPromis
 			...M,
 			element: M.motionValue.owner.current
 		}) : new JSAnimation(M);
-		N.finished.then(() => this.notifyFinished()).catch(noop$1), this.pendingTimeline &&= (this.stopTimeline = N.attachTimeline(this.pendingTimeline), void 0), this._animation = N;
+		N.finished.then(() => this.notifyFinished()).catch(noop), this.pendingTimeline &&= (this.stopTimeline = N.attachTimeline(this.pendingTimeline), void 0), this._animation = N;
 	}
 	get finished() {
 		return this._animation ? this.animation.finished : this._finished;
@@ -15483,7 +15337,7 @@ function setDragLock(m) {
 		isDragging.x = isDragging.y = !1;
 	});
 }
-function setupGesture$1(m, x) {
+function setupGesture(m, x) {
 	let S = resolveElements(m), C = new AbortController();
 	return [
 		S,
@@ -15499,7 +15353,7 @@ function isValidHover(m) {
 	return !(m.pointerType === "touch" || isDragActive());
 }
 function hover(m, x, S = {}) {
-	let [C, T, D] = setupGesture$1(m, S), O = (m) => {
+	let [C, T, D] = setupGesture(m, S), O = (m) => {
 		if (!isValidHover(m)) return;
 		let { target: S } = m, C = x(S, m);
 		if (typeof C != "function" || !S) return;
@@ -15551,7 +15405,7 @@ function isValidPressEvent(m) {
 	return isPrimaryPointer(m) && !isDragActive();
 }
 function press(m, x, S = {}) {
-	let [C, T, D] = setupGesture$1(m, S), O = (m) => {
+	let [C, T, D] = setupGesture(m, S), O = (m) => {
 		let C = m.currentTarget;
 		if (!isValidPressEvent(m)) return;
 		isPressing.add(C);
@@ -15850,15 +15704,15 @@ var lowercaseSVGElements = [
 function isSVGComponent(m) {
 	return typeof m != "string" || m.includes("-") ? !1 : !!(lowercaseSVGElements.indexOf(m) > -1 || /[A-Z]/u.test(m));
 }
-function useRender(m, x, S, { latestValues: T }, O, k = !1) {
-	let A = (isSVGComponent(m) ? useSVGProps : useHTMLProps)(x, T, O, m), j = filterProps(x, typeof m == "string", k), M = m === Fragment ? {} : {
-		...j,
-		...A,
+function useRender(m, x, S, { latestValues: C }, T, D = !1) {
+	let O = (isSVGComponent(m) ? useSVGProps : useHTMLProps)(x, C, T, m), k = filterProps(x, typeof m == "string", D), A = m === Fragment ? {} : {
+		...k,
+		...O,
 		ref: S
-	}, { children: N } = x, P = useMemo(() => isMotionValue(N) ? N.get() : N, [N]);
+	}, { children: j } = x, M = useMemo(() => isMotionValue(j) ? j.get() : j, [j]);
 	return createElement(m, {
-		...M,
-		children: P
+		...A,
+		children: M
 	});
 }
 function getValueState(m) {
@@ -15959,18 +15813,18 @@ function useVisualElement(m, x, S, C, T) {
 		blockInitialAnimation: k ? k.initial === !1 : !1,
 		reducedMotionConfig: A
 	}));
-	let M = j.current, F = useContext(SwitchLayoutGroupContext);
-	M && !M.projection && T && (M.type === "html" || M.type === "svg") && createProjectionNode$1(j.current, S, T, F);
-	let I = useRef(!1);
+	let M = j.current, N = useContext(SwitchLayoutGroupContext);
+	M && !M.projection && T && (M.type === "html" || M.type === "svg") && createProjectionNode$1(j.current, S, T, N);
+	let P = useRef(!1);
 	useInsertionEffect(() => {
-		M && I.current && M.update(S, k);
+		M && P.current && M.update(S, k);
 	});
-	let R = S[optimizedAppearDataAttribute], z = useRef(!!R && !window.MotionHandoffIsComplete?.(R) && window.MotionHasOptimisedAnimation?.(R));
-	return useIsomorphicLayoutEffect$2(() => {
-		M && (I.current = !0, window.MotionIsMounted = !0, M.updateFeatures(), M.scheduleRenderMicrotask(), z.current && M.animationState && M.animationState.animateChanges());
+	let F = S[optimizedAppearDataAttribute], I = useRef(!!F && !window.MotionHandoffIsComplete?.(F) && window.MotionHasOptimisedAnimation?.(F));
+	return useIsomorphicLayoutEffect$1(() => {
+		M && (P.current = !0, window.MotionIsMounted = !0, M.updateFeatures(), M.scheduleRenderMicrotask(), I.current && M.animationState && M.animationState.animateChanges());
 	}), useEffect(() => {
-		M && (!z.current && M.animationState && M.animationState.animateChanges(), z.current &&= (queueMicrotask(() => {
-			window.MotionHandoffMarkAsComplete?.(R);
+		M && (!I.current && M.animationState && M.animationState.animateChanges(), I.current &&= (queueMicrotask(() => {
+			window.MotionHandoffMarkAsComplete?.(F);
 		}), !1), M.enteringChildren = void 0);
 	}), M;
 }
@@ -15999,23 +15853,23 @@ function createMotionComponent(m, { forwardMotionProps: x = !1 } = {}, S, C) {
 			...useContext(MotionConfigContext),
 			...D,
 			layoutId: useLayoutId(D)
-		}, { isStatic: j } = A, M = useCreateMotionContext(D), P = T(D, j);
-		if (!j && isBrowser$1) {
+		}, { isStatic: j } = A, M = useCreateMotionContext(D), N = T(D, j);
+		if (!j && isBrowser) {
 			useStrictMode(A, S);
 			let x = getProjectionFunctionality(A);
-			k = x.MeasureLayout, M.visualElement = useVisualElement(m, P, A, C, x.ProjectionNode);
+			k = x.MeasureLayout, M.visualElement = useVisualElement(m, N, A, C, x.ProjectionNode);
 		}
 		return jsxs(MotionContext.Provider, {
 			value: M,
 			children: [k && M.visualElement ? jsx(k, {
 				visualElement: M.visualElement,
 				...A
-			}) : null, useRender(m, D, useMotionRef(P, M.visualElement, O), P, j, x)]
+			}) : null, useRender(m, D, useMotionRef(N, M.visualElement, O), N, j, x)]
 		});
 	}
 	D.displayName = `motion.${typeof m == "string" ? m : `create(${m.displayName ?? m.name ?? ""})`}`;
-	let k = forwardRef(D);
-	return k[motionComponentSymbol] = m, k;
+	let O = forwardRef(D);
+	return O[motionComponentSymbol] = m, O;
 }
 function useLayoutId({ layoutId: m }) {
 	let x = useContext(LayoutGroupContext).id;
@@ -16156,7 +16010,7 @@ var createAxisDelta = () => ({
 	y: createAxis()
 }), prefersReducedMotion = { current: null }, hasReducedMotionListener = { current: !1 };
 function initPrefersReducedMotion() {
-	if (hasReducedMotionListener.current = !0, isBrowser$1) if (window.matchMedia) {
+	if (hasReducedMotionListener.current = !0, isBrowser) if (window.matchMedia) {
 		let m = window.matchMedia("(prefers-reduced-motion)"), x = () => prefersReducedMotion.current = m.matches;
 		m.addEventListener("change", x), x();
 	} else prefersReducedMotion.current = !1;
@@ -16652,30 +16506,30 @@ function createAnimationState(m) {
 			R === !1 && (N = x);
 			let z = I === k[P] && I !== O[P] && L;
 			if (z && C && m.manuallyAnimateOnMount && (z = !1), F.protectedKeys = { ...M }, !F.isActive && R === null || !I && !F.prevProp || isAnimationControls(I) || typeof I == "boolean") continue;
-			let B = checkVariantsDidChange(F.prevProp, I), H = B || P === D && F.isActive && !z && L || x > N && L, U = !1, W = Array.isArray(I) ? I : [I], G = W.reduce(T(P), {});
-			R === !1 && (G = {});
-			let { prevResolvedValues: K = {} } = F, q = {
-				...K,
-				...G
-			}, J = (x) => {
-				H = !0, j.has(x) && (U = !0, j.delete(x)), F.needsAnimating[x] = !0;
+			let B = checkVariantsDidChange(F.prevProp, I), V = B || P === D && F.isActive && !z && L || x > N && L, H = !1, U = Array.isArray(I) ? I : [I], W = U.reduce(T(P), {});
+			R === !1 && (W = {});
+			let { prevResolvedValues: G = {} } = F, K = {
+				...G,
+				...W
+			}, q = (x) => {
+				V = !0, j.has(x) && (H = !0, j.delete(x)), F.needsAnimating[x] = !0;
 				let S = m.getValue(x);
 				S && (S.liveStyle = !1);
 			};
-			for (let m in q) {
-				let x = G[m], S = K[m];
+			for (let m in K) {
+				let x = W[m], S = G[m];
 				if (M.hasOwnProperty(m)) continue;
 				let C = !1;
-				C = isKeyframesTarget(x) && isKeyframesTarget(S) ? !shallowCompare(x, S) : x !== S, C ? x == null ? j.add(m) : J(m) : x !== void 0 && j.has(m) ? J(m) : F.protectedKeys[m] = !0;
+				C = isKeyframesTarget(x) && isKeyframesTarget(S) ? !shallowCompare(x, S) : x !== S, C ? x == null ? j.add(m) : q(m) : x !== void 0 && j.has(m) ? q(m) : F.protectedKeys[m] = !0;
 			}
-			F.prevProp = I, F.prevResolvedValues = G, F.isActive && (M = {
+			F.prevProp = I, F.prevResolvedValues = W, F.isActive && (M = {
 				...M,
-				...G
-			}), C && m.blockInitialAnimation && (H = !1);
-			let $V = z && B;
-			H && (!$V || U) && A.push(...W.map((x) => {
+				...W
+			}), C && m.blockInitialAnimation && (V = !1);
+			let J = z && B;
+			V && (!J || H) && A.push(...U.map((x) => {
 				let S = { type: P };
-				if (typeof x == "string" && C && !$V && m.manuallyAnimateOnMount && m.parent) {
+				if (typeof x == "string" && C && !J && m.manuallyAnimateOnMount && m.parent) {
 					let { parent: C } = m, T = resolveVariant(C, x);
 					if (C.enteringChildren && T) {
 						let { delayChildren: x } = T.transition || {};
@@ -16948,7 +16802,7 @@ function calcViewportConstraints(m, x) {
 }
 function calcOrigin(m, x) {
 	let S = .5, C = calcLength(m), T = calcLength(x);
-	return T > C ? S = /* @__PURE__ */ progress(x.min, x.max - C, m.min) : C > T && (S = /* @__PURE__ */ progress(m.min, m.max - T, x.min)), clamp$1(0, 1, S);
+	return T > C ? S = /* @__PURE__ */ progress(x.min, x.max - C, m.min) : C > T && (S = /* @__PURE__ */ progress(m.min, m.max - T, x.min)), clamp(0, 1, S);
 }
 function rebaseAxisConstraints(m, x) {
 	let S = {};
@@ -17186,11 +17040,11 @@ function getCurrentDirection(m, x = 10) {
 }
 var DragGesture = class extends Feature {
 	constructor(m) {
-		super(m), this.removeGroupControls = noop$1, this.removeListeners = noop$1, this.controls = new VisualElementDragControls(m);
+		super(m), this.removeGroupControls = noop, this.removeListeners = noop, this.controls = new VisualElementDragControls(m);
 	}
 	mount() {
 		let { dragControls: m } = this.node.getProps();
-		m && (this.removeGroupControls = m.subscribe(this.controls)), this.removeListeners = this.controls.addListeners() || noop$1;
+		m && (this.removeGroupControls = m.subscribe(this.controls)), this.removeListeners = this.controls.addListeners() || noop;
 	}
 	unmount() {
 		this.removeGroupControls(), this.removeListeners();
@@ -17199,7 +17053,7 @@ var DragGesture = class extends Feature {
 	m && frame.postRender(() => m(x, S));
 }, PanGesture = class extends Feature {
 	constructor() {
-		super(...arguments), this.removePointerDownListener = noop$1;
+		super(...arguments), this.removePointerDownListener = noop;
 	}
 	onPointerDown(m) {
 		this.session = new PanSession(m, this.createPanHandlers(), {
@@ -17349,7 +17203,7 @@ function mixValues(m, x, S, C, T, D) {
 function getRadius(m, x) {
 	return m[x] === void 0 ? m.borderRadius : m[x];
 }
-var easeCrossfadeIn = /* @__PURE__ */ compress(0, .5, circOut), easeCrossfadeOut = /* @__PURE__ */ compress(.5, .95, noop$1);
+var easeCrossfadeIn = /* @__PURE__ */ compress(0, .5, circOut), easeCrossfadeOut = /* @__PURE__ */ compress(.5, .95, noop);
 function compress(m, x, S) {
 	return (C) => C < m ? 0 : C > x ? 1 : S(/* @__PURE__ */ progress(m, x, C));
 }
@@ -17599,7 +17453,7 @@ function createProjectionNode({ attachResizeListener: m, defaultParent: x, measu
 			}
 			this.animationCommitId = this.animationId, this.isUpdating ? (this.isUpdating = !1, this.nodes.forEach(resetTransformStyle), this.nodes.forEach(updateLayout), this.nodes.forEach(notifyLayoutUpdate)) : this.nodes.forEach(clearIsLayoutDirty), this.clearAllSnapshots();
 			let m = time.now();
-			frameData.delta = clamp$1(0, 1e3 / 60, m - frameData.timestamp), frameData.timestamp = m, frameData.isProcessing = !0, frameSteps.update.process(frameData), frameSteps.preRender.process(frameData), frameSteps.render.process(frameData), frameData.isProcessing = !1;
+			frameData.delta = clamp(0, 1e3 / 60, m - frameData.timestamp), frameData.timestamp = m, frameData.isProcessing = !0, frameSteps.update.process(frameData), frameSteps.preRender.process(frameData), frameSteps.render.process(frameData), frameData.isProcessing = !1;
 		}
 		didUpdate() {
 			this.updateScheduled || (this.updateScheduled = !0, microtask.read(this.scheduleUpdate));
@@ -17999,7 +17853,7 @@ var defaultLayoutTransition = {
 		.1,
 		1
 	]
-}, userAgentContains = (m) => typeof navigator < "u" && navigator.userAgent && navigator.userAgent.toLowerCase().includes(m), roundPoint = userAgentContains("applewebkit/") && !userAgentContains("chrome/") ? Math.round : noop$1;
+}, userAgentContains = (m) => typeof navigator < "u" && navigator.userAgent && navigator.userAgent.toLowerCase().includes(m), roundPoint = userAgentContains("applewebkit/") && !userAgentContains("chrome/") ? Math.round : noop;
 function roundAxis(m) {
 	m.min = roundPoint(m.min), m.max = roundPoint(m.max);
 }
@@ -18282,17 +18136,17 @@ function HomeFirstSectionWrapper(m) {
 		scrollIndicatorOpacity: O
 	});
 }
-function Image({ src: m, fallbackSrc: x, alt: S, width: C, height: T, className: D }) {
+function Image({ src: m, fallbackSrc: x, alt: S, width: C, height: T, className: O }) {
 	return m ? /* @__PURE__ */ jsx("img", {
 		src: m,
 		alt: S,
-		className: D
+		className: O
 	}) : x ? /* @__PURE__ */ jsx("img", {
 		src: x,
 		alt: S,
-		className: D
+		className: O
 	}) : /* @__PURE__ */ jsx("div", {
-		className: cn(D, " bg-gray-400"),
+		className: cn(O, " bg-gray-400"),
 		style: {
 			width: C,
 			height: T
@@ -18879,37 +18733,37 @@ function updateSlides() {
 	typeof I == "function" && (I = S.slidesOffsetBefore.call(m));
 	let L = S.slidesOffsetAfter;
 	typeof L == "function" && (L = S.slidesOffsetAfter.call(m));
-	let R = m.snapGrid.length, z = m.slidesGrid.length, B = m.size - I - L, H = S.spaceBetween, U = -I, W = 0, G = 0;
+	let R = m.snapGrid.length, z = m.slidesGrid.length, B = m.size - I - L, V = S.spaceBetween, H = -I, U = 0, W = 0;
 	if (B === void 0) return;
-	typeof H == "string" && H.indexOf("%") >= 0 ? H = parseFloat(H.replace("%", "")) / 100 * B : typeof H == "string" && (H = parseFloat(H)), m.virtualSize = -H - I - L, j.forEach((m) => {
+	typeof V == "string" && V.indexOf("%") >= 0 ? V = parseFloat(V.replace("%", "")) / 100 * B : typeof V == "string" && (V = parseFloat(V)), m.virtualSize = -V - I - L, j.forEach((m) => {
 		D ? m.style.marginLeft = "" : m.style.marginRight = "", m.style.marginBottom = "", m.style.marginTop = "";
 	}), S.centeredSlides && S.cssMode && (setCSSProperty(C, "--swiper-centered-offset-before", ""), setCSSProperty(C, "--swiper-centered-offset-after", ""));
-	let K = S.grid && S.grid.rows > 1 && m.grid;
-	K ? m.grid.initSlides(j) : m.grid && m.grid.unsetSlides();
-	let q, J = S.slidesPerView === "auto" && S.breakpoints && Object.keys(S.breakpoints).filter((m) => S.breakpoints[m].slidesPerView !== void 0).length > 0;
+	let G = S.grid && S.grid.rows > 1 && m.grid;
+	G ? m.grid.initSlides(j) : m.grid && m.grid.unsetSlides();
+	let K, q = S.slidesPerView === "auto" && S.breakpoints && Object.keys(S.breakpoints).filter((m) => S.breakpoints[m].slidesPerView !== void 0).length > 0;
 	for (let C = 0; C < M; C += 1) {
-		q = 0;
+		K = 0;
 		let T = j[C];
-		if (!(T && (K && m.grid.updateSlide(C, T, j), elementStyle(T, "display") === "none"))) {
-			if (k && S.slidesPerView === "auto") S.virtual.slidesPerViewAutoSlideSize && (q = S.virtual.slidesPerViewAutoSlideSize), q && T && (S.roundLengths && (q = Math.floor(q)), T.style[m.getDirectionLabel("width")] = `${q}px`);
+		if (!(T && (G && m.grid.updateSlide(C, T, j), elementStyle(T, "display") === "none"))) {
+			if (k && S.slidesPerView === "auto") S.virtual.slidesPerViewAutoSlideSize && (K = S.virtual.slidesPerViewAutoSlideSize), K && T && (S.roundLengths && (K = Math.floor(K)), T.style[m.getDirectionLabel("width")] = `${K}px`);
 			else if (S.slidesPerView === "auto") {
-				J && (T.style[m.getDirectionLabel("width")] = "");
+				q && (T.style[m.getDirectionLabel("width")] = "");
 				let C = getComputedStyle(T), D = T.style.transform, O = T.style.webkitTransform;
-				if (D && (T.style.transform = "none"), O && (T.style.webkitTransform = "none"), S.roundLengths) q = m.isHorizontal() ? elementOuterSize(T, "width", !0) : elementOuterSize(T, "height", !0);
+				if (D && (T.style.transform = "none"), O && (T.style.webkitTransform = "none"), S.roundLengths) K = m.isHorizontal() ? elementOuterSize(T, "width", !0) : elementOuterSize(T, "height", !0);
 				else {
 					let m = x(C, "width"), S = x(C, "padding-left"), D = x(C, "padding-right"), O = x(C, "margin-left"), k = x(C, "margin-right"), A = C.getPropertyValue("box-sizing");
-					if (A && A === "border-box") q = m + O + k;
+					if (A && A === "border-box") K = m + O + k;
 					else {
 						let { clientWidth: x, offsetWidth: C } = T;
-						q = m + S + D + O + k + (C - x);
+						K = m + S + D + O + k + (C - x);
 					}
 				}
-				D && (T.style.transform = D), O && (T.style.webkitTransform = O), S.roundLengths && (q = Math.floor(q));
-			} else q = (B - (S.slidesPerView - 1) * H) / S.slidesPerView, S.roundLengths && (q = Math.floor(q)), T && (T.style[m.getDirectionLabel("width")] = `${q}px`);
-			T && (T.swiperSlideSize = q), F.push(q), S.centeredSlides ? (U = U + q / 2 + W / 2 + H, W === 0 && C !== 0 && (U = U - B / 2 - H), C === 0 && (U = U - B / 2 - H), Math.abs(U) < 1 / 1e3 && (U = 0), S.roundLengths && (U = Math.floor(U)), G % S.slidesPerGroup === 0 && N.push(U), P.push(U)) : (S.roundLengths && (U = Math.floor(U)), (G - Math.min(m.params.slidesPerGroupSkip, G)) % m.params.slidesPerGroup === 0 && N.push(U), P.push(U), U = U + q + H), m.virtualSize += q + H, W = q, G += 1;
+				D && (T.style.transform = D), O && (T.style.webkitTransform = O), S.roundLengths && (K = Math.floor(K));
+			} else K = (B - (S.slidesPerView - 1) * V) / S.slidesPerView, S.roundLengths && (K = Math.floor(K)), T && (T.style[m.getDirectionLabel("width")] = `${K}px`);
+			T && (T.swiperSlideSize = K), F.push(K), S.centeredSlides ? (H = H + K / 2 + U / 2 + V, U === 0 && C !== 0 && (H = H - B / 2 - V), C === 0 && (H = H - B / 2 - V), Math.abs(H) < 1 / 1e3 && (H = 0), S.roundLengths && (H = Math.floor(H)), W % S.slidesPerGroup === 0 && N.push(H), P.push(H)) : (S.roundLengths && (H = Math.floor(H)), (W - Math.min(m.params.slidesPerGroupSkip, W)) % m.params.slidesPerGroup === 0 && N.push(H), P.push(H), H = H + K + V), m.virtualSize += K + V, U = K, W += 1;
 		}
 	}
-	if (m.virtualSize = Math.max(m.virtualSize, B) + L, D && O && (S.effect === "slide" || S.effect === "coverflow") && (C.style.width = `${m.virtualSize + H}px`), S.setWrapperSize && (C.style[m.getDirectionLabel("width")] = `${m.virtualSize + H}px`), K && m.grid.updateWrapperSize(q, N), !S.centeredSlides) {
+	if (m.virtualSize = Math.max(m.virtualSize, B) + L, D && O && (S.effect === "slide" || S.effect === "coverflow") && (C.style.width = `${m.virtualSize + V}px`), S.setWrapperSize && (C.style[m.getDirectionLabel("width")] = `${m.virtualSize + V}px`), G && m.grid.updateWrapperSize(K, N), !S.centeredSlides) {
 		let x = [];
 		for (let C = 0; C < N.length; C += 1) {
 			let T = N[C];
@@ -18918,32 +18772,32 @@ function updateSlides() {
 		N = x, Math.floor(m.virtualSize - B) - Math.floor(N[N.length - 1]) > 1 && N.push(m.virtualSize - B);
 	}
 	if (k && S.loop) {
-		let x = F[0] + H;
+		let x = F[0] + V;
 		if (S.slidesPerGroup > 1) {
 			let C = Math.ceil((m.virtual.slidesBefore + m.virtual.slidesAfter) / S.slidesPerGroup), T = x * S.slidesPerGroup;
 			for (let m = 0; m < C; m += 1) N.push(N[N.length - 1] + T);
 		}
 		for (let C = 0; C < m.virtual.slidesBefore + m.virtual.slidesAfter; C += 1) S.slidesPerGroup === 1 && N.push(N[N.length - 1] + x), P.push(P[P.length - 1] + x), m.virtualSize += x;
 	}
-	if (N.length === 0 && (N = [0]), H !== 0) {
+	if (N.length === 0 && (N = [0]), V !== 0) {
 		let x = m.isHorizontal() && D ? "marginLeft" : m.getDirectionLabel("marginRight");
 		j.filter((m, x) => !S.cssMode || S.loop ? !0 : x !== j.length - 1).forEach((m) => {
-			m.style[x] = `${H}px`;
+			m.style[x] = `${V}px`;
 		});
 	}
 	if (S.centeredSlides && S.centeredSlidesBounds) {
 		let m = 0;
 		F.forEach((x) => {
-			m += x + (H || 0);
-		}), m -= H;
+			m += x + (V || 0);
+		}), m -= V;
 		let x = m > B ? m - B : 0;
 		N = N.map((m) => m <= 0 ? -I : m > x ? x + L : m);
 	}
 	if (S.centerInsufficientSlides) {
 		let m = 0;
 		F.forEach((x) => {
-			m += x + (H || 0);
-		}), m -= H;
+			m += x + (V || 0);
+		}), m -= V;
 		let x = (I || 0) + (L || 0);
 		if (m + x < B) {
 			let S = (B - m - x) / 2;
@@ -19251,13 +19105,13 @@ function slideTo(m = 0, x, S = !0, C, T) {
 	O !== (M || 0) && S && D.emit("beforeSlideChangeStart"), D.updateProgress(z);
 	let B;
 	B = O > N ? "next" : O < N ? "prev" : "reset";
-	let H = D.virtual && D.params.virtual.enabled;
-	if (!(H && T) && (P && -z === D.translate || !P && z === D.translate)) return D.updateActiveIndex(O), k.autoHeight && D.updateAutoHeight(), D.updateSlidesClasses(), k.effect !== "slide" && D.setTranslate(z), B !== "reset" && (D.transitionStart(S, B), D.transitionEnd(S, B)), !1;
+	let V = D.virtual && D.params.virtual.enabled;
+	if (!(V && T) && (P && -z === D.translate || !P && z === D.translate)) return D.updateActiveIndex(O), k.autoHeight && D.updateAutoHeight(), D.updateSlidesClasses(), k.effect !== "slide" && D.setTranslate(z), B !== "reset" && (D.transitionStart(S, B), D.transitionEnd(S, B)), !1;
 	if (k.cssMode) {
 		let m = D.isHorizontal(), S = P ? z : -z;
-		if (x === 0) H && (D.wrapperEl.style.scrollSnapType = "none", D._immediateVirtual = !0), H && !D._cssModeVirtualInitialSet && D.params.initialSlide > 0 ? (D._cssModeVirtualInitialSet = !0, requestAnimationFrame(() => {
+		if (x === 0) V && (D.wrapperEl.style.scrollSnapType = "none", D._immediateVirtual = !0), V && !D._cssModeVirtualInitialSet && D.params.initialSlide > 0 ? (D._cssModeVirtualInitialSet = !0, requestAnimationFrame(() => {
 			F[m ? "scrollLeft" : "scrollTop"] = S;
-		})) : F[m ? "scrollLeft" : "scrollTop"] = S, H && requestAnimationFrame(() => {
+		})) : F[m ? "scrollLeft" : "scrollTop"] = S, V && requestAnimationFrame(() => {
 			D.wrapperEl.style.scrollSnapType = "", D._immediateVirtual = !1;
 		});
 		else {
@@ -19273,8 +19127,8 @@ function slideTo(m = 0, x, S = !0, C, T) {
 		}
 		return !0;
 	}
-	let U = getBrowser().isSafari;
-	return H && !T && U && D.isElement && D.virtual.update(!1, !1, O), D.setTransition(x), D.setTranslate(z), D.updateActiveIndex(O), D.updateSlidesClasses(), D.emit("beforeTransitionStart", x, C), D.transitionStart(S, B), x === 0 ? D.transitionEnd(S, B) : D.animating || (D.animating = !0, D.onSlideToWrapperTransitionEnd ||= function(m) {
+	let H = getBrowser().isSafari;
+	return V && !T && H && D.isElement && D.virtual.update(!1, !1, O), D.setTransition(x), D.setTranslate(z), D.updateActiveIndex(O), D.updateSlidesClasses(), D.emit("beforeTransitionStart", x, C), D.transitionStart(S, B), x === 0 ? D.transitionEnd(S, B) : D.animating || (D.animating = !0, D.onSlideToWrapperTransitionEnd ||= function(m) {
 		!D || D.destroyed || m.target === this && (D.wrapperEl.removeEventListener("transitionend", D.onSlideToWrapperTransitionEnd), D.onSlideToWrapperTransitionEnd = null, delete D.onSlideToWrapperTransitionEnd, D.transitionEnd(S, B));
 	}, D.wrapperEl.addEventListener("transitionend", D.onSlideToWrapperTransitionEnd)), !0;
 }
@@ -19431,55 +19285,55 @@ function loopFix({ slideRealIndex: m, slideTo: x = !0, direction: S, setTranslat
 		x && (!B && A.snapIndex === 0 ? A.slideTo(A.virtual.slides.length, 0, !1, !0) : B && A.snapIndex < F.slidesPerView ? A.slideTo(A.virtual.slides.length + A.snapIndex, 0, !1, !0) : A.snapIndex === A.snapGrid.length - 1 && A.slideTo(A.virtual.slidesBefore, 0, !1, !0)), A.allowSlidePrev = M, A.allowSlideNext = N, A.emit("loopFix");
 		return;
 	}
-	let H = F.slidesPerView;
-	H === "auto" ? H = A.slidesPerViewDynamic() : (H = Math.ceil(parseFloat(F.slidesPerView, 10)), B && H % 2 == 0 && (H += 1));
-	let U = F.slidesPerGroupAuto ? H : F.slidesPerGroup, W = B ? Math.max(U, Math.ceil(H / 2)) : U;
-	W % U !== 0 && (W += U - W % U), W += F.loopAdditionalSlides, A.loopedSlides = W;
-	let G = A.grid && F.grid && F.grid.rows > 1;
-	j.length < H + W || A.params.effect === "cards" && j.length < H + W * 2 ? showWarning("Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled or not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters") : G && F.grid.fill === "row" && showWarning("Swiper Loop Warning: Loop mode is not compatible with grid.fill = `row`");
-	let K = [], q = [], J = G ? Math.ceil(j.length / F.grid.rows) : j.length, $V = D && J - z < H && !B, Y = $V ? z : A.activeIndex;
-	T === void 0 ? T = A.getSlideIndex(j.find((m) => m.classList.contains(F.slideActiveClass))) : Y = T;
-	let X = S === "next" || !S, Z = S === "prev" || !S, eH = 0, Q = 0, tH = (G ? j[T].column : T) + (B && C === void 0 ? -H / 2 + .5 : 0);
-	if (tH < W) {
-		eH = Math.max(W - tH, U);
-		for (let m = 0; m < W - tH; m += 1) {
-			let x = m - Math.floor(m / J) * J;
-			if (G) {
-				let m = J - x - 1;
-				for (let x = j.length - 1; x >= 0; --x) j[x].column === m && K.push(x);
-			} else K.push(J - x - 1);
+	let V = F.slidesPerView;
+	V === "auto" ? V = A.slidesPerViewDynamic() : (V = Math.ceil(parseFloat(F.slidesPerView, 10)), B && V % 2 == 0 && (V += 1));
+	let H = F.slidesPerGroupAuto ? V : F.slidesPerGroup, U = B ? Math.max(H, Math.ceil(V / 2)) : H;
+	U % H !== 0 && (U += H - U % H), U += F.loopAdditionalSlides, A.loopedSlides = U;
+	let W = A.grid && F.grid && F.grid.rows > 1;
+	j.length < V + U || A.params.effect === "cards" && j.length < V + U * 2 ? showWarning("Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled or not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters") : W && F.grid.fill === "row" && showWarning("Swiper Loop Warning: Loop mode is not compatible with grid.fill = `row`");
+	let G = [], K = [], q = W ? Math.ceil(j.length / F.grid.rows) : j.length, J = D && q - z < V && !B, Uz = J ? z : A.activeIndex;
+	T === void 0 ? T = A.getSlideIndex(j.find((m) => m.classList.contains(F.slideActiveClass))) : Uz = T;
+	let Y = S === "next" || !S, Wz = S === "prev" || !S, X = 0, Z = 0, Gz = (W ? j[T].column : T) + (B && C === void 0 ? -V / 2 + .5 : 0);
+	if (Gz < U) {
+		X = Math.max(U - Gz, H);
+		for (let m = 0; m < U - Gz; m += 1) {
+			let x = m - Math.floor(m / q) * q;
+			if (W) {
+				let m = q - x - 1;
+				for (let x = j.length - 1; x >= 0; --x) j[x].column === m && G.push(x);
+			} else G.push(q - x - 1);
 		}
-	} else if (tH + H > J - W) {
-		Q = Math.max(tH - (J - W * 2), U), $V && (Q = Math.max(Q, H - J + z + 1));
-		for (let m = 0; m < Q; m += 1) {
-			let x = m - Math.floor(m / J) * J;
-			G ? j.forEach((m, S) => {
-				m.column === x && q.push(S);
-			}) : q.push(x);
+	} else if (Gz + V > q - U) {
+		Z = Math.max(Gz - (q - U * 2), H), J && (Z = Math.max(Z, V - q + z + 1));
+		for (let m = 0; m < Z; m += 1) {
+			let x = m - Math.floor(m / q) * q;
+			W ? j.forEach((m, S) => {
+				m.column === x && K.push(S);
+			}) : K.push(x);
 		}
 	}
 	if (A.__preventObserver__ = !0, requestAnimationFrame(() => {
 		A.__preventObserver__ = !1;
-	}), A.params.effect === "cards" && j.length < H + W * 2 && (q.includes(T) && q.splice(q.indexOf(T), 1), K.includes(T) && K.splice(K.indexOf(T), 1)), Z && K.forEach((m) => {
+	}), A.params.effect === "cards" && j.length < V + U * 2 && (K.includes(T) && K.splice(K.indexOf(T), 1), G.includes(T) && G.splice(G.indexOf(T), 1)), Wz && G.forEach((m) => {
 		j[m].swiperLoopMoveDOM = !0, P.prepend(j[m]), j[m].swiperLoopMoveDOM = !1;
-	}), X && q.forEach((m) => {
+	}), Y && K.forEach((m) => {
 		j[m].swiperLoopMoveDOM = !0, P.append(j[m]), j[m].swiperLoopMoveDOM = !1;
-	}), A.recalcSlides(), F.slidesPerView === "auto" ? A.updateSlides() : G && (K.length > 0 && Z || q.length > 0 && X) && A.slides.forEach((m, x) => {
+	}), A.recalcSlides(), F.slidesPerView === "auto" ? A.updateSlides() : W && (G.length > 0 && Wz || K.length > 0 && Y) && A.slides.forEach((m, x) => {
 		A.grid.updateSlide(x, m, A.slides);
 	}), F.watchSlidesProgress && A.updateSlidesOffset(), x) {
-		if (K.length > 0 && Z) {
+		if (G.length > 0 && Wz) {
 			if (m === void 0) {
-				let m = A.slidesGrid[Y], x = A.slidesGrid[Y + eH] - m;
-				k ? A.setTranslate(A.translate - x) : (A.slideTo(Y + Math.ceil(eH), 0, !1, !0), C && (A.touchEventsData.startTranslate = A.touchEventsData.startTranslate - x, A.touchEventsData.currentTranslate = A.touchEventsData.currentTranslate - x));
+				let m = A.slidesGrid[Uz], x = A.slidesGrid[Uz + X] - m;
+				k ? A.setTranslate(A.translate - x) : (A.slideTo(Uz + Math.ceil(X), 0, !1, !0), C && (A.touchEventsData.startTranslate = A.touchEventsData.startTranslate - x, A.touchEventsData.currentTranslate = A.touchEventsData.currentTranslate - x));
 			} else if (C) {
-				let m = G ? K.length / F.grid.rows : K.length;
+				let m = W ? G.length / F.grid.rows : G.length;
 				A.slideTo(A.activeIndex + m, 0, !1, !0), A.touchEventsData.currentTranslate = A.translate;
 			}
-		} else if (q.length > 0 && X) if (m === void 0) {
-			let m = A.slidesGrid[Y], x = A.slidesGrid[Y - Q] - m;
-			k ? A.setTranslate(A.translate - x) : (A.slideTo(Y - Q, 0, !1, !0), C && (A.touchEventsData.startTranslate = A.touchEventsData.startTranslate - x, A.touchEventsData.currentTranslate = A.touchEventsData.currentTranslate - x));
+		} else if (K.length > 0 && Y) if (m === void 0) {
+			let m = A.slidesGrid[Uz], x = A.slidesGrid[Uz - Z] - m;
+			k ? A.setTranslate(A.translate - x) : (A.slideTo(Uz - Z, 0, !1, !0), C && (A.touchEventsData.startTranslate = A.touchEventsData.startTranslate - x, A.touchEventsData.currentTranslate = A.touchEventsData.currentTranslate - x));
 		} else {
-			let m = G ? q.length / F.grid.rows : q.length;
+			let m = W ? K.length / F.grid.rows : K.length;
 			A.slideTo(A.activeIndex - m, 0, !1, !0);
 		}
 	}
@@ -19673,16 +19527,16 @@ function onTouchMove(m) {
 		return;
 	}
 	S.emit("sliderMove", A), C.isMoved = !0, C.currentTranslate = I + C.startTranslate;
-	let H = !0, U = T.resistanceRatio;
-	if (T.touchReleaseOnEdges && (U = 0), I > 0 ? (z && B && C.allowThresholdMove && C.currentTranslate > (T.centeredSlides ? S.minTranslate() - S.slidesSizesGrid[S.activeIndex + 1] - (T.slidesPerView !== "auto" && S.slides.length - T.slidesPerView >= 2 ? S.slidesSizesGrid[S.activeIndex + 1] + S.params.spaceBetween : 0) - S.params.spaceBetween : S.minTranslate()) && S.loopFix({
+	let V = !0, H = T.resistanceRatio;
+	if (T.touchReleaseOnEdges && (H = 0), I > 0 ? (z && B && C.allowThresholdMove && C.currentTranslate > (T.centeredSlides ? S.minTranslate() - S.slidesSizesGrid[S.activeIndex + 1] - (T.slidesPerView !== "auto" && S.slides.length - T.slidesPerView >= 2 ? S.slidesSizesGrid[S.activeIndex + 1] + S.params.spaceBetween : 0) - S.params.spaceBetween : S.minTranslate()) && S.loopFix({
 		direction: "prev",
 		setTranslate: !0,
 		activeSlideIndex: 0
-	}), C.currentTranslate > S.minTranslate() && (H = !1, T.resistance && (C.currentTranslate = S.minTranslate() - 1 + (-S.minTranslate() + C.startTranslate + I) ** U))) : I < 0 && (z && B && C.allowThresholdMove && C.currentTranslate < (T.centeredSlides ? S.maxTranslate() + S.slidesSizesGrid[S.slidesSizesGrid.length - 1] + S.params.spaceBetween + (T.slidesPerView !== "auto" && S.slides.length - T.slidesPerView >= 2 ? S.slidesSizesGrid[S.slidesSizesGrid.length - 1] + S.params.spaceBetween : 0) : S.maxTranslate()) && S.loopFix({
+	}), C.currentTranslate > S.minTranslate() && (V = !1, T.resistance && (C.currentTranslate = S.minTranslate() - 1 + (-S.minTranslate() + C.startTranslate + I) ** H))) : I < 0 && (z && B && C.allowThresholdMove && C.currentTranslate < (T.centeredSlides ? S.maxTranslate() + S.slidesSizesGrid[S.slidesSizesGrid.length - 1] + S.params.spaceBetween + (T.slidesPerView !== "auto" && S.slides.length - T.slidesPerView >= 2 ? S.slidesSizesGrid[S.slidesSizesGrid.length - 1] + S.params.spaceBetween : 0) : S.maxTranslate()) && S.loopFix({
 		direction: "next",
 		setTranslate: !0,
 		activeSlideIndex: S.slides.length - (T.slidesPerView === "auto" ? S.slidesPerViewDynamic() : Math.ceil(parseFloat(T.slidesPerView, 10)))
-	}), C.currentTranslate < S.maxTranslate() && (H = !1, T.resistance && (C.currentTranslate = S.maxTranslate() + 1 - (S.maxTranslate() - C.startTranslate - I) ** U))), H && (A.preventedByNestedSwiper = !0), !S.allowSlideNext && S.swipeDirection === "next" && C.currentTranslate < C.startTranslate && (C.currentTranslate = C.startTranslate), !S.allowSlidePrev && S.swipeDirection === "prev" && C.currentTranslate > C.startTranslate && (C.currentTranslate = C.startTranslate), !S.allowSlidePrev && !S.allowSlideNext && (C.currentTranslate = C.startTranslate), T.threshold > 0) if (Math.abs(I) > T.threshold || C.allowThresholdMove) {
+	}), C.currentTranslate < S.maxTranslate() && (V = !1, T.resistance && (C.currentTranslate = S.maxTranslate() + 1 - (S.maxTranslate() - C.startTranslate - I) ** H))), V && (A.preventedByNestedSwiper = !0), !S.allowSlideNext && S.swipeDirection === "next" && C.currentTranslate < C.startTranslate && (C.currentTranslate = C.startTranslate), !S.allowSlidePrev && S.swipeDirection === "prev" && C.currentTranslate > C.startTranslate && (C.currentTranslate = C.startTranslate), !S.allowSlidePrev && !S.allowSlideNext && (C.currentTranslate = C.startTranslate), T.threshold > 0) if (Math.abs(I) > T.threshold || C.allowThresholdMove) {
 		if (!C.allowThresholdMove) {
 			C.allowThresholdMove = !0, D.startX = D.currentX, D.startY = D.currentY, C.currentTranslate = C.startTranslate, D.diff = S.isHorizontal() ? D.currentX - D.startX : D.currentY - D.startY;
 			return;
@@ -19742,19 +19596,19 @@ function onTouchEnd(m) {
 	}
 	let R = null, z = null;
 	D.rewind && (x.isBeginning ? z = D.virtual && D.virtual.enabled && x.virtual ? x.virtual.slides.length - 1 : x.slides.length - 1 : x.isEnd && (R = 0));
-	let B = (P - A[I]) / L, H = I < D.slidesPerGroupSkip - 1 ? 1 : D.slidesPerGroup;
+	let B = (P - A[I]) / L, V = I < D.slidesPerGroupSkip - 1 ? 1 : D.slidesPerGroup;
 	if (N > D.longSwipesMs) {
 		if (!D.longSwipes) {
 			x.slideTo(x.activeIndex);
 			return;
 		}
-		x.swipeDirection === "next" && (B >= D.longSwipesRatio ? x.slideTo(D.rewind && x.isEnd ? R : I + H) : x.slideTo(I)), x.swipeDirection === "prev" && (B > 1 - D.longSwipesRatio ? x.slideTo(I + H) : z !== null && B < 0 && Math.abs(B) > D.longSwipesRatio ? x.slideTo(z) : x.slideTo(I));
+		x.swipeDirection === "next" && (B >= D.longSwipesRatio ? x.slideTo(D.rewind && x.isEnd ? R : I + V) : x.slideTo(I)), x.swipeDirection === "prev" && (B > 1 - D.longSwipesRatio ? x.slideTo(I + V) : z !== null && B < 0 && Math.abs(B) > D.longSwipesRatio ? x.slideTo(z) : x.slideTo(I));
 	} else {
 		if (!D.shortSwipes) {
 			x.slideTo(x.activeIndex);
 			return;
 		}
-		x.navigation && (C.target === x.navigation.nextEl || C.target === x.navigation.prevEl) ? C.target === x.navigation.nextEl ? x.slideTo(I + H) : x.slideTo(I) : (x.swipeDirection === "next" && x.slideTo(R === null ? I + H : R), x.swipeDirection === "prev" && x.slideTo(z === null ? I : z));
+		x.navigation && (C.target === x.navigation.nextEl || C.target === x.navigation.prevEl) ? C.target === x.navigation.nextEl ? x.slideTo(I + V) : x.slideTo(I) : (x.swipeDirection === "next" && x.slideTo(R === null ? I + V : R), x.swipeDirection === "prev" && x.slideTo(z === null ? I : z));
 	}
 }
 function onResize() {
@@ -19828,12 +19682,12 @@ function setBreakpoint() {
 	});
 	let R = M.direction && M.direction !== C.direction, z = C.loop && (M.slidesPerView !== C.slidesPerView || R), B = C.loop;
 	R && S && m.changeDirection(), extend$1(m.params, M);
-	let H = m.params.enabled, U = m.params.loop;
+	let V = m.params.enabled, H = m.params.loop;
 	Object.assign(m, {
 		allowTouchMove: m.params.allowTouchMove,
 		allowSlideNext: m.params.allowSlideNext,
 		allowSlidePrev: m.params.allowSlidePrev
-	}), L && !H ? m.disable() : !L && H && m.enable(), m.currentBreakpoint = j, m.emit("_beforeBreakpoint", M), S && (z ? (m.loopDestroy(), m.loopCreate(x), m.updateSlides()) : !B && U ? (m.loopCreate(x), m.updateSlides()) : B && !U && m.loopDestroy()), m.emit("breakpoint", M);
+	}), L && !V ? m.disable() : !L && V && m.enable(), m.currentBreakpoint = j, m.emit("_beforeBreakpoint", M), S && (z ? (m.loopDestroy(), m.loopCreate(x), m.updateSlides()) : !B && H ? (m.loopCreate(x), m.updateSlides()) : B && !H && m.loopDestroy()), m.emit("breakpoint", M);
 }
 function getBreakpoint(m, x = "window", S) {
 	if (!m || x === "container" && !S) return;
@@ -20299,18 +20153,18 @@ function wrapperClass(m = "") {
 	return m ? m.includes("swiper-wrapper") ? m : `swiper-wrapper ${m}` : "swiper-wrapper";
 }
 function updateSwiper({ swiper: m, slides: x, passedParams: S, changedParams: C, nextEl: T, prevEl: D, scrollbarEl: O, paginationEl: k }) {
-	let A = C.filter((m) => m !== "children" && m !== "direction" && m !== "wrapperClass"), { params: j, pagination: M, navigation: N, scrollbar: P, virtual: F, thumbs: I } = m, L, R, z, B, H, U, W, G;
-	C.includes("thumbs") && S.thumbs && S.thumbs.swiper && !S.thumbs.swiper.destroyed && j.thumbs && (!j.thumbs.swiper || j.thumbs.swiper.destroyed) && (L = !0), C.includes("controller") && S.controller && S.controller.control && j.controller && !j.controller.control && (R = !0), C.includes("pagination") && S.pagination && (S.pagination.el || k) && (j.pagination || j.pagination === !1) && M && !M.el && (z = !0), C.includes("scrollbar") && S.scrollbar && (S.scrollbar.el || O) && (j.scrollbar || j.scrollbar === !1) && P && !P.el && (B = !0), C.includes("navigation") && S.navigation && (S.navigation.prevEl || D) && (S.navigation.nextEl || T) && (j.navigation || j.navigation === !1) && N && !N.prevEl && !N.nextEl && (H = !0);
-	let K = (x) => {
+	let A = C.filter((m) => m !== "children" && m !== "direction" && m !== "wrapperClass"), { params: j, pagination: M, navigation: N, scrollbar: P, virtual: F, thumbs: I } = m, L, R, z, B, V, H, U, W;
+	C.includes("thumbs") && S.thumbs && S.thumbs.swiper && !S.thumbs.swiper.destroyed && j.thumbs && (!j.thumbs.swiper || j.thumbs.swiper.destroyed) && (L = !0), C.includes("controller") && S.controller && S.controller.control && j.controller && !j.controller.control && (R = !0), C.includes("pagination") && S.pagination && (S.pagination.el || k) && (j.pagination || j.pagination === !1) && M && !M.el && (z = !0), C.includes("scrollbar") && S.scrollbar && (S.scrollbar.el || O) && (j.scrollbar || j.scrollbar === !1) && P && !P.el && (B = !0), C.includes("navigation") && S.navigation && (S.navigation.prevEl || D) && (S.navigation.nextEl || T) && (j.navigation || j.navigation === !1) && N && !N.prevEl && !N.nextEl && (V = !0);
+	let G = (x) => {
 		m[x] && (m[x].destroy(), x === "navigation" ? (m.isElement && (m[x].prevEl.remove(), m[x].nextEl.remove()), j[x].prevEl = void 0, j[x].nextEl = void 0, m[x].prevEl = void 0, m[x].nextEl = void 0) : (m.isElement && m[x].el.remove(), j[x].el = void 0, m[x].el = void 0));
 	};
-	C.includes("loop") && m.isElement && (j.loop && !S.loop ? U = !0 : !j.loop && S.loop ? W = !0 : G = !0), A.forEach((m) => {
-		if (isObject(j[m]) && isObject(S[m])) Object.assign(j[m], S[m]), (m === "navigation" || m === "pagination" || m === "scrollbar") && "enabled" in S[m] && !S[m].enabled && K(m);
+	C.includes("loop") && m.isElement && (j.loop && !S.loop ? H = !0 : !j.loop && S.loop ? U = !0 : W = !0), A.forEach((m) => {
+		if (isObject(j[m]) && isObject(S[m])) Object.assign(j[m], S[m]), (m === "navigation" || m === "pagination" || m === "scrollbar") && "enabled" in S[m] && !S[m].enabled && G(m);
 		else {
 			let x = S[m];
-			(x === !0 || x === !1) && (m === "navigation" || m === "pagination" || m === "scrollbar") ? x === !1 && K(m) : j[m] = S[m];
+			(x === !0 || x === !1) && (m === "navigation" || m === "pagination" || m === "scrollbar") ? x === !1 && G(m) : j[m] = S[m];
 		}
-	}), A.includes("controller") && !R && m.controller && m.controller.control && j.controller && j.controller.control && (m.controller.control = j.controller.control), C.includes("children") && x && F && j.virtual.enabled ? (F.slides = x, F.update(!0)) : C.includes("virtual") && F && j.virtual.enabled && (x && (F.slides = x), F.update(!0)), C.includes("children") && x && j.loop && (G = !0), L && I.init() && I.update(!0), R && (m.controller.control = j.controller.control), z && (m.isElement && (!k || typeof k == "string") && (k = document.createElement("div"), k.classList.add("swiper-pagination"), k.part.add("pagination"), m.el.appendChild(k)), k && (j.pagination.el = k), M.init(), M.render(), M.update()), B && (m.isElement && (!O || typeof O == "string") && (O = document.createElement("div"), O.classList.add("swiper-scrollbar"), O.part.add("scrollbar"), m.el.appendChild(O)), O && (j.scrollbar.el = O), P.init(), P.updateSize(), P.setTranslate()), H && (m.isElement && ((!T || typeof T == "string") && (T = document.createElement("div"), T.classList.add("swiper-button-next"), setInnerHTML(T, m.navigation.arrowSvg), T.part.add("button-next"), m.el.appendChild(T)), (!D || typeof D == "string") && (D = document.createElement("div"), D.classList.add("swiper-button-prev"), setInnerHTML(D, m.navigation.arrowSvg), D.part.add("button-prev"), m.el.appendChild(D))), T && (j.navigation.nextEl = T), D && (j.navigation.prevEl = D), N.init(), N.update()), C.includes("allowSlideNext") && (m.allowSlideNext = S.allowSlideNext), C.includes("allowSlidePrev") && (m.allowSlidePrev = S.allowSlidePrev), C.includes("direction") && m.changeDirection(S.direction, !1), (U || G) && m.loopDestroy(), (W || G) && m.loopCreate(), m.update();
+	}), A.includes("controller") && !R && m.controller && m.controller.control && j.controller && j.controller.control && (m.controller.control = j.controller.control), C.includes("children") && x && F && j.virtual.enabled ? (F.slides = x, F.update(!0)) : C.includes("virtual") && F && j.virtual.enabled && (x && (F.slides = x), F.update(!0)), C.includes("children") && x && j.loop && (W = !0), L && I.init() && I.update(!0), R && (m.controller.control = j.controller.control), z && (m.isElement && (!k || typeof k == "string") && (k = document.createElement("div"), k.classList.add("swiper-pagination"), k.part.add("pagination"), m.el.appendChild(k)), k && (j.pagination.el = k), M.init(), M.render(), M.update()), B && (m.isElement && (!O || typeof O == "string") && (O = document.createElement("div"), O.classList.add("swiper-scrollbar"), O.part.add("scrollbar"), m.el.appendChild(O)), O && (j.scrollbar.el = O), P.init(), P.updateSize(), P.setTranslate()), V && (m.isElement && ((!T || typeof T == "string") && (T = document.createElement("div"), T.classList.add("swiper-button-next"), setInnerHTML(T, m.navigation.arrowSvg), T.part.add("button-next"), m.el.appendChild(T)), (!D || typeof D == "string") && (D = document.createElement("div"), D.classList.add("swiper-button-prev"), setInnerHTML(D, m.navigation.arrowSvg), D.part.add("button-prev"), m.el.appendChild(D))), T && (j.navigation.nextEl = T), D && (j.navigation.prevEl = D), N.init(), N.update()), C.includes("allowSlideNext") && (m.allowSlideNext = S.allowSlideNext), C.includes("allowSlidePrev") && (m.allowSlidePrev = S.allowSlidePrev), C.includes("direction") && m.changeDirection(S.direction, !1), (H || W) && m.loopDestroy(), (U || W) && m.loopCreate(), m.update();
 }
 function getParams(m = {}, x = !0) {
 	let S = { on: {} }, C = {}, T = {};
@@ -20371,169 +20225,169 @@ function isChildSwiperSlide(m) {
 	return m.type && m.type.displayName && m.type.displayName.includes("SwiperSlide");
 }
 function processChildren(m) {
-	let S = [];
+	let x = [];
 	return React.Children.toArray(m).forEach((m) => {
-		isChildSwiperSlide(m) ? S.push(m) : m.props && m.props.children && processChildren(m.props.children).forEach((m) => S.push(m));
-	}), S;
+		isChildSwiperSlide(m) ? x.push(m) : m.props && m.props.children && processChildren(m.props.children).forEach((m) => x.push(m));
+	}), x;
 }
 function getChildren(m) {
-	let S = [], C = {
+	let x = [], S = {
 		"container-start": [],
 		"container-end": [],
 		"wrapper-start": [],
 		"wrapper-end": []
 	};
 	return React.Children.toArray(m).forEach((m) => {
-		if (isChildSwiperSlide(m)) S.push(m);
-		else if (m.props && m.props.slot && C[m.props.slot]) C[m.props.slot].push(m);
+		if (isChildSwiperSlide(m)) x.push(m);
+		else if (m.props && m.props.slot && S[m.props.slot]) S[m.props.slot].push(m);
 		else if (m.props && m.props.children) {
-			let x = processChildren(m.props.children);
-			x.length > 0 ? x.forEach((m) => S.push(m)) : C["container-end"].push(m);
-		} else C["container-end"].push(m);
+			let C = processChildren(m.props.children);
+			C.length > 0 ? C.forEach((m) => x.push(m)) : S["container-end"].push(m);
+		} else S["container-end"].push(m);
 	}), {
-		slides: S,
-		slots: C
+		slides: x,
+		slots: S
 	};
 }
-function renderVirtual(m, S, C) {
-	if (!C) return null;
-	let T = (m) => {
-		let x = m;
-		return m < 0 ? x = S.length + m : x >= S.length && (x -= S.length), x;
-	}, D = m.isHorizontal() ? { [m.rtlTranslate ? "right" : "left"]: `${C.offset}px` } : { top: `${C.offset}px` }, { from: O, to: k } = C, A = m.params.loop ? -S.length : 0, j = m.params.loop ? S.length * 2 : S.length, M = [];
-	for (let m = A; m < j; m += 1) m >= O && m <= k && M.push(S[T(m)]);
-	return M.map((S, C) => /* @__PURE__ */ React.cloneElement(S, {
+function renderVirtual(m, x, S) {
+	if (!S) return null;
+	let C = (m) => {
+		let S = m;
+		return m < 0 ? S = x.length + m : S >= x.length && (S -= x.length), S;
+	}, T = m.isHorizontal() ? { [m.rtlTranslate ? "right" : "left"]: `${S.offset}px` } : { top: `${S.offset}px` }, { from: D, to: O } = S, k = m.params.loop ? -x.length : 0, A = m.params.loop ? x.length * 2 : x.length, j = [];
+	for (let m = k; m < A; m += 1) m >= D && m <= O && j.push(x[C(m)]);
+	return j.map((x, S) => /* @__PURE__ */ React.cloneElement(x, {
 		swiper: m,
-		style: D,
-		key: S.props.virtualIndex || S.key || `slide-${C}`
+		style: T,
+		key: x.props.virtualIndex || x.key || `slide-${S}`
 	}));
 }
-function useIsomorphicLayoutEffect$1(m, x) {
+function useIsomorphicLayoutEffect(m, x) {
 	return typeof window > "u" ? useEffect(m, x) : useLayoutEffect(m, x);
 }
-var SwiperSlideContext = /* @__PURE__ */ createContext(null), SwiperContext = /* @__PURE__ */ createContext(null), Swiper = /* @__PURE__ */ forwardRef(({ className: m, tag: S = "div", wrapperTag: C = "div", children: T, onSwiper: D, ...O } = {}, k) => {
-	let A = !1, [j, M] = useState("swiper"), [N, F] = useState(null), [I, L] = useState(!1), R = useRef(!1), z = useRef(null), U = useRef(null), W = useRef(null), G = useRef(null), K = useRef(null), q = useRef(null), J = useRef(null), $V = useRef(null), { params: Y, passedParams: X, rest: Z, events: eH } = getParams(O), { slides: Q, slots: tH } = getChildren(T), nH = () => {
-		L(!I);
+var SwiperSlideContext = /* @__PURE__ */ createContext(null), SwiperContext = /* @__PURE__ */ createContext(null), Swiper = /* @__PURE__ */ forwardRef(({ className: m, tag: x = "div", wrapperTag: S = "div", children: C, onSwiper: T, ...D } = {}, O) => {
+	let k = !1, [A, j] = useState("swiper"), [M, P] = useState(null), [F, I] = useState(!1), L = useRef(!1), R = useRef(null), z = useRef(null), B = useRef(null), V = useRef(null), H = useRef(null), U = useRef(null), G = useRef(null), K = useRef(null), { params: q, passedParams: J, rest: Uz, events: X } = getParams(D), { slides: Z, slots: Gz } = getChildren(C), Kz = () => {
+		I(!F);
 	};
-	Object.assign(Y.on, { _containerClasses(m, x) {
-		M(x);
+	Object.assign(q.on, { _containerClasses(m, x) {
+		j(x);
 	} });
-	let rH = () => {
-		Object.assign(Y.on, eH), A = !0;
-		let m = { ...Y };
-		if (delete m.wrapperClass, U.current = new Swiper$1(m), U.current.virtual && U.current.params.virtual.enabled) {
-			U.current.virtual.slides = Q;
+	let qz = () => {
+		Object.assign(q.on, X), k = !0;
+		let m = { ...q };
+		if (delete m.wrapperClass, z.current = new Swiper$1(m), z.current.virtual && z.current.params.virtual.enabled) {
+			z.current.virtual.slides = Z;
 			let m = {
 				cache: !1,
-				slides: Q,
-				renderExternal: F,
+				slides: Z,
+				renderExternal: P,
 				renderExternalUpdate: !1
 			};
-			extend(U.current.params.virtual, m), extend(U.current.originalParams.virtual, m);
+			extend(z.current.params.virtual, m), extend(z.current.originalParams.virtual, m);
 		}
 	};
-	z.current || rH(), U.current && U.current.on("_beforeBreakpoint", nH);
-	let iH = () => {
-		A || !eH || !U.current || Object.keys(eH).forEach((m) => {
-			U.current.on(m, eH[m]);
+	R.current || qz(), z.current && z.current.on("_beforeBreakpoint", Kz);
+	let Jz = () => {
+		k || !X || !z.current || Object.keys(X).forEach((m) => {
+			z.current.on(m, X[m]);
 		});
-	}, aH = () => {
-		!eH || !U.current || Object.keys(eH).forEach((m) => {
-			U.current.off(m, eH[m]);
+	}, Yz = () => {
+		!X || !z.current || Object.keys(X).forEach((m) => {
+			z.current.off(m, X[m]);
 		});
 	};
 	useEffect(() => () => {
-		U.current && U.current.off("_beforeBreakpoint", nH);
+		z.current && z.current.off("_beforeBreakpoint", Kz);
 	}), useEffect(() => {
-		!R.current && U.current && (U.current.emitSlidesClasses(), R.current = !0);
-	}), useIsomorphicLayoutEffect$1(() => {
-		if (k && (k.current = z.current), z.current) return U.current.destroyed && rH(), mountSwiper({
-			el: z.current,
-			nextEl: K.current,
-			prevEl: q.current,
-			paginationEl: J.current,
-			scrollbarEl: $V.current,
-			swiper: U.current
-		}, Y), D && !U.current.destroyed && D(U.current), () => {
-			U.current && !U.current.destroyed && U.current.destroy(!0, !1);
+		!L.current && z.current && (z.current.emitSlidesClasses(), L.current = !0);
+	}), useIsomorphicLayoutEffect(() => {
+		if (O && (O.current = R.current), R.current) return z.current.destroyed && qz(), mountSwiper({
+			el: R.current,
+			nextEl: H.current,
+			prevEl: U.current,
+			paginationEl: G.current,
+			scrollbarEl: K.current,
+			swiper: z.current
+		}, q), T && !z.current.destroyed && T(z.current), () => {
+			z.current && !z.current.destroyed && z.current.destroy(!0, !1);
 		};
-	}, []), useIsomorphicLayoutEffect$1(() => {
-		iH();
-		let m = getChangedParams(X, W.current, Q, G.current, (m) => m.key);
-		return W.current = X, G.current = Q, m.length && U.current && !U.current.destroyed && updateSwiper({
-			swiper: U.current,
-			slides: Q,
-			passedParams: X,
+	}, []), useIsomorphicLayoutEffect(() => {
+		Jz();
+		let m = getChangedParams(J, B.current, Z, V.current, (m) => m.key);
+		return B.current = J, V.current = Z, m.length && z.current && !z.current.destroyed && updateSwiper({
+			swiper: z.current,
+			slides: Z,
+			passedParams: J,
 			changedParams: m,
-			nextEl: K.current,
-			prevEl: q.current,
-			scrollbarEl: $V.current,
-			paginationEl: J.current
+			nextEl: H.current,
+			prevEl: U.current,
+			scrollbarEl: K.current,
+			paginationEl: G.current
 		}), () => {
-			aH();
+			Yz();
 		};
-	}), useIsomorphicLayoutEffect$1(() => {
-		updateOnVirtualData(U.current);
-	}, [N]);
-	function oH() {
-		return Y.virtual ? renderVirtual(U.current, Q, N) : Q.map((m, S) => /* @__PURE__ */ React.cloneElement(m, {
-			swiper: U.current,
-			swiperSlideIndex: S
+	}), useIsomorphicLayoutEffect(() => {
+		updateOnVirtualData(z.current);
+	}, [M]);
+	function Xz() {
+		return q.virtual ? renderVirtual(z.current, Z, M) : Z.map((m, x) => /* @__PURE__ */ React.cloneElement(m, {
+			swiper: z.current,
+			swiperSlideIndex: x
 		}));
 	}
-	return /* @__PURE__ */ React.createElement(S, _extends({
-		ref: z,
-		className: uniqueClasses(`${j}${m ? ` ${m}` : ""}`)
-	}, Z), /* @__PURE__ */ React.createElement(SwiperContext.Provider, { value: U.current }, tH["container-start"], /* @__PURE__ */ React.createElement(C, { className: wrapperClass(Y.wrapperClass) }, tH["wrapper-start"], oH(), tH["wrapper-end"]), needsNavigation(Y) && /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("div", {
-		ref: q,
+	return /* @__PURE__ */ React.createElement(x, _extends({
+		ref: R,
+		className: uniqueClasses(`${A}${m ? ` ${m}` : ""}`)
+	}, Uz), /* @__PURE__ */ React.createElement(SwiperContext.Provider, { value: z.current }, Gz["container-start"], /* @__PURE__ */ React.createElement(S, { className: wrapperClass(q.wrapperClass) }, Gz["wrapper-start"], Xz(), Gz["wrapper-end"]), needsNavigation(q) && /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("div", {
+		ref: U,
 		className: "swiper-button-prev"
 	}), /* @__PURE__ */ React.createElement("div", {
-		ref: K,
+		ref: H,
 		className: "swiper-button-next"
-	})), needsScrollbar(Y) && /* @__PURE__ */ React.createElement("div", {
-		ref: $V,
+	})), needsScrollbar(q) && /* @__PURE__ */ React.createElement("div", {
+		ref: K,
 		className: "swiper-scrollbar"
-	}), needsPagination(Y) && /* @__PURE__ */ React.createElement("div", {
-		ref: J,
+	}), needsPagination(q) && /* @__PURE__ */ React.createElement("div", {
+		ref: G,
 		className: "swiper-pagination"
-	}), tH["container-end"]));
+	}), Gz["container-end"]));
 });
 Swiper.displayName = "Swiper";
-var SwiperSlide = /* @__PURE__ */ forwardRef(({ tag: m = "div", children: S, className: C = "", swiper: T, zoom: D, lazy: O, virtualIndex: k, swiperSlideIndex: A, ...j } = {}, M) => {
-	let N = useRef(null), [P, F] = useState("swiper-slide"), [I, L] = useState(!1);
+var SwiperSlide = /* @__PURE__ */ forwardRef(({ tag: m = "div", children: x, className: S = "", swiper: C, zoom: T, lazy: D, virtualIndex: O, swiperSlideIndex: k, ...A } = {}, j) => {
+	let M = useRef(null), [P, F] = useState("swiper-slide"), [I, L] = useState(!1);
 	function R(m, x, S) {
-		x === N.current && F(S);
+		x === M.current && F(S);
 	}
-	useIsomorphicLayoutEffect$1(() => {
-		if (A !== void 0 && (N.current.swiperSlideIndex = A), M && (M.current = N.current), !(!N.current || !T)) {
-			if (T.destroyed) {
+	useIsomorphicLayoutEffect(() => {
+		if (k !== void 0 && (M.current.swiperSlideIndex = k), j && (j.current = M.current), !(!M.current || !C)) {
+			if (C.destroyed) {
 				P !== "swiper-slide" && F("swiper-slide");
 				return;
 			}
-			return T.on("_slideClass", R), () => {
-				T && T.off("_slideClass", R);
+			return C.on("_slideClass", R), () => {
+				C && C.off("_slideClass", R);
 			};
 		}
-	}), useIsomorphicLayoutEffect$1(() => {
-		T && N.current && !T.destroyed && F(T.getSlideClasses(N.current));
-	}, [T]);
+	}), useIsomorphicLayoutEffect(() => {
+		C && M.current && !C.destroyed && F(C.getSlideClasses(M.current));
+	}, [C]);
 	let z = {
 		isActive: P.indexOf("swiper-slide-active") >= 0,
 		isVisible: P.indexOf("swiper-slide-visible") >= 0,
 		isPrev: P.indexOf("swiper-slide-prev") >= 0,
 		isNext: P.indexOf("swiper-slide-next") >= 0
-	}, U = () => typeof S == "function" ? S(z) : S, W = () => {
+	}, B = () => typeof x == "function" ? x(z) : x, V = () => {
 		L(!0);
 	};
 	return /* @__PURE__ */ React.createElement(m, _extends({
-		ref: N,
-		className: uniqueClasses(`${P}${C ? ` ${C}` : ""}`),
-		"data-swiper-slide-index": k,
-		onLoad: W
-	}, j), D && /* @__PURE__ */ React.createElement(SwiperSlideContext.Provider, { value: z }, /* @__PURE__ */ React.createElement("div", {
+		ref: M,
+		className: uniqueClasses(`${P}${S ? ` ${S}` : ""}`),
+		"data-swiper-slide-index": O,
+		onLoad: V
+	}, A), T && /* @__PURE__ */ React.createElement(SwiperSlideContext.Provider, { value: z }, /* @__PURE__ */ React.createElement("div", {
 		className: "swiper-zoom-container",
-		"data-swiper-zoom": typeof D == "number" ? D : void 0
-	}, U(), O && !I && /* @__PURE__ */ React.createElement("div", { className: "swiper-lazy-preloader" }))), !D && /* @__PURE__ */ React.createElement(SwiperSlideContext.Provider, { value: z }, U(), O && !I && /* @__PURE__ */ React.createElement("div", { className: "swiper-lazy-preloader" })));
+		"data-swiper-zoom": typeof T == "number" ? T : void 0
+	}, B(), D && !I && /* @__PURE__ */ React.createElement("div", { className: "swiper-lazy-preloader" }))), !T && /* @__PURE__ */ React.createElement(SwiperSlideContext.Provider, { value: z }, B(), D && !I && /* @__PURE__ */ React.createElement("div", { className: "swiper-lazy-preloader" })));
 });
 SwiperSlide.displayName = "SwiperSlide";
 function ItemSlider({ items: m, variant: x = "default", language: S = "en" }) {
@@ -21542,1961 +21396,4 @@ function VoodvaleSection(m) {
 		]
 	});
 }
-const PlanItemTypeEnum = {
-	None: 0,
-	Room: 1,
-	Plot: 2,
-	PlotContainer: 3
-}, PlanItemTypeEnumNames = {
-	[PlanItemTypeEnum.None]: "None",
-	[PlanItemTypeEnum.Room]: "Room",
-	[PlanItemTypeEnum.Plot]: "Plot",
-	[PlanItemTypeEnum.PlotContainer]: "PlotContainer"
-};
-function getPlanItemTypeEnum(m) {
-	return PlanItemTypeEnum[m] ?? PlanItemTypeEnum.None;
-}
-const PlanObjectTypeEnum = {
-	None: 0,
-	Rectangle: 1,
-	Circle: 2,
-	Polygon: 3
-}, PlanObjectTypeEnumNames = {
-	[PlanObjectTypeEnum.None]: "None",
-	[PlanObjectTypeEnum.Rectangle]: "Rectangle",
-	[PlanObjectTypeEnum.Circle]: "Circle",
-	[PlanObjectTypeEnum.Polygon]: "Polygon"
-};
-var PlanLabelObject = class extends fabric.Group {
-	get label() {
-		return this._text.text;
-	}
-	constructor(m, x, S, C, T, D, O, k = 16) {
-		super([], {
-			left: S,
-			top: C,
-			selectable: !1,
-			hasControls: !1,
-			evented: !1,
-			lockRotation: !0
-		}), this.PADDING_RIGHT_LEFT = 10, this.PADDING_TOP_BOTTOM = 4, this._text = new fabric.Text(m, {
-			left: T / 2 + S,
-			top: D / 2 + C,
-			fontSize: k,
-			lineHeight: 16,
-			fontFamily: "Inter",
-			originX: "center",
-			originY: "center",
-			textAlign: "center",
-			hasControls: !1,
-			selectable: !1,
-			lockRotation: !0,
-			fill: "white",
-			fontWeight: "bolder",
-			opacity: O ?? 1
-		}), this._rectangle = new fabric.Rect({
-			left: T / 2 + S,
-			top: D / 2 + C,
-			originX: "center",
-			originY: "center",
-			width: (this._text.width ?? 0) + 200,
-			height: (this._text.height ?? 0) + this.PADDING_TOP_BOTTOM * 2,
-			selectable: !1,
-			hasControls: !1,
-			evented: !1,
-			hasBorders: !1,
-			lockRotation: !0,
-			fill: x,
-			rx: 12,
-			ry: 12,
-			opacity: O ?? 1
-		}), this.addWithUpdate(this._rectangle), this.addWithUpdate(this._text);
-	}
-	setLabel(m) {
-		try {
-			this._text.set("text", m), this._rectangle.set("width", (this._text.width ?? 0) + this.PADDING_RIGHT_LEFT * 2);
-		} catch {}
-	}
-	addStroke() {
-		this._text.set("stroke", "black"), this._text.set("strokeWidth", 15), this._text.set("paintFirst", "stroke");
-	}
-	setColor(m) {
-		this._rectangle.set("fill", m);
-	}
-	hideBackground() {
-		this._rectangle.set("opacity", 0);
-	}
-	setOpacity(m) {
-		this._rectangle.set("opacity", m), this._text.set("opacity", m);
-	}
-}, PlanCircleObject = class m extends fabric.Circle {
-	get objectId() {
-		return this._objectId;
-	}
-	get objectType() {
-		return PlanObjectTypeEnumNames[PlanObjectTypeEnum.Circle];
-	}
-	get objectName() {
-		return this.itemName ? this.itemName : "New Shape";
-	}
-	get icon() {
-		return this.itemId ? "assets/icons/link.svg" : "assets/icons/link-broken.svg";
-	}
-	constructor(m) {
-		super({
-			left: m.left,
-			top: m.top,
-			radius: Math.min(m.width ?? 0, m.height ?? 0) / 2,
-			selectable: !1,
-			hasControls: !1,
-			originX: "center",
-			originY: "center",
-			evented: !1,
-			hasBorders: !0,
-			strokeWidth: .2,
-			stroke: "#000000",
-			fill: m.fill,
-			opacity: m.opacity ?? .6
-		}), this._objectId = v4_default(), this.containerId = 0, this.itemId = "", this.itemType = PlanItemTypeEnumNames[PlanItemTypeEnum.None], this.itemName = "", m.objectId && (this._objectId = m.objectId), this.containerType = m.containerType, this.containerId = m.containerId, this.itemType = m.itemType, this.itemId = m.itemId, this.label = new PlanLabelObject(this.objectType, m.fill ?? "0x000000", m.left ?? 0, m.top ?? 0, 0, 0), this.text = new fabric.Text(this.objectType, {
-			fontSize: 15,
-			fontFamily: "Arial",
-			originX: "center",
-			originY: "center",
-			textAlign: "center",
-			hasControls: !1,
-			selectable: !1,
-			evented: !1,
-			left: this.left,
-			top: this.top,
-			width: this.width,
-			height: (this.height ?? 0) / 2,
-			visible: !1
-		});
-	}
-	finishDrawing() {
-		this.setControlsVisibility({
-			bl: !0,
-			br: !0,
-			mb: !1,
-			ml: !1,
-			mr: !1,
-			mt: !1,
-			tl: !0,
-			tr: !0,
-			mtr: !1
-		}), this.selectable = !1, this.evented = !0, this.hasControls = !0, this.centeredScaling = !0, this.hoverCursor = "pointer", this.text.visible = !0, this.label.visible = !0, this.setCoords();
-	}
-	redraw(m) {
-		let x = this.left, S = this.top;
-		this.set("radius", Math.max(Math.abs(m.x - (x ?? 0)), Math.abs(m.y - (S ?? 0)))).setCoords(), this.text.set("left", this.left).set("top", this.top).set("width", this.width);
-	}
-	duplicate() {
-		let x = new m({
-			objectId: "",
-			objectType: PlanObjectTypeEnumNames[PlanObjectTypeEnum.Circle],
-			containerType: this.containerType,
-			containerId: this.containerId,
-			itemType: PlanItemTypeEnumNames[PlanItemTypeEnum.None],
-			itemId: "",
-			left: (this.left ?? 0) + (this.width ?? 0),
-			top: this.top,
-			fill: this.fill,
-			radius: this.radius,
-			label: this.label
-		});
-		return x.finishDrawing(), x;
-	}
-	assign(m) {
-		m ? (this.itemType = m.type, this.itemId = m.id, this.itemName = m.number ?? m.name, this.itemInformation = m.informations?.join("\r\n") ?? "", this.text.visible = !0, this.label.visible = !0, this.setControlVisible("assignControl", !1), this.setControlVisible("unassignControl", !0), this.changeColor(m.color)) : (this.itemType = PlanItemTypeEnumNames[PlanItemTypeEnum.None], this.itemId = "", this.itemName = "", this.setControlVisible("unassignControl", !1), this.setControlVisible("assignControl", !0)), this.setText(this.itemName ?? "");
-	}
-	move() {
-		this.setCoords(), this.text.set("left", this.left).set("top", this.top).setCoords();
-	}
-	resize() {
-		this.text.set("left", this.left).set("top", this.top).set("width", (this.radius ?? 0) * (this.scaleX ?? 1)).setCoords();
-	}
-	modify() {
-		this.setCoords().set("radius", (this.radius ?? 0) * (this.scaleX ?? 1)).set("scaleX", 1).set("scaleY", 1);
-	}
-	setText(m) {
-		this.label.setLabel(m);
-	}
-	changeColor(m) {
-		m && (this.set("fill", m), this.label.setColor(m));
-	}
-}, PlanRectangleObject = class m extends fabric.Rect {
-	get objectId() {
-		return this._objectId;
-	}
-	get objectType() {
-		return PlanObjectTypeEnumNames[PlanObjectTypeEnum.Rectangle];
-	}
-	get objectName() {
-		return this.itemName ? this.itemName : "New Shape";
-	}
-	get icon() {
-		return this.itemId ? "assets/icons/link.svg" : "assets/icons/link-broken.svg";
-	}
-	constructor(m) {
-		super({
-			objectCaching: !1,
-			left: m.left,
-			top: m.top,
-			width: m.width ?? 1,
-			height: m.height ?? 1,
-			originX: "center",
-			originY: "center",
-			selectable: !1,
-			hasControls: !1,
-			evented: !1,
-			hasBorders: !0,
-			strokeWidth: .2,
-			stroke: "#000000",
-			fill: m.fill,
-			opacity: m.opacity ?? .6
-		}), this._objectId = v4_default(), this.containerId = 0, this.itemId = "", this.itemType = PlanItemTypeEnumNames[PlanItemTypeEnum.None], this.itemName = "", m.objectId && (this._objectId = m.objectId), this.containerType = m.containerType, this.containerId = m.containerId, this.itemType = m.itemType, this.itemId = m.itemId, this.label = new PlanLabelObject(this.objectType, m.fill ?? "0x000000", m.left ?? 0, m.top ?? 0, 0, 0), this.text = new fabric.Text(this.objectType, {
-			fontSize: 15,
-			fontFamily: "Arial",
-			originX: "center",
-			originY: "center",
-			textAlign: "center",
-			hasControls: !1,
-			selectable: !1,
-			evented: !1,
-			left: this.left,
-			top: this.top,
-			width: this.width * .75,
-			height: this.height / 2,
-			visible: !1
-		}), this._pointer = new fabric.Point(m.left, m.top);
-	}
-	finishDrawing() {
-		this.selectable = !1, this.evented = !0, this.hasControls = !0, this.lockRotation = !0, this.hoverCursor = "pointer", this.text.visible = !0;
-	}
-	redraw(m) {
-		let x = Math.abs(m.x - this._pointer.x), S = Math.abs(m.y - this._pointer.y);
-		if (!x || !S) return !1;
-		let C = (m.x + this._pointer.x) / 2, T = (m.y + this._pointer.y) / 2;
-		this.set("left", C).set("top", T).set("width", x).set("height", S), this.text.set("width", x).set("left", C).set("top", T);
-	}
-	duplicate() {
-		let x = new m({
-			objectId: "",
-			objectType: PlanObjectTypeEnumNames[PlanObjectTypeEnum.Rectangle],
-			containerType: this.containerType,
-			containerId: this.containerId,
-			itemType: PlanItemTypeEnumNames[PlanItemTypeEnum.None],
-			itemId: "",
-			left: this.left + this.width,
-			top: this.top,
-			width: this.width,
-			height: this.height,
-			fill: this.fill,
-			label: this.label
-		});
-		return x.finishDrawing(), x;
-	}
-	assign(m) {
-		m ? (this.itemType = m.type, this.itemId = m.id, this.itemName = m.number ?? "", this.text.visible = !0, this.itemInformation = m.informations?.join("\r\n"), this.setControlVisible("assignControl", !1), this.setControlVisible("unassignControl", !0), this.changeColor(m.color)) : (this.itemType = PlanItemTypeEnumNames[PlanItemTypeEnum.None], this.itemId = "", this.itemName = "", this.setControlVisible("unassignControl", !1), this.setControlVisible("assignControl", !0)), this.setText(this.itemId ? this.itemName : this.objectType);
-	}
-	move() {
-		this.setCoords(), this.text.set("left", this.left).set("top", this.top).setCoords();
-	}
-	resize() {
-		let m = this.getScaledWidth();
-		this.text.set("left", this.left).set("top", this.top).set("width", m * .75).setCoords();
-	}
-	modify() {
-		this.set("width", this.getScaledWidth()).set("height", this.getScaledHeight()).set("scaleX", 1).set("scaleY", 1).setCoords();
-	}
-	setText(m) {
-		this.label.setLabel(m);
-	}
-	changeColor(m) {
-		m && this.set("fill", m);
-	}
-}, PlanPolygonObject = class m extends fabric.Polygon {
-	get objectId() {
-		return this._objectId;
-	}
-	get objectType() {
-		return PlanObjectTypeEnumNames[PlanObjectTypeEnum.Polygon];
-	}
-	get objectName() {
-		return this.itemName ? this.itemName : "New Shape";
-	}
-	get icon() {
-		return this.itemId ? "assets/icons/link.svg" : "assets/icons/link-broken.svg";
-	}
-	constructor(m) {
-		let x = m.points || [], S = m.left ?? 0, C = m.top ?? 0, T = m.width ?? 0, D = m.height ?? 0;
-		if (x.length > 0) {
-			let m = x.map((m) => m.x), O = x.map((m) => m.y), k = Math.min(...m), A = Math.max(...m), j = Math.min(...O), M = Math.max(...O);
-			T = A - k, D = M - j, S = k, C = j;
-			let N = (k + A) / 2, P = (j + M) / 2;
-			x = x.map((m) => new fabric.Point(m.x - N, m.y - P)), S = N, C = P;
-		}
-		super(x, {
-			left: S,
-			top: C,
-			width: T,
-			height: D,
-			opacity: m.opacity ?? .6,
-			fill: m.fill,
-			hoverCursor: "pointer",
-			selectable: !1,
-			hasControls: !1,
-			evented: !1,
-			originX: "center",
-			originY: "center"
-		}), this._objectId = v4_default(), this.containerId = 0, this.itemId = "", this.itemType = PlanItemTypeEnumNames[PlanItemTypeEnum.None], this.itemName = "", m.objectId && (this._objectId = m.objectId), this.containerType = m.containerType, this.containerId = m.containerId, this.itemType = m.itemType, this.itemId = m.itemId;
-		let O = S - T / 2, k = C - D / 2;
-		this.label = new PlanLabelObject(this.objectType, m.fill ?? "0x000000", O, k, T, D), this.text = new fabric.Text(this.objectType, {
-			fontSize: 15,
-			fontFamily: "Arial",
-			originX: "center",
-			originY: "center",
-			textAlign: "center",
-			hasControls: !1,
-			selectable: !1,
-			evented: !1,
-			left: S,
-			top: C,
-			width: T,
-			height: D / 2,
-			visible: !1
-		});
-	}
-	finishDrawing() {
-		this.selectable = !1, this.evented = !0, this.hasControls = !1, this.text.visible = !0;
-	}
-	duplicate() {
-		let x = this.points.map((m) => new fabric.Point(m.x + (this.left ?? 0), m.y + (this.top ?? 0))), S = x.map((m) => m.x), C = Math.min(...S), T = Math.max(...S) - C, D = x.map((m) => new fabric.Point(m.x + T, m.y)), O = new m({
-			objectId: "",
-			objectType: PlanObjectTypeEnumNames[PlanObjectTypeEnum.Polygon],
-			containerType: this.containerType,
-			containerId: this.containerId,
-			itemType: PlanItemTypeEnumNames[PlanItemTypeEnum.None],
-			itemId: "",
-			points: D,
-			fill: this.fill,
-			opacity: this.opacity,
-			label: null
-		});
-		return O.finishDrawing(), O;
-	}
-	assign(m) {
-		m ? (this.itemType = m.type, this.itemId = m.id, this.itemName = m.number ? `${m.number}` : m.name, this.text.visible = !0, this.itemInformation = m.informations?.join("\r\n"), this.setControlVisible("assignControl", !1), this.setControlVisible("unassignControl", !0), this.changeColor(m.color)) : (this.itemType = PlanItemTypeEnumNames[PlanItemTypeEnum.None], this.itemId = "", this.itemName = "", this.setControlVisible("unassignControl", !1), this.setControlVisible("assignControl", !0)), this.setText(this.itemId ? this.itemName : this.objectType);
-	}
-	move() {
-		this.setCoords(), this.text.set("left", this.left).set("top", this.top).setCoords();
-		let m = this.left - this.width / 2, x = this.top - this.height / 2;
-		this.label.set("left", m), this.label.set("top", x), this.label.setCoords();
-	}
-	setText(m) {
-		this.label.setLabel(m);
-	}
-	changeColor(m) {
-		m && this.set("fill", m);
-	}
-	resize() {
-		let m = this.getScaledWidth(), x = this.getScaledHeight();
-		this.text.set("left", this.left).set("top", this.top).set("width", m).setCoords();
-		let S = this.left - m / 2, C = this.top - x / 2;
-		this.label.set("left", S), this.label.set("top", C), this.label.setCoords();
-	}
-	modify() {
-		let m = this.getScaledWidth(), x = this.getScaledHeight(), S = m - this.width, C = x - this.height;
-		this.calcPoints(this.points, S, C, m / this.width, x / this.height), this.setCoords().set("width", m).set("height", x).set("scaleX", 1).set("scaleY", 1);
-		let T = this.left - m / 2, D = this.top - x / 2;
-		this.label.set("left", T), this.label.set("top", D), this.label.setCoords();
-	}
-	toPlanObject(m) {
-		let x = this.points.map((m) => new fabric.Point(m.x + (this.left ?? 0), m.y + (this.top ?? 0))), S = x.map((m) => m.x), C = x.map((m) => m.y), T = Math.min(...S), D = Math.max(...S), O = Math.min(...C), k = Math.max(...C), A = D - T, j = k - O, M = T, N = O;
-		return {
-			objectId: this.objectId,
-			objectType: this.objectType,
-			containerId: this.containerId,
-			containerType: this.containerType,
-			itemId: this.itemId,
-			itemType: this.itemType,
-			left: M / m.x,
-			top: N / m.y,
-			width: A / m.x,
-			height: j / m.y,
-			radius: 0,
-			points: x.map((x, S) => ({
-				id: v4_default(),
-				order: S,
-				x: x.x / m.x,
-				y: x.y / m.y
-			})),
-			fill: this.fill,
-			opacity: this.opacity,
-			svg: this.toSVG()
-		};
-	}
-	calcPoints(m, x, S, C, T) {
-		let D = Math.min(...m.map((m) => m.x)), O = m.map((m, x) => m.x == D ? x : -1).filter((m) => m != -1), k = Math.max(...O), A = [];
-		for (let x = k; x < k + m.length; x++) {
-			let S = x % m.length, C = m[S], T = m[(S + 1) % m.length];
-			A.push(T.x - C.x);
-		}
-		for (let S = k; S < k + m.length; S++) {
-			let T = S % m.length, D = m[T], O = m[(T + m.length - 1) % m.length];
-			T == k ? D.x -= x / 2 : D.x = O.x + A[S - k - 1] * C;
-		}
-		let j = Math.min(...m.map((m) => m.y)), M = m.map((m, x) => m.y == j ? x : -1).filter((m) => m != -1), N = Math.min(...M), P = [];
-		for (let x = N; x < N + m.length; x++) {
-			let S = x % m.length, C = m[S], T = m[(S + 1) % m.length];
-			P.push(T.y - C.y);
-		}
-		for (let x = N; x < N + m.length; x++) {
-			let C = x % m.length, D = m[C], O = m[(C + m.length - 1) % m.length];
-			C == N ? D.y -= S / 2 : D.y = O.y + P[x - N - 1] * T;
-		}
-	}
-}, PlanLineObject = class extends fabric.Line {
-	get id() {
-		return this._id;
-	}
-	constructor(m, x, S) {
-		super([
-			x.x,
-			x.y,
-			S.x,
-			S.y
-		], {
-			strokeWidth: .2,
-			stroke: "#000000",
-			selectable: !1,
-			hasControls: !1,
-			evented: !1,
-			hasBorders: !1
-		}), this._id = v4_default(), this.canvas = m, this.selectable = !1, this.canvas.add(this);
-	}
-	redraw(m) {
-		this.set("x2", m.x), this.set("y2", m.y);
-	}
-}, PlanObjectController = class {
-	get planObjects() {
-		return this._planObjects;
-	}
-	get containerObjects() {
-		return this._containerObjects;
-	}
-	get selectedObject() {
-		return this._selectedObjects.length == 1 ? this._selectedObjects[0] : null;
-	}
-	get isRectangle() {
-		return this.selectedObject ? this.selectedObject instanceof PlanRectangleObject : !1;
-	}
-	get isCircle() {
-		return this.selectedObject ? this.selectedObject instanceof PlanCircleObject : !1;
-	}
-	get isPolygon() {
-		return this.selectedObject ? this.selectedObject instanceof PlanPolygonObject : !1;
-	}
-	get isLine() {
-		return this.selectedObject ? this.selectedObject instanceof PlanLineObject : !1;
-	}
-	get selectedItemType() {
-		return this.isRectangle ? "Rectangle" : this.isCircle ? "Circle" : this.isPolygon ? "Polygon" : this.isLine ? "Vector" : "";
-	}
-	constructor(m) {
-		this._planObjects = [], this._containerObjects = [], this._selectedObjects = [], this._planObjects = m;
-	}
-	getPlanObjectByItemId(m) {
-		return this.planObjects.find((x) => x.itemId == m);
-	}
-	isObjectSelected(m) {
-		return this.selectedObject ? this.selectedObject.objectId === m : !1;
-	}
-	onKeydownDelete() {
-		this.deleteObjects();
-	}
-	deleteObjects() {
-		!this._selectedObjects || !this._selectedObjects.length || this._selectedObjects.forEach((m) => {
-			let x = this.containerObjects.findIndex((x) => x.objectId === m.objectId);
-			this.containerObjects.splice(x, 1);
-		});
-	}
-	initObject(m, x) {
-		let S = Math.min(m.width ?? 0, m.height ?? 0) / 2, C = {
-			objectId: m.objectId,
-			objectType: m.objectType,
-			containerId: m.containerId,
-			containerType: m.containerType,
-			itemId: m.itemId,
-			itemType: m.itemType,
-			left: x.x * m.left,
-			top: x.y * m.top,
-			width: m.width * x.x,
-			height: m.height * x.y,
-			radius: (m.radius ?? S) * x.x,
-			points: m.points ? m.points.map((m) => new fabric.Point(x.x * m.x, x.y * m.y)) : [],
-			fill: m.fill,
-			opacity: m.opacity,
-			label: null
-		};
-		if (m.objectType === PlanObjectTypeEnumNames[PlanObjectTypeEnum.Rectangle]) {
-			let m = new PlanRectangleObject(C);
-			return m.finishDrawing(), this.containerObjects.push(m), m;
-		} else if (m.objectType === PlanObjectTypeEnumNames[PlanObjectTypeEnum.Polygon]) {
-			let m = new PlanPolygonObject(C);
-			return m.finishDrawing(), this.containerObjects.push(m), m;
-		} else {
-			let m = new PlanCircleObject(C);
-			return m.finishDrawing(), this.containerObjects.push(m), m;
-		}
-	}
-	initContainerObjects(m) {
-		this._containerObjects = this.planObjects.map((x) => this.initObject(x, m)).filter((m) => m != null);
-	}
-	startDrawingRectangle(m) {
-		return new PlanRectangleObject(m);
-	}
-	startDrawingCircle(m) {
-		return new PlanCircleObject(m);
-	}
-	finishDrawing(m) {
-		this.containerObjects.push(m);
-	}
-}, PlanItemController = class {
-	get items() {
-		return this._items;
-	}
-	constructor(m) {
-		this._items = [], this._items = m;
-	}
-	getItem(m) {
-		return this.items.find((x) => x.id == m);
-	}
-};
-function clamp(m, x, S) {
-	return Math.max(x, Math.min(m, S));
-}
-var V = {
-	toVector(m, x) {
-		return m === void 0 && (m = x), Array.isArray(m) ? m : [m, m];
-	},
-	add(m, x) {
-		return [m[0] + x[0], m[1] + x[1]];
-	},
-	sub(m, x) {
-		return [m[0] - x[0], m[1] - x[1]];
-	},
-	addTo(m, x) {
-		m[0] += x[0], m[1] += x[1];
-	},
-	subTo(m, x) {
-		m[0] -= x[0], m[1] -= x[1];
-	}
-};
-function rubberband(m, x, S) {
-	return x === 0 || Math.abs(x) === Infinity ? m ** (S * 5) : m * x * S / (x + S * m);
-}
-function rubberbandIfOutOfBounds(m, x, S, C = .15) {
-	return C === 0 ? clamp(m, x, S) : m < x ? -rubberband(x - m, S - x, C) + x : m > S ? +rubberband(m - S, S - x, C) + S : m;
-}
-function computeRubberband(m, [x, S], [C, T]) {
-	let [[D, O], [k, A]] = m;
-	return [rubberbandIfOutOfBounds(x, D, O, C), rubberbandIfOutOfBounds(S, k, A, T)];
-}
-function _toPrimitive(m, x) {
-	if (typeof m != "object" || !m) return m;
-	var S = m[Symbol.toPrimitive];
-	if (S !== void 0) {
-		var C = S.call(m, x || "default");
-		if (typeof C != "object") return C;
-		throw TypeError("@@toPrimitive must return a primitive value.");
-	}
-	return (x === "string" ? String : Number)(m);
-}
-function _toPropertyKey(m) {
-	var x = _toPrimitive(m, "string");
-	return typeof x == "symbol" ? x : String(x);
-}
-function _defineProperty(m, x, S) {
-	return x = _toPropertyKey(x), x in m ? Object.defineProperty(m, x, {
-		value: S,
-		enumerable: !0,
-		configurable: !0,
-		writable: !0
-	}) : m[x] = S, m;
-}
-function ownKeys(m, x) {
-	var S = Object.keys(m);
-	if (Object.getOwnPropertySymbols) {
-		var C = Object.getOwnPropertySymbols(m);
-		x && (C = C.filter(function(x) {
-			return Object.getOwnPropertyDescriptor(m, x).enumerable;
-		})), S.push.apply(S, C);
-	}
-	return S;
-}
-function _objectSpread2(m) {
-	for (var x = 1; x < arguments.length; x++) {
-		var S = arguments[x] == null ? {} : arguments[x];
-		x % 2 ? ownKeys(Object(S), !0).forEach(function(x) {
-			_defineProperty(m, x, S[x]);
-		}) : Object.getOwnPropertyDescriptors ? Object.defineProperties(m, Object.getOwnPropertyDescriptors(S)) : ownKeys(Object(S)).forEach(function(x) {
-			Object.defineProperty(m, x, Object.getOwnPropertyDescriptor(S, x));
-		});
-	}
-	return m;
-}
-var EVENT_TYPE_MAP = {
-	pointer: {
-		start: "down",
-		change: "move",
-		end: "up"
-	},
-	mouse: {
-		start: "down",
-		change: "move",
-		end: "up"
-	},
-	touch: {
-		start: "start",
-		change: "move",
-		end: "end"
-	},
-	gesture: {
-		start: "start",
-		change: "change",
-		end: "end"
-	}
-};
-function capitalize(m) {
-	return m ? m[0].toUpperCase() + m.slice(1) : "";
-}
-var actionsWithoutCaptureSupported = ["enter", "leave"];
-function hasCapture(m = !1, x) {
-	return m && !actionsWithoutCaptureSupported.includes(x);
-}
-function toHandlerProp(m, x = "", S = !1) {
-	let C = EVENT_TYPE_MAP[m], T = C && C[x] || x;
-	return "on" + capitalize(m) + capitalize(T) + (hasCapture(S, T) ? "Capture" : "");
-}
-var pointerCaptureEvents = ["gotpointercapture", "lostpointercapture"];
-function parseProp(m) {
-	let x = m.substring(2).toLowerCase(), S = !!~x.indexOf("passive");
-	S && (x = x.replace("passive", ""));
-	let C = pointerCaptureEvents.includes(x) ? "capturecapture" : "capture", T = !!~x.indexOf(C);
-	return T && (x = x.replace("capture", "")), {
-		device: x,
-		capture: T,
-		passive: S
-	};
-}
-function toDomEventType(m, x = "") {
-	let S = EVENT_TYPE_MAP[m];
-	return m + (S && S[x] || x);
-}
-function isTouch(m) {
-	return "touches" in m;
-}
-function getCurrentTargetTouchList(m) {
-	return Array.from(m.touches).filter((x) => {
-		var S, C;
-		return x.target === m.currentTarget || ((S = m.currentTarget) == null || (C = S.contains) == null ? void 0 : C.call(S, x.target));
-	});
-}
-function distanceAngle(m, x) {
-	try {
-		let S = x.clientX - m.clientX, C = x.clientY - m.clientY, T = (x.clientX + m.clientX) / 2, D = (x.clientY + m.clientY) / 2, O = Math.hypot(S, C);
-		return {
-			angle: -(Math.atan2(S, C) * 180) / Math.PI,
-			distance: O,
-			origin: [T, D]
-		};
-	} catch {}
-	return null;
-}
-function touchIds(m) {
-	return getCurrentTargetTouchList(m).map((m) => m.identifier);
-}
-function touchDistanceAngle(m, x) {
-	let [S, C] = Array.from(m.touches).filter((m) => x.includes(m.identifier));
-	return distanceAngle(S, C);
-}
-var LINE_HEIGHT = 40, PAGE_HEIGHT = 800;
-function wheelValues(m) {
-	let { deltaX: x, deltaY: S, deltaMode: C } = m;
-	return C === 1 ? (x *= LINE_HEIGHT, S *= LINE_HEIGHT) : C === 2 && (x *= PAGE_HEIGHT, S *= PAGE_HEIGHT), [x, S];
-}
-function getEventDetails(m) {
-	let x = {};
-	if ("buttons" in m && (x.buttons = m.buttons), "shiftKey" in m) {
-		let { shiftKey: S, altKey: C, metaKey: T, ctrlKey: D } = m;
-		Object.assign(x, {
-			shiftKey: S,
-			altKey: C,
-			metaKey: T,
-			ctrlKey: D
-		});
-	}
-	return x;
-}
-function call(m, ...x) {
-	return typeof m == "function" ? m(...x) : m;
-}
-function noop() {}
-function chain(...m) {
-	return m.length === 0 ? noop : m.length === 1 ? m[0] : function() {
-		let x;
-		for (let S of m) x = S.apply(this, arguments) || x;
-		return x;
-	};
-}
-function assignDefault(m, x) {
-	return Object.assign({}, x, m || {});
-}
-var BEFORE_LAST_KINEMATICS_DELAY = 32, Engine = class {
-	constructor(m, x, S) {
-		this.ctrl = m, this.args = x, this.key = S, this.state || (this.state = {}, this.computeValues([0, 0]), this.computeInitial(), this.init && this.init(), this.reset());
-	}
-	get state() {
-		return this.ctrl.state[this.key];
-	}
-	set state(m) {
-		this.ctrl.state[this.key] = m;
-	}
-	get shared() {
-		return this.ctrl.state.shared;
-	}
-	get eventStore() {
-		return this.ctrl.gestureEventStores[this.key];
-	}
-	get timeoutStore() {
-		return this.ctrl.gestureTimeoutStores[this.key];
-	}
-	get config() {
-		return this.ctrl.config[this.key];
-	}
-	get sharedConfig() {
-		return this.ctrl.config.shared;
-	}
-	get handler() {
-		return this.ctrl.handlers[this.key];
-	}
-	reset() {
-		let { state: m, shared: x, ingKey: S, args: C } = this;
-		x[S] = m._active = m.active = m._blocked = m._force = !1, m._step = [!1, !1], m.intentional = !1, m._movement = [0, 0], m._distance = [0, 0], m._direction = [0, 0], m._delta = [0, 0], m._bounds = [[-Infinity, Infinity], [-Infinity, Infinity]], m.args = C, m.axis = void 0, m.memo = void 0, m.elapsedTime = m.timeDelta = 0, m.direction = [0, 0], m.distance = [0, 0], m.overflow = [0, 0], m._movementBound = [!1, !1], m.velocity = [0, 0], m.movement = [0, 0], m.delta = [0, 0], m.timeStamp = 0;
-	}
-	start(m) {
-		let x = this.state, S = this.config;
-		x._active || (this.reset(), this.computeInitial(), x._active = !0, x.target = m.target, x.currentTarget = m.currentTarget, x.lastOffset = S.from ? call(S.from, x) : x.offset, x.offset = x.lastOffset, x.startTime = x.timeStamp = m.timeStamp);
-	}
-	computeValues(m) {
-		let x = this.state;
-		x._values = m, x.values = this.config.transform(m);
-	}
-	computeInitial() {
-		let m = this.state;
-		m._initial = m._values, m.initial = m.values;
-	}
-	compute(m) {
-		let { state: x, config: S, shared: C } = this;
-		x.args = this.args;
-		let T = 0;
-		if (m && (x.event = m, S.preventDefault && m.cancelable && x.event.preventDefault(), x.type = m.type, C.touches = this.ctrl.pointerIds.size || this.ctrl.touchIds.size, C.locked = !!document.pointerLockElement, Object.assign(C, getEventDetails(m)), C.down = C.pressed = C.buttons % 2 == 1 || C.touches > 0, T = m.timeStamp - x.timeStamp, x.timeStamp = m.timeStamp, x.elapsedTime = x.timeStamp - x.startTime), x._active) {
-			let m = x._delta.map(Math.abs);
-			V.addTo(x._distance, m);
-		}
-		this.axisIntent && this.axisIntent(m);
-		let [D, O] = x._movement, [k, A] = S.threshold, { _step: j, values: M } = x;
-		if (S.hasCustomTransform ? (j[0] === !1 && (j[0] = Math.abs(D) >= k && M[0]), j[1] === !1 && (j[1] = Math.abs(O) >= A && M[1])) : (j[0] === !1 && (j[0] = Math.abs(D) >= k && Math.sign(D) * k), j[1] === !1 && (j[1] = Math.abs(O) >= A && Math.sign(O) * A)), x.intentional = j[0] !== !1 || j[1] !== !1, !x.intentional) return;
-		let N = [0, 0];
-		if (S.hasCustomTransform) {
-			let [m, x] = M;
-			N[0] = j[0] === !1 ? 0 : m - j[0], N[1] = j[1] === !1 ? 0 : x - j[1];
-		} else N[0] = j[0] === !1 ? 0 : D - j[0], N[1] = j[1] === !1 ? 0 : O - j[1];
-		this.restrictToAxis && !x._blocked && this.restrictToAxis(N);
-		let P = x.offset, F = x._active && !x._blocked || x.active;
-		F && (x.first = x._active && !x.active, x.last = !x._active && x.active, x.active = C[this.ingKey] = x._active, m && (x.first && ("bounds" in S && (x._bounds = call(S.bounds, x)), this.setup && this.setup()), x.movement = N, this.computeOffset()));
-		let [I, L] = x.offset, [[R, z], [B, H]] = x._bounds;
-		x.overflow = [I < R ? -1 : I > z ? 1 : 0, L < B ? -1 : L > H ? 1 : 0], x._movementBound[0] = x.overflow[0] ? x._movementBound[0] === !1 ? x._movement[0] : x._movementBound[0] : !1, x._movementBound[1] = x.overflow[1] ? x._movementBound[1] === !1 ? x._movement[1] : x._movementBound[1] : !1;
-		let U = x._active && S.rubberband || [0, 0];
-		if (x.offset = computeRubberband(x._bounds, x.offset, U), x.delta = V.sub(x.offset, P), this.computeMovement(), F && (!x.last || T > BEFORE_LAST_KINEMATICS_DELAY)) {
-			x.delta = V.sub(x.offset, P);
-			let m = x.delta.map(Math.abs);
-			V.addTo(x.distance, m), x.direction = x.delta.map(Math.sign), x._direction = x._delta.map(Math.sign), !x.first && T > 0 && (x.velocity = [m[0] / T, m[1] / T], x.timeDelta = T);
-		}
-	}
-	emit() {
-		let m = this.state, x = this.shared, S = this.config;
-		if (m._active || this.clean(), (m._blocked || !m.intentional) && !m._force && !S.triggerAllEvents) return;
-		let C = this.handler(_objectSpread2(_objectSpread2(_objectSpread2({}, x), m), {}, { [this.aliasKey]: m.values }));
-		C !== void 0 && (m.memo = C);
-	}
-	clean() {
-		this.eventStore.clean(), this.timeoutStore.clean();
-	}
-}, identity = (m) => m, DEFAULT_RUBBERBAND = .15, commonConfigResolver = {
-	enabled(m = !0) {
-		return m;
-	},
-	eventOptions(m, x, S) {
-		return _objectSpread2(_objectSpread2({}, S.shared.eventOptions), m);
-	},
-	preventDefault(m = !1) {
-		return m;
-	},
-	triggerAllEvents(m = !1) {
-		return m;
-	},
-	rubberband(m = 0) {
-		switch (m) {
-			case !0: return [DEFAULT_RUBBERBAND, DEFAULT_RUBBERBAND];
-			case !1: return [0, 0];
-			default: return V.toVector(m);
-		}
-	},
-	from(m) {
-		if (typeof m == "function") return m;
-		if (m != null) return V.toVector(m);
-	},
-	transform(m, x, S) {
-		let C = m || S.shared.transform;
-		if (this.hasCustomTransform = !!C, process.env.NODE_ENV === "development") {
-			let m = C || identity;
-			return (x) => {
-				let S = m(x);
-				return (!isFinite(S[0]) || !isFinite(S[1])) && console.warn(`[@use-gesture]: config.transform() must produce a valid result, but it was: [${S[0]},1]`), S;
-			};
-		}
-		return C || identity;
-	},
-	threshold(m) {
-		return V.toVector(m, 0);
-	}
-};
-process.env.NODE_ENV === "development" && Object.assign(commonConfigResolver, {
-	domTarget(m) {
-		if (m !== void 0) throw Error("[@use-gesture]: `domTarget` option has been renamed to `target`.");
-		return NaN;
-	},
-	lockDirection(m) {
-		if (m !== void 0) throw Error("[@use-gesture]: `lockDirection` option has been merged with `axis`. Use it as in `{ axis: 'lock' }`");
-		return NaN;
-	},
-	initial(m) {
-		if (m !== void 0) throw Error("[@use-gesture]: `initial` option has been renamed to `from`.");
-		return NaN;
-	}
-});
-var DEFAULT_AXIS_THRESHOLD = 0, coordinatesConfigResolver = _objectSpread2(_objectSpread2({}, commonConfigResolver), {}, {
-	axis(m, x, { axis: S }) {
-		if (this.lockDirection = S === "lock", !this.lockDirection) return S;
-	},
-	axisThreshold(m = DEFAULT_AXIS_THRESHOLD) {
-		return m;
-	},
-	bounds(m = {}) {
-		if (typeof m == "function") return (x) => coordinatesConfigResolver.bounds(m(x));
-		if ("current" in m) return () => m.current;
-		if (typeof HTMLElement == "function" && m instanceof HTMLElement) return m;
-		let { left: x = -Infinity, right: S = Infinity, top: C = -Infinity, bottom: T = Infinity } = m;
-		return [[x, S], [C, T]];
-	}
-}), isBrowser = typeof window < "u" && window.document && window.document.createElement;
-function supportsTouchEvents() {
-	return isBrowser && "ontouchstart" in window;
-}
-function isTouchScreen() {
-	return supportsTouchEvents() || isBrowser && window.navigator.maxTouchPoints > 1;
-}
-function supportsPointerEvents() {
-	return isBrowser && "onpointerdown" in window;
-}
-function supportsPointerLock() {
-	return isBrowser && "exitPointerLock" in window.document;
-}
-function supportsGestureEvents() {
-	try {
-		return "constructor" in GestureEvent;
-	} catch {
-		return !1;
-	}
-}
-var SUPPORT = {
-	isBrowser,
-	gesture: supportsGestureEvents(),
-	touch: supportsTouchEvents(),
-	touchscreen: isTouchScreen(),
-	pointer: supportsPointerEvents(),
-	pointerLock: supportsPointerLock()
-}, DEFAULT_PREVENT_SCROLL_DELAY = 250, DEFAULT_DRAG_DELAY = 180, DEFAULT_SWIPE_VELOCITY = .5, DEFAULT_SWIPE_DISTANCE = 50, DEFAULT_SWIPE_DURATION = 250, DEFAULT_KEYBOARD_DISPLACEMENT = 10, DEFAULT_DRAG_AXIS_THRESHOLD = {
-	mouse: 0,
-	touch: 0,
-	pen: 8
-}, dragConfigResolver = _objectSpread2(_objectSpread2({}, coordinatesConfigResolver), {}, {
-	device(m, x, { pointer: { touch: S = !1, lock: C = !1, mouse: T = !1 } = {} }) {
-		return this.pointerLock = C && SUPPORT.pointerLock, SUPPORT.touch && S ? "touch" : this.pointerLock ? "mouse" : SUPPORT.pointer && !T ? "pointer" : SUPPORT.touch ? "touch" : "mouse";
-	},
-	preventScrollAxis(m, x, { preventScroll: S }) {
-		if (this.preventScrollDelay = typeof S == "number" ? S : S || S === void 0 && m ? DEFAULT_PREVENT_SCROLL_DELAY : void 0, !(!SUPPORT.touchscreen || S === !1)) return m || (S === void 0 ? void 0 : "y");
-	},
-	pointerCapture(m, x, { pointer: { capture: S = !0, buttons: C = 1, keys: T = !0 } = {} }) {
-		return this.pointerButtons = C, this.keys = T, !this.pointerLock && this.device === "pointer" && S;
-	},
-	threshold(m, x, { filterTaps: S = !1, tapsThreshold: C = 3, axis: T = void 0 }) {
-		let D = V.toVector(m, S ? C : T ? 1 : 0);
-		return this.filterTaps = S, this.tapsThreshold = C, D;
-	},
-	swipe({ velocity: m = DEFAULT_SWIPE_VELOCITY, distance: x = DEFAULT_SWIPE_DISTANCE, duration: S = DEFAULT_SWIPE_DURATION } = {}) {
-		return {
-			velocity: this.transform(V.toVector(m)),
-			distance: this.transform(V.toVector(x)),
-			duration: S
-		};
-	},
-	delay(m = 0) {
-		switch (m) {
-			case !0: return DEFAULT_DRAG_DELAY;
-			case !1: return 0;
-			default: return m;
-		}
-	},
-	axisThreshold(m) {
-		return m ? _objectSpread2(_objectSpread2({}, DEFAULT_DRAG_AXIS_THRESHOLD), m) : DEFAULT_DRAG_AXIS_THRESHOLD;
-	},
-	keyboardDisplacement(m = DEFAULT_KEYBOARD_DISPLACEMENT) {
-		return m;
-	}
-});
-process.env.NODE_ENV === "development" && Object.assign(dragConfigResolver, {
-	useTouch(m) {
-		if (m !== void 0) throw Error("[@use-gesture]: `useTouch` option has been renamed to `pointer.touch`. Use it as in `{ pointer: { touch: true } }`.");
-		return NaN;
-	},
-	experimental_preventWindowScrollY(m) {
-		if (m !== void 0) throw Error("[@use-gesture]: `experimental_preventWindowScrollY` option has been renamed to `preventScroll`.");
-		return NaN;
-	},
-	swipeVelocity(m) {
-		if (m !== void 0) throw Error("[@use-gesture]: `swipeVelocity` option has been renamed to `swipe.velocity`. Use it as in `{ swipe: { velocity: 0.5 } }`.");
-		return NaN;
-	},
-	swipeDistance(m) {
-		if (m !== void 0) throw Error("[@use-gesture]: `swipeDistance` option has been renamed to `swipe.distance`. Use it as in `{ swipe: { distance: 50 } }`.");
-		return NaN;
-	},
-	swipeDuration(m) {
-		if (m !== void 0) throw Error("[@use-gesture]: `swipeDuration` option has been renamed to `swipe.duration`. Use it as in `{ swipe: { duration: 250 } }`.");
-		return NaN;
-	}
-});
-function clampStateInternalMovementToBounds(m) {
-	let [x, S] = m.overflow, [C, T] = m._delta, [D, O] = m._direction;
-	(x < 0 && C > 0 && D < 0 || x > 0 && C < 0 && D > 0) && (m._movement[0] = m._movementBound[0]), (S < 0 && T > 0 && O < 0 || S > 0 && T < 0 && O > 0) && (m._movement[1] = m._movementBound[1]);
-}
-var SCALE_ANGLE_RATIO_INTENT_DEG = 30, PINCH_WHEEL_RATIO = 100, PinchEngine = class extends Engine {
-	constructor(...m) {
-		super(...m), _defineProperty(this, "ingKey", "pinching"), _defineProperty(this, "aliasKey", "da");
-	}
-	init() {
-		this.state.offset = [1, 0], this.state.lastOffset = [1, 0], this.state._pointerEvents = /* @__PURE__ */ new Map();
-	}
-	reset() {
-		super.reset();
-		let m = this.state;
-		m._touchIds = [], m.canceled = !1, m.cancel = this.cancel.bind(this), m.turns = 0;
-	}
-	computeOffset() {
-		let { type: m, movement: x, lastOffset: S } = this.state;
-		m === "wheel" ? this.state.offset = V.add(x, S) : this.state.offset = [(1 + x[0]) * S[0], x[1] + S[1]];
-	}
-	computeMovement() {
-		let { offset: m, lastOffset: x } = this.state;
-		this.state.movement = [m[0] / x[0], m[1] - x[1]];
-	}
-	axisIntent() {
-		let m = this.state, [x, S] = m._movement;
-		if (!m.axis) {
-			let C = Math.abs(x) * SCALE_ANGLE_RATIO_INTENT_DEG - Math.abs(S);
-			C < 0 ? m.axis = "angle" : C > 0 && (m.axis = "scale");
-		}
-	}
-	restrictToAxis(m) {
-		this.config.lockDirection && (this.state.axis === "scale" ? m[1] = 0 : this.state.axis === "angle" && (m[0] = 0));
-	}
-	cancel() {
-		let m = this.state;
-		m.canceled || setTimeout(() => {
-			m.canceled = !0, m._active = !1, this.compute(), this.emit();
-		}, 0);
-	}
-	touchStart(m) {
-		this.ctrl.setEventIds(m);
-		let x = this.state, S = this.ctrl.touchIds;
-		if (x._active && x._touchIds.every((m) => S.has(m)) || S.size < 2) return;
-		this.start(m), x._touchIds = Array.from(S).slice(0, 2);
-		let C = touchDistanceAngle(m, x._touchIds);
-		C && this.pinchStart(m, C);
-	}
-	pointerStart(m) {
-		if (m.buttons != null && m.buttons % 2 != 1) return;
-		this.ctrl.setEventIds(m), m.target.setPointerCapture(m.pointerId);
-		let x = this.state, S = x._pointerEvents, C = this.ctrl.pointerIds;
-		if (x._active && Array.from(S.keys()).every((m) => C.has(m)) || (S.size < 2 && S.set(m.pointerId, m), x._pointerEvents.size < 2)) return;
-		this.start(m);
-		let T = distanceAngle(...Array.from(S.values()));
-		T && this.pinchStart(m, T);
-	}
-	pinchStart(m, x) {
-		let S = this.state;
-		S.origin = x.origin, this.computeValues([x.distance, x.angle]), this.computeInitial(), this.compute(m), this.emit();
-	}
-	touchMove(m) {
-		if (!this.state._active) return;
-		let x = touchDistanceAngle(m, this.state._touchIds);
-		x && this.pinchMove(m, x);
-	}
-	pointerMove(m) {
-		let x = this.state._pointerEvents;
-		if (x.has(m.pointerId) && x.set(m.pointerId, m), !this.state._active) return;
-		let S = distanceAngle(...Array.from(x.values()));
-		S && this.pinchMove(m, S);
-	}
-	pinchMove(m, x) {
-		let S = this.state, C = S._values[1], T = x.angle - C, D = 0;
-		Math.abs(T) > 270 && (D += Math.sign(T)), this.computeValues([x.distance, x.angle - 360 * D]), S.origin = x.origin, S.turns = D, S._movement = [S._values[0] / S._initial[0] - 1, S._values[1] - S._initial[1]], this.compute(m), this.emit();
-	}
-	touchEnd(m) {
-		this.ctrl.setEventIds(m), this.state._active && this.state._touchIds.some((m) => !this.ctrl.touchIds.has(m)) && (this.state._active = !1, this.compute(m), this.emit());
-	}
-	pointerEnd(m) {
-		let x = this.state;
-		this.ctrl.setEventIds(m);
-		try {
-			m.target.releasePointerCapture(m.pointerId);
-		} catch {}
-		x._pointerEvents.has(m.pointerId) && x._pointerEvents.delete(m.pointerId), x._active && x._pointerEvents.size < 2 && (x._active = !1, this.compute(m), this.emit());
-	}
-	gestureStart(m) {
-		m.cancelable && m.preventDefault();
-		let x = this.state;
-		x._active || (this.start(m), this.computeValues([m.scale, m.rotation]), x.origin = [m.clientX, m.clientY], this.compute(m), this.emit());
-	}
-	gestureMove(m) {
-		if (m.cancelable && m.preventDefault(), !this.state._active) return;
-		let x = this.state;
-		this.computeValues([m.scale, m.rotation]), x.origin = [m.clientX, m.clientY];
-		let S = x._movement;
-		x._movement = [m.scale - 1, m.rotation], x._delta = V.sub(x._movement, S), this.compute(m), this.emit();
-	}
-	gestureEnd(m) {
-		this.state._active && (this.state._active = !1, this.compute(m), this.emit());
-	}
-	wheel(m) {
-		let x = this.config.modifierKey;
-		x && (Array.isArray(x) ? !x.find((x) => m[x]) : !m[x]) || (this.state._active ? this.wheelChange(m) : this.wheelStart(m), this.timeoutStore.add("wheelEnd", this.wheelEnd.bind(this)));
-	}
-	wheelStart(m) {
-		this.start(m), this.wheelChange(m);
-	}
-	wheelChange(m) {
-		"uv" in m || (m.cancelable && m.preventDefault(), process.env.NODE_ENV === "development" && !m.defaultPrevented && console.warn("[@use-gesture]: To properly support zoom on trackpads, try using the `target` option.\n\nThis message will only appear in development mode."));
-		let x = this.state;
-		x._delta = [-wheelValues(m)[1] / PINCH_WHEEL_RATIO * x.offset[0], 0], V.addTo(x._movement, x._delta), clampStateInternalMovementToBounds(x), this.state.origin = [m.clientX, m.clientY], this.compute(m), this.emit();
-	}
-	wheelEnd() {
-		this.state._active && (this.state._active = !1, this.compute(), this.emit());
-	}
-	bind(m) {
-		let x = this.config.device;
-		x && (m(x, "start", this[x + "Start"].bind(this)), m(x, "change", this[x + "Move"].bind(this)), m(x, "end", this[x + "End"].bind(this)), m(x, "cancel", this[x + "End"].bind(this)), m("lostPointerCapture", "", this[x + "End"].bind(this))), this.config.pinchOnWheel && m("wheel", "", this.wheel.bind(this), { passive: !1 });
-	}
-}, pinchConfigResolver = _objectSpread2(_objectSpread2({}, commonConfigResolver), {}, {
-	device(m, x, { shared: S, pointer: { touch: C = !1 } = {} }) {
-		if (S.target && !SUPPORT.touch && SUPPORT.gesture) return "gesture";
-		if (SUPPORT.touch && C) return "touch";
-		if (SUPPORT.touchscreen) {
-			if (SUPPORT.pointer) return "pointer";
-			if (SUPPORT.touch) return "touch";
-		}
-	},
-	bounds(m, x, { scaleBounds: S = {}, angleBounds: C = {} }) {
-		let T = (m) => {
-			let x = assignDefault(call(S, m), {
-				min: -Infinity,
-				max: Infinity
-			});
-			return [x.min, x.max];
-		}, D = (m) => {
-			let x = assignDefault(call(C, m), {
-				min: -Infinity,
-				max: Infinity
-			});
-			return [x.min, x.max];
-		};
-		return typeof S != "function" && typeof C != "function" ? [T(), D()] : (m) => [T(m), D(m)];
-	},
-	threshold(m, x, S) {
-		return this.lockDirection = S.axis === "lock", V.toVector(m, this.lockDirection ? [.1, 3] : 0);
-	},
-	modifierKey(m) {
-		return m === void 0 ? "ctrlKey" : m;
-	},
-	pinchOnWheel(m = !0) {
-		return m;
-	}
-});
-_objectSpread2(_objectSpread2({}, coordinatesConfigResolver), {}, { mouseOnly: (m = !0) => m }), _objectSpread2(_objectSpread2({}, coordinatesConfigResolver), {}, { mouseOnly: (m = !0) => m });
-var EngineMap = /* @__PURE__ */ new Map(), ConfigResolverMap = /* @__PURE__ */ new Map();
-function registerAction(m) {
-	EngineMap.set(m.key, m.engine), ConfigResolverMap.set(m.key, m.resolver);
-}
-var pinchAction = {
-	key: "pinch",
-	engine: PinchEngine,
-	resolver: pinchConfigResolver
-};
-function _objectWithoutPropertiesLoose(m, x) {
-	if (m == null) return {};
-	var S = {}, C = Object.keys(m), T, D;
-	for (D = 0; D < C.length; D++) T = C[D], !(x.indexOf(T) >= 0) && (S[T] = m[T]);
-	return S;
-}
-function _objectWithoutProperties(m, x) {
-	if (m == null) return {};
-	var S = _objectWithoutPropertiesLoose(m, x), C, T;
-	if (Object.getOwnPropertySymbols) {
-		var D = Object.getOwnPropertySymbols(m);
-		for (T = 0; T < D.length; T++) C = D[T], !(x.indexOf(C) >= 0) && Object.prototype.propertyIsEnumerable.call(m, C) && (S[C] = m[C]);
-	}
-	return S;
-}
-var sharedConfigResolver = {
-	target(m) {
-		if (m) return () => "current" in m ? m.current : m;
-	},
-	enabled(m = !0) {
-		return m;
-	},
-	window(m = SUPPORT.isBrowser ? window : void 0) {
-		return m;
-	},
-	eventOptions({ passive: m = !0, capture: x = !1 } = {}) {
-		return {
-			passive: m,
-			capture: x
-		};
-	},
-	transform(m) {
-		return m;
-	}
-}, _excluded = [
-	"target",
-	"eventOptions",
-	"window",
-	"enabled",
-	"transform"
-];
-function resolveWith(m = {}, x) {
-	let S = {};
-	for (let [C, T] of Object.entries(x)) switch (typeof T) {
-		case "function":
-			if (process.env.NODE_ENV === "development") {
-				let x = T.call(S, m[C], C, m);
-				Number.isNaN(x) || (S[C] = x);
-			} else S[C] = T.call(S, m[C], C, m);
-			break;
-		case "object":
-			S[C] = resolveWith(m[C], T);
-			break;
-		case "boolean":
-			T && (S[C] = m[C]);
-			break;
-	}
-	return S;
-}
-function parse(m, x, S = {}) {
-	let C = m, { target: T, eventOptions: D, window: O, enabled: k, transform: A } = C, j = _objectWithoutProperties(C, _excluded);
-	if (S.shared = resolveWith({
-		target: T,
-		eventOptions: D,
-		window: O,
-		enabled: k,
-		transform: A
-	}, sharedConfigResolver), x) {
-		let m = ConfigResolverMap.get(x);
-		S[x] = resolveWith(_objectSpread2({ shared: S.shared }, j), m);
-	} else for (let m in j) {
-		let x = ConfigResolverMap.get(m);
-		if (x) S[m] = resolveWith(_objectSpread2({ shared: S.shared }, j[m]), x);
-		else if (process.env.NODE_ENV === "development" && ![
-			"drag",
-			"pinch",
-			"scroll",
-			"wheel",
-			"move",
-			"hover"
-		].includes(m)) {
-			if (m === "domTarget") throw Error("[@use-gesture]: `domTarget` option has been renamed to `target`.");
-			console.warn(`[@use-gesture]: Unknown config key \`${m}\` was used. Please read the documentation for further information.`);
-		}
-	}
-	return S;
-}
-var EventStore = class {
-	constructor(m, x) {
-		_defineProperty(this, "_listeners", /* @__PURE__ */ new Set()), this._ctrl = m, this._gestureKey = x;
-	}
-	add(m, x, S, C, T) {
-		let D = this._listeners, O = toDomEventType(x, S), k = _objectSpread2(_objectSpread2({}, this._gestureKey ? this._ctrl.config[this._gestureKey].eventOptions : {}), T);
-		m.addEventListener(O, C, k);
-		let A = () => {
-			m.removeEventListener(O, C, k), D.delete(A);
-		};
-		return D.add(A), A;
-	}
-	clean() {
-		this._listeners.forEach((m) => m()), this._listeners.clear();
-	}
-}, TimeoutStore = class {
-	constructor() {
-		_defineProperty(this, "_timeouts", /* @__PURE__ */ new Map());
-	}
-	add(m, x, S = 140, ...C) {
-		this.remove(m), this._timeouts.set(m, window.setTimeout(x, S, ...C));
-	}
-	remove(m) {
-		let x = this._timeouts.get(m);
-		x && window.clearTimeout(x);
-	}
-	clean() {
-		this._timeouts.forEach((m) => void window.clearTimeout(m)), this._timeouts.clear();
-	}
-}, Controller = class {
-	constructor(m) {
-		_defineProperty(this, "gestures", /* @__PURE__ */ new Set()), _defineProperty(this, "_targetEventStore", new EventStore(this)), _defineProperty(this, "gestureEventStores", {}), _defineProperty(this, "gestureTimeoutStores", {}), _defineProperty(this, "handlers", {}), _defineProperty(this, "config", {}), _defineProperty(this, "pointerIds", /* @__PURE__ */ new Set()), _defineProperty(this, "touchIds", /* @__PURE__ */ new Set()), _defineProperty(this, "state", { shared: {
-			shiftKey: !1,
-			metaKey: !1,
-			ctrlKey: !1,
-			altKey: !1
-		} }), resolveGestures(this, m);
-	}
-	setEventIds(m) {
-		if (isTouch(m)) return this.touchIds = new Set(touchIds(m)), this.touchIds;
-		if ("pointerId" in m) return m.type === "pointerup" || m.type === "pointercancel" ? this.pointerIds.delete(m.pointerId) : m.type === "pointerdown" && this.pointerIds.add(m.pointerId), this.pointerIds;
-	}
-	applyHandlers(m, x) {
-		this.handlers = m, this.nativeHandlers = x;
-	}
-	applyConfig(m, x) {
-		this.config = parse(m, x, this.config);
-	}
-	clean() {
-		this._targetEventStore.clean();
-		for (let m of this.gestures) this.gestureEventStores[m].clean(), this.gestureTimeoutStores[m].clean();
-	}
-	effect() {
-		return this.config.shared.target && this.bind(), () => this._targetEventStore.clean();
-	}
-	bind(...m) {
-		let x = this.config.shared, S = {}, C;
-		if (!(x.target && (C = x.target(), !C))) {
-			if (x.enabled) {
-				for (let x of this.gestures) {
-					let T = this.config[x], D = bindToProps(S, T.eventOptions, !!C);
-					T.enabled && new (EngineMap.get(x))(this, m, x).bind(D);
-				}
-				let T = bindToProps(S, x.eventOptions, !!C);
-				for (let x in this.nativeHandlers) T(x, "", (S) => this.nativeHandlers[x](_objectSpread2(_objectSpread2({}, this.state.shared), {}, {
-					event: S,
-					args: m
-				})), void 0, !0);
-			}
-			for (let m in S) S[m] = chain(...S[m]);
-			if (!C) return S;
-			for (let m in S) {
-				let { device: x, capture: T, passive: D } = parseProp(m);
-				this._targetEventStore.add(C, x, "", S[m], {
-					capture: T,
-					passive: D
-				});
-			}
-		}
-	}
-};
-function setupGesture(m, x) {
-	m.gestures.add(x), m.gestureEventStores[x] = new EventStore(m, x), m.gestureTimeoutStores[x] = new TimeoutStore();
-}
-function resolveGestures(m, x) {
-	x.drag && setupGesture(m, "drag"), x.wheel && setupGesture(m, "wheel"), x.scroll && setupGesture(m, "scroll"), x.move && setupGesture(m, "move"), x.pinch && setupGesture(m, "pinch"), x.hover && setupGesture(m, "hover");
-}
-var bindToProps = (m, x, S) => (C, T, D, O = {}, k = !1) => {
-	let A = O.capture ?? x.capture, j = O.passive ?? x.passive, M = k ? C : toHandlerProp(C, T, A);
-	S && j && (M += "Passive"), m[M] = m[M] || [], m[M].push(D);
-};
-function useRecognizers(m, S = {}, C, T) {
-	let D = React.useMemo(() => new Controller(m), []);
-	if (D.applyHandlers(m, T), D.applyConfig(S, C), React.useEffect(D.effect.bind(D)), React.useEffect(() => D.clean.bind(D), []), S.target === void 0) return D.bind.bind(D);
-}
-function usePinch(m, x) {
-	return registerAction(pinchAction), useRecognizers({ pinch: m }, x || {}, "pinch");
-}
-function usePlotStatus(m) {
-	let { plotStatusList: x } = useMainModuleResult();
-	if (Array.isArray(x)) return x.find((x) => x.name.toLowerCase() == m?.toLowerCase());
-}
-const useProjectArea = () => {
-	let { measurementSystem: m } = useMainModuleResult(), x = m === "metric" ? "m²" : "sqft";
-	return {
-		unit: x,
-		prepareArea: (m) => m == null || m == 0 ? "N/A" : `${m} ${x ?? ""}`
-	};
-};
-function BedroomIcon({ width: m = "1.5625rem", className: x }) {
-	return /* @__PURE__ */ jsxs("svg", {
-		style: { width: m },
-		className: x,
-		viewBox: "0 0 25 25",
-		fill: "none",
-		xmlns: "http://www.w3.org/2000/svg",
-		children: [
-			/* @__PURE__ */ jsx("path", {
-				d: "M22.8734 16.0297V9.55908C22.8734 8.45451 21.978 7.55908 20.8734 7.55908H11.2379C10.5692 7.55908 9.94472 7.89328 9.57379 8.44968L8.75576 9.67673L8.68311 9.5501",
-				stroke: "currentColor",
-				strokeWidth: "2"
-			}),
-			/* @__PURE__ */ jsx("path", {
-				d: "M1.69678 3.32397V16.0299M1.69678 23.0887V16.0299M1.69678 19.5593H22.8732M22.8732 23.0887V14.9122C22.8732 14.3599 22.4255 13.9122 21.8732 13.9122H5.88549C4.55941 13.9122 3.28764 14.439 2.34996 15.3767L1.69678 16.0299",
-				stroke: "currentColor",
-				strokeWidth: "2",
-				strokeLinecap: "round"
-			}),
-			/* @__PURE__ */ jsx("circle", {
-				cx: "5.93224",
-				cy: "10.3827",
-				r: "2.52941",
-				stroke: "currentColor",
-				strokeWidth: "2"
-			})
-		]
-	});
-}
-function RulerIcon({ className: m, width: x }) {
-	return /* @__PURE__ */ jsx("svg", {
-		style: { width: x },
-		className: m,
-		viewBox: "0 0 16 16",
-		fill: "none",
-		xmlns: "http://www.w3.org/2000/svg",
-		children: /* @__PURE__ */ jsx("g", {
-			clipPath: "url(#clip0_679_1033)",
-			children: /* @__PURE__ */ jsx("path", {
-				d: "M9.66666 3.66667L10.6667 4.66667M7.66666 5.66667L8.66666 6.66667M5.66666 7.66667L6.66666 8.66667M3.66666 9.66667L4.66666 10.6667M1.71043 11.7105L4.28951 14.2896C4.42152 14.4216 4.48752 14.4876 4.56363 14.5123C4.63058 14.5341 4.70269 14.5341 4.76964 14.5123C4.84575 14.4876 4.91175 14.4216 5.04376 14.2896L14.2895 5.04382C14.4215 4.91182 14.4875 4.84581 14.5123 4.7697C14.534 4.70276 14.534 4.63064 14.5123 4.56369C14.4875 4.48758 14.4215 4.42158 14.2895 4.28957L11.7104 1.71049C11.5784 1.57848 11.5124 1.51248 11.4363 1.48775C11.3694 1.466 11.2972 1.466 11.2303 1.48775C11.1542 1.51248 11.0882 1.57848 10.9562 1.71049L1.71043 10.9562C1.57842 11.0882 1.51242 11.1542 1.48769 11.2304C1.46594 11.2973 1.46594 11.3694 1.48769 11.4364C1.51242 11.5125 1.57842 11.5785 1.71043 11.7105Z",
-				stroke: "currentColor",
-				strokeWidth: "1.5",
-				strokeLinecap: "round",
-				strokeLinejoin: "round"
-			})
-		})
-	});
-}
-function BathroomIcon({ width: m = "1.5625rem" }) {
-	return /* @__PURE__ */ jsxs("svg", {
-		style: { width: m },
-		height: "25",
-		viewBox: "0 0 25 25",
-		fill: "none",
-		xmlns: "http://www.w3.org/2000/svg",
-		children: [
-			/* @__PURE__ */ jsx("path", {
-				d: "M9.88428 11.95V11.35M12.9897 11.1024V10.75",
-				stroke: "#50555F",
-				strokeWidth: "2",
-				strokeLinecap: "round",
-				strokeLinejoin: "round"
-			}),
-			/* @__PURE__ */ jsx("path", {
-				d: "M22.166 16.0437H3.10596L3.10615 16.9564C3.10671 19.5713 5.22663 21.6908 7.84149 21.6908H17.6269C20.1338 21.6908 22.166 19.6585 22.166 17.1517V16.0437Z",
-				stroke: "currentColor",
-				strokeWidth: "2",
-				strokeLinejoin: "round"
-			}),
-			/* @__PURE__ */ jsx("path", {
-				d: "M20.754 23.8085L18.6364 21.6908H7.34226L5.22461 23.8085M5.22461 16.0438V4.1594M5.22461 4.04378V4.1594M5.22461 4.1594V4.1594C5.22461 2.80095 6.32585 1.69971 7.6843 1.69971H10.084C10.6363 1.69971 11.084 2.14742 11.084 2.69971V3.88906M11.084 3.88906C10.1616 4.08596 9.22808 5.39148 8.04814 7.57307H14.4011C13.7302 6.14195 13.1391 5.14968 12.5847 4.55384C12.0639 3.994 11.5755 3.78414 11.084 3.88906Z",
-				stroke: "currentColor",
-				strokeWidth: "2",
-				strokeLinecap: "round"
-			})
-		]
-	});
-}
-var use_isomorphic_layout_effect_default = typeof window < "u" ? useLayoutEffect : useEffect;
-function useEventListener(m, x, S, C) {
-	let T = useRef(x);
-	use_isomorphic_layout_effect_default(() => {
-		T.current = x;
-	}, [x]), useEffect(() => {
-		let x = S?.current ?? window;
-		if (!(x && x.addEventListener)) return;
-		let D = (m) => T.current(m);
-		return x.addEventListener(m, D, C), () => {
-			x.removeEventListener(m, D, C);
-		};
-	}, [
-		m,
-		S,
-		C
-	]);
-}
-var use_event_listener_default = useEventListener;
-function useOnClickOutside(m, x, S = "mousedown", C = []) {
-	use_event_listener_default(S, (S) => {
-		let T = m?.current;
-		if (!(!T || T.contains(S.target))) {
-			for (let m of C) {
-				let x = document.querySelector(m);
-				if (x && x.contains(S.target)) return;
-			}
-			S.target.tagName !== "HTML" && x(S);
-		}
-	});
-}
-var use_on_click_outside_default = useOnClickOutside;
-function PlanViewPopup({ canvas: m, obj: x, item: S, onClickOutside: C }) {
-	let { t: T } = useTranslation(), D = useRef(null), [O, k] = useState([1, 1]), { showPrice: A, currency: j, clientName: M, projectName: N, country: F, city: I, district: L } = useMainModuleResult(), R = usePlotStatus(S.plotInfo?.statusName ?? "available"), z = useRef(!1), { prepareArea: U } = useProjectArea();
-	use_on_click_outside_default(D, (m) => {
-		m.preventDefault(), C();
-	}, "mousedown"), use_on_click_outside_default(D, (m) => {
-		m.preventDefault(), z.current = !0;
-	}, "touchmove"), use_on_click_outside_default(D, (m) => {
-		m.preventDefault(), z.current ? z.current = !1 : C();
-	}, "touchend");
-	let W = (m, S) => {
-		let C = m.getZoom(), T = m.getWidth(), O = m.getHeight(), k = x.label.getBoundingRect(), A = k.top + k.height / 2, j = k.left + k.width / 2;
-		return {
-			canvasTop: 0,
-			canvasLeft: 0,
-			canvasRight: T,
-			canvasBottom: O,
-			objectTop: A - 10,
-			objectLeft: j - 10,
-			popupWidth: D.current?.offsetWidth ?? 0,
-			popupHeight: D.current?.offsetHeight ?? 0,
-			zoom: C
-		};
-	}, q = () => {
-		if (D.current == null) return;
-		let S = W(m, x), C = [1, 1], T = S?.objectLeft ?? 0, O = (S?.objectTop ?? 0) - S.popupHeight;
-		T + S.popupWidth > S.canvasRight && (T = S?.objectLeft - S.popupWidth, C[0] = -1), O - S.popupHeight < S.canvasTop && (O = S?.objectTop, C[1] = -1);
-		let [A, j] = J(C[0], C[1]);
-		k(C), D.current.style.left = T + A + "px", D.current.style.top = O + j + "px";
-	}, J = (m, x) => m > 0 && x > 0 ? [10, -20] : m > 0 && x < 0 ? [20, 40] : m < 0 && x > 0 ? [20, -20] : m < 0 && x < 0 ? [10, 40] : [0], $V = (m, x) => m > 0 && x > 0 ? "triangle-bottom-left" : m > 0 && x < 0 ? "triangle-top-left" : m < 0 && x > 0 ? "triangle-bottom-right" : "triangle-top-right";
-	useEffect(() => {
-		q(), m.on("before:render", () => {
-			q();
-		});
-	}, []);
-	let Y = R?.name.toLowerCase() == "sold" ? T("web.availability.status.Sold") : formatCurrency(S.plotInfo?.price ?? 0, null, A, j, document.documentElement.lang);
-	return /* @__PURE__ */ jsxs("div", {
-		ref: D,
-		onClick: async () => {
-			let m = PlanItemTypeEnum[x?.itemType ?? ""], C = "/availability/site-plan", T = document.documentElement.lang;
-			if (m === PlanItemTypeEnum.PlotContainer) C = T === "en" ? "" : `/${T}/availability/site-plan/plot-container/${x?.itemId}`, window.location.href = C;
-			else if (m === PlanItemTypeEnum.Plot) {
-				let m = await generatePlotUrl(x.itemId.toString(), M, N, F, I, L, S.plotInfo?.name, S.plotInfo?.bedrooms);
-				window.location.href = m;
-			}
-		},
-		className: "cursor-pointer mobile:text-[0.8rem] absolute p-4 bg-thirdLayer text-bodyContentColor touch-none",
-		style: { scale: 1 },
-		children: [
-			/* @__PURE__ */ jsxs("div", {
-				className: "text-[1em] leading-[1.375em] font-bold flex justify-between",
-				children: [/* @__PURE__ */ jsx("div", { children: S.plotInfo?.typeName }), /* @__PURE__ */ jsxs("div", {
-					className: "flex items-center gap-1 text-[0.8125em] leading-[1.375em]",
-					children: [/* @__PURE__ */ jsx("span", {
-						style: { color: R?.color },
-						children: T(`${R?.name}`)
-					}), /* @__PURE__ */ jsx("svg", {
-						width: "16",
-						height: "16",
-						className: "rtl:rotate-180",
-						viewBox: "0 0 16 16",
-						fill: "none",
-						xmlns: "http://www.w3.org/2000/svg",
-						children: /* @__PURE__ */ jsx("path", {
-							d: "M11.3546 8.00004C11.3546 7.75416 11.2606 7.54444 11.0726 7.35642L5.43193 1.83868C5.27283 1.67958 5.07758 1.60004 4.84616 1.60004C4.37611 1.60004 4.00006 1.96162 4.00006 2.43168C4.00006 2.66309 4.09407 2.8728 4.25317 3.03913L9.34424 8.00004L4.25317 12.9609C4.1013 13.12 4.00006 13.3298 4.00006 13.5612C4.00006 14.0385 4.37611 14.4 4.84616 14.4C5.07758 14.4 5.27283 14.3205 5.43193 14.1614L11.0726 8.64365C11.2679 8.45563 11.3546 8.24591 11.3546 8.00004Z",
-							fill: R?.color
-						})
-					})]
-				})]
-			}),
-			/* @__PURE__ */ jsx("div", {
-				className: "text-xs leading-[1.375em] text-inActiveBodyContentColor mb-4",
-				children: S.plotInfo?.name
-			}),
-			/* @__PURE__ */ jsxs("div", {
-				className: "flex grid grid-cols-2 gap-[0.7081rem] mobile:gap-[2.125em] whitespace-pre text-[0.75rem]",
-				children: [
-					A && /* @__PURE__ */ jsxs("div", {
-						style: { color: R?.color },
-						className: "flex flex-[1] gap-[0.25em] items-center",
-						children: [/* @__PURE__ */ jsxs("svg", {
-							width: "16",
-							height: "16",
-							viewBox: "0 0 16 16",
-							fill: "none",
-							xmlns: "http://www.w3.org/2000/svg",
-							children: [/* @__PURE__ */ jsx("g", {
-								clipPath: "url(#clip0_679_1027)",
-								children: /* @__PURE__ */ jsx("path", {
-									d: "M9.01964 5.56788C8.63803 5.83995 8.17103 5.99998 7.66665 5.99998C6.37798 5.99998 5.33331 4.95531 5.33331 3.66665C5.33331 2.37798 6.37798 1.33331 7.66665 1.33331C8.50197 1.33331 9.23478 1.77226 9.64698 2.43207M3.99998 13.3914H5.74017C5.96706 13.3914 6.19257 13.4184 6.41252 13.4724L8.25124 13.9192C8.65021 14.0164 9.06583 14.0259 9.46896 13.9476L11.502 13.5521C12.039 13.4474 12.533 13.1903 12.9202 12.8136L14.3586 11.4145C14.7693 11.0156 14.7693 10.3683 14.3586 9.96869C13.9887 9.60894 13.4031 9.56844 12.9847 9.87352L11.3084 11.0965C11.0683 11.272 10.7762 11.3665 10.4757 11.3665H8.85698L9.88736 11.3665C10.4681 11.3665 10.9386 10.9089 10.9386 10.3439V10.1394C10.9386 9.67031 10.6104 9.26129 10.1427 9.14789L8.55238 8.76114C8.29357 8.69837 8.02851 8.66665 7.76207 8.66665C7.11887 8.66665 5.95458 9.19919 5.95458 9.19919L3.99998 10.0166M13.3333 4.33331C13.3333 5.62198 12.2886 6.66665 11 6.66665C9.71132 6.66665 8.66665 5.62198 8.66665 4.33331C8.66665 3.04465 9.71132 1.99998 11 1.99998C12.2886 1.99998 13.3333 3.04465 13.3333 4.33331ZM1.33331 9.73331L1.33331 13.6C1.33331 13.9733 1.33331 14.16 1.40598 14.3026C1.46989 14.4281 1.57188 14.5301 1.69732 14.594C1.83993 14.6666 2.02661 14.6666 2.39998 14.6666H2.93331C3.30668 14.6666 3.49337 14.6666 3.63597 14.594C3.76141 14.5301 3.8634 14.4281 3.92732 14.3026C3.99998 14.16 3.99998 13.9733 3.99998 13.6V9.73331C3.99998 9.35995 3.99998 9.17326 3.92732 9.03065C3.8634 8.90521 3.76141 8.80323 3.63597 8.73931C3.49337 8.66665 3.30668 8.66665 2.93331 8.66665L2.39998 8.66665C2.02661 8.66665 1.83993 8.66665 1.69732 8.73931C1.57188 8.80322 1.46989 8.90521 1.40598 9.03065C1.33331 9.17326 1.33331 9.35994 1.33331 9.73331Z",
-									stroke: "currentColor",
-									strokeWidth: "1.5",
-									strokeLinecap: "round",
-									strokeLinejoin: "round"
-								})
-							}), /* @__PURE__ */ jsx("defs", { children: /* @__PURE__ */ jsx("clipPath", {
-								id: "clip0_679_1027",
-								children: /* @__PURE__ */ jsx("rect", {
-									width: "16",
-									height: "16",
-									fill: "white"
-								})
-							}) })]
-						}), /* @__PURE__ */ jsx("span", {
-							className: "text-bodyContentColor",
-							children: Y
-						})]
-					}),
-					/* @__PURE__ */ jsxs("div", {
-						style: { color: R?.color },
-						className: "flex gap-[0.25em] items-center",
-						children: [/* @__PURE__ */ jsx(BedroomIcon, {
-							className: "stroke-footerTextColor",
-							width: "1rem"
-						}), /* @__PURE__ */ jsx("span", {
-							className: "text-bodyContentColor",
-							children: S.plotInfo?.bedrooms + ` ${T("web.unit_detail.bedroom")}`
-						})]
-					}),
-					/* @__PURE__ */ jsxs("div", {
-						style: { color: R?.color },
-						className: "mobile:-mt-[1.625em] flex gap-[0.25em] items-center",
-						children: [/* @__PURE__ */ jsx(RulerIcon, { className: "w-4 h-4" }), /* @__PURE__ */ jsx("span", {
-							className: "text-bodyContentColor",
-							children: U(S.plotInfo?.metricArea ?? 0)
-						})]
-					}),
-					/* @__PURE__ */ jsxs("div", {
-						style: { color: R?.color },
-						className: "mobile:-mt-[1.625em] flex gap-[0.25em] items-center",
-						children: [/* @__PURE__ */ jsx(BathroomIcon, {
-							className: "stroke-footerTextColor",
-							width: "1rem"
-						}), /* @__PURE__ */ jsx("span", {
-							className: "text-bodyContentColor",
-							children: S.plotInfo?.bathrooms + ` ${T("web.unit_detail.bathrooms").toLowerCase()}`
-						})]
-					})
-				]
-			}),
-			/* @__PURE__ */ jsx("div", { className: `absolute w-0 h-0 ${$V(O[0], O[1])} ` })
-		]
-	});
-}
-function ContainerPlanPopup({ canvas: m, obj: x, item: S, onClickOutside: C, onNavigate: T, formatCurrency: D = (m) => `£${m.toLocaleString()}`, t: O = (m) => m, showPrice: k = !0 }) {
-	let A = useRef(null), [j, M] = useState([1, 1]), N = useRef(!1), F = (m) => {
-		A.current && !A.current.contains(m.target) && (m.type === "mousedown" ? (m.preventDefault(), C()) : m.type === "touchmove" ? (m.preventDefault(), N.current = !0) : m.type === "touchend" && (m.preventDefault(), N.current ? N.current = !1 : C()));
-	};
-	useEffect(() => (document.addEventListener("mousedown", F), document.addEventListener("touchmove", F), document.addEventListener("touchend", F), () => {
-		document.removeEventListener("mousedown", F), document.removeEventListener("touchmove", F), document.removeEventListener("touchend", F);
-	}), []);
-	let I = (m, S) => {
-		let C = m.getZoom(), T = m.getWidth(), D = m.getHeight(), O = x.label.getBoundingRect();
-		return {
-			canvasTop: 0,
-			canvasLeft: 0,
-			canvasRight: T,
-			canvasBottom: D,
-			objectTop: O.top + O.height / 2,
-			objectLeft: O.left + O.width / 2,
-			popupWidth: A.current?.offsetWidth ?? 0,
-			popupHeight: A.current?.offsetHeight ?? 0,
-			zoom: C
-		};
-	}, L = () => {
-		if (A.current == null) return;
-		let S = I(m, x), C = [1, 1], T = S?.objectLeft ?? 0, D = (S?.objectTop ?? 0) - S.popupHeight;
-		T + S.popupWidth > S.canvasRight && (T = S?.objectLeft - S.popupWidth, C[0] = -1), D - S.popupHeight < S.canvasTop && (D = S?.objectTop, C[1] = -1);
-		let [O, k] = R(C[0], C[1]);
-		M(C), A.current.style.left = T + O + "px", A.current.style.top = D + k + "px";
-	}, R = (m, x) => m > 0 && x > 0 ? [10, -20] : m > 0 && x < 0 ? [20, 40] : m < 0 && x > 0 ? [20, -20] : m < 0 && x < 0 ? [10, 40] : [0, 0];
-	return useEffect(() => {
-		L(), m.on("before:render", () => {
-			L();
-		});
-	}, []), /* @__PURE__ */ jsxs("div", {
-		ref: A,
-		onClick: async () => {
-			let m = "/availability/site-plan";
-			m = `/availability/site-plan/container/${x?.itemId}`, T && T(m);
-		},
-		className: "cursor-pointer mobile:text-[0.8rem] absolute p-4 bg-thirdLayer text-bodyContentColor touch-none",
-		style: { scale: 1 },
-		children: [
-			/* @__PURE__ */ jsxs("div", {
-				className: "mb-[0.875em] text-[1em] leading-[1.375em] font-bold flex justify-between",
-				children: [/* @__PURE__ */ jsx("div", { children: S.plotContainerInfo?.name }), /* @__PURE__ */ jsx("div", {
-					className: "flex items-center gap-1 text-[0.8125em] leading-[1.375em]",
-					children: /* @__PURE__ */ jsx("svg", {
-						width: "16",
-						height: "16",
-						className: "rtl:rotate-180",
-						viewBox: "0 0 16 16",
-						fill: "none",
-						xmlns: "http://www.w3.org/2000/svg",
-						children: /* @__PURE__ */ jsx("path", {
-							d: "M11.3546 8.00004C11.3546 7.75416 11.2606 7.54444 11.0726 7.35642L5.43193 1.83868C5.27283 1.67958 5.07758 1.60004 4.84616 1.60004C4.37611 1.60004 4.00006 1.96162 4.00006 2.43168C4.00006 2.66309 4.09407 2.8728 4.25317 3.03913L9.34424 8.00004L4.25317 12.9609C4.1013 13.12 4.00006 13.3298 4.00006 13.5612C4.00006 14.0385 4.37611 14.4 4.84616 14.4C5.07758 14.4 5.27283 14.3205 5.43193 14.1614L11.0726 8.64365C11.2679 8.45563 11.3546 8.24591 11.3546 8.00004Z",
-							fill: "currentColor"
-						})
-					})
-				})]
-			}),
-			/* @__PURE__ */ jsxs("div", {
-				className: "grid grid-cols-1 whitespace-pre",
-				children: [
-					k && /* @__PURE__ */ jsxs("div", {
-						className: "col-span-1 flex gap-[0.5em] items-center",
-						children: [/* @__PURE__ */ jsxs("svg", {
-							width: "16",
-							height: "16",
-							viewBox: "0 0 16 16",
-							fill: "none",
-							xmlns: "http://www.w3.org/2000/svg",
-							children: [/* @__PURE__ */ jsx("g", {
-								clipPath: "url(#clip0_679_1027)",
-								children: /* @__PURE__ */ jsx("path", {
-									d: "M9.01964 5.56788C8.63803 5.83995 8.17103 5.99998 7.66665 5.99998C6.37798 5.99998 5.33331 4.95531 5.33331 3.66665C5.33331 2.37798 6.37798 1.33331 7.66665 1.33331C8.50197 1.33331 9.23478 1.77226 9.64698 2.43207M3.99998 13.3914H5.74017C5.96706 13.3914 6.19257 13.4184 6.41252 13.4724L8.25124 13.9192C8.65021 14.0164 9.06583 14.0259 9.46896 13.9476L11.502 13.5521C12.039 13.4474 12.533 13.1903 12.9202 12.8136L14.3586 11.4145C14.7693 11.0156 14.7693 10.3683 14.3586 9.96869C13.9887 9.60894 13.4031 9.56844 12.9847 9.87352L11.3084 11.0965C11.0683 11.272 10.7762 11.3665 10.4757 11.3665H8.85698L9.88736 11.3665C10.4681 11.3665 10.9386 10.9089 10.9386 10.3439V10.1394C10.9386 9.67031 10.6104 9.26129 10.1427 9.14789L8.55238 8.76114C8.29357 8.69837 8.02851 8.66665 7.76207 8.66665C7.11887 8.66665 5.95458 9.19919 5.95458 9.19919L3.99998 10.0166M13.3333 4.33331C13.3333 5.62198 12.2886 6.66665 11 6.66665C9.71132 6.66665 8.66665 5.62198 8.66665 4.33331C8.66665 3.04465 9.71132 1.99998 11 1.99998C12.2886 1.99998 13.3333 3.04465 13.3333 4.33331ZM1.33331 9.73331L1.33331 13.6C1.33331 13.9733 1.33331 14.16 1.40598 14.3026C1.46989 14.4281 1.57188 14.5301 1.69732 14.594C1.83993 14.6666 2.02661 14.6666 2.39998 14.6666H2.93331C3.30668 14.6666 3.49337 14.6666 3.63597 14.594C3.76141 14.5301 3.8634 14.4281 3.92732 14.3026C3.99998 14.16 3.99998 13.9733 3.99998 13.6V9.73331C3.99998 9.35995 3.99998 9.17326 3.92732 9.03065C3.8634 8.90521 3.76141 8.80323 3.63597 8.73931C3.49337 8.66665 3.30668 8.66665 2.93331 8.66665L2.39998 8.66665C2.02661 8.66665 1.83993 8.66665 1.69732 8.73931C1.57188 8.80322 1.46989 8.90521 1.40598 9.03065C1.33331 9.17326 1.33331 9.35994 1.33331 9.73331Z",
-									stroke: "currentColor",
-									strokeWidth: "1.5",
-									strokeLinecap: "round",
-									strokeLinejoin: "round"
-								})
-							}), /* @__PURE__ */ jsx("defs", { children: /* @__PURE__ */ jsx("clipPath", {
-								id: "clip0_679_1027",
-								children: /* @__PURE__ */ jsx("rect", {
-									width: "16",
-									height: "16",
-									fill: "white"
-								})
-							}) })]
-						}), /* @__PURE__ */ jsx("div", {
-							className: "text-bodyContentColor",
-							children: `${D(S.plotContainerInfo?.priceMin ?? 0)} - ${D(S.plotContainerInfo?.priceMax ?? 0)}`
-						})]
-					}),
-					/* @__PURE__ */ jsx("div", {
-						className: "col-span-1 flex gap-[0.5em] items-center",
-						children: /* @__PURE__ */ jsx("div", {
-							className: "text-bodyContentColor",
-							children: `${S.plotContainerInfo?.bedroomsMin} ${O("web.unit_detail.bedroom")} - ${S.plotContainerInfo?.bedroomsMax} ${O("web.unit_detail.bedroom")}`
-						})
-					}),
-					/* @__PURE__ */ jsx("div", {
-						className: "col-span-1 flex gap-[0.5em] items-center",
-						children: /* @__PURE__ */ jsx("div", {
-							className: "text-bodyContentColor",
-							children: `${S.plotContainerInfo?.areaMin} ${O(S.plotContainerInfo?.areaUnit ?? "")} - ${S.plotContainerInfo?.areaMax} ${O(S.plotContainerInfo?.areaUnit ?? "")}`
-						})
-					})
-				]
-			}),
-			/* @__PURE__ */ jsx("div", { className: `absolute w-0 h-0 ${((m, x) => m > 0 && x > 0 ? "triangle-bottom-left" : m > 0 && x < 0 ? "triangle-top-left" : m < 0 && x > 0 ? "triangle-bottom-right" : "triangle-top-right")(j[0], j[1])}` })
-		]
-	});
-}
-var FloorViewPopup = React.forwardRef(({ canvas: m, obj: x, item: S, onClickOutside: C, onNavigate: T, measurementSystem: D = "metric" }, O) => {
-	let k = useRef(null), [A, j] = useState([1, 1]), M = useRef(!1), N = (m) => {
-		k.current && !k.current.contains(m.target) && (m.type === "mousedown" ? (m.preventDefault(), C()) : m.type === "touchmove" ? (m.preventDefault(), M.current = !0) : m.type === "touchend" && (m.preventDefault(), M.current ? M.current = !1 : C()));
-	};
-	useEffect(() => (document.addEventListener("mousedown", N), document.addEventListener("touchmove", N), document.addEventListener("touchend", N), () => {
-		document.removeEventListener("mousedown", N), document.removeEventListener("touchmove", N), document.removeEventListener("touchend", N);
-	}), []);
-	let F = (m) => {
-		let S = m.getZoom(), C = m.getWidth(), T = m.getHeight(), D = x.label.getBoundingRect();
-		return {
-			canvasTop: 0,
-			canvasLeft: 0,
-			canvasRight: C,
-			canvasBottom: T,
-			objectTop: D.top + D.height / 2,
-			objectLeft: D.left + D.width / 2,
-			popupWidth: k.current?.offsetWidth ?? 0,
-			popupHeight: k.current?.offsetHeight ?? 0,
-			zoom: S
-		};
-	}, I = (m, x) => m > 0 && x > 0 ? [10, -20] : m > 0 && x < 0 ? [20, 40] : m < 0 && x > 0 ? [20, -20] : m < 0 && x < 0 ? [10, 40] : [0, 0], L = (m, x) => m > 0 && x > 0 ? "triangle-bottom-left" : m > 0 && x < 0 ? "triangle-top-left" : m < 0 && x > 0 ? "triangle-bottom-right" : "triangle-top-right";
-	useEffect(() => {
-		let x = () => {
-			if (k.current == null) return;
-			let x = F(m), S = [1, 1], C = x?.objectLeft ?? 0, T = (x?.objectTop ?? 0) - x.popupHeight;
-			C + x.popupWidth > x.canvasRight && (C = x?.objectLeft - x.popupWidth, S[0] = -1), T - x.popupHeight < x.canvasTop && (T = x?.objectTop, S[1] = -1);
-			let [D, O] = I(S[0], S[1]);
-			j(S), k.current && (k.current.style.left = C + D + "px", k.current.style.top = T + O + "px");
-		};
-		return x(), m.on("before:render", x), () => {
-			m.off("before:render", x);
-		};
-	}, [x, m]);
-	let R = D === "metric" ? S.informations?.[0] : S.informations?.[1];
-	return /* @__PURE__ */ jsxs("div", {
-		ref: (m) => {
-			k.current = m, typeof O == "function" ? O(m) : O && (O.current = m);
-		},
-		onClick: async () => {
-			let m = "/availability/site-plan";
-			m = `/availability/site-plan/container/${x?.itemId}`, T && T(m);
-		},
-		className: "cursor-pointer mobile:text-[0.8rem] absolute p-4 bg-thirdLayer text-bodyContentColor touch-none",
-		style: { scale: 1 },
-		children: [
-			/* @__PURE__ */ jsx("div", {
-				className: "mb-[0.875em] text-[1em] leading-[1.375em] font-bold flex justify-between",
-				children: /* @__PURE__ */ jsx("div", { children: S.name })
-			}),
-			/* @__PURE__ */ jsx("div", {
-				className: "grid grid-cols-1 whitespace-pre",
-				children: R ?? ""
-			}),
-			/* @__PURE__ */ jsx("div", { className: `absolute w-0 h-0 ${L(A[0], A[1])}` })
-		]
-	});
-});
-FloorViewPopup.displayName = "FloorViewPopup";
-var floor_view_popup_default = FloorViewPopup;
-function PlanView({ planId: m, objects: x, items: S, background: C, color: T, canvasSubject: D, useHalfWidth: O, onNavigate: k, formatCurrency: A, t: j, showPrice: N, measurementSystem: F }) {
-	let I = useRef(null), L = useRef(null), R = useRef(null), z = useRef(null), U = useRef(null), W = useRef(null), q = useRef(null), J = useRef(0), Y = useRef(0), Z = useRef(!1), eH = useRef(!1), Q = useRef(0), tH = useRef(1), nH = useRef(new PlanItemController(S)), rH = useRef(new PlanObjectController(x)), iH = useRef(x), aH = useRef(""), oH = useRef(null), sH = useRef(0), cH = useRef(0), $ = useRef(0), lH = useRef(null), [uH, dH] = useState([]), fH = useRef(null), pH = () => {
-		let m = fH.current;
-		m && q.current.setDimensions({
-			width: m.clientWidth,
-			height: m.clientHeight
-		});
-	}, mH = () => {
-		pH();
-		let m = 1;
-		if (L.current?.width !== 0 || L.current?.height !== 0) {
-			let x = q.current.getWidth() / (O ? 2 : 1), S = L.current.width, C = L.current.height, T = q.current.getHeight(), D = x / S, k = T / C;
-			m = Math.min(D, k), q.current.setZoom(m), q.current.absolutePan(new fabric.Point((S * m - x) / 2, (C * m - T) / 2)), tH.current = m;
-		}
-		q.current.renderAll(), oH.current = q.current?.viewportTransform;
-	};
-	useEffect(() => {
-		let m = (m) => m.preventDefault(), x = () => mH(), S = fH.current ?? document, C = document?.getElementById("puck-canvas-root");
-		S.addEventListener("gesturestart", m), S.addEventListener("gesturechange", m), S.addEventListener("gestureend", m), window.addEventListener("resize", x);
-		let T = null;
-		return C && (T = new ResizeObserver(() => {
-			mH();
-		}), T.observe(C)), () => {
-			S.removeEventListener("gesturestart", m), S.removeEventListener("gesturechange", m), S.removeEventListener("gestureend", m), window.removeEventListener("resize", x), T && C && (T.unobserve(C), T.disconnect());
-		};
-	}, [fH]), usePinch((m) => {
-		let { da: x } = m;
-		m.event.preventDefault(), Q.current == 0 && (Q.current = x[0]);
-		let S = x[0] / Q.current * q.current.getZoom();
-		S > 20 && (S = 20), S < tH.current && (S = tH.current), q.current.setZoom(S), TH(), Q.current = x[0], q.current.renderAll();
-	}, { target: lH }), useEffect(() => {
-		q.current && D && D.attach(() => {
-			mH();
-		}, "onFit");
-	}, [D, q.current]), useEffect(() => {
-		if (!C?.objectUrl) return;
-		let m = typeof window < "u" ? window.document : document;
-		return m.addEventListener("gesturestart", (m) => m.preventDefault()), m.addEventListener("gesturechange", (m) => m.preventDefault()), hH(), () => {
-			try {
-				q.current && (q.current?.dispose(), L.current?.dispose());
-			} catch (m) {
-				console.error(m);
-			}
-		};
-	}, [C]), useEffect(() => {
-		let C = m == aH.current;
-		if (q.current && C) q.current.remove(...q.current.getObjects()), rH.current.deleteObjects(), nH.current = new PlanItemController(S), rH.current = new PlanObjectController(x), rH.current.initContainerObjects(R.current), rH.current.containerObjects.forEach((m) => {
-			let x = nH.current.getItem(m.itemId);
-			x && (m.assign(x), q.current.add(m, m.label));
-		}), q.current?.requestRenderAll();
-		else if (q.current && !C) try {
-			q.current && (q.current.remove(...q.current.getObjects()), L.current?.dispose(), rH.current.deleteObjects(), nH.current = new PlanItemController(S), rH.current = new PlanObjectController(x), hH());
-		} catch (m) {
-			console.error(m);
-		}
-		iH.current = x, aH.current = m;
-	}, [x]);
-	let hH = () => {
-		fabric.Image.fromURL(C.objectUrl ?? "", (m) => {
-			m.setOptions({
-				stroke: "#333333",
-				strokeWidth: 0,
-				opacity: 1,
-				hasBorders: !1
-			}), L.current = m, R.current = new fabric.Point(L.current.width ?? 0, L.current.height ?? 0), vH(), wH(L.current?.width ?? 0, L.current?.height ?? 0), mH();
-		});
-	}, gH = (m) => {
-		if (m.target instanceof PlanRectangleObject || m.target instanceof PlanCircleObject || m.target instanceof PlanPolygonObject) {
-			let x = m.target, S = getPlanItemTypeEnum(nH.current.getItem(x.itemId)?.type ?? "");
-			S == PlanItemTypeEnum.Room && (W.current = S, bH(x));
-		}
-	}, _H = (m) => {
-		if ((m.target instanceof PlanRectangleObject || m.target instanceof PlanCircleObject || m.target instanceof PlanPolygonObject) && W.current == PlanItemTypeEnum.Room) {
-			let x = z.current?.getBoundingClientRect(), { clientX: S, clientY: C } = m.e;
-			if (S >= Math.round((x?.left ?? 0) - 10) && S <= Math.round((x?.right ?? 0) + 10) && C >= Math.round((x?.top ?? 0) - 10) && C <= Math.round((x?.bottom ?? 0) + 10)) return;
-			xH();
-		}
-	}, vH = () => {
-		L.current && (q.current, q.current = new fabric.Canvas(I.current, {
-			hoverCursor: "move",
-			selection: !0,
-			selectionBorderColor: "blue",
-			backgroundColor: "#cccccc",
-			renderOnAddRemove: !1,
-			objectCaching: !1,
-			backgroundImage: L.current
-		}), q.current.backgroundColor = T ?? "#ff00", q.current.selection = !1, q.current.defaultCursor = "grab", q.current.on("mouse:wheel", function(m) {
-			let x = m.e.deltaY, S = q.current.getZoom(), C = new fabric.Point(q.current.getWidth() / 2, q.current.getHeight() / 2);
-			S *= .999 ** x, S > 20 && (S = 20), S < tH.current && (S = tH.current);
-			let T = q.current.getPointer(m.e), D = new fabric.Point(T.x, T.y), O = fabric.util.transformPoint(D, q.current.viewportTransform);
-			q.current.zoomToPoint(C, S);
-			let k = fabric.util.transformPoint(D, q.current.viewportTransform), A = new fabric.Point(O.x - k.x, O.y - k.y);
-			q.current.relativePan(A), TH(), q.current.renderAll(), m.e.preventDefault(), m.e.stopPropagation();
-		}), q.current.on("mouse:move", function(m) {
-			Z.current && (m.e.type == "mousemove" ? DH(m.e.clientX, m.e.clientY) : m.e.touches && m.e.touches.length > 1 || DH(m.e.touches[0].clientX, m.e.touches[0].clientY));
-		}), q.current.on("mouse:up", CH), q.current.on("mouse:down", SH), q.current.on("mouse:over", gH), q.current.on("mouse:out", _H), rH.current.initContainerObjects(R.current), rH.current.containerObjects.forEach((m) => {
-			let x = nH.current.getItem(m.itemId);
-			if (x) if (m.itemType == "Room") {
-				x && m.assign(x);
-				let S = m.fill;
-				m.fill = "#ff00", m.label = new PlanLabelObject(x.name, S ?? "0x000000", m.left ?? 0, m.top ?? 0, m.width ?? 0, m.height ?? 0, 1, 56), m.label.hideBackground(), m.label.addStroke(), q.current.add(m, m.label);
-			} else x && m.assign(x), q.current.add(m, m.label);
-		}), q.current.on("mouse:mouseup", (m) => {
-			(m.target instanceof PlanRectangleObject || m.target instanceof PlanCircleObject || m.target instanceof PlanPolygonObject) && (bH(m.target), q.current?.requestRenderAll());
-		}), q.current.requestRenderAll(), eH.current = !0);
-	}, yH = async (m) => {
-		let x = getPlanItemTypeEnum(m?.itemType ?? ""), S = "/availability/site-plan";
-		x === PlanItemTypeEnum.PlotContainer ? (S = `/availability/site-plan/plot-container/${m?.itemId}`, k && k(S)) : x === PlanItemTypeEnum.Plot && (S = `/plot/${m?.itemId}`, k && k(S));
-	}, bH = (m) => {
-		let x = nH.current.getItem(m.itemId), S = getPlanItemTypeEnum(x?.type ?? "");
-		switch (W.current = S, S) {
-			case PlanItemTypeEnum.Plot:
-				dH([/* @__PURE__ */ jsx(PlanViewPopup, {
-					canvas: q.current,
-					obj: m,
-					item: x,
-					onClickOutside: () => {
-						xH();
-					}
-				}, "container_element")]);
-				break;
-			case PlanItemTypeEnum.PlotContainer:
-				dH([/* @__PURE__ */ jsx(ContainerPlanPopup, {
-					canvas: q.current,
-					obj: m,
-					item: x,
-					onClickOutside: () => {
-						xH();
-					},
-					onNavigate: k,
-					formatCurrency: A,
-					t: j,
-					showPrice: N
-				}, "container_element")]);
-				break;
-			case PlanItemTypeEnum.Room:
-				dH([/* @__PURE__ */ jsx(floor_view_popup_default, {
-					ref: z,
-					canvas: q.current,
-					obj: m,
-					item: x,
-					onClickOutside: () => {
-						xH();
-					},
-					onNavigate: k,
-					measurementSystem: F
-				}, "container_element")]);
-				break;
-		}
-	}, xH = useCallback(() => {
-		W.current = null, dH([]), U.current = null;
-	}, [uH]), SH = (m) => {
-		Z.current = !0, m.e.type.includes("mouse") && (J.current = m.e.clientX, Y.current = m.e.clientY), m.e.type.includes("touch") && (J.current = m.e.touches[0].clientX, Y.current = m.e.touches[0].clientY), (m.target instanceof PlanRectangleObject || m.target instanceof PlanCircleObject || m.target instanceof PlanPolygonObject) && U.current && U.current.itemId == m.target.itemId ? yH(U.current) : (m.target instanceof PlanRectangleObject || m.target instanceof PlanCircleObject || m.target instanceof PlanPolygonObject) && setTimeout(() => {
-			bH(m.target), q.current?.requestRenderAll();
-		}, 150);
-	}, CH = (m) => {
-		Z.current = !1, q.current?.fire("canvas:dragEnd"), Q.current = 0;
-	}, wH = (m, x) => {
-		sH.current = m, cH.current = x;
-	}, TH = () => {
-		Date.now() - $.current < 8 || ($.current = Date.now(), EH(), q.current?.requestRenderAll());
-	}, EH = () => {
-		if (sH.current === 0 || cH.current === 0 || !q.current?.viewportTransform) return;
-		let m = q.current?.viewportTransform, x = q.current?.getZoom(), S = q.current?.getWidth(), C = sH.current, T = cH.current, D = q.current?.getHeight(), O = oH.current[4], k = oH.current[5];
-		m[4] >= oH.current[4] ? q.current.viewportTransform[4] = oH.current[4] : m[4] < S - C * x - O && (q.current.viewportTransform[4] = S - C * x - O), m[5] >= oH.current[5] ? q.current.viewportTransform[5] = oH.current[5] : m[5] < D - T * x - k && (q.current.viewportTransform[5] = D - T * x - k);
-	}, DH = (m, x) => {
-		if (q.current?.getZoom() == tH.current) return;
-		let S = new fabric.Point(m - J.current, x - Y.current);
-		q.current.relativePan(S), TH(), q.current?.requestRenderAll(), J.current = m, Y.current = x;
-	};
-	return /* @__PURE__ */ jsx("div", {
-		className: "w-full max-w-[1440px] mb-[7.5rem] mobile:mb-[9rem] mx-auto xl:h-[600px] h-[300px] overflow-hidden",
-		ref: fH,
-		children: /* @__PURE__ */ jsxs("div", {
-			ref: lH,
-			className: "relative",
-			children: [uH.map((m) => createPortal(m, lH.current)), /* @__PURE__ */ jsx("canvas", { ref: I })]
-		})
-	});
-}
-var CanvasSubject = class {
-	constructor() {
-		this.events = ["onFit"], this.observers = { onFit: [] };
-	}
-	attach(m, x) {
-		this.observers[x].push(m);
-	}
-	detach(m, x) {
-		this.observers[x] = this.observers[x].filter((x) => m !== x);
-	}
-	notify(m) {
-		this.observers[m].forEach((m) => m());
-	}
-};
-function PlanViewWrapper(m) {
-	let { planId: x, objects: S, background: C, color: T, elementId: D = "canvas_container", useHalfWidth: O = !1, showPrice: k = !0, measurementSystem: A = "metric" } = m, [j, M] = useState(null), N = usePlotRepository();
-	useEffect(() => {
-		N.fetchSitePlan().then((m) => {
-			M(m);
-		});
-	}, []);
-	let F = [], I = null;
-	try {
-		F = typeof S == "string" ? S ? JSON.parse(S) : [] : S || [], I = typeof C == "string" ? C ? JSON.parse(C) : null : C;
-	} catch (m) {
-		return console.error("Error parsing PlanView props:", m), /* @__PURE__ */ jsx("div", {
-			className: "p-4 text-red-600",
-			children: "Error: Invalid JSON data for PlanView component"
-		});
-	}
-	return !I || !x ? /* @__PURE__ */ jsx("div", {
-		className: "w-full h-[600px] flex items-center justify-center p-4",
-		children: /* @__PURE__ */ jsx("div", { className: "w-8 h-8 border-4 border-gray-200 border-t-[#5ec6d3] rounded-full animate-spin" })
-	}) : /* @__PURE__ */ jsx(PlanView, {
-		planId: x,
-		objects: F,
-		items: j?.plan.items ?? [],
-		background: I,
-		color: T,
-		elementId: D,
-		useHalfWidth: O,
-		showPrice: k,
-		measurementSystem: A
-	}, j?.plan.id ?? "siteplan");
-}
-export { CanvasSubject, ColorPickerField, ContainerPlanPopup, ContentSection, ContentSectionWrapper, floor_view_popup_default as FloorViewPopup, GridSection, GridSectionWrapper, HeaderSection, HeaderSectionWrapper, HomeFirstSection, HomeFirstSectionWrapper, HomePageContent, HomePageContentWrapper, ItemSlider, PlanCircleObject, PlanItemController, PlanItemTypeEnum, PlanLabelObject, PlanObjectController, PlanObjectTypeEnum, PlanPolygonObject, PlanRectangleObject, PlanView, PlanViewPopup, PlanViewWrapper, PlotThumbCard, PlotThumbCardBody, PlotThumbCardImage, PlotThumbCardRoot, PlotsShowcase, PlotsShowcaseWrapper, Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectScrollDownButton, SelectScrollUpButton, SelectSeparator, SelectTrigger, SelectValue, SkyscrapperHomeFirstSection, SkyscrapperHomeFirstSectionWrapper, SkyscrapperHomesSecondSection, SkyscrapperHomesSecondSectionWrapper, SkyscrapperPlotThumbCard, SkyscrapperPlotThumbCardBody, SkyscrapperPlotThumbCardImage, SkyscrapperPlotThumbCardRoot, SkyscrapperPlotsShowcase, SkyscrapperPlotsShowcaseWrapper, SkyscrapperShowcaseCard, UiToolkitProvider, VoodvaleHomeFirstSection, VoodvaleHomeFirstSectionWrapper, VoodvaleHomeSecondSection, VoodvaleHomeSecondSectionWrapper, VoodvalePlotThumbCard, VoodvalePlotThumbCardBody, VoodvalePlotThumbCardImage, VoodvalePlotThumbCardRoot, VoodvalePlotsShowcase, VoodvalePlotsShowcaseWrapper, VoodvaleSection, colorPickerField, createPlotRepository, plotRepository, useMainModuleResult, usePlotRepository, useTranslation, useUiToolkitConfig, useUiToolkitConfigOptional };
+export { ColorPickerField, ContentSection, ContentSectionWrapper, GridSection, GridSectionWrapper, HeaderSection, HeaderSectionWrapper, HomeFirstSection, HomeFirstSectionWrapper, HomePageContent, HomePageContentWrapper, ItemSlider, PlotThumbCard, PlotThumbCardBody, PlotThumbCardImage, PlotThumbCardRoot, PlotsShowcase, PlotsShowcaseWrapper, Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectScrollDownButton, SelectScrollUpButton, SelectSeparator, SelectTrigger, SelectValue, SkyscrapperHomeFirstSection, SkyscrapperHomeFirstSectionWrapper, SkyscrapperHomesSecondSection, SkyscrapperHomesSecondSectionWrapper, SkyscrapperPlotThumbCard, SkyscrapperPlotThumbCardBody, SkyscrapperPlotThumbCardImage, SkyscrapperPlotThumbCardRoot, SkyscrapperPlotsShowcase, SkyscrapperPlotsShowcaseWrapper, SkyscrapperShowcaseCard, UiToolkitProvider, VoodvaleHomeFirstSection, VoodvaleHomeFirstSectionWrapper, VoodvaleHomeSecondSection, VoodvaleHomeSecondSectionWrapper, VoodvalePlotThumbCard, VoodvalePlotThumbCardBody, VoodvalePlotThumbCardImage, VoodvalePlotThumbCardRoot, VoodvalePlotsShowcase, VoodvalePlotsShowcaseWrapper, VoodvaleSection, colorPickerField, createPlotRepository, plotRepository, useMainModuleResult, usePlotRepository, useTranslation, useUiToolkitConfig, useUiToolkitConfigOptional };

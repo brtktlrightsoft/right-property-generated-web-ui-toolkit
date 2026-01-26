@@ -42,6 +42,5 @@ export * from './components/voodvale/VoodvaleHomeSecondSectionWrapper';
 export * from './components/voodvale/VoodvalePlotsShowcase';
 export * from './components/voodvale/VoodvalePlotsShowcaseWrapper';
 export * from './components/VoodvaleSection';
-export * from './components/common/plan-view';
-export * from './components/common/PlanViewWrapper';
+export type { PlanObjectResultModel, PlanItemResultModel, AssetResult, PlanObjectPointResultModel } from './components/common/plan-view';
 //# sourceMappingURL=index.d.ts.map

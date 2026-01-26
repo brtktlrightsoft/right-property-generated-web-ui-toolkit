@@ -65,9 +65,11 @@ export * from './components/voodvale/VoodvalePlotsShowcase';
 export * from './components/voodvale/VoodvalePlotsShowcaseWrapper';
 export * from './components/VoodvaleSection';
 
-// plan-view components
-export * from './components/common/plan-view';
-export * from './components/common/PlanViewWrapper';
+// plan-view types (exported here for use in other modules, components moved to separate entry)
+export type { PlanObjectResultModel, PlanItemResultModel, AssetResult, PlanObjectPointResultModel } from './components/common/plan-view';
+
+// plan-view components - moved to separate entry point to avoid fabric/jsdom loading
+// Import from 'right-property-generated-web-ui-toolkit/plan-view' if needed
 
 
 

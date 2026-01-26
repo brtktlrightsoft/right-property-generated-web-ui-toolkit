@@ -14,6 +14,11 @@
       "types": "./dist/styles.d.ts",
       "import": "./dist/right-property-generated-web-ui-toolkit.css",
       "default": "./dist/right-property-generated-web-ui-toolkit.css"
+    },
+    "./plan-view": {
+      "types": "./dist/plan-view.d.ts",
+      "import": "./dist/plan-view.mjs",
+      "default": "./dist/plan-view.mjs"
     }
   },
   "files": [

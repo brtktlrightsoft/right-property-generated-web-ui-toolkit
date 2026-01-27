@@ -1,8 +1,10 @@
 import type { HomePageContentProps } from '@/types/default.types';
 import { Image } from '../common/image';
-import wimbledonMainImage from '@/assets/wimbledon/wimbledon_content_main.avif';
-import wimbledonImage2 from '@/assets/wimbledon/wimbledon_content_left.avif';
-import wimbledonImage3 from '@/assets/wimbledon/wimbledon_content_right.avif';
+
+// Default image URLs – host app must expose these under its /public path
+const DEFAULT_MAIN_IMAGE = '/assets/wimbledon/wimbledon_content_main.avif';
+const DEFAULT_IMAGE_2 = '/assets/wimbledon/wimbledon_content_left.avif';
+const DEFAULT_IMAGE_3 = '/assets/wimbledon/wimbledon_content_right.avif';
 export function HomePageContent({
   title,
   titleColor = '#1a1a1a',
@@ -36,8 +38,8 @@ export function HomePageContent({
                 <Image
                   width={600}
                   height={400}
-                  src={image1}
-                  fallbackSrc={wimbledonMainImage}
+                  src={image1 || DEFAULT_MAIN_IMAGE}
+                  fallbackSrc={DEFAULT_MAIN_IMAGE}
                   className="h-60 lg:h-100 w-full"
                   alt=""
                 />
@@ -47,8 +49,8 @@ export function HomePageContent({
                   <Image
                     width={290}
                     height={180}
-                    src={image2}
-                    fallbackSrc={wimbledonImage2}
+                    src={image2 || DEFAULT_IMAGE_2}
+                    fallbackSrc={DEFAULT_IMAGE_2}
                     className="h-auto w-full"
                     alt=""
                   />
@@ -57,8 +59,8 @@ export function HomePageContent({
                   <Image
                     width={290}
                     height={180}
-                    src={image3}
-                    fallbackSrc={wimbledonImage3}
+                    src={image3 || DEFAULT_IMAGE_3}
+                    fallbackSrc={DEFAULT_IMAGE_3}
                     className="h-auto w-full"
                     alt=""
                   />
@@ -84,8 +86,8 @@ export function HomePageContent({
                 <Image
                   width={400}
                   height={280}
-                  src={image1}
-                  fallbackSrc={wimbledonMainImage}
+                  src={image1 || DEFAULT_MAIN_IMAGE}
+                  fallbackSrc={DEFAULT_MAIN_IMAGE}
                   className="h-60 lg:h-100 w-full"
                   alt=""
                 />
@@ -95,8 +97,8 @@ export function HomePageContent({
                   <Image
                     width={290}
                     height={120}
-                    src={image2}
-                    fallbackSrc={wimbledonImage2}
+                    src={image2 || DEFAULT_IMAGE_2}
+                    fallbackSrc={DEFAULT_IMAGE_2}
                     className="h-30 w-full"
                     alt=""
                   />
@@ -105,8 +107,8 @@ export function HomePageContent({
                   <Image
                     width={290}
                     height={120}
-                    src={image3}
-                    fallbackSrc={wimbledonImage3}
+                    src={image3 || DEFAULT_IMAGE_3}
+                    fallbackSrc={DEFAULT_IMAGE_3}
                     className="h-30 w-full"
                     alt=""
                   />

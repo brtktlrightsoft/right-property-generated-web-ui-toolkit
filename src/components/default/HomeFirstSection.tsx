@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion';
 import type { HomeFirstSectionProps } from '@/types/default.types';
 import BackgroundMedia from '../common/background-media';
-import defaultBg from '@/assets/wimbledon/background.webp';
+
+// Default background image URL – host app must expose this under its /public path
+const DEFAULT_BACKGROUND = '/assets/wimbledon/background.webp';
 export function HomeFirstSection({
   projectName,
   projectDescription,
@@ -9,7 +11,9 @@ export function HomeFirstSection({
   scrollIndicatorText = 'Scroll down',
   scrollIndicatorOpacity = 1,
 }: HomeFirstSectionProps) {
-  const bgData = backgroundData?.backgroundUrl ? { isVideo: backgroundData.isVideo, backgroundUrl: backgroundData.backgroundUrl } : { isVideo: false, backgroundUrl: defaultBg };
+  const bgData = backgroundData?.backgroundUrl
+    ? { isVideo: backgroundData.isVideo, backgroundUrl: backgroundData.backgroundUrl }
+    : { isVideo: false, backgroundUrl: DEFAULT_BACKGROUND };
   return (
     <div className="panel absolute left-0 top-0 will-change-transform w-full h-full z-30">
       <div className="pt-17.5 flex flex-col justify-end lg:justify-center px-5 bg-gray-300 relative h-[100vh] w-[100vw] bg-no-repeat bg-cover">

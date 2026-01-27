@@ -1,8 +1,10 @@
 import type { VoodvaleContentSectionProps } from '@/types/voodvale.types';
 import { Image } from '../common/image';
-import voodvaleImage1 from '@/assets/woodvale/voodvale-content-1.avif';
-import voodvaleImage2 from '@/assets/woodvale/voodvale-content-2.avif';
-import voodvaleImage3 from '@/assets/woodvale/voodvale-content-3.avif';
+
+// Default image URLs – host app must expose these under its /public path
+const DEFAULT_IMAGE_1 = '/assets/woodvale/voodvale-content-1.avif';
+const DEFAULT_IMAGE_2 = '/assets/woodvale/voodvale-content-2.avif';
+const DEFAULT_IMAGE_3 = '/assets/woodvale/voodvale-content-3.avif';
 export function ContentSection({
   sectionTitle,
   sectionDescription,
@@ -20,27 +22,69 @@ export function ContentSection({
           {sectionDescription}
         </div>
         <div className="w-full h-auto mobile:hidden">
-          <Image width={550} height={640} src={contentImage1} fallbackSrc={voodvaleImage1} alt="content" className="w-full h-auto object-contain" />
+          <Image
+            width={550}
+            height={640}
+            src={contentImage1 || DEFAULT_IMAGE_1}
+            fallbackSrc={DEFAULT_IMAGE_1}
+            alt="content"
+            className="w-full h-auto object-contain"
+          />
         </div>
       </div>
       <div className="flex-grow mobile:hidden">
         <div className="w-full h-auto mb-[4.25rem]">
-          <Image width={680} height={734} src={contentImage2} fallbackSrc={voodvaleImage2} alt="content" className="w-full h-auto object-contain" />
+          <Image
+            width={680}
+            height={734}
+            src={contentImage2 || DEFAULT_IMAGE_2}
+            fallbackSrc={DEFAULT_IMAGE_2}
+            alt="content"
+            className="w-full h-auto object-contain"
+          />
         </div>
         <div className="w-full h-auto">
-          <Image width={461} height={309} src={contentImage3} fallbackSrc={voodvaleImage3} alt="content" className="w-full h-auto object-contain" />
+          <Image
+            width={461}
+            height={309}
+            src={contentImage3 || DEFAULT_IMAGE_3}
+            fallbackSrc={DEFAULT_IMAGE_3}
+            alt="content"
+            className="w-full h-auto object-contain"
+          />
         </div>
       </div>
       <div className="hidden mobile:flex justify-center mobile:gap-[0.903125rem]">
         <div className="mt-[5.375rem] w-[39.8vw] h-auto">
-          <Image width={133} height={154} src={contentImage1} fallbackSrc={voodvaleImage1} alt="content" className="w-full h-auto object-contain" />
+          <Image
+            width={133}
+            height={154}
+            src={contentImage1 || DEFAULT_IMAGE_1}
+            fallbackSrc={DEFAULT_IMAGE_1}
+            alt="content"
+            className="w-full h-auto object-contain"
+          />
         </div>
         <div className="flex flex-col gap-[1.25rem]">
           <div className="w-[48.75vw] h-auto">
-            <Image width={197} height={212} src={contentImage2} fallbackSrc={voodvaleImage2} alt="content" className="w-full h-auto object-contain" />
+          <Image
+            width={197}
+            height={212}
+            src={contentImage2 || DEFAULT_IMAGE_2}
+            fallbackSrc={DEFAULT_IMAGE_2}
+            alt="content"
+            className="w-full h-auto object-contain"
+          />
           </div>
           <div className="w-[33.08vw] h-auto">
-            <Image width={133} height={212} src={contentImage3} fallbackSrc={voodvaleImage3} alt="content" className="w-full h-auto object-contain" />
+          <Image
+            width={133}
+            height={212}
+            src={contentImage3 || DEFAULT_IMAGE_3}
+            fallbackSrc={DEFAULT_IMAGE_3}
+            alt="content"
+            className="w-full h-auto object-contain"
+          />
           </div>
         </div>
       </div>

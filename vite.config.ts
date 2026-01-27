@@ -35,6 +35,8 @@ export default defineConfig({
   },
   build: {
     cssCodeSplit: false,
+    // IMPORTANT: don't inline images as base64 into JS chunks – emit real files instead
+    assetsInlineLimit: 0,
     lib: {
       entry: {
         index: path.resolve(__dirname, 'src/index.ts'),

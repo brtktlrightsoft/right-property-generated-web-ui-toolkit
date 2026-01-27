@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion';
 import type { SkyscrapperHomeFirstSectionProps } from '@/types/skyscrapper.types';
 import BackgroundMedia from '../common/background-media';
-import defaultBg from '@/assets/skyscrapper/background.webp';
+
+// Default background image URL – host app must expose this under its /public path
+const DEFAULT_BACKGROUND = '/assets/skyscrapper/background.webp';
 export function SkyscrapperHomeFirstSection({
   projectName,
   heading,
@@ -12,7 +14,9 @@ export function SkyscrapperHomeFirstSection({
   buttonHref,
   backgroundData,
 }: SkyscrapperHomeFirstSectionProps) {
-  const bgData = backgroundData?.backgroundUrl ? { isVideo: backgroundData.isVideo, backgroundUrl: backgroundData.backgroundUrl } : { isVideo: false, backgroundUrl: defaultBg };
+  const bgData = backgroundData?.backgroundUrl
+    ? { isVideo: backgroundData.isVideo, backgroundUrl: backgroundData.backgroundUrl }
+    : { isVideo: false, backgroundUrl: DEFAULT_BACKGROUND };
 
   return (
     <div className="panel absolute font-instrument-serif left-0 top-0 will-change-transform w-full h-full z-30">

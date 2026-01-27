@@ -6,6 +6,10 @@ import './index.css';
 // Core Puck component prop types
 export * from './types/puck.types';
 
+// Context + types needed for runtime configuration from apps
+export { UiToolkitProvider, useUiToolkitConfig, useUiToolkitConfigOptional, useTranslation, useMainModuleResult } from './context/UiToolkitContext';
+export type { MainModuleResult } from './domain/plot-models';
+
 // Default theme wrappers used by Puck
 export * from './components/default/HomeFirstSectionWrapper';
 export * from './components/default/HomePageContentWrapper';

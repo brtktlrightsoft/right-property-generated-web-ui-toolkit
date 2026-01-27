@@ -10,6 +10,11 @@
       "import": "./dist/index.mjs",
       "default": "./dist/index.mjs"
     },
+    "./puck-runtime": {
+      "types": "./dist/puck-runtime.d.ts",
+      "import": "./dist/puck-runtime.mjs",
+      "default": "./dist/puck-runtime.mjs"
+    },
     "./styles": {
       "types": "./dist/styles.d.ts",
       "import": "./dist/right-property-generated-web-ui-toolkit.css",
@@ -32,6 +37,13 @@
     "prepare": "npm run build"
   },
   "dependencies": {
+    "uuid": "^9.0.1"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.0.0",
+    "fabric": "^5.3.0",
     "@measured/puck": "^0.20.2",
     "@radix-ui/react-select": "^2.2.6",
     "@tailwindcss/vite": "^4.1.17",
@@ -40,17 +52,9 @@
     "clsx": "^2.1.1",
     "framer-motion": "^12.23.25",
     "lucide-react": "^0.555.0",
-    "react-router-dom": "^7.0.0",
     "swiper": "^12.0.2",
     "tailwind-merge": "^3.4.0",
-    "tailwindcss": "^4.1.17",
-    "uuid": "^9.0.1"
-  },
-  "peerDependencies": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "react-router-dom": "^7.0.0",
-    "fabric": "^5.3.0"
+    "tailwindcss": "^4.1.17"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",

@@ -4,7 +4,11 @@
 
 @import "tailwindcss";
 @import "tw-animate-css";
-@import './fonts.css';
+/* Font faces are now expected to be provided by the host app.
+ * See: https://github.com/.../README for integration details.
+ * If you want General Sans locally, define @font-face in your app and
+ * point it at your own /fonts/general-sans/* files or a CDN.
+ */
 @import 'swiper/css';
 @custom-variant dark (&:is(.dark *));
 @custom-variant mobile (@media (max-width: 800px));

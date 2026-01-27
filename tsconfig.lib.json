@@ -12,9 +12,11 @@
   "include": [
     "src/index.ts",
     "src/plan-view.ts",
+    "src/puck-runtime.ts",
     "src/components",
     "src/types",
-    "src/lib"
+    "src/lib",
+    "src/index.css"
   ]
 }
 

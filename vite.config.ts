@@ -11,6 +11,18 @@ const external = [
   'react-dom/client',
   'react-dom/server',
   'fabric',
+  '@measured/puck',
+  '@radix-ui/react-select',
+  '@tailwindcss/vite',
+  '@use-gesture/react',
+  'class-variance-authority',
+  'clsx',
+  'framer-motion',
+  'lucide-react',
+  'react-router-dom',
+  'swiper',
+  'tailwind-merge',
+  'tailwindcss',
 ]
 
 // https://vite.dev/config/
@@ -27,6 +39,7 @@ export default defineConfig({
       entry: {
         index: path.resolve(__dirname, 'src/index.ts'),
         'plan-view': path.resolve(__dirname, 'src/plan-view.ts'),
+        'puck-runtime': path.resolve(__dirname, 'src/puck-runtime.ts'),
       },
       formats: ['es'],
       fileName: (format, entryName) => `${entryName}.mjs`,

@@ -1,5 +1,5 @@
-import { a as useMainModuleResult, o as useTranslation, t as usePlotRepository } from "./usePlotRepository-TWHxzcho.js";
-import { n as formatCurrency, r as generatePlotUrl } from "./utils-DsvYD7Rp.js";
+import { a as useMainModuleResult, n as formatCurrency, o as useTranslation, r as generatePlotUrl } from "./utils-DYfvbnRa.js";
+import { t as usePlotRepository } from "./usePlotRepository-RELhuOOx.js";
 import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { fabric } from "fabric";
@@ -680,7 +680,7 @@ function useOnClickOutside(e, t, n = "mousedown", r = []) {
 	});
 }
 var use_on_click_outside_default = useOnClickOutside;
-function PlanViewPopup({ canvas: n, obj: a, item: o, onClickOutside: c }) {
+function PlanViewPopup({ canvas: i, obj: a, item: o, onClickOutside: c }) {
 	let { t: p } = useTranslation(), m = useRef(null), [h, g] = useState([1, 1]), { showPrice: _, currency: v, clientName: y, projectName: b, country: x, city: S, district: C } = useMainModuleResult(), w = usePlotStatus(o.plotInfo?.statusName ?? "available"), T = useRef(!1), { prepareArea: E } = useProjectArea();
 	use_on_click_outside_default(m, (e) => {
 		e.preventDefault(), c();
@@ -704,13 +704,13 @@ function PlanViewPopup({ canvas: n, obj: a, item: o, onClickOutside: c }) {
 		};
 	}, O = () => {
 		if (m.current == null) return;
-		let e = D(n, a), t = [1, 1], r = e?.objectLeft ?? 0, i = (e?.objectTop ?? 0) - e.popupHeight;
-		r + e.popupWidth > e.canvasRight && (r = e?.objectLeft - e.popupWidth, t[0] = -1), i - e.popupHeight < e.canvasTop && (i = e?.objectTop, t[1] = -1);
+		let e = D(i, a), t = [1, 1], n = e?.objectLeft ?? 0, r = (e?.objectTop ?? 0) - e.popupHeight;
+		n + e.popupWidth > e.canvasRight && (n = e?.objectLeft - e.popupWidth, t[0] = -1), r - e.popupHeight < e.canvasTop && (r = e?.objectTop, t[1] = -1);
 		let [o, s] = oe(t[0], t[1]);
-		g(t), m.current.style.left = r + o + "px", m.current.style.top = i + s + "px";
+		g(t), m.current.style.left = n + o + "px", m.current.style.top = r + s + "px";
 	}, oe = (e, t) => e > 0 && t > 0 ? [10, -20] : e > 0 && t < 0 ? [20, 40] : e < 0 && t > 0 ? [20, -20] : e < 0 && t < 0 ? [10, 40] : [0], se = (e, t) => e > 0 && t > 0 ? "triangle-bottom-left" : e > 0 && t < 0 ? "triangle-top-left" : e < 0 && t > 0 ? "triangle-bottom-right" : "triangle-top-right";
 	useEffect(() => {
-		O(), n.on("before:render", () => {
+		O(), i.on("before:render", () => {
 			O();
 		});
 	}, []);
@@ -1188,7 +1188,7 @@ var CanvasSubject = class {
 	}
 };
 function PlanViewWrapper(e) {
-	let { planId: t, objects: r, background: i, color: a, elementId: o = "canvas_container", useHalfWidth: c = !1, showPrice: l = !0, measurementSystem: f = "metric" } = e, [p, m] = useState(null), h = usePlotRepository();
+	let { planId: t, objects: n, background: r, color: a, elementId: o = "canvas_container", useHalfWidth: c = !1, showPrice: l = !0, measurementSystem: f = "metric" } = e, [p, m] = useState(null), h = usePlotRepository();
 	useEffect(() => {
 		h.fetchSitePlan().then((e) => {
 			m(e);
@@ -1196,7 +1196,7 @@ function PlanViewWrapper(e) {
 	}, []);
 	let g = [], _ = null;
 	try {
-		g = typeof r == "string" ? r ? JSON.parse(r) : [] : r || [], _ = typeof i == "string" ? i ? JSON.parse(i) : null : i;
+		g = typeof n == "string" ? n ? JSON.parse(n) : [] : n || [], _ = typeof r == "string" ? r ? JSON.parse(r) : null : r;
 	} catch (e) {
 		return console.error("Error parsing PlanView props:", e), /* @__PURE__ */ jsx("div", {
 			className: "p-4 text-red-600",

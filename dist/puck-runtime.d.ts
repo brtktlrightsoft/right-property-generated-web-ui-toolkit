@@ -1,5 +1,7 @@
 import './index.css';
 export * from './types/puck.types';
+export { UiToolkitProvider, useUiToolkitConfig, useUiToolkitConfigOptional, useTranslation, useMainModuleResult } from './context/UiToolkitContext';
+export type { MainModuleResult } from './domain/plot-models';
 export * from './components/default/HomeFirstSectionWrapper';
 export * from './components/default/HomePageContentWrapper';
 export * from './components/default/PlotsShowcaseWrapper';

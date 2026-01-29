@@ -21,12 +21,12 @@ export function HeaderSection({ title, description, animationEase = 'easeOut' }:
           | 'backInOut'
           | 'anticipate',
       }}
-      className="mt-[3rem] mb-[5rem] mobile:mb-[3.125rem] flex mobile:flex-col mobile:gap-[1.875rem] justify-between"
+      className="voodvale-header-wrapper"
     >
-      <div className="w-[34.5rem] mobile:w-[19.6875rem] text-[3rem] mobile:text-[2.25rem] leading-[122%] tracking-[-0.01em] text-[#12161D] font-medium capitalize">
+      <div className="voodvale-header-title">
         {title}
       </div>
-      <div className="w-[39.125rem] mobile:w-full text-[1.125rem] mobile:text-[1rem] leading-[144.444%] text-[#4A4A4A] font-normal">
+      <div className="voodvale-header-description">
         {description}
       </div>
     </motion.div>

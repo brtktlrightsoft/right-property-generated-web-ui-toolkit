@@ -1,0 +1,36 @@
+/* Base Reset Styles */
+
+* {
+  border-color: var(--border);
+  outline-color: color-mix(in oklch, var(--ring) 50%, transparent);
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-general-sans);
+}
+
+/* Font Family Utilities */
+.font-general-sans {
+  font-family: var(--font-general-sans);
+}
+
+.font-fira {
+  font-family: var(--font-fira);
+}
+
+.font-instrument-serif {
+  font-family: var(--font-instrument-serif);
+  font-weight: 400;
+}

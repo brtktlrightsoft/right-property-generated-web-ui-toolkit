@@ -142,14 +142,14 @@ export default function ContainerPlanPopup({
     <div
       ref={ref}
       onClick={navigateHandler}
-      className="cursor-pointer mobile:text-[0.8rem] absolute p-4 bg-thirdLayer text-bodyContentColor touch-none"
+      className="plan-view-popup"
       style={{
         scale: 1,
       }}
     >
-      <div className="mb-[0.875em] text-[1em] leading-[1.375em] font-bold flex justify-between">
+      <div className="plan-view-popup-header">
         <div>{item.plotContainerInfo?.name}</div>
-        <div className="flex items-center gap-1 text-[0.8125em] leading-[1.375em]">
+        <div className="plan-view-popup-status">
           <svg
             width="16"
             height="16"
@@ -166,9 +166,9 @@ export default function ContainerPlanPopup({
         </div>
       </div>
 
-      <div className="grid grid-cols-1 whitespace-pre">
+      <div className="plan-view-popup-container-details">
         {showPrice && (
-          <div className="col-span-1 flex gap-[0.5em] items-center">
+          <div className="plan-view-popup-detail-item">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g clipPath="url(#clip0_679_1027)">
                 <path
@@ -190,12 +190,12 @@ export default function ContainerPlanPopup({
             </div>
           </div>
         )}
-        <div className="col-span-1 flex gap-[0.5em] items-center">
+        <div className="plan-view-popup-detail-item">
           <div className="text-bodyContentColor">
             {`${item.plotContainerInfo?.bedroomsMin} ${t('web.unit_detail.bedroom')} - ${item.plotContainerInfo?.bedroomsMax} ${t('web.unit_detail.bedroom')}`}
           </div>
         </div>
-        <div className="col-span-1 flex gap-[0.5em] items-center">
+        <div className="plan-view-popup-detail-item">
           <div className="text-bodyContentColor">
             {`${item.plotContainerInfo?.areaMin} ${t(item.plotContainerInfo?.areaUnit ?? '')} - ${item.plotContainerInfo?.areaMax} ${t(item.plotContainerInfo?.areaUnit ?? '')}`}
           </div>

@@ -25,25 +25,20 @@ export function SkyscrapperPlotsShowcase({
   });
 
   return (
-    <div className="relative w-full mx-auto flex flex-col bg-black">
-      <div className="relative z-[1] page-container">
-        <div className="pt-[6.8125rem] mobile:pt-[4.1875rem] pb-[7.5rem] mobile:pb-[9rem] mobile:pl-[1.3rem] mobile:pr-0">
-          <div className="mb-[3.875rem] mobile:mb-[2rem] flex justify-between items-center">
-            <div suppressHydrationWarning>
-              <div className="pl-[11.57rem] mobile:pl-0">
-                <div
-                  className="mb-[2.87rem] mobile:mb-[2.25rem] text-[2.75rem] mobile:text-[2.25rem] leading-[100%] text-[#FFF]
-                    font-medium"
-                >
-                  {title}
-                </div>
-                <p className="text-[1.25rem] mobile:text-[1rem] text-white">{subtitle}</p>
+    <div className="skyscrapper-plots-showcase">
+      <div className="page-container skyscrapper-plots-showcase-content">
+        <div className="skyscrapper-plots-showcase-header">
+          <div suppressHydrationWarning>
+            <div className="skyscrapper-plots-showcase-title-wrapper">
+              <div className="skyscrapper-plots-showcase-title">
+                {title}
               </div>
+              <p className="skyscrapper-plots-showcase-subtitle">{subtitle}</p>
             </div>
           </div>
-          <div className="pl-[3.87rem] mobile:pl-0">
-            <ItemSlider items={plotItems.slice(0, 5)} variant="skyscrapper" language={language} />
-          </div>
+        </div>
+        <div className="skyscrapper-plots-showcase-slider">
+          <ItemSlider items={plotItems.slice(0, 5)} variant="skyscrapper" language={language} />
         </div>
       </div>
     </div>

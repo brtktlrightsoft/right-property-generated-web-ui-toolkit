@@ -725,13 +725,13 @@ function PlanViewPopup({ canvas: i, obj: a, item: o, onClickOutside: c }) {
 				window.location.href = e;
 			}
 		},
-		className: "cursor-pointer mobile:text-[0.8rem] absolute p-4 bg-thirdLayer text-bodyContentColor touch-none",
+		className: "plan-view-popup",
 		style: { scale: 1 },
 		children: [
 			/* @__PURE__ */ jsxs("div", {
-				className: "text-[1em] leading-[1.375em] font-bold flex justify-between",
+				className: "plan-view-popup-header",
 				children: [/* @__PURE__ */ jsx("div", { children: o.plotInfo?.typeName }), /* @__PURE__ */ jsxs("div", {
-					className: "flex items-center gap-1 text-[0.8125em] leading-[1.375em]",
+					className: "plan-view-popup-status",
 					children: [/* @__PURE__ */ jsx("span", {
 						style: { color: w?.color },
 						children: p(`${w?.name}`)
@@ -750,15 +750,15 @@ function PlanViewPopup({ canvas: i, obj: a, item: o, onClickOutside: c }) {
 				})]
 			}),
 			/* @__PURE__ */ jsx("div", {
-				className: "text-xs leading-[1.375em] text-inActiveBodyContentColor mb-4",
+				className: "plan-view-popup-name",
 				children: o.plotInfo?.name
 			}),
 			/* @__PURE__ */ jsxs("div", {
-				className: "flex grid grid-cols-2 gap-[0.7081rem] mobile:gap-[2.125em] whitespace-pre text-[0.75rem]",
+				className: "plan-view-popup-details",
 				children: [
 					_ && /* @__PURE__ */ jsxs("div", {
 						style: { color: w?.color },
-						className: "flex flex-[1] gap-[0.25em] items-center",
+						className: "plan-view-popup-detail-item",
 						children: [/* @__PURE__ */ jsxs("svg", {
 							width: "16",
 							height: "16",
@@ -789,7 +789,7 @@ function PlanViewPopup({ canvas: i, obj: a, item: o, onClickOutside: c }) {
 					}),
 					/* @__PURE__ */ jsxs("div", {
 						style: { color: w?.color },
-						className: "flex gap-[0.25em] items-center",
+						className: "plan-view-popup-detail-item",
 						children: [/* @__PURE__ */ jsx(BedroomIcon, {
 							className: "stroke-footerTextColor",
 							width: "1rem"
@@ -800,7 +800,7 @@ function PlanViewPopup({ canvas: i, obj: a, item: o, onClickOutside: c }) {
 					}),
 					/* @__PURE__ */ jsxs("div", {
 						style: { color: w?.color },
-						className: "mobile:-mt-[1.625em] flex gap-[0.25em] items-center",
+						className: "plan-view-popup-detail-item",
 						children: [/* @__PURE__ */ jsx(RulerIcon, { className: "w-4 h-4" }), /* @__PURE__ */ jsx("span", {
 							className: "text-bodyContentColor",
 							children: E(o.plotInfo?.metricArea ?? 0)
@@ -808,7 +808,7 @@ function PlanViewPopup({ canvas: i, obj: a, item: o, onClickOutside: c }) {
 					}),
 					/* @__PURE__ */ jsxs("div", {
 						style: { color: w?.color },
-						className: "mobile:-mt-[1.625em] flex gap-[0.25em] items-center",
+						className: "plan-view-popup-detail-item",
 						children: [/* @__PURE__ */ jsx(BathroomIcon, {
 							className: "stroke-footerTextColor",
 							width: "1rem"
@@ -860,13 +860,13 @@ function ContainerPlanPopup({ canvas: e, obj: t, item: n, onClickOutside: r, onN
 			let e = "/availability/site-plan";
 			e = `/availability/site-plan/container/${t?.itemId}`, i && i(e);
 		},
-		className: "cursor-pointer mobile:text-[0.8rem] absolute p-4 bg-thirdLayer text-bodyContentColor touch-none",
+		className: "plan-view-popup",
 		style: { scale: 1 },
 		children: [
 			/* @__PURE__ */ jsxs("div", {
-				className: "mb-[0.875em] text-[1em] leading-[1.375em] font-bold flex justify-between",
+				className: "plan-view-popup-header",
 				children: [/* @__PURE__ */ jsx("div", { children: n.plotContainerInfo?.name }), /* @__PURE__ */ jsx("div", {
-					className: "flex items-center gap-1 text-[0.8125em] leading-[1.375em]",
+					className: "plan-view-popup-status",
 					children: /* @__PURE__ */ jsx("svg", {
 						width: "16",
 						height: "16",
@@ -882,10 +882,10 @@ function ContainerPlanPopup({ canvas: e, obj: t, item: n, onClickOutside: r, onN
 				})]
 			}),
 			/* @__PURE__ */ jsxs("div", {
-				className: "grid grid-cols-1 whitespace-pre",
+				className: "plan-view-popup-container-details",
 				children: [
 					c && /* @__PURE__ */ jsxs("div", {
-						className: "col-span-1 flex gap-[0.5em] items-center",
+						className: "plan-view-popup-detail-item",
 						children: [/* @__PURE__ */ jsxs("svg", {
 							width: "16",
 							height: "16",
@@ -915,14 +915,14 @@ function ContainerPlanPopup({ canvas: e, obj: t, item: n, onClickOutside: r, onN
 						})]
 					}),
 					/* @__PURE__ */ jsx("div", {
-						className: "col-span-1 flex gap-[0.5em] items-center",
+						className: "plan-view-popup-detail-item",
 						children: /* @__PURE__ */ jsx("div", {
 							className: "text-bodyContentColor",
 							children: `${n.plotContainerInfo?.bedroomsMin} ${o("web.unit_detail.bedroom")} - ${n.plotContainerInfo?.bedroomsMax} ${o("web.unit_detail.bedroom")}`
 						})
 					}),
 					/* @__PURE__ */ jsx("div", {
-						className: "col-span-1 flex gap-[0.5em] items-center",
+						className: "plan-view-popup-detail-item",
 						children: /* @__PURE__ */ jsx("div", {
 							className: "text-bodyContentColor",
 							children: `${n.plotContainerInfo?.areaMin} ${o(n.plotContainerInfo?.areaUnit ?? "")} - ${n.plotContainerInfo?.areaMax} ${o(n.plotContainerInfo?.areaUnit ?? "")}`
@@ -976,15 +976,15 @@ var FloorViewPopup = React.forwardRef(({ canvas: e, obj: t, item: n, onClickOuts
 			let e = "/availability/site-plan";
 			e = `/availability/site-plan/container/${t?.itemId}`, i && i(e);
 		},
-		className: "cursor-pointer mobile:text-[0.8rem] absolute p-4 bg-thirdLayer text-bodyContentColor touch-none",
+		className: "plan-view-popup",
 		style: { scale: 1 },
 		children: [
 			/* @__PURE__ */ jsx("div", {
-				className: "mb-[0.875em] text-[1em] leading-[1.375em] font-bold flex justify-between",
+				className: "plan-view-popup-header",
 				children: /* @__PURE__ */ jsx("div", { children: n.name })
 			}),
 			/* @__PURE__ */ jsx("div", {
-				className: "grid grid-cols-1 whitespace-pre",
+				className: "plan-view-popup-floor-details",
 				children: b ?? ""
 			}),
 			/* @__PURE__ */ jsx("div", { className: `absolute w-0 h-0 ${y(p[0], p[1])}` })
@@ -1164,11 +1164,11 @@ function PlanView({ planId: e, objects: t, items: n, background: r, color: i, ca
 		A.current.relativePan(n), Q(), A.current?.requestRenderAll(), j.current = e, M.current = t;
 	};
 	return /* @__PURE__ */ jsx("div", {
-		className: "w-full max-w-[1440px] mb-[7.5rem] mobile:mb-[9rem] mx-auto xl:h-[600px] h-[300px] overflow-hidden",
+		className: "plan-view-container",
 		ref: K,
 		children: /* @__PURE__ */ jsxs("div", {
 			ref: U,
-			className: "relative",
+			className: "plan-view-canvas-wrapper",
 			children: [W.map((e) => createPortal(e, U.current)), /* @__PURE__ */ jsx("canvas", { ref: x })]
 		})
 	});
@@ -1204,8 +1204,8 @@ function PlanViewWrapper(e) {
 		});
 	}
 	return !_ || !t ? /* @__PURE__ */ jsx("div", {
-		className: "w-full h-[600px] flex items-center justify-center p-4",
-		children: /* @__PURE__ */ jsx("div", { className: "w-8 h-8 border-4 border-gray-200 border-t-[#5ec6d3] rounded-full animate-spin" })
+		className: "plan-view-wrapper-loading",
+		children: /* @__PURE__ */ jsx("div", { className: "plan-view-wrapper-spinner" })
 	}) : /* @__PURE__ */ jsx(PlanView, {
 		planId: t,
 		objects: g,

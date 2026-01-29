@@ -1,4 +1,3 @@
-import 'swiper/swiper.css';
 interface ItemSliderProps {
     items: React.ReactNode[];
     variant?: 'default' | 'voodvale' | 'skyscrapper';

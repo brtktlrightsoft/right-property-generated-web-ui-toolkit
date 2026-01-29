@@ -1,0 +1,12 @@
+/* Main SCSS Entry Point - All Templates (for backward compatibility) */
+
+/* Base Layer */
+@import 'base/variables';
+@import 'base/mixins';
+@import 'base/reset';
+
+/* Utilities Layer */
+@import 'utilities/index';
+
+/* Components Layer - All Templates */
+@import 'components/index';

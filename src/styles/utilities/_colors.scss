@@ -1,0 +1,96 @@
+/* Color Utilities */
+
+/* Background Colors */
+.bg-transparent {
+  background-color: transparent;
+}
+
+.bg-white {
+  background-color: white;
+}
+
+.bg-gray-200 {
+  background-color: rgb(229 231 235);
+}
+
+.bg-gray-300 {
+  background-color: rgb(209 213 219);
+}
+
+.bg-gray-400 {
+  background-color: rgb(156 163 175);
+}
+
+.bg-gray-400 {
+  background-color: rgb(156 163 175);
+}
+
+.bg-gray-600 {
+  background-color: rgb(75 85 99);
+}
+
+.bg-1a1a1a {
+  background-color: #1A1A1A;
+}
+
+.bg-black {
+  background-color: black;
+}
+
+.bg-gray-700 {
+  background-color: rgb(55 65 81);
+}
+
+.bg-thirdLayer {
+  background-color: var(--thirdLayer);
+}
+
+/* Text Colors */
+.text-bodyContentColor {
+  color: var(--bodyContentColor);
+}
+
+.text-inActiveBodyContentColor {
+  color: var(--inActiveBodyContentColor);
+}
+
+.text-primary-dark-1 {
+  color: var(--primary-dark-1);
+}
+
+.stroke-footerTextColor {
+  stroke: var(--footerTextColor);
+}
+
+/* Border Colors */
+.border-input {
+  border-color: var(--input);
+}
+
+.border-border {
+  border-color: var(--border);
+}
+
+.bg-popover {
+  background-color: var(--popover);
+}
+
+.text-popover-foreground {
+  color: var(--popover-foreground);
+}
+
+.text-muted-foreground {
+  color: var(--muted-foreground);
+}
+
+.bg-accent {
+  background-color: var(--accent);
+}
+
+.text-accent-foreground {
+  color: var(--accent-foreground);
+}
+
+.bg-border {
+  background-color: var(--border);
+}

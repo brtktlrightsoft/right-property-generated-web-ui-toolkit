@@ -1,5 +1,5 @@
 // Public entrypoint for the UI toolkit
-// Import global styles so consumers get compiled Tailwind/theme CSS with components
+// Import global styles so consumers get compiled SCSS CSS with components
 import './index.css';
 
 // context
@@ -22,11 +22,6 @@ export * from './types/voodvale.types';
 export * from './types/puck.types';
 export * from './types/plot.types';
 
-// ui
-export * from './components/ui/select';
-
-// editor helpers
-export * from './components/editor/ColorPickerField';
 
 // default theme components
 export * from './components/default/HomeFirstSection';

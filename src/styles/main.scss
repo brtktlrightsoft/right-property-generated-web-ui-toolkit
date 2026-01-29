@@ -1,0 +1,26 @@
+/* Main SCSS Entry Point */
+
+/* NOTE: Google Fonts should be loaded via <link> tags in HTML instead of @import
+ * @import blocks CSS parsing and increases load time
+ * Add these to your HTML:
+ * <link rel="preconnect" href="https://fonts.googleapis.com">
+ * <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ * <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+ * <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:wght@400;600;700&display=swap" rel="stylesheet">
+ */
+
+/* Base Layer */
+@import 'base/variables';
+@import 'base/mixins';
+@import 'base/reset';
+
+/* Utilities Layer */
+@import 'utilities/index';
+
+/* Components Layer */
+@import 'components/index';
+
+/* NOTE: Swiper CSS is imported in ItemSlider.tsx component
+ * This prevents bundling Swiper CSS if the component isn't used
+ * Remove this comment if you need Swiper styles globally
+ */

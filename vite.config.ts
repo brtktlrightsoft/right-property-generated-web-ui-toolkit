@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
-import tailwindcss from '@tailwindcss/vite'
 
 const external = [
   'react',
@@ -12,8 +11,6 @@ const external = [
   'react-dom/server',
   'fabric',
   '@measured/puck',
-  '@radix-ui/react-select',
-  '@tailwindcss/vite',
   '@use-gesture/react',
   'class-variance-authority',
   'clsx',
@@ -21,20 +18,18 @@ const external = [
   'lucide-react',
   'react-router-dom',
   'swiper',
-  'tailwind-merge',
-  'tailwindcss',
 ]
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  plugins: [react()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
     },
   },
   build: {
-    cssCodeSplit: false,
+    cssCodeSplit: true, // Enable CSS code splitting for template-specific CSS
     // IMPORTANT: don't inline images as base64 into JS chunks – emit real files instead
     assetsInlineLimit: 0,
     lib: {
@@ -42,9 +37,28 @@ export default defineConfig({
         index: path.resolve(__dirname, 'src/index.ts'),
         'plan-view': path.resolve(__dirname, 'src/plan-view.ts'),
         'puck-runtime': path.resolve(__dirname, 'src/puck-runtime.ts'),
+        // CSS entry points for template-specific styles
+        'styles/base': path.resolve(__dirname, 'src/styles/base.ts'),
+        'styles/utilities': path.resolve(__dirname, 'src/styles/utilities.ts'),
+        'styles/skyscrapper': path.resolve(__dirname, 'src/styles/skyscrapper.ts'),
+        'styles/voodvale': path.resolve(__dirname, 'src/styles/voodvale.ts'),
+        'styles/default': path.resolve(__dirname, 'src/styles/default.ts'),
+        // Main CSS file (all templates) for backward compatibility
+        'styles/main': path.resolve(__dirname, 'src/styles/main-all.ts'),
       },
       formats: ['es'],
-      fileName: (format, entryName) => `${entryName}.mjs`,
+      fileName: (format, entryName) => {
+        // CSS files should keep .css extension
+        if (entryName.startsWith('styles/')) {
+          const name = entryName.replace('styles/', '');
+          // Main CSS file keeps the original name for backward compatibility
+          if (name === 'main') {
+            return 'right-property-generated-web-ui-toolkit.css';
+          }
+          return name + '.css';
+        }
+        return `${entryName}.mjs`;
+      },
     },
     rollupOptions: {
       // IMPORTANT: externalize React AND the JSX runtimes.

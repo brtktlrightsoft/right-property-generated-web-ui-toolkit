@@ -13,15 +13,15 @@ export function ContentSection({
   contentImage3,
 }: VoodvaleContentSectionProps) {
   return (
-    <div className="mt-[11.5rem] mobile:mt-[6.250rem] mb-[7.5rem] flex mobile:flex-col gap-[3.125rem] mobile:gap-0 ">
-      <div className="flex-shrink-0 w-[34.375rem] mobile:w-full">
-        <div className="mb-[1.5rem] text-[3rem] mobile:text-[2.25rem] mobile:w-[19.6875rem] leading-[108.333%] text-[#12161D] font-medium capitalize">
+    <div className="voodvale-content-section">
+      <div className="voodvale-content-section-left">
+        <div className="voodvale-content-section-title">
           {sectionTitle}
         </div>
-        <div className="mb-[3.75rem] text-[1.125rem] mobile:text-[1rem] leading-[144.444%] text-[#4A4A4A] font-normal">
+        <div className="voodvale-content-section-description">
           {sectionDescription}
         </div>
-        <div className="w-full h-auto mobile:hidden">
+        <div className="voodvale-content-section-image-1-desktop">
           <Image
             width={550}
             height={640}
@@ -32,8 +32,8 @@ export function ContentSection({
           />
         </div>
       </div>
-      <div className="flex-grow mobile:hidden">
-        <div className="w-full h-auto mb-[4.25rem]">
+      <div className="voodvale-content-section-right">
+        <div className="voodvale-content-section-image-2">
           <Image
             width={680}
             height={734}
@@ -43,7 +43,7 @@ export function ContentSection({
             className="w-full h-auto object-contain"
           />
         </div>
-        <div className="w-full h-auto">
+        <div className="voodvale-content-section-image-3">
           <Image
             width={461}
             height={309}
@@ -54,8 +54,8 @@ export function ContentSection({
           />
         </div>
       </div>
-      <div className="hidden mobile:flex justify-center mobile:gap-[0.903125rem]">
-        <div className="mt-[5.375rem] w-[39.8vw] h-auto">
+      <div className="voodvale-content-section-mobile">
+        <div className="voodvale-content-section-mobile-image-1">
           <Image
             width={133}
             height={154}
@@ -65,8 +65,8 @@ export function ContentSection({
             className="w-full h-auto object-contain"
           />
         </div>
-        <div className="flex flex-col gap-[1.25rem]">
-          <div className="w-[48.75vw] h-auto">
+        <div className="voodvale-content-section-mobile-images">
+          <div className="voodvale-content-section-mobile-image-2">
           <Image
             width={197}
             height={212}
@@ -76,7 +76,7 @@ export function ContentSection({
             className="w-full h-auto object-contain"
           />
           </div>
-          <div className="w-[33.08vw] h-auto">
+          <div className="voodvale-content-section-mobile-image-3">
           <Image
             width={133}
             height={212}

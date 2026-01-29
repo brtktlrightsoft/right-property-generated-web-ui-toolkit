@@ -1,0 +1,556 @@
+/* Skyscrapper Component Styles */
+
+/* Custom Gradient Text */
+.skyscrapper-text-gradient {
+  background: linear-gradient(305deg, #032228 1.01%, #5c8c95 51.34%, #faba6c 91.9%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Gradient Border Button */
+.gradient-border-button {
+  position: relative;
+  display: inline-block;
+  border-radius: 12.38px;
+  overflow: hidden;
+  background: transparent;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(320deg, #0f3f48 0%, #2498ae 47.17%, #eca650 100%);
+    padding: 1.24px;
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  > * {
+    position: relative;
+    background: transparent;
+  }
+}
+
+.gradient-border-button-inner {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  height: 49px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hero Section */
+.skyscrapper-hero-section {
+  padding-top: 4.375rem;
+  padding-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  background-color: rgb(209 213 219);
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  @media (min-width: 1024px) {
+    justify-content: center;
+  }
+}
+
+.skyscrapper-hero-overlay {
+  position: absolute;
+  z-index: 20;
+  top: 0;
+  left: 0;
+}
+
+.skyscrapper-hero-content {
+  z-index: 30;
+  color: white;
+}
+
+/* Semantic Classes for Skyscrapper Components */
+.skyscrapper-heading {
+  width: 58.3125rem;
+  font-size: 10.44rem;
+  margin-left: 11.86rem;
+  margin-top: 8.5rem;
+  color: white;
+  line-height: 1.1em;
+  letter-spacing: -0.20881rem;
+
+  @media (max-width: 800px) {
+    width: 19.875rem;
+    font-size: 5rem;
+    margin-left: 0;
+  }
+}
+
+.skyscrapper-subheading {
+  margin-bottom: 2.75rem;
+  max-width: 34rem;
+  font-size: 3.40rem;
+  color: #CED7D8;
+  line-height: 3.5rem;
+  letter-spacing: -0.06em;
+
+  @media (max-width: 800px) {
+    margin-bottom: 2.87rem;
+    max-width: 23.125rem;
+  }
+}
+
+.skyscrapper-description {
+  margin-bottom: 2rem;
+  color: #CED7D8;
+  max-width: 21.5625rem;
+  font-family: var(--font-general-sans);
+}
+
+.skyscrapper-content-wrapper {
+  margin-top: 1.56rem;
+  margin-left: 58.56rem;
+
+  @media (max-width: 800px) {
+    margin-top: 5.19rem;
+    margin-left: 0;
+  }
+}
+
+/* Skyscrapper Image Mask */
+.skyscrapper-image-mask {
+  /* Custom mask styles if needed */
+}
+
+/* Skyscrapper Second Section */
+.second-section {
+  background-color: black;
+  color: #CED7D8;
+  font-family: var(--font-instrument-serif);
+  left: 0;
+  top: 0;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+  padding-top: 12rem;
+
+  @media (max-width: 800px) {
+    padding-top: 8.5rem;
+  }
+}
+
+/* Skyscrapper Showcase Card */
+.skyscrapper-showcase-card-first {
+  border-radius: 24px;
+  background-color: #1A1A1A;
+  width: 100%;
+  height: 29.9375rem;
+  padding-left: 1.75rem;
+  padding-right: 1.82rem;
+  padding-top: 2rem;
+  padding-bottom: 1.62rem;
+  position: relative;
+
+  @media (max-width: 800px) {
+    height: 15.18rem;
+    padding-left: 0.89rem;
+    padding-right: 0.92rem;
+    padding-top: 1.17rem;
+    padding-bottom: 0.82rem;
+  }
+}
+
+.skyscrapper-showcase-card-default {
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 29.9375rem;
+  position: relative;
+
+  @media (max-width: 800px) {
+    height: 15.18rem;
+  }
+}
+
+.skyscrapper-showcase-card-arrow {
+  position: absolute;
+  top: 1.13rem;
+  right: 0.69rem;
+  visibility: hidden;
+  transition: all 300ms;
+
+  .group:hover & {
+    visibility: visible;
+  }
+}
+
+.skyscrapper-showcase-card-number {
+  margin-bottom: 2.2rem;
+  padding-left: 1.22rem;
+  display: flex;
+  gap: 1.75rem;
+  align-items: center;
+  color: #CED7D8;
+  font-size: 1.5rem;
+  letter-spacing: 0.045rem;
+
+  @media (max-width: 800px) {
+    margin-bottom: 0.99rem;
+    padding-left: 0.62rem;
+    font-size: 0.875rem;
+    letter-spacing: 0.02rem;
+  }
+}
+
+.skyscrapper-showcase-card-name {
+  font-size: 2.5rem;
+  line-height: 75%;
+  letter-spacing: -0.025rem;
+  color: #CED7D8;
+  padding-left: 1.22rem;
+  margin-bottom: 2.49rem;
+
+  @media (max-width: 800px) {
+    font-size: 1.25rem;
+    letter-spacing: -0.0125rem;
+    padding-left: 0.62rem;
+    margin-bottom: 1.11rem;
+  }
+}
+
+.skyscrapper-showcase-card-image {
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  height: 15.437rem;
+  border-radius: 11px;
+  background-color: rgb(55 65 81);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 800px) {
+    height: 7.83rem;
+  }
+}
+
+.skyscrapper-showcase-card-bg {
+  position: absolute;
+  border-radius: 24px;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  z-index: 4;
+}
+
+.skyscrapper-showcase-card-content {
+  padding-left: 2.02rem;
+  padding-right: 1.82rem;
+  padding-top: 2rem;
+  padding-bottom: 1.62rem;
+  display: flex;
+  gap: 1.75rem;
+  align-items: center;
+  z-index: 6;
+
+  @media (max-width: 800px) {
+    padding-left: 1.02rem;
+    padding-right: 0.92rem;
+    padding-top: 1.17rem;
+    padding-bottom: 0.82rem;
+  }
+}
+
+.skyscrapper-showcase-card-name {
+  font-size: 2.5rem;
+  line-height: 75%;
+  letter-spacing: -0.025rem;
+  color: #CED7D8;
+
+  @media (max-width: 800px) {
+    font-size: 1.25rem;
+    letter-spacing: -0.0125rem;
+  }
+}
+
+.skyscrapper-showcase-card-name-first {
+  padding-left: 1.22rem;
+  margin-bottom: 2.49rem;
+
+  @media (max-width: 800px) {
+    padding-left: 0.62rem;
+    margin-bottom: 1.11rem;
+  }
+}
+
+.skyscrapper-showcase-card-name-default {
+  padding-left: 2.02rem;
+  margin-bottom: 2.49rem;
+  z-index: 6;
+
+  @media (max-width: 800px) {
+    padding-left: 1.02rem;
+    margin-bottom: 1.11rem;
+  }
+}
+
+/* Skyscrapper Second Section */
+.skyscrapper-second-section-intro {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  padding-left: 5rem;
+  padding-right: 5rem;
+  max-width: 1440px;
+
+  @media (max-width: 800px) {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+}
+
+.skyscrapper-second-section-intro-text {
+  margin-left: auto;
+  margin-right: auto;
+  width: 57.48rem;
+  text-align: center;
+  font-size: 3.75rem;
+  line-height: 108%;
+  color: #CED7D8;
+
+  @media (max-width: 800px) {
+    width: 100%;
+    font-size: 2.25rem;
+  }
+}
+
+.skyscrapper-second-section-images {
+  margin-bottom: 5rem;
+  position: relative;
+  height: 46.875rem;
+
+  @media (max-width: 800px) {
+    margin-bottom: 0;
+    height: 55vh;
+  }
+}
+
+.skyscrapper-second-section-image-1 {
+  position: absolute;
+  right: 50%;
+  transform: translateX(-10%);
+  top: 50%;
+  transform: translate(-10%, -80%);
+  width: 14.55rem;
+  height: 17.98rem;
+  object-fit: cover;
+
+  @media (max-width: 800px) {
+    width: 10rem;
+    height: 12.3025rem;
+  }
+}
+
+.skyscrapper-second-section-image-2 {
+  position: absolute;
+  right: 50%;
+  transform: translateX(105%);
+  top: 50%;
+  transform: translate(105%, -115%);
+  width: 14.55rem;
+  height: 17.98rem;
+  object-fit: cover;
+
+  @media (max-width: 800px) {
+    width: 10rem;
+    height: 12.3025rem;
+  }
+}
+
+.skyscrapper-second-section-image-3 {
+  position: absolute;
+  right: 50%;
+  transform: translateX(75%);
+  top: 50%;
+  transform: translate(75%, -2%);
+  width: 19.57rem;
+  height: 24.20rem;
+  object-fit: cover;
+
+  @media (max-width: 800px) {
+    width: 13.375rem;
+    height: 16.625rem;
+  }
+}
+
+.skyscrapper-second-section-grid {
+  padding-top: 10rem;
+  padding-bottom: 12rem;
+  padding-left: 11.57rem;
+  padding-right: 22.27rem;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1440px;
+
+  @media (max-width: 800px) {
+    padding-top: 0;
+    padding-bottom: 9rem;
+    padding-left: 1.3rem;
+    padding-right: 1.3rem;
+  }
+}
+
+.skyscrapper-second-section-grid-title {
+  font-size: 3.75rem;
+  margin-bottom: 3rem;
+
+  @media (max-width: 800px) {
+    font-size: 2.25rem;
+    margin-bottom: 2.25rem;
+  }
+}
+
+.skyscrapper-second-section-grid-lead {
+  margin-bottom: 10.69rem;
+  font-family: var(--font-general-sans);
+  font-size: 1.125rem;
+
+  @media (max-width: 800px) {
+    margin-bottom: 4.19rem;
+    font-size: 1rem;
+  }
+}
+
+.skyscrapper-second-section-grid-items {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15.20rem;
+
+  @media (max-width: 800px) {
+    grid-template-columns: 1fr;
+    gap: 3.75rem;
+  }
+}
+
+.skyscrapper-grid-cell {
+  /* Base grid cell styles */
+}
+
+.skyscrapper-grid-cell-increase {
+  background: linear-gradient(305deg, #032228 1.01%, #5c8c95 51.34%, #faba6c 91.9%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 100%;
+  letter-spacing: -0.1rem;
+  font-size: 5rem;
+  margin-bottom: 1.25rem;
+}
+
+.skyscrapper-grid-cell-description {
+  font-family: var(--font-general-sans);
+  font-size: 1rem;
+  line-height: 162%;
+  height: 7.75rem;
+}
+
+.skyscrapper-grid-cell-divider {
+  height: 1px;
+  background-color: rgba(250, 186, 108, 0.3);
+  width: 100%;
+}
+
+/* Skyscrapper Plots Showcase */
+.skyscrapper-plots-showcase {
+  position: relative;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  background-color: black;
+}
+
+.skyscrapper-plots-showcase-content {
+  position: relative;
+  z-index: 1;
+  padding-top: 6.8125rem;
+  padding-bottom: 7.5rem;
+
+  @media (max-width: 800px) {
+    padding-top: 4.1875rem;
+    padding-bottom: 9rem;
+    padding-left: 1.3rem;
+    padding-right: 0;
+  }
+}
+
+.skyscrapper-plots-showcase-header {
+  margin-bottom: 3.875rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @media (max-width: 800px) {
+    margin-bottom: 2rem;
+  }
+}
+
+.skyscrapper-plots-showcase-title-wrapper {
+  padding-left: 11.57rem;
+
+  @media (max-width: 800px) {
+    padding-left: 0;
+  }
+}
+
+.skyscrapper-plots-showcase-title {
+  margin-bottom: 2.87rem;
+  font-size: 2.75rem;
+  line-height: 100%;
+  color: #FFF;
+  font-weight: 500;
+
+  @media (max-width: 800px) {
+    margin-bottom: 2.25rem;
+    font-size: 2.25rem;
+  }
+}
+
+.skyscrapper-plots-showcase-subtitle {
+  font-size: 1.25rem;
+  color: white;
+
+  @media (max-width: 800px) {
+    font-size: 1rem;
+  }
+}
+
+.skyscrapper-plots-showcase-slider {
+  padding-left: 3.87rem;
+
+  @media (max-width: 800px) {
+    padding-left: 0;
+  }
+}

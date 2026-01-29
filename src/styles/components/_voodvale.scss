@@ -1,0 +1,443 @@
+/* Voodvale Component Styles */
+
+/* Hero Section */
+.voodvale-hero-section {
+  padding-top: 4.375rem;
+  padding-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  background-color: rgb(209 213 219);
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  @media (min-width: 1024px) {
+    justify-content: center;
+  }
+}
+
+.voodvale-hero-overlay {
+  position: absolute;
+  z-index: 20;
+  top: 0;
+  left: 0;
+}
+
+.voodvale-hero-content {
+  z-index: 30;
+  color: white;
+}
+
+/* Semantic Classes for Voodvale Components */
+.voodvale-heading {
+  width: 58.3125rem;
+  font-weight: 500;
+  font-size: 5.625rem;
+  margin-left: 7.875rem;
+  margin-top: 8.5rem;
+  color: white;
+  line-height: 107%;
+  letter-spacing: -0.01em;
+  text-transform: capitalize;
+
+  @media (max-width: 800px) {
+    width: 19.875rem;
+    font-size: 3rem;
+    margin-left: 0;
+  }
+}
+
+.voodvale-subheading-wrapper {
+  margin-top: 5rem;
+  margin-left: 45.9375rem;
+
+  @media (max-width: 800px) {
+    margin-top: 2.5rem;
+    margin-left: 0;
+  }
+}
+
+.voodvale-subheading {
+  margin-bottom: 1.0625rem;
+  width: 34rem;
+  font-size: 1.25rem;
+  line-height: 135%;
+  letter-spacing: 0.03em;
+
+  @media (max-width: 800px) {
+    margin-bottom: 3.125rem;
+    width: 23.125rem;
+  }
+}
+
+.voodvale-button {
+  background-color: white;
+  border-radius: 7px;
+  color: #484848;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 10.0625rem;
+  height: 3.125rem;
+}
+
+/* Voodvale Home Second Section */
+.voodvale-home-second-section {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  padding-top: 3rem;
+  padding-left: 5rem;
+  padding-right: 5rem;
+  max-width: 1440px;
+
+  @media (max-width: 800px) {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+}
+
+/* Voodvale Grid Section */
+.voodvale-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  @media (max-width: 800px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.voodvale-grid-cell {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-top: 1px solid #E3E3E3;
+
+  &:hover {
+    background-color: rgba(199, 160, 147, 0.1);
+  }
+
+  transition: all 300ms;
+
+  @media (max-width: 800px) {
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-right-width: 0;
+  }
+
+  &:nth-child(1) {
+    @media (max-width: 800px) {
+      border-top-width: 1px;
+    }
+  }
+
+  &:nth-child(-n+2) {
+    border-bottom: 1px solid #E3E3E3;
+  }
+
+  &:nth-child(even) {
+    border-right: 1px solid #E3E3E3;
+  }
+}
+
+.voodvale-grid-cell-title {
+  padding-top: 1.6875rem;
+  padding-left: 1.9375rem;
+  font-size: 1.125rem;
+  line-height: 144.444%;
+  color: #4A4A4A;
+  font-weight: 400;
+
+  @media (max-width: 800px) {
+    padding-left: 0;
+    padding-bottom: 0.875rem;
+  }
+}
+
+.voodvale-grid-cell-content {
+  padding-left: 15.875rem;
+  padding-bottom: 1.9375rem;
+
+  @media (max-width: 800px) {
+    padding-left: 0;
+  }
+}
+
+.voodvale-grid-cell-increase {
+  margin-bottom: 0.75rem;
+  font-size: 2.25rem;
+  line-height: 133.333%;
+  color: #C6A195;
+  font-weight: 600;
+}
+
+.voodvale-grid-cell-description {
+  font-size: 1.125rem;
+  line-height: 144.444%;
+  color: #61656E;
+  font-weight: 500;
+
+  @media (max-width: 800px) {
+    width: 100%;
+  }
+}
+
+/* Voodvale Content Section */
+.voodvale-content-section {
+  margin-top: 11.5rem;
+  margin-bottom: 7.5rem;
+  display: flex;
+  gap: 3.125rem;
+
+  @media (max-width: 800px) {
+    margin-top: 6.250rem;
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+.voodvale-content-section-left {
+  flex-shrink: 0;
+  width: 34.375rem;
+
+  @media (max-width: 800px) {
+    width: 100%;
+  }
+}
+
+.voodvale-content-section-title {
+  margin-bottom: 1.5rem;
+  font-size: 3rem;
+  line-height: 108.333%;
+  color: #12161D;
+  font-weight: 500;
+  text-transform: capitalize;
+
+  @media (max-width: 800px) {
+    font-size: 2.25rem;
+    width: 19.6875rem;
+  }
+}
+
+.voodvale-content-section-description {
+  margin-bottom: 3.75rem;
+  font-size: 1.125rem;
+  line-height: 144.444%;
+  color: #4A4A4A;
+  font-weight: 400;
+
+  @media (max-width: 800px) {
+    font-size: 1rem;
+  }
+}
+
+.voodvale-content-section-image-1-desktop {
+  width: 100%;
+  height: auto;
+
+  @media (max-width: 800px) {
+    display: none;
+  }
+}
+
+.voodvale-content-section-right {
+  flex-grow: 1;
+
+  @media (max-width: 800px) {
+    display: none;
+  }
+}
+
+.voodvale-content-section-image-2 {
+  width: 100%;
+  height: auto;
+  margin-bottom: 4.25rem;
+}
+
+.voodvale-content-section-image-3 {
+  width: 100%;
+  height: auto;
+}
+
+.voodvale-content-section-mobile {
+  display: none;
+  justify-content: center;
+  gap: 0.903125rem;
+
+  @media (max-width: 800px) {
+    display: flex;
+  }
+}
+
+.voodvale-content-section-mobile-image-1 {
+  margin-top: 5.375rem;
+  width: 39.8vw;
+  height: auto;
+}
+
+.voodvale-content-section-mobile-images {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.voodvale-content-section-mobile-image-2 {
+  width: 48.75vw;
+  height: auto;
+}
+
+.voodvale-content-section-mobile-image-3 {
+  width: 33.08vw;
+  height: auto;
+}
+
+/* Voodvale Plots Showcase */
+.voodvale-plots-showcase {
+  position: relative;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.voodvale-plots-showcase-content {
+  position: relative;
+  z-index: 1;
+  padding-top: 6.8125rem;
+  padding-bottom: 7.8125rem;
+  padding-left: 8.4375rem;
+  padding-right: 8.4375rem;
+
+  @media (max-width: 800px) {
+    padding-top: 4.1875rem;
+    padding-bottom: 9rem;
+    padding-left: 1rem;
+    padding-right: 0;
+  }
+}
+
+.voodvale-plots-showcase-header {
+  margin-bottom: 3.875rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @media (max-width: 800px) {
+    margin-bottom: 2rem;
+  }
+}
+
+.voodvale-plots-showcase-title {
+  font-size: 2.75rem;
+  line-height: 118.182%;
+  color: #FFF;
+  font-weight: 500;
+
+  @media (max-width: 800px) {
+    font-size: 2.25rem;
+  }
+}
+
+.voodvale-see-all-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  @media (max-width: 800px) {
+    display: none;
+  }
+}
+
+.voodvale-plots-showcase-see-all-mobile {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 4.1875rem;
+
+  @media (max-width: 800px) {
+    display: block;
+  }
+}
+
+.voodvale-plots-showcase-vector-desktop {
+  display: block;
+  z-index: 0;
+  position: absolute;
+  width: 100vw;
+  height: auto;
+  object-fit: contain;
+  bottom: -12.72vw;
+  left: 50%;
+  transform: translateX(-50%);
+
+  @media (max-width: 800px) {
+    display: none;
+  }
+}
+
+.voodvale-plots-showcase-vector-mobile {
+  display: none;
+  z-index: 0;
+  position: absolute;
+  width: 100vw;
+  height: auto;
+  object-fit: contain;
+  bottom: -21vw;
+  left: 50%;
+  transform: translateX(-50%);
+
+  @media (max-width: 800px) {
+    display: block;
+  }
+}
+
+.voodvale-header-title {
+  width: 34.5rem;
+  font-size: 3rem;
+  line-height: 122%;
+  letter-spacing: -0.01em;
+  color: #12161D;
+  font-weight: 500;
+  text-transform: capitalize;
+
+  @media (max-width: 800px) {
+    width: 19.6875rem;
+    font-size: 2.25rem;
+  }
+}
+
+.voodvale-header-description {
+  width: 39.125rem;
+  font-size: 1.125rem;
+  line-height: 144.444%;
+  color: #4A4A4A;
+  font-weight: 400;
+
+  @media (max-width: 800px) {
+    width: 100%;
+    font-size: 1rem;
+  }
+}
+
+.voodvale-header-wrapper {
+  margin-top: 3rem;
+  margin-bottom: 5rem;
+  display: flex;
+  justify-content: space-between;
+
+  @media (max-width: 800px) {
+    flex-direction: column;
+    gap: 1.875rem;
+    margin-bottom: 3.125rem;
+  }
+}

@@ -14,7 +14,7 @@ export function VoodvaleHomeSecondSection({
   contentImage3,
 }: VoodvaleSectionProps) {
   return (
-    <div className="w-full mx-auto flex flex-col pt-[3rem] px-[5rem] mobile:px-5 max-w-[1440px]">
+    <div className="voodvale-home-second-section">
       <HeaderSection title={title} description={description} />
       <GridSection gridData={gridData} />
       <ContentSection

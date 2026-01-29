@@ -12,7 +12,6 @@ import { SkyscrapperHomesSecondSectionWrapper } from '@/components/skyscrapper/S
 import { VoodvalePlotsShowcaseWrapper } from '@/components/voodvale/VoodvalePlotsShowcaseWrapper';
 import { PlotsShowcaseWrapper } from '@/components/default/PlotsShowcaseWrapper';
 import { SkyscrapperPlotsShowcaseWrapper } from '@/components/skyscrapper/SkyscrapperPlotsShowcaseWrapper';
-import { ColorPickerField } from '@/components/editor/ColorPickerField';
 import { PlanViewWrapper } from '@/components/common/PlanViewWrapper';
 import type { Components } from '@/types/puck.types';
 type Category =
@@ -219,18 +218,7 @@ export const puckConfig: Config<Components, object, Category>  = {
     HomePageContent: {
       fields: {
         title: { type: 'text', label: 'Title', contentEditable: true },
-        titleColor: {
-          type: 'custom',
-          label: 'Title Color',
-          render: ({ name, label, value, onChange }: { name: string; label: string; value: string | undefined; onChange: (value: string | undefined) => void }) =>
-            React.createElement(ColorPickerField, {
-              name,
-              label,
-              value: value as string,
-              onChange: (val: string) => onChange(val),
-            }),
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        } as any,
+        titleColor: { type: 'text', label: 'Title Color (hex code)' },
         subtitle: { type: 'textarea', label: 'Subtitle', contentEditable: true },
         paragraphs: {
           type: 'array',

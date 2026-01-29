@@ -9,8 +9,6 @@ export * from './types/skyscrapper.types';
 export * from './types/voodvale.types';
 export * from './types/puck.types';
 export * from './types/plot.types';
-export * from './components/ui/select';
-export * from './components/editor/ColorPickerField';
 export * from './components/default/HomeFirstSection';
 export * from './components/default/HomeFirstSectionWrapper';
 export * from './components/default/HomePageContent';

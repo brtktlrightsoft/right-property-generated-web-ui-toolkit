@@ -34,7 +34,6 @@ export default function BackgroundMedia({
       loading="eager"
       alt={projectName}
       src={backgroundData.backgroundUrl}
-      style={{ objectFit: 'cover' }}
       className="absolute z-10 top-0 left-0 w-full h-full object-cover"
     />
   );

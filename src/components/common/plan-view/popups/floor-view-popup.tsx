@@ -143,15 +143,15 @@ const FloorViewPopup = React.forwardRef<HTMLDivElement, FloorViewPopupProps>(
           }
         }}
         onClick={navigateHandler}
-        className="cursor-pointer mobile:text-[0.8rem] absolute p-4 bg-thirdLayer text-bodyContentColor touch-none"
+        className="plan-view-popup"
         style={{
           scale: 1,
         }}
       >
-        <div className="mb-[0.875em] text-[1em] leading-[1.375em] font-bold flex justify-between">
+        <div className="plan-view-popup-header">
           <div>{item.name}</div>
         </div>
-        <div className="grid grid-cols-1 whitespace-pre">{information ?? ''}</div>
+        <div className="plan-view-popup-floor-details">{information ?? ''}</div>
         <div className={`absolute w-0 h-0 ${getTrianglePosition(direction[0], direction[1])}`}></div>
       </div>
     );

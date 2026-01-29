@@ -149,14 +149,14 @@ export default function PlanViewPopup({
     <div
       ref={ref}
       onClick={navigateHandler}
-      className="cursor-pointer mobile:text-[0.8rem] absolute p-4 bg-thirdLayer text-bodyContentColor touch-none"
+      className="plan-view-popup"
       style={{
         scale: 1,
       }}
     >
-      <div className="text-[1em] leading-[1.375em] font-bold flex justify-between">
+      <div className="plan-view-popup-header">
         <div>{item.plotInfo?.typeName}</div>
-        <div className="flex items-center gap-1 text-[0.8125em] leading-[1.375em]">
+        <div className="plan-view-popup-status">
           <span style={{ color: status?.color }}>{t(`${status?.name}`)}</span>
           <svg
             width="16"
@@ -173,10 +173,10 @@ export default function PlanViewPopup({
           </svg>
         </div>
       </div>
-      <div className="text-xs leading-[1.375em] text-inActiveBodyContentColor mb-4">{item.plotInfo?.name}</div>
-      <div className="flex grid grid-cols-2 gap-[0.7081rem] mobile:gap-[2.125em] whitespace-pre text-[0.75rem]">
+      <div className="plan-view-popup-name">{item.plotInfo?.name}</div>
+      <div className="plan-view-popup-details">
         {showPrice && (
-          <div style={{ color: status?.color }} className="flex flex-[1] gap-[0.25em] items-center">
+          <div style={{ color: status?.color }} className="plan-view-popup-detail-item">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g clipPath="url(#clip0_679_1027)">
                 <path
@@ -196,15 +196,15 @@ export default function PlanViewPopup({
             <span className="text-bodyContentColor">{price}</span>
           </div>
         )}
-        <div style={{ color: status?.color }} className="flex gap-[0.25em] items-center">
+        <div style={{ color: status?.color }} className="plan-view-popup-detail-item">
           <BedroomIcon className="stroke-footerTextColor" width="1rem" />
           <span className="text-bodyContentColor">{item.plotInfo?.bedrooms + ` ${t('web.unit_detail.bedroom')}`}</span>
         </div>
-        <div style={{ color: status?.color }} className="mobile:-mt-[1.625em] flex gap-[0.25em] items-center">
+        <div style={{ color: status?.color }} className="plan-view-popup-detail-item">
           <RulerIcon className="w-4 h-4" />
           <span className="text-bodyContentColor">{prepareArea(item.plotInfo?.metricArea ?? 0)}</span>
         </div>
-        <div style={{ color: status?.color }} className="mobile:-mt-[1.625em] flex gap-[0.25em] items-center">
+        <div style={{ color: status?.color }} className="plan-view-popup-detail-item">
           <BathroomIcon className="stroke-footerTextColor" width="1rem" />
           <span className="text-bodyContentColor">
             {item.plotInfo?.bathrooms + ` ${t('web.unit_detail.bathrooms').toLowerCase()}`}

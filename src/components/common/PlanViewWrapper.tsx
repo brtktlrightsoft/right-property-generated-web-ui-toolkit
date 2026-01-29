@@ -48,8 +48,8 @@ export function PlanViewWrapper(props: PlanViewWrapperProps & Record<string, unk
 
   if (!parsedBackground || !planId) {
     return (
-      <div className="w-full h-[600px] flex items-center justify-center p-4">
-        <div className="w-8 h-8 border-4 border-gray-200 border-t-[#5ec6d3] rounded-full animate-spin"></div>
+      <div className="plan-view-wrapper-loading">
+        <div className="plan-view-wrapper-spinner"></div>
       </div>
     );
   }

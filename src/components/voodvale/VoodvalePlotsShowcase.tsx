@@ -33,30 +33,28 @@ export function VoodvalePlotsShowcase({
 
   return (
     <div
-      className="relative w-full mx-auto flex flex-col"
+      className="voodvale-plots-showcase"
       style={{
         background: 'radial-gradient(113.94% 104.88% at 55.95% -2.12%, #DECFCD 0%, #B38A82 56.73%, #988289 100%)',
       }}
     >
-      <div className="relative z-[1] page-container">
-        <div className="pt-[6.8125rem] mobile:pt-[4.1875rem] pb-[7.8125rem] mobile:pb-[9rem] px-[8.4375rem] mobile:pl-[1rem] mobile:pr-0">
-          <div className="mb-[3.875rem] mobile:mb-[2rem] flex justify-between items-center">
-            <h3 className="text-[2.75rem] mobile:text-[2.25rem] leading-[118.182%] text-[#FFF] font-medium" suppressHydrationWarning>
-              {title}
-            </h3>
-            <SeeAllProperties className="mobile:hidden" pathname={showAllLink || ''} title={seeAllTitle || 'See All Properties'} />
-          </div>
-          <ItemSlider items={plotItems.slice(0, 3)} variant="voodvale" language={language} />
+      <div className="page-container voodvale-plots-showcase-content">
+        <div className="voodvale-plots-showcase-header">
+          <h3 className="voodvale-plots-showcase-title" suppressHydrationWarning>
+            {title}
+          </h3>
+          <SeeAllProperties className="mobile:hidden" pathname={showAllLink || ''} title={seeAllTitle || 'See All Properties'} />
         </div>
+        <ItemSlider items={plotItems.slice(0, 3)} variant="voodvale" language={language} />
       </div>
-      <SeeAllProperties className="hidden mobile:block absolute z-[1] left-1/2 -translate-x-1/2 bottom-[4.1875rem]"  pathname={showAllLink || ''} title={seeAllTitle || 'See All Properties'} />
+      <SeeAllProperties className="voodvale-plots-showcase-see-all-mobile" pathname={showAllLink || ''} title={seeAllTitle || 'See All Properties'} />
       {showcaseVectorUrl && (
-        <div className="mobile:hidden z-[0] absolute w-[100vw] h-auto object-contain -bottom-[12.72vw] left-1/2 -translate-x-1/2">
+        <div className="voodvale-plots-showcase-vector-desktop">
           <img src={showcaseVectorUrl} alt="showcase vector" className="w-full h-full object-contain" />
         </div>
       )}
       {showcaseMobileVectorUrl && (
-        <div className="mobile:block hidden z-[0] absolute w-[100vw] h-auto object-contain -bottom-[21vw] left-1/2 -translate-x-1/2">
+        <div className="voodvale-plots-showcase-vector-mobile">
           <img src={showcaseMobileVectorUrl} alt="showcase mobile vector" className="w-full h-full object-contain" />
         </div>
       )}
@@ -66,7 +64,7 @@ export function VoodvalePlotsShowcase({
 
 const SeeAllProperties = ({ pathname,title, className }: { pathname: string; title: string; className?: string }) => {
   return (
-    <a className={cn('mobile:hidden', className)} href={pathname}>
+    <a className={cn('voodvale-see-all-link', className)} href={pathname}>
       <div className="flex items-center gap-4">
         <div className="text-[1rem] text-[#FFF]">{title}</div>
         <Arrow />

@@ -17,11 +17,11 @@ export function HomePageContent({
   const titleStyle = { color: titleColor };
 
   return (
-    <div className='font-fira'>
+    <div className='font-fira default-home-page-content'>
       {/* Desktop Version */}
-      <div className="hidden md:block pb-15 px-24 pt-20 max-w-[1440px] mx-auto">
-        <div className="grid grid-cols-2 gap-10">
-          <div className="col-span-1 flex flex-col space-y-5">
+      <div className="default-home-page-content-desktop">
+        <div className="default-home-page-content-grid">
+          <div className="default-home-page-content-text">
             <h1 className="font-bold text-5xl" style={titleStyle}>
               {title}
             </h1>
@@ -32,39 +32,37 @@ export function HomePageContent({
               </div>
             ))}
           </div>
-          <div className="col-span-1">
-            <div className="flex flex-col space-y-5">
-              <div className="w-full">
+          <div className="default-home-page-content-images">
+            <div className="default-home-page-content-main-image">
+              <Image
+                width={600}
+                height={400}
+                src={image1 || DEFAULT_MAIN_IMAGE}
+                fallbackSrc={DEFAULT_MAIN_IMAGE}
+                className="h-60 lg:h-100 w-full"
+                alt=""
+              />
+            </div>
+            <div className="default-home-page-content-secondary-images">
+              <div className="col-span-1">
                 <Image
-                  width={600}
-                  height={400}
-                  src={image1 || DEFAULT_MAIN_IMAGE}
-                  fallbackSrc={DEFAULT_MAIN_IMAGE}
-                  className="h-60 lg:h-100 w-full"
+                  width={290}
+                  height={180}
+                  src={image2 || DEFAULT_IMAGE_2}
+                  fallbackSrc={DEFAULT_IMAGE_2}
+                  className="h-auto w-full"
                   alt=""
                 />
               </div>
-              <div className="w-full grid grid-cols-2 gap-5">
-                <div className="col-span-1">
-                  <Image
-                    width={290}
-                    height={180}
-                    src={image2 || DEFAULT_IMAGE_2}
-                    fallbackSrc={DEFAULT_IMAGE_2}
-                    className="h-auto w-full"
-                    alt=""
-                  />
-                </div>
-                <div className="col-span-1">
-                  <Image
-                    width={290}
-                    height={180}
-                    src={image3 || DEFAULT_IMAGE_3}
-                    fallbackSrc={DEFAULT_IMAGE_3}
-                    className="h-auto w-full"
-                    alt=""
-                  />
-                </div>
+              <div className="col-span-1">
+                <Image
+                  width={290}
+                  height={180}
+                  src={image3 || DEFAULT_IMAGE_3}
+                  fallbackSrc={DEFAULT_IMAGE_3}
+                  className="h-auto w-full"
+                  alt=""
+                />
               </div>
             </div>
           </div>
@@ -72,47 +70,45 @@ export function HomePageContent({
       </div>
 
       {/* Mobile Version */}
-      <div className="md:hidden">
-        <div className="flex flex-wrap mb-5">
-          <div className="flex-auto w-full md:w-1/2 p-5">
+      <div className="default-home-page-content-mobile">
+        <div className="default-home-page-content-mobile-wrapper">
+          <div className="default-home-page-content-mobile-text">
             <h1 className="font-bold text-5xl mb-5" style={titleStyle}>
               {title}
             </h1>
             <h4 className="font-light text-xl text-primary-dark-1">{subtitle}</h4>
           </div>
-          <div className="flex-auto w-full md:w-1/2 p-5">
-            <div className="flex flex-wrap space-y-5">
-              <div className="w-full">
+          <div className="default-home-page-content-mobile-images">
+            <div className="w-full">
+              <Image
+                width={400}
+                height={280}
+                src={image1 || DEFAULT_MAIN_IMAGE}
+                fallbackSrc={DEFAULT_MAIN_IMAGE}
+                className="h-60 lg:h-100 w-full"
+                alt=""
+              />
+            </div>
+            <div className="flex space-x-5">
+              <div className="flex-auto w-1/2">
                 <Image
-                  width={400}
-                  height={280}
-                  src={image1 || DEFAULT_MAIN_IMAGE}
-                  fallbackSrc={DEFAULT_MAIN_IMAGE}
-                  className="h-60 lg:h-100 w-full"
+                  width={290}
+                  height={120}
+                  src={image2 || DEFAULT_IMAGE_2}
+                  fallbackSrc={DEFAULT_IMAGE_2}
+                  className="h-30 w-full"
                   alt=""
                 />
               </div>
-              <div className="flex space-x-5">
-                <div className="flex-auto w-1/2">
-                  <Image
-                    width={290}
-                    height={120}
-                    src={image2 || DEFAULT_IMAGE_2}
-                    fallbackSrc={DEFAULT_IMAGE_2}
-                    className="h-30 w-full"
-                    alt=""
-                  />
-                </div>
-                <div className="flex-auto w-1/2">
-                  <Image
-                    width={290}
-                    height={120}
-                    src={image3 || DEFAULT_IMAGE_3}
-                    fallbackSrc={DEFAULT_IMAGE_3}
-                    className="h-30 w-full"
-                    alt=""
-                  />
-                </div>
+              <div className="flex-auto w-1/2">
+                <Image
+                  width={290}
+                  height={120}
+                  src={image3 || DEFAULT_IMAGE_3}
+                  fallbackSrc={DEFAULT_IMAGE_3}
+                  className="h-30 w-full"
+                  alt=""
+                />
               </div>
             </div>
           </div>

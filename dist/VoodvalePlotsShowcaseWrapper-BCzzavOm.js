@@ -15,16 +15,15 @@ function BackgroundMedia({ backgroundData: e, projectName: _ }) {
 		loading: "eager",
 		alt: _,
 		src: e.backgroundUrl,
-		style: { objectFit: "cover" },
 		className: "absolute z-10 top-0 left-0 w-full h-full object-cover"
 	});
 }
 var DEFAULT_BACKGROUND$2 = "/assets/wimbledon/background.webp";
 function HomeFirstSection({ projectName: e, projectDescription: _, backgroundData: v, scrollIndicatorText: y = "Scroll down", scrollIndicatorOpacity: b = 1 }) {
 	return /* @__PURE__ */ jsx("div", {
-		className: "panel absolute left-0 top-0 will-change-transform w-full h-full z-30",
+		className: "panel",
 		children: /* @__PURE__ */ jsxs("div", {
-			className: "pt-17.5 flex flex-col justify-end lg:justify-center px-5 bg-gray-300 relative h-[100vh] w-[100vw] bg-no-repeat bg-cover",
+			className: "default-hero-section",
 			children: [
 				/* @__PURE__ */ jsx(BackgroundMedia, {
 					backgroundData: v?.backgroundUrl ? {
@@ -37,33 +36,33 @@ function HomeFirstSection({ projectName: e, projectDescription: _, backgroundDat
 					projectName: e
 				}),
 				/* @__PURE__ */ jsx("div", {
-					className: "absolute z-20 top-0 left-0 h-[100vh] w-[100vw]",
+					className: "default-hero-overlay",
 					style: {
 						opacity: .5,
 						backgroundColor: "black"
 					}
 				}),
 				/* @__PURE__ */ jsx(motion.div, {
-					className: "absolute z-30 top-0 left-0 h-[100vh] w-[100vw]",
+					className: "default-hero-gradient",
 					style: {
 						opacity: 0,
 						background: "linear-gradient(0deg, var(--menuBgColor), var(--menuBgColor)), linear-gradient(180deg, var(--menuBgColor) 0%, rgba(0, 53, 110, 0) 100%)"
 					}
 				}),
 				/* @__PURE__ */ jsxs("div", {
-					className: "page-container z-30 justify-end lg:justify-center px-5 py-5 lg:px-7.5 lg:py-7.5 mobile:p-0",
+					className: "page-container default-hero-content",
 					children: [/* @__PURE__ */ jsxs("div", {
-						className: "mb-12.5 flex flex-col justify-end lg:justify-center lg:grow",
+						className: "default-hero-text",
 						children: [/* @__PURE__ */ jsx("h1", {
-							className: "font-bold text-5xl mb-2.5 text-[#FAF9FD]",
+							className: "default-hero-title",
 							children: e
 						}), /* @__PURE__ */ jsx("h3", {
-							className: "text-[1rem] mobile:text-[0.8rem] mobile:leading-[1.2rem] leading-[1.45rem] w-[37.5rem] mobile:w-[100%] text-[#FAF9FD] font-light whitespace-pre-wrap",
+							className: "default-hero-description",
 							children: _
 						})]
 					}), /* @__PURE__ */ jsxs(motion.div, {
 						id: "scroll-indicator",
-						className: "flex space-x-2.5 rtl:space-x-reverse items-center py-5 lg:mt-auto",
+						className: "default-scroll-indicator",
 						style: { opacity: b },
 						children: [/* @__PURE__ */ jsx(MouseIcon, {}), /* @__PURE__ */ jsx("span", {
 							className: "text-base font-light justify-self-end text-[#FAF9FD]",
@@ -131,7 +130,7 @@ function Image({ src: _, fallbackSrc: v, alt: y, width: b, height: x, className:
 		alt: y,
 		className: S
 	}) : /* @__PURE__ */ jsx("div", {
-		className: cn(S, " bg-gray-400"),
+		className: cn(S, "image-placeholder"),
 		style: {
 			width: b,
 			height: x
@@ -142,13 +141,13 @@ var DEFAULT_MAIN_IMAGE = "/assets/wimbledon/wimbledon_content_main.avif", DEFAUL
 function HomePageContent({ title: e, titleColor: _ = "#1a1a1a", subtitle: v, paragraphs: y, image1: b, image2: x, image3: S }) {
 	let C = { color: _ };
 	return /* @__PURE__ */ jsxs("div", {
-		className: "font-fira",
+		className: "font-fira default-home-page-content",
 		children: [/* @__PURE__ */ jsx("div", {
-			className: "hidden md:block pb-15 px-24 pt-20 max-w-[1440px] mx-auto",
+			className: "default-home-page-content-desktop",
 			children: /* @__PURE__ */ jsxs("div", {
-				className: "grid grid-cols-2 gap-10",
+				className: "default-home-page-content-grid",
 				children: [/* @__PURE__ */ jsxs("div", {
-					className: "col-span-1 flex flex-col space-y-5",
+					className: "default-home-page-content-text",
 					children: [
 						/* @__PURE__ */ jsx("h1", {
 							className: "font-bold text-5xl",
@@ -164,53 +163,50 @@ function HomePageContent({ title: e, titleColor: _ = "#1a1a1a", subtitle: v, par
 							children: e.text
 						}, _))
 					]
-				}), /* @__PURE__ */ jsx("div", {
-					className: "col-span-1",
-					children: /* @__PURE__ */ jsxs("div", {
-						className: "flex flex-col space-y-5",
+				}), /* @__PURE__ */ jsxs("div", {
+					className: "default-home-page-content-images",
+					children: [/* @__PURE__ */ jsx("div", {
+						className: "default-home-page-content-main-image",
+						children: /* @__PURE__ */ jsx(Image, {
+							width: 600,
+							height: 400,
+							src: b || DEFAULT_MAIN_IMAGE,
+							fallbackSrc: DEFAULT_MAIN_IMAGE,
+							className: "h-60 lg:h-100 w-full",
+							alt: ""
+						})
+					}), /* @__PURE__ */ jsxs("div", {
+						className: "default-home-page-content-secondary-images",
 						children: [/* @__PURE__ */ jsx("div", {
-							className: "w-full",
+							className: "col-span-1",
 							children: /* @__PURE__ */ jsx(Image, {
-								width: 600,
-								height: 400,
-								src: b || DEFAULT_MAIN_IMAGE,
-								fallbackSrc: DEFAULT_MAIN_IMAGE,
-								className: "h-60 lg:h-100 w-full",
+								width: 290,
+								height: 180,
+								src: x || DEFAULT_IMAGE_2$2,
+								fallbackSrc: DEFAULT_IMAGE_2$2,
+								className: "h-auto w-full",
 								alt: ""
 							})
-						}), /* @__PURE__ */ jsxs("div", {
-							className: "w-full grid grid-cols-2 gap-5",
-							children: [/* @__PURE__ */ jsx("div", {
-								className: "col-span-1",
-								children: /* @__PURE__ */ jsx(Image, {
-									width: 290,
-									height: 180,
-									src: x || DEFAULT_IMAGE_2$2,
-									fallbackSrc: DEFAULT_IMAGE_2$2,
-									className: "h-auto w-full",
-									alt: ""
-								})
-							}), /* @__PURE__ */ jsx("div", {
-								className: "col-span-1",
-								children: /* @__PURE__ */ jsx(Image, {
-									width: 290,
-									height: 180,
-									src: S || DEFAULT_IMAGE_3$2,
-									fallbackSrc: DEFAULT_IMAGE_3$2,
-									className: "h-auto w-full",
-									alt: ""
-								})
-							})]
+						}), /* @__PURE__ */ jsx("div", {
+							className: "col-span-1",
+							children: /* @__PURE__ */ jsx(Image, {
+								width: 290,
+								height: 180,
+								src: S || DEFAULT_IMAGE_3$2,
+								fallbackSrc: DEFAULT_IMAGE_3$2,
+								className: "h-auto w-full",
+								alt: ""
+							})
 						})]
-					})
+					})]
 				})]
 			})
 		}), /* @__PURE__ */ jsx("div", {
-			className: "md:hidden",
+			className: "default-home-page-content-mobile",
 			children: /* @__PURE__ */ jsxs("div", {
-				className: "flex flex-wrap mb-5",
+				className: "default-home-page-content-mobile-wrapper",
 				children: [/* @__PURE__ */ jsxs("div", {
-					className: "flex-auto w-full md:w-1/2 p-5",
+					className: "default-home-page-content-mobile-text",
 					children: [/* @__PURE__ */ jsx("h1", {
 						className: "font-bold text-5xl mb-5",
 						style: C,
@@ -219,45 +215,42 @@ function HomePageContent({ title: e, titleColor: _ = "#1a1a1a", subtitle: v, par
 						className: "font-light text-xl text-primary-dark-1",
 						children: v
 					})]
-				}), /* @__PURE__ */ jsx("div", {
-					className: "flex-auto w-full md:w-1/2 p-5",
-					children: /* @__PURE__ */ jsxs("div", {
-						className: "flex flex-wrap space-y-5",
+				}), /* @__PURE__ */ jsxs("div", {
+					className: "default-home-page-content-mobile-images",
+					children: [/* @__PURE__ */ jsx("div", {
+						className: "w-full",
+						children: /* @__PURE__ */ jsx(Image, {
+							width: 400,
+							height: 280,
+							src: b || DEFAULT_MAIN_IMAGE,
+							fallbackSrc: DEFAULT_MAIN_IMAGE,
+							className: "h-60 lg:h-100 w-full",
+							alt: ""
+						})
+					}), /* @__PURE__ */ jsxs("div", {
+						className: "flex space-x-5",
 						children: [/* @__PURE__ */ jsx("div", {
-							className: "w-full",
+							className: "flex-auto w-1/2",
 							children: /* @__PURE__ */ jsx(Image, {
-								width: 400,
-								height: 280,
-								src: b || DEFAULT_MAIN_IMAGE,
-								fallbackSrc: DEFAULT_MAIN_IMAGE,
-								className: "h-60 lg:h-100 w-full",
+								width: 290,
+								height: 120,
+								src: x || DEFAULT_IMAGE_2$2,
+								fallbackSrc: DEFAULT_IMAGE_2$2,
+								className: "h-30 w-full",
 								alt: ""
 							})
-						}), /* @__PURE__ */ jsxs("div", {
-							className: "flex space-x-5",
-							children: [/* @__PURE__ */ jsx("div", {
-								className: "flex-auto w-1/2",
-								children: /* @__PURE__ */ jsx(Image, {
-									width: 290,
-									height: 120,
-									src: x || DEFAULT_IMAGE_2$2,
-									fallbackSrc: DEFAULT_IMAGE_2$2,
-									className: "h-30 w-full",
-									alt: ""
-								})
-							}), /* @__PURE__ */ jsx("div", {
-								className: "flex-auto w-1/2",
-								children: /* @__PURE__ */ jsx(Image, {
-									width: 290,
-									height: 120,
-									src: S || DEFAULT_IMAGE_3$2,
-									fallbackSrc: DEFAULT_IMAGE_3$2,
-									className: "h-30 w-full",
-									alt: ""
-								})
-							})]
+						}), /* @__PURE__ */ jsx("div", {
+							className: "flex-auto w-1/2",
+							children: /* @__PURE__ */ jsx(Image, {
+								width: 290,
+								height: 120,
+								src: S || DEFAULT_IMAGE_3$2,
+								fallbackSrc: DEFAULT_IMAGE_3$2,
+								className: "h-30 w-full",
+								alt: ""
+							})
 						})]
-					})
+					})]
 				})]
 			})
 		})]
@@ -2462,22 +2455,22 @@ var DefaultItemSlider = ({ items: e, language: _, viewPort: v }) => {
 	}, y ? "rtl" : "ltr");
 };
 const PlotThumbCardRoot = ({ children: e }) => /* @__PURE__ */ jsx("div", {
-	className: "flex flex-grow flex-col space-y-2.5",
+	className: "plot-thumb-card-root",
 	children: e
 }), PlotThumbCardImage = ({ imageUrl: e }) => e ? /* @__PURE__ */ jsx("img", {
 	src: e,
 	alt: "Plot Image",
-	className: "mobile:w-full w-full h-[156px] object-cover"
+	className: "plot-thumb-card-image"
 }) : /* @__PURE__ */ jsx("div", {
-	className: "mobile:w-full w-full h-[156px] bg-gray-300 rounded flex items-center justify-center",
+	className: "plot-thumb-card-image-placeholder",
 	children: /* @__PURE__ */ jsx("span", {
 		className: "text-gray-500",
 		children: "Image"
 	})
 }), PlotThumbCardBody = ({ plot: e }) => /* @__PURE__ */ jsxs("div", {
-	className: "flex justify-between items-end",
+	className: "plot-thumb-card-body",
 	children: [/* @__PURE__ */ jsxs("div", {
-		className: "flex space-x-2.5 rtl:space-x-reverse items-end",
+		className: "plot-thumb-card-name",
 		children: [/* @__PURE__ */ jsx("div", {
 			style: { lineHeight: "1rem" },
 			children: e.plotName || `Plot ${e.plotNumber || e.id}`
@@ -2486,46 +2479,46 @@ const PlotThumbCardRoot = ({ children: e }) => /* @__PURE__ */ jsx("div", {
 			children: ["$", e.price.toLocaleString()]
 		})]
 	}), e.plotStatus && /* @__PURE__ */ jsx("div", {
-		className: "text-xs px-2 py-1 bg-gray-200 rounded",
+		className: "plot-thumb-card-status",
 		children: e.plotStatus
 	})]
 }), VoodvalePlotThumbCardRoot = ({ children: e, plot: _ }) => /* @__PURE__ */ jsxs("div", {
-	className: "flex flex-grow flex-col rounded-[12px] overflow-hidden relative border border-[#E6E6E6]",
+	className: "voodvale-plot-thumb-card-root",
 	children: [e, _.plotStatus && /* @__PURE__ */ jsx("div", {
-		className: "absolute top-[1.25rem] left-[1.25rem]",
+		className: "voodvale-plot-thumb-card-badge",
 		children: /* @__PURE__ */ jsx("div", {
-			className: "px-[1.25rem] py-[0.625rem] rounded-[7px] text-[0.75rem] leading-[normal] font-medium text-[#FFF] min-w-0 min-h-0 bg-gray-600",
+			className: "voodvale-plot-thumb-card-badge-inner",
 			children: _.plotStatus
 		})
 	})]
 }), VoodvalePlotThumbCardImage = ({ imageUrl: e }) => e ? /* @__PURE__ */ jsx("img", {
 	src: e,
 	alt: "Plot Image",
-	className: "w-full h-[240px] object-cover"
+	className: "voodvale-plot-thumb-card-image"
 }) : /* @__PURE__ */ jsx("div", {
-	className: "w-full h-[240px] object-cover bg-gray-300 rounded flex items-center justify-center",
+	className: "voodvale-plot-thumb-card-image-placeholder",
 	children: /* @__PURE__ */ jsx("span", {
 		className: "text-gray-500",
 		children: "Image "
 	})
 }), VoodvalePlotThumbCardBody = ({ plot: e }) => /* @__PURE__ */ jsxs("div", {
-	className: "flex justify-between items-center bg-white px-[1.25rem] pt-[1.4018rem] pb-[1.625rem]",
+	className: "voodvale-plot-thumb-card-body",
 	children: [/* @__PURE__ */ jsx("div", {
-		className: "text-[1.125rem] leading-[100%] text-[#181A20] font-medium",
+		className: "voodvale-plot-thumb-card-name",
 		children: e.plotName || `Plot ${e.plotNumber || e.id}`
 	}), e.price && /* @__PURE__ */ jsxs("div", {
-		className: "text-[1.125rem] leading-[158.333%] text-[#A87D6F] font-medium",
+		className: "voodvale-plot-thumb-card-price",
 		children: ["$", e.price.toLocaleString()]
 	})]
 }), SkyscrapperPlotThumbCardRoot = ({ children: e }) => /* @__PURE__ */ jsx("div", {
-	className: "flex flex-grow flex-col space-y-[1.5rem]",
+	className: "skyscrapper-plot-thumb-card-root",
 	children: e
 }), SkyscrapperPlotThumbCardImage = ({ plot: e }) => {
 	let _ = !e.imageUrl;
 	return /* @__PURE__ */ jsxs("div", {
-		className: "rounded-[24px] overflow-hidden relative",
+		className: "skyscrapper-plot-thumb-card-image-wrapper",
 		children: [/* @__PURE__ */ jsx("div", {
-			className: "h-[19.375rem] w-full",
+			className: "skyscrapper-plot-thumb-card-image-bg",
 			style: { background: _ ? "black" : `linear-gradient(0deg, rgba(0, 0, 0, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%), url(${e.imageUrl ?? ""}) lightgray -76.39px 0.265px / 114.913% 99.858% no-repeat` },
 			children: _ && /* @__PURE__ */ jsx("div", {
 				className: "w-full h-full flex items-center justify-center",
@@ -2536,26 +2529,26 @@ const PlotThumbCardRoot = ({ children: e }) => /* @__PURE__ */ jsx("div", {
 			})
 		}), e.plotStatus && /* @__PURE__ */ jsx(SkyscrapperBadge, {
 			plot: e,
-			className: "absolute top-[1.5rem] left-[1.5rem]"
+			className: "skyscrapper-plot-thumb-card-badge"
 		})]
 	});
 }, SkyscrapperPlotThumbCardBody = ({ plot: e }) => /* @__PURE__ */ jsx("div", {
-	className: "flex justify-between items-end",
+	className: "skyscrapper-plot-thumb-card-body",
 	children: /* @__PURE__ */ jsxs("div", {
-		className: "flex justify-between w-full items-center text-[1.125rem]",
+		className: "skyscrapper-plot-thumb-card-name-group",
 		children: [/* @__PURE__ */ jsx("div", {
 			style: { lineHeight: "1rem" },
 			children: e.plotName || `Plot ${e.plotNumber || e.id}`
 		}), e.price && /* @__PURE__ */ jsxs("div", {
-			className: "text-[#FABA6C] text-[1.375rem]",
+			className: "skyscrapper-plot-thumb-card-price",
 			children: ["$", e.price.toLocaleString()]
 		})]
 	})
 });
 var SkyscrapperBadge = ({ plot: _, className: v }) => /* @__PURE__ */ jsxs("div", {
-	className: cn("border flex items-center gap-[0.5rem] border-white/17 rounded-[11px] px-[0.75rem] py-[0.62rem] font-general-sans text-[0.625rem] text-white tracking-[0.01875rem]", v),
+	className: cn("skyscrapper-plot-thumb-card-badge-inner", v),
 	style: { backgroundColor: "#00000066" },
-	children: [/* @__PURE__ */ jsx("div", { className: "w-[5px] h-[5px] rounded-full bg-white" }), /* @__PURE__ */ jsx("div", { children: _.plotStatus || "Available" })]
+	children: [/* @__PURE__ */ jsx("div", { className: "skyscrapper-plot-badge-dot" }), /* @__PURE__ */ jsx("div", { children: _.plotStatus || "Available" })]
 });
 function PlotThumbCard({ plot: e, variant: _ = "default" }) {
 	switch (_) {
@@ -2591,11 +2584,11 @@ function PlotsShowcase({ plots: e, title: _ = "Available Units", showAllLink: v,
 		children: /* @__PURE__ */ jsx("div", {
 			className: "page-container",
 			children: /* @__PURE__ */ jsxs("div", {
-				className: "space-y-5 px-5 lg:px-7.5 py-5 lg:py-10",
+				className: "plots-showcase-content",
 				children: [/* @__PURE__ */ jsxs("div", {
-					className: "flex justify-between items-end",
+					className: "plots-showcase-header",
 					children: [/* @__PURE__ */ jsxs("div", {
-						className: "space-x-2.5 rtl:space-x-reverse flex items-end",
+						className: "plots-showcase-title-group",
 						children: [/* @__PURE__ */ jsx("h3", {
 							className: "text-2xl",
 							suppressHydrationWarning: !0,
@@ -2641,16 +2634,16 @@ function SkyscrapperHomeFirstSection({ projectName: e, heading: _, subheadingLin
 		backgroundUrl: DEFAULT_BACKGROUND$1
 	};
 	return /* @__PURE__ */ jsx("div", {
-		className: "panel absolute font-instrument-serif left-0 top-0 will-change-transform w-full h-full z-30",
+		className: "panel font-instrument-serif",
 		children: /* @__PURE__ */ jsxs(motion.div, {
-			className: "pt-17.5 pb-[2rem] flex flex-col justify-end lg:justify-center px-5 bg-gray-300 relative h-[100vh] w-[100vw] bg-no-repeat bg-cover",
+			className: "skyscrapper-hero-section",
 			children: [
 				/* @__PURE__ */ jsx(BackgroundMedia, {
 					backgroundData: w,
 					projectName: e
 				}),
 				/* @__PURE__ */ jsx(motion.div, {
-					className: "absolute z-20 top-0 left-0",
+					className: "skyscrapper-hero-overlay",
 					style: {
 						opacity: .1,
 						backgroundColor: "black",
@@ -2659,15 +2652,15 @@ function SkyscrapperHomeFirstSection({ projectName: e, heading: _, subheadingLin
 					}
 				}),
 				/* @__PURE__ */ jsxs("div", {
-					className: "page-container z-30 text-white",
+					className: "page-container skyscrapper-hero-content",
 					children: [/* @__PURE__ */ jsx("h1", {
-						className: "skyscrapper-text-gradient w-[58.3125rem] mobile:w-[19.875rem] text-[10.44rem] mobile:text-[5rem] ml-[11.86rem] mobile:ml-[0] mt-[8.5rem] text-white leading-[1.1em] tracking-[-0.20881rem]",
+						className: "skyscrapper-heading skyscrapper-text-gradient",
 						children: _
 					}), /* @__PURE__ */ jsxs("div", {
-						className: "mt-[1.56rem] mobile:mt-[5.19rem] ml-[58.56rem] mobile:ml-0",
+						className: "skyscrapper-content-wrapper",
 						children: [
 							/* @__PURE__ */ jsxs("h3", {
-								className: "mb-[2.75rem] mobile:mb-[2.87rem] max-w-[34rem] mobile:max-w-[23.125rem] text-[3.40rem] text-[#CED7D8] leading-[3.5rem] tracking-[-0.06em]",
+								className: "skyscrapper-subheading",
 								children: [
 									v,
 									/* @__PURE__ */ jsx("br", {}),
@@ -2675,7 +2668,7 @@ function SkyscrapperHomeFirstSection({ projectName: e, heading: _, subheadingLin
 								]
 							}),
 							/* @__PURE__ */ jsx("p", {
-								className: "mb-[2rem] text-[#CED7D8] max-w-[21.5625rem] font-general-sans",
+								className: "skyscrapper-description",
 								children: b
 							}),
 							/* @__PURE__ */ jsx(GradientBorderButton, {
@@ -2695,9 +2688,9 @@ function GradientBorderButton({ children: e, href: _ }) {
 		children: /* @__PURE__ */ jsx("div", {
 			className: "gradient-border-button",
 			children: /* @__PURE__ */ jsx("div", {
-				className: "px-6 py-3 h-[49px] flex items-center justify-center",
+				className: "gradient-border-button-inner",
 				children: /* @__PURE__ */ jsx("span", {
-					className: "text-white font-general-sans text-[0.875rem] font-medium",
+					className: "text-white font-general-sans text-sm font-medium",
 					children: e
 				})
 			})
@@ -2726,14 +2719,14 @@ var DEFAULT_IMAGE_1$1 = "/assets/skyscrapper/skyscrapper_content_1.webp", DEFAUL
 function SkyscrapperHomesSecondSection({ introText: e, image1: _, image2: v, image3: y, gridTitle: b, gridLead: x, gridItems: S }) {
 	return /* @__PURE__ */ jsx("div", {
 		id: "second-section",
-		className: "bg-black text-[#CED7D8] font-instrument-serif second-section left-0 top-0 w-full min-h-[100vh] flex flex-col z-10 pt-[12rem] mobile:pt-[8.5rem]",
+		className: "second-section",
 		children: /* @__PURE__ */ jsxs("div", { children: [/* @__PURE__ */ jsxs("div", {
-			className: "w-full mx-auto flex flex-col px-[5rem] mobile:px-5 max-w-[1440px]",
+			className: "skyscrapper-second-section-intro",
 			children: [/* @__PURE__ */ jsx("p", {
-				className: "mx-auto w-[57.48rem] mobile:w-full text-center text-[3.75rem] mobile:text-[2.25rem] leading-[108%] text-[#CED7D8]",
+				className: "skyscrapper-second-section-intro-text",
 				children: e
 			}), /* @__PURE__ */ jsxs("div", {
-				className: "mb-[5rem] mobile:mb-[0rem] relative h-[46.875rem] mobile:h-[55vh]",
+				className: "skyscrapper-second-section-images",
 				children: [
 					/* @__PURE__ */ jsx(Image, {
 						width: 233,
@@ -2741,7 +2734,7 @@ function SkyscrapperHomesSecondSection({ introText: e, image1: _, image2: v, ima
 						src: _ || DEFAULT_IMAGE_1$1,
 						fallbackSrc: DEFAULT_IMAGE_1$1,
 						alt: "content-1",
-						className: "absolute right-1/2 -translate-x-[10%] top-1/2 -translate-y-[80%] w-[14.55rem] mobile:w-[10rem] h-[17.98rem] mobile:h-[12.3025rem] object-cover skyscrapper-image-mask"
+						className: "skyscrapper-second-section-image-1"
 					}),
 					/* @__PURE__ */ jsx(Image, {
 						width: 233,
@@ -2749,7 +2742,7 @@ function SkyscrapperHomesSecondSection({ introText: e, image1: _, image2: v, ima
 						src: v || DEFAULT_IMAGE_2$1,
 						fallbackSrc: DEFAULT_IMAGE_2$1,
 						alt: "content-2",
-						className: "absolute right-1/2 translate-x-[105%] top-1/2 -translate-y-[115%] w-[14.55rem] mobile:w-[10rem] h-[17.98rem] mobile:h-[12.3025rem] object-cover skyscrapper-image-mask"
+						className: "skyscrapper-second-section-image-2"
 					}),
 					/* @__PURE__ */ jsx(Image, {
 						width: 233,
@@ -2757,23 +2750,23 @@ function SkyscrapperHomesSecondSection({ introText: e, image1: _, image2: v, ima
 						src: y || DEFAULT_IMAGE_3$1,
 						fallbackSrc: DEFAULT_IMAGE_3$1,
 						alt: "content-3",
-						className: "absolute right-1/2 translate-x-[75%] top-1/2 -translate-y-[2%] w-[19.57rem] h-[24.20rem] mobile:w-[13.375rem] mobile:h-[16.625rem] object-cover skyscrapper-image-mask lg"
+						className: "skyscrapper-second-section-image-3"
 					})
 				]
 			})]
 		}), /* @__PURE__ */ jsxs("div", {
-			className: "pt-[10rem] mobile:pt-[0rem] pb-[12rem] mobile:pb-[9rem] pl-[11.57rem] pr-[22.27rem] mobile:px-[1.3rem] mx-auto max-w-[1440px]",
+			className: "skyscrapper-second-section-grid",
 			children: [
 				/* @__PURE__ */ jsx("div", {
-					className: "text-[3.75rem] mobile:text-[2.25rem] mb-[3rem] mobile:mb-[2.25rem]",
+					className: "skyscrapper-second-section-grid-title",
 					children: b
 				}),
 				/* @__PURE__ */ jsx("div", {
-					className: "mb-[10.69rem] mobile:mb-[4.19rem] font-general-sans text-[1.125rem] mobile:text-[1rem]",
+					className: "skyscrapper-second-section-grid-lead",
 					children: x
 				}),
 				/* @__PURE__ */ jsx("div", {
-					className: "grid grid-cols-2 mobile:grid-cols-1 gap-[15.20rem] mobile:gap-[3.75rem]",
+					className: "skyscrapper-second-section-grid-items",
 					children: S.map((e, _) => /* @__PURE__ */ jsx(GridCell$1, { ...e }, _))
 				})
 			]
@@ -2781,17 +2774,17 @@ function SkyscrapperHomesSecondSection({ introText: e, image1: _, image2: v, ima
 	});
 }
 var GridCell$1 = ({ description: _, increase: v, className: y }) => /* @__PURE__ */ jsxs("div", {
-	className: cn("", y),
+	className: cn("skyscrapper-grid-cell", y),
 	children: [
 		/* @__PURE__ */ jsx("div", {
-			className: "skyscrapper-text-gradient leading-[100%] tracking-[-0.1rem] text-[5rem] mb-[1.25rem]",
+			className: "skyscrapper-grid-cell-increase",
 			children: v
 		}),
 		/* @__PURE__ */ jsx("div", {
-			className: "font-general-sans text-[1rem] leading-[162%] h-[7.75rem]",
+			className: "skyscrapper-grid-cell-description",
 			children: _
 		}),
-		/* @__PURE__ */ jsx("div", { className: "h-[1px] bg-[#FABA6C4D] w-full" })
+		/* @__PURE__ */ jsx("div", { className: "skyscrapper-grid-cell-divider" })
 	]
 });
 function SkyscrapperHomesSecondSectionWrapper(e) {
@@ -2838,25 +2831,22 @@ function SkyscrapperShowcaseCard({ plot: e, index: _, variant: v }) {
 var FirstShowcaseCard = ({ plot: e, index: _ }) => {
 	let v = !e.imageUrl;
 	return /* @__PURE__ */ jsxs("div", {
-		className: "group rounded-[24px] bg-[#1A1A1A] w-full h-[29.9375rem] mobile:h-[15.18rem] pl-[1.75rem] mobile:pl-[0.89rem]\n        pr-[1.82rem] mobile:pr-[0.92rem] pt-[2rem] mobile:pt-[1.17rem] pb-[1.62rem] mobile:pb-[0.82rem] relative",
+		className: "group skyscrapper-showcase-card-first",
 		children: [
 			/* @__PURE__ */ jsx("div", {
-				className: "absolute top-[1.13rem] right-[0.69rem] invisible group-hover:visible transition-all duration-300",
+				className: "skyscrapper-showcase-card-arrow",
 				children: /* @__PURE__ */ jsx(Arrow$1, {})
 			}),
 			/* @__PURE__ */ jsx("div", {
-				className: "mb-[2.2rem] mobile:mb-[0.99rem] pl-[1.22rem] mobile:pl-[0.62rem] flex gap-[1.75rem] items-center",
-				children: /* @__PURE__ */ jsx("div", {
-					className: "text-[#CED7D8] text-[1.5rem] tracking-[0.045rem] mobile:text-[0.875rem] mobile:tracking-[0.02rem]",
-					children: (_ + 1).toString().padStart(2, "0")
-				})
+				className: "skyscrapper-showcase-card-number",
+				children: /* @__PURE__ */ jsx("div", { children: (_ + 1).toString().padStart(2, "0") })
 			}),
 			/* @__PURE__ */ jsx(Name, {
 				name: e.plotName ?? "",
-				className: "pl-[1.22rem] mobile:pl-[0.62rem] mb-[2.49rem] mobile:mb-[1.11rem]"
+				className: "skyscrapper-showcase-card-name-first"
 			}),
 			v ? /* @__PURE__ */ jsx(LoaderComp, { className: "w-full h-[15.437rem]" }) : /* @__PURE__ */ jsx("div", {
-				className: "object-cover object-center w-full h-[15.437rem] mobile:h-[7.83rem] rounded-[11px] bg-gray-700 flex items-center justify-center",
+				className: "skyscrapper-showcase-card-image",
 				style: {
 					backgroundImage: e.imageUrl ? `url(${e.imageUrl})` : void 0,
 					backgroundSize: "cover",
@@ -2870,18 +2860,18 @@ var FirstShowcaseCard = ({ plot: e, index: _ }) => {
 		]
 	});
 }, DefaultShowcaseCard = ({ plot: e, index: _ }) => /* @__PURE__ */ jsxs("div", {
-	className: "group rounded-[24px] flex flex-col justify-between h-[29.9375rem] mobile:h-[15.18rem] relative",
+	className: "group skyscrapper-showcase-card-default",
 	children: [
 		/* @__PURE__ */ jsx("div", {
 			style: { background: e.imageUrl ? `linear-gradient(0deg, rgba(0, 0, 0, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%), url(${e.imageUrl ?? ""}) lightgray -76.39px 0.265px / 114.913% 99.858% no-repeat` : "black" },
-			className: "absolute rounded-[24px] overflow-hidden top-0 left-0 w-full h-full !bg-cover !bg-center z-[4]"
+			className: "skyscrapper-showcase-card-bg"
 		}),
 		/* @__PURE__ */ jsx("div", {
-			className: "absolute z-[6] top-[1.13rem] right-[0.69rem] invisible group-hover:visible transition-all duration-300",
+			className: "skyscrapper-showcase-card-arrow",
 			children: /* @__PURE__ */ jsx(Arrow$1, {})
 		}),
 		/* @__PURE__ */ jsx("div", {
-			className: "pl-[2.02rem] mobile:pl-[1.02rem] pr-[1.82rem] mobile:pr-[0.92rem] pt-[2rem] mobile:pt-[1.17rem] pb-[1.62rem]\n          mobile:pb-[0.82rem] flex gap-[1.75rem] items-center z-[6]",
+			className: "skyscrapper-showcase-card-content",
 			children: /* @__PURE__ */ jsx("div", {
 				className: "text-[#CED7D8] text-[1.5rem] tracking-[0.045rem] mobile:text-[0.875rem] mobile:tracking-[0.02rem]",
 				children: (_ + 1).toString().padStart(2, "0")
@@ -2889,13 +2879,13 @@ var FirstShowcaseCard = ({ plot: e, index: _ }) => {
 		}),
 		/* @__PURE__ */ jsx(Name, {
 			name: e.plotName ?? "",
-			className: "pl-[2.02rem] mobile:pl-[1.02rem] mb-[2.49rem] mobile:mb-[1.11rem] z-[6]"
+			className: "skyscrapper-showcase-card-name-default"
 		})
 	]
 }), LoaderComp = ({ className: _ }) => /* @__PURE__ */ jsx("div", {
-	className: cn("select-none w-full min-h-[11.25rem] max-w-full h-full flex grow", _),
+	className: cn("select-none w-full min-h-11-25rem max-w-full h-full flex grow", _),
 	children: /* @__PURE__ */ jsx("div", {
-		className: "w-full max-w-full grow flex animate-pulse items-center justify-center bg-gray-300 rounded dark:bg-gray-700",
+		className: "w-full max-w-full grow flex animate-pulse items-center justify-center bg-gray-300 rounded",
 		children: /* @__PURE__ */ jsx("svg", {
 			className: "w-12 h-12 text-gray-200",
 			xmlns: "http://www.w3.org/2000/svg",
@@ -2906,7 +2896,7 @@ var FirstShowcaseCard = ({ plot: e, index: _ }) => {
 		})
 	})
 }), Name = ({ name: _, className: v }) => /* @__PURE__ */ jsx("div", {
-	className: cn("text-[2.5rem] mobile:text-[1.25rem] mobile:tracking-[-0.0125rem] leading-[75%] tracking-[-0.025rem] text-[#CED7D8]", v),
+	className: cn("skyscrapper-showcase-card-name", v),
 	children: _
 }), Arrow$1 = () => /* @__PURE__ */ jsxs("svg", {
 	width: "72",
@@ -2938,35 +2928,32 @@ function SkyscrapperPlotsShowcase({ plots: e, title: _ = "Available Units", subt
 		})
 	}, `detail_link${_}`));
 	return /* @__PURE__ */ jsx("div", {
-		className: "relative w-full mx-auto flex flex-col bg-black",
-		children: /* @__PURE__ */ jsx("div", {
-			className: "relative z-[1] page-container",
-			children: /* @__PURE__ */ jsxs("div", {
-				className: "pt-[6.8125rem] mobile:pt-[4.1875rem] pb-[7.5rem] mobile:pb-[9rem] mobile:pl-[1.3rem] mobile:pr-0",
-				children: [/* @__PURE__ */ jsx("div", {
-					className: "mb-[3.875rem] mobile:mb-[2rem] flex justify-between items-center",
-					children: /* @__PURE__ */ jsx("div", {
-						suppressHydrationWarning: !0,
-						children: /* @__PURE__ */ jsxs("div", {
-							className: "pl-[11.57rem] mobile:pl-0",
-							children: [/* @__PURE__ */ jsx("div", {
-								className: "mb-[2.87rem] mobile:mb-[2.25rem] text-[2.75rem] mobile:text-[2.25rem] leading-[100%] text-[#FFF]\n                    font-medium",
-								children: _
-							}), /* @__PURE__ */ jsx("p", {
-								className: "text-[1.25rem] mobile:text-[1rem] text-white",
-								children: v
-							})]
-						})
+		className: "skyscrapper-plots-showcase",
+		children: /* @__PURE__ */ jsxs("div", {
+			className: "page-container skyscrapper-plots-showcase-content",
+			children: [/* @__PURE__ */ jsx("div", {
+				className: "skyscrapper-plots-showcase-header",
+				children: /* @__PURE__ */ jsx("div", {
+					suppressHydrationWarning: !0,
+					children: /* @__PURE__ */ jsxs("div", {
+						className: "skyscrapper-plots-showcase-title-wrapper",
+						children: [/* @__PURE__ */ jsx("div", {
+							className: "skyscrapper-plots-showcase-title",
+							children: _
+						}), /* @__PURE__ */ jsx("p", {
+							className: "skyscrapper-plots-showcase-subtitle",
+							children: v
+						})]
 					})
-				}), /* @__PURE__ */ jsx("div", {
-					className: "pl-[3.87rem] mobile:pl-0",
-					children: /* @__PURE__ */ jsx(ItemSlider, {
-						items: b.slice(0, 5),
-						variant: "skyscrapper",
-						language: y
-					})
-				})]
-			})
+				})
+			}), /* @__PURE__ */ jsx("div", {
+				className: "skyscrapper-plots-showcase-slider",
+				children: /* @__PURE__ */ jsx(ItemSlider, {
+					items: b.slice(0, 5),
+					variant: "skyscrapper",
+					language: y
+				})
+			})]
 		})
 	});
 }
@@ -2994,12 +2981,12 @@ function HeaderSection({ title: e, description: _, animationEase: v = "easeOut" 
 			duration: .6,
 			ease: v
 		},
-		className: "mt-[3rem] mb-[5rem] mobile:mb-[3.125rem] flex mobile:flex-col mobile:gap-[1.875rem] justify-between",
+		className: "voodvale-header-wrapper",
 		children: [/* @__PURE__ */ jsx("div", {
-			className: "w-[34.5rem] mobile:w-[19.6875rem] text-[3rem] mobile:text-[2.25rem] leading-[122%] tracking-[-0.01em] text-[#12161D] font-medium capitalize",
+			className: "voodvale-header-title",
 			children: e
 		}), /* @__PURE__ */ jsx("div", {
-			className: "w-[39.125rem] mobile:w-full text-[1.125rem] mobile:text-[1rem] leading-[144.444%] text-[#4A4A4A] font-normal",
+			className: "voodvale-header-description",
 			children: _
 		})]
 	});
@@ -3013,27 +3000,27 @@ function HeaderSectionWrapper(e) {
 	});
 }
 var GridCell = ({ title: _, description: v, increase: y, className: b }) => /* @__PURE__ */ jsxs("div", {
-	className: cn("flex flex-col bg-white", b),
+	className: cn("voodvale-grid-cell", b),
 	children: [/* @__PURE__ */ jsx("div", {
-		className: "pt-[1.6875rem] pl-[1.9375rem] mobile:pl-0 mobile:pb-[0.875rem] text-[1.125rem] leading-[144.444%] text-[#4A4A4A] font-normal",
+		className: "voodvale-grid-cell-title",
 		children: _
 	}), /* @__PURE__ */ jsxs("div", {
-		className: "pl-[15.875rem] pb-[1.9375rem] mobile:pl-0 ",
+		className: "voodvale-grid-cell-content",
 		children: [/* @__PURE__ */ jsx("div", {
-			className: "mb-[0.75rem] text-[2.25rem] leading-[133.333%] text-[#C6A195] font-semibold",
+			className: "voodvale-grid-cell-increase",
 			children: y
 		}), /* @__PURE__ */ jsx("div", {
-			className: "text-[1.125rem] leading-[144.444%] text-[#61656E] font-medium mobile:w-full",
+			className: "voodvale-grid-cell-description",
 			children: v
 		})]
 	})]
 });
 function GridSection({ gridData: e }) {
 	return /* @__PURE__ */ jsx("div", {
-		className: "grid grid-cols-2 mobile:grid-cols-1",
+		className: "voodvale-grid",
 		children: e.map((e, _) => /* @__PURE__ */ jsx(GridCell, {
 			...e,
-			className: `hover:bg-[#C7A093]/10 transition-all duration-300 border-t border-[#E3E3E3] ${_ === 0 ? "mobile:border-t-1" : ""} mobile:border-b-1 mobile:border-r-0 ${_ < 2 ? "border-b" : ""} ${_ % 2 == 0 ? "border-r" : ""}`
+			className: `voodvale-grid-cell-${_}`
 		}, _))
 	});
 }
@@ -3044,21 +3031,21 @@ function GridSectionWrapper(e) {
 var DEFAULT_IMAGE_1 = "/assets/woodvale/voodvale-content-1.avif", DEFAULT_IMAGE_2 = "/assets/woodvale/voodvale-content-2.avif", DEFAULT_IMAGE_3 = "/assets/woodvale/voodvale-content-3.avif";
 function ContentSection({ sectionTitle: e, sectionDescription: _, contentImage1: v, contentImage2: y, contentImage3: b }) {
 	return /* @__PURE__ */ jsxs("div", {
-		className: "mt-[11.5rem] mobile:mt-[6.250rem] mb-[7.5rem] flex mobile:flex-col gap-[3.125rem] mobile:gap-0 ",
+		className: "voodvale-content-section",
 		children: [
 			/* @__PURE__ */ jsxs("div", {
-				className: "flex-shrink-0 w-[34.375rem] mobile:w-full",
+				className: "voodvale-content-section-left",
 				children: [
 					/* @__PURE__ */ jsx("div", {
-						className: "mb-[1.5rem] text-[3rem] mobile:text-[2.25rem] mobile:w-[19.6875rem] leading-[108.333%] text-[#12161D] font-medium capitalize",
+						className: "voodvale-content-section-title",
 						children: e
 					}),
 					/* @__PURE__ */ jsx("div", {
-						className: "mb-[3.75rem] text-[1.125rem] mobile:text-[1rem] leading-[144.444%] text-[#4A4A4A] font-normal",
+						className: "voodvale-content-section-description",
 						children: _
 					}),
 					/* @__PURE__ */ jsx("div", {
-						className: "w-full h-auto mobile:hidden",
+						className: "voodvale-content-section-image-1-desktop",
 						children: /* @__PURE__ */ jsx(Image, {
 							width: 550,
 							height: 640,
@@ -3071,9 +3058,9 @@ function ContentSection({ sectionTitle: e, sectionDescription: _, contentImage1:
 				]
 			}),
 			/* @__PURE__ */ jsxs("div", {
-				className: "flex-grow mobile:hidden",
+				className: "voodvale-content-section-right",
 				children: [/* @__PURE__ */ jsx("div", {
-					className: "w-full h-auto mb-[4.25rem]",
+					className: "voodvale-content-section-image-2",
 					children: /* @__PURE__ */ jsx(Image, {
 						width: 680,
 						height: 734,
@@ -3083,7 +3070,7 @@ function ContentSection({ sectionTitle: e, sectionDescription: _, contentImage1:
 						className: "w-full h-auto object-contain"
 					})
 				}), /* @__PURE__ */ jsx("div", {
-					className: "w-full h-auto",
+					className: "voodvale-content-section-image-3",
 					children: /* @__PURE__ */ jsx(Image, {
 						width: 461,
 						height: 309,
@@ -3095,9 +3082,9 @@ function ContentSection({ sectionTitle: e, sectionDescription: _, contentImage1:
 				})]
 			}),
 			/* @__PURE__ */ jsxs("div", {
-				className: "hidden mobile:flex justify-center mobile:gap-[0.903125rem]",
+				className: "voodvale-content-section-mobile",
 				children: [/* @__PURE__ */ jsx("div", {
-					className: "mt-[5.375rem] w-[39.8vw] h-auto",
+					className: "voodvale-content-section-mobile-image-1",
 					children: /* @__PURE__ */ jsx(Image, {
 						width: 133,
 						height: 154,
@@ -3107,9 +3094,9 @@ function ContentSection({ sectionTitle: e, sectionDescription: _, contentImage1:
 						className: "w-full h-auto object-contain"
 					})
 				}), /* @__PURE__ */ jsxs("div", {
-					className: "flex flex-col gap-[1.25rem]",
+					className: "voodvale-content-section-mobile-images",
 					children: [/* @__PURE__ */ jsx("div", {
-						className: "w-[48.75vw] h-auto",
+						className: "voodvale-content-section-mobile-image-2",
 						children: /* @__PURE__ */ jsx(Image, {
 							width: 197,
 							height: 212,
@@ -3119,7 +3106,7 @@ function ContentSection({ sectionTitle: e, sectionDescription: _, contentImage1:
 							className: "w-full h-auto object-contain"
 						})
 					}), /* @__PURE__ */ jsx("div", {
-						className: "w-[33.08vw] h-auto",
+						className: "voodvale-content-section-mobile-image-3",
 						children: /* @__PURE__ */ jsx(Image, {
 							width: 133,
 							height: 212,
@@ -3154,16 +3141,16 @@ function VoodvaleHomeFirstSection({ projectName: e, heading: _, subheading: v, b
 		backgroundUrl: DEFAULT_BACKGROUND
 	};
 	return /* @__PURE__ */ jsx("div", {
-		className: "panel absolute left-0 top-0 will-change-transform w-full h-full z-30",
+		className: "panel",
 		children: /* @__PURE__ */ jsxs(motion.div, {
-			className: "pt-17.5 pb-[2rem] flex flex-col justify-end lg:justify-center px-5 bg-gray-300 relative h-[100vh] w-[100vw] bg-no-repeat bg-cover",
+			className: "voodvale-hero-section",
 			children: [
 				/* @__PURE__ */ jsx(BackgroundMedia, {
 					backgroundData: S,
 					projectName: e
 				}),
 				/* @__PURE__ */ jsx(motion.div, {
-					className: "absolute z-20 top-0 left-0",
+					className: "voodvale-hero-overlay",
 					style: {
 						opacity: .5,
 						backgroundColor: "black",
@@ -3172,19 +3159,19 @@ function VoodvaleHomeFirstSection({ projectName: e, heading: _, subheading: v, b
 					}
 				}),
 				/* @__PURE__ */ jsxs("div", {
-					className: "page-container z-30 text-white",
+					className: "page-container voodvale-hero-content",
 					children: [/* @__PURE__ */ jsx("h1", {
-						className: "w-[58.3125rem] mobile:w-[19.875rem] font-medium text-[5.625rem] mobile:text-[3rem] ml-[7.875rem] mobile:ml-[0] mt-[8.5rem] text-white leading-[107%] tracking-[-0.01em] capitalize",
+						className: "voodvale-heading",
 						children: _
 					}), /* @__PURE__ */ jsxs("div", {
-						className: "mt-[5rem] mobile:mt-[2.5rem] ml-[45.9375rem] mobile:ml-0",
+						className: "voodvale-subheading-wrapper",
 						children: [/* @__PURE__ */ jsx("h3", {
-							className: "mb-[1.0625rem] mobile:mb-[3.125rem] w-[34rem] mobile:w-[23.125rem] text-[1.25rem] leading-[135%] tracking-[0.03em]",
+							className: "voodvale-subheading",
 							children: v
 						}), /* @__PURE__ */ jsx("a", {
 							href: b,
+							className: "voodvale-button",
 							style: { boxShadow: "0 72px 20px 0 rgba(0, 0, 0, 0.00), 0 46px 18px 0 rgba(0, 0, 0, 0.01), 0 26px 16px 0 rgba(0, 0, 0, 0.05), 0 12px 12px 0 rgba(0, 0, 0, 0.09), 0 3px 6px 0 rgba(0, 0, 0, 0.10)" },
-							className: "bg-white rounded-[7px] text-[#484848] flex items-center justify-center w-[10.0625rem] h-[3.125rem]",
 							children: y
 						})]
 					})]
@@ -3211,7 +3198,7 @@ function VoodvaleHomeFirstSectionWrapper(e) {
 }
 function VoodvaleHomeSecondSection({ title: e, description: _, gridData: v, sectionTitle: y, sectionDescription: b, contentImage1: x, contentImage2: S, contentImage3: C }) {
 	return /* @__PURE__ */ jsxs("div", {
-		className: "w-full mx-auto flex flex-col pt-[3rem] px-[5rem] mobile:px-5 max-w-[1440px]",
+		className: "voodvale-home-second-section",
 		children: [
 			/* @__PURE__ */ jsx(HeaderSection, {
 				title: e,
@@ -3268,38 +3255,35 @@ function VoodvalePlotsShowcase({ plots: e, title: _ = "Available Units", seeAllT
 		children: /* @__PURE__ */ jsx(VoodvalePlotThumbCard, { plot: e }, `showcase_card${_}`)
 	}, `detail_link${_}`));
 	return /* @__PURE__ */ jsxs("div", {
-		className: "relative w-full mx-auto flex flex-col",
+		className: "voodvale-plots-showcase",
 		style: { background: "radial-gradient(113.94% 104.88% at 55.95% -2.12%, #DECFCD 0%, #B38A82 56.73%, #988289 100%)" },
 		children: [
-			/* @__PURE__ */ jsx("div", {
-				className: "relative z-[1] page-container",
-				children: /* @__PURE__ */ jsxs("div", {
-					className: "pt-[6.8125rem] mobile:pt-[4.1875rem] pb-[7.8125rem] mobile:pb-[9rem] px-[8.4375rem] mobile:pl-[1rem] mobile:pr-0",
-					children: [/* @__PURE__ */ jsxs("div", {
-						className: "mb-[3.875rem] mobile:mb-[2rem] flex justify-between items-center",
-						children: [/* @__PURE__ */ jsx("h3", {
-							className: "text-[2.75rem] mobile:text-[2.25rem] leading-[118.182%] text-[#FFF] font-medium",
-							suppressHydrationWarning: !0,
-							children: _
-						}), /* @__PURE__ */ jsx(SeeAllProperties, {
-							className: "mobile:hidden",
-							pathname: y || "",
-							title: v || "See All Properties"
-						})]
-					}), /* @__PURE__ */ jsx(ItemSlider, {
-						items: C.slice(0, 3),
-						variant: "voodvale",
-						language: b
+			/* @__PURE__ */ jsxs("div", {
+				className: "page-container voodvale-plots-showcase-content",
+				children: [/* @__PURE__ */ jsxs("div", {
+					className: "voodvale-plots-showcase-header",
+					children: [/* @__PURE__ */ jsx("h3", {
+						className: "voodvale-plots-showcase-title",
+						suppressHydrationWarning: !0,
+						children: _
+					}), /* @__PURE__ */ jsx(SeeAllProperties, {
+						className: "mobile:hidden",
+						pathname: y || "",
+						title: v || "See All Properties"
 					})]
-				})
+				}), /* @__PURE__ */ jsx(ItemSlider, {
+					items: C.slice(0, 3),
+					variant: "voodvale",
+					language: b
+				})]
 			}),
 			/* @__PURE__ */ jsx(SeeAllProperties, {
-				className: "hidden mobile:block absolute z-[1] left-1/2 -translate-x-1/2 bottom-[4.1875rem]",
+				className: "voodvale-plots-showcase-see-all-mobile",
 				pathname: y || "",
 				title: v || "See All Properties"
 			}),
 			x && /* @__PURE__ */ jsx("div", {
-				className: "mobile:hidden z-[0] absolute w-[100vw] h-auto object-contain -bottom-[12.72vw] left-1/2 -translate-x-1/2",
+				className: "voodvale-plots-showcase-vector-desktop",
 				children: /* @__PURE__ */ jsx("img", {
 					src: x,
 					alt: "showcase vector",
@@ -3307,7 +3291,7 @@ function VoodvalePlotsShowcase({ plots: e, title: _ = "Available Units", seeAllT
 				})
 			}),
 			S && /* @__PURE__ */ jsx("div", {
-				className: "mobile:block hidden z-[0] absolute w-[100vw] h-auto object-contain -bottom-[21vw] left-1/2 -translate-x-1/2",
+				className: "voodvale-plots-showcase-vector-mobile",
 				children: /* @__PURE__ */ jsx("img", {
 					src: S,
 					alt: "showcase mobile vector",
@@ -3318,7 +3302,7 @@ function VoodvalePlotsShowcase({ plots: e, title: _ = "Available Units", seeAllT
 	});
 }
 var SeeAllProperties = ({ pathname: _, title: v, className: y }) => /* @__PURE__ */ jsx("a", {
-	className: cn("mobile:hidden", y),
+	className: cn("voodvale-see-all-link", y),
 	href: _,
 	children: /* @__PURE__ */ jsxs("div", {
 		className: "flex items-center gap-4",

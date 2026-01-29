@@ -7,6 +7,6 @@ export function Image({ src, fallbackSrc, alt, width, height, className }: { src
     if (fallbackSrc) {
         return <img src={fallbackSrc} alt={alt} className={className} />;
     }
-    return <div className={cn(className, " bg-gray-400")} style={{ width: width, height: height }}>
+    return <div className={cn(className, "image-placeholder")} style={{ width: width, height: height }}>
     </div>
 }

@@ -15,31 +15,31 @@ export function HomeFirstSection({
     ? { isVideo: backgroundData.isVideo, backgroundUrl: backgroundData.backgroundUrl }
     : { isVideo: false, backgroundUrl: DEFAULT_BACKGROUND };
   return (
-    <div className="panel absolute left-0 top-0 will-change-transform w-full h-full z-30">
-      <div className="pt-17.5 flex flex-col justify-end lg:justify-center px-5 bg-gray-300 relative h-[100vh] w-[100vw] bg-no-repeat bg-cover">
+    <div className="panel">
+      <div className="default-hero-section">
         <BackgroundMedia backgroundData={bgData} projectName={projectName} />
         <div
-          className="absolute z-20 top-0 left-0 h-[100vh] w-[100vw]"
+          className="default-hero-overlay"
           style={{ opacity: 0.5, backgroundColor: 'black' }}
         />
         <motion.div
-          className="absolute z-30 top-0 left-0 h-[100vh] w-[100vw]"
+          className="default-hero-gradient"
           style={{
             opacity: 0,
             background:
               'linear-gradient(0deg, var(--menuBgColor), var(--menuBgColor)), linear-gradient(180deg, var(--menuBgColor) 0%, rgba(0, 53, 110, 0) 100%)',
           }}
         />
-        <div className="page-container z-30 justify-end lg:justify-center px-5 py-5 lg:px-7.5 lg:py-7.5 mobile:p-0">
-          <div className="mb-12.5 flex flex-col justify-end lg:justify-center lg:grow">
-            <h1 className="font-bold text-5xl mb-2.5 text-[#FAF9FD]">{projectName}</h1>
-            <h3 className="text-[1rem] mobile:text-[0.8rem] mobile:leading-[1.2rem] leading-[1.45rem] w-[37.5rem] mobile:w-[100%] text-[#FAF9FD] font-light whitespace-pre-wrap">
+        <div className="page-container default-hero-content">
+          <div className="default-hero-text">
+            <h1 className="default-hero-title">{projectName}</h1>
+            <h3 className="default-hero-description">
               {projectDescription}
             </h3>
           </div>
           <motion.div
             id="scroll-indicator"
-            className="flex space-x-2.5 rtl:space-x-reverse items-center py-5 lg:mt-auto"
+            className="default-scroll-indicator"
             style={{ opacity: scrollIndicatorOpacity }}
           >
             <MouseIcon />

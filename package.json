@@ -20,6 +20,26 @@
       "import": "./dist/right-property-generated-web-ui-toolkit.css",
       "default": "./dist/right-property-generated-web-ui-toolkit.css"
     },
+    "./styles/base": {
+      "import": "./dist/base.css",
+      "default": "./dist/base.css"
+    },
+    "./styles/utilities": {
+      "import": "./dist/utilities.css",
+      "default": "./dist/utilities.css"
+    },
+    "./styles/skyscrapper": {
+      "import": "./dist/skyscrapper.css",
+      "default": "./dist/skyscrapper.css"
+    },
+    "./styles/voodvale": {
+      "import": "./dist/voodvale.css",
+      "default": "./dist/voodvale.css"
+    },
+    "./styles/default": {
+      "import": "./dist/default.css",
+      "default": "./dist/default.css"
+    },
     "./plan-view": {
       "types": "./dist/plan-view.d.ts",
       "import": "./dist/plan-view.mjs",
@@ -31,7 +51,7 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "vite build && tsc -p tsconfig.lib.json && cp src/styles.d.ts dist/styles.d.ts",
+    "build": "vite build && tsc -p tsconfig.lib.json && cp src/styles.d.ts dist/styles.d.ts && (test -f dist/main.css && mv dist/main.css dist/right-property-generated-web-ui-toolkit.css || true)",
     "lint": "eslint .",
     "preview": "vite preview",
     "prepare": "npm run build"
@@ -40,42 +60,36 @@
     "uuid": "^9.0.1"
   },
   "peerDependencies": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "react-router-dom": "^7.0.0",
-    "fabric": "^5.3.0",
     "@measured/puck": "^0.20.2",
-    "@radix-ui/react-select": "^2.2.6",
-    "@tailwindcss/vite": "^4.1.17",
     "@use-gesture/react": "^10.3.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "fabric": "^5.3.0",
     "framer-motion": "^12.23.25",
     "lucide-react": "^0.555.0",
-    "swiper": "^12.0.2",
-    "tailwind-merge": "^3.4.0",
-    "tailwindcss": "^4.1.17"
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.0.0",
+    "swiper": "^12.0.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
+    "@measured/puck": "^0.20.2",
     "@types/fabric": "^5.3.10",
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
     "@types/uuid": "^9.0.8",
+    "@use-gesture/react": "^10.3.1",
     "@vitejs/plugin-react": "^5.1.1",
     "eslint": "^9.39.1",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
-    "globals": "^16.5.0",
-    "tw-animate-css": "^1.4.0",
-    "swiper": "^12.0.2",
-    "@tailwindcss/vite": "^4.1.17",
-    "@use-gesture/react": "^10.3.1",
-    "@measured/puck": "^0.20.2",
-    "@radix-ui/react-select": "^2.2.6",
-    "lucide-react": "^0.555.0",
     "framer-motion": "^12.23.25",
+    "globals": "^16.5.0",
+    "lucide-react": "^0.555.0",
+    "sass-embedded": "^1.97.3",
+    "swiper": "^12.0.2",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",
     "vite": "npm:rolldown-vite@7.2.5"

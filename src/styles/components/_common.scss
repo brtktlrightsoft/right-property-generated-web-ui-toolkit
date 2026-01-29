@@ -1,0 +1,405 @@
+/* Common Component Styles */
+
+/* Plots Showcase */
+.plots-showcase-content {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+
+  @media (min-width: 1024px) {
+    padding-left: 7.5rem;
+    padding-right: 7.5rem;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+}
+
+.plots-showcase-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.plots-showcase-title-group {
+  display: flex;
+  gap: 0.625rem;
+  align-items: flex-end;
+
+  [dir="rtl"] & {
+    > * + * {
+      margin-left: 0;
+      margin-right: 0.625rem;
+    }
+  }
+}
+
+/* Plot Thumb Card */
+.plot-thumb-card-root {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.plot-thumb-card-image {
+  width: 100%;
+  height: 156px;
+  object-fit: cover;
+
+  @media (max-width: 800px) {
+    width: 100%;
+  }
+}
+
+.plot-thumb-card-image-placeholder {
+  width: 100%;
+  height: 156px;
+  background-color: rgb(209 213 219);
+  border-radius: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 800px) {
+    width: 100%;
+  }
+}
+
+.plot-thumb-card-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.plot-thumb-card-name {
+  display: flex;
+  gap: 0.625rem;
+  align-items: flex-end;
+
+  [dir="rtl"] & {
+    > * + * {
+      margin-left: 0;
+      margin-right: 0.625rem;
+    }
+  }
+}
+
+.plot-thumb-card-status {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  background-color: rgb(229 231 235);
+  border-radius: 0.25rem;
+}
+
+/* Voodvale Plot Thumb Card */
+.voodvale-plot-thumb-card-root {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid #E6E6E6;
+}
+
+.voodvale-plot-thumb-card-badge {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.25rem;
+}
+
+.voodvale-plot-thumb-card-badge-inner {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  border-radius: 7px;
+  font-size: 0.75rem;
+  line-height: normal;
+  font-weight: 500;
+  color: #FFF;
+  min-width: 0;
+  min-height: 0;
+  background-color: rgb(75 85 99);
+}
+
+.voodvale-plot-thumb-card-image {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+}
+
+.voodvale-plot-thumb-card-image-placeholder {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  background-color: rgb(209 213 219);
+  border-radius: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.voodvale-plot-thumb-card-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  padding-top: 1.4018rem;
+  padding-bottom: 1.625rem;
+}
+
+.voodvale-plot-thumb-card-name {
+  font-size: 1.125rem;
+  line-height: 100%;
+  color: #181A20;
+  font-weight: 500;
+}
+
+.voodvale-plot-thumb-card-price {
+  font-size: 1.125rem;
+  line-height: 158.333%;
+  color: #A87D6F;
+  font-weight: 500;
+}
+
+/* Skyscrapper Plot Thumb Card */
+.skyscrapper-plot-thumb-card-root {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.skyscrapper-plot-thumb-card-image-wrapper {
+  border-radius: 24px;
+  overflow: hidden;
+  position: relative;
+}
+
+.skyscrapper-plot-thumb-card-image-bg {
+  height: 19.375rem;
+  width: 100%;
+}
+
+.skyscrapper-plot-thumb-card-badge {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+}
+
+.skyscrapper-plot-thumb-card-badge-inner {
+  border: 1px solid rgba(255, 255, 255, 0.17);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 11px;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.62rem;
+  padding-bottom: 0.62rem;
+  font-family: var(--font-general-sans);
+  font-size: 0.625rem;
+  color: white;
+  letter-spacing: 0.01875rem;
+}
+
+.skyscrapper-plot-badge-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: white;
+}
+
+.skyscrapper-plot-thumb-card-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.skyscrapper-plot-thumb-card-name-group {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  font-size: 1.125rem;
+}
+
+.skyscrapper-plot-thumb-card-price {
+  color: #FABA6C;
+  font-size: 1.375rem;
+}
+
+/* Image Placeholder */
+.image-placeholder {
+  background-color: rgb(156 163 175);
+}
+
+/* Plan View */
+.plan-view-container {
+  width: 100%;
+  max-width: 1440px;
+  margin-bottom: 7.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  height: 300px;
+  overflow: hidden;
+
+  @media (max-width: 800px) {
+    margin-bottom: 9rem;
+  }
+
+  @media (min-width: 1280px) {
+    height: 600px;
+  }
+}
+
+.plan-view-canvas-wrapper {
+  position: relative;
+}
+
+.plan-view-wrapper-loading {
+  width: 100%;
+  height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.plan-view-wrapper-spinner {
+  width: 2rem;
+  height: 2rem;
+  border: 4px solid rgb(229 231 235);
+  border-top-color: #5ec6d3;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Plan View Popup */
+.plan-view-popup {
+  cursor: pointer;
+  position: absolute;
+  padding: 1rem;
+  background-color: var(--thirdLayer);
+  color: var(--bodyContentColor);
+  touch-action: none;
+  font-size: 1em;
+  line-height: 1.375em;
+  font-weight: 700;
+
+  @media (max-width: 800px) {
+    font-size: 0.8rem;
+  }
+}
+
+.plan-view-popup-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1em;
+  line-height: 1.375em;
+  font-weight: 700;
+  margin-bottom: 0.875em;
+}
+
+.plan-view-popup-container-details {
+  display: grid;
+  grid-template-columns: 1fr;
+  white-space: pre;
+  gap: 0.5em;
+}
+
+.plan-view-popup-floor-details {
+  display: grid;
+  grid-template-columns: 1fr;
+  white-space: pre;
+}
+
+.plan-view-popup-status {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.8125em;
+  line-height: 1.375em;
+}
+
+.plan-view-popup-name {
+  font-size: 0.75rem;
+  line-height: 1.375em;
+  color: var(--inActiveBodyContentColor);
+  margin-bottom: 1rem;
+}
+
+.plan-view-popup-details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.7081rem;
+  white-space: pre;
+  font-size: 0.75rem;
+
+  @media (max-width: 800px) {
+    gap: 2.125em;
+  }
+}
+
+.plan-view-popup-detail-item {
+  display: flex;
+  gap: 0.25em;
+  align-items: center;
+  flex: 1;
+
+  @media (max-width: 800px) {
+    margin-top: -1.625em;
+  }
+
+  &:first-child {
+    flex: 1;
+  }
+}
+
+/* Triangle Indicators */
+.triangle-bottom-left,
+.triangle-top-left,
+.triangle-bottom-right,
+.triangle-top-right {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+.triangle-bottom-left {
+  bottom: 0;
+  left: 0;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid var(--thirdLayer);
+}
+
+.triangle-top-left {
+  top: 0;
+  left: 0;
+  border-right: 10px solid transparent;
+  border-top: 10px solid var(--thirdLayer);
+}
+
+.triangle-bottom-right {
+  bottom: 0;
+  right: 0;
+  border-left: 10px solid transparent;
+  border-bottom: 10px solid var(--thirdLayer);
+}
+
+.triangle-top-right {
+  top: 0;
+  right: 0;
+  border-left: 10px solid transparent;
+  border-top: 10px solid var(--thirdLayer);
+}

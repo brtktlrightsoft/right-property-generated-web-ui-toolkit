@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/swiper.css';
+// Swiper CSS should be imported by the consuming application
+// This prevents bundling ~4KB of Swiper CSS in the library
+// Add this to your app: import 'swiper/swiper.css';
 
 interface ItemSliderProps {
   items: React.ReactNode[];

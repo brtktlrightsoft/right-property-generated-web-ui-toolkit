@@ -19,24 +19,21 @@ export function SkyscrapperShowcaseCard({ plot, index, variant }: SkyscrapperSho
 const FirstShowcaseCard = ({ plot, index }: { plot: PlotThumbResult; index: number }) => {
   const isLoading = !plot.imageUrl;
   return (
-    <div
-      className="group rounded-[24px] bg-[#1A1A1A] w-full h-[29.9375rem] mobile:h-[15.18rem] pl-[1.75rem] mobile:pl-[0.89rem]
-        pr-[1.82rem] mobile:pr-[0.92rem] pt-[2rem] mobile:pt-[1.17rem] pb-[1.62rem] mobile:pb-[0.82rem] relative"
-    >
-      <div className="absolute top-[1.13rem] right-[0.69rem] invisible group-hover:visible transition-all duration-300">
+    <div className="group skyscrapper-showcase-card-first">
+      <div className="skyscrapper-showcase-card-arrow">
         <Arrow />
       </div>
-      <div className="mb-[2.2rem] mobile:mb-[0.99rem] pl-[1.22rem] mobile:pl-[0.62rem] flex gap-[1.75rem] items-center">
-        <div className="text-[#CED7D8] text-[1.5rem] tracking-[0.045rem] mobile:text-[0.875rem] mobile:tracking-[0.02rem]">
+      <div className="skyscrapper-showcase-card-number">
+        <div>
           {(index + 1).toString().padStart(2, '0')}
         </div>
       </div>
-      <Name name={plot.plotName ?? ''} className="pl-[1.22rem] mobile:pl-[0.62rem] mb-[2.49rem] mobile:mb-[1.11rem]" />
+      <Name name={plot.plotName ?? ''} className="skyscrapper-showcase-card-name-first" />
       {isLoading ? (
         <LoaderComp className="w-full h-[15.437rem]" />
       ) : (
         <div
-          className="object-cover object-center w-full h-[15.437rem] mobile:h-[7.83rem] rounded-[11px] bg-gray-700 flex items-center justify-center"
+          className="skyscrapper-showcase-card-image"
           style={{
             backgroundImage: plot.imageUrl ? `url(${plot.imageUrl})` : undefined,
             backgroundSize: 'cover',
@@ -53,36 +50,33 @@ const FirstShowcaseCard = ({ plot, index }: { plot: PlotThumbResult; index: numb
 const DefaultShowcaseCard = ({ plot, index }: { plot: PlotThumbResult; index: number }) => {
   const isLoading = !plot.imageUrl;
   return (
-    <div className="group rounded-[24px] flex flex-col justify-between h-[29.9375rem] mobile:h-[15.18rem] relative">
+    <div className="group skyscrapper-showcase-card-default">
       <div
         style={{
           background: isLoading
             ? 'black'
             : `linear-gradient(0deg, rgba(0, 0, 0, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%), url(${plot.imageUrl ?? ''}) lightgray -76.39px 0.265px / 114.913% 99.858% no-repeat`,
         }}
-        className="absolute rounded-[24px] overflow-hidden top-0 left-0 w-full h-full !bg-cover !bg-center z-[4]"
+        className="skyscrapper-showcase-card-bg"
       ></div>
-      <div className="absolute z-[6] top-[1.13rem] right-[0.69rem] invisible group-hover:visible transition-all duration-300">
+      <div className="skyscrapper-showcase-card-arrow">
         <Arrow />
       </div>
-      <div
-        className="pl-[2.02rem] mobile:pl-[1.02rem] pr-[1.82rem] mobile:pr-[0.92rem] pt-[2rem] mobile:pt-[1.17rem] pb-[1.62rem]
-          mobile:pb-[0.82rem] flex gap-[1.75rem] items-center z-[6]"
-      >
+      <div className="skyscrapper-showcase-card-content">
         <div className="text-[#CED7D8] text-[1.5rem] tracking-[0.045rem] mobile:text-[0.875rem] mobile:tracking-[0.02rem]">
           {(index + 1).toString().padStart(2, '0')}
         </div>
       </div>
-      <Name name={plot.plotName ?? ''} className="pl-[2.02rem] mobile:pl-[1.02rem] mb-[2.49rem] mobile:mb-[1.11rem] z-[6]" />
+      <Name name={plot.plotName ?? ''} className="skyscrapper-showcase-card-name-default" />
     </div>
   );
 };
 
 const LoaderComp = ({ className }: { className?: string }) => {
-  const cnClass = cn('select-none w-full min-h-[11.25rem] max-w-full h-full flex grow', className);
+  const cnClass = cn('select-none w-full min-h-11-25rem max-w-full h-full flex grow', className);
   return (
     <div className={cnClass}>
-      <div className="w-full max-w-full grow flex animate-pulse items-center justify-center bg-gray-300 rounded dark:bg-gray-700">
+      <div className="w-full max-w-full grow flex animate-pulse items-center justify-center bg-gray-300 rounded">
         <svg
           className="w-12 h-12 text-gray-200"
           xmlns="http://www.w3.org/2000/svg"
@@ -99,12 +93,7 @@ const LoaderComp = ({ className }: { className?: string }) => {
 
 const Name = ({ name, className }: { name: string; className?: string }) => {
   return (
-    <div
-      className={cn(
-        'text-[2.5rem] mobile:text-[1.25rem] mobile:tracking-[-0.0125rem] leading-[75%] tracking-[-0.025rem] text-[#CED7D8]',
-        className
-      )}
-    >
+    <div className={cn('skyscrapper-showcase-card-name', className)}>
       {name}
     </div>
   );

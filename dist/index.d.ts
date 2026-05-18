@@ -22,6 +22,7 @@ export * from './components/common/PlotThumbCard';
 export * from './components/common/plot-thumb-card/plot-thumb-card-parts';
 export * from './components/common/plot-thumb-card/voodvale-plot-thumb-card/voodvale-plot-thumb-card-parts';
 export * from './components/common/plot-thumb-card/skyscrapper-plot-thumb-card/skyscrapper-plot-thumb-card-parts';
+export * from './components/common/PlanViewWrapper';
 export * from './components/skyscrapper/SkyscrapperHomeFirstSection';
 export * from './components/skyscrapper/SkyscrapperHomeFirstSectionWrapper';
 export * from './components/skyscrapper/SkyscrapperHomesSecondSection';

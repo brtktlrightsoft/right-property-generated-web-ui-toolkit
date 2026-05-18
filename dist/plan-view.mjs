@@ -70,7 +70,7 @@ var PlanLabelObject = class extends fabric.Group {
 			top: a / 2 + r,
 			fontSize: s,
 			lineHeight: 16,
-			fontFamily: "Inter",
+			fontFamily: "Fira Sans",
 			originX: "center",
 			originY: "center",
 			textAlign: "center",
@@ -508,31 +508,31 @@ var PlanLabelObject = class extends fabric.Group {
 		});
 	}
 	initObject(e, t) {
-		let n = Math.min(e.width ?? 0, e.height ?? 0) / 2, r = {
+		let n = e.width ?? 0, r = e.height ?? 0, i = scaleCoordinate(n, t.x), a = scaleCoordinate(r, t.y), o = scaleCoordinate(e.left, t.x), s = scaleCoordinate(e.top, t.y), c = o + i / 2, l = s + a / 2, u = Math.min(i, a) / 2, d = {
 			objectId: e.objectId,
 			objectType: e.objectType,
 			containerId: e.containerId,
 			containerType: e.containerType,
 			itemId: e.itemId,
 			itemType: e.itemType,
-			left: t.x * e.left,
-			top: t.y * e.top,
-			width: e.width * t.x,
-			height: e.height * t.y,
-			radius: (e.radius ?? n) * t.x,
-			points: e.points ? e.points.map((e) => new fabric.Point(t.x * e.x, t.y * e.y)) : [],
+			left: c,
+			top: l,
+			width: i,
+			height: a,
+			radius: e.radius ? scaleCoordinate(e.radius, t.x) : u,
+			points: e.points ? e.points.map((e) => new fabric.Point(t.x * (e.x + n / 2), t.y * (e.y + r / 2))) : [],
 			fill: e.fill,
 			opacity: e.opacity,
 			label: null
 		};
 		if (e.objectType === PlanObjectTypeEnumNames[PlanObjectTypeEnum.Rectangle]) {
-			let e = new PlanRectangleObject(r);
+			let e = new PlanRectangleObject(d);
 			return e.finishDrawing(), this.containerObjects.push(e), e;
 		} else if (e.objectType === PlanObjectTypeEnumNames[PlanObjectTypeEnum.Polygon]) {
-			let e = new PlanPolygonObject(r);
+			let e = new PlanPolygonObject(d);
 			return e.finishDrawing(), this.containerObjects.push(e), e;
 		} else {
-			let e = new PlanCircleObject(r);
+			let e = new PlanCircleObject(d);
 			return e.finishDrawing(), this.containerObjects.push(e), e;
 		}
 	}
@@ -548,7 +548,11 @@ var PlanLabelObject = class extends fabric.Group {
 	finishDrawing(e) {
 		this.containerObjects.push(e);
 	}
-}, PlanItemController = class {
+};
+function scaleCoordinate(e, t) {
+	return Number.isFinite(e) ? e >= 0 && e <= 1 ? e * t : e : 0;
+}
+var PlanItemController = class {
 	get items() {
 		return this._items;
 	}
@@ -706,15 +710,15 @@ function PlanViewPopup({ canvas: i, obj: a, item: o, onClickOutside: c }) {
 		if (m.current == null) return;
 		let e = D(i, a), t = [1, 1], n = e?.objectLeft ?? 0, r = (e?.objectTop ?? 0) - e.popupHeight;
 		n + e.popupWidth > e.canvasRight && (n = e?.objectLeft - e.popupWidth, t[0] = -1), r - e.popupHeight < e.canvasTop && (r = e?.objectTop, t[1] = -1);
-		let [o, s] = oe(t[0], t[1]);
+		let [o, s] = k(t[0], t[1]);
 		g(t), m.current.style.left = n + o + "px", m.current.style.top = r + s + "px";
-	}, oe = (e, t) => e > 0 && t > 0 ? [10, -20] : e > 0 && t < 0 ? [20, 40] : e < 0 && t > 0 ? [20, -20] : e < 0 && t < 0 ? [10, 40] : [0], se = (e, t) => e > 0 && t > 0 ? "triangle-bottom-left" : e > 0 && t < 0 ? "triangle-top-left" : e < 0 && t > 0 ? "triangle-bottom-right" : "triangle-top-right";
+	}, k = (e, t) => e > 0 && t > 0 ? [10, -20] : e > 0 && t < 0 ? [20, 40] : e < 0 && t > 0 ? [20, -20] : e < 0 && t < 0 ? [10, 40] : [0], se = (e, t) => e > 0 && t > 0 ? "triangle-bottom-left" : e > 0 && t < 0 ? "triangle-top-left" : e < 0 && t > 0 ? "triangle-bottom-right" : "triangle-top-right";
 	useEffect(() => {
 		O(), i.on("before:render", () => {
 			O();
 		});
 	}, []);
-	let k = w?.name.toLowerCase() == "sold" ? p("web.availability.status.Sold") : formatCurrency(o.plotInfo?.price ?? 0, null, _, v, document.documentElement.lang);
+	let A = w?.name.toLowerCase() == "sold" ? p("web.availability.status.Sold") : formatCurrency(o.plotInfo?.price ?? 0, null, _, v, document.documentElement.lang);
 	return /* @__PURE__ */ jsxs("div", {
 		ref: m,
 		onClick: async () => {
@@ -784,7 +788,7 @@ function PlanViewPopup({ canvas: i, obj: a, item: o, onClickOutside: c }) {
 							}) })]
 						}), /* @__PURE__ */ jsx("span", {
 							className: "text-bodyContentColor",
-							children: k
+							children: A
 						})]
 					}),
 					/* @__PURE__ */ jsxs("div", {
@@ -994,84 +998,84 @@ var FloorViewPopup = React.forwardRef(({ canvas: e, obj: t, item: n, onClickOuts
 FloorViewPopup.displayName = "FloorViewPopup";
 var floor_view_popup_default = FloorViewPopup;
 function PlanView({ planId: e, objects: t, items: n, background: r, color: i, canvasSubject: a, useHalfWidth: c, onNavigate: g, formatCurrency: _, t: v, showPrice: y, measurementSystem: b }) {
-	let x = useRef(null), S = useRef(null), C = useRef(null), w = useRef(null), E = useRef(null), D = useRef(null), A = useRef(null), j = useRef(0), M = useRef(0), N = useRef(!1), ce = useRef(!1), P = useRef(0), F = useRef(1), I = useRef(new PlanItemController(n)), L = useRef(new PlanObjectController(t)), le = useRef(t), R = useRef(""), z = useRef(null), B = useRef(0), V = useRef(0), H = useRef(0), U = useRef(null), [W, G] = useState([]), K = useRef(null), ue = () => {
-		let e = K.current;
-		e && A.current.setDimensions({
+	let x = useRef(null), S = useRef(null), C = useRef(null), w = useRef(null), E = useRef(null), D = useRef(null), j = useRef(null), M = useRef(0), N = useRef(0), P = useRef(!1), ce = useRef(!1), F = useRef(0), I = useRef(1), L = useRef(new PlanItemController(n)), R = useRef(new PlanObjectController(t)), le = useRef(t), z = useRef(""), B = useRef(null), V = useRef(0), H = useRef(0), U = useRef(0), W = useRef(null), [G, K] = useState([]), q = useRef(null), ue = () => {
+		let e = q.current;
+		e && j.current.setDimensions({
 			width: e.clientWidth,
 			height: e.clientHeight
 		});
-	}, q = () => {
+	}, J = () => {
 		ue();
 		let e = 1;
 		if (S.current?.width !== 0 || S.current?.height !== 0) {
-			let t = A.current.getWidth() / (c ? 2 : 1), n = S.current.width, r = S.current.height, i = A.current.getHeight(), a = t / n, o = i / r;
-			e = Math.min(a, o), A.current.setZoom(e), A.current.absolutePan(new fabric.Point((n * e - t) / 2, (r * e - i) / 2)), F.current = e;
+			let t = j.current.getWidth() / (c ? 2 : 1), n = S.current.width, r = S.current.height, i = j.current.getHeight(), a = t / n, o = i / r;
+			e = Math.min(a, o), j.current.setZoom(e), j.current.absolutePan(new fabric.Point((n * e - t) / 2, (r * e - i) / 2)), I.current = e;
 		}
-		A.current.renderAll(), z.current = A.current?.viewportTransform;
+		j.current.renderAll(), B.current = j.current?.viewportTransform;
 	};
 	useEffect(() => {
-		let e = (e) => e.preventDefault(), t = () => q(), n = K.current ?? document, r = document?.getElementById("puck-canvas-root");
+		let e = (e) => e.preventDefault(), t = () => J(), n = q.current ?? document, r = document?.getElementById("puck-canvas-root");
 		n.addEventListener("gesturestart", e), n.addEventListener("gesturechange", e), n.addEventListener("gestureend", e), window.addEventListener("resize", t);
 		let i = null;
 		return r && (i = new ResizeObserver(() => {
-			q();
+			J();
 		}), i.observe(r)), () => {
 			n.removeEventListener("gesturestart", e), n.removeEventListener("gesturechange", e), n.removeEventListener("gestureend", e), window.removeEventListener("resize", t), i && r && (i.unobserve(r), i.disconnect());
 		};
-	}, [K]), usePinch((e) => {
+	}, [q]), usePinch((e) => {
 		let { da: t } = e;
-		e.event.preventDefault(), P.current == 0 && (P.current = t[0]);
-		let n = t[0] / P.current * A.current.getZoom();
-		n > 20 && (n = 20), n < F.current && (n = F.current), A.current.setZoom(n), Q(), P.current = t[0], A.current.renderAll();
-	}, { target: U }), useEffect(() => {
-		A.current && a && a.attach(() => {
-			q();
+		e.event.preventDefault(), F.current == 0 && (F.current = t[0]);
+		let n = t[0] / F.current * j.current.getZoom();
+		n > 20 && (n = 20), n < I.current && (n = I.current), j.current.setZoom(n), Q(), F.current = t[0], j.current.renderAll();
+	}, { target: W }), useEffect(() => {
+		j.current && a && a.attach(() => {
+			J();
 		}, "onFit");
-	}, [a, A.current]), useEffect(() => {
+	}, [a, j.current]), useEffect(() => {
 		if (!r?.objectUrl) return;
 		let e = typeof window < "u" ? window.document : document;
-		return e.addEventListener("gesturestart", (e) => e.preventDefault()), e.addEventListener("gesturechange", (e) => e.preventDefault()), J(), () => {
+		return e.addEventListener("gesturestart", (e) => e.preventDefault()), e.addEventListener("gesturechange", (e) => e.preventDefault()), Y(), () => {
 			try {
-				A.current && (A.current?.dispose(), S.current?.dispose());
+				j.current && (j.current?.dispose(), S.current?.dispose());
 			} catch (e) {
 				console.error(e);
 			}
 		};
 	}, [r]), useEffect(() => {
-		let r = e == R.current;
-		if (A.current && r) A.current.remove(...A.current.getObjects()), L.current.deleteObjects(), I.current = new PlanItemController(n), L.current = new PlanObjectController(t), L.current.initContainerObjects(C.current), L.current.containerObjects.forEach((e) => {
-			let t = I.current.getItem(e.itemId);
-			t && (e.assign(t), A.current.add(e, e.label));
-		}), A.current?.requestRenderAll();
-		else if (A.current && !r) try {
-			A.current && (A.current.remove(...A.current.getObjects()), S.current?.dispose(), L.current.deleteObjects(), I.current = new PlanItemController(n), L.current = new PlanObjectController(t), J());
+		let r = e == z.current;
+		if (j.current && r) j.current.remove(...j.current.getObjects()), R.current.deleteObjects(), L.current = new PlanItemController(n), R.current = new PlanObjectController(t), R.current.initContainerObjects(C.current), R.current.containerObjects.forEach((e) => {
+			let t = L.current.getItem(e.itemId);
+			t && (e.assign(t), j.current.add(e, e.label));
+		}), j.current?.requestRenderAll();
+		else if (j.current && !r) try {
+			j.current && (j.current.remove(...j.current.getObjects()), S.current?.dispose(), R.current.deleteObjects(), L.current = new PlanItemController(n), R.current = new PlanObjectController(t), Y());
 		} catch (e) {
 			console.error(e);
 		}
-		le.current = t, R.current = e;
+		le.current = t, z.current = e;
 	}, [t]);
-	let J = () => {
+	let Y = () => {
 		fabric.Image.fromURL(r.objectUrl ?? "", (e) => {
 			e.setOptions({
 				stroke: "#333333",
 				strokeWidth: 0,
 				opacity: 1,
 				hasBorders: !1
-			}), S.current = e, C.current = new fabric.Point(S.current.width ?? 0, S.current.height ?? 0), pe(), ge(S.current?.width ?? 0, S.current?.height ?? 0), q();
+			}), S.current = e, C.current = new fabric.Point(S.current.width ?? 0, S.current.height ?? 0), pe(), _e(S.current?.width ?? 0, S.current?.height ?? 0), J();
 		});
 	}, de = (e) => {
 		if (e.target instanceof PlanRectangleObject || e.target instanceof PlanCircleObject || e.target instanceof PlanPolygonObject) {
-			let t = e.target, n = getPlanItemTypeEnum(I.current.getItem(t.itemId)?.type ?? "");
-			n == PlanItemTypeEnum.Room && (D.current = n, Y(t));
+			let t = e.target, n = getPlanItemTypeEnum(L.current.getItem(t.itemId)?.type ?? "");
+			n == PlanItemTypeEnum.Room && (D.current = n, X(t));
 		}
 	}, fe = (e) => {
 		if ((e.target instanceof PlanRectangleObject || e.target instanceof PlanCircleObject || e.target instanceof PlanPolygonObject) && D.current == PlanItemTypeEnum.Room) {
 			let t = w.current?.getBoundingClientRect(), { clientX: n, clientY: r } = e.e;
 			if (n >= Math.round((t?.left ?? 0) - 10) && n <= Math.round((t?.right ?? 0) + 10) && r >= Math.round((t?.top ?? 0) - 10) && r <= Math.round((t?.bottom ?? 0) + 10)) return;
-			X();
+			Z();
 		}
 	}, pe = () => {
-		S.current && (A.current, A.current = new fabric.Canvas(x.current, {
+		S.current && (j.current, j.current = new fabric.Canvas(x.current, {
 			hoverCursor: "move",
 			selection: !0,
 			selectionBorderColor: "blue",
@@ -1079,48 +1083,48 @@ function PlanView({ planId: e, objects: t, items: n, background: r, color: i, ca
 			renderOnAddRemove: !1,
 			objectCaching: !1,
 			backgroundImage: S.current
-		}), A.current.backgroundColor = i ?? "#ff00", A.current.selection = !1, A.current.defaultCursor = "grab", A.current.on("mouse:wheel", function(e) {
-			let t = e.e.deltaY, n = A.current.getZoom(), r = new fabric.Point(A.current.getWidth() / 2, A.current.getHeight() / 2);
-			n *= .999 ** t, n > 20 && (n = 20), n < F.current && (n = F.current);
-			let i = A.current.getPointer(e.e), a = new fabric.Point(i.x, i.y), o = fabric.util.transformPoint(a, A.current.viewportTransform);
-			A.current.zoomToPoint(r, n);
-			let s = fabric.util.transformPoint(a, A.current.viewportTransform), c = new fabric.Point(o.x - s.x, o.y - s.y);
-			A.current.relativePan(c), Q(), A.current.renderAll(), e.e.preventDefault(), e.e.stopPropagation();
-		}), A.current.on("mouse:move", function(e) {
-			N.current && (e.e.type == "mousemove" ? $(e.e.clientX, e.e.clientY) : e.e.touches && e.e.touches.length > 1 || $(e.e.touches[0].clientX, e.e.touches[0].clientY));
-		}), A.current.on("mouse:up", he), A.current.on("mouse:down", Z), A.current.on("mouse:over", de), A.current.on("mouse:out", fe), L.current.initContainerObjects(C.current), L.current.containerObjects.forEach((e) => {
-			let t = I.current.getItem(e.itemId);
+		}), j.current.backgroundColor = i ?? "#ff00", j.current.selection = !1, j.current.defaultCursor = "grab", j.current.on("mouse:wheel", function(e) {
+			let t = e.e.deltaY, n = j.current.getZoom(), r = new fabric.Point(j.current.getWidth() / 2, j.current.getHeight() / 2);
+			n *= .999 ** t, n > 20 && (n = 20), n < I.current && (n = I.current);
+			let i = j.current.getPointer(e.e), a = new fabric.Point(i.x, i.y), o = fabric.util.transformPoint(a, j.current.viewportTransform);
+			j.current.zoomToPoint(r, n);
+			let s = fabric.util.transformPoint(a, j.current.viewportTransform), c = new fabric.Point(o.x - s.x, o.y - s.y);
+			j.current.relativePan(c), Q(), j.current.renderAll(), e.e.preventDefault(), e.e.stopPropagation();
+		}), j.current.on("mouse:move", function(e) {
+			P.current && (e.e.type == "mousemove" ? $(e.e.clientX, e.e.clientY) : e.e.touches && e.e.touches.length > 1 || $(e.e.touches[0].clientX, e.e.touches[0].clientY));
+		}), j.current.on("mouse:up", ge), j.current.on("mouse:down", he), j.current.on("mouse:over", de), j.current.on("mouse:out", fe), R.current.initContainerObjects(C.current), R.current.containerObjects.forEach((e) => {
+			let t = L.current.getItem(e.itemId);
 			if (t) if (e.itemType == "Room") {
 				t && e.assign(t);
-				let n = e.fill;
-				e.fill = "#ff00", e.label = new PlanLabelObject(t.name, n ?? "0x000000", e.left ?? 0, e.top ?? 0, e.width ?? 0, e.height ?? 0, 1, 56), e.label.hideBackground(), e.label.addStroke(), A.current.add(e, e.label);
-			} else t && e.assign(t), A.current.add(e, e.label);
-		}), A.current.on("mouse:mouseup", (e) => {
-			(e.target instanceof PlanRectangleObject || e.target instanceof PlanCircleObject || e.target instanceof PlanPolygonObject) && (Y(e.target), A.current?.requestRenderAll());
-		}), A.current.requestRenderAll(), ce.current = !0);
+				let n = e.fill, r = getObjectLabelFrame(e);
+				e.fill = "#ff00", e.label = new PlanLabelObject(t.name, n ?? "0x000000", r.left, r.top, r.width, r.height, 1, 56), e.label.hideBackground(), e.label.addStroke(), j.current.add(e, e.label);
+			} else t && e.assign(t), j.current.add(e, e.label);
+		}), j.current.on("mouse:mouseup", (e) => {
+			(e.target instanceof PlanRectangleObject || e.target instanceof PlanCircleObject || e.target instanceof PlanPolygonObject) && (X(e.target), j.current?.requestRenderAll());
+		}), j.current.requestRenderAll(), ce.current = !0);
 	}, me = async (e) => {
 		let t = getPlanItemTypeEnum(e?.itemType ?? ""), n = "/availability/site-plan";
 		t === PlanItemTypeEnum.PlotContainer ? (n = `/availability/site-plan/plot-container/${e?.itemId}`, g && g(n)) : t === PlanItemTypeEnum.Plot && (n = `/plot/${e?.itemId}`, g && g(n));
-	}, Y = (e) => {
-		let t = I.current.getItem(e.itemId), n = getPlanItemTypeEnum(t?.type ?? "");
+	}, X = (e) => {
+		let t = L.current.getItem(e.itemId), n = getPlanItemTypeEnum(t?.type ?? "");
 		switch (D.current = n, n) {
 			case PlanItemTypeEnum.Plot:
-				G([/* @__PURE__ */ jsx(PlanViewPopup, {
-					canvas: A.current,
+				K([/* @__PURE__ */ jsx(PlanViewPopup, {
+					canvas: j.current,
 					obj: e,
 					item: t,
 					onClickOutside: () => {
-						X();
+						Z();
 					}
 				}, "container_element")]);
 				break;
 			case PlanItemTypeEnum.PlotContainer:
-				G([/* @__PURE__ */ jsx(ContainerPlanPopup, {
-					canvas: A.current,
+				K([/* @__PURE__ */ jsx(ContainerPlanPopup, {
+					canvas: j.current,
 					obj: e,
 					item: t,
 					onClickOutside: () => {
-						X();
+						Z();
 					},
 					onNavigate: g,
 					formatCurrency: _,
@@ -1129,49 +1133,58 @@ function PlanView({ planId: e, objects: t, items: n, background: r, color: i, ca
 				}, "container_element")]);
 				break;
 			case PlanItemTypeEnum.Room:
-				G([/* @__PURE__ */ jsx(floor_view_popup_default, {
+				K([/* @__PURE__ */ jsx(floor_view_popup_default, {
 					ref: w,
-					canvas: A.current,
+					canvas: j.current,
 					obj: e,
 					item: t,
 					onClickOutside: () => {
-						X();
+						Z();
 					},
 					onNavigate: g,
 					measurementSystem: b
 				}, "container_element")]);
 				break;
 		}
-	}, X = useCallback(() => {
-		D.current = null, G([]), E.current = null;
-	}, [W]), Z = (e) => {
-		N.current = !0, e.e.type.includes("mouse") && (j.current = e.e.clientX, M.current = e.e.clientY), e.e.type.includes("touch") && (j.current = e.e.touches[0].clientX, M.current = e.e.touches[0].clientY), (e.target instanceof PlanRectangleObject || e.target instanceof PlanCircleObject || e.target instanceof PlanPolygonObject) && E.current && E.current.itemId == e.target.itemId ? me(E.current) : (e.target instanceof PlanRectangleObject || e.target instanceof PlanCircleObject || e.target instanceof PlanPolygonObject) && setTimeout(() => {
-			Y(e.target), A.current?.requestRenderAll();
+	}, Z = useCallback(() => {
+		D.current = null, K([]), E.current = null;
+	}, [G]), he = (e) => {
+		P.current = !0, e.e.type.includes("mouse") && (M.current = e.e.clientX, N.current = e.e.clientY), e.e.type.includes("touch") && (M.current = e.e.touches[0].clientX, N.current = e.e.touches[0].clientY), (e.target instanceof PlanRectangleObject || e.target instanceof PlanCircleObject || e.target instanceof PlanPolygonObject) && E.current && E.current.itemId == e.target.itemId ? me(E.current) : (e.target instanceof PlanRectangleObject || e.target instanceof PlanCircleObject || e.target instanceof PlanPolygonObject) && setTimeout(() => {
+			X(e.target), j.current?.requestRenderAll();
 		}, 150);
-	}, he = (e) => {
-		N.current = !1, A.current?.fire("canvas:dragEnd"), P.current = 0;
-	}, ge = (e, t) => {
-		B.current = e, V.current = t;
+	}, ge = (e) => {
+		P.current = !1, j.current?.fire("canvas:dragEnd"), F.current = 0;
+	}, _e = (e, t) => {
+		V.current = e, H.current = t;
 	}, Q = () => {
-		Date.now() - H.current < 8 || (H.current = Date.now(), _e(), A.current?.requestRenderAll());
-	}, _e = () => {
-		if (B.current === 0 || V.current === 0 || !A.current?.viewportTransform) return;
-		let e = A.current?.viewportTransform, t = A.current?.getZoom(), n = A.current?.getWidth(), r = B.current, i = V.current, a = A.current?.getHeight(), o = z.current[4], s = z.current[5];
-		e[4] >= z.current[4] ? A.current.viewportTransform[4] = z.current[4] : e[4] < n - r * t - o && (A.current.viewportTransform[4] = n - r * t - o), e[5] >= z.current[5] ? A.current.viewportTransform[5] = z.current[5] : e[5] < a - i * t - s && (A.current.viewportTransform[5] = a - i * t - s);
+		Date.now() - U.current < 8 || (U.current = Date.now(), ve(), j.current?.requestRenderAll());
+	}, ve = () => {
+		if (V.current === 0 || H.current === 0 || !j.current?.viewportTransform) return;
+		let e = j.current?.viewportTransform, t = j.current?.getZoom(), n = j.current?.getWidth(), r = V.current, i = H.current, a = j.current?.getHeight(), o = B.current[4], s = B.current[5];
+		e[4] >= B.current[4] ? j.current.viewportTransform[4] = B.current[4] : e[4] < n - r * t - o && (j.current.viewportTransform[4] = n - r * t - o), e[5] >= B.current[5] ? j.current.viewportTransform[5] = B.current[5] : e[5] < a - i * t - s && (j.current.viewportTransform[5] = a - i * t - s);
 	}, $ = (e, t) => {
-		if (A.current?.getZoom() == F.current) return;
-		let n = new fabric.Point(e - j.current, t - M.current);
-		A.current.relativePan(n), Q(), A.current?.requestRenderAll(), j.current = e, M.current = t;
+		if (j.current?.getZoom() == I.current) return;
+		let n = new fabric.Point(e - M.current, t - N.current);
+		j.current.relativePan(n), Q(), j.current?.requestRenderAll(), M.current = e, N.current = t;
 	};
 	return /* @__PURE__ */ jsx("div", {
 		className: "w-full max-w-[1440px] mb-[7.5rem] mobile:mb-[9rem] mx-auto xl:h-[600px] h-[300px] overflow-hidden",
-		ref: K,
+		ref: q,
 		children: /* @__PURE__ */ jsxs("div", {
-			ref: U,
+			ref: W,
 			className: "relative",
-			children: [W.map((e) => createPortal(e, U.current)), /* @__PURE__ */ jsx("canvas", { ref: x })]
+			children: [G.map((e) => createPortal(e, W.current)), /* @__PURE__ */ jsx("canvas", { ref: x })]
 		})
 	});
+}
+function getObjectLabelFrame(e) {
+	let t = e.getScaledWidth(), n = e.getScaledHeight();
+	return {
+		left: (e.left ?? 0) - t / 2,
+		top: (e.top ?? 0) - n / 2,
+		width: t,
+		height: n
+	};
 }
 var CanvasSubject = class {
 	constructor() {

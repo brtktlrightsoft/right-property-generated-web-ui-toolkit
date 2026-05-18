@@ -92,7 +92,15 @@ export class PlanObjectController {
   }
 
   initObject(o: PlanObjectResultModel, imageBoundary: fabric.Point) {
-    const defaultRadius = Math.min(o.width ?? 0, o.height ?? 0) / 2;
+    const objectWidth = o.width ?? 0;
+    const objectHeight = o.height ?? 0;
+    const width = scaleCoordinate(objectWidth, imageBoundary.x);
+    const height = scaleCoordinate(objectHeight, imageBoundary.y);
+    const left = scaleCoordinate(o.left, imageBoundary.x);
+    const top = scaleCoordinate(o.top, imageBoundary.y);
+    const centerLeft = left + width / 2;
+    const centerTop = top + height / 2;
+    const defaultRadius = Math.min(width, height) / 2;
     const options: IPlanObject = {
       objectId: o.objectId,
       objectType: o.objectType,
@@ -100,12 +108,14 @@ export class PlanObjectController {
       containerType: o.containerType,
       itemId: o.itemId,
       itemType: o.itemType,
-      left: imageBoundary.x * o.left,
-      top: imageBoundary.y * o.top,
-      width: o.width! * imageBoundary.x,
-      height: o.height! * imageBoundary.y,
-      radius: (o.radius ?? defaultRadius) * imageBoundary.x,
-      points: o.points ? o.points.map((p) => new fabric.Point(imageBoundary.x * p.x, imageBoundary.y * p.y)) : [],
+      left: centerLeft,
+      top: centerTop,
+      width,
+      height,
+      radius: o.radius ? scaleCoordinate(o.radius, imageBoundary.x) : defaultRadius,
+      points: o.points
+        ? o.points.map((p) => new fabric.Point(imageBoundary.x * (p.x + objectWidth / 2), imageBoundary.y * (p.y + objectHeight / 2)))
+        : [],
       fill: o.fill,
       opacity: o.opacity,
       label: null,
@@ -146,3 +156,14 @@ export class PlanObjectController {
   }
 }
 
+function scaleCoordinate(value: number, dimension: number) {
+  if (!Number.isFinite(value)) {
+    return 0;
+  }
+
+  if (value >= 0 && value <= 1) {
+    return value * dimension;
+  }
+
+  return value;
+}

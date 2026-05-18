@@ -34,7 +34,7 @@ export class PlanLabelObject extends fabric.Group {
       top: containerHeight / 2 + top,
       fontSize: fontSize,
       lineHeight: 16,
-      fontFamily: 'Inter',
+      fontFamily: 'Fira Sans',
       originX: 'center',
       originY: 'center',
       textAlign: 'center',
@@ -96,4 +96,3 @@ export class PlanLabelObject extends fabric.Group {
     this._text.set('opacity', opacity);
   }
 }
-

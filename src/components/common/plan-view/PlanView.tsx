@@ -344,14 +344,15 @@ export default function PlanView({
         if (object.itemType == 'Room') {
           if (item) object.assign(item);
           const objectColor = object.fill;
+          const labelFrame = getObjectLabelFrame(object);
           object.fill = '#ff00';
           object.label = new PlanLabelObject(
             item.name,
             objectColor ?? '0x000000',
-            object.left ?? 0,
-            object.top ?? 0,
-            object.width ?? 0,
-            object.height ?? 0,
+            labelFrame.left,
+            labelFrame.top,
+            labelFrame.width,
+            labelFrame.height,
             1,
             56
           );
@@ -558,3 +559,14 @@ export default function PlanView({
   );
 }
 
+function getObjectLabelFrame(object: PlanRectangleObject | PlanCircleObject | PlanPolygonObject) {
+  const width = object.getScaledWidth();
+  const height = object.getScaledHeight();
+
+  return {
+    left: (object.left ?? 0) - width / 2,
+    top: (object.top ?? 0) - height / 2,
+    width,
+    height,
+  };
+}

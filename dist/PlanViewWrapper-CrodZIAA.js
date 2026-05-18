@@ -1,4 +1,4 @@
-import { a as useMainModuleResult, n as formatCurrency, o as useTranslation, r as generatePlotUrl, s as useUiToolkitConfig } from "./utils-DYfvbnRa.js";
+import { a as useMainModuleResult, c as useUiToolkitConfigOptional, n as formatCurrency, o as useTranslation, r as generatePlotUrl } from "./utils-DYfvbnRa.js";
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { fabric } from "fabric";
@@ -58,8 +58,8 @@ function createPlotRepository(e) {
 	return t.configure(e), t;
 }
 function usePlotRepository() {
-	let e = useUiToolkitConfig();
-	return useMemo(() => createPlotRepository(e), [e]);
+	let e = useUiToolkitConfigOptional();
+	return useMemo(() => e ? createPlotRepository(e) : plotRepository, [e]);
 }
 var getRandomValues, rnds8 = new Uint8Array(16);
 function rng() {
@@ -740,7 +740,7 @@ function useOnClickOutside(e, t, n = "mousedown", r = []) {
 	});
 }
 var use_on_click_outside_default = useOnClickOutside;
-function PlanViewPopup({ canvas: i, obj: a, item: o, onClickOutside: c }) {
+function PlanViewPopup({ canvas: t, obj: a, item: o, onClickOutside: c }) {
 	let { t: l } = useTranslation(), m = useRef(null), [h, g] = useState([1, 1]), { showPrice: _, currency: v, clientName: y, projectName: b, country: x, city: S, district: C } = useMainModuleResult(), w = usePlotStatus(o.plotInfo?.statusName ?? "available"), T = useRef(!1), { prepareArea: E } = useProjectArea();
 	use_on_click_outside_default(m, (e) => {
 		e.preventDefault(), c();
@@ -764,13 +764,13 @@ function PlanViewPopup({ canvas: i, obj: a, item: o, onClickOutside: c }) {
 		};
 	}, O = () => {
 		if (m.current == null) return;
-		let e = D(i, a), t = [1, 1], n = e?.objectLeft ?? 0, r = (e?.objectTop ?? 0) - e.popupHeight;
-		n + e.popupWidth > e.canvasRight && (n = e?.objectLeft - e.popupWidth, t[0] = -1), r - e.popupHeight < e.canvasTop && (r = e?.objectTop, t[1] = -1);
-		let [o, s] = k(t[0], t[1]);
-		g(t), m.current.style.left = n + o + "px", m.current.style.top = r + s + "px";
+		let e = D(t, a), n = [1, 1], r = e?.objectLeft ?? 0, i = (e?.objectTop ?? 0) - e.popupHeight;
+		r + e.popupWidth > e.canvasRight && (r = e?.objectLeft - e.popupWidth, n[0] = -1), i - e.popupHeight < e.canvasTop && (i = e?.objectTop, n[1] = -1);
+		let [o, s] = k(n[0], n[1]);
+		g(n), m.current.style.left = r + o + "px", m.current.style.top = i + s + "px";
 	}, k = (e, t) => e > 0 && t > 0 ? [10, -20] : e > 0 && t < 0 ? [20, 40] : e < 0 && t > 0 ? [20, -20] : e < 0 && t < 0 ? [10, 40] : [0], de = (e, t) => e > 0 && t > 0 ? "triangle-bottom-left" : e > 0 && t < 0 ? "triangle-top-left" : e < 0 && t > 0 ? "triangle-bottom-right" : "triangle-top-right";
 	useEffect(() => {
-		O(), i.on("before:render", () => {
+		O(), t.on("before:render", () => {
 			O();
 		});
 	}, []);
@@ -1262,7 +1262,7 @@ function PlanViewWrapper(e) {
 		m.fetchSitePlan().then((e) => {
 			p(e);
 		});
-	}, []);
+	}, [m]);
 	let h = [], g = null;
 	try {
 		h = typeof n == "string" ? n ? JSON.parse(n) : [] : n || [], g = typeof r == "string" ? r ? JSON.parse(r) : null : r;

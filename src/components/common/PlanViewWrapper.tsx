@@ -30,11 +30,11 @@ export function PlanViewWrapper(props: PlanViewWrapperProps & Record<string, unk
   } = props;
   const [sitePlanResult, setSitePlanResult] = useState<SitePlanResult | null>(null);
   const plotRepository = usePlotRepository();
-  useEffect(()=>{
-    plotRepository.fetchSitePlan().then((result)=>{
+  useEffect(() => {
+    plotRepository.fetchSitePlan().then((result) => {
       setSitePlanResult(result);
     });
-  },[])
+  }, [plotRepository]);
   // Parse JSON strings if needed
   let parsedObjects: PlanObjectResultModel[] = [];
   let parsedBackground: AssetResult | null = null;
@@ -71,4 +71,3 @@ export function PlanViewWrapper(props: PlanViewWrapperProps & Record<string, unk
       />
   );
 }
-

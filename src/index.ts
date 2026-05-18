@@ -40,6 +40,7 @@ export * from './components/common/PlotThumbCard';
 export * from './components/common/plot-thumb-card/plot-thumb-card-parts';
 export * from './components/common/plot-thumb-card/voodvale-plot-thumb-card/voodvale-plot-thumb-card-parts';
 export * from './components/common/plot-thumb-card/skyscrapper-plot-thumb-card/skyscrapper-plot-thumb-card-parts';
+export * from './components/common/PlanViewWrapper';
 
 // skyscrapper components
 export * from './components/skyscrapper/SkyscrapperHomeFirstSection';

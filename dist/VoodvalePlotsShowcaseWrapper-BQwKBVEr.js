@@ -1,4 +1,4 @@
-import { t as cn } from "./utils-DYfvbnRa.js";
+import { o as useTranslation, t as cn } from "./utils-DYfvbnRa.js";
 import React, { createContext, forwardRef, useContext, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { motion } from "framer-motion";
@@ -121,9 +121,9 @@ function HomeFirstSectionWrapper(e) {
 		scrollIndicatorOpacity: S
 	});
 }
-function Image({ src: _, fallbackSrc: v, alt: y, width: b, height: x, className: S }) {
-	return _ ? /* @__PURE__ */ jsx("img", {
-		src: _,
+function Image({ src: e, fallbackSrc: v, alt: y, width: b, height: x, className: S }) {
+	return e ? /* @__PURE__ */ jsx("img", {
+		src: e,
 		alt: y,
 		className: S
 	}) : v ? /* @__PURE__ */ jsx("img", {
@@ -2210,48 +2210,48 @@ function isChildSwiperSlide(e) {
 	return e.type && e.type.displayName && e.type.displayName.includes("SwiperSlide");
 }
 function processChildren(e) {
-	let v = [];
+	let _ = [];
 	return React.Children.toArray(e).forEach((e) => {
-		isChildSwiperSlide(e) ? v.push(e) : e.props && e.props.children && processChildren(e.props.children).forEach((e) => v.push(e));
-	}), v;
+		isChildSwiperSlide(e) ? _.push(e) : e.props && e.props.children && processChildren(e.props.children).forEach((e) => _.push(e));
+	}), _;
 }
 function getChildren(e) {
-	let v = [], y = {
+	let _ = [], y = {
 		"container-start": [],
 		"container-end": [],
 		"wrapper-start": [],
 		"wrapper-end": []
 	};
 	return React.Children.toArray(e).forEach((e) => {
-		if (isChildSwiperSlide(e)) v.push(e);
+		if (isChildSwiperSlide(e)) _.push(e);
 		else if (e.props && e.props.slot && y[e.props.slot]) y[e.props.slot].push(e);
 		else if (e.props && e.props.children) {
-			let _ = processChildren(e.props.children);
-			_.length > 0 ? _.forEach((e) => v.push(e)) : y["container-end"].push(e);
+			let v = processChildren(e.props.children);
+			v.length > 0 ? v.forEach((e) => _.push(e)) : y["container-end"].push(e);
 		} else y["container-end"].push(e);
 	}), {
-		slides: v,
+		slides: _,
 		slots: y
 	};
 }
-function renderVirtual(e, v, y) {
+function renderVirtual(e, _, y) {
 	if (!y) return null;
 	let b = (e) => {
-		let _ = e;
-		return e < 0 ? _ = v.length + e : _ >= v.length && (_ -= v.length), _;
-	}, x = e.isHorizontal() ? { [e.rtlTranslate ? "right" : "left"]: `${y.offset}px` } : { top: `${y.offset}px` }, { from: S, to: C } = y, w = e.params.loop ? -v.length : 0, T = e.params.loop ? v.length * 2 : v.length, E = [];
-	for (let e = w; e < T; e += 1) e >= S && e <= C && E.push(v[b(e)]);
-	return E.map((v, y) => /* @__PURE__ */ React.cloneElement(v, {
+		let v = e;
+		return e < 0 ? v = _.length + e : v >= _.length && (v -= _.length), v;
+	}, x = e.isHorizontal() ? { [e.rtlTranslate ? "right" : "left"]: `${y.offset}px` } : { top: `${y.offset}px` }, { from: S, to: C } = y, w = e.params.loop ? -_.length : 0, T = e.params.loop ? _.length * 2 : _.length, E = [];
+	for (let e = w; e < T; e += 1) e >= S && e <= C && E.push(_[b(e)]);
+	return E.map((_, y) => /* @__PURE__ */ React.cloneElement(_, {
 		swiper: e,
 		style: x,
-		key: v.props.virtualIndex || v.key || `slide-${y}`
+		key: _.props.virtualIndex || _.key || `slide-${y}`
 	}));
 }
 function useIsomorphicLayoutEffect(e, _) {
 	return typeof window > "u" ? useEffect(e, _) : useLayoutEffect(e, _);
 }
-var SwiperSlideContext = /* @__PURE__ */ createContext(null), SwiperContext = /* @__PURE__ */ createContext(null), Swiper = /* @__PURE__ */ forwardRef(({ className: e, tag: v = "div", wrapperTag: y = "div", children: b, onSwiper: S, ...T } = {}, E) => {
-	let D = !1, [O, k] = useState("swiper"), [A, j] = useState(null), [M, N] = useState(!1), P = useRef(!1), F = useRef(null), I = useRef(null), L = useRef(null), R = useRef(null), z = useRef(null), B = useRef(null), V = useRef(null), H = useRef(null), { params: U, passedParams: W, rest: G, events: K } = getParams(T), { slides: q, slots: J } = getChildren(b), Y = () => {
+var SwiperSlideContext = /* @__PURE__ */ createContext(null), SwiperContext = /* @__PURE__ */ createContext(null), Swiper = /* @__PURE__ */ forwardRef(({ className: e, tag: _ = "div", wrapperTag: y = "div", children: b, onSwiper: x, ...C } = {}, E) => {
+	let D = !1, [O, k] = useState("swiper"), [A, j] = useState(null), [M, N] = useState(!1), P = useRef(!1), F = useRef(null), I = useRef(null), L = useRef(null), R = useRef(null), z = useRef(null), B = useRef(null), V = useRef(null), H = useRef(null), { params: U, passedParams: W, rest: G, events: K } = getParams(C), { slides: q, slots: J } = getChildren(b), Y = () => {
 		N(!M);
 	};
 	Object.assign(U.on, { _containerClasses(e, _) {
@@ -2293,7 +2293,7 @@ var SwiperSlideContext = /* @__PURE__ */ createContext(null), SwiperContext = /*
 			paginationEl: V.current,
 			scrollbarEl: H.current,
 			swiper: I.current
-		}, U), S && !I.current.destroyed && S(I.current), () => {
+		}, U), x && !I.current.destroyed && x(I.current), () => {
 			I.current && !I.current.destroyed && I.current.destroy(!0, !1);
 		};
 	}, []), useIsomorphicLayoutEffect(() => {
@@ -2315,12 +2315,12 @@ var SwiperSlideContext = /* @__PURE__ */ createContext(null), SwiperContext = /*
 		updateOnVirtualData(I.current);
 	}, [A]);
 	function $() {
-		return U.virtual ? renderVirtual(I.current, q, A) : q.map((e, v) => /* @__PURE__ */ React.cloneElement(e, {
+		return U.virtual ? renderVirtual(I.current, q, A) : q.map((e, _) => /* @__PURE__ */ React.cloneElement(e, {
 			swiper: I.current,
-			swiperSlideIndex: v
+			swiperSlideIndex: _
 		}));
 	}
-	return /* @__PURE__ */ React.createElement(v, _extends({
+	return /* @__PURE__ */ React.createElement(_, _extends({
 		ref: F,
 		className: uniqueClasses(`${O}${e ? ` ${e}` : ""}`)
 	}, G), /* @__PURE__ */ React.createElement(SwiperContext.Provider, { value: I.current }, J["container-start"], /* @__PURE__ */ React.createElement(y, { className: wrapperClass(U.wrapperClass) }, J["wrapper-start"], $(), J["wrapper-end"]), needsNavigation(U) && /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("div", {
@@ -2338,7 +2338,7 @@ var SwiperSlideContext = /* @__PURE__ */ createContext(null), SwiperContext = /*
 	}), J["container-end"]));
 });
 Swiper.displayName = "Swiper";
-var SwiperSlide = /* @__PURE__ */ forwardRef(({ tag: e = "div", children: v, className: y = "", swiper: b, zoom: x, lazy: S, virtualIndex: T, swiperSlideIndex: E, ...D } = {}, O) => {
+var SwiperSlide = /* @__PURE__ */ forwardRef(({ tag: e = "div", children: _, className: y = "", swiper: b, zoom: x, lazy: S, virtualIndex: C, swiperSlideIndex: E, ...D } = {}, O) => {
 	let k = useRef(null), [A, j] = useState("swiper-slide"), [M, N] = useState(!1);
 	function P(e, _, v) {
 		_ === k.current && j(v);
@@ -2361,13 +2361,13 @@ var SwiperSlide = /* @__PURE__ */ forwardRef(({ tag: e = "div", children: v, cla
 		isVisible: A.indexOf("swiper-slide-visible") >= 0,
 		isPrev: A.indexOf("swiper-slide-prev") >= 0,
 		isNext: A.indexOf("swiper-slide-next") >= 0
-	}, I = () => typeof v == "function" ? v(F) : v, L = () => {
+	}, I = () => typeof _ == "function" ? _(F) : _, L = () => {
 		N(!0);
 	};
 	return /* @__PURE__ */ React.createElement(e, _extends({
 		ref: k,
 		className: uniqueClasses(`${A}${y ? ` ${y}` : ""}`),
-		"data-swiper-slide-index": T,
+		"data-swiper-slide-index": C,
 		onLoad: L
 	}, D), x && /* @__PURE__ */ React.createElement(SwiperSlideContext.Provider, { value: F }, /* @__PURE__ */ React.createElement("div", {
 		className: "swiper-zoom-container",
@@ -2376,7 +2376,7 @@ var SwiperSlide = /* @__PURE__ */ forwardRef(({ tag: e = "div", children: v, cla
 });
 SwiperSlide.displayName = "SwiperSlide";
 function ItemSlider({ items: e, variant: _ = "default", language: v = "en" }) {
-	let [y, b] = useState("desktop"), S = `viewport-${y}`;
+	let [y, b] = useState("desktop"), x = `viewport-${y}`;
 	switch (useEffect(() => {
 		let e = document?.getElementById("puck-canvas-root"), _ = null, v = () => {
 			let _ = e ? e.getBoundingClientRect().width : window.innerWidth;
@@ -2390,17 +2390,17 @@ function ItemSlider({ items: e, variant: _ = "default", language: v = "en" }) {
 			items: e,
 			language: v,
 			viewPort: y
-		}, S);
+		}, x);
 		case "skyscrapper": return /* @__PURE__ */ jsx(SkyscrapperItemSlider, {
 			items: e,
 			language: v,
 			viewPort: y
-		}, S);
+		}, x);
 		default: return /* @__PURE__ */ jsx(DefaultItemSlider, {
 			items: e,
 			language: v,
 			viewPort: y
-		}, S);
+		}, x);
 	}
 }
 var DefaultItemSlider = ({ items: e, language: _, viewPort: v }) => {
@@ -2552,10 +2552,10 @@ const PlotThumbCardRoot = ({ children: e }) => /* @__PURE__ */ jsx("div", {
 		})]
 	})
 });
-var SkyscrapperBadge = ({ plot: _, className: v }) => /* @__PURE__ */ jsxs("div", {
+var SkyscrapperBadge = ({ plot: e, className: v }) => /* @__PURE__ */ jsxs("div", {
 	className: cn("border flex items-center gap-[0.5rem] border-white/17 rounded-[11px] px-[0.75rem] py-[0.62rem] font-general-sans text-[0.625rem] text-white tracking-[0.01875rem]", v),
 	style: { backgroundColor: "#00000066" },
-	children: [/* @__PURE__ */ jsx("div", { className: "w-[5px] h-[5px] rounded-full bg-white" }), /* @__PURE__ */ jsx("div", { children: _.plotStatus || "Available" })]
+	children: [/* @__PURE__ */ jsx("div", { className: "w-[5px] h-[5px] rounded-full bg-white" }), /* @__PURE__ */ jsx("div", { children: e.plotStatus || "Available" })]
 });
 function PlotThumbCard({ plot: e, variant: _ = "default" }) {
 	switch (_) {
@@ -2578,8 +2578,8 @@ function VoodvalePlotThumbCard({ plot: e }) {
 		children: [/* @__PURE__ */ jsx(VoodvalePlotThumbCardImage, { imageUrl: e.imageUrl }), /* @__PURE__ */ jsx(VoodvalePlotThumbCardBody, { plot: e })]
 	});
 }
-function PlotsShowcase({ plots: e, title: _ = "Available Units", showAllLink: v, language: y = "en" }) {
-	let b = e.map((e, _) => /* @__PURE__ */ jsx("a", {
+function PlotsShowcase({ plots: _, title: v = "Available Units", showAllLink: y, language: b = "en" }) {
+	let { t: x } = useTranslation(), S = _.map((e, _) => /* @__PURE__ */ jsx("a", {
 		href: e.href,
 		children: /* @__PURE__ */ jsx(PlotThumbCard, {
 			plot: e,
@@ -2599,23 +2599,23 @@ function PlotsShowcase({ plots: e, title: _ = "Available Units", showAllLink: v,
 						children: [/* @__PURE__ */ jsx("h3", {
 							className: "text-2xl",
 							suppressHydrationWarning: !0,
-							children: _
+							children: v
 						}), /* @__PURE__ */ jsx("h6", {
 							className: "opacity-50 text-xs",
 							suppressHydrationWarning: !0,
-							children: `${e.length} units`
+							children: x("web.similar_units.units")
 						})]
-					}), v && /* @__PURE__ */ jsx("a", {
-						href: v,
+					}), y && /* @__PURE__ */ jsx("a", {
+						href: y,
 						children: /* @__PURE__ */ jsx("div", {
 							suppressHydrationWarning: !0,
 							children: "Show All"
 						})
 					})]
 				}), /* @__PURE__ */ jsx(ItemSlider, {
-					items: b.slice(0, 5),
+					items: S.slice(0, 5),
 					variant: "default",
-					language: y
+					language: b
 				})]
 			})
 		})
@@ -2705,7 +2705,7 @@ function GradientBorderButton({ children: e, href: _ }) {
 	});
 }
 function SkyscrapperHomeFirstSectionWrapper(e) {
-	let { projectName: _ = "Skyscrapper", heading: v = "A New Peak.", subheadingLine1: y = "in the City", subheadingLine2: b = "of Impossibles", description: x = "Experience contemporary homes crafted with finesse, surrounded by green spaces and effortless connections.", buttonLabel: S = "Explore Listing", buttonHref: C = "/availability", backgroundUrl: w = "", mediaType: E = "image", scrollIndicatorText: D = "Scroll down", scrollIndicatorOpacity: O = 1 } = e;
+	let { projectName: _ = "Skyscrapper", heading: v = "A New Peak.", subheadingLine1: y = "in the City", subheadingLine2: b = "of Impossibles", description: x = "Experience contemporary homes crafted with finesse, surrounded by green spaces and effortless connections.", buttonLabel: S = "Explore Listing", buttonHref: C = "/availability", backgroundUrl: w = "", mediaType: T = "image", scrollIndicatorText: D = "Scroll down", scrollIndicatorOpacity: O = 1 } = e;
 	return /* @__PURE__ */ jsx(SkyscrapperHomeFirstSection, {
 		projectName: _,
 		heading: v,
@@ -2715,7 +2715,7 @@ function SkyscrapperHomeFirstSectionWrapper(e) {
 		buttonLabel: S,
 		buttonHref: C,
 		backgroundData: {
-			isVideo: E === "video",
+			isVideo: T === "video",
 			backgroundUrl: w
 		},
 		scrollIndicatorText: D,
@@ -2780,7 +2780,7 @@ function SkyscrapperHomesSecondSection({ introText: e, image1: _, image2: v, ima
 		})] })
 	});
 }
-var GridCell$1 = ({ description: _, increase: v, className: y }) => /* @__PURE__ */ jsxs("div", {
+var GridCell$1 = ({ description: e, increase: v, className: y }) => /* @__PURE__ */ jsxs("div", {
 	className: cn("", y),
 	children: [
 		/* @__PURE__ */ jsx("div", {
@@ -2789,7 +2789,7 @@ var GridCell$1 = ({ description: _, increase: v, className: y }) => /* @__PURE__
 		}),
 		/* @__PURE__ */ jsx("div", {
 			className: "font-general-sans text-[1rem] leading-[162%] h-[7.75rem]",
-			children: _
+			children: e
 		}),
 		/* @__PURE__ */ jsx("div", { className: "h-[1px] bg-[#FABA6C4D] w-full" })
 	]
@@ -2892,8 +2892,8 @@ var FirstShowcaseCard = ({ plot: e, index: _ }) => {
 			className: "pl-[2.02rem] mobile:pl-[1.02rem] mb-[2.49rem] mobile:mb-[1.11rem] z-[6]"
 		})
 	]
-}), LoaderComp = ({ className: _ }) => /* @__PURE__ */ jsx("div", {
-	className: cn("select-none w-full min-h-[11.25rem] max-w-full h-full flex grow", _),
+}), LoaderComp = ({ className: e }) => /* @__PURE__ */ jsx("div", {
+	className: cn("select-none w-full min-h-[11.25rem] max-w-full h-full flex grow", e),
 	children: /* @__PURE__ */ jsx("div", {
 		className: "w-full max-w-full grow flex animate-pulse items-center justify-center bg-gray-300 rounded dark:bg-gray-700",
 		children: /* @__PURE__ */ jsx("svg", {
@@ -2905,9 +2905,9 @@ var FirstShowcaseCard = ({ plot: e, index: _ }) => {
 			children: /* @__PURE__ */ jsx("path", { d: "M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" })
 		})
 	})
-}), Name = ({ name: _, className: v }) => /* @__PURE__ */ jsx("div", {
+}), Name = ({ name: e, className: v }) => /* @__PURE__ */ jsx("div", {
 	className: cn("text-[2.5rem] mobile:text-[1.25rem] mobile:tracking-[-0.0125rem] leading-[75%] tracking-[-0.025rem] text-[#CED7D8]", v),
-	children: _
+	children: e
 }), Arrow$1 = () => /* @__PURE__ */ jsxs("svg", {
 	width: "72",
 	height: "72",
@@ -3012,11 +3012,11 @@ function HeaderSectionWrapper(e) {
 		animationEase: y
 	});
 }
-var GridCell = ({ title: _, description: v, increase: y, className: b }) => /* @__PURE__ */ jsxs("div", {
+var GridCell = ({ title: e, description: v, increase: y, className: b }) => /* @__PURE__ */ jsxs("div", {
 	className: cn("flex flex-col bg-white", b),
 	children: [/* @__PURE__ */ jsx("div", {
 		className: "pt-[1.6875rem] pl-[1.9375rem] mobile:pl-0 mobile:pb-[0.875rem] text-[1.125rem] leading-[144.444%] text-[#4A4A4A] font-normal",
-		children: _
+		children: e
 	}), /* @__PURE__ */ jsxs("div", {
 		className: "pl-[15.875rem] pb-[1.9375rem] mobile:pl-0 ",
 		children: [/* @__PURE__ */ jsx("div", {
@@ -3194,7 +3194,7 @@ function VoodvaleHomeFirstSection({ projectName: e, heading: _, subheading: v, b
 	});
 }
 function VoodvaleHomeFirstSectionWrapper(e) {
-	let { projectName: _ = "Voodvale", heading: v = "A New Benchmark of Refined Living.", subheading: y = "Experience contemporary homes crafted with finesse, surrounded by green spaces and effortless connections.", buttonLabel: b = "Explore Listing", buttonHref: x = "/availability", backgroundUrl: S = "", mediaType: C = "image", scrollIndicatorText: w = "Scroll down", scrollIndicatorOpacity: E = 1 } = e;
+	let { projectName: _ = "Voodvale", heading: v = "A New Benchmark of Refined Living.", subheading: y = "Experience contemporary homes crafted with finesse, surrounded by green spaces and effortless connections.", buttonLabel: b = "Explore Listing", buttonHref: x = "/availability", backgroundUrl: S = "", mediaType: C = "image", scrollIndicatorText: w = "Scroll down", scrollIndicatorOpacity: T = 1 } = e;
 	return /* @__PURE__ */ jsx(VoodvaleHomeFirstSection, {
 		projectName: _,
 		heading: v,
@@ -3206,7 +3206,7 @@ function VoodvaleHomeFirstSectionWrapper(e) {
 			backgroundUrl: S
 		},
 		scrollIndicatorText: w,
-		scrollIndicatorOpacity: E
+		scrollIndicatorOpacity: T
 	});
 }
 function VoodvaleHomeSecondSection({ title: e, description: _, gridData: v, sectionTitle: y, sectionDescription: b, contentImage1: x, contentImage2: S, contentImage3: C }) {
@@ -3317,9 +3317,9 @@ function VoodvalePlotsShowcase({ plots: e, title: _ = "Available Units", seeAllT
 		]
 	});
 }
-var SeeAllProperties = ({ pathname: _, title: v, className: y }) => /* @__PURE__ */ jsx("a", {
+var SeeAllProperties = ({ pathname: e, title: v, className: y }) => /* @__PURE__ */ jsx("a", {
 	className: cn("mobile:hidden", y),
-	href: _,
+	href: e,
 	children: /* @__PURE__ */ jsxs("div", {
 		className: "flex items-center gap-4",
 		children: [/* @__PURE__ */ jsx("div", {

@@ -1,7 +1,7 @@
 import type { PlotThumbResult } from '@/types/plot.types';
 import { ItemSlider } from './ItemSlider';
 import { PlotThumbCard } from './PlotThumbCard';
-import { useTranslation } from 'dist';
+import { useTranslation } from '@/context/UiToolkitContext';
 
 interface PlotsShowcaseProps {
   plots: PlotThumbResult[];
@@ -17,7 +17,7 @@ export function PlotsShowcase({
   showAllLink,
   language = 'en',
 }: PlotsShowcaseProps) {
-  const {t} = useTranslation()
+  const { t } = useTranslation();
   const plotItems = plots.map((plot, index) => {
     return (
       <a href={plot.href} key={`detail_link${index}`}>
@@ -51,4 +51,3 @@ export function PlotsShowcase({
     </div>
   );
 }
-

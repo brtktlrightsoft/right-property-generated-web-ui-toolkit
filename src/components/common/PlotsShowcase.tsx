@@ -6,6 +6,7 @@ import { useTranslation } from '@/context/UiToolkitContext';
 interface PlotsShowcaseProps {
   plots: PlotThumbResult[];
   title?: string;
+  unitsText?: string;
   showAllLink?: string;
   locale?: string;
   language?: string;
@@ -16,6 +17,7 @@ export function PlotsShowcase({
   title = 'Available Units',
   showAllLink,
   language = 'en',
+  unitsText = 'units'
 }: PlotsShowcaseProps) {
   const { t } = useTranslation();
   const plotItems = plots.map((plot, index) => {
@@ -36,7 +38,7 @@ export function PlotsShowcase({
                 {title}
               </h3>
               <h6 className="opacity-50 text-xs" suppressHydrationWarning>
-                {t('web.similar_units.units')}
+                {plotItems.length} {unitsText}
               </h6>
             </div>
             {showAllLink && (

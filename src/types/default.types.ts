@@ -33,6 +33,7 @@ import type { PlotThumbResult } from './plot.types';
 export type PlotsShowcaseEditableProps = {
   plots?: PlotThumbResult[];
   title?: string;
+  unitsText?:string;
   showAllLink?: string;
   locale?: string;
   language?: string;
